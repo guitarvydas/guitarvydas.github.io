@@ -1,0 +1,221 @@
+<html>
+
+<head>
+<title>Bash vs Concurrency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">[I write this essay after battling with bash for almost 2 weeks, to build a "simple" Scrivener to Jekyll transformer.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I contend that bash's (macosx's) take on multitasking made my simple project much more difficult than it needed to be].</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Bash Does Not Support Concurrency</p>
+<p class="itemText">I contend that bash does not support concurrency.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Concurrency is not Multitasking</p>
+<p class="itemText">The version of multitasking that is currently in vogue is not concurrency.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Multitasking conflates numerous issues, for example</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• time-sharing</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• memory-sharing</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• parallel processing</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrency.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Concurrency is concurrency, not all that other stuff.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Concurrency is not Rendezvous</p>
+<p class="itemText">Rendezvous is a technique that makes concurrent processes act in a sequential manner.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Rendezvous can be implemented in the concurrent domain, but one does not need rendezvous to have concurrency.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Experiment 1</p>
+<p class="itemText">The following script hangs:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#!/bin/bash</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">rm -f pipe_*</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe1=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe2=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe1}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe2}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">./z.bash 3&lt;${pipe1} 4&lt;${pipe2}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo "arrived here"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 1 &gt;${pipe1}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 2 &gt;${pipe2}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>What could be simpler?<span class="Apple-converted-space">  </span>It create two named pipes, runs another script (z.bash) and pours characters into the pipes.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Experiment 2</p>
+<p class="itemText">The following script hangs, also.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#!/bin/bash</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">rm -f pipe_*</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe1=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe2=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe1}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe2}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">./z.bash 3&lt;${pipe1} 4&lt;${pipe2}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo "arrived here"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 1 &gt;${pipe1} &amp;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 2 &gt;${pipe2} &amp;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Experiment 3</p>
+<p class="itemText">The following script does not hang.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#!/bin/bash</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">rm -f pipe_*</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe1=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">pipe2=pipe_$RANDOM</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe1}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">mkfifo ${pipe2}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">./z.bash 3&lt;${pipe1} 4&lt;${pipe2} &amp;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo "arrived here"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 1 &gt;${pipe1}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">echo 2 &gt;${pipe2}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">What's Going On?</p>
+<p class="itemText">The script, z.bash takes input from two pipes, pipe1 and pipe2.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Bash, on MacOSX (Catalina), does not let z.bash run until both pipes are "instantiated" by having 2 ends.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If we use the first script, z.bash runs and blocks until its pipes are instantiated.<span class="Apple-converted-space">  </span>This means that the first script blocks on the call to z.bash and never succeeds in running the echo lines.<span class="Apple-converted-space">  </span>Both echoes are needed before z.bash can be instantiated.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The second script suffers the same fate, even though we've spawned the ech...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">If This Sounds Confusing...</p>
+<p class="itemText">If this sounds confusing, it's because it is confusing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The semantics of bash fit someone elses' problem, just not this above - very simple - problem.<span class="Apple-converted-space">  </span>[Actually, I haven't dug too deeply into this problem - I'm blaming bash, but maybe I should blame UNIX, or just the combination of bash + MacOSX, or … TC;DB (too complicated, didn't bother)].</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">AFAICT, something is causing z.bash to wait until both ends of all of its pipes had been instantiated.<span class="Apple-converted-space">  </span>This smacks of rendezvous semantics.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Simlulating Concurrency</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

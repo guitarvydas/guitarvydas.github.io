@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="F517E293-9FB3-411F-932E-C218E3719425">
+            <Title>Experiment 2</Title>
+            <Text>The following script hangs, also.
+
+#!/bin/bash
+rm -f pipe_*
+
+pipe1=pipe_$RANDOM
+pipe2=pipe_$RANDOM
+mkfifo ${pipe1}
+mkfifo ${pipe2}
+
+./z.bash 3&lt;${pipe1} 4&lt;${pipe2}
+echo "arrived here"
+
+echo 1 &gt;${pipe1} &amp;
+echo 2 &gt;${pipe2} &amp;
+</Text>
+        </Document>
+        <Document ID="C5246F80-C4F3-4D9B-80C2-F709D19D5991">
+            <Title>Experiment 1</Title>
+            <Text>The following script hangs:
+
+#!/bin/bash
+rm -f pipe_*
+
+pipe1=pipe_$RANDOM
+pipe2=pipe_$RANDOM
+mkfifo ${pipe1}
+mkfifo ${pipe2}
+
+./z.bash 3&lt;${pipe1} 4&lt;${pipe2}
+echo "arrived here"
+
+echo 1 &gt;${pipe1}
+echo 2 &gt;${pipe2}
+
+ What could be simpler?  It create two named pipes, runs another script (z.bash) and pours characters into the pipes.</Text>
+        </Document>
+        <Document ID="54313455-A7AE-40C3-A0F3-4208C44DACC1">
+            <Title>Introduction</Title>
+            <Text>[I write this essay after battling with bash for almost 2 weeks, to build a "simple" Scrivener to Jekyll transformer.
+
+I contend that bash's (macosx's) take on multitasking made my simple project much more difficult than it needed to be].
+</Text>
+        </Document>
+        <Document ID="2DB925D3-25B4-4868-A48F-6BA109D90105">
+            <Title>Simlulating Concurrency</Title>
+        </Document>
+        <Document ID="150FB5E5-AD2D-4910-A9C8-9C08493763A6">
+            <Title>Concurrency is not Multitasking</Title>
+            <Text>The version of multitasking that is currently in vogue is not concurrency.
+
+Multitasking conflates numerous issues, for example
+	•	time-sharing
+	•	memory-sharing
+	•	parallel processing
+	•	concurrency.
+
+Concurrency is concurrency, not all that other stuff.
+
+</Text>
+        </Document>
+        <Document ID="F5E12254-815F-4A5B-9EB3-DE97583635AF">
+            <Title>Experiment 3</Title>
+            <Text>The following script does not hang.
+
+#!/bin/bash
+rm -f pipe_*
+
+pipe1=pipe_$RANDOM
+pipe2=pipe_$RANDOM
+mkfifo ${pipe1}
+mkfifo ${pipe2}
+
+./z.bash 3&lt;${pipe1} 4&lt;${pipe2} &amp;
+echo "arrived here"
+
+echo 1 &gt;${pipe1}
+echo 2 &gt;${pipe2}
+</Text>
+        </Document>
+        <Document ID="C283E7B3-071F-40EB-B7A8-B212C2563D83">
+            <Title>Bash Does Not Support Concurrency</Title>
+            <Text>I contend that bash does not support concurrency.
+</Text>
+        </Document>
+        <Document ID="ED61CC9D-4D80-4C8A-9B0E-835A72FAC1EA">
+            <Title>Concurrency is not Rendezvous</Title>
+            <Text>Rendezvous is a technique that makes concurrent processes act in a sequential manner.
+
+Rendezvous can be implemented in the concurrent domain, but one does not need rendezvous to have concurrency.
+</Text>
+            <Comments>Network people do this "all the time".  They use ACK/NAK protocols when they want to synchronize.  Hardware designers knew how to do this in the 1980's, if not earlier.</Comments>
+        </Document>
+        <Document ID="8E41AE26-DCD3-43CC-B614-D11D52FEE79E">
+            <Title>What's Going On?</Title>
+            <Text>The script, z.bash takes input from two pipes, pipe1 and pipe2.
+
+Bash, on MacOSX (Catalina), does not let z.bash run until both pipes are "instantiated" by having 2 ends.
+
+If we use the first script, z.bash runs and blocks until its pipes are instantiated.  This means that the first script blocks on the call to z.bash and never succeeds in running the echo lines.  Both echoes are needed before z.bash can be instantiated.
+
+The second script suffers the same fate, even though we've spawned the echos as separate processes.
+
+The third script doesn't hang, because z.bash is spawned - asynchronously - and the script is allowed to continue.  In fact, z.bash does hang until its pipes have been instantiated, but that happens in another process which doesn't affect the operation of the third script.</Text>
+        </Document>
+        <Document ID="63D65500-A000-4016-A53B-8FC22FB57297">
+            <Title>If This Sounds Confusing...</Title>
+            <Text>If this sounds confusing, it's because it is confusing.
+
+The semantics of bash fit someone elses' problem, just not this above - very simple - problem.  [Actually, I haven't dug too deeply into this problem - I'm blaming bash, but maybe I should blame UNIX, or just the combination of bash + MacOSX, or … TC;DB (too complicated, didn't bother)].
+
+AFAICT, something is causing z.bash to wait until both ends of all of its pipes had been instantiated.  This smacks of rendezvous semantics.
+
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

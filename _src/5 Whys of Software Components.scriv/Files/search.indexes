@@ -26,7 +26,7 @@ Q6: What kind of dependencies are hidden by languages?
 
 A: For one example, CALL / RETURN leaves breadcrumbs on stacks, forming dynamic dependency chains.
 
-Q7: Why do CALL/RETURN leave breadcrumbs on the stack?
+Q7: Why does CALL/RETURN leave breadcrumbs on the stack?
 
 A: RETURN needs to follow the breadcrumbs back to the caller.
 
@@ -36,7 +36,7 @@ A: The callee becomes the caller and leaves another breadcrumb on the stack.
  
 Q9: Why is a stack used?  Why not use a "register"?
 
-A: Stacks are used so that previously laid breadcrumbs are not over-written.
+A: Stacks are used so that previously laid breadcrumbs are not over-written.  If we didn't have an automatic stack mechanism to save our breadcrumbs, we'd have to save them manually in some sort of list.
 
 Q10: Is the stack of breadcrumbs a dynamic data structure?
 
@@ -52,7 +52,7 @@ A: Yes, but it is an optimized list.
 
 Q13: Why is it necessary to optimize lists to make stacks?
 
-A: Because we need to optimized memory usage.
+A: Because we need to optimize memory usage.
 
 Q14: Why do we need to optimize memory usage?
 
@@ -70,7 +70,7 @@ Q17: Why do we use techniques to optimize memory usage, when memory is no longer
 
 A: Uh, because we've always done it that way.
 
-Q18: Did we notice that the ground rules have shifted?  Memory used to be expensive, but is no longer expensive?
+Q18: Did we notice that the ground truth has shifted?  Memory used to be expensive, but is no longer expensive?
 
 A: Uh, no, we didn't notice.
 
