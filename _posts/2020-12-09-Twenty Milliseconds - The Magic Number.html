@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Twenty Milliseconds - The Magic Number</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:20:35Z">
+  <meta name="ModificationTime" content="2020-12-09T15:20:35Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 13.0px Palatino}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Keyboard Debouncing</b></h2>
+<p class="p2">When writing code to debounce a keyboard, it was found that the magic number was 20 msec (twenty milliseconds).</p>
+<p class="p3"><br></p>
+<p class="p2">If a keystroke took longer than 20 milliseconds to be recognized, the keyboard "felt slow" to the human operator.</p>
+<p class="p3"><br></p>
+<p class="p2">If the software sampled the keystrokes too quickly (e.g. 1 msec), then the sampler found that the key switch actually, physically, bounced (1 to 0 to 1 to 0, etc.) and settled down to a final, steady value before the magic number of 20 msec.</p>
+<p class="p3"><br></p>
+<p class="p2">I don't know how this magic number has changed with respect to more modern keyboards based on newer technologies.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Music Software</b></h2>
+<p class="p2">Music software - DAWs (Digital Audio Workstations) - need to worry about sluggishness and latency.</p>
+<p class="p3"><br></p>
+<p class="p2">Piano-style keyboards are <i>polyphonic</i> - the musician can press more than one key at once (or in sequence) and expects to hear notes "right away".</p>
+<p class="p3"><br></p>
+<p class="p2">Playback of multiple tracks is/was also a problem.<span class="Apple-converted-space">  </span>When multiple tracks are played by the DAW, the musician expects to hear them all "in sync".<span class="Apple-converted-space">  </span>If the number of tracks (and effects processors contained in the track - e.g. reverb) exceeds the ability of the processor to keep up, the music will sound sluggish and "out of sync".</p>
+<p class="p3"><br></p>
+<p class="p2">Faster hardware has ameliorated this problem.<span class="Apple-converted-space">  </span>The same software runs faster and can process more tracks before maxing out.<span class="Apple-converted-space">  </span>I expect that software built with preemptive multitasking (i.e. the norm) will max out sooner than software optimized to handle keyboard reading.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Game Industry</b></h2>
+<p class="p2">I expect, but don't have the direct experience, that this problem also affects the game industry.<span class="Apple-converted-space">  </span>Production Engineering of software can save money when shipping a zillion xboxes.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>IoT</b></h2>
+<p class="p2">I expect that IoT will run into this problem.<span class="Apple-converted-space">  </span>Using Linux on a small processor is (usually) over-kill for what is actually needed, and, Linux could be production engineered away if economy of scale requires it. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Concurrency (and parallelism) can be built less expensively than by using Linux.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p2">One needs to make a trade-off assessment - how many $'s can by saved in hardware by spending $'s on software optimization?<span class="Apple-converted-space">  </span>And, reliability enters the equation, too - preemptive multitasking is notoriously hard to get right (http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html).<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p4"><br></p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>See my various essays, e.g. "Box-and-Arrow for Concurrency".</p>
+<p class="p5"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>This description claims that the problem was due to lack of correctness proof.<span class="Apple-converted-space">  </span>The real problem, IMO, is that memory sharing and full preemption were used.<span class="Apple-converted-space">  </span>Understanding that full-preemption is only one of the possible solutions to the problem (an over-kill, over-generalized solution), might have generated a different solution and the bug might have been detected earlier.</p>
+</div>
+</body>
+</html>

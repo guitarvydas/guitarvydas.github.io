@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Untitled</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:21:01Z">
+  <meta name="ModificationTime" content="2020-12-09T15:21:01Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Out of Date Biases</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parameter Lists</b></h2>
+<p class="p2">Presently, parameters are pushed onto a heterogenous<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> stack.</p>
+<p class="p3"><br></p>
+<p class="p2">The idea of parameter lists was borne out of:</p>
+<ul class="ul1">
+  <li class="li4">concern for memory conservation</li>
+  <li class="li4">mathematical notation (which came from pen-and-paper-only thinking)</li>
+  <li class="li4">strictly textual notations<span class="Apple-converted-space"> </span></li>
+  <li class="li4">"everything must be synchronous" thinking.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Exceptions</b></h2>
+<p class="p2">The idea of exceptions was borne out of:</p>
+<ul class="ul1">
+  <li class="li4">strictly textual notations<span class="Apple-converted-space"> </span></li>
+  <li class="li4">synchronous-only thinking</li>
+  <li class="li4">the idea of parameter lists (which cause accidental complexity in the design of exception syntax).</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Return Values</b></h2>
+<p class="p2">Return values are placed on the stack.</p>
+<p class="p3"><br></p>
+<p class="p2">The idea of return values was borne out of:</p>
+<ul class="ul1">
+  <li class="li4">concern for memory conservation</li>
+  <li class="li4">mathematical notation</li>
+  <li class="li4">strictly textual notations<span class="Apple-converted-space"> </span></li>
+  <li class="li4">"everything must be synchronous" thinking</li>
+  <li class="li4">the idea of parameter lists (which cause accidental complexity in the design of return syntax).</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Extra Work</b></h2>
+<p class="p2">Using the current system, the compiler must do extra work:</p>
+<ul class="ul1">
+  <li class="li4">to determine type safety</li>
+  <li class="li4">to determine alignment.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>A Stack is a (Degenerate) Collection</b></h2>
+<p class="p2">A stack is just an optimization of a list. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">A list is a collection.</p>
+<p class="p3"><br></p>
+<p class="p2">The concept of <i>stack</i> conflates several issues:</p>
+<ul class="ul1">
+  <li class="li4">scoping</li>
+  <li class="li4">optimization.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Scoping is a semantic issue.</p>
+<p class="p5"><br></p>
+<p class="p4">Optimization is an issue for <i>optimization engineers</i>.<span class="Apple-converted-space">  </span>Low-level optimization should not appear in an <i>architecture</i>.<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Two Stacks for Every Type</b></h2>
+<p class="p2">I argue that every type should have its own stack(s).<span class="Apple-converted-space">  </span>[<i>I find that two stacks - input stack and working stack - helps programming].</i></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Separate Collections</b></h2>
+<p class="p2">Every <i>type</i> might be stored in a separate collection.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The <i>parameters</i> to a routine might be a collection of typed collections.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Checking</b></h2>
+<p class="p2">Assertion: if something is in a typed collection, then it has the correct type.</p>
+<p class="p3"><br></p>
+<p class="p2">Type check is done at "push" time (where "push" means to add the item to its collection).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Name Clashes</b></h2>
+<p class="p2">What can we do if two parameters have the same type?</p>
+<p class="p3"><br></p>
+<p class="p2">Presently, we use variables and assign a type to each.</p>
+<p class="p3"><br></p>
+<p class="p2">Another solution might be to allow type synonyms, where each parameter gets a unique name, but the name is synonymed to be of a given type.</p>
+<p class="p3"><br></p>
+<p class="p2">E.G.</p>
+<p class="p3"><br></p>
+<p class="p6">fn(a : int, b : int)</p>
+<p class="p3"><br></p>
+<p class="p2">becomes</p>
+<p class="p3"><br></p>
+<p class="p6">fn(a,b)</p>
+<p class="p6">a = int</p>
+<p class="p6">b = int</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p2">The fact that <span class="s1">a</span> (and <span class="s1">b</span>) is an <span class="s1">int</span>, is an implementation detail, and should not appear in the Architecture.<span class="Apple-converted-space">  </span>The fact that we want to use automation to check such details implies that the semantic (i.e. architecture-related) and implementation details might need to appear in the same body of code.<span class="Apple-converted-space">  </span>A trade-off is to separate implementation details from architectural details, as above.<span class="Apple-converted-space">  </span>This allows the Architect to describe an architecture at the architectural level while pushing implementation details to more innocuous places (like the bottom of the file).<span class="Apple-converted-space">  </span>The Engineer(s) and Implementor(s) can later add such details without affecting the readability of the original architecture<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">At the architectural level, parameters to functions are not variables.<span class="Apple-converted-space">  </span>Variables and their types are implementation details.<span class="Apple-converted-space">  </span>The above arrangement suggests that we can expunge variables from parameter lists completely. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The current style of assigning types to parameters in a function signature conflates two issues (1) architectural readability and, (2) implementation details.</p>
+<p class="p3"><br></p>
+<p class="p2">In the above, every parameter, at the DI<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> level, is a type.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I have found that treating parameters as types to be defined later, reduces syntactic noise.<span class="Apple-converted-space">  </span>Code is shorter and not cluttered with detail.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>[The notion of types associated with parameters was based on premature optimization - making it less expensive in memory and CPU time to define parameters and their implementations.<span class="Apple-converted-space">  </span>With "infinite" CPU power and "infinite" memory, there is no need to conflate types with their implementations in function signatures.<span class="Apple-converted-space">  </span>Types can be defined in a scoped manner - defined in terms of other types and, ultimately, as consisting of a small number of opaque types.<span class="Apple-converted-space">  </span>So-called </i>system<i> languages are concerned with implementation details.<span class="Apple-converted-space">  </span>Even programs written in such languages have distinct DI and implementation aspects.]</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">In the above notation, implementation of types is the exception, not the rule.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Stack Operations</b></h2>
+<p class="p2"><i>TBD</i></p>
+<p class="p3"><br></p>
+<p class="p2">I have implemented a version of the above ideas and will document the operations (about 5) that I use (push-and-check-type, pop, list-add, etc.).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PT Pascal and S/SL</b></h2>
+<p class="p2">The PT Pascal compiler, written in the language S/SL, uses stacks for scoping and type checking.<span class="Apple-converted-space">  </span>The PT Pascal source code and S/SL source code can be found at <a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/">https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/</a>.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>[A version of S/SL with input and output parameters was documented in a thesis - I can't find my copy of the thesis nor can I remember the author's name.]</i></p>
+<hr>
+<p class="p8"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Parameters of all types share the same stack.</p>
+<p class="p4"><span class="s3"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a></span> This idea, of separation, also appears in Ohm-JS, where the parse (grammar) is separated from the semantic details.</p>
+<p class="p8"><span class="s2"><a id="fn3"></a><a href="#fnlink3">[3]</a> </span>DI mean Design Intent - an explicit description of architecture.</p>
+</div>
+</body>
+</html>

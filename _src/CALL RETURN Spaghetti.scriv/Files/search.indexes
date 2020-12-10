@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="146F1F6C-FFE0-43E0-9489-EC01403D40A6">
+            <Title>C Runs Again (2) on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="702B50A7-60C7-432D-B2D4-569F721ED586">
+            <Title>SyncVsAsync-BCDelivery2</Title>
+        </Document>
+        <Document ID="17D0A89A-8EB4-4FD0-B164-3B2E72650110">
+            <Title>Fairness</Title>
+            <Text>Fairness is not an issue.
+
+Components run a single incoming event to completion, they yield only to the Dispatcher.
+
+This system mimics, more closely, the modern ideas of distributed systems.</Text>
+            <Comments>e.g. IoT, multi-core and internet systems</Comments>
+        </Document>
+        <Document ID="0B9EC3A0-1450-43C3-A767-BA559E7FB2E5">
+            <Title>SyncVsAsync-BCDelivery3</Title>
+        </Document>
+        <Document ID="F1BCE784-F66E-4D5C-A70D-1105CC590356">
+            <Title>B Run 1 on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="75E1FF29-8C43-4861-8D2B-83BD32F02567">
+            <Title>Code Version 2</Title>
+            <Text>Version 2 of the code might call C first:
+
+main () {
+  call C(q)
+  call B(q)
+ }
+Fig. &lt;$n:CodeVersion2&gt; Code Version 2</Text>
+        </Document>
+        <Document ID="62A5928D-A3BD-4193-808B-A75FF325E07E">
+            <Title>Two Possible Control Flow Paths</Title>
+            <Text>At this point, two control flow paths are possible:
+
+	1.	Component B runs first.
+	2.	Component C runs first.
+
+I will draw a sequence of diagrams for each path.</Text>
+        </Document>
+        <Document ID="6822FBB2-08C0-42E4-A0DD-0939D4FC9A78">
+            <Title>Shared Memory</Title>
+            <Text>Shared memory is not an issue.
+
+Components cannot share memory.
+
+Components can only send immutable messages.
+
+In very tightly coupled systems, we have the temptation to send pointers to large blobs of memory.  The sender might mutate the blobs of memory before the message is read by the receiver.  
+
+This system makes no guarantees for such situations.
+
+This system gives the Architect all of the atomic tools necessary to create systems that work.  For example, the memory-sharing issue was encountered 40+ years ago in TTL-based hardware systems.  The solution was to use "double-buffering" and "overrun" flags.  If a system could not switch between buffers quickly enough, then it created an overrun condition.  A system which encountered overrun was deemed simply to be "too slow".  
+
+The Architect must make the calculation of whether his/her design is "fast enough" for a given purpose.</Text>
+            <Comments>We call it Arrowgrams.
+Calculation is discussed elsewhere.</Comments>
+        </Document>
+        <Document ID="AE5B6187-4466-4C83-B5EF-0482E7A87E9A">
+            <Title>Function C</Title>
+            <Text>function C(in) {
+  if (in == q) {
+    output &lt;- v
+ } else if (in == r) {
+    output &lt;- w
+ } else if (in == s) {
+    output &lt;- x
+ } else if (in == t) {
+    output &lt;- y
+ } else if (in == u) {
+    output &lt;- z
+} else {
+   FatalError ()
+}
+
+Fig. &lt;$n:figure:FunctionC&gt; Function C</Text>
+        </Document>
+        <Document ID="1916E32E-6CF6-40BA-B651-7058530C24E8">
+            <Title>SyncVsAsync-CBRun2</Title>
+        </Document>
+        <Document ID="3D2754CC-8833-4716-97D6-6BEE4B2130C5">
+            <Title>Function B</Title>
+            <Text>function B(in) {
+  if (in == q) {
+    call C(s)
+} else if (in == r) {
+    call C(t)
+} else {
+  FatalError()
+}
+Fig. &lt;$n:figure:FunctionB&gt; Function B</Text>
+        </Document>
+        <Document ID="1CC89902-02EA-45D4-B4BD-57F63427ED06">
+            <Title>SyncVsAsync-BCRun2</Title>
+        </Document>
+        <Document ID="7D152A01-D1AD-4ED2-AC63-28A11F6E7CDE">
+            <Title>SyncVsAsync-main</Title>
+        </Document>
+        <Document ID="001E51A8-6E87-4EEA-9494-6B7392F494F2">
+            <Title>PathCB</Title>
+        </Document>
+        <Document ID="519C015F-E6F6-4D89-914E-0857A2E786D6">
+            <Title>Event Delivery 1</Title>
+            <Text>#
+Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; Event q Delivered
+
+Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows event "q" being delivered to B and C.
+
+Nothing else happens, no routines are called.</Text>
+        </Document>
+        <Document ID="5D864273-5255-405D-9A3A-36BFFA8F761C">
+            <Title>SyncVsAsync-CBRun3</Title>
+        </Document>
+        <Document ID="DCD0C553-D17D-4E60-80E8-939A7ADDFDAF">
+            <Title>B Runs First - Path BC</Title>
+            <Text>#
+Fig. &lt;$n:figure:AsyncControlFlowBC&gt; Control Flow BC</Text>
+        </Document>
+        <Document ID="40789088-688D-40ED-8BFA-5DDBAE214113">
+            <Title>Dynamic Routing</Title>
+            <Text>Dynamic routing is not an issue, because it's not supported.
+
+Dynamic routing used to be called self-modifying code.  Self modifying code is a bad idea.</Text>
+            <Comments>Self-modifying code is especially bad from the maintenance perspective.</Comments>
+        </Document>
+        <Document ID="A0579965-9CE7-4E71-AF94-03556D32BAE0">
+            <Title>Code Version 1</Title>
+            <Text>Version 1 of the code might call component B first:
+
+main () {
+  call B(q)
+  call C(q)
+}
+
+Fig. &lt;$n:CodeVersion1&gt; Code Version 1</Text>
+        </Document>
+        <Document ID="4C75D780-BE2A-4D21-AB06-0A844688AF8E">
+            <Title>SyncVsAsync-CBDelivery4</Title>
+        </Document>
+        <Document ID="BAAD7A9A-0141-4D4B-8759-55B4F6E06B9F">
+            <Title>SyncVsAsync-BCAfterDelivery3</Title>
+        </Document>
+        <Document ID="62124DBB-06D9-45A4-9613-6F7B1B94AA14">
+            <Title>Using Threads</Title>
+            <Text>Operating system threads can be used to trivially implement components.
+
+Each Component has a mailbox and it sends messages to it parent.  The parent routes the messages to the mailboxes of appropriate receivers.
+
+Note - using threads is overkill.  An operating system based thread involves hardware MMUs and separate stacks.  Operating system threads implement the out-dated notion of time-sharing.  None of these are actually required to make this system work.</Text>
+            <Comments>a.k.a. processes
+a.k.a. input queue
+which I call a schematic
+The routing information is based on the arrows on the diagram(s).
+Memory Management Units</Comments>
+        </Document>
+        <Document ID="8007AF85-5E55-4448-BA58-54C678A680BE">
+            <Title>SyncVsAsync-CBAfterDelivery3</Title>
+        </Document>
+        <Document ID="A7BC2C28-8274-491D-AAD0-1C8C91424995">
+            <Title>Event Delivery 4 on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="16802BF5-FBE4-4BEB-8A54-54677D9A7A03">
+            <Title>SyncVsAsync-main</Title>
+        </Document>
+        <Document ID="9149721D-F356-495B-A76E-BE841DC63CF4">
+            <Title>Loops and Recursion</Title>
+            <Text>It turns out that Looping (and Recursion) is the exception, not the rule.
+
+Components must not enter long-running loops (or deep recursion).  Components must yield to the Dispatcher.  Note that compilers could insert yields at the bottom of Loops to accomplish this behaviour.
+
+The Dispatcher routine is the only routine in the system that runs a loop.  It loops through a list of ready closures and, randomly, invokes a ready closure.  When the closure finishes, the Dispatcher simply picks another ready closure to run.</Text>
+            <Comments>e.g. executes a RETURN </Comments>
+        </Document>
+        <Document ID="A380126F-8CD0-4C29-A1E4-9B40A25148EF">
+            <Title>Isolation</Title>
+            <Text>This system produces a natural hierarchical composition of Architectures.
+
+Parents route messages between their children.
+
+Parents act like Components in all other respects.  Parents cannot SEND() messages to their peers.  They can only SEND() messages upwards to their parents, and route messages of their direct children.</Text>
+        </Document>
+        <Document ID="933B67CF-75DB-41D3-8543-89FDBEE69D4C">
+            <Title>SyncVsAsync-BCDelivery4</Title>
+        </Document>
+        <Document ID="27A9C5FF-6048-4033-B98B-82FB778CDFAA">
+            <Title>Requirements</Title>
+            <Text>All Components have an input queue, onto which incoming events are placed.
+	•	Components cannot call one another.
+	•	Components are asynchronous.
+	•	A Dispatcher routine decides which Component will run and in what order.
+	•	Components are ready if they have events in their input queues.
+	•	Components consume one input event and produce as many output events as necessary in reaction to the input event.
+	•	Components perform a co-routine dance with the Dispatcher.  When a Component has processed a single event to completion, the the Component yields to the Dispatcher.  The Dispatcher decides which Component will run next. Components do not decide on the order of dispatching (as with call-return based code) nor can Components rely on any certain dispatching order.
+	•	Events and data contained in events, are immutable.
+	•	If a Component sends one event to multiple receivers, it must lock the routing wire.
+
+
+In addition,
+
+	•	Components have no parameters,  Send() is used instead.
+	•	Components have no return values.  Send() is used instead.
+	•	There is no syntax for exceptions.  Send() is used instead.</Text>
+            <Comments>In a production version, Components also have output queues.  That requirement is a fine point, discussed elsewhere.
+The order is arbitrary.  Components are fully asynchronous.
+0 or more.  In this example, each component produces exactly 1 output for each input, but this is not a requirement.
+FYI - This is easy to accomplish using closures and state-machine mentality.  Discussed later.  It is also easy to accomplish using threads, albeit this is overkill.
+There are many scheduling possibilities.  For example, the Dispatcher may invoke a Component repeatedly until the Component's input queue is empty.  Or, the Dispatcher may choose to work in a round-robin fashion.  Fairness is not an issue (since a Component will eventually go idle when its input queue is empty).
+Components are truly asynchronous and must survive through any dispatching order.
+In practical systems, this is not an issue.  It becomes an issue for bare metal systems (no operating system) or systems where Components are distributed along "very slow" connections.  I leave this "problem" to the Architect to solve in a manner suitable for the application.  I simply want to give the Architect the tools to work with to build reliable systems.  The Architect makes guarantees of reliability.  This system provides only the bare minimum tool set.
+SEND() is the only mechanism for transferring data.  Data can be transferred to any number of receivers up and down the line, using SEND().  There is no need for a specialized RETURN() expression.
+SEND() is the only mechanism for transferring data.  Exceptions are simply data.  Data can be transferred to any receiver using SEND().</Comments>
+        </Document>
+        <Document ID="618C502C-223C-4AFB-AD77-4E7A7EAE0E57">
+            <Title>The Desired Outcome</Title>
+            <Text>
+We want to plug software components together.
+
+We want the diagram(s) to mean exactly one thing.
+
+We want the diagram(s) to mean the same thing every time.
+
+This is possible.
+
+I will show the event flow that we desire, in a series of diagrams, then, I will discuss how this flow can be achieved.</Text>
+            <Comments>After all, computer (digital) hardware is plugged together.
+Even on synchronous operating systems.</Comments>
+        </Document>
+        <Document ID="01E75A77-0DD6-4F16-956E-825AD64FD768">
+            <Title>Event Delivery 4 on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="B14BAE1D-5F58-4DAD-9374-EBC35F960A18">
+            <Title>SyncVsAsync-FinalBC</Title>
+        </Document>
+        <Document ID="1AFE198A-F08C-4C13-AF05-A063CD1F9FF3">
+            <Title>Using Closures</Title>
+            <Text>Most modern languages provide the concept of closures.  Closures might be called anonymous functions, or callbacks, or be embedded in concepts such as futures, etc.
+
+Even C has a way to make closures, using function pointers.
+
+The minimum closure required by this system requires some static, but not exported, data, and a temporary stack.  N.B. one stack, for the complete system, is enough.
+
+OO Objects and Blocks are very close, in principle, to the ideas expressed here.  The difference is that I specify closures that run asynchronously whereas OO uses Objects that perform synchronous call-return and explicit naming of receivers.  I recommend that closures send messages to their parents and do not refer to each other directly.
+
+In my opinion, and experience, creating separate stacks for each closure and using MMUs is overkill.  I don't wish to use time-sharing in my programs.  I might use time-sharing if I were to build an operating system.
+
+If one imagines that closures contain state-machines, then, this method could be considered to be a system of communicating state machines.   I think in terms of clockwork.</Text>
+            <Comments>Closures were explored in the 1950's using Lisp.
+A temporary stack is used for compiler-generated temporary values.
+One stack is needed for implemenationon von Neumann architectures.  Maybe one stack is one too many in non-von Neumann architectures?
+Object Oriented
+I argue that we shouldn't use operating systems at all.
+Rendezvous techniques also form clockwork systems.  Rendezvous has the drawback that it imposes synchronous operation of processes.  This is anathema to concurrency.  In a concurrent system, processes are asynchronous by default.  Synchronization is the exception not the rule.  If synchronization is needed, it must be explicitly designed (for example, see ACK/NAK protocols in networking, and, synchronization techniques used in TTL hardware of the 1980's).</Comments>
+        </Document>
+        <Document ID="F5967670-94D5-40B9-8445-7B40FCCCFFEC">
+            <Title>SyncVsAsync-CBDelivery3</Title>
+        </Document>
+        <Document ID="D9EED353-0E9C-4AD5-B996-00DE58EC7BC5">
+            <Title>Event Delivery 3 on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="2902D4B3-C505-458A-838F-3083FABA62FA">
+            <Title>SyncVsAsync-AsyncDelivery2</Title>
+        </Document>
+        <Document ID="53EDC076-1901-491D-A550-4084B9506EA7">
+            <Title>C Run 1 on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="20C738B5-235D-46E1-BF0F-934FC6C97E1B">
+            <Title>C Runs Again (2) on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="893265FC-C9AA-46B1-B90E-73ABDF2477F9">
+            <Title>Thread Safety</Title>
+            <Text>Thread Safety is not an issue.
+
+Components cannot share memory, hence, thread safety is not an issue.</Text>
+        </Document>
+        <Document ID="12035707-CCDC-45D0-BE26-F5F541CC07FA">
+            <Title>Global Variables</Title>
+            <Text>Global variables are not an issue.
+
+Global variables cannot leak beyond the boundaries of their Components.
+
+Global variables are not a problem, if properly encapsulated.</Text>
+        </Document>
+        <Document ID="DB6BC686-AB44-49EE-B5FF-F668BE4FB715">
+            <Title>Final Output</Title>
+            <Text>Final Output
+The final output of the preceding routines depends on which version of the code we use.
+
+Version 1 results in the following code path:
+
+main {
+ call B(q)
+   B calls C(s)
+     output &lt;— x
+   C returns to B
+  B returns to main
+ call C(q)
+    output &lt;— v
+    C returns to main
+}
+main done
+Fig. &lt;$n:FinalOutput1&gt; Final Output for Version 1
+
+The final output for Version 1 is x,v.
+
+While version 2 results in the following code path:
+
+main () {
+  call C(q)
+    output &lt;— v
+  call B(q)
+    B calls C(s)
+      output &lt;- x
+      C returns to B
+    B returns to main
+}
+main done
+Fig. &lt;$n:FinalOutput2&gt; Final Output for Version 2
+
+The final output for Version 2 if v,x.
+
+Version 1 and version 2 create different results.
+</Text>
+            <Comments>in left to right order</Comments>
+        </Document>
+        <Document ID="FF74B8B6-8DCF-4B42-B882-6674893D7CD2">
+            <Title>SyncVsAsync-BCAfterDelivery2</Title>
+        </Document>
+        <Document ID="CF61EA49-3DBC-42A5-8205-C10D0C51CAAC">
+            <Title>Refactoring</Title>
+            <Text>Software Component Architectures composed in this manner can be easily refactored into other Architectures, simply by moving/deleting/adding arrows.
+
+Components SEND() messages to their parents. Parents contain the routing tables.  Parents route messages between their children.  This combination makes refactoring of Architectures easy.</Text>
+            <Comments>a.k.a. arrows
+Routing tables is nothing more than indirection.  It also allows for reuse (as opposed to multiple use) of architectures.</Comments>
+        </Document>
+        <Document ID="C9A4FDED-5394-43D2-9FBC-84AD8AA9D826">
+            <Title>SyncVsAsync-AfterAsyncDelivery1</Title>
+        </Document>
+        <Document ID="7026CC53-9F64-48DC-B7AF-72768E23FF6F">
+            <Title>SyncVsAsync-WhatHappens</Title>
+        </Document>
+        <Document ID="4F40D9FE-7B6B-42EE-ADA0-44C3EF084595">
+            <Title>B Runs on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="834DC721-E645-4FA9-BFBF-D40EFD1AE7C8">
+            <Title>Achieving the Desired Result</Title>
+        </Document>
+        <Document ID="BCB25AE9-E714-4182-8326-A2B9EE195A3E">
+            <Title>C Runs First - Path CB</Title>
+            <Text>#
+Fig. &lt;$n:figure:AsyncControlFlowCB&gt; Control Flow CB</Text>
+        </Document>
+        <Document ID="AB367BE2-F694-4C35-B028-59CE535E4822">
+            <Title>Global Types</Title>
+            <Text>Global Types in synchronous languages are just as bad as Global Variables in those languages.
+
+Global anything is bad.
+
+Encapsulation must be applied to every concept in software architecture.</Text>
+        </Document>
+        <Document ID="2EA5E0CA-4044-408F-B567-C66E24068CF6">
+            <Title>SyncVsAsync-SimpleDiagram</Title>
+        </Document>
+        <Document ID="46A93396-1884-421A-8715-433C8BA7F202">
+            <Title>Namespaces</Title>
+            <Text>A component has two external namespaces:
+
+	•	The set of inputs.
+	•	The set of outputs.
+
+The internal namespace(s) of Components does not leak out.
+
+All input names must be unique within the input namespace.
+
+All output names must be unique within the output namespace.
+
+The same name may appear in, both, the input and output namespaces.
+
+Namespaces are naturally encapsulated in a hierarchical manner, due to hierarchical encapsulation of Components.
+
+If two Components have exactly the same input namespace and the same output namespace, then the components are considered to be interchangeable, and "pin compatible".</Text>
+            <Comments>I call them "input pins" and "output pins", resp., inspired by TTL hardware concepts.
+This is similar to referential transparency, but, without the constraint that pin-compatible components must produce the same outputs (this loosening of the same-output restriction allows upgrading).</Comments>
+        </Document>
+        <Document ID="04319635-AE4D-427A-9764-67315B628311">
+            <Title>What Happens?</Title>
+            <Text>What Happens When Events Arrive?
+
+#
+Fig. &lt;$n:figure:SyncVsAsync-WhatHappens&gt;  An Event Arrives
+
+What happens when an event arrives at the input?  See Fig. &lt;$n:figure:SyncVsAsync-WhatHappens&gt;.
+
+The event, "q", is injected into the input.
+
+The algorithms specify exactly what each box does for any given input.
+
+What is the expected output?
+
+Do we see the expected output every time?
+
+Do we see the expected output for every coding of the diagram?</Text>
+        </Document>
+        <Document ID="177C9F30-1574-420C-80E3-C423EA4A46F4">
+            <Title>SyncVsAsync-BCRun3</Title>
+        </Document>
+        <Document ID="828A2EBD-D59D-41E5-AD1F-7DBC3319444F">
+            <Title>Isolation of Control Flow</Title>
+            <Text>Control Flow within Components is naturally isolated by the fact that Components are truly asynchronous.
+
+Control flow begins when a Component is invoked, and, control flow ends when the Component yields to the Dispatcher.
+
+Control Flow does not leak beyond the boundaries of Components.</Text>
+            <Comments>Control Flow cannot leak because Components cannot CALL other components.  Components can only SEND() messages upwards to their parents for routing.  Corollary: the direction of SEND() is vertical-only - SEND() cannot be used to deliver messages sideways to peer components.  Components can SEND() data upwards to their parent.  A parent can route messages between children (and their own input and output pins).  Parents can SEND() commands downwards to children.</Comments>
+        </Document>
+        <Document ID="1041C9CF-39E5-4819-BE30-3106C9F7363A">
+            <Title>Control Flow</Title>
+            <Text>Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows the control flows for code versions 1 and 2.
+
+#
+
+Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; Control Flow for Versions 1 &amp; 2</Text>
+        </Document>
+        <Document ID="11C85568-68C5-4365-BB86-46F4F9B05D0D">
+            <Title>PathBC</Title>
+        </Document>
+        <Document ID="B5348FB9-CFF2-4FFF-A2FC-CCCDB754AC4F">
+            <Title>Other Features</Title>
+        </Document>
+        <Document ID="4AFAC935-4607-48A2-9AEF-FE9C7189FF0C">
+            <Title>figure naming</Title>
+            <Synopsis>Fig. &lt;$n:figure:FBStateMachine&gt;
+FB State Machine
+</Synopsis>
+            <Text>Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; 
+</Text>
+        </Document>
+        <Document ID="A7F01925-E00E-479E-BF96-96893281EA12">
+            <Title>SyncVsAsync-what happens?</Title>
+        </Document>
+        <Document ID="2FC88FFA-9527-444D-9515-FA27E6621265">
+            <Title>SyncVsAsync-AsyncDelivery1</Title>
+        </Document>
+        <Document ID="BE871AFD-CADA-4F1A-8633-01560C892770">
+            <Title>After Event Delivery 1</Title>
+            <Text>#
+Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; After Event Delivery 1
+
+Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows what the system looks like after Event Delivery 1 has occurred.
+
+Both, Components B and C have an event "q" at their inputs.
+
+(Neither Component has acted yet).</Text>
+        </Document>
+        <Document ID="29A99407-8047-4A28-BFE3-FEBA75767754">
+            <Title>PathCB</Title>
+        </Document>
+        <Document ID="8F6DDA0A-E803-43B9-99BC-BE571FFA9572">
+            <Title>System After Delivery 2 Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="FA8F1834-CE09-44B9-972C-EF60C32B0EED">
+            <Title>Event Delivery 3 on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="FAB567F4-CB6D-4341-95BD-8FBF7DD40353">
+            <Title>Introduction</Title>
+            <Text>In this essay, I show that a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.
+
+I show the fundamental operation of a concurrent system and argue that it is inherently simpler than a system based on Call/Return.</Text>
+        </Document>
+        <Document ID="917254F3-4550-48CE-85F9-D33A8B5F1DDF">
+            <Title>Current State of the Art</Title>
+        </Document>
+        <Document ID="483B00AA-C87B-4F5B-A5EA-8A8EDDE668A0">
+            <Title>Final Result Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="0A046958-5CA3-46BA-B7D0-F11E1874517B">
+            <Title>Simple System</Title>
+            <Text>Fig. &lt;$n:figure:SyncVsAsync-main&gt; contains a diagram of a simple system.
+
+#
+Fig. &lt;$n:figure:SyncVsAsync-main&gt; A Simple System
+
+The diagram contains one input port and one output port.  
+
+The diagram contains two components.  The algorithms for the boxes are straight-forward.  The algorithms are stated in terms of what each box outputs when inputs arrive at that box.
+
+The flow of data within the diagram is shown by arrows.
+
+It appears that we have plugged two software components together to form a system.</Text>
+            <Comments>The oval labelled "input".
+The oval labelled "output".
+Boxes labelled B and C.
+See the dashed callouts pointing to each box.
+The input flows to B and to C.  B's output flows to C.  C's output flows to the output.</Comments>
+        </Document>
+        <Document ID="0C7B7171-5F57-40B8-AF5F-7E3ED0ED6B19">
+            <Title>Event Delivery 2 on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="801F83F9-7711-4891-9FC1-8925B9539D6B">
+            <Title>Title</Title>
+            <Text>Software Components</Text>
+        </Document>
+        <Document ID="88FCEF7C-E8C2-442C-92B1-20FE0C134DC8">
+            <Title>C Run 1 on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="843BB559-71A9-4BAD-82AB-A8C60DCB72A7">
+            <Title>System After Delivery 3 on Path CB</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="181E9418-75A3-4665-B0D2-A850915ACB53">
+            <Title>Priority Inversion</Title>
+            <Text>Priority inversion is not an issue.
+
+I don't use, nor specify priorities, hence, priority inversion cannot happen.</Text>
+            <Comments>This is not a flippant statement, regardless of how it sounds.  It is based on hard-won experience with real products.  Priorities can (almost) always be designed out of a system.
+This is system of atomic tools.  Priorities are non-atomic and can be implemented using the atomic tools.
+If a system must act using priorities, then the Architect is referred to literature on hardware priorities⁠1 fully documented some 40+ years ago.
+1 NMI and IRQ levels.</Comments>
+        </Document>
+        <Document ID="8B959234-8F2F-47FB-B9DC-DCCC765AD2AA">
+            <Title>SyncVsAsync-SyncControFlow</Title>
+        </Document>
+        <Document ID="9F0EF89F-47B0-4A2B-8641-31F011644958">
+            <Title>Reuse</Title>
+            <Text>This system emphasizes reuse of Architecture.  
+
+Architecture reuse is more valuable than code reuse.</Text>
+            <Comments>Reuse can be performed by cut/copy/paste.  According to Paul Bassett, OO does not provide reuse.  OO provides multiple-use (which leads to parameterization, which leads to accidental complexities, and so on).</Comments>
+        </Document>
+        <Document ID="0218D425-02E1-4432-A787-AF7B603D378E">
+            <Title>SyncVsAsync-CBDelivery2</Title>
+        </Document>
+        <Document ID="7966AD90-D21D-4F01-B8E9-F1639AC7643E">
+            <Title>Final Result</Title>
+            <Text>In both cases, Path BC and Path CB, the final result is the same - v is output first, then x is output.</Text>
+        </Document>
+        <Document ID="6B174F75-33F1-4617-830C-EA5BF290434B">
+            <Title>The Code for Components B and C</Title>
+            <Text>We can implement the diagram in pseudo-code.</Text>
+        </Document>
+        <Document ID="51EAD35B-7FBD-4D0C-B726-CB404037530E">
+            <Title>Event Delivery 2 on Path BC</Title>
+            <Text>#</Text>
+        </Document>
+        <Document ID="703867BE-60DC-40D0-B2C3-62D4FDEB3DCD">
+            <Title>SyncVsAsync-BCRun1</Title>
+        </Document>
+        <Document ID="DF76F3B3-8DCC-4155-A4A9-7FA8B0CF65B7">
+            <Title>SyncVsAsync-what happens?</Title>
+        </Document>
+        <Document ID="C68D3A1A-E862-41AE-A2C6-F6EA831C0C16">
+            <Title>SyncVsAsync-CBRun1</Title>
+        </Document>
+        <Document ID="23383C78-DEB0-45BE-AAC8-D47FC3C68C70">
+            <Title>SyncVsAsync-main</Title>
+        </Document>
+        <Document ID="BEA0F589-E231-411B-9E2D-E26DFD94DB0E">
+            <Title>Final Result Path BC</Title>
+            <Text>#</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

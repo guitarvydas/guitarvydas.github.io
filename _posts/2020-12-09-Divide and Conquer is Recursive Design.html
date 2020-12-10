@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Divide and Conquer is Recursive Design</title>
+  <meta name="CreationTime" content="2020-12-09T14:54:45Z">
+  <meta name="ModificationTime" content="2020-12-09T14:54:45Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 12.0px 0.0px 6.0px 0.0px; text-align: center; font: 28.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    span.s1 {font: 12.0px Times}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1"><b>Divide &amp; Conquer is Recursive Design</b></p>
+<p class="p2">Recursion is the process of “looping” where the problem becomes simpler every time through the “loop” and where there is a terminating case (something that stops the loop).</p>
+<p class="p3"><br></p>
+<p class="p2">Designing an application using divide &amp; conquer is recursion.<span class="Apple-converted-space">  </span>The design is successively broken down into (1) a simple problem to be solved and, (2) the rest of the problem.</p>
+<p class="p3"><br></p>
+<p class="p2">The terminating case for divide &amp; conquer is the decision that (2) is “so simple” that it can be solved without further division.</p>
+<p class="p3"><br></p>
+<p class="p2">When we (my consulting company) built credit terminal applications, we used diagrams and a terminating case.</p>
+<p class="p3"><br></p>
+<p class="p2">The diagrams gave us a way to visualize divisions in divide and conquer.<span class="Apple-converted-space">  </span>Each sub-problem – (1) – became a box (literally, on a whiteboard, then on a diagram) containing a simple problem that could be solved.</p>
+<p class="p3"><br></p>
+<p class="p2">Our terminating case was: whether everyone in the room (e.g. 5-10 developers) agreed that all sub-problems could be coded up and solved in about 1/2 day.<span class="Apple-converted-space">  </span>That included alpha-testing, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">In my opinion, a grain-size of 3 weeks for a “sprint” in Agile methodology is too large.<span class="Apple-converted-space">  </span>The grain-size should be reduced to about 1/2 day (that is 3 weeks = 21 days * 2 = 42 chunks * number of developers).<span class="Apple-converted-space">  </span>Obviously, the customer cannot be consulted for every completed chunk (every grain, every terminating condition, every box).<span class="Apple-converted-space">  </span>This is where Agile does not use <i>enough</i> divide and conquer and recursion.<span class="Apple-converted-space">  </span>A “sprint” presented to a customer, should consist of many smaller chunks (grains, boxes).<span class="Apple-converted-space">  </span>Intermediate chunks can be “reviewed” by the developer, every group of chunks can be reviewed by the team about once every few days, every group of group-of-chunks can be reviewed by technical management every week (or so) and every group of groups-of-groups-of-chunks can be reviewed by the product owner every couple of weeks.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Programmers and technical leads and CTO’s already do something like this, implicitly.<span class="Apple-converted-space">  </span>They draw out their “design” on a whiteboard in a meeting.<span class="Apple-converted-space">  </span>No one sits in a meeting longer than one hour.<span class="Apple-converted-space">  </span>The whiteboard represents the chunks – the grains – developers and tech leads in the meeting “approve” of the chunks as being implementable in a finite amount of time, etc. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">One hour is usually not enough to subdivide a problem into enough pieces.<span class="Apple-converted-space">  </span>The “terminating case” is fuzzy and further subdivision is left up to the programmers.<span class="Apple-converted-space">  </span>In other words, the programmers do not just write code, but they, also finish designing the solution.<span class="Apple-converted-space">  </span>Some are better at this than others.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>The people who are good at finishing the design should be designated as Architects and should not waste their time coding.<span class="Apple-converted-space">  </span>The others should be designated coders and should not waste everyones’ time doing design work.<span class="Apple-converted-space">  </span>There are many more levels of Architects/Engineers/Implementors - see my essay “Software Development Roles”.</p>
+</div>
+</body>
+</html>

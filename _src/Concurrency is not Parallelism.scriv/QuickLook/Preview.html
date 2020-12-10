@@ -1,0 +1,150 @@
+<html>
+
+<head>
+<title>Concurrency is not Parallelism</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Central Point</p>
+<p class="itemText">Concurrency is a programming paradigm.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parallelism is an application problem, not a paradigm.<span class="Apple-converted-space">  </span>Parallel programs must use the concurrent paradigm.<span class="Apple-converted-space">  </span>Concurrent programs, though, are not necessarily parallel.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Rob Pike's Talk</p>
+<p class="itemText">https://vimeo.com/49718712</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Conflating Concurrency and Parallelism</p>
+<p class="itemText">I used to conflate parallelism and concurrency until I watched Rob Pike’s talk.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I used to try to convince people that they could write concurrent programs using something “better” than Processes (Threads).<span class="Apple-converted-space">  </span>What I didn’t realize was that I was trying to explain the difference between the paradigm called “concurrency” and the application problem called “parallelism”.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A parallel program must run on multiple processors.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A program designed using the concurrent paradigm can run on a single Processor ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Implementing the Concurrent Paradigm</span></p>
+<p class="p1"><span class="s1">Implementing the Concurrent Paradigm</p>
+<p class="itemText">A concurrent system is composed of a number of closures.<span class="Apple-converted-space">  </span>There is a single distinguished routine, called the Dispatcher().<span class="Apple-converted-space">  </span>The Distpacher() invokes closures, at random.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">That’s all there is.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It is simple – almost too simple – to implement concurrency in any language that supports closures.<span class="Apple-converted-space">  </span>It is possible to implement the concurrent paradigm in C or assembler, too, one just needs to pay more attention to details.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As simple as this sounds, the concurrent paradigm forces one to program in a compl...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">The Concurrent API</p>
+<p class="itemText">The API for the concurrent paradigm consists of one routine – Send().<br></p>
+
+</li>
+<li>
+<p class="topLevelItemTitle">Examples of the Concurrent Paradigm</p>
+<p class="itemText">These are some examples of the concurrent paradigm:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">• UNIX® shell pipelines</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">• closures using queues/mailboxes for inter-closure communication.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">O/S threads, and threading libraries, are often conflated with the concurrent paradigm.<span class="Apple-converted-space">  </span>O/S threads – and many threading libraries – solve much greater problems, and are poor examples of the concurrent paradigm.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Advantages to Using the Concurrent Paradigm</p>
+<p class="itemText">• Encourages the absence of dependencies</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">• Isolation.</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

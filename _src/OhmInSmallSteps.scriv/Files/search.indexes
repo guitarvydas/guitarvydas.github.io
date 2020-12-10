@@ -1,0 +1,2797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="E165032C-26C8-4E67-A1C8-58CB5162367A">
+            <Title>Grammar Inheritance</Title>
+            <Text>Grammars for Scm2JSListConstants and Scm2JSEmitter are rewritten to inherit from Scm2JSBasic.
+
+Note that this creates new "flat" grammars and does not, by itself, create new isolated passes.
+
+Note that Scm2JSEmitter inherits from Scm2JSBasic and not from its immediate predecessor Scm2JSListConstants (as would be done if I used only OO instead of a pass-based strategy).
+
+OO is essentially a fancy form of cut&amp;paste - it creates new "flat" grammars by piling changes up on predecessor grammars.  This applies to all forms of OO, not just to grammars.  OO provides only some encapsulation, not full encapsulation.
+
+Inheritance produces increasingly complicated software and does not provide a way to "freeze" changes.
+
+</Text>
+        </Document>
+        <Document ID="D8881C7F-056F-48D3-AE86-FE61DBD1D979">
+            <Title>Lines and Filenames</Title>
+            <Text>A token-based representation allows us to stick debugging information into each token.
+
+For example, when there's a syntax error, we might want to know the line &amp; character position of each character and which file it came from.
+
+For now, we can use a trick pioneered by C compilers - create pragmas for file and lines.  The pragmas are passed down the pipeline and, if an error occurs, the filename and line number of the erroneous input can be examined and displayed.  
+
+In C, the file pragma appears as a single line with the contents '#file "&lt;…&gt;"'.  The line pragma appears as a different pragma '#line nn'.  The various passes in the pipeline record the pragmas but otherwise ignore them until an error occurs.
+
+Question: if the grammar is embedded as a script in HTML, what is the #file for it?
+Answer: I don't know yet.  It will depend on the debugger.
+
+Question: if the grammar is embedded as a script in HTML, what is nn in the #line for it?  Is nn a line-offset within the script or is it a line-offset from the beginning of the HTML file?
+Answer: I don't know yet.
+
+Question: if the grammar is embedded as a script in HTML, maybe #file and #line can be replaced by something else, like hidden HTML elements?  Is #file even useful in this context?
+Answer: I don't know yet.
+
+TODO:
+	1.	I want to create a unity grammar that simply outputs what is input (probably stripping out comments).  This might give us ideas on how to proceed - DI via divide&amp;conquer and experimentation.
+	2.	I want to create a semantics that inserts #line pragmas.
+	3.	I want to create a grammar that expands the ' (QUOTE) shorthand in Scheme to its full form (also Scheme, just harder for humans to read).
+
+I will switch to using an index.html page for these experiments, instead of using node.js…
+</Text>
+            <Comments>Where "&lt;…&gt;" is the filename in quotes.
+Where "nn" is an integer line number.
+Design Intent - see another of my essays.</Comments>
+        </Document>
+        <Document ID="34323449-73CF-4EB5-AA9A-A544BCA6D1E5">
+            <Title>Ohm-data-structures</Title>
+        </Document>
+        <Document ID="061D0405-6F94-4F3D-BA7E-02E9FFB3228D">
+            <Title>Pipelning Grammar</Title>
+            <Text>I should be able to feed the result from the latest unbackquote expander into the unity transformer.
+
+This will test whether I can pipeline the grammar, i.e. feed one grammar into another.  Ohm-JS can only parse character strings.  The backquote expander produces strings, so this shouldn't be a problem for Ohm-JS.
+
+Pipelinetest() runs each test case twice.  The first time, the original Scheme is run through unbackquote.  Then, the result from unbackquote is run, again, through unbackquote (which should parse, but find no quotes or backquotes to expand).  The first run expands all quotes and backquotes.  The second run does nothing, but parses the (already expanded) Scheme.  The results from the first run should be the same as the results from the second (regression) run, using JS string equality "==".  
+
+This means that the results from unbackquote form a valid Scheme program (at least as far as this grammar goes - as far as I need it to).
+
+(See commit 56569e3b6e33344db9409368f5754454c71b37ce)
+
+This means that I can pipe output from one grammar into another grammar.
+
+The point of pipelining is to remove possible dependencies - Divide and Conquer.  Once I have a grammar that expands quotes and backquotes, I know that it works.  I never have to alter that grammar again.  It does one job.  Then it gets frozen.
+
+As I progress further, I will want to tweak the grammar (to give us better handles on parts of the parse).  Pipelining ensures that no tweaks can alter the functioning of previously written code (grammars).  Quote and backquote expansion is working and I can forget about it, knowing that it will always work in the same way.</Text>
+            <Comments>N.B. OO does not do this - it does not freeze the code.  Inheritance and overriding can change the meaning of the original code.</Comments>
+        </Document>
+        <Document ID="0128D111-F4A6-4448-BFCF-9AE7BB8E27CC">
+            <Title>Dotted Lists</Title>
+            <Text>There is but one instance of a dotted list in prolog-6.scm
+
+(define db
+  '(((edge a b))
+    ((edge a f))
+    ((edge a g))
+    ((edge b c))
+    ((edge b d))
+    ((edge c d))
+    ((edge c e))
+    ((edge g h))
+    ((edge d h))
+    ((edge h e))
+    ((edge h f))
+
+    ((path (? A) (? B) ((? A) (? B)))
+     (edge (? A) (? B)))
+
+    ((path (? A) (? B) ((? A) . (? CB)))
+     (edge (? A) (? C))
+     (path (? C) (? B) (? CB)))))
+
+I could handle the dotted list in the grammar, but, it is easier to change the code manually to remove the dotted list completely (and rewrite it to call a library function that I'll call _cons).  I will write the replacement in Scheme and let the transpiler do the rest of the job…
+
+(define db
+  '(((edge a b))
+    ((edge a f))
+    ((edge a g))
+    ((edge b c))
+    ((edge b d))
+    ((edge c d))
+    ((edge c e))
+    ((edge g h))
+    ((edge d h))
+    ((edge h e))
+    ((edge h f))
+
+    ((path (? A) (? B) ((? A) (? B)))
+     (edge (? A) (? B)))
+
+    ((path (? A) (? B) (_cons (? A) (? CB)))
+     (edge (? A) (? C))
+     (path (? C) (? B) (? CB)))))
+</Text>
+        </Document>
+        <Document ID="08A0342F-7CEE-4BDB-9A02-2DE133B3006C">
+            <Title>AST - Syntax Tree</Title>
+            <Text>- don't optimize - repetition can be automated (and later optimized) - that was the big lesson from ASM to HLL, assembler programmers always optimized the code, compiler writers began by automating very repetitive sequences … then GCC arrived and ate the ASM programmers' lunch
+</Text>
+        </Document>
+        <Document ID="DB1A3282-4775-471A-9720-8904C7851129">
+            <Title>Source to Source</Title>
+            <Text>This is the most basic example I could think of - input a string from a file, then dump it out.  
+
+NPM install ohm
+
+npm install ohm-js
+
+Ohm file source2source.ohm:
+
+Program {
+  code = any*
+}
+
+JS (JavaScript) file source2source.js:
+
+// usage:
+// npm install ohm-js
+// node source2source.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('source2source.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('s2s.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+        return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        code: (s) =&gt; {
+	    return node_to_source(s._node)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+
+Test file s2s.js:
+
+/* a sample comment */
+function f(a, b) {
+    a = b; // a 2nd sample comment
+}
+
+usage:
+&gt; node source2source.js
+</Text>
+        </Document>
+        <Document ID="18975E40-459D-46CC-BF55-845C1681B39B">
+            <Title>Concatenative Languages</Title>
+            <Text>- PT Pascal was done in a concatenative style.
+</Text>
+        </Document>
+        <Document ID="471CD17A-0682-49F4-A06E-EDEFF3B7FC7F">
+            <Title>Quote Replacment</Title>
+            <Text>In Scheme (and Lisp in general), a single quote is shorthand for a list which begins with "quote".  For example, '#t is short-hand for (quote #t).
+
+I want to transform the cst of the example into an equivalent cst, with ' expanded:
+
+{"Program":[
+    {"_iter":[
+        {"Form":[
+            {"SList":[
+                {"NullTerminatedList":[
+                    {"_terminal":"("},
+                    {"_iter":[
+                        {"ListItem":[
+                            {"Atom":[
+                                {"SSymbol":[
+                                    {"Letchar":[
+                                        {"LC":[
+                                            {"_terminal":"q"}]}]},
+                                    {"_iter":[
+                                        {"Letchar":[
+                                            {"LC":[
+                                                {"_terminal":"u"}]}]},
+                                        {"Letchar":[
+                                            {"LC":[
+                                                {"_terminal":"o"}]}]},
+                                        {"Letchar":[
+                                            {"LC":[
+                                                {"_terminal":"t"}]}]},
+                                        {"Letchar":[
+                                            {"LC":[
+                                                {"_terminal":"e"}]}]}]}]}]}]},
+                        {"ListItem":[
+                            {"Atom":[
+                                {"SBoolean":[
+                                    {"_terminal":"#t"}]}]}]}]},
+                    {"_terminal":")"}]}]}]}]}]}
+
+
+
+</Text>
+        </Document>
+        <Document ID="FA389830-705C-4C77-BC0A-50C1E61925A2">
+            <Title>Quote List Expansion</Title>
+            <Text>I've revamped the emitjs semantics to output "cons(…)" instead of "new List(…)".
+
+The quote list expansion is not fully correct.  A quoted list should be converted to "list(…)",  where list() inserts a null at the end of the list.
+
+See commit 9ba41fe9151d5bde775852f573f19de3fcc9e251.
+
+Note that this was anti-waterfall development, I made progress without needing to get everything right at first.  A placeholder was enough.  I fixed the error, then iterated.  Fixing the error was easy - a minor change to the .semantics() of the emitter.
+</Text>
+        </Document>
+        <Document ID="F53EC7A5-9B2F-4928-B15D-CC6F0F78DFCC">
+            <Title>Grammar Inheritance</Title>
+        </Document>
+        <Document ID="759B9DE7-E88C-417B-94A6-EC547B4E7006">
+            <Title>Type Stacking</Title>
+        </Document>
+        <Document ID="BD6774A3-8AD3-4264-8D7E-B9E8E004472F">
+            <Title>Overriding a Rule</Title>
+            <Text>  Code := ChunkF ChunkA ChunkB
+
+Use the := operator instead of = (and +=).
+
+overridetest.js:
+
+fff
+aaa
+bbb
+
+override.ohm:
+
+Program {
+  Code = ChunkA ChunkB
+  ChunkA = "aaa" Eol*
+  ChunkB = "bbb" Eol*
+  Eol = "\n"
+}
+
+Program2 &lt;: Program {
+  Code := ChunkF ChunkA ChunkB
+  ChunkF = "fff" Eol*
+}
+
+override.js:
+
+// usage:
+// npm install ohm-js
+// node inherit.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('override.ohm')
+const grammarsNamespace = ohm.grammars(grammarData)
+
+const input = fs.readFileSync('overridetest.js')
+
+const result = grammarsNamespace.Program2.match(input)
+// console.log(result)
+// console.log(grammarsNamespace.Program2.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+        </Document>
+        <Document ID="D977582D-0C87-4D6B-8562-0B634100CF72">
+            <Title>Refactoring</Title>
+        </Document>
+        <Document ID="66304F8E-A2CE-41E0-B3E3-D31A85D37863">
+            <Title>Start Rule</Title>
+            <Synopsis>- .match specifies start rule? - g.match(str: string, optStartRule?: string) → MatchResult (see https://github.com/harc/ohm/blob/master/doc/api-reference.md)</Synopsis>
+            <Text>To start with a given rule, specify its name (as a String) in match().
+
+const result = grammarsNamespace.Program2.match(input, "StartTest")
+
+starttest.js:
+
+ggg
+aaa
+bbb
+
+start.ohm:
+
+Program {
+  Code = ChunkA ChunkB
+  ChunkA = "aaa" Eol*
+  ChunkB = "bbb" Eol*
+  Eol = "\n"
+}
+
+Program2 &lt;: Program {
+  Code := ChunkF ChunkA ChunkB
+  StartTest = ChunkG ChunkA ChunkB
+  ChunkF = "fff" Eol*
+  ChunkG = "ggg" Eol*
+}
+
+start.js:
+
+// usage:
+// npm install ohm-js
+// node inherit.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('start.ohm')
+const grammarsNamespace = ohm.grammars(grammarData)
+
+const input = fs.readFileSync('starttest.js')
+
+const result = grammarsNamespace.Program2.match(input, "StartTest")
+// console.log(result)
+// console.log(grammarsNamespace.Program2.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+        </Document>
+        <Document ID="3457F6D3-CE8D-4D5C-B563-092233B8A144">
+            <Title>Emitting JavaScript</Title>
+            <Text>I copy&amp;pasted the emitter semantics and created a new semantics (for the same grammar) called 'emitjs'.
+
+I modified the IF-THEN-ELSE code to emit JS ?: expressions.  (See commit cc41021f1f3efe0b02598ba25020064470f95093). </Text>
+        </Document>
+        <Document ID="2F479434-3843-4323-932B-6F269E30A28A">
+            <Title>GitHub</Title>
+            <Text>https://github.com/guitarvydas/OhmSmallSteps
+</Text>
+        </Document>
+        <Document ID="73CB2F0C-610E-4940-8817-F08ED63B6C90">
+            <Title>Skipping Comments</Title>
+            <Text>I use the original s2s.js as a test file, add (+=) a set of rules that treat comments as whitespace.
+
+skipcomments.ohm:
+
+Program {
+  Code = any*
+  space +=   slashStarComment
+           | slashSlashComment
+  slashStarComment = "/*" (~"*/" any)* "*/"
+  slashSlashComment = "//" (~"\n" any)* "\n"
+}
+
+skipcomments.js:
+
+// usage:
+// npm install ohm-js
+// node source2source1b.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('skipcomments.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('s2s.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+        return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        Code: (s) =&gt; {
+	    return node_to_source(s._node)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+</Text>
+        </Document>
+        <Document ID="3F269EFF-5330-45CD-B4C2-40B75E0508C9">
+            <Title>Semantics - Quoting</Title>
+            <Text>I've reached the point where I need to consider how every kind of Scheme expression should be transpiled into valid - and meaningful - JS.  This is call "semantics".
+
+First, let's look at (quote …).  What does it mean in JS?
+
+'() needs to become an empty list.  In JS, I can convert that to an empty array "[]", or I can define a class called List and call "new" on it.
+
+Let's choose the List class solution.
+
+I have constructed a pattern matcher (aka parser) for Scheme.  I can simply add a pattern for '() to the matcher and have it convert '"()" into "new List()".
+
+[breaking news: I change this decision, later, near the end and I use Cons() instead of List().  Again, divide and conquer means not having to care until you have to care.  Glossing over details is a good design choice. PROLOG itself is a good example - we know how to write nested loops, but the details of looping discourages higher level thinking.  Using PROLOG, we are allowed to think in terms of relations instead of in terms of looping details + relations.  I argue that most programming languages shackle us in details instead of allowing us to think at higher levels (much like C/Pascal broke the strangle-hold on designers, who had to express everything in assembler)].
+
+</Text>
+        </Document>
+        <Document ID="08AB6058-4F22-4437-8F45-6CF08D418295">
+            <Title>PROLOG in JS Page</Title>
+            <Text>One way (of many) to proceed (see the discussion in the "Ohm and Scheme"&gt;&gt;"Recap" section) is to build a mock-up target page that combines PROLOG and JS and should produce a given result.
+
+This mock-up doesn't have to be correct at the moment, just something to shoot for.  I can change the target, in stages, as the details become more clear.
+
+It is OK to skip over details and to get them wrong.  Trying to get everything correct before proceeding is call "the Waterfall method".
+
+Successful iteration is hampered by attention to detail.
+
+I will begin my iterations by writing a mock-up .html page that generates a new .html page.</Text>
+        </Document>
+        <Document ID="F0DFC8C1-58F6-4C8E-9077-8FB0E8BDE1E9">
+            <Title>Returning a List of Answers</Title>
+            <Text>As it stands, prolog6 prints every answer (a successful match) in the function print-frame.
+
+I want to collect the answers into a list and return it, instead of printing it.
+
+I have a number of choices in how to do this.
+
+The first choice is whether the return will be a Cons() list or something more amenable to  JS - an array, for example.  The code generated by the transpiler will be used in JS programs.  The better choice seems to be that of returning a JS Array.
+The PROLOG code creates a Cons() list, though.  Returning a Cons() list will be easier.  Easy wins - I can always write a toArray method for Cons() - later.
+
+The next choice is how to accumulate the result.  The most obvious answer is to accumulate the result in some sort of global variable.  Alternately, I can accumulate the result in an accumulator list that is passed to prove6 and everything it calls.
+Again, "easy" wins out - I will choose to use a global variable.
+Rhetorical question, for discussion - when is it OK to use a global instead of using an accumulator parameter?  For discussion: 
+	•	using parameters instead of globals evolved as a protectionist strategy when text-only code was used.  
+	•	Further: using parameters instead of globals evolved as a protectionist strategy when code "freezing" was not possible - e.g. when the programmer doesn't know how the code will be used.  
+	•	Further: using parameters instead of globals evolved in an environment where the only tools &amp; languages available could cause subtle changes to behaviour.  
+	•	Further: the use of parameters instead of globals converts globals into scoped parameters, to reduce the "problem" - the "problem" being that globals don't necessarily fit in an eye-full, whereas it is hoped that parameters do fit in an eye-full ; global variables are removed from the global scope and are moved into local scope.  The concept of modules solved this problem by wrapping "global variables" into modules.  OO was, essentially, a riff on this theme - modules became objects that could be instantiated at runtime.  
+	•	Further: isn't the real problem one of freezing known-to-be-working code instead of a problem of scoping?
+
+Divide &amp; conquer - I choose to ignore the issue and proceed using the "least change" principal - i.e. the design is working, change as little code as possible.  Let Maintenance Engineering worry about this issue.  Can CI tools help us detect future problems?  (That is the claim :-).
+
+Next choice - do I make the change in JS or in Scheme?  I am treating Scheme as my meta-language.  Every change I make in Scheme will be reflected in the transpiled code, even when it is transpiled to something other than JS.  If I make the change in JS, then only the JS version has the fix and I will need to make the change in every target language.  This is the same issue that HLLs solved - one could write code in a meta-language (e.g. C) and have it be compiled to many various assembly languages.  Over time, we learned how to "standardize" languages so that they were more portable across target architectures.  An example of a successful standard is the Common Lisp standard - Cltl2.  An example of an evolving standard is the ECMAscript standards for JavaScript.
+
+So, my immediate goals are:
+	•	collect answers in a Cons() list
+	•	use a global variable as the top-level accumulator of a list of answers
+	•	do all of this in Scheme - in prolog-6a.scm.  
+
+The only remaining question is whether I need to make copies of the Cons() list answers.  I will defer this issue until I see good or broken results ; I have used Cons() lists in Lisp without needing to make copies, and I expect this to be the case here.
+</Text>
+        </Document>
+        <Document ID="591AE89E-8F28-4A61-8895-8DD175FDC55C">
+            <Title>CST</Title>
+            <Synopsis>(Concrete Syntax Tree)</Synopsis>
+            <Text>(Concrete Syntax Tree)
+An experiment.  I fed a very simple grammar into Ohm, then used the JS debugger (node inspect junk.js) to dissect the results:
+
+dissect.scm:
+
+#t
+
+dissect.ohm:
+
+Scm2JSBasic {
+  Program = Form+
+  Form = Atom
+  Atom = SBoolean
+  SBoolean = "#f" | "#t"
+}
+
+dissect.js:
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('dissect.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('dissect.scm')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+
+
+
+const semantics = grammar.createSemantics()
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+        return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        Program: (p) =&gt; {
+	    return node_to_source(p)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+
+
+function astString(obj) { return obj.toString() }
+
+class Program { 
+    constructor(p) { this.p = p } 
+    astString () { 
+	console.log("&lt;" + this.constructor.name + "&gt;: " + this.p.constructor.name) ; 
+	return "P \n" + this.p.map((x) =&gt; x.astString()).join('\n')}}
+class Form { 
+    constructor(s) { this.s = s } 
+    astString () { 
+	return "&lt;" + this.constructor.name + "&gt;:" + this.s.constructor.name + " " + "[" + this.s.astString().constructor.name + "] " + this.s.astString();}}
+
+class Atom { constructor(a) { this.a = a } astString() { return this.a.astString() }}
+class SBoolean { constructor(b) { this.b = b } astString(){ return this.b }}
+
+// an operation that uses the above classes
+semantics.addOperation(
+    'ast',
+    {
+	Program: (p) =&gt; { return new Program(p.ast()) },
+	Form: (s) =&gt; { 
+	    console.log("Form " + this.s );},
+	Atom: (a) =&gt; {
+	    console.log("Atom a=" + a);},
+	SBoolean: (b) =&gt; { 
+	    console.log("b is " + b._node.ctorName + " and b's ast is " + b.ast()) ; },
+	_terminal: () =&gt; { console.log("primitive " + this.primitiveValue); return this.primitiveValue }
+    }
+)
+
+console.log()
+console.log("result")
+console.log(result)
+console.log()
+console.log("semantics")
+var sem  = semantics(result)
+var tree = sem.ast()
+console.log()
+console.log("tree")
+console.log(tree)
+
+Fig. &lt;$n:figure:OhmDataStructures&gt; shows this data in diagrammatic form (some parts elided).
+
+#
+Fig. &lt;$n:figure:OhmDataStructures&gt; Overview of Ohm Parse Results</Text>
+        </Document>
+        <Document ID="4BAA0ACE-944D-487D-A175-F357E61D0DEE">
+            <Title>Test 1 - Test Rough In</Title>
+            <Text>Stub out code for transpileMixedPrologAndJS() and createPageForRunningJS();
+
+After some fixing, the rough-in test works.  The code is:
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;sample mixed PROLOG and JS - ohm/js in small steps&lt;/title&gt;
+    &lt;meta charset=utf-8&gt;
+
+    &lt;script type="text/js-and-prolog"&gt;
+      this is a test
+    &lt;/script&gt;
+    
+    &lt;script&gt;
+      
+      function displayDate () {
+	  document.getElementById('timestamp').innerHTML = Date();
+      }
+      
+      function displayResults(str) {
+	  document.getElementById('result').innerHTML = str;
+      }
+      
+      function transpileMixedPrologAndJS(s) {
+	  // stubbed out
+	  return s;
+      }
+      
+      function createPageForRunningJS(s) {
+	  // stubbed out
+	  return s;
+      }
+      
+      function runSample() {
+	  let jsAndPrologString = document.querySelector('script[type="text/js-and-prolog"]').innerHTML;
+	  let transpiledToJS = transpileMixedPrologAndJS(jsAndPrologString);
+	  let newPage = createPageForRunningJS(transpiledToJS);
+	  displayResults(newPage);
+	  displayDate();
+      }
+    &lt;/script&gt;
+
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="runSample()"&gt;run sample&lt;/button&gt;
+    &lt;p id="timestamp"&gt;&lt;/p&gt;
+    &lt;p id="result"&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</Text>
+        </Document>
+        <Document ID="E42AD59F-E21D-4E31-91E1-9C69995906F6">
+            <Title>Writing Syntax vs. Reading Syntax</Title>
+        </Document>
+        <Document ID="CB12C8D8-E307-4558-ABAE-40CC9DEC139D">
+            <Title>Introduction</Title>
+            <Text>This is a set of experiments with 2 outcomes:
+
+	1.	PROLOG in JavaScript - transpilation of Nils Holm's PROLOG in Scheme to JavaScript.
+	2.	A deep dive into Ohm-JS with commentary along the way.
+	⁃	How to build a transpiler in OHM (which is a lot less work than building a whole language)
+	⁃	a "stream of consciousness" description of how I built the transpiler, including errors on my part
+
+If you want only the PROLOG in JS, feel free to skip to the end of this document and latest commit in github.
+
+I perform some experiments with Ohm-js, fill my toolbelt and then move on to more interesting applications…
+</Text>
+        </Document>
+        <Document ID="AC5A1517-FBFA-4D53-ABE0-AAE2334F0E7A">
+            <Title>Contents</Title>
+            <Text>Contents	&lt;$p&gt;
+Introduction	&lt;$p&gt;
+GitHub	&lt;$p&gt;
+Source to Source	&lt;$p&gt;
+1. Get the Grammar to Work	&lt;$p&gt;
+2. Add Semantics	&lt;$p&gt;
+Matching Pairs	&lt;$p&gt;
+Flip Chunks of Code	&lt;$p&gt;
+Find and Replace	&lt;$p&gt;
+Skip Spaces	&lt;$p&gt;
+Skipping Comments	&lt;$p&gt;
+Grammar Inheritance	&lt;$p&gt;
+Extending a Rule	&lt;$p&gt;
+Overriding a Rule	&lt;$p&gt;
+Start Rule	&lt;$p&gt;
+CST	&lt;$p&gt;
+Pipelining Grammars	&lt;$p&gt;
+Lines and Filenames	&lt;$p&gt;
+Math Example in Browser	&lt;$p&gt;
+Ohm and PROLOG	&lt;$p&gt;
+Introduction	&lt;$p&gt;
+PROLOG CONTROL in 6 SLIDES	&lt;$p&gt;
+Ohm and Scheme	&lt;$p&gt;
+Basic Scheme Parser	&lt;$p&gt;
+Inherit the Basic Parser	&lt;$p&gt;
+Basic Scheme Version #2	&lt;$p&gt;
+Basic Scheme vs prolog-6.scm	&lt;$p&gt;
+Lisp is Assembly Language	&lt;$p&gt;
+Basic Scheme to JS	&lt;$p&gt;
+Unity Parser	&lt;$p&gt;
+Expanding Quotes	&lt;$p&gt;
+Expanding Backquotes	&lt;$p&gt;
+Pipelning Grammar	&lt;$p&gt;
+Top Level Forms	&lt;$p&gt;
+Tweak the Grammar for the 3 Top-Level Scheme Constructs	&lt;$p&gt;
+Multiple Grammars in One HTML File	&lt;$p&gt;
+Semantics - Quoting	&lt;$p&gt;
+Special Forms	&lt;$p&gt;
+Interlude - Illegal Characters	&lt;$p&gt;
+List Constants	&lt;$p&gt;
+When Do You Create a New Pass?	&lt;$p&gt;
+Grammar Inheritance	&lt;$p&gt;
+Isolation	&lt;$p&gt;
+Emitting JavaScript	&lt;$p&gt;
+Functional JS	&lt;$p&gt;
+Waterfall	&lt;$p&gt;
+Workflow	&lt;$p&gt;
+Mapping Illegals to JS	&lt;$p&gt;
+Refining Scheme to JS Emission	&lt;$p&gt;
+Writability vs. Readability	&lt;$p&gt;
+Greedy Matching	&lt;$p&gt;
+Quoting Revisited	&lt;$p&gt;
+Dotted Lists	&lt;$p&gt;
+Dissecting the Parse	&lt;$p&gt;
+Larger Tests	&lt;$p&gt;
+Sweeping Changes	&lt;$p&gt;
+Quote List Expansion	&lt;$p&gt;
+Let*	&lt;$p&gt;
+Function Copy()	&lt;$p&gt;
+MIssing Support Routines	&lt;$p&gt;
+Working	&lt;$p&gt;
+Recap	&lt;$p&gt;
+Transpiling to Other Languages	&lt;$p&gt;
+Returning a List of Answers	&lt;$p&gt;
+Accumulator in print-frame	&lt;$p&gt;
+Deeper	&lt;$p&gt;
+Ideas	&lt;$p&gt;
+Errata	&lt;$p&gt;
+</Text>
+        </Document>
+        <Document ID="EE924938-6833-441A-AB2F-AA6DBD7A1594">
+            <Title>jq</Title>
+            <Text>See https://codefaster.substack.com/p/mastering-jq-part-1-59c.
+</Text>
+        </Document>
+        <Document ID="BA175A52-920F-44F0-A6B0-902126844DDD">
+            <Title>Diseecting a Parse Thread</Title>
+            <Text>StatementBlock = MidStatement* LastStatement
+MidStatement = Statement &amp;Statement
+LastStatement = Statement ~Statement
+
+This didn't have the desired result.  Why?
+
+The input is
+
+((a b) (c d))
+
+The parser commits to one branch, say MidStatement
+</Text>
+        </Document>
+        <Document ID="25E1D9F4-B687-4FF3-9D54-8516936F54E8">
+            <Title>Deeper</Title>
+            <Text>Chapter 2 contains a good overview of Ohm:
+
+https://escholarship.mcgill.ca/concern/theses/j67316286
+
+
+OMeta: an Object-Oriented Language for Pattern Matching
+http://www.tinlizzie.org/~awarth/papers/dls07.pdf
+(N.B. Ohm is not OMeta, but Ohm is a descendant of OMeta
+ N.B. Ohm only understands how to parse characters
+ N.B. Ohm breaks semantics and grammar apart, whereas OMeta expects semantics to be a part of the grammar description)
+
+OMeta: PhD Thesis
+http://www.vpri.org/pdf/tr2008003_experimenting.pdf
+
+OMeta website
+http://www.tinlizzie.org/ometa/
+
+Ohm examples
+https://cs.lmu.edu/~ray/notes/ohmexamples/
+
+Ohm github:
+https://github.com/harc/ohm
+
+article: Making your own programming language with NodeJS
+https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+
+Repl.it:
+https://repl.it/
+
+Ohm paper (and how it differs from OMeta):
+https://ohmlang.github.io/pubs/dls2016/modular-semantic-actions.pdf
+
+PubNub blogs about Ohm
+1. https://www.pubnub.com/blog/javascript-parser-ohm-makes-creating-a-programming-language-easy/
+2.  (includes toAST): https://www.pubnub.com/blog/build-your-own-symbol-calculator-with-ohm/
+3. (Meow language): https://www.pubnub.com/blog/add-code-blocks-conditionals-to-ohm/
+
+writing a compiler (incl. toAST):
+https://cs.lmu.edu/~ray/notes/writingacompiler/
+
+A Compiler for Ael
+(good introduction - a bit of everything including code generators for JS, C and ASM):
+https://cs.lmu.edu/~ray/notes/aelcompiler/
+</Text>
+        </Document>
+        <Document ID="066C52A9-CA94-4F86-A55D-106F2D08D1D6">
+            <Title>Lisp is Assembly Language</Title>
+            <Text>Lisp makes a wonderful assembly language - it does just about everything. 
+
+Programs can be built in multiple paradigms and, Lisp has no syntax to get in the way.
+
+Scheme is a stripped-down Lisp.  CL (Common Lisp) is a production tool.
+
+I think that Lisp should form the basis of most languages and most projectional editors, but, I digress.
+</Text>
+        </Document>
+        <Document ID="E2DF3144-D49C-4879-8FD9-D2F887D67622">
+            <Title>MIssing Support Routines</Title>
+            <Text>Append is missing.  I will write one in Scheme, called AppendInefficient, and replace all calls to Append by this - in the Scheme code.
+
+N.B. I am now using the Scheme to JS transpiler.  I will write AppendInefficient in Scheme and let the transpiler convert it to JS.  There are some interesting trade-offs to be had when the transpiler begins to work (even hobbling).  Should I write Append() in JS or in Scheme?  Or, should I rewrite it in PROLOG?  I'm not worried about efficiency (yet), and I am very comfortable writing Scheme.  Writing it in Scheme will allow me to debug the implementation in a working compiler - MIT-Scheme.  
+
+Instead of dealing with varargs, I wrote AppendInefficient3 which is defined using AppendInefficient. 
+
+In a sense, I'm using Scheme as a meta-language…
+
+</Text>
+        </Document>
+        <Document ID="D5E9A3FA-620E-46A0-9B25-0EC54AAD3F65">
+            <Title>Workflow</Title>
+            <Synopsis>- use https://ohmlang.github.io/editor/ to debug the syntax (grammar) - then, switch to semantics</Synopsis>
+            <Text>The grammar IDE at https://ohmlang.github.io/editor/ is useful, although it appears not to accept grammars that inherit from user-defined grammars (not a big loss, since inheritance applied to code serves to de-localize the code, making it more difficult to debug).
+My suggested workflow becomes: 
+
+	•	write the grammar (aka the pattern matcher)
+	•	test the grammar against various cases, using the grammar editor https://ohmlang.github.io/editor/, starting with simple cases, then escalating in complexity
+	•	once the grammar is fully debugged, build the semantics object(s) associated with the grammar
+	•	copy the output to a file and run node on it, to find further transpilation mistakes.
+</Text>
+        </Document>
+        <Document ID="8DBDEE35-0CDD-450D-A10A-E0C2AAEF9259">
+            <Title>JAMscript</Title>
+            <Text>Chapter 2 good description of Ohm internal structures
+
+file:///Users/tarvydas/Downloads/025e2cbf-1325-4c65-a975-6ac5b9d5d214.pdf
+
+Design and Implementation of a Compiler for a Fog and IoT Programming Language Robert Wenger</Text>
+        </Document>
+        <Document ID="D0FBEADF-ECDD-4276-9B6A-2A39C11ABEF8">
+            <Title>WASM to JS</Title>
+        </Document>
+        <Document ID="3C2013BD-0A81-485B-BAEE-F0E25F7967B1">
+            <Title>Greedy Matching</Title>
+            <Text>PEG (and ohm-js) uses greedy matching.  It matches the longest possible phrase and doesn't turn back.
+
+This means that I can write a rule, like:
+
+  CondExpressionWithElse = BEGIN lexical_COND FirstCondClause MoreCondClause CondElseClause END
+
+but not a rule like:
+
+ StatementBlock = Statement* LastStatement 
+
+The first pattern matches one CondClause then matches more CondClauses.
+
+The second pattern matches a bunch of statements, greedily matching all statements, then I want it to back up and leave one Statement to match LastStatement.  This back up doesn't happen and the pattern match fails.
+
+The corrected version of the rule is
+
+ StatementBlock = Statement+ 
+
+I can handle the "last" statement in the semantics, since ohm-js gives me an Iter node containing statements.
+
+I would prefer to have the pattern matcher tell me which is the last statement, without having to write code to walk the Iter node chain.
+
+Can I rewrite this?  Maybe, using ohm-js' lookahead operation.
+
+Maybe I can say something like:
+
+StatementBlock = MidStatement* LastStatement
+MidStatement = Statement &amp;Statement
+LastStatement = Statement ~Statement
+
+?
+I'll try it out in the editor using "(a) (b) (c)" as input and selecting (from the pull-down) the start rule as StatementBlock.
+
+Note that the editor shows the input string at the top of the tree output window.  For every &amp;, it shows the input an extra time.  For example when the above rules are use to parse "(a) (b) (c)", the editor shows two "(c)" even though the input contains only one "(c)".</Text>
+        </Document>
+        <Document ID="E4D0E895-A3E3-433F-BCBE-0AEFB0E49F77">
+            <Title>Text Pipelines</Title>
+        </Document>
+        <Document ID="5C937B37-F496-4F01-9FAF-0AC1A07FAF44">
+            <Title>Expanding Backquotes</Title>
+            <Text>In Common Lisp (and Scheme), backquote is used as a shorthand to create lists.
+Backquote evolved as a way to create programs that create programs.  In Lisp, programs are lists, so programs that create programs are just programs that create and modify lists.
+In Lisp, the function "(LIST …)" creates a list containing all of its arguments.  In Lisp, all arguments are evaluated before being passed to a function.
+In creating programs that create programs, using Lisp, one of the often-used idioms was a call to the function LIST with arguments that are quoted and with only some of the arguments that are evaluated.
+This idiom occurred so frequently, that a shorthand was invented - the backquote.
+ 
+Backquote is a kind of an inverted QUOTE.  
+Inside a backquoted form, an unquoted sexp is quoted and a form preceded by a comma is not quoted (it is eval'ed in the usual manner).  
+
+For example (LIST (QUOTE A)  (QUOTE B) (QUOTE C)) is written in shorthand as `(A B C), and,  (LIST (QUOTE A) B (QUOTE C)) is written in shorthand as `(A ,B C).  Note that, in this latter case, B is evaluated but A and C are quoted.  A list of 3 values is created.  Clearly, `(A ,B C) is more expressive, and easier to write and read, than (LIST (QUOTE A) B (QUOTE C)), if you know the shorthand.
+
+The following examples form some of the tests I use for the backquote expander:
+
+`a —&gt; (quote a)
+`,a —&gt; a
+`(a) —&gt; (list (quote a))
+`(a b c) —&gt; (list (quote a) (quote b) (quote c))
+`(a ,b c) —&gt; (list (quote a) b (quote c))
+,a —-&gt; error (comma not inside backquote)
+
+To parse this, I use the grammar already developed.  I could write some code within the rule "BackQuotedSexp" to rewrite the backquoted code, but, I will use a trick - I will switch to another set of semantic rules when I see a backquote.  The main set of semantic rules is called 'unbackquote' and the backquote helper is called 'inbackquote'.  The semantic rules in 'inbackquote' are written to return reverse-quoted strings, which is what I want when I see a backquote.  The BackQuotedSexp rule of the main semantics calls the unparser in 'inbackquote' instead of recursively calling 'unbackquote' (as is done in the straight-forward 'unquote' semantics).
+
+What happens in the case where a backquoted sexp is seen while already processing a backquote?  I don't care.  This case never happens in the prolog-6.scm code that I want to automatically process.  This is, obviously, a place where I leave it as an exercise to the reader: try double-backquoting in a Lisp REPL to test your theory about how this is supposed to work, then mimic this behaviour in the parser.
+
+Numeric, string and boolean atoms are essentially constants, so their values aren't changed by backquote.
+
+(See commit 33eb0eb6f6389ab3423e2561b04e5e9221145ac4).</Text>
+            <Comments>a list of 3 items: (QUOTE A), the value of B, and, (QUOTE C).</Comments>
+        </Document>
+        <Document ID="31009A79-C95C-41A7-8CCB-17FC1E8FD78B">
+            <Title>Unity Parser</Title>
+            <Text>The first step towards pipelining grammars is to create a unity parser. The Unity parser contains a grammar plus an unparser.  
+
+The grammar I need is the bare minimum to parse prolog-6.scm. 
+
+The unparser simply walks the CST (Concrete Syntax Tree) and re-emits the sub-trees as needed.
+
+Spaces and comments are dumped by the parser, so they don't appear in the CST and are not re-emitted.
+
+
+This exercise showed a deficiency in the original Scm2JSBasic grammar.  The grammar, as written, was slurping adjacent symbols and making them into single symbols.  The original grammar ignored spaces, including those that separated adjacent symbols.
+
+The original grammar was written using syntactic rules everywhere.
+
+The fix was to rewrite the grammar using lexical rules for the low-level recognizers.
+
+I, also, switched from using node.js to using HTML for the grammar.
+
+The result is in index.html.  (See commit 2e40532e25e63f4d3be1f8f37b18d37df266970d).
+
+index.html: (less prolog-6.scm code):
+
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;ohm/js in small steps&lt;/title&gt;
+    &lt;meta charset=utf-8&gt;
+    &lt;script src="/Users/tarvydas/projects/ohm/examples/lib.js"&gt;&lt;/script&gt;
+    &lt;script src="/Users/tarvydas/projects/ohm/dist/ohm.js"&gt;&lt;/script&gt;
+    &lt;script type="text/ohm-js"&gt;
+
+      // An Ohm grammar for Scheme, step 1.
+Scm2JSBasic {
+  Program = Form+
+  Form = SList | Atom
+  QuotedSexp = "'" Form
+  BackQuotedSexp = "`" Form
+  CommaSexp = "," Form
+  SList = DottedList | NullTerminatedList
+  DottedList = "(" ListItem+ "." ListItem ")"
+  NullTerminatedList =   "(" ListItem+ ")"
+  ListItem = (Atom | SList)
+  Atom = lexical_atom | Syntactic_Atom
+  Syntactic_Atom = QuotedSexp | BackQuotedSexp | CommaSexp
+
+  lexical_atom = lexical_integer | lexical_symbol | lexical_string | lexical_boolean | lexical_nullList
+  lexical_nullList = "(" ")"
+  lexical_boolean = "#f" | "#t"
+  lexical_integer = lexical_numchar+
+  lexical_numchar = "0".."9"
+  lexical_string = "\"" (~"\"" any)+ "\""
+  lexical_symbol = lexical_letchar (lexical_letchar | lexical_numchar)*
+  lexical_letchar = lexical_lc | lexical_uc | "+" | "*" | "!" | "?"  | "_" | "-"
+  lexical_lc = "a".."z"
+  lexical_uc = "A".."Z"
+  semiColonComment = ";" (~"\n" any)* "\n"
+  space += semiColonComment
+}
+    &lt;/script&gt;
+
+    &lt;script&gt;
+      var g = ohm.grammarFromScriptElement();
+    &lt;/script&gt;
+
+    &lt;script type="text/test"&gt;
+      (#t #f)
+    &lt;/script&gt;
+    
+    &lt;script type="text/test"&gt;
+      ( #t #f . #t)
+    &lt;/script&gt;
+    
+    &lt;script type="text/test"&gt;
+      ( . #t)
+    &lt;/script&gt;
+    
+    &lt;script type="text/test"&gt;
+      asymbol
+    &lt;/script&gt;
+    
+    &lt;script type="text/test"&gt;
+      (asymbol)
+    &lt;/script&gt;
+
+    &lt;script type="text/test"&gt;
+      (asymbol1 asymbol2)
+    &lt;/script&gt;
+
+    &lt;script type="text/test"&gt;
+      (asymbol1 asymbol2)
+      (asymbol3 asymbol4)
+    &lt;/script&gt;
+
+    &lt;script type="text/test"&gt;
+… code for prolog-6.scm …
+    &lt;/script&gt;
+
+    &lt;script&gt;
+
+      var sem = g.createSemantics();
+      
+      function toListOfStrings(a) {
+	  return a.join(' ');
+      }
+      
+      function toPackedString(a) {
+	  return a.join('');
+      }
+      
+      sem.addOperation(
+	  'unity',
+	  {
+	      Program: function(tree) {return toListOfStrings(tree.unity())},
+	      Form: function(item) {return item.unity()},
+	      QuotedSexp: function(_, form) {return "'" + form.unity()},
+	      BackQuotedSexp: function(_, form) {return "`" + form.unity()},
+	      CommaSexp: function(_, form) {return "," + form.unity()},
+	      SList: function(lis) {return lis.unity()},
+	      DottedList: function(_lp, items, _dot, lastItem, _rp) {
+		  return "(" + toListOfStrings(items.unity()) + " . " + lastItem.unity() + ")"},
+	      NullTerminatedList: function(_lp, items, _rp) {
+		  return "(" + toListOfStrings(items.unity()) + ")"},
+	      ListItem: function(item) {return item.unity()},
+	      Atom: function(a) {return a.unity()},
+	      lexical_integer: function(ns) {return toPackedString(ns.unity());},
+	      lexical_symbol: function(c, cs) {return c.unity() + toPackedString(cs.unity());},
+	      lexical_string: function(_q1, chars, _q2) {return "\"" + toPackedString(chars.unity()) + "\""},
+	      lexical_letchar: function(c) {return c.unity()},
+	      lexical_numchar: function(c) {return c.unity()},
+	      lexical_lc: function(c) {return c.unity()},
+	      lexical_uc: function(c) {return c.unity()},
+
+	      lexical_nullList: function(_lp,_rp) {return "()"},
+	      lexical_boolean: function(b) {return this.sourceString},
+	      _terminal: function() { return this.primitiveValue; }
+	  }
+      );
+      
+    &lt;/script&gt;
+
+
+
+    &lt;script&gt;
+      var tests = document.querySelectorAll('script[type="text/test"]');
+    &lt;/script&gt;
+
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="ohmtest()"&gt;Click me&lt;/button&gt;
+    &lt;p id="timestamp"&gt;&lt;/p&gt;
+    &lt;p id="input"&gt;&lt;/p&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+      var resultsString = '';
+      
+      function displayDate () {
+	  document.getElementById('timestamp').innerHTML = Date();
+      }
+      function do1Test(testElement) {
+	  var testString = testElement.innerHTML;
+	  var r = g.match(testString);
+	  var tail = "...";
+	  var charsToDisplay = 40;
+	  if (testString.length &lt; charsToDisplay) {
+	      tail = "";
+	  }
+	  resultsString = resultsString + "&lt;br&gt;" + r.toString() + " " + testString.substring(0,charsToDisplay) + tail + (r.succeeded() ? (" &lt;--- " + sem(r).unity()) : '');
+      }
+      function displayTestResults(s) {
+	  document.getElementById('input').innerHTML = s;
+      }
+      function ohmtest () {
+	  resultsString = '';
+	  console.log(tests);
+	  console.log(tests[0]);
+	  tests.forEach(do1Test);
+	  displayTestResults(resultsString);
+	  displayDate();
+      }
+      ohmtest();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</Text>
+        </Document>
+        <Document ID="071505BF-3096-42CF-BDE8-2F31C8723A7D">
+            <Title>Addendum - Rewrite MAP</Title>
+        </Document>
+        <Document ID="09A56098-22F4-4A1A-9268-0A5BC8E92F7C">
+            <Title>Interlude - Illegal Characters</Title>
+            <Text>At this point, I can see that the transpiler, in its present state, allows characters, like "?" and "-" and "*" in identifiers that are illegal in JS identifiers.
+
+I will deal with these later.
+
+The transpiler is a pattern matcher, and, changing single characters to other strings will be easy.  For now, it is easier on the eyes (at least for me, since I'm very familiar with Lisp) to leave the illegal characters and debug the operation of the transpiler at the 30,000 foot level.
+
+I proceed using Divide&amp;Conquer and chew on the harder bits first, leaving the "obvious" stuff (least risky) to the end.  There is more to learn by attacking the unknowns first.  In the worst case, I could use the "SED" tool to change the illegal characters.  This problem isn't worrisome at present and can be deferred.
+
+</Text>
+        </Document>
+        <Document ID="0BD1B596-B696-4CC2-BEC0-D525DEB3AA12">
+            <Title>Introduction</Title>
+            <Text>PROLOG is just an exhaustive pattern matcher.
+
+PROLOG uses backtracking to exhaustively explore a search space.
+
+One could implement backtracking pattern matching with loops of loops, but the result quickly becomes unmaintainable and defies DI (expression of Design Intent), by overwhelming the code-reader with details.
+
+Once one splits the expression of backtracking pattern matching away from the details, one can begin to think in terms of relations.  PROLOG was an early attempt to make this split.
+
+I don't know of a PROLOG library for JS.  Maybe one exists, but that's not my point, here.  My point is to show that one can bolt high-falutin' technologies into JS by using parsers.
+
+The easiest-to-understand description of PROLOG (IMO) is Nils Holm's PROLOG in Scheme.
+
+Can I steal that code?  It is written in Scheme and I want JS.  Oh wait, Scheme has a super-simple syntax.  Maybe I can use an Ohm-based parser to convert the Scheme code into JS, then build an Ohm-based parser that gives us PROLOG syntax? 
+The experiment begins…
+</Text>
+            <Comments>A more recent technology is miniKanren.  Once one learns to think in miniKanren, the possibilities become fantastic and weird very quickly.  See Barliman and https://www.youtube.com/watch?v=er_lLvkklsk.
+Or, maybe there is a core.logic miniKanren library for JS?
+See https://www.t3x.org/bits/prolog6.html</Comments>
+        </Document>
+        <Document ID="0CEED5B7-2535-4598-ACF9-04151A9CBB65">
+            <Title>Isolation</Title>
+            <Text>I will use the word "isolation" to mean encapsulation that supports freezing.
+</Text>
+        </Document>
+        <Document ID="231C5783-8E40-4DFA-8DF1-6F6F05A71AFC">
+            <Title>Flip Chunks of Code</Title>
+            <Text>I, finally, "do something".  
+
+The parser figures out "chunkA" and "chunkB" for me.
+
+Then, I use JS to construct a final string with chunkA and chunkB reversed.
+
+This is a cheesy solution, but hey, I believe in single-use DSLs, so it's open season.  Anything that will get me from Point a to Point b in a repeatable fashion is OK with me.
+
+This simple example could have been done solely in JS using RegExps and .replace(), but, when the problem becomes larger, e.g. using a parser to refactor code, it is more easily handled with parsers than with REGEX.
+ 
+flip.ohm:
+
+Program {
+  code = chunkA chunkB
+  chunkA = "aaa" eol*
+  chunkB = "bbb" eol*
+  eol = "\n"
+}
+
+fliptest.js
+aaa
+bbb
+
+
+flip.js:
+
+// usage:
+// npm install ohm-js
+// node flip.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('flip.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('fliptest.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+	if (node.primitiveValue.toString() == "\n") {
+	    return ''
+	}
+	else
+            return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        code: (a,b) =&gt; {
+	    return node_to_source(b) + node_to_source(a)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+</Text>
+            <Comments>and understandable / maintainable</Comments>
+        </Document>
+        <Document ID="AE17D54B-A7B6-4EF0-916D-5C606728B573">
+            <Title>Basic Scheme to JS</Title>
+            <Text>I will settle on scm2jsbasic2.ohm and call it scm2js.ohm.
+
+Likewise scm2js.js.
+
+test:
+prolog-6.scm
+
+scm2js.ohm:
+
+Scm2JSBasic {
+  Program = Scm+
+  Scm = List | Atom |  Boolean
+  QuotedSexp = "'" Scm
+  BackQuotedSexp = "`" Scm
+  CommaSexp = "," Scm
+  List = DottedList | NullTerminatedList
+  DottedList = "(" ListItem+ "." ListItem ")"
+  NullTerminatedList =   "(" ListItem+ ")"
+  ListItem = (Atom | List)
+  Atom = Integer | Symbol | String | Boolean | NullList | QuotedSexp | BackQuotedSexp | CommaSexp
+  NullList = "(" ")"
+  Boolean = "#f" | "#t"
+  Integer = Numchar+
+  Numchar = "0".."9"
+  String = "\"" (~"\"" any)+ "\""
+  Symbol = Letchar (Letchar | Numchar)*
+  Letchar = LC | UC | "+" | "*" | "!" | "?"  | "_" | "-"
+  LC = "a".."z"
+  UC = "A".."Z"
+  semiColonComment = ";" (~"\n" any)* "\n"
+  space += semiColonComment
+}
+
+scm2js.js:
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('scm2jsbasic.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('prolog-6.scm')
+
+const result = grammar.match(input)
+// console.log(grammar.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+        </Document>
+        <Document ID="1435B281-2702-4B9F-9B22-FAE88DBC4E72">
+            <Title>Mapping Illegals to JS</Title>
+            <Text>Scheme allows many more characters as valid identifier characters than does JS.
+
+At this stage in debugging, I want to test the emitted code using the node compiler.
+
+The illegal characters must be mapped to valid JS character strings.  This is done using the .replace() function and JS REGEXs. 
+
+See the function doReplacements() in index.html for a list of the actual replacements.</Text>
+        </Document>
+        <Document ID="509DCFE0-D8D7-4C27-A26B-43D64885F575">
+            <Title>Recap</Title>
+            <Text>I now have the JS code for a PROLOG interpreter.  It consists of the support.js routines plus the output from our transpiler.  
+"Prove6" is the entry point.
+ I need to create a database of facts, rules and, a database of goals.  I pass these to prove6() and it prints the results.
+I need several simple things:
+	a)	Prove6() needs to return a list of answers instead of printing them out.
+	b)	A PROLOG-like syntax skin over JS, that converts PROLOG-like statements into databases and calls to prove6().  This is probably going to be another grammar (Ohm-JS).
+	c)	A way to combine chunks of PROLOG-like statements into JS.  Each chunk will be fed into the above PROLOG-to-JS transpiler and the result will be pasted back into the JS program.  When done, the final JS program will be fed to the JS compiler/interpreter.  In its simplest form this will involve calls to String.search() and String.split() (etc.).  Q: What do I do with the resulting JS code?  Can I overwrite &lt;script&gt; segments in the DOM?  Do I generate another .html page with new &lt;script&gt;…&lt;/script&gt; segments?  Do I generate a .JS file and feed it to node.js? The ideal would be a page, an .html file, that contains the mixed PROLOG and JS script, which invisibly transpiles the code and runs and produces a result.  [This is the "hard part" for me.  I don't yet have enough JS and HTML experience.  Grammars are the "easy part" for me:-].
+
+I will address point (a) and leave (b) and (c) for other essays.
+
+</Text>
+            <Comments>Or as exercises for the reader :-)</Comments>
+        </Document>
+        <Document ID="F4A41670-7A3F-4A2D-AAE4-CAC7E4F95DA5">
+            <Title>When Do You Create a New Pass?</Title>
+            <Text>The parser consists of two main parts:
+
+	•	a grammar
+	•	a set of semantics hung off of the grammar
+
+I am using the grammar to help me build the transpiler.
+
+I start a new pass when I want encapsulation.  The encapsulation provided by pure OO is not enough.  Just creating new sets of semantics is not sufficient to encapsulate all of the changes I need to make.  
+
+In particular, whenever I need to hack on the grammar to make things easier, I need to start a new pass.  OO encapsulation won't save me here - I need to start with a simple grammar (e.g. Scm2JSBasic) and freeze my work.  Then, I need to create new layers of grammars that perform specific functions for my transpiler.  
+
+Ohm-JS has a way to extend grammars in an OO-like manner, but this feature does not actually encapsulate the changes.  The final result is a "flat" grammar that may contain hidden dependencies that make debugging harder.
+
+It is much better (safer, less debugging) to use a hierarchy of composed grammars instead of inherited grammars.
+
+I want to freeze what I've got.  I don't want new changes to interfere with previously-correct grammars.  The only way that I know of to accomplish this is to use passes (passes like pipelines in the UNIX® shell.  This feature - composition - might be why pipelines became popular). 
+
+The List Constant changes could be done in the pass1 grammar, but, then, the layering Architecture would be lost.  The grammar would become a ball of lint - collecting every change I've made, instead of laying out the changes in a layered manner.
+
+PEG's backtracking leads to unexpected bugs when new changes are added to an existing grammar.
+
+An example of the problem is seen when comparing the original pass1 grammar with the changes I added in pass2.  Pass2 has more details.  When trying to understand the grammar, one should begin by looking at the pass1 grammar.  The changes for pass2 could have been added by extending the grammar via inheritance and overriding, but overriding can lead to hidden dependencies and new bugs in previously working code.  What I want is a freeze of what already works.  Then, I want to compose new changes in layers over what already works.  Overriding does not layer my changes - inheritance and overriding change the final grammar and, possibly, the final result.
+
+Paul Bassett's work on Frame-based software might be a direction to look into.  Bassett's Frames are not the same concept as the concept called "frames" in older forms of AI.</Text>
+            <Comments>and a bit of semantics
+https://www.amazon.ca/Framing-Software-Reuse-Lessons-1996-08-05/dp/B01K17JFS4/ref=sr_1_1?dchild=1&amp;keywords=framing+software+reuse&amp;qid=1600651776&amp;sr=8-1</Comments>
+        </Document>
+        <Document ID="22D8DFE2-D4E5-4B1B-B39E-E69D98A3951C">
+            <Title>Find and Replace</Title>
+            <Text>More JS cheeze.  I use the previously built code and JS's .replace() with REGEXs to edit the final result…
+
+Again, this toy example doesn't show the full power of this kind of parsing/editing.
+
+I suggest that this is a technique that needs to be stored one's toolbelt.
+
+FindAndReplace.js:
+
+// usage:
+// npm install ohm-js
+// node flip.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('flip.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('fliptest.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+	if (node.primitiveValue.toString() == "\n") {
+	    return ''
+	}
+	else
+            return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        code: (a,b) =&gt; {
+	    return node_to_source(b) + node_to_source(a).replace(/a/g, "ABC")
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+</Text>
+        </Document>
+        <Document ID="7CEC2EB5-660E-4033-B6AD-DFDECA3D165A">
+            <Title>Integer</Title>
+        </Document>
+        <Document ID="4B6BCBA9-D7E6-4C7A-8E93-C33EF8BFA418">
+            <Title>OhmDataStructures</Title>
+        </Document>
+        <Document ID="609EF324-05BF-4C69-AE26-34E5E7FC6899">
+            <Title>Basic Scheme Version #2</Title>
+            <Text>Add ! as a valid identifier (first &amp; follow) character.
+
+Add "-" as a valid identifier (follow) character.
+
+Move "-", "_", "!", "?" to first (&amp; follow) character sets.
+
+Add Strings (stunted, no escapes yet).
+
+Add comments as whitespace.
+
+Add () as a valid atom (NullList) and make List use + instead of * (looking ahead to future conversion simplicity).
+
+Add ' recognizer.  (Single quote).  Single quote is a convenience operator that expands into a QUOTE form.  E.G. "'(a b c)" =&gt; "(quote (a b c))".  In this step, I deal only with the parse.   I will re-write QUOTE later…
+
+Scheme macros use "`" (back quote) to start a macro.  Inside a macro, quoting is "reversed" - everything is quoted unless it is preceded by a comma ",".  There are more features, but I am striving only to recognize prolog-6.scm…. YAGNI.
+
+Add ` recognizer.  (Back quote, back tick)
+
+Add , recognizer.
+
+Allow for multiple lists in a file.
+
+Lists are made up of cons cells.  A cons cell is a 2-tuple: {pointer to data, pointer to next cell}.  In most "normal" lists, the final "pointer to the next cell" is NIL (i.e. no next cell).  As a convenience, the printer prints such lists in the most common notation - openParen, items, closeParen (e.g. "(a b c)").  In some cases, lists end with a datum instead of NIL, and, in those cases the list prints as: openParen, items, dot, last item, closeParen (e.g. "(a b . c)").  All lists are the same - they are made up of cons cells - it is only the printer that shows lists in shorthand notation, where the most common lists are null-terminated lists.
+
+sm2jstest2.scm (not a practical piece of code, just a test case):
+
+(define (clear_r x)
+  (set-car! (cddr x) '(()))
+  (append (cdr a) `(r! ,l) (cdr g)))
+
+(define (clear_r x)
+  (set-car! (cddr x) '(()))
+  (append (cdr a) `(r! ,l) (cdr g)))
+
+(a b . c)
+((a b . c))
+
+scm2jsbasic2.ohm:
+
+Scm2JSBasic {
+  Program = Scm+
+  Scm = List | Atom |  Boolean
+  QuotedSexp = "'" Scm
+  BackQuotedSexp = "`" Scm
+  CommaSexp = "," Scm
+  List = DottedList | NullTerminatedList
+  DottedList = "(" ListItem+ "." ListItem ")"
+  NullTerminatedList =   "(" ListItem+ ")"
+  ListItem = (Atom | List)
+  Atom = Integer | Symbol | String | Boolean | NullList | QuotedSexp | BackQuotedSexp | CommaSexp
+  NullList = "(" ")"
+  Boolean = "#f" | "#t"
+  Integer = Numchar+
+  Numchar = "0".."9"
+  String = "\"" (~"\"" any)+ "\""
+  Symbol = Letchar (Letchar | Numchar)*
+  Letchar = LC | UC | "+" | "*" | "!" | "?"  | "_" | "-"
+  LC = "a".."z"
+  UC = "A".."Z"
+  semiColonComment = ";" (~"\n" any)* "\n"
+  space += semiColonComment
+}
+
+scm2jsbasic2.js:
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('scm2jsbasic2.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('scm2jstest2.scm')
+
+const result = grammar.match(input)
+// console.log(grammar.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+            <Comments>Ya Ain't Gonna Need It</Comments>
+        </Document>
+        <Document ID="334FB909-8FB9-4572-8CE3-FE58B2B53BA4">
+            <Title>First Iteration - Rough In</Title>
+            <Text>Here is what I think I want to do.  
+
+	•	Grab a lump of script.  
+	•	Process it to transpile all PROLOG chunks into JS.  
+	•	Create a new page containing the processed JS.
+	•	Eyeball the result.  (I will try running it in a later iteration).
+
+My roughed-in HTML code is:
+
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;sample mixed PROLOG and JS - ohm/js in small steps&lt;/title&gt;
+    &lt;meta charset=utf-8&gt;
+    &lt;script src="/Users/tarvydas/projects/ohm/examples/lib.js"&gt;&lt;/script&gt;
+    &lt;script src="/Users/tarvydas/projects/ohm/dist/ohm.js"&gt;&lt;/script&gt;
+    &lt;script type="text/test-form"&gt;
+      (#t #f)
+    &lt;/script&gt;
+
+    &lt;script type="text/js-and-prolog"&gt;
+
+      function displayDate () {
+	  document.getElementById('timestamp').innerHTML = Date();
+      }
+
+      function displayResults(str,el) {
+	  document.getElementById(el).innerHTML = str;
+      }
+      
+      function run() {
+	  let jsAandPrologString = document.querySelector('script[type="text/js-and-prolog"]');
+	  let transpiledToJS = transpileMixedPrologAndJS(jsAndPrologString);
+	  let newPage = createPageForRunningJS(transpiledToJS);
+	  displayResults(newPage,'result');
+	  displayDate();
+    &lt;/script&gt;
+
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button onclick="run()"&gt;run&lt;/button&gt;
+    &lt;p id="timestamp"&gt;&lt;/p&gt;
+    &lt;p id="result"&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+(See commit ebf1e79bfbbaec704543e585d3fa952786a0e735)
+</Text>
+        </Document>
+        <Document ID="6FB144B8-185E-45FE-A6C0-8C87897BF1D3">
+            <Title>Four Lines Make a Box</Title>
+        </Document>
+        <Document ID="CB72D756-4CC6-4362-ADA6-D1ECBA9B38F1">
+            <Title>Special Forms</Title>
+            <Text>In Scheme, almost everything is a function call with evaluated arguments.
+
+There are some special forms, though:
+
+	•	cond
+	•	let (and let*)
+	•	if
+
+These are handled by adding more detailed rules to the grammar.  
+(See commit f6c5b87c7a5995ea1a2486c8f05c6d92798c6610 and the preceding commits).
+
+Test expressions in COND and IF are essentially the same, but it helps to give rules different names depending on their context (e.g. test expression in COND vs. test expression in IF).  The transpiler might emit different code for each of these rules, depending on the target language and its syntax. 
+
+For example, I created separate parsing rules for the first test+clause in COND vs. the rest of the test+clauses of a COND, even though they are semantically the same.  I want to transpile Scheme's COND into if-then-elseif-then… statements in JS.  In this case, the first test+clause needs to transpile to an "if" statement, whereas the rest of test+clauses need to transpile into "} else if (…) {" statements.
+
+The pattern matcher doesn't care when I split rules, but, this can be helpful in making the transpiler simpler, for me, to write.  Patterns can help tell me in which order phrases arrive, even when the patterns match for the same phrases.
+
+At this moment, in this commit I've transpiled the special forms into pseudo-code, to watch how certain Scheme phrases are transpiled.
+
+Later, I will convert the pass2 semantics from emitting pseudo-code to emitting JS.
+</Text>
+            <Comments>DRY is a detail that should be ignored until later - during Maintenance Engineering.  Parser technology shows how RY can be used to advantage during the Design phase.</Comments>
+        </Document>
+        <Document ID="6126DB87-A817-4B09-B0D2-C8540DF02AE2">
+            <Title>Top Level Forms</Title>
+            <Text>In prolog-6.scm, there are only 3 kinds of top-level forms: 
+
+	1.	global variable definition
+	2.	global function definition
+	3.	call a function.
+
+I created a new grammar - Scm2JSPass2 - knowing that the grammar does not need to handle quotes and backquotes.
+
+I added new rules to the pass2 grammar, to handle the 3 top level forms.  The earlier grammar handled all forms, including top-level ones, with one rule "Form".  Now, the pass2 grammar differentiates between the 3 top-level forms.
+
+(See commit 9ad44acc2d62e918f33b652b49e3e8c950bbfcec).
+</Text>
+        </Document>
+        <Document ID="537AD891-9075-4D6A-A645-4480B4A0D7F4">
+            <Title>Writability vs. Readability</Title>
+            <Text>Ohm-JS documentation emphasizes the fact that grammars are "clean" and semantics have been moved out of the grammar.
+
+This makes sense for readability.  The grammar and semantics have been created and checked by the compiler.   A Maintenance Engineer can read the grammar and then refer to the semantics object.
+
+This separation of semantics from grammar, though, makes writing more difficult, since one needs to refer to the grammar when writing semantic rules.  For example, I have broken CondExpression into many parts.  I have to ping-pong between the grammar and the semantics object to ensure that I have correctly named each semantic rule and to make sure that the arities of semantic rules match the grammar.  I just changed the grammar to split Cond into more pieces - now, I find it difficult to ensure that the semantics object corresponds to the tweaked grammar.
+
+Ideally, I should be able to choose whether I view grammar rules and the semantics rules in one eye-full, or, whether the grammar should be clean, with semantics rules moved elsewhere.
+
+At least, the ohm-js compiler performs arity checks and raises error conditions if there is a mismatch between grammar and semantic rules.
+
+Can this be significantly improved?
+</Text>
+            <Comments>S/SL has this property, too.
+This looks like an opportunity for automation.  I shouldn't have to worry about matching the semantics to the grammar.  This matching should be automated…
+the readability vs. writability conundrum</Comments>
+        </Document>
+        <Document ID="B71428F9-52C8-4762-872C-B47E4C77588C">
+            <Title>1. Get the Grammar to Work</Title>
+            <Text>My workflow is:
+	1.	Get the grammar right.  
+	2.	Add semantics.
+
+This is step 1 - see that the grammar is working as expected.  
+
+This should print "Matching Succeeded".
+
+See source2source1a.js.
+
+
+Ohm file source2source.ohm:
+
+Program {
+  code = any*
+}
+
+JS (JavaScript) file source2source1a.js:
+
+// usage:
+// npm install ohm-js
+// node source2source1a.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('source2source.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('s2s.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+
+Test file s2s.js:
+
+/* a sample comment */
+function f(a, b) {
+    a = b; // a 2nd sample comment
+}
+
+usage:
+&gt; node source2source1a.js
+</Text>
+        </Document>
+        <Document ID="B89901AC-0546-4BB7-B39C-DEFA5DCE6C3C">
+            <Title>Code Reuse</Title>
+        </Document>
+        <Document ID="1D148436-CBEC-45D6-B811-37D11581AB6D">
+            <Title>Refining Scheme to JS Emission</Title>
+            <Text>The JS emitter, as currently written, shows some weaknesses and bugs.  Notably, the emitted code is extremely hard to read.
+This chapter of this essay describes a second attempt at code emission in JS…
+
+Instead of emitting everything as a function, I pay closer attention to which parts of JS are expressions and which parts are statements.  I hope to emit the expressions alone and to let them be emitted in "normal" JS.  I will wrap "function (…){…}" blocks around only the JS statements that do not, by default, return a value.  I believe that this will make the emitted code look more like "standard" JS.  I've already got the parser working, so I only need to think about one narrow aspect - the rewriting of the .semantics() code for 'emitjs'.
+
+The semantics (meaning) of Scheme is that everything is an expression and, thus, everything returns a value.  In Scheme, there are a few basic types.  Just about everything else looks like a function (with the open-parentheses moved leftward).
+The emitted JS code must evaluate to the same semantics as Scheme.  Everything returns a value.  This is not a problem for basic types (numbers, strings, booleans), but, JS also specifies several statements (like "if") that are evaluated for side-effects only and do not return a value.  In mapping Scheme to JS, I must emit JS code that returns values for such statements.
+Thankfully, JS allows me to create anonymous functions.  I will wrap anonymous functions around the statement types and invoke return inside of the functions.  I will cause the functions to be evaluated by suffixing them with "()".
+I list the mappings below, as I understand them now…
+
+Scheme syntax
+Emitted JS
+atom
+atom
+(fn a b c)
+fn(a,b,c)
+(if e thn els)
+(function(){
+    if e {
+        return thn;
+    } else {
+        return els;
+    }
+)()
+(if e thn)
+(function(){
+    if e {
+        return thn;
+    } else {
+        return null;
+    }
+)()
+(let ((a x) (b y)) d e f)
+(function(a=x, b=y)){ d; e; return f; })()
+(and a b c)
+(function() {
+    if (a &amp;&amp; b &amp;&amp; c) {
+        return true;
+    } else {
+        return false;
+    }
+}) ()
+(or a b c)
+(function() {
+    if (a || b || c) {
+        return true;
+    } else {
+        return false;
+    }
+}) ()
+(not x) 
+!x
+(cond (a b c) (d e f) (else g h i))
+ (function () {
+      if a {
+          b;
+          return c;
+       } else if d {
+          e;
+          return f;
+       } else {
+          g;
+          h;
+          return i;
+       }
+  ) ()
+(cond (a b c) (d e f))
+ (function () {
+      if a {
+          b;
+          return c;
+       } else if d {
+          e;
+          return f;
+       } else {
+          return null;
+       }
+  ) ()
+(a b c)
+a(b,c)
+
+
+;; top level
+
+(define g v)
+var g = v;
+(define (f a b) c d)
+function f(a b) { c ; return d; };
+(a b c)
+a(b,c)
+
+
+Again, I won't be doing any checking - I will let the JS compiler check the types for me.  I continue to treat the parser as a glorified REGEX, not as a full-blown language builder.  Future generations of the tool environment might allow my transpiler to insert file location / debug information to allow easier debugging by humans.  Future IDEs might allow the insertion of BREAK statements into the generated code, much like what is currently done with IDEs+compilers+assembler today.  LISP has some advanced features for this kind of insertion.  I don't know enough about JS at present, to say whether JS does or does not have such features.</Text>
+        </Document>
+        <Document ID="06C8602D-98A9-4A16-972F-476E7D2D9ABB">
+            <Title>Ohm and Scheme</Title>
+        </Document>
+        <Document ID="0A94E438-55F3-475F-AC89-8D9F7292981C">
+            <Title>JSONify</Title>
+            <Text>Given the simple input program of "#t", the cst as JSON is:
+
+{"Program":[
+    {"_iter":[
+	{"Form":[
+	    {"Atom":[
+		{"QuotedSexp":[
+		    {"_terminal":"'"},
+		    {"Form":[
+			{"Atom":[
+			    {"SBoolean":[
+				{"_terminal":"#t"}]}]}]}]}]}]}]}]}
+</Text>
+        </Document>
+        <Document ID="298BDBAD-E39F-4651-BBDF-9DA6E9D01A64">
+            <Title>Smalltalk to JS</Title>
+            <Text>Seymour https://cs.lmu.edu/~ray/notes/ohmexamples/</Text>
+        </Document>
+        <Document ID="FDF46344-950F-4AB9-B18F-888D27B6CA7F">
+            <Title>Tweak the Grammar for the 3 Top-Level Scheme Constructs</Title>
+            <Text>The minimal Scheme parser that I need to parse and transpile prolog-6.scm contains (only) 3 top-level constructs.
+
+	1.	Global variable definitions
+	2.	Global function definitions
+	3.	Function calls.
+
+A global variable definition looks like "(define sym &lt;form&gt;)".
+
+A global function definition looks like "(define (sym syms) &lt;form&gt;)".
+
+Function calls look like "(sym &lt;forms&gt;)".
+
+To pattern match this (aka parse this), I first need to differentiate syms from other kinds of atoms.   I call these Identifiers.  Identifiers are symbol names, and cannot be other kinds of atoms (e.g. strings, numbers, etc.).
+
+</Text>
+        </Document>
+        <Document ID="0E549368-FC82-499D-86A9-2DD7AB4C49CD">
+            <Title>Functional JS</Title>
+            <Text>Lisp - and Scheme - does not have statements.  Lisp only has expressions (called s-exprs) and special forms
+
+Every expression returns a value.  Always.
+
+To stay true to the semantics of Scheme, I must emit JS code that is expression-based.  This is possible in JS using anonymous functions.  The emitted code is going to look horrible, but it will be a true representation of the original Scheme program.  Later, after I see things work and can regression test, I can try to "optimize" some of the sequences, so that they don't look as ugly.
+
+For example, whenever the parser sees an atom, we emit a function.
+
+If the atom is a number N, then the parser emits 
+
+(function(){return N;})
+
+If the atom is a string, say "abc", then the parser needs to emit:
+
+(function(){return "abc";})
+
+When the parser sees a function call (an s-expr, where the first item is a function and the rest of the items are arguments), it emits a function which evaluates the arguments and returns a function which calls the intended function, say (fn a b c) becomes:
+
+ (function(){return fn(a(),b(),c();})
+
+Below, is a list of all transformations I think I need:
+
+atom x --&gt; (function(){return x;})
+SList (a b c) --&gt; (function(){return a(fb(),fc());}) [where fb and fc are functions]
+special (and b c) --&gt; (function(){return _and([b,c]);})
+special (or b c) --&gt; (function(){return _or([b,c]);})
+special (not b) --&gt; (function(){return (b() == false) ? true : false;})
+special (if x y z) --&gt; (function(){return (x() != false) ? y() : z();})
+special (if x y) --&gt; (function(){return (x() != false) ? y() : null;})
+special (cond ((a b c) (d e f))) --&gt; (function(){return _cond([[a,b,c],[d,e,f]])})
+special (let ((a b) (c d)) d e f) --&gt; (function(a=b(),c=d()){return d(),e(),f();})
+special (quote symbol) —&gt; (function(){return "symbol";}) [since JS doesn't have symbols per se]
+special (quote N) —&gt; (function(){return N;}) [where N is a number]
+special (quote "abc") —&gt; (function(){return "abc";})
+special (quote #f) —&gt; (function(){return false;})
+special (quote #t) —&gt; (function(){return true;})
+special (quote (…)) —&gt; (function(){return new List(…);})
+
+
+I'm expecting to supply a small runtime library that defines functions _and(), _or() and _cond().  In Lisp, these things work like &amp;&amp; and || in JS.  Each item is evaluated and evaluation stops as soon as one item is non-false.  It is imperative that unneeded arguments not be evaluated.  In the JS version, I will pass an array of (unevaluated) functions to _and and _or.  This is like how Smalltalk implements control flow - it passes unevaluated blocks (anonymous functions) into branching code.  The code decides which branch to take and evaluates (runs) the block.  [breaking news: I will modify the above code templates later, before I finish].
+Most of the mystique of compiler-writing is the act of learning, and coming up with, patterns that make the emitted code suck less.  
+It used to be that "suck less" meant creating emitted patterns that ran faster than their unoptimized versions.  
+We have learned, over the years, how to build compilers that are hot and fast.
+Thankfully, I am just building a transpiler - I am going to let the JS compiler(s) worry about optimizing my emitted code.  I just want it to work, I don't need fast-ness.  If I do create some optimizations, it will probably have to do with making the emitted code more readable to humans.  Fast-ness isn't my problem - it's the problem that competent Efficiency Engineers can tackle (once the transpiler is working).
+
+I'll try implementing the above table, then see what breaks.  Divide &amp; Conquer…
+
+In the rule FunctionCall, the original grammar specifies that the arguments ("actuals") are parsed as ListItem.  In emitting this code, I want to append "()" to every argument (to effectively evaluate it), but only in function calls.  The easiest way that I could think of to do this was to create a new rule "Arg" and use it instead of ListItem when parsing the arguments to a function.  I am using the parser to tell me what the context is and, in the case of arguments to a function call (only) I append "()" to each list item.
+
+(See commit 9db14775d9acedfb187a33feaa8bf41b508e4617).</Text>
+            <Comments>N.B for purists: Lisp intentionally does not specify an order for argument evaluation, so it is OK to let the JS compiler pick any order of evaluation.  If this were not the case, I would have to add more code to ensure that arguments are evaluated in a specific order.  If you don't understand the previous statement, don't worry.
+
+N.B. for purists: Lisp thinks that Booleans are NIL and anything-that-isn't NIL.  Scheme reserves #f and #t for false and true, resp. 
+If you didn't notice, I've just explained how CPS (Continuation Passing Style) works.  CPS is the ultimate GOTO.
+Actually, humans have no business looking at the emitted code.  We don't normally look at the assembly code emitted.  We used to look at the emitted assembler, but that urge has gone away, as compilers have gotten to be really good.  Over time, I expect that no one will care to look at the code emitted by transpilers, such as this.
+N.B. This is, again, a place where I'm using the parser to parse similar phrases, but categorize them to tell me how to emit code them. "Arg" is only another way of saying "ListItem", but is emitted differently in the .semantics() portion.</Comments>
+        </Document>
+        <Document ID="89E80D12-4B4A-4C48-A716-538EE740C326">
+            <Title>Ideas</Title>
+            <Text>IDEAS
+Ohm-JS does not parse anything but single characters.
+
+In an ideal situation, we would want to parse "tokens".
+
+Tokens would provide:
+
+	•	separation between Syntactic entities - when we ignore spaces, we would still have (delimited) tokens, for example, in the scanner pass (the very first pass), we would recognize identifiers.  If we had tokens, the scanner would emit 3 tokens for: abc&lt;space&gt;def - token(identifier, "abc"), token(spaces," "), token(identifier, "def").  In later passes, we could ignore spaces and still see distinct identifiers, e.g. token(identifier,"abc"), token(identifier,"def").  In the current version of Ohm-JS, the string abc&lt;space&gt;def is recognized as a single token, when spaces are ignored, e.g. "abcdef".  Maybe this problem just needs more thought…
+	•	extra information, such as line#, character position and filename, e.g. token(identifier, "abc", line=10, startPosition="3", filename="sample.txt").
+
+The above could be accomplished by using distinguished strings, for example "!!!&lt;token identifier abc … !!!&gt;".  The "problem" with this solution is that strings are not terminals and, hence, there is no automatic backtracking.
+Maybe we could use Unicode characters instead of distinguished strings?  For example "† identifier abc … ®".  JS purportedly supports unicode characters, so, in theory, Ohm-JS should be able to parse them, with backtracking.  Is this worth it?  Maybe the whole issue is moot?</Text>
+        </Document>
+        <Document ID="A35111FC-3CB2-4534-8BF5-5BA8A4ECAFD2">
+            <Title>List Constants</Title>
+            <Text>Scheme (and Lisp in general) reads code into lists.  It interprets the first item in a list as the function and the rest of the items in the list as (evaluated) arguments.
+
+QUOTE is used to create list constants.  The Lisp runtime doesn't try to execute constants, but only creates them.  This is very similar to how, say, string constants are created in JS.
+
+For example, the "goals" database used in prolog-6.scm is:
+
+(define goals '((some (? X))
+                (some (? Y))
+                (neq (? X) (? Y))))
+
+which says that the global variable "goals" is created as a list constant containing 3 items.  
+
+Pass1 of the transpiler converts this into:
+
+(define goals (quote ((some (? X)) (some (? Y)) (neq (? X) (? Y))))
+
+I want this to transpile to something like the following, in pseudo-code:
+
+(? X) —&gt; new List("?", "X") (where ? is a valid identifier in Lisp)
+(some (new  List("?","X"))) —&gt; new List("some", new List("?","X"))
+
+and the whole global constant (global variable) definition becomes:
+
+var goals = new List( new List("some",new List("?","X")),
+                      new List("some",new List("?","Y")),
+                      new List("neq", new List("?","X"), new List("?","Y") );
+
+Looking at it this way, I see that the prolog-6.scm code uses "(? X)" to create "logic variables" (in this case, a logic variable called X).  Lists are used for all sorts of data in Lisp, but in this specific example, (? X) creates a logic variable.  Hmm, maybe I want the transpiler to turn this into:
+
+var goals = new List( new List("some",new LogicVar("X")),
+                      new List("some",new LogicVar("Y")),
+                      new List("neq", new LogicVar("X"), new LogicVar("Y")) );
+
+It would be easy to have the transpiler convert patterns like "(? X)" into something more meaningful.  Hmm, maybe I should stick to the List version and make such changes later, after the basics are debugged.
+
+Decision made - I'll stick with the List version for now and optimize later…
+
+So, the transpiler should convert
+
+(quote (…)) —&gt; new List(…)
+
+And, it should do this recursively.
+
+The syntax for JS is wildly different from that of Scheme.  In order to continue using (the simpler) Scheme syntax, I transpile the above into valid Scheme.  I will unwind this in the final (emitter) pass.
+
+(quote (…)) —&gt; (@newList@ (…)) 
+
+(See commit 0c410d333c6370d39b9f648c38dff2f505a5502e).</Text>
+        </Document>
+        <Document ID="58C50409-E525-4BB0-9391-9E25E124D88F">
+            <Title>PROLOG CONTROL in 6 SLIDES</Title>
+            <Text>https://www.t3x.org/bits/prolog6.html
+
+</Text>
+        </Document>
+        <Document ID="085E7180-4157-4F71-8D32-F745E28C15F4">
+            <Title>PROLOG CONTROL in 6 SLIDES</Title>
+            <Text>Nils Holm PROLOG - used in a later section "Ohm and PROLOG".
+
+https://www.t3x.org/bits/prolog6.html
+
+</Text>
+        </Document>
+        <Document ID="47A40B3E-AE45-4750-A27B-83788DBCAC83">
+            <Title>Transpiling to Other Languages</Title>
+            <Text>I claim that the transpiler can be modified to emit the code in other languages.
+
+All that is necessary is to write a new 
+
+      emitter_semantics.addOperation(
+	  'emit???',
+…
+);
+
+I don't plan to prove this assertion and to show how it would be done, in this essay.  By now, it should be clear how to do this.</Text>
+            <Comments>If not, I haven't done my job of explaining things.  Contact me.</Comments>
+        </Document>
+        <Document ID="6A5597B4-5682-4CBD-81AD-323B0FFD8DB0">
+            <Title>Let*</Title>
+            <Text>The let* (LetSequential) emission is incorrect.  It needs to be transformed into sequential Lets.  There are at least 2 ways forward - 
+	1.	fix LetSequential, or 
+	2.	manually rewrite prolog-6a.scm to remove all let*s.
+
+For now, let's take choice 2 (there is only one let* in prolog-6a.scm).</Text>
+        </Document>
+        <Document ID="58EE1EC7-0982-4CD6-A98D-969FDDF1495A">
+            <Title>Extending a Rule</Title>
+            <Text>I've written a grammar where Program2 inherits from Program.
+
+Both grammars are in the same file.
+
+I use the += operator to extend the rule "Code" in the second grammar Program2.
+
+N.B. I need to call ohm.grammars(…) not ohm.grammar(…) when there is more than one grammar in the file.  This call returns a namespace instead of a grammar object.
+
+N.B. The default start rule remains "Code" (inherited from the original grammar).  I deal with the start rule later.
+
+inherittest.js:
+
+eee
+aaa
+bbb
+
+inherit.ohm:
+
+Program {
+  Code = ChunkA ChunkB -- code
+  ChunkA = "aaa" Eol*
+  ChunkB = "bbb" Eol*
+  Eol = "\n"
+}
+
+Program2 &lt;: Program {
+  Main = ChunkE
+  Code += ChunkE ChunkA ChunkB  -- code3
+  ChunkE = "eee" Eol*
+}
+
+inherit.js:
+
+// usage:
+// npm install ohm-js
+// node inherit.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('inherit.ohm')
+const grammarsNamespace = ohm.grammars(grammarData)
+
+const input = fs.readFileSync('inherittest.js')
+
+const result = grammarsNamespace.Program2.match(input)
+// console.log(result)
+// console.log(grammarsNamespace.Program2.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+// const semantics = grammar.createSemantics()
+
+</Text>
+            <Comments>I haven't figured out how to split them across files, yet.</Comments>
+        </Document>
+        <Document ID="AE65EB9E-026F-4FD9-8FE2-BDA16031889D">
+            <Title>Strongly Typed DSLs</Title>
+            <Text>Multiple stacks for every type.</Text>
+        </Document>
+        <Document ID="8042BDD0-D5A4-4E1A-AE27-E3D92F7D859D">
+            <Title>Math Example in Browser</Title>
+            <Text>See https://github.com/harc/ohm/tree/master/examples/math.
+
+This example shows how to embed a grammar into a webpage and then process it using different sets of semantics.
+
+The grammar and semantics can be found in https://github.com/harc/ohm/blob/master/examples/math/index.html.
+
+The grammar is embedded as a script with type="text/ohm-js".  This type distinguishes the Ohm-JS grammar from the other scripts and is read into variable "g" by line 63:
+
+var g = ohm.grammarFromScriptElement();
+
+The actual matching (g.match(…)) of the grammar against some input (string) is done in input.oninput (line 456).
+
+A semantics dictionary is created in line 136:
+
+var s = g.createSemantics();
+
+Semantic actions are created by the "s.addOperation" and "s.addAttribute" functions.
+
+AddOperation is called to create 3 sets of semantics: 'interpret', 'toTree' and 'toTwoD'.
+
+AddAttribute is called to create a 4th semantics names 'asLisp'.
+
+AddOperation and addAttribute are almost the same, except that the latter (addAttribute) creates properties (not methods) and is memoized (an optimization that reduces the cost of backtracking during the pattern match).
+
+'Interpret' returns a JS value, 'asLisp' returns a JS list (arrays of arrays), 'toTree' and 'toTwoD' return trees of HTML elements.
+
+The function 'input.oninput' (line 456) calls "show" (../lib.js) for each of the semantics.   The 'interpret' semantics returns a JS value which creates a string div.  The 'asLisp' semantics returns a JS tree which is processed by the stringifyLisp function and creates a string div.  The semantic functions 'tree' and 'twoD' return trees of HTML elements.  The file math.css creates visualization styles for the elements which result in the final appearance of the elements as a parse tree and as 2D mathematical notation (factions shown as numerators and denominators).
+
+The "show()" function simply appends the elements to the various divs (value, lisp, tree, twoD) and the browser displays the divs.  The "show()" function also clears the top-level divs, allowing the display to be iterated.  The CSS file (math.css) does most of the real work - by arranging that #tree elements have a visible bottom border, etc. </Text>
+            <Comments>The Elements are created by the 'elt' function.  The first parameter to 'elt()' is always an element id, which always corresponds to one of the rules in the grammar.  The rest of the arguments are sub-trees.</Comments>
+        </Document>
+        <Document ID="A2CBF717-61AB-4B76-9601-4BC3AF87BA76">
+            <Title>Inherit the Basic Parser</Title>
+            <Text>Let's try to inherit the basic scheme parser.
+
+I think that I'm going to need to revisit that basic parser many times. I'm going to iterate on the basic definition as I build up more interesting parsers.
+
+This is anti-waterfall thinking.  Beginning with the belief that one doesn't know where this is going to go.
+
+Waterfall design would be the idea that I can get the basic grammar (and all subsequent layers) right without iterating the code.
+
+Programmers like languages that have REPLs (Read-Eval Print Loop) because it helps them iterate.  This is one form of "design".
+
+Maintainers don't like REPLs, but that's another whole branch of Software Engineering…</Text>
+        </Document>
+        <Document ID="4750C4F0-CA1D-48D5-A46B-03A8A76A098F">
+            <Title>Pass 3</Title>
+            <Text>I'm going to freeze what works so far and create another pass.
+
+Since the current pass2 emits code that isn't Scheme-like, it is easier to leave the current pass2 as the "final" code emitting pass.   Hence, I will promote change the name of pass2 to "emitter" and insert a brand new pass in between "pass1" and "emitter".
+
+First, I will rename all pass2 .unity() calls to emitter() calls, to reduce chances of later confusion.  This change is a simple edit with the editor of my choosing (emacs, in this case ; using global search and replace on a narrowed region).
+
+(See commit ce97d2ee5af057c751661e707ad3bdaeb665720f). 
+
+I will call the new pass "listConstants".  It starts out by cloning 'unity' from pass1.</Text>
+        </Document>
+        <Document ID="A986A96B-15ED-4D17-889B-AF81671E128E">
+            <Title>Multiple Grammars in One HTML File</Title>
+            <Text>I can have multiple grammars in an .HTML file, but I need to use .grammarsFromScriptElements() which returns a namespace containing multiple grammars, each contained in &lt;script  type="text/ohm-js"&gt;…&lt;/script&gt;  in the HTML document.
+</Text>
+        </Document>
+        <Document ID="001A962D-ECA1-4689-91DE-F6AADD33C6B5">
+            <Title>Working</Title>
+            <Text>Now, the full test is working (compared to the Scheme output for prolog-6a.scm).
+
+See commit 544c1d52c9278b1cb90724f6452408a8154fc750.
+</Text>
+        </Document>
+        <Document ID="4E8090BA-DF99-4370-ADB6-5DC0F2ACA254">
+            <Title>Accumulator in print-frame</Title>
+            <Text>It turns out the Scheme and the way that the code is written, makes it easy to use an accumulator in print-frame (and print-frame-loop)
+
+The accumulator is intialized to '() in the top call to print-frame.  Successive calls to print-frame-loop either 
+	•	pass the accumulator unchanged, or, 
+	•	cons a result onto the accumulator.  
+The bottom-most call to print-fame-loop simply returns the accumulator.
+
+Wiring an accumulator into prove6 requires some non-local changes - all calls to prove6() need to be altered, and, back6() needs to be altered, and all calls to back6() need to be altered.  
+
+Discussion: 
+	•	If proves6() were written as a nested set of loops, locality would have been "better".  The goal of PROLOG is a one-off problem - stop after every answer and let the user decide whether more answers are wanted.  Discussion: should all of the code be affected by this one-off problem?  Should the solution be first described in its simplest form (a set of nested loops), and show points where user interaction is required?  If I had infinitely fast hardware, I would simply generate all of the answers, then print them out (in a REPL) one by one.  Everything beyond this is an optimization.  Clouding the DI with optimization details is something I dislike.  Optimization is a valid concern, but should not be tangled up with DI.
+		The PROLOG "problem" breaks down (divide&amp;conquer) into two sub-problems
+	⁃	find all solutions
+	⁃	allow the user to ask for solutions one by one.
+		Paul Graham and Peter Norvig went to great lengths to show optimized solutions to the PROLOG problem, essentially using CPS.  Their code is very complicated and imparts a mystical property to their books.
+	•	At what point does the cognitive load get so large that using an accumulator makes the code no clearer?  As a maintainer, I want to make as few changes as possible - using a global variable to "cross-cut" prove6 and back6 makes sense from this perspective (back6 doesn't even use the accumulator), but, as a designer, I might want to describe the algorithm in terms of an accumulator and would be happy to wire it into prove6 and back6.
+	⁃	The mutual recursion between prove6 and back6 is a code-driven, non-natural split, but, the if emphasis is on showing how backtracking works, is this split needed?
+	•	The original intent of Nils Holm's paper (and code) was to show how backtracking in PROLOG works.  "Back6()" shows the backtracking and "prove6()" calls it at the appropriate points.  When "prove6()" finds an answer, it calls "print-frame()", then backtracks to find more answers.  I, firstly, want to find all of the answers.  Later, I might want to cut the PROLOG behaviour in - which is: stop after any answer is found, let the user choose whether more answers are wanted.
+</Text>
+            <Comments>Design Intent
+http://www.paulgraham.com/onlisp.html
+https://www.amazon.com/Paradigms-Artificial-Intelligence-Programming-Studies/dp/1558601910/ref=sr_1_1?dchild=1&amp;keywords=paradigms+of+artificial+intelligence&amp;qid=1600610453&amp;s=books&amp;sr=1-1
+Continuation Passing Style</Comments>
+        </Document>
+        <Document ID="7A2B8944-411F-4431-A803-3A5A985214B2">
+            <Title>Sweeping Changes</Title>
+            <Text>In debugging support.js, I hit a variable scoping problem which looks like a JS problem
+
+The problem appears to go away if I use "let" instead of "var" in the transpiled code.
+
+This is one of the advantages of using the DSL approach.  This is a late change in strategy, but the fix is easy and all of the code is regenerated (transpiled).
+
+Now, node complains that "db" is defined more than one.  This is true - the original code in prolog-6.scm uses "db" as a global and relies on Lisp's ability to redefine variables as the code is loaded.  Possible solutions: 
+	1)	alter the .scm code to create multiple variables with different names, 
+	2)	allow multiple (define x …) statements and transpile them into variable assignments if the variable has already been defined (this would require making a table of top-level variables (globals), and checking it before emitting a top-level "let" definition, or 
+	3)	?.
+
+First, it seems prudent to remove the global variable and turn it into a function parameter.  This means going back to Scheme, checking that prolog-6.scm still runs, making the change to original Scheme code and seeing that it still gives the same answers…
+
+Running Scheme (mit-scheme) on my macbook produces the output:
+
+&gt; scheme
+
+
+1 ]=&gt; (load "prolog-6")
+
+;Loading "prolog-6.scm"...
+p = (a f)
+
+p = (a b c d h f)
+
+p = (a b d h f)
+
+p = (a g h f)
+
+p = (a f)
+
+p = (a b c d h f)
+
+p = (a b d h f)
+
+p = (a g h f)
+
+y = bar
+x = foo
+
+y = baz
+x = foo
+
+y = foo
+x = bar
+
+y = baz
+x = bar
+
+y = foo
+x = baz
+
+y = bar
+x = baz
+;... done
+;Value: #t
+
+Next, I make a copy and remove the definitions for prove3 and prove5.  I remove the tests for prove3 and prove5.
+
+1 ]=&gt; (load "prolog-6a")
+
+;Loading "prolog-6a.scm"...
+y = bar
+x = foo
+
+y = baz
+x = foo
+
+y = foo
+x = bar
+
+y = baz
+x = bar
+
+y = foo
+x = baz
+
+y = bar
+x = baz
+;... done
+;Value: #t
+
+That gets rid of the extra references to db.  Db is still a global and is used once in the "else" clause of prove6.  This use comes about because the pattern-matching "loop" needs to start from the beginning of the database.  The mutual recursion between loop6 and back6 is actually a nested set of loops and, deep in the nested loops, the algorithm needs to start matching rules against the whole database.  In this case, the recursion is a trick that covers up what is really going on - loops nested in loops nested in loops  - recursion isn't actually needed, except to appease Scheme and allergy sufferers - those who think that "loop" is a four-letter word.  In mathematics(?) notation the algorithm would clearly show a nested set of for-all's (∀).  I'll rewrite the algorithm more clearly, later.  For now, I'll pass "db" in as a parameter ("whole-db") while ensuring that it gets copied without change in prove6 and back6.  See commit 42e75c5499e8e0df65d49ba0b52eb521fc15f1dd.</Text>
+            <Comments>Nils intended to break backtracking out, and used mutual recursion to clearly show the backtracking.  My analysis might be unfair.
+In fact, the inner-most loop would have to contain a "stop and wait for go-ahead from user" statement (which doesn't exist in any language, at present) and would continue looping or break out of looping, depending on the user's command.</Comments>
+        </Document>
+        <Document ID="54900624-4419-4747-85F7-34F3F0637329">
+            <Title>Identifier</Title>
+        </Document>
+        <Document ID="F2C1E63F-D672-4975-B7BB-796D48ECDA2A">
+            <Title>Expanding Quotes</Title>
+            <Text>In Lisp, "quote" is used so often that it has been given a shortcut, consisting of a single quote.
+
+A quoted symbol, 'a is internally expanded into (quote a) and, ('(a b)) is internally expanded into ((quote (a b))).
+
+Unquote is simple to implement as a tweak of the Unity parser:
+(See commit f2105736ed1fb19b582986c4e8c2ba588c118eb8) [this code has a bug - see later]
+
+          sem.addOperation(
+	  'unquote',
+	  {
+	      Program: function(tree) {return toListOfStrings(tree.unquote())},
+	      Form: function(item) {return item.unquote()},
+	      QuotedSexp: function(_, form) {return "(quote " + form.unquote() + ")"},
+	      BackQuotedSexp: function(_, form) {return "`" + form.unquote()},
+	      CommaSexp: function(_, form) {return "," + form.unquote()},
+	      SList: function(lis) {return lis.unquote()},
+	      DottedList: function(_lp, items, _dot, lastItem, _rp) {
+		  return "(" + toListOfStrings(items.unquote()) + " . " + lastItem.unquote() + ")"},
+	      NullTerminatedList: function(_lp, items, _rp) {
+		  return "(" + toListOfStrings(items.unquote()) + ")"},
+	      ListItem: function(item) {return item.unquote()},
+	      Atom: function(a) {return a.unquote()},
+	      lexical_integer: function(ns) {return toPackedString(ns.unquote());},
+	      lexical_symbol: function(c, cs) {return c.unquote() + toPackedString(cs.unquote());},
+	      lexical_string: function(_q1, chars, _q2) {return "\"" + toPackedString(chars.unquote()) + "\""},
+	      lexical_letchar: function(c) {return c.unquote()},
+	      lexical_numchar: function(c) {return c.unquote()},
+	      lexical_lc: function(c) {return c.unquote()},
+	      lexical_uc: function(c) {return c.unquote()},
+
+	      lexical_nullList: function(_lp,_rp) {return "()"},
+	      lexical_boolean: function(b) {return this.sourceString},
+	      _terminal: function() { return this.primitiveValue; }
+	  }
+</Text>
+        </Document>
+        <Document ID="ED1B611F-5FAE-41C6-8F9F-8C85BF9ABFA8">
+            <Title>Basic Scheme Parser</Title>
+            <Text>The fundamental data type of Scheme is the SEXP (s-expression).
+
+A SEXP is either an atom or a list.  A list can contain atoms and other lists.
+
+If I get the basics right, I could use Ohm's grammar inheritance to build bigger grammars.
+
+I don't expect to get that grammar right on the first pass.  Divide and Conquer.  I try out bits of ideas first, then, modify the bits to suit the bigger picture.
+
+My first attempt at a basic parser for SEXPs:
+
+Scm2jsbasic1.ohm:
+
+Scm2JSBasic {
+  Scm = List | Atom |  Boolean
+  List =   "(" ListInnards ")"
+  ListInnards = (Atom | List)*
+  Atom = Integer | Symbol | Boolean
+  Boolean = "#f" | "#t"
+  Integer = Numchar+
+  Numchar = "0".."9"
+  Symbol = Letchar (Letchar | Numchar | "?" | "_")*
+  Letchar = LC | UC | "+" | "*"
+  LC = "a".."z"
+  UC = "A".."Z"
+}
+
+I can already see that I'm going to be replacing Letchar with something more interesting…
+
+Hmm, maybe the whole definition of "symbol" needs to be replaced…
+
+Just to be clear - I am not trying to parse all of Scheme, only enough to parse Nils' PROLOG code.  This will be a single-use DSL…
+
+Engineering trade-off - I don't need to do everything (the last 5% of details always kill).  YAGNI.  I hope to transpile Nils' Scheme code to JS, then let the JS compiler do the heavy lifting.
+
+I'm planning to use the Ohm-js parser as a fancy editor…. Think of Ohm-JS as "sed" on steroids.
+
+Next step - pour all of Nils' code into the test, fix what doesn't parse…
+
+scm2jsbasictest1.scm:
+
+(null? xyz)
+
+scm2jsbasic1.js:
+
+// usage:
+// npm install ohm-js
+// node scm2jsbasic1.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('scm2jsbasic1.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('scm2jstest1.scm')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+        </Document>
+        <Document ID="642E75A5-3629-40BA-A93B-D61E898189A8">
+            <Title>Matching Pairs</Title>
+            <Text>Ohm can parse matching pairs of delimiters.  This can't be done easily with YACC or REGEX.
+
+Ohm, PEG and recursive-descent parsers in general can include rules that call themselves.
+
+A very simple example is shown below…
+
+Program {
+  code = matchingBraces+ eol
+  matchingBraces =    "{" matchingBraces "}" -- braces
+                    | innards
+  innards = "inside"
+  eol = "\n"
+}
+
+The "magic" happens in the "matchingBraces" rule.  It consumes an opening brace "{", calls itself, then consumes a closing brace "}".
+
+This grammar can parse nested sets of pairs, e.g. "{{inside}}".
+
+Pairtest.js:
+
+{{inside}}
+
+Pairs.js:
+// usage:
+// npm install ohm-js
+// node pairs.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('pairs.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('pairtest.js')
+
+const result = grammar.match(input)
+//console.log(grammar.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+        return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        code: (braced,eol) =&gt; {
+	    return "matching pairs of braces=/" +  node_to_source(braced) + "/"
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+</Text>
+            <Comments>The "- -" annotation is syntactic sugar provided by Ohm, to help with conformance of Arities.  There are two rules in "matchingBraces", the first has Arity 3 ('"{" matchingBraces "}"' has 3 matches) and the second has Arity 1 ("innards" is a single match).  The "- -" notation automagically splits its branch off into a sub-rule called matchingBraces_braces.  The sub-rule "matchingBraces_braces" has Arity 3, but the alternate in "matchingBraces" has Arity 1 (after the split).  After this split, all alternates of "matchingBraces" have Arity 1 and Ohm-js is happy.
+</Comments>
+        </Document>
+        <Document ID="5B1E4D5E-6459-419F-BDF6-717C8FA1E1C4">
+            <Title>Ohm and PROLOG</Title>
+        </Document>
+        <Document ID="ED26B9D6-44B4-499F-8F1C-A7C16757244B">
+            <Title>Function Copy()</Title>
+            <Text>The Copy() function is not being emitted correctly.
+
+The first clause returns "x" as an atom.  There is no "return" statement emitted.
+
+I will copy/paste it into my test-harness element and zero in on it.
+
+I pare the test case down to:
+
+(define (copy x n)
+  (cond
+    ((not (pair? x)) x)))
+
+and look at "pass1 &amp; listConstants &amp; emitter tree".
+
+The parse tree is:
+
+(:Program 
+ (:GlobalFunctionDefinition 
+  (:Identifier 
+   (:symbol [[copy]] )) 
+  (:Identifier 
+   (:symbol [[x]] )),
+  (:Identifier 
+   (:symbol [[n]] )) 
+  (:StatementBlock 
+   (:SequentialStatement 
+    (:LastStatement 
+     (:Statement 
+      (:Form 
+       (:SList 
+	(:SpecialForm 
+	 (:CondExpression 
+	  (:CondExpressionWithoutElse [toCL operation] )))))))))))
+
+I see 2 potential problems: 
+	1)	there is a comma between the args "x" and "n" and 
+	2)	the :CondExpressionWithoutElse is showing "[toCL operation]" instead of a value.
+
+It looks like (1) was intentional, so I will focus on (2).
+
+CondClauseWithoutElse was missing () after firstCondClause.toCL.  This is in the toCL operation, so the actual problem has not been repaired, but may become more visible.
+
+Now, the parse tree is appears as:
+
+
+(:Program 
+ (:GlobalFunctionDefinition 
+  (:Identifier 
+   (:symbol [[copy]] )) 
+  (:Identifier 
+   (:symbol [[x]] )),
+  (:Identifier 
+   (:symbol [[n]] )) 
+  (:StatementBlock 
+   (:SequentialStatement 
+    (:LastStatement 
+     (:Statement 
+      (:Form 
+       (:SList 
+        (:SpecialForm 
+         (:CondExpression 
+          (:CondExpressionWithoutElse 
+           (:FirstCondClause 
+            (:CondClause 
+             (:CondTest 
+              (:Form 
+               (:SList 
+                (:SpecialForm 
+                 (:NotExpression 
+                  (:Bool 
+                   (:Form 
+                    (:SList 
+                     (:FunctionCall 
+                      (:Identifier 
+                       (:symbol [[pair_Q_]] ))
+                      (:Arg 
+                       (:ListItem 
+                        (:Atom 
+                         (:atom 
+                          (:symbol [[x]] )))))))))))))) 
+             (:CondStatementBlock 
+              (:StatementBlock 
+               (:Atom 
+                (:atom 
+                 (:symbol [[x]] ))))))) )))))))))))
+
+[^ I put the output into emacs .lisp mode and pretty-printed it.]
+
+The problem appears to be that the grammar looks for "StatementBlock = Atom | SequentialStatement".  The grammar is over-specified.  I simply remove Atom and leave "StatementBlock = SequentialStatement".  This now leaves Atom to be parsed by Statement and takes its rightful place as a MidStatement or a LastStatement.
+I've made the code simpler by removing code.  This is good.</Text>
+        </Document>
+        <Document ID="DB7566E8-BD21-403A-A9DA-B2AE4D23C15B">
+            <Title>Step 1a: Commenting Out Semantics</Title>
+        </Document>
+        <Document ID="59D2604C-404B-4A66-AC82-3F540DC760BC">
+            <Title>Dissecting the Parse</Title>
+            <Text>I found that the parsing results from the ohm editor were misleading.  I implemented my own tree viewer, using Lisp-like syntax.  See commit 950c308f28e5a3360afc14fb6b9f171c4a4acb32.</Text>
+        </Document>
+        <Document ID="9B4786D7-6BC1-4742-AD11-18FE69C78238">
+            <Title>Ohm and Scheme</Title>
+        </Document>
+        <Document ID="CF8611A9-E93A-47BA-AC9D-427FAD526AE6">
+            <Title>Errata</Title>
+            <Text>Nov. 6, 2020: 
+It turns out that the final version of the prolog transpiler was broken.  The error was in the hand-rewritten code for print-frame (a parenthesis was off-by-one).
+I re-examined the original prolog-6.scm and rewrote it (in Scheme) as a simple recursive function that did not used Scheme's named let feature.  In the process, I lifted as many implementation details out and put them into auxiliary functions.
+The result appears to work, is in branch "main" commit 70989e3333021327b472f56a548a6e81c8abcbca, in https://github.com/guitarvydas/OhmSmallSteps.
+To run it, simply execute
+
+./run.bash
+
+in the OhmSmallSteps directory.  This should create a file junk.js by concatenating support.js and prolog-6.js.  The script then runs 
+
+node junk.js
+
+which should print the final set of matches as bindings to X and Y:
+
+(((X . baz)  (Y . bar))  ((X . baz)  (Y . foo))  ((X . bar)  (Y . baz))  ((X . bar)  (Y . foo))  ((X . foo)  (Y . baz))  ((X . foo)  (Y . bar)))
+
+To re-create "prolog-6.js" and watch the transpiler transpile the Scheme code, load "index.html" in a browser (I used Chrome) and hit the "emit JavaScript" button.  This should produce JavaScript code in the browser.  Copy the code and paste it into a file or prolog-6.js.  The transpiled Javascript should have no differences with the file prolog-6.js found in the above-mentioned git repository.
+The Javascript in support.js and prolog-6.js forms the basis for new, follow-on, work in ../js-match.</Text>
+        </Document>
+        <Document ID="5EFAA405-E52E-48B9-B286-90FA414CD7E1">
+            <Title>Skip Spaces</Title>
+            <Text>To skip spaces, I simply need to change all of the rules so that they begin with uppercase letters.
+
+N.B. The semantic action "code" must also be changed to "Code".
+
+I used the flip code for this test…
+
+skipspacestest.js:
+ccc  ddd
+
+
+
+skipspaces.ohm:
+
+Program {
+  Code = ChunkC ChunkD
+  ChunkC = "ccc" Eol*
+  ChunkD = "ddd" Eol*
+  Eol = "\n"
+}
+
+skipspaces.js:
+// usage:
+// npm install ohm-js
+// node skipspaces.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('skipspaces.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('skipspacestest.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+	if (node.primitiveValue.toString() == "\n") {
+	    return ''
+	}
+	else
+            return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        Code: (a,b) =&gt; {
+	    return node_to_source(b) + node_to_source(a)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+</Text>
+        </Document>
+        <Document ID="4C8E0599-662A-4A57-9BE2-B1AC254400F6">
+            <Title>Basic Scheme vs prolog-6.scm</Title>
+            <Text>Try the whole enchilada.
+
+test:
+see prolog-6.scm https://www.t3x.org/bits/prolog6.html
+
+ohm grammar:
+see Basic Scheme Version #2
+
+scm3jsbasic3.js:
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('scm2jsbasic2.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('prolog-6.scm')
+
+const result = grammar.match(input)
+//console.log(grammar.trace(input).toString())
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+</Text>
+        </Document>
+        <Document ID="A23642CF-EF61-4C6A-AD1B-914720E7DEBE">
+            <Title>Pipelining Grammars</Title>
+            <Text>Ideally, I would want a grammar that inputs a string and produces a token stream which I could then feed into other grammars in a pipeline fashion.
+
+OMeta is able to run grammar pattern matchers on arbitrary input (e.g. strings and tokens).
+
+Ohm-JS cannot do this and works only with input strings (of characters).
+
+I can compromise and produce strings.  I'll ignore low-level efficiency for the moment and see that our idea works.  Later, I can switch to OMeta if needed.  It might turn out that everything works "fast enough" so, I might not need to switch to OMeta and keep our "dumb" implementation.
+
+</Text>
+        </Document>
+        <Document ID="29C079F6-F92C-46B1-BA35-C5A5D67CF705">
+            <Title>Addendum - Foreign Call</Title>
+        </Document>
+        <Document ID="16577842-E111-4F58-9421-07B364A5DE84">
+            <Title>Larger Tests</Title>
+            <Text>The new grammars now handle all of prolog-6.scm.
+
+I view the JavaScript output using my favourite pretty-printer (emacs, JavaScript-mode, in my case).
+
+I am manually eyeing the output backwards - starting with the final call to prove6().
+
+I see something suspicious in the transpilation of the function "resolve".
+
+I have saved the output in prolog-6.js.  Running "node" on it shows an error at function "back5".
+
+That gives me at least two errors to look at.
+
+I will start debugging by looking at back5.  I start with cutting back5 out of the full test and making a test harness for it.
+
+Back5 transpiled and formated, is:
+
+function back5(l,g,r,e,n) {
+    return (function(){
+	if (
+	    (function(){
+		ifpair_Q_(g) &amp;&amp; pair_Q_(r) {
+		    return true;
+		} else {
+		    return false;
+		}))
+	    ()
+	) {
+	    return prove5(l,g,cdr(r),e,n);
+	} else {
+	    return prove5(L_l(l),L_g(l),cdr(L_r(l)),L_e(l),L_n(l));
+	}
+    })
+    ();
+};
+
+The first obvious problem is the ifpair_Q_. The branching AND (&amp;&amp;) needs to be wrapped in parentheses and, for readability, the "if" could use a space before the expression.  Both of these problems can be addressed by adjusting the code for &amp;&amp; (and ||).
+
+Next, there is a problem with CondClauses - MoreCondClause is defined as CondClause*.  Instead it should be defined as a CondClause and the * repetition is moved up into CondExpressionWithElse and CondExpressionWithoutElse.  Now, each MoreCondClause will be prefixed with "} else if " instead of only the first MoreCondClause having this prefix.  (See commit 49ee1506144edb8bbca68e796ad3b4a94cdcb318).
+
+Next, another named let, that I overlooked, is in "lookup".  I rewrote this manually, as before.
+
+It seems that the grammar does not handle LETs with no bindings.  This appears in my manual rewrite of  "print_frame_loop".  Putting in dummy bindings (_xx and _yy) solves the immediate problem.  Since this problem appears only in my rewrite, I choose not to repair the grammar (at this time).
+
+I created references to cd*r().
+</Text>
+            <Comments>&gt; node prolog6.js</Comments>
+        </Document>
+        <Document ID="46535E11-25E4-4DB5-AA42-BB52DFBC8D5A">
+            <Title>2. Add Semantics</Title>
+            <Text>Ohm file source2source.ohm:
+
+Program {
+  code = any*
+}
+
+JS (JavaScript) file source2source1b.js:
+
+// usage:
+// npm install ohm-js
+// node source2source.js
+
+
+const fs = require ('fs')
+const ohm = require ('ohm-js')
+const grammarData = fs.readFileSync('source2source.ohm')
+const grammar = ohm.grammar(grammarData)
+
+const input = fs.readFileSync('s2s.js')
+
+const result = grammar.match(input)
+
+if (result.succeeded()) {
+    console.log("Matching Succeeded")
+} else {
+    console.log("Matching Failed")
+}
+const semantics = grammar.createSemantics()
+
+// recursive function to get the source of a non-terminal node
+// from https://repl.it/talk/learn/Making-your-own-programming-language-with-NodeJS/45779
+const node_to_source = node =&gt; {
+    if (node.ctorName == "_terminal") {
+        return node.primitiveValue
+    } else {
+        return node.children.map(n =&gt; node_to_source(n)).join('')
+    }
+}
+
+semantics.addOperation(
+    'dump',
+    {
+        code: (s) =&gt; {
+	    return node_to_source(s._node)
+        }
+    }
+)
+
+console.log(semantics(result).dump())
+
+Test file s2s.js:
+
+/* a sample comment */
+function f(a, b) {
+    a = b; // a 2nd sample comment
+}
+
+usage:
+&gt; node source2source1b.js
+</Text>
+        </Document>
+        <Document ID="027A7E8A-E6EF-4FB6-B542-BF316CB80EE2">
+            <Title>Token Pipelines</Title>
+            <Text>Ohm-js can parse characters only.
+
+OMeta can parse arbitrary datatypes.
+</Text>
+        </Document>
+        <Document ID="932B8945-DA14-462A-BBA2-D76EB3B4C287">
+            <Title>Ohm Data Structures Dissected</Title>
+            <Text>For the simple input "#t" and a simplified grammar, I get the following data structures.  In the diagram below, I also display the top level semantics object that is created when "semantics(result)" is called.
+
+
+#
+
+</Text>
+        </Document>
+        <Document ID="FD4FF368-A7F5-41E5-8EB0-58FB689EA3D3">
+            <Title>Waterfall</Title>
+            <Text>In software, it is never true that one can get it right the first time around.  
+
+If you think that you know what you are doing, then you are employing a technique called the Waterall method.  
+
+Even really smart people don't get it right most of the time - for example, refer to most existing multi-tasking libraries and the agony that these have caused.
+
+[If you thought that you got it right the "first time", odds are that you have done this before.] </Text>
+            <Comments>Currently, multi-tasking is considered "hard",  Most of the problem is due to Accidental Complexity - the use of Time-Sharing (a hard problem) and the idea that memory needs to be shared.  Both of these are based on old-fashioned criteria that have little to do with generalized multi-tasking.</Comments>
+        </Document>
+        <Document ID="EC720A9B-0567-4856-82E6-C6919D91FC19">
+            <Title>Quoting Revisited</Title>
+            <Text>As I get further and try more detailed examples, I see some bugs in the quote expander code.
+
+Firstly, 
+
+(define db '(5)) 
+
+Comes out as
+
+(define db (@newList@ "5")) 
+
+whereas it should be
+
+(define db (@newList@ 5)).
+
+This is a variant of the problem I solved in the Scm2JS grammar, and should be easy to repair.  Thankfully, the quote expansion is isolated, so I know that changes to it will not affect what I've done so far.  
+
+See commit 8946e4f755f5b3083fcf0203c0d3246d0b8cd399 which fixes quoted lists of single atoms and a quoted null list.  The result still has problems…
+
+Next, I see (1) that the Scm2JS grammar treats the insides of quoted lists as function calls and (2) something looks odd for input "(define db '(((edge a b))):.
+
+Actually, after a more detailed look, I see that (1) is misdiagnosed.  The emitter has left-over code that places "()" after every item when emitting for SList_atnewlistat.  I need to remove the spurious "()".  See commit 0ce488124f292152754348e030b78be3b449fb13 (now back on the 'master' branch, once again).
+
+Now, (2) looks more reasonable, but still has spurious "function"s emitted.  Again, this is just legacy code - easy to clean up and fix.  See commit 6a5a268cccdc04c593c79983bd5d02ccf80160ed.
+
+The emitted code is
+
+var db = new List(new List(new List("edge","a","b")));
+
+but the node compiler balks with the error that List is undefined.
+
+Manually stubbing in List…
+
+function List(args) {
+};
+
+and the code compiles cleanly under node (put the code into "junk.js" and run node: "node junk.js").</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

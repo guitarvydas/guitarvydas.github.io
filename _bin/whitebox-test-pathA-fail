@@ -1,0 +1,15 @@
+#!/bin/bash
+
+wire3=wire_$RANDOM
+wire4=wire_$RANDOM
+wire5=wire_$RANDOM
+mkfifo ${wire3} ${wire4} ${wire5}
+
+./pathA "$1 $0" 3<${wire3} 4<${wire4} 5<${wire5} &
+
+echo "../_new/aaa.html" >${wire3} &
+echo "(content)" >${wire4} &
+echo "die" >${wire5} &
+
+wait
+

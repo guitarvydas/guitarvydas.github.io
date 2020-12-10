@@ -1,0 +1,197 @@
+<html>
+
+<head>
+<title>editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Graphical Atoms - Gratoms</p>
+<p class="itemText">Graphical Atoms are the lowest level graphical units that can edited by an editor.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For lack of a better term, I will use the word gratom to denote graphics atoms.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Editor Basic Operations</p>
+<p class="itemText">An editor can create various gratoms:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• rectangle</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• line</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• text</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• ellipse</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• curvy line</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The editor does not know what it is editing.<span class="Apple-converted-space">  </span>The editor simply creates gratoms and allows the user to edit them.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Understanding what is on a diagram is left to later passes in the chain.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Analogy</p>
+<p class="itemText">For an analogy, imagine a generic programming editor (emacs, vim, vscode, etc.).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The generic programming editor allows one to create and edit text (only).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It does not "know" what programming language it is editing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It only knows a few basic rules:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• how to move the cursor</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• how to insert a new characters at the cursor</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• how to delete characters</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• how to save / load a file of characters</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• how to load scripts (aka modes) that help to pretty-print the text.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A text-only programming editor ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Operations</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Text</p>
+<p class="itemText"> • position x,y of a text box</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• change w,h (width, height) of text box</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• edit the characters contained in a text box (maybe by bringing up a textual editor)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Rectangle</p>
+<p class="itemText"> • position x,y of a rectangle</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• change w,h (width, height) of rectangle</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• edit characteristics of rectangle (colour, border, rounding, etc.) </p>
+</li>
+<li>
+<p class="itemTitle">Ellipse</p>
+<p class="itemText"> • position x,y of an ellipse</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• change w,h (width, height) of ellipse's bounding box</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• edit characteristics of ellipse (colour, border, etc.) </p>
+</li>
+<li>
+<p class="itemTitle">Straight Line</p>
+<p class="itemText"> • define start point of a line</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• define ending point of a line</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• edit syntactic sugar of a line - editing polyline points, thickness, etc.</p>
+</li>
+<li>
+<p class="itemTitle">Curvy Line</p>
+<p class="itemText"> • define start point of a line</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• define ending point of a line</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• edit syntactic sugar of a line - editing bezier points, thickness, etc.</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">SVG?</p>
+<p class="itemText">Maybe the editor is just an SVG editor?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We need to use only a subset of SVG. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We could write a routine that strips out all of the unwanted parts of SVG.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We could write a checker routine that checks that the stripped-down SVG diagram follows certain rules.<span class="Apple-converted-space">  </span>Such a checker is given the fancy name "parser" in traditional compiler lore.<span class="Apple-converted-space">  </span>A parser checks that the tokens follow certain rules.<span class="Apple-converted-space">  </span>In fancy compiler terminology: the parser checks that the tokens make up well-formed phrases in the langu...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

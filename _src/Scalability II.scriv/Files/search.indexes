@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="1CED7E6A-2F6F-4FA9-9D70-C6D62D58E1C6">
+            <Text>There is no silver bullet.  There are many silver bullets.
+</Text>
+        </Document>
+        <Document ID="DFA02F6C-491F-436A-AE38-7F24AAEEAFB3">
+            <Text>Complexity is not the problem.
+</Text>
+        </Document>
+        <Document ID="225FB909-8F9D-4CDD-A67C-DA4556EF0479">
+            <Text>Further explanation:
+
+The main problem in software design is scalability.
+
+We want to "plug" pieces tother like LEGO blocks.
+
+Better scalability implies fewer dependencies.
+
+Early hardware people got this "right".  They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).
+
+Chips were black boxes.  They had a set of input/output pins.  The insides of the chips were inscrutable - encased in opaque epoxy.
+
+Nothing leaked out of or into a chip except through the pins of the chip.
+
+Properties of a chip were described in easily-measured terms:
+
+	•	voltage on a pin
+	•	current needed by a pin
+	•	diagram / chart of the outputs, given a set of inputs
+	•	timing.
+
+Then, hardware designers "discovered" that point-to-point wiring between chips led to non-scalable designs.
+
+They built a (small) hierarchy - chips mounted on boards plugged into backplanes.
+
+The earliest backplanes were basically point-to-point wiring harnesses.  For example, an early Wang word processor had a backplane with some 400 pins, allowing a chip on one board to send signals directly to a chip on another board.
+
+Then, came the S100 bus.  It had only 100 pins.  It was well defined and documented.  Certain connections were not allowed, even if they could be done more efficiently as point-to-point connections.
+
+The idea of the Bus led to Apple computers and, ultimately, the IBM desktop computer.  (There was more than one Bus definition, but the market shook those out).
+
+Can software be built like chips?  I argue Yes.
+
+We need to build software in hierarchies.
+
+Divide and conquer.
+
+No leakage - of anything - between layers in a hierarchy.  ("Anything" includes things like variables, types, control flow, dependencies of any kind, etc.).
+
+
+Coming back to Complexity: we *don't care* how complicated a component is, as long as it is well-encapsulated and as long as we don't have to deal with any of its leakage of dependencies.
+
+I see software as a hierarchy of black boxes.  The Architect for each box chooses the best way to describe the design intent of a black box.  The Engineer figures out how to dot the I's and cross the T's.  The Production Engineer figures out how to make the black box "more efficient" and the Coder lays the bricks to implement the black box.
+
+A good Architect will have a tool-belt full of Silver Bullets.  Maybe a problem is best described in Relational terms, maybe a problem is best described as a State Machine (as a diagram, yet), maybe a problem can be broken down in a synchronous manner, etc., etc.
+
+</Text>
+        </Document>
+        <Document ID="C48AFDBE-2DC6-45DD-85C9-BF48FADF85CE">
+            <Title>Measuring Isolation</Title>
+            <Text>Measuring early successes at isolation:
+
+	•	No need for make
+	•	No need for any package managers
+	•	No need for tools like AutoConfig.
+	•	Manuals that are only one page long.
+
+Other measures:
+- Using a hierarchy of DSLs to solve a given problem.
+- Breaking out of a text-only syntax mentality, using DaS (Diagrams as Syntax).
+
+</Text>
+        </Document>
+        <Document ID="48CD5F26-2DA3-4937-BC37-E4F760476D00">
+            <Title>Insidious Form of Dependency</Title>
+            <Text>Dependency: An insidious form of dependency that is overlooked is the "dynamic call chain" created by using a (usually hidden) stack to store state and return addresses between function invocations.  This dependency must be broken if software is to scale to new heights.  Breaking this kind of dependency requires Concurrency.  Concurrency, currently, has a bad name (i.e. it is thought to be a "hard" problem) because it has been tangled up with Time Sharing and Operating Systems.  Most applications don't need Time Sharing and all applications, except Linux, MacOSX, Windows, etc., don't need to implement operating systems.  Concurrency is *much* easier when Time-Sharing is removed.
+</Text>
+        </Document>
+        <Document ID="A4DD758E-F904-47AA-8D4B-33B9D7D79671">
+            <Title>Old Reality vs. New Reality</Title>
+            <Text>Old reality - The old reality was: limited memory and one CPU (hence, the name "Central Processing Unit").  In this reality, it was reasonable to simulate concurrency and have one stack per process.
+
+New reality - Huge amounts of memory and many processors (none of those being "Central").  In this reality we can afford to have multiple stacks (e.g. one for each type) and use SEND() for every kind of data movement (displacing function parameters, return values, exceptions, all of which came about due to the Old Reality).
+
+There is nothing "new" in the above ideas.  Humanity has dealt with issues of isolation and timing many times before.
+
+For example, businesses are built on the notion of hierarchy.
+
+For example, music scores deal with real-time issues and sequencing.
+
+
+
+Measuring early successes at encapsulation:
+
+- No need for Make
+- No need for any package managers
+- No need for tools like AutoConfig.
+- Manuals that are only one page long.
+
+Other measures:
+- Using a hierarchy of DSLs to solve a given problem.
+- Breaking out of a text-only syntax mentality, using DaS (Diagrams as Syntax).
+
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

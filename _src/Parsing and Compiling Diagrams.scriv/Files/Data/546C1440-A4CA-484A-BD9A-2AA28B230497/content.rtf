@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid501\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}
+{\list\listtemplateid7\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid601\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid7}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}{\listoverride\listid7\listoverridecount0\ls7}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Code Emitter\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 The Coder (aka Code Emitter) produces code from the diagram, for various languages.  In this particular POC, we produce code for JavaScript (JS).  In this particular POC, the JS code we produce is a JSON wiring table. (We join the JSON with 
+\f3\i leaf
+\f2\i0  parts (JS) and a 
+\f3\i kernel
+\f2\i0  in a later \'93build\'94 pass).\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 A Coder might also contain an optimiser, but this POC does not contain an optimiser.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 In this POC, the code consists of seven child Parts.  The first four Parts are written in Prolog and deal mostly with creating a \'93wire\'94 array (called \'93pipes\'94 for historical reasons), creating unique indices for the wires and describing which wire indices refer to which Pins.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 The fifth pass is just another *nix sort for Prolog requirements (probably unneeded, as it was {\field{\*\fldinst{HYPERLINK "scrivcmt://A102F7EB-725C-4A0A-876F-CA3163905581"}}{\fldrslt experimental).}}\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 The sixth Part, \'93emit-js\'94 uses Prolog to walk the 
+\f3\i factbase
+\f2\i0  and to emit intermediate code that can be read by Lisp.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 The final Part, \'93emit-js2\'94 is written in Lisp and simply transforms the intermediate code from \'93emit-js\'94 as a legal JSON table in JS.  Note that the character \'93@\'93 is a legal identifier character in Lisp.  The meat of this Part is in main() and describes its architecture as calls to zero-argument functions.  Each of the functions are prefixed with the character \'93@\'93 to mean that they are \'93mechanisms\'94 (in the {\field{\*\fldinst{HYPERLINK "scrivcmt://CA5C1C71-1F76-4012-BDCC-4F2F26B05C05"}}{\fldrslt S/SL}} sense).  These \'93@\'93 functions \'93support\'94 the architectural intent written out in main().  Lisp was chosen for this Part, due to its rich output formatting, due to its ability to read() the intermediate code and familiarity to the author.  Any other language could have been used, and the preceding Part (\'93emit-js\'94) could have been tweaked to make the work easier in the other language.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}  assign_wire_numbers_to_inputs\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22     nwires(nnnn).\
+    wireNum(pin-id,nnnn).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 This pass creates a unique index (a number, incrementing monotonically starting at 0) for each wire in the diagram being compiled.  This pass creates a 
+\f3\i fact
+\f2\i0  indicating the maximum number of wires and a 
+\f3\i fact
+\f2\i0  for each wire associated with every input pin.  An input pin might have 0 or more wires connected to it.\
+    \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}  assign_wire_numbers_to_outputs\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22     wireNum(pin-id,nnnn).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 This pass associates one or more wire numbers with each output pin on the diagram.\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls3\ilvl0\cf0 {\listtext	\uc0\u8226 	}  assign_portIndices\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22     sourcePortIndex(pin-id,nnnn).\
+    sinkPortIndex(pin-id,nnnn).\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 \
+This pass visits every pin (input and output) and creates a fact associating an index (a number) with it.  It also marks whether the pin is a source or a sink.  This pass simply collapses information that is already in the factbase, making traversal easier in downstream passes.\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\uc0\u8226 	}  inOutPins\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22     inputPin(part-id,pin-id).\
+    outputPin(part-id,pin-id).\
+    wireIndex(pin-id,wire-index).\
+    n_c(pin-id).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 This pass marks every pin, associated with Part, as being an input or an output pin of that Part.  It also gathers the wire index and creates a wireIndex fact.  Pins that have no wires attached to them are marked as \'93No Connection\'94 (n_c). \
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f2\fs26 \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls5\ilvl0
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 	\'95	  plsort\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 This is the same as the previous plsort.  It simply uses *nix sort() to sort the factbase and to group like-named rules together according to Prolog\'92s requirements.  This pass might now be a no-op in the finished POC.  We need to test whether this Part can be removed from the {\field{\*\fldinst{HYPERLINK "scrivcmt://27E103B3-D31B-4781-867A-5BAA1E4E3898"}}{\fldrslt pipeline.}}\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls6\ilvl0\cf0 {\listtext	\uc0\u8226 	}  emit-js\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 This Part is one-half of the final output functionality.  It gathers the information, from the 
+\f3\i factbase
+\f2\i0 , to write out the JSON table.  Prolog is used for this Pass, since Prolog makes it \'93simple\'94 to pattern-match, using backtracking, for the required information.  The author deemed it \'93easier\'94 to format the output using Lisp instead of Prolog, hence emission is cut into two Parts.  This Part outputs a lisp data structure, not a 
+\f3\i factbase
+\f2\i0 .\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls7\ilvl0\cf0 {\listtext	\uc0\u8226 	}  emit-js2\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 This Part finalises the output, using Lisp code to read the the output from \'93emit-js\'94 and uses Lisp\'92s \'93format\'94 function to produce an indented JSON table.  This table is meant to be coupled (TBD) with the JS kernel code and any JS methods that are used by the parent Part.\
+}

@@ -1,0 +1,327 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\})}{\leveltext\leveltemplateid1\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\})}{\leveltext\leveltemplateid101\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\})}{\leveltext\leveltemplateid201\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 The Algorithm\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+To describe the algorithm for compiling 2D drawings to code, I will use the \'93standard\'94 four-pass model for compiler-building from the 1D text language paradigm.  A final version of the diagram compiler might use a separation that is different from the four-pass model, but it appears that the four-pass model might make for a simpler explanation at this time.  In fact, the current compiler has about twenty \'93passes\'94, grouped into four larger (
+\f3\i composite
+\f2\i0 ) parts.\
+\
+Draw.IO outputs drawings in various formats.  
+\f3\i bmFBP
+\f2\i0  drawings use the conventions discussed earlier and are saved as .SVG files.\
+\
+In this algorithm, we always 
+\f3\i add
+\f2\i0  
+\f3\i facts
+\f2\i0  to the 
+\f3\i factbase
+\f2\i0 .  In principle, it is possible to remove 
+\f3\i facts
+\f2\i0  from the 
+\f3\i factbase
+\f2\i0 , but such action is not necessary - downstream passes match only for the facts they are \'93interested in\'94.  Superfluous 
+\f3\i facts
+\f2\i0  are skipped over and their only effect is to slow down the pattern matching (backtracking).  In the diagrams we have compiled, slow-down is not noticeable and pruning 
+\f3\i facts
+\f2\i0  is not necessary.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Scanner\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+The scanner pass simply strips and discards unused SVG information and outputs a Prolog 
+\f3\i factbase
+\f2\i0 .\
+\
+Each 
+\f3\i fact
+\f2\i0  appears on separate lines in the format\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 relation(subject,object).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 Where the 
+\f3\i relation
+\f2\i0  is some sort of relationship (declared in head.pl and tail.pl), the 
+\f3\i subject 
+\f2\i0 is a unique id and the 
+\f3\i object
+\f2\i0  is a unique id (of some other graphic object) or a piece of data (usually an integer or floating point number).\
+\
+The scanner recognises and emits four kinds of graphical objects:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1)	}Rectangles\
+{\listtext	2)	}Ellipses (with no-fill-color or black-fill-color)\
+{\listtext	3)	}Text\
+{\listtext	4)	}Directional lines (with arrow-heads).\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+As it stands, the POC compiler takes a component-name from the command line and emits a 
+\f3\i fact\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\i0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 component('name').\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 (The component name should, in the future, come from the IDE, sent in through an ellipse input).\
+\
+For every line, we know that the line has a sink port (its beginning \'97 where events are consumed) and a sink port (its end, where events are emitted).  \'93Source\'94 means that events \'93come from\'94 the port.  \'93Sink\'94 means that port accepts events as input.  On children parts, \'93sink\'94 ports are inputs while \'93source\'94 ports are outputs.  On the parent part (the drawing itself), the input port \'93sources\'94 events (from the outside) while the output ports \'93sink\'94 events (emit events to the outside).  We can calculate the bounding box for each port using a fixed constant (e.g. 20) for its size in x and y.  In a later pass, we will add more bounding box for other graphical elements.  Emit a set of 
+\f3\i facts 
+\f2\i0 (where \'93eltype\'94 means \'93graphic element type\'94):\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 \
+  line(new-id).\
+  source(line-id,begin-id).\
+  eltype(begin-id,'port').\
+  bounding_box_left(begin-id,nnnn).\
+  bounding_box_top(begin-id,nnnn).\
+  bounding_box_right(begin-id,nnnn).\
+  bounding_box_bottom(begin-id,nnnn).\
+  sink(line-id,end-id).\
+  eltype(end-id,'port').\
+  bounding_box_left(end-id,nnnn).\
+  bounding_box_top(end-id,nnnn).\
+  bounding_box_right(end-id,nnnn).\
+  bounding_box_bottom(end-id,nnnn).\
+\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 For every rectangle, output its ID, eltype (\'91box\'92) and geometry x/y/width/height.\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 \
+  rect(rect-id).\
+  eltype(rect-id,'box').\
+  geometry_x(rect-id,nnnn).\
+  geometry_y(rect-id,nnnn).\
+  geometry_w(rect-id,nnnn).\
+  geometry_h(rect-id,nnnn).\
+  \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 <$n:eg:Text>For every text graphical item that contains only numerical digits, emit it\'92s id, the \'93text\'94 as a number and its geometry.\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22  \
+  text(text-id,nnnn).\
+  geometry_x(text-id,nnnn).\
+  geometry_y(text-id,nnnn).\
+  geometry_w(text-id,nnnn).\
+  geometry_h(text-id,nnnn).\
+  \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 For every text graphical item that contains any non-numerical characters, emit it\'92s id, the \'93text\'94 as a string and its geometry.  (Currently, the compiler uses strings for part kinds and numbers for port indices. When creating the initial factbase, it is \'93easy\'94 to differentiate between strings and numbers.  Prolog can easily differentiate between these two types using the 
+\f3\i hint
+\f2\i0  that strings are quoted and numbers are not.  This differentiation helps downstream passes, by making it obvious what the text contains, since the downstream passes do not need to perform differentiation, since it is already done).\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22  \
+  text(text-id,'string').\
+  geometry_x(text-id,nnnn).\
+  geometry_y(text-id,nnnn).\
+  geometry_w(text-id,nnnn).\
+  geometry_h(text-id,nnnn).\
+  \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 For every arrow-head, emit it\'92s id and an (x,y) pair that corresponds to the \'93tip\'94 of the arrow-head.\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22   arrow(arrow-id).\
+  arrow_x(arrow-id,nnnn).\
+  arrow_y(arrow-id,nnnn).\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 \
+(As can be seen, the scanner is relatively \'93simple\'94 and does little work.  The last two passes inside the scanner - plsort and check_input - do almost \'93nothing\'94.  Plsort simply sorts the 
+\f3\i factbase
+\f2\i0 , since Prolog requires that all rules with the same name be contiguous, and \'93check_input\'94 does an incoming sanity check to check that the 
+\f3\i factbase
+\f2\i0  is clean.  In this case, we simply rely on Prolog to signal bad rules.  \'93check_input\'94 simply reads then writes out the factbase.  If prolog signals no errors then the sanity check is deemed to have succeeded.  In the future, check_input might be extended to check more details.)\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><!$Scr_Ps::1><$Scr_Ps::0>
+\f1\b\fs26 Parser\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+In this POC, \'93parser\'94 does most of the work, consisting of 9 passes (each one fairly simple):\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	1)	}Calculate bounding boxes for Rects and Text, insert the bounding box facts for each item into the 
+\f3\i factbase
+\f2\i0 .  This pass adds four kinds of 
+\f3\i facts
+\f2\i0  to the 
+\f3\i factbase
+\f2\i0 : 
+\f3\i bounding_box_left
+\f2\i0 , 
+\f3\i bounding_box_top
+\f2\i0 , 
+\f3\i bounding_box_right
+\f2\i0  and 
+\f3\i bounding_box_bottom
+\f2\i0 , each with an ID and a number.  [calc_bounds].\
+{\listtext	2)	}For every rectangle, find a graphical text item that fits inside the box (its 
+\f3\i kind
+\f2\i0  (aka 
+\f3\i type 
+\f2\i0 or 
+\f3\i class
+\f2\i0 )).  For every such text item, mark it as \'93used\'94 (simplifies searching in later passes).  The \'93kind\'94 is marked with a 
+\f3\i kind(id,text-id)
+\f2\i0  
+\f3\i fact
+\f2\i0  and a 
+\f3\i used(id)
+\f2\i0  
+\f3\i fact.  
+\f2\i0 [add_kinds].
+\f3\i \
+\ls2\ilvl0
+\f2\i0 {\listtext	3)	}For all text items that are not marked as 
+\f3\i used,
+\f2\i0  create an 
+\f3\i unassigned
+\f2\i0  fact.  This is a superfluous operation, but makes downstream passes \'93easier\'94 - 
+\f3\i unassigned
+\f2\i0  means that the item is 
+\f3\i text 
+\f2\i0 and that it is not marked as being 
+\f3\i used
+\f2\i0  (i.e. used as a 
+\f3\i kind
+\f2\i0  name of a rectangle).  [make_unknown_port_names].\
+{\listtext	4)	}Create a center (x,y) for every port and every 
+\f3\i unassigned
+\f2\i0  text item.  [create_centers].\
+{\listtext	5)	}For every 
+\f3\i port
+\f2\i0 , calculate the distance to every 
+\f3\i unassigned
+\f2\i0  (text) item.  We stay true to the idea of making every 
+\f3\i fact
+\f2\i0  a triple (and only a triple).  This requires the use of an indirect 
+\f3\i fact
+\f2\i0  called 
+\f3\i join
+\f2\i0  which joins a port to each calculated distance for each 
+\f3\i unassigned
+\f2\i0 .  In \'93normal\'94 Prolog, we could simply list the PortID, the TextID and the Distance in a single fact (instead of using indirection via 
+\f3\i join
+\f2\i0 ).  [calculate_distances].\
+{\listtext	6)	}For every Port, make a list of distances to 
+\f3\i unassigned 
+\f2\i0 text.  Choose the minimum distance in the list, then create a pair of 
+\f3\i facts 
+\f2\i0 that connect the PortID to the TextID (
+\f3\i portIndex) 
+\f2\i0 and another fact that points \'93backwards\'94 from the TextID to the PortID (
+\f3\i portIndexByID
+\f2\i0 ).  [For the sake of future revisions, also create another pair of facts using string name (
+\f3\i portName, portNameByID
+\f2\i0 ) - not strictly needed by this algorithm.].  [assign_portnames].\
+{\listtext	7)	}Mark every port as a sink or a source, as appropriate.  [markIndexedPorts].\
+{\listtext	8)	}To allow fan-out and fan-in, ports can overlap one another (see 
+\f3\i figure
+\f2\i0  
+\f3\i <$n:Chapter>
+\f2\i0 .
+\f3\i <$n:figure:Dots>)
+\f2\i0 .  For every group of overlapping ports, only one port actually has an index assigned to it.  Propagate the index to all other overlapping ports.  [coincidentPorts].\
+{\listtext	9)	}For every port, calculate which Part (a rectangle \'91box\'92) the port intersects with and insert a new 
+\f3\i parent
+\f2\i0  fact relating the port to its parent.  [match_ports_to_components].  Clearly, the semantic pass should check that each port intersects one and only one Part.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+At this point, the algorithm is almost finished - a diagram, following conventions as described earlier, has been entered into the 
+\f3\i factbase
+\f2\i0  and the 
+\f3\i factbase
+\f2\i0  contains sufficient information to produce code.  As can be seen, the algorithm is very simple.  A production version of this algorithm would include more semantic checks.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Semantic Pass\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+The semantics pass checks various design rules.  If any check doesn\'92t pass, it should abort code generation.  At present, there are only two passes built as examples of semantic checking - sem_partsHaveSomePorts (every Part must have at least one port) and sem_allPortsHaveAnIndex (every port must have a numeric index (this index is used during code generation)).  The semantic pass could (should) have many more checks, but as can be seen, using backtracking pattern matching over the 
+\f3\i factbase
+\f2\i0  makes piece-wise semantic checking \'93easy\'94.  In fact, the semantic checks could be spread throughout the compiler and abort compilation at its earliest convenience. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Code Emitter\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+The code emitter walks the 
+\f3\i factbase
+\f2\i0  and creates a file of text for a given language.  In this case, a JSON table is emitted for JavaScript.  There are currently 5 steps to doing this:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls3\ilvl0\cf0 {\listtext	1)	}Create a \'93wire number\'94 for every wire.  Since every wire is connected to one source and one sink, as per the diagram conventions, we arbitrarily walk the sinks and assign wire numbers.  For every sink port, match the wire(s) that it is connected to, and assign a wire number, starting with 0 and increasing by 1 monotonically.  Keep a count of the number of wires on a given diagram.  [assign_wire_numbers_to_inputs].\
+{\listtext	2)	} For every source port, match the wire(s) that connect to it, then associate the wire number with the wire(s).  Use the already-chosen wire number from step one, from the sink attached to a given wire.\
+{\listtext	3)	}For every sink Port on every Part, create two facts - the 
+\f3\i inputPin
+\f2\i0  and 
+\f3\i wireIndex
+\f2\i0  
+\f3\i facts.
+\f2\i0   Do the same for every source Port on every Part (
+\f3\i outputPin 
+\f2\i0 and 
+\f3\i wireIndex
+\f2\i0 ).  [inOutPins]. \
+}

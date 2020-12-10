@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>HTML Components - Handling Callback Logic Explicitly</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:08:24Z">
+  <meta name="ModificationTime" content="2020-12-09T15:08:24Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 9.0px Palatino}
+    span.s3 {font: 13.0px Palatino}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction - Structuring Asynchronous Components</b></h2>
+<p class="p2">[This essay builds upon explanations given in a previous essay - <a href="https://github.com/guitarvydas/ag-js/blob/master/HTML%20Components%20-%20Arrowgrams.pdf">https://github.com/guitarvydas/ag-js/blob/master/HTML%20Components%20-%20Arrowgrams.pdf</a>]</p>
+<p class="p3"><br></p>
+<p class="p2">In this essay, I discuss how to pull the callback logic out of the "part2" component.</p>
+<p class="p3"><br></p>
+<p class="p2">In essence, I am describing how I <i>structure</i> asynchronous components.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Callback.js</b></h2>
+<p class="p2">Refer to the diagram <span class="s1">drawing.drawio</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">I've given better - more descriptive - names to the components.</p>
+<p class="p3"><br></p>
+<p class="p2">I've renamed "part1" to "FileSelector".</p>
+<p class="p3"><br></p>
+<p class="p2">I've renamed "part2" to "Display".</p>
+<p class="p3"><br></p>
+<p class="p2">I've created a new JavaScript file called <span class="s1">callbacklogic.js</span> and have inserted a 3<span class="s2"><sup>rd</sup></span> component in between the FileSelector and the Display components.</p>
+<p class="p3"><br></p>
+<p class="p2">I've moved the callback logic from Display (part2) into the new component CallbackLogic.<span class="Apple-converted-space">  </span>The code now resides in the <span class="s1">react()</span> function of CallbackLogic.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Interface Between HTML Events and AG</b></h2>
+<p class="p2">CallbackLogic is, now, the interface between FileReader() events - HTML + JavaScript - and AG events.</p>
+<p class="p3"><br></p>
+<p class="p2">The initial call to CallbackLogic is done by the FileSelector component.<span class="Apple-converted-space">  </span>It sends an AG event to the CallbackLogic component.</p>
+<p class="p3"><br></p>
+<p class="p2">In that first call to <span class="s1">react()</span>, the code sets up JS callbacks for <span class="s1">onload</span>, <span class="s1">onerror</span>, <span class="s1">onabort</span><span class="Apple-converted-space">  </span>and a timer.<span class="Apple-converted-space">  </span>Then it starts the ball rolling by calling <span class="s1">readAsText().</span></p>
+<p class="p4"><br></p>
+<p class="p2">After that initial call, all subsequent events are AG events.</p>
+<p class="p3"><br></p>
+<p class="p2">After fielding the HTML+JS events, CallbackLogic makes calls to <span class="s1">kernel.send()</span> (and <a href="http://kernel.io"><span class="s1">kernel.io</span></a><span class="s1">()</span>) to propagate events further into the system.<span class="Apple-converted-space">  </span>In this example, the events from CallbackLogic flow into one of 4 downstream components - <span class="s1">Display</span>, <span class="s1">ErrorHandler</span>, <span class="s1">AbortHandler</span> and <span class="s1">NoResponseHandler</span>.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The <i>happy path</i> <span class="s1">send()s</span> a pair of items to Display - the filename and the file contents.<span class="Apple-converted-space">  </span>CallbackLogic handles the unpacking of the HTML+JS event data.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Event Interface &amp; Conversion</b></h2>
+<p class="p2">HTML + JavaScript cause one of 4 events - <span class="s1">onload</span>, <span class="s1">onerror</span>, <span class="s1">onabort</span>, <span class="s1">timer</span>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">These HTML + JavaScript events are fielded by the CallbackLogic component. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">For each HTML + JavaScript event, the component re-calls <span class="s1">this.react()</span> with a pin tag.<span class="Apple-converted-space">  </span>The pin tags correspond to the pins shown on the diagram <span class="s1">drawing.drawio</span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>CustomEvent()</b></h2>
+<p class="p2">The blog article <a href="https://javascript.info/dispatch-events">https://javascript.info/dispatch-events</a> discusses the use of HTML+JS CustomEvent()s.</p>
+<p class="p3"><br></p>
+<p class="p2">This article points out one crucial problem with the design of CustomEvent().</p>
+<p class="p3"><br></p>
+<p class="p2">Events sent from within an event handler are <i>synchronous</i> - they happen immediately, they are sent in a <i>depth-first</i> manner.</p>
+<p class="p3"><br></p>
+<p class="p2">All other events, though, are processed differently - in a <i>breadth-first</i> manner.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">There are two ways that events are handled, where there should only be one way. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In addition, the event handling is <i>implicit</i>.<span class="Apple-converted-space">  </span>The onus is on the programmer to figure out what will happen.<span class="Apple-converted-space">  </span>This is an unnecessary implementation detail that interferes with design-flow.</p>
+<p class="p3"><br></p>
+<p class="p2">I strongly recommend that all events be dispatched in a <i>breadth-first</i> manner, as this promotes the use of the <i>concurrent</i> programming paradigm and prevents future problems similar to priority-inversion.</p>
+<p class="p3"><br></p>
+<p class="p2">The article explains how to dispatch events in a <i>breadth-first</i> manner - using a 0-time timeout.<span class="Apple-converted-space">  </span>This is counter-intuitive, but could be hidden behind a well-chosen SCL<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> syntax.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Structuring Asynchronous Activity</b></h2>
+<p class="p2">The above implicitly shows how to structure event handlers - <i>make all events arrive at the same place</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">In fact, this is what <i>Structured Programming</i> recommended.<span class="Apple-converted-space">  </span>1 entry point and 1 exit point.</p>
+<p class="p3"><br></p>
+<p class="p2">This allows us to view the full gamut of events together, in one piece of code.<span class="Apple-converted-space">  </span>This structure retains one's sanity and allows any state handling to occur in one place, instead of being spread out across many pieces of code.<span class="Apple-converted-space">  </span>This kind of funnel also benefits from being arranged in a hierarchical manner - viewing and trying to understand 7±2 events is about the maximum for any one person.<span class="Apple-converted-space">  </span>A flat space of anything is a poor choice - hierarchy is a better choice.</p>
+<p class="p5"><br></p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>Solution Centric Language (kind of like a DSL).</p>
+</div>
+</body>
+</html>

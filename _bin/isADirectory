@@ -1,0 +1,25 @@
+#!/bin/bash
+## send file name into 3
+## if file name is a directory, echo <something> to port 4
+## else echo <something> to port 5
+# input_port[3] === input_port["filename"]
+# output_port[4] === output_port["yes"]
+# output_port[5] === output_port["no"]
+./debug-entry "[$1] $0"
+read filename </dev/fd/3
+if test -d "${filename}"
+then
+   echo go >/dev/fd/4
+   echo die >/dev/fd/5
+else
+    if test -f "${filename}"
+    then
+	echo die >/dev/fd/4
+	echo go >/dev/fd/5
+    else
+	echo die >/dev/fd/4
+	echo die >/dev/fd/5
+    fi
+fi
+./debug-exit "[$1] $0"
+

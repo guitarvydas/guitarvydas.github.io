@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>editor</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:05:45Z">
+  <meta name="ModificationTime" content="2020-12-09T15:05:45Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Graphical Atoms - Gratoms</b></h2>
+<p class="p2">Graphical Atoms are the lowest level graphical units that can edited by an editor.</p>
+<p class="p3"><br></p>
+<p class="p2">For lack of a better term, I will use the word <i>gratom</i> to denote graphics atoms.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Editor Basic Operations</b></h2>
+<p class="p2">An editor can create various gratoms:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li4">rectangle</li>
+  <li class="li4">line</li>
+  <li class="li4">text</li>
+  <li class="li4">ellipse</li>
+  <li class="li4">curvy line</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">The editor does not know what it is editing.<span class="Apple-converted-space">  </span>The editor simply creates gratoms and allows the user to edit them.</p>
+<p class="p5"><br></p>
+<p class="p4"><i>Understanding</i> what is on a diagram is left to later passes in the chain.</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Analogy</b></h2>
+<p class="p4">For an analogy, imagine a generic programming editor (emacs, vim, vscode, etc.).</p>
+<p class="p5"><br></p>
+<p class="p4">The generic programming editor allows one to create and edit text (only).</p>
+<p class="p5"><br></p>
+<p class="p4">It does not "know" what programming language it is editing.</p>
+<p class="p5"><br></p>
+<p class="p4">It only knows a few basic rules:</p>
+<p class="p5"><br></p>
+<ul class="ul1">
+  <li class="li4">how to move the cursor</li>
+  <li class="li4">how to insert a new characters at the cursor</li>
+  <li class="li4">how to delete characters</li>
+  <li class="li4">how to save / load a file of characters</li>
+  <li class="li4">how to load scripts (aka modes) that help to pretty-print the text.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">A text-only programming editor creates grids of non-overlapping bitmap glyphs (called characters).</p>
+<p class="p5"><br></p>
+<p class="p4">A more general editor, as described here can:</p>
+<p class="p5"><br></p>
+<ul class="ul1">
+  <li class="li4">create and edit gratoms</li>
+  <li class="li4">allow gratoms to overlap</li>
+  <li class="li4">create / load a gratom file, describing each gratom with its (x,y,w,h) pixel coordinate and it's type.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Operations</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Text</b></h2>
+<ul class="ul1">
+  <li class="li4">position x,y of a text box</li>
+  <li class="li4">change w,h (width, height) of text box</li>
+  <li class="li4">edit the characters contained in a text box (maybe by bringing up a textual editor)</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rectangle</b></h2>
+<ul class="ul1">
+  <li class="li4">position x,y of a rectangle</li>
+  <li class="li4">change w,h (width, height) of rectangle</li>
+  <li class="li4">edit characteristics of rectangle (colour, border, rounding, etc.)<span class="Apple-tab-span">	</span></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ellipse</b></h2>
+<ul class="ul1">
+  <li class="li4">position x,y of an ellipse</li>
+  <li class="li4">change w,h (width, height) of ellipse's bounding box</li>
+  <li class="li4">edit characteristics of ellipse (colour, border, etc.)<span class="Apple-tab-span">	</span></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Straight Line</b></h2>
+<ul class="ul1">
+  <li class="li4">define start point of a line</li>
+  <li class="li4">define ending point of a line</li>
+  <li class="li4">edit syntactic sugar of a line - editing polyline points, thickness, etc.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Curvy Line</b></h2>
+<ul class="ul1">
+  <li class="li4">define start point of a line</li>
+  <li class="li4">define ending point of a line</li>
+  <li class="li4">edit syntactic sugar of a line - editing bezier points, thickness, etc.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG?</b></h2>
+<p class="p2">Maybe the editor is just an SVG editor?</p>
+<p class="p3"><br></p>
+<p class="p2">We need to use only a subset of SVG. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We could write a routine that strips out all of the unwanted parts of SVG.</p>
+<p class="p3"><br></p>
+<p class="p2">We could write a checker routine that checks that the stripped-down SVG diagram follows certain rules.<span class="Apple-converted-space">  </span>Such a checker is given the fancy name "parser" in traditional compiler lore.<span class="Apple-converted-space">  </span>A parser checks that the tokens follow certain rules.<span class="Apple-converted-space">  </span>In fancy compiler terminology: the parser checks that the tokens make up well-formed phrases in the language (DSL/PSL, in this case).<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Parsing is not contained in the editor proper.<span class="Apple-converted-space">  </span>Attempts at putting a lot of smarts into the editor were tried and failed.<span class="Apple-converted-space">  </span>Such editors - "structured editors" - were too complicated to maintain.<span class="Apple-converted-space">  </span>It was always better to put the parser in a separate pass. <span class="Apple-converted-space">  </span>Such structured editors also tried to deal with the conundrum of ill-formed code - some editors would not let you save an unfinished piece of code.<span class="Apple-converted-space">  </span>The user should be able to create garbage files using the editor, as long as the parser complains when fed garbage.<span class="Apple-converted-space">  </span>Let the editor edit, the parser parse, etc.</p>
+</div>
+</body>
+</html>

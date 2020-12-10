@@ -1,0 +1,166 @@
+<html>
+
+<head>
+<title>Efficiency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Efficiency</p>
+<p class="itemText">Using C++ will not automatically produce more efficient code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Using Rust will not automatically produce more efficient code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Using C will not automatically produce more efficient code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Learning to use a debugger is a step towards producing efficient code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Learning to use a profiler is a step toward producing efficient code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Rust’s Ownership concept has been tried before.<span class="Apple-converted-space">  </span>See FBP.<span class="Apple-converted-space">   </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I used ownership in the 1990’s, but called it “physical objects”.<span class="Apple-converted-space">  </span>I didn’t write about it.<span class="Apple-converted-space">  </span>Garbage Collection t...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Memory Efficiency</p>
+<p class="itemText">MC6809 (an 8-bit processor) was more memory efficient than MC68000 (a 16-bit processor) code.<span class="Apple-converted-space">  </span>I measured that 6809 code was 40% the size of 68000 code.<span class="Apple-converted-space">  </span>I attributed the size difference to be due to the size of instructions – for the 6809, opcodes were bytes (8 bits), whereas for the 68000 opcodes were words (16 bits).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One of the early Burroughs processors used Huffman Encoding to encode instructions.<span class="Apple-converted-space">  </span>The most common instruction was 2-bits long.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Smalltalk Method Caching</p>
+<p class="itemText">Smalltalk supported duck-typing with caches.<span class="Apple-converted-space">  </span>Methods were first looked up dynamically, then cached.<span class="Apple-converted-space">  </span>As the app ran and reached steady-state, the caches would tend towards containing the most-frequently-used methods, resulting in faster lookup for more-frequently-used methods.<span class="Apple-converted-space">  </span>Obviously the caches were populated on a per-application basis.<span class="Apple-converted-space">  </span>This was “good enough” and the compiler remained simple, not needing to predict the frequency-of-use for every method. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Stratifying Architecture and Efficiency</p>
+<p class="itemText">This method of optimization (caching) allowed the original Architecture to remain intact, while allowing Efficiency Engineers to make the result faster.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Compile-time vs. Run-time</p>
+<p class="itemText">I view everything as an interpreter.<span class="Apple-converted-space">  </span>The difference between compile-time and run-time is simply a function of the number of times each interpreter runs.<span class="Apple-converted-space">  </span>It is generally expected that compile-time interpreters (“the compiler”) will be run much less frequently than the run-time interpreters (“the app”).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We can view this as a slider ...</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">New Definitions for Phases</p>
+<p class="itemText">Our division between compile-time and run-time is arbitrary.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">What if the slider had two knobs?<span class="Apple-converted-space">  </span>Compile-time, pre-run-time, run-time?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Fractal Phasing</span></p>
+<p class="p1"><span class="s1">Fractal Phasing</p>
+<p class="itemText">What if we had an infinite number of knobs on the slider?<span class="Apple-converted-space">  </span>What if, say, pre-run-time were divided up into smaller and smaller pieces, each with its own distinct purpose?<span class="Apple-converted-space">  </span>The tenet of component-based design is to “do one thing, and do it well” in each phase.<span class="Apple-converted-space">  </span>Could pre-run-time be broken down into method-lookup caching, branch-prediction, etc.?</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The front-end, compile-time, would have to create an intermediate form (IR – internal representation) that was easily searched and re-arranged in a succ...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Small Is Better</p>
+<p class="itemText">O(N) analysis says that O(1) is “better” than O(3).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The real analysis is UX time.<span class="Apple-converted-space">  </span>What performance does the user see? What performance does the user care about?<span class="Apple-converted-space">  </span>What performance does the user not care about?</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">O(3) is OK in a Component, if the Component is small, from a user’s perspective.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">How do the O(N)s in Components add up in UX?<span class="Apple-converted-space">  </span>The answer used to be a no-brainer, when everything was done on one CPU.<span class="Apple-converted-space">  </span>Now, a long time after O(N) analysis was invented, hardware is much cheaper, processors a...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

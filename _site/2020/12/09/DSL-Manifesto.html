@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>DSL Manifesto</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T14:55:49Z">
+  <meta name="ModificationTime" content="2020-12-09T14:55:49Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: lower-alpha}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DSL Prescription</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Use DSLs to Express Design Intent</b></h2>
+<p class="p2">We currently don't have a language for DI (Design Intent, aka Architecture, aka Business Rules).</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Refactoring</i> is a symptom of DI being embedded in code.<span class="Apple-converted-space">  </span>Corollary: if you need to refactor, then it is likely that the code hasn't been split into DI and Implementation.</p>
+<p class="p3"><br></p>
+<p class="p2">Excess detail is the antithesis of DI. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most languages pride themselves on how many features they have, instead of how few features they have. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">When you create DI, you don't want to care how something is implemented (e.g. Arrays vs. Lists).</p>
+<p class="p3"><br></p>
+<p class="p2">Low-level efficiency is the concern of Efficiency Engineers, not Architects.</p>
+<p class="p3"><br></p>
+<p class="p2">DSLs are one way to split DI from Implementation.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Automate Everything</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Cheat</b></h2>
+<p class="p2">When possible, cheat.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Don't Do Things That the Base Language Already Does</b></h2>
+<p class="p2">Let the underlying base language handle the heavy lifting.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Use a DSL Only If It Saves Effort</b></h2>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Design</b></h2>
+<p class="p2">Can a design be expressed "better" - e.g. more accurately - using a DSL instead of using a detailed HLL?</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Reuse of Architecture</b></h2>
+<p class="p2">Reuse of DI (Design Intent, aka Architecture) is more important than the reuse of code.</p>
+<p class="p3"><br></p>
+<p class="p2">Code is cheap, thinking is hard.</p>
+<p class="p3"><br></p>
+<p class="p2">Keep "business rules" separated from code. <span class="Apple-converted-space">  </span>Use one language for DI, another for Implementation.</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Coding</b></h2>
+<p class="p2">Does using a DSL reduce coding time?</p>
+<p class="p3"><br></p>
+<p class="p2">Automation - get the DSL to write code.<span class="Apple-converted-space">  </span>Write programs that write programs.</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Maintenance</b></h2>
+<p class="p2">Does using the DSL reduce maintenance effort?</p>
+<p class="p3"><br></p>
+<p class="p2">Can a Maintenance Engineer understand the DI (Design Intent) more quickly?</p>
+<p class="p3"><br></p>
+<p class="p2">Does the DSL perform D.R.Y. (Don't Repeat Yourself) for you?</p>
+<p class="p3"><br></p>
+<p class="p2">Can a Maintenance Engineer perform bug fixes more quickly by tweaking the DSL?</p>
+<p class="p3"><br></p>
+<p class="p2">Can a Maintenance Engineer perform feature upgrades more quickly by tweaking the DSL?</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Write As Little Code As Possible</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Create Small DSLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reduce Coding Using DSLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rely on the Base Language to do the Heavy Lifting</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Use More than Text</b></h2>
+<p class="p2">Management uses diagrams (e.g. on whiteboards).</p>
+<p class="p3"><br></p>
+<p class="p2">Programmers should use diagrams, too.</p>
+<p class="p3"><br></p>
+<p class="p2">It is OK to mix diagrams and text in the same document.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagrams Can Be Easy to Transpile</b></h2>
+<p class="p2">Diagrams can be easy to transpile.</p>
+<p class="p3"><br></p>
+<p class="p2">Think <i>glyphs</i>, not pixels.<span class="Apple-converted-space">  </span>Use backtracking parsers (e.g. Ohm, PROLOG, etc.).</p>
+<p class="p3"><br></p>
+<p class="p2">Gedanken examples:<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li5">How do you know if 4 lines make a box?<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space"> </span></li>
+  <li class="li5">How do you know if one box is smaller than another box? <span class="Apple-converted-space"> </span></li>
+  <li class="li5">How do you know if the smaller box intersects the edge of the bigger box? <span class="Apple-converted-space"> </span></li>
+  <li class="li5">How do you know if a piece of text is completely inside a box?</li>
+  <li class="li5">How do you know if an arrow (a glorified line) joins two boxes?</li>
+  <li class="li5">What if the line is made up of many smaller segments?</li>
+  <li class="li5">How do you draw a network?</li>
+  <li class="li5">How do you draw a state machine?<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></li>
+  <li class="li5">What changes when you have ellipses instead of boxes?</li>
+  <li class="li5">What changes when you have curvy lines instead of straight line segments?</li>
+  <li class="li6"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>When All Else Fails. Automate</b></h2>
+<p class="p2">Generate code, in some way, automatically.<span class="Apple-converted-space">  </span>Use a pretty printer to make the code human-readable.</p>
+<p class="p3"><br></p>
+<p class="p2">You can always use the generated code as if it were written manually (by someone else).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Why Management Hated DSLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DSL (mis-)Perceptions</b></h2>
+<p class="p2">Management perceive DSL-writing as a sink-hole for time.<span class="Apple-converted-space">  </span>This impression is based on the mistaken notion that writing DSLs is the same as writing compilers.</p>
+<p class="p3"><br></p>
+<p class="p2">Management sees the up-front cost of creating a DSL.<span class="Apple-converted-space">  </span>Management knows how to <i>measure</i> development time (and cost) but doesn't know how to measure maintenance (understanding) costs.</p>
+<p class="p3"><br></p>
+<p class="p2">Management can't hire interchangeable units, called programmers, who already understand a given DSL.<span class="Apple-converted-space">  </span>Understanding a DSL requires <i>thinking</i>, understanding a product design requires <i>thinking</i>, too. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hiring</b></h2>
+<p class="p2">At the moment, we don't know how to hire <i>thinkers</i> based on only a resume. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Profession of Engineering</b></h2>
+<p class="p2">The profession of Engineering encountered the problem, of hiring <i>thinkers,</i> decades ago. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The answer was to split the profession into parts. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">If you attend university courses for 4 years and are rubber-stamped with an Engineering degree, then you are deemed to be an Engineer.</p>
+<p class="p3"><br></p>
+<p class="p2">People who attend trades colleges for 2 years are deemed to be tradespeople. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Others are deemed to be labourers and brick-layers.</p>
+<p class="p3"><br></p>
+<p class="p2">For this scheme to work, a method of communication between the strata must be used - <i>blueprints</i>. <span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Round Tripping</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Round Tripping is Not Used in Engineering</b></h2>
+<p class="p2">Engineers put their seal (stamp or signature) on designs and are responsible - in Law - for their designs.</p>
+<p class="p3"><br></p>
+<p class="p2">Brick-layers might detect "bugs" or "improvements" in designs, but they never make substantial changes to blueprints.<span class="Apple-converted-space">  </span>The changes must be approved by the signing Engineer(s).</p>
+<p class="p3"><br></p>
+<p class="p2">The practice of round-tripping is never used in labour and Engineering.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Round Tripping Is a Symptom</b></h2>
+<p class="p2">People use round-tripping technology when they believe that the generating technology doesn't work in all cases.</p>
+<p class="p3"><br></p>
+<p class="p2">Round-tripping usually causes accidental complexity.</p>
+<p class="p3"><br></p>
+<p class="p2">If you think you need round-tripping, then<span class="Apple-converted-space"> </span></p>
+<ol class="ol1">
+  <li class="li5">prove that the notation doesn't work for some case</li>
+  <li class="li5">fix ithe notation, don't use round-tripping as a band-aid.</li>
+  <li class="li6"><br></li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blueprints</b></h2>
+<p class="p2">Current programming languages cannot be used like <i>blueprints</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Current programming languages expose too much detail to be effectively used as communication mechanisms, such as blueprints.</p>
+<p class="p3"><br></p>
+<p class="p2">In my opinion, the answer lies in <i>isolation</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Drawings</b></h2>
+<p class="p2">Blueprints are drawings that expose little detail.</p>
+<p class="p3"><br></p>
+<p class="p2">Blueprints are composed of simple elements.</p>
+<p class="p3"><br></p>
+<p class="p2">Current programming languages expose too many details to be used in the way that blueprints are used in Engineering and construction.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scalability</b></h2>
+<p class="p2">Further explanation:</p>
+<p class="p3"><br></p>
+<p class="p2">The main problem in software design is scalability.</p>
+<p class="p3"><br></p>
+<p class="p2">We want to "plug" pieces tother like LEGO blocks.</p>
+<p class="p3"><br></p>
+<p class="p2">Better scalability implies fewer dependencies.</p>
+<p class="p3"><br></p>
+<p class="p2">Early hardware people got this "right".<span class="Apple-converted-space">  </span>They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).</p>
+<p class="p3"><br></p>
+<p class="p2">Chips were black boxes.<span class="Apple-converted-space">  </span>They had a set of input/output pins.<span class="Apple-converted-space">  </span>The insides of the chips were inscrutable - encased in opaque epoxy.</p>
+<p class="p3"><br></p>
+<p class="p2">Nothing leaked out of or into a chip except through the pins of the chip.</p>
+<p class="p3"><br></p>
+<p class="p2">Properties of a chip were described in easily-measured terms:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li5">voltage on a pin</li>
+  <li class="li5">current needed by a pin</li>
+  <li class="li5">diagram / chart of the outputs, given a set of inputs</li>
+  <li class="li5">timing.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Then, hardware designers "discovered" that point-to-point wiring between chips led to non-scalable designs.</p>
+<p class="p3"><br></p>
+<p class="p2">They built a (small) hierarchy - chips mounted on boards plugged into backplanes.</p>
+<p class="p3"><br></p>
+<p class="p2">The earliest backplanes were basically point-to-point wiring harnesses.<span class="Apple-converted-space">  </span>For example, an early Wang word processor I owned, had a backplane with some 400 pins, allowing a chip on one board to send signals directly to a chip on another board.</p>
+<p class="p3"><br></p>
+<p class="p2">Then, came the S100 bus.<span class="Apple-converted-space">  </span>It had only 100 pins.<span class="Apple-converted-space">  </span>It was well defined and documented.<span class="Apple-converted-space">  </span>Certain connections were not allowed, even if they could be done more efficiently as point-to-point connections.</p>
+<p class="p3"><br></p>
+<p class="p2">The idea of the Bus led to Apple computers and, ultimately, the IBM desktop computer.<span class="Apple-converted-space">  </span>(There was more than one Bus definition, but the market shook those out).</p>
+<p class="p3"><br></p>
+<p class="p2">Can software be built like chips?<span class="Apple-converted-space">  </span>I argue Yes.</p>
+<p class="p3"><br></p>
+<p class="p2">We need to build software in hierarchies.</p>
+<p class="p3"><br></p>
+<p class="p2">Divide and conquer.</p>
+<p class="p3"><br></p>
+<p class="p2">There must be no leakage - of anything - between layers in a hierarchy.<span class="Apple-converted-space">  </span>("Anything" includes things like variables, types, control flow, dependencies of any kind, etc.).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rigor and Trade-offs</b></h2>
+<p class="p2">Engineering is about making trade-offs.</p>
+<p class="p3"><br></p>
+<p class="p2">Engineers don't strive to <i>prove</i> that a design works - they simply build safety margins into a design. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The current quest for provable software designs will not lead to Engineering. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">What is needed is characterization of the possible trade-offs, e.g. How fast does it run? How much memory is needed? How much processing power is needed? What is the fail-safe, the "big red button"? What can be done if it crashes? Does it have a "known beginning state"?<span class="Apple-converted-space">  </span>How much will it cost to design each feature?<span class="Apple-converted-space">  </span>How much will it cost to test each feature? What is at stake?<span class="Apple-converted-space">  </span>How thoroughly does it need to be tested?<span class="Apple-converted-space">  </span>What is the worst-case throughput?<span class="Apple-converted-space">  </span>What is the average throughput? What is the MTBF? Is it single-sourced or multiply-sourced and what are the implications?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Complexity</b></h2>
+<p class="p2">I see software as a hierarchy of black boxes.<span class="Apple-converted-space">  </span>The Architect for each box <i>chooses </i>the best way to describe the design intent of a black box.<span class="Apple-converted-space">  </span>The Engineer figures out how to dot the I's and cross the T's.<span class="Apple-converted-space">  </span>The Production Engineer figures out how to measure and make the black box "more efficient" and the Coder lays the bricks to implement the black box.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Black Box Architecture</b></h2>
+<p class="p2">I see software as a hierarchy<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> of black boxes.<span class="Apple-converted-space">  </span>The Architect for each box <i>chooses </i>the best way to describe the design intent of a black box.<span class="Apple-converted-space">  </span>The Engineer figures out how to dot the I's and cross the T's.<span class="Apple-converted-space">  </span>The Production Engineer figures out how to make the black box "more efficient" and the Coder lays the bricks to implement the black box.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Many Silver Bullets</b></h2>
+<p class="p2">A good Architect will have a tool-belt full of Silver Bullets.<span class="Apple-converted-space">  </span>Maybe a problem is best described in Relational terms, maybe a problem is best described as a State Machine (as a diagram, yet), maybe a problem can be broken down in a synchronous manner, etc., etc.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PSLs</b></h2>
+<p class="p2">I will use the term <i>PSL </i>instead of <i>DSL</i> to emphasize problem-specific issues for every problem+solution. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">PSL means problem-specific language.<span class="Apple-converted-space">  </span>The older term, DSL, means domain-specific language.<span class="Apple-converted-space">  </span>In my opinion, "domain" is too broad a term, we must focus down on problems and we must use specialization instead of generalization to solve specific problems.</p>
+<p class="p7"><br></p>
+<hr>
+<p class="p8"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>If you know PROLOG or something like it, how would you declaratively write this relationship of 4 lines?</p>
+<p class="p8"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>If you don't already know, refer to Harel's StateCharts paper.</p>
+<p class="p8"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>Actually, a directed, acyclic graph.<span class="Apple-converted-space">  </span>Information flows upwards, control (commands) flows downwards.</p>
+</div>
+</body>
+</html>

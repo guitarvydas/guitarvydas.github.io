@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>New-Breed HLLs</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:11:44Z">
+  <meta name="ModificationTime" content="2020-12-09T15:11:44Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>New-Breed HLLs</b></h2>
+<p class="p2">The way forward is: assume that ALL current programming languages are assemblers, and create new-breed HLLs that emit such assemblers. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Concurrency</b></h2>
+<p class="p2">Concurrency is a programming paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2">See Rob Pike's talk "Concurrency is not Paralellism" <a href="https://vimeo.com/49718712">https://vimeo.com/49718712</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Parallelism is a specific problem.<span class="Apple-converted-space">  </span>Parallelism and Concurrency are often conflated together.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">Every</span> parallel program employs the concurrent paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">Not every</span> concurrent program is parallel.</p>
+<p class="p3"><br></p>
+<p class="p2">Concurrency is a programming paradigm that is useful on its own, like Structured Programming, OO, FP, etc., etc., etc.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Isolation</b></h2>
+<p class="p2">I invent the word "isolation" to mean uber-encapsulation.</p>
+<p class="p3"><br></p>
+<p class="p2">Isolation encapsulates everything that encapsulation does, but, also encapsulates control-flow, whereas encapsulation does not.</p>
+<p class="p3"><br></p>
+<p class="p2">Isolation exists in operating systems such as UNIX, but does not appear in commonly-available programming languages.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DaS</b></h2>
+<p class="p2">I invent the word "DaS" to mean Diagrams as Syntax.</p>
+<p class="p3"><br></p>
+<p class="p2">It is possible to parse diagrams in the same way that we now parse textual languages.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The key ideas that I use are:</p>
+<ul class="ul1">
+  <li class="li4">Use backtracking (for example PROLOG) to do the parsing - we can optimize this later.</li>
+  <li class="li4">Think of diagrams as <i>glyphs</i>, not pixels.<span class="Apple-converted-space">  </span>For example, a box-and-arrow language contains only the 3 kinds of <i>glyphs</i>:
+  <ul class="ul2">
+    <li class="li4">boxes</li>
+    <li class="li4">arrows</li>
+    <li class="li4">text</li>
+  </ul></li>
+  <li class="li4">Allow glyphs to overlap, instead of insisting that they be arranged on a fixed, non-overlapping grid as is done with current programming editors.</li>
+  <li class="li4">Mix text in with the diagrams. <span class="Apple-converted-space"> </span></li>
+  <li class="li4">Some things are better expressed as text, e.g. <i>a = b + c</i>.<span class="Apple-converted-space"> </span></li>
+  <li class="li4">Do not create diagrams to express things that we already know how to express. <span class="Apple-converted-space"> </span></li>
+  <li class="li4">Use diagrams to express ideas that cannot be easily expressed<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> in text, e.g. composition of concurrent components, e.g. components that have multiple results,<span class="Apple-converted-space">  </span>e.g. components that accept inputs at varying intervals of time, e.g. components that produce outputs at varying intervals of time.</li>
+  <li class="li4">Use the Concurrent paradigm.<span class="Apple-converted-space">  </span>DaS.<span class="Apple-converted-space">  </span>Note that box-and-arrow diagrams tend not to work unless the boxes are concurrent.<span class="Apple-converted-space">  </span>[Attempts at shoe-horning box-and-arrow diagrams into the sequential/synchronous paradigm cause difficulties and accidental complexities.]</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What Makes a Good Assembler?</b></h2>
+<p class="p2"><span class="Apple-converted-space"> </span>"Good" assembler languages are ones that are easy to emit.</p>
+<p class="p3"><br></p>
+<p class="p2">"Good" assembler languages are not the same as "good" programming languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Good assembler languges are "loosey goosey".</p>
+<p class="p3"><br></p>
+<p class="p2">Good assembler languages do not require declaration-before-use.</p>
+<p class="p3"><br></p>
+<p class="p2">Good assembler languages do not have strong-typing<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Good assembler languages provide 1st class functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Good assembler languages provide anonymous functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Examples of good assembler languages are Lisp and JavaScript.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Riffing</b></h2>
+<p class="p2">New-breed HLLs will riff on the ideas of concurrency, isolation, DaS.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Projectional Editors</b></h2>
+<p class="p2">Projectional editors edit assembler language.</p>
+<p class="p3"><br></p>
+<p class="p2">A good place to start creating a projectional editor is by using a "good" assembler language (see "What Makes a Good Assembler?").</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCLs</b></h2>
+<p class="p2">I invent the word "SCL" to mean Solution-Centric Language.</p>
+<p class="p3"><br></p>
+<p class="p2">SCLs are a sub-class of DSLs<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>, but are tuned to the details of a solution to <b>one</b> specific problem.<span class="Apple-converted-space">  </span>In other words, what Engineers do<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEGs</b></h2>
+<p class="p2">I believe the PEG<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> technology is a break-through technology that makes SCLs possible and allows them to be used liberally.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm-JS</b></h2>
+<p class="p2">I am exploring Ohm-JS<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a>.<span class="Apple-converted-space">  </span>I have written about it and will continue to write about it.</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>and understood</p>
+<p class="p7"><span class="s3"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a></span> Strong-typing is provided by the HLL, not the assembler.<span class="Apple-converted-space">  </span>Strong-typing is for people, but assembler languages are for automation, not for people.</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3">[3]</a> <span class="s3">Domain Specific Languages</span></p>
+<p class="p8"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Engineers solve one "real" problem at a time, using the best available technologies.</p>
+<p class="p8"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>https://bford.info/pub/lang/peg/</p>
+<p class="p8"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>https://github.com/harc/ohm</p>
+</div>
+</body>
+</html>

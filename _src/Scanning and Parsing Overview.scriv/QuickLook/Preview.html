@@ -1,0 +1,153 @@
+<html>
+
+<head>
+<title>Scanning and Parsing Overview</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">A DSL is best built as a hierarchy.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">At the “leaf nodes” of the hierarchy are characters (or better yet, glyphs).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Leaf nodes are collected into composite structures, called tokens.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A language (and a DSL) is composed of layers.<span class="Apple-converted-space">  </span>At each layer, a certain set of tokens is parsed and transpiled into another set of tokens.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">An unparser is a layer processor.<span class="Apple-converted-space">  </span>It takes a set of tokens and emits them as a simpler set of tokens.<span class="Apple-converted-space">  </span>For example, we might construct a tree representing a Scheme program, the...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Scanner</p>
+<p class="itemText">The first layer of a DSL is the scanner.<span class="Apple-converted-space">  </span>It reads input data, e.g. characters, and converts the data into tokens.<span class="Apple-converted-space">  </span>A token might contain file and position information. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The scanner might compress runs of similar characters into single tokens.<span class="Apple-converted-space">  </span>For example a run of whitespace – spaces, tabs, etc. - might be compressed into a single whitespace token.<span class="Apple-converted-space">  </span>These are semantically uninteresting, but whitespace tokens can act as delimiters between other tokens.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">More importantly, the scanner compresses...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Parser</p>
+<p class="itemText">A parser inputs a sequential stream of tokens, and checks that the tokens form valid phrases – in sequence – for the language being processed (compiled, transpiled, etc.).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parsers are pattern matchers, albeit more elaborate than the pattern matchers in scanners.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parsing is typically specified as a set of rules (patterns) that describe parts of the language being processed. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parsing typically uses subroutines (stack based) to do pattern matching.<span class="Apple-converted-space">  </span>As such, parser pattern matchers cannot use REGE...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">S/SL</p>
+<p class="itemText">PEG is not the first tool to process and create top-down grammars.<span class="Apple-converted-space">  </span>S/SL is another such tool.<span class="Apple-converted-space">  </span>S/SL was invented in the 1980’s. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">S/SL has the advantage that it works with tokens, whereas Ohm-JS works only with character streams.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">S/SL has the advantage that it is pass-based.<span class="Apple-converted-space">  </span>Ohm-JS does not default to this behaviour, but could be twisted to conform to passes.<span class="Apple-converted-space">  </span>Since Ohm-JS accepts only characters as input, it discourages pass-based and token-based approaches.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">S/SL has the disadvantage that it ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">TXL</p>
+<p class="itemText">TXL is a source-to-source technology, based on backtracking, ostensibly used for experimental language design.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">PROLOG</p>
+<p class="itemText">PROLOG is a language that expresses exhaustive pattern-matching using backtracking.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As such, PROLOG should be ideal for building parsers (and, maybe, scanners).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The early wisdom stated that backtracking was not a viable strategy for building parsers.<span class="Apple-converted-space">  </span>Early attempts to use backtracking in parsers was quashed after Early’s (a researcher’s name) Parsing technology.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Now, with much faster computers, and almost-unlimited memory, this “wisdom” could be re-investigated.<span class="Apple-converted-space">  </span>To my knowledge, this has not b...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\deftab709
+\pard\pardeftab709\partightenfactor0
+
+\f0\fs24 \cf0 The first layer of a DSL is the 
+\f1\i scanner.
+\f0\i0   It reads input data, e.g. characters, and converts the data into 
+\f1\i tokens
+\f0\i0 .  A 
+\f1\i token
+\f0\i0  might contain file and position information.  \
+\
+The scanner might compress runs of similar characters into single tokens.  For example a run of whitespace \'96 spaces, tabs, etc. - might be compressed into a single 
+\f1\i whitespace
+\f0\i0  
+\f1\i token
+\f0\i0 .  These are semantically uninteresting, but 
+\f1\i whitespace tokens
+\f0\i0  can act as delimiters between other tokens.\
+\
+More importantly, the scanner compresses semantically interesting runs of related characters.  For example, an identifier, 
+\f1\i id
+\f0\i0 , in a language is usually composed of a single alpha character followed by 0 or more alphanumeric characters.  The scanner groups such identifier characters together and assigns a single token (e.g. a token code plus a string hashcode) to such runs.  Compressing such runs of characters into single tokens relieves subsequent passes from having to re-scan the input character by {\field{\*\fldinst{HYPERLINK "scrivcmt://081294F6-D80C-45DA-A2B1-92C27E6E1184"}}{\fldrslt character.}} The scanner also worries about the low-level details of {\field{\*\fldinst{HYPERLINK "scrivcmt://65665512-EDB1-47EF-A18D-827E4B2063ED"}}{\fldrslt delimiter}} characters. In languages where indentation is significant (e.g. Python), the scanner might keep track of indentation levels and attach these to 
+\f1\i tokens
+\f0\i0  or, might create special indentation 
+\f1\i tokens
+\f0\i0 .\
+Scanners are, fundamentally, pattern matchers.\
+\
+Scanners often use REGEX libraries to specify string matching.  \
+\
+A tool that build scanners from declarative specifications is LEX.\
+\
+PEG technology obsoletes the use of LEX.  See below.}

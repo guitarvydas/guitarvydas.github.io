@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Scalability</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T18:17:43Z">
+  <meta name="ModificationTime" content="2020-12-09T18:17:43Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Complexity is not the problem.</p>
+<p class="p2"><br></p>
+<p class="p1">There is no silver bullet.<span class="Apple-converted-space">  </span>There are many silver bullets.</p>
+<p class="p2"><br></p>
+<p class="p1">Further explanation:</p>
+<p class="p2"><br></p>
+<p class="p1">The main problem in software design is scalability.</p>
+<p class="p2"><br></p>
+<p class="p1">We want to "plug" pieces tother like LEGO blocks.</p>
+<p class="p2"><br></p>
+<p class="p1">Better scalability implies fewer dependencies.</p>
+<p class="p2"><br></p>
+<p class="p1">Early hardware people got this "right".<span class="Apple-converted-space">  </span>They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).</p>
+<p class="p2"><br></p>
+<p class="p1">Chips were black boxes.<span class="Apple-converted-space">  </span>They had a set of input/output pins.<span class="Apple-converted-space">  </span>The insides of the chips were inscrutable - encased in opaque epoxy.</p>
+<p class="p2"><br></p>
+<p class="p1">Nothing leaked out of or into a chip except through the pins of the chip.</p>
+<p class="p2"><br></p>
+<p class="p1">Properties of a chip were described in easily-measured terms:</p>
+<p class="p2"><br></p>
+<ul class="ul1">
+  <li class="li3">voltage on a pin</li>
+  <li class="li3">current needed by a pin</li>
+  <li class="li3">diagram / chart of the outputs, given a set of inputs</li>
+  <li class="li3">timing.</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p1">Then, hardware designers "discovered" that point-to-point wiring between chips led to non-scalable designs.</p>
+<p class="p2"><br></p>
+<p class="p1">They built a (small) hierarchy - chips mounted on boards plugged into backplanes.</p>
+<p class="p2"><br></p>
+<p class="p1">The earliest backplanes were basically point-to-point wiring harnesses.<span class="Apple-converted-space">  </span>For example, an early Wang word processor had a backplane with some 400 pins, allowing a chip on one board to send signals directly to a chip on another board.</p>
+<p class="p2"><br></p>
+<p class="p1">Then, came the S100 bus.<span class="Apple-converted-space">  </span>It had only 100 pins.<span class="Apple-converted-space">  </span>It was well defined and documented.<span class="Apple-converted-space">  </span>Certain connections were not allowed, even if they could be done more efficiently as point-to-point connections.</p>
+<p class="p2"><br></p>
+<p class="p1">The idea of the Bus led to Apple computers and, ultimately, the IBM desktop computer.<span class="Apple-converted-space">  </span>(There was more than one Bus definition, but the market shook those out).</p>
+<p class="p2"><br></p>
+<p class="p1">Can software be built like chips?<span class="Apple-converted-space">  </span>I argue Yes.</p>
+<p class="p2"><br></p>
+<p class="p1">We need to build software in hierarchies.</p>
+<p class="p2"><br></p>
+<p class="p1">Divide and conquer.</p>
+<p class="p2"><br></p>
+<p class="p1">No leakage - of anything - between layers in a hierarchy.<span class="Apple-converted-space">  </span>("Anything" includes things like variables, types, control flow, dependencies of any kind, etc.).</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">Coming back to Complexity: we *don't care* how complicated a component is, as long as it is well-encapsulated and as long as we don't have to deal with any of its leakage of dependencies.</p>
+<p class="p2"><br></p>
+<p class="p1">I see software as a hierarchy of black boxes.<span class="Apple-converted-space">  </span>The Architect for each box <i>chooses </i>the best way to describe the design intent of a black box.<span class="Apple-converted-space">  </span>The Engineer figures out how to dot the I's and cross the T's.<span class="Apple-converted-space">  </span>The Production Engineer figures out how to make the black box "more efficient" and the Coder lays the bricks to implement the black box.</p>
+<p class="p2"><br></p>
+<p class="p1">A good Architect will have a tool-belt full of Silver Bullets.<span class="Apple-converted-space">  </span>Maybe a problem is best described in Relational terms, maybe a problem is best described as a State Machine (as a diagram, yet), maybe a problem can be broken down in a synchronous manner, etc., etc.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Insidious Form of Dependency</b></h2>
+<p class="p1">Dependency: An insidious form of dependency that is overlooked is the "dynamic call chain" created by using a (usually hidden) stack to store state and return addresses between function invocations.<span class="Apple-converted-space">  </span>This dependency must be broken if software is to scale to new heights.<span class="Apple-converted-space">  </span>Breaking this kind of dependency requires Concurrency.<span class="Apple-converted-space">  </span>Concurrency, currently, has a bad name (i.e. it is thought to be a "hard" problem) because it has been tangled up with Time Sharing and Operating Systems.<span class="Apple-converted-space">  </span>Most applications don't need Time Sharing and all applications, except Linux, MacOSX, Windows, etc., don't need to implement operating systems.<span class="Apple-converted-space">  </span>Concurrency is *much* easier when Time-Sharing is removed.</p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Old Reality vs. New Reality</b></h2>
+<p class="p1">Old reality - The old reality was: limited memory and one CPU (hence, the name "Central Processing Unit").<span class="Apple-converted-space">  </span>In this reality, it was reasonable to simulate concurrency and have one stack per process.</p>
+<p class="p2"><br></p>
+<p class="p1">New reality - Huge amounts of memory and many processors (none of those being "Central").<span class="Apple-converted-space">  </span>In this reality we can afford to have multiple stacks (e.g. one for each type) and use SEND() for every kind of data movement (displacing function parameters, return values, exceptions, all of which came about due to the Old Reality).</p>
+<p class="p2"><br></p>
+<p class="p1">There is nothing "new" in the above ideas.<span class="Apple-converted-space">  </span>Humanity has dealt with issues of isolation and timing many times before.</p>
+<p class="p2"><br></p>
+<p class="p1">For example, businesses are built on the notion of hierarchy.</p>
+<p class="p2"><br></p>
+<p class="p1">For example, music scores deal with real-time issues and sequencing.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">Measuring early successes at encapsulation:</p>
+<p class="p2"><br></p>
+<p class="p1">- No need for Make</p>
+<p class="p1">- No need for any package managers</p>
+<p class="p1">- No need for tools like AutoConfig.</p>
+<p class="p1">- Manuals that are only one page long.</p>
+<p class="p2"><br></p>
+<p class="p1">Other measures:</p>
+<p class="p1">- Using a hierarchy of DSLs to solve a given problem.</p>
+<p class="p1">- Breaking out of a text-only syntax mentality, using DaS (Diagrams as Syntax).</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Measuring Isolation</b></h2>
+<p class="p1">Measuring early successes at isolation:</p>
+<p class="p2"><br></p>
+<ul class="ul1">
+  <li class="li3">No need for <i>make</i></li>
+  <li class="li3">No need for any package managers</li>
+  <li class="li3">No need for tools like AutoConfig.</li>
+  <li class="li3">Manuals that are only one page long.</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p1">Other measures:</p>
+<p class="p1">- Using a hierarchy of DSLs to solve a given problem.</p>
+<p class="p1">- Breaking out of a text-only syntax mentality, using DaS (Diagrams as Syntax).</p>
+<p class="p2"><br></p>
+</div>
+</body>
+</html>

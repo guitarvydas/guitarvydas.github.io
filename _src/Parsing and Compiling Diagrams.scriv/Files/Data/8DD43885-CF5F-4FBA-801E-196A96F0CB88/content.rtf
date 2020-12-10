@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Drawing Conventions\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+As it stands, we do not have an off-the-shelf drawing editor.\
+\
+We use an existing diagram editor plus some conventions that make its output suitable for compilation.  We do not check all drawings for correctness and the compiler may fail (or produce incorrect code) if drawings contain features not specified below.\
+\
+For now, we will use the (free) Draw.IO drawing editor and save the drawings as .SVG files.\
+ \
+For drawings made with Draw.IO, the following conventions are used:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}A 
+\f3\i Part
+\f2\i0  is drawn as a Rectangle (top-left of General palette) with 
+\f3\i Text
+\f2\i0  (3
+\fs18 \super rd
+\fs26 \nosupersub  item on General palette) completely inside the Rectangle.  The 
+\f3\i Text
+\f2\i0  represents the 
+\f3\i kind
+\f2\i0  (aka, 
+\f3\i type, class
+\f2\i0 ) of the part.  There can be multiple 
+\f3\i Parts
+\f2\i0  with the same 
+\f3\i kind
+\f2\i0  in a drawing.  These are recognised as multiple 
+\f3\i instances
+\f2\i0  of the same 
+\f3\i kind
+\f2\i0  of part.  Instances are given unique ID\'92s internally, that are not shown on the diagram (see 
+\f3\i Figure: <$n:figure:Ports>
+\f2\i0 ).\
+{\listtext	\uc0\u8226 	}A 
+\f3\i Wire 
+\f2\i0 is drawn as a \'93directional connector\'94 (line with arrowhead) (32
+\fs18 \super nd
+\fs26 \nosupersub  item on the General palette) from one rectangle to another.  The connection points are displayed by Draw.IO when the line is dragged near, or across, the boundary of the rectangle.\
+{\listtext	\uc0\u8226 	}A 
+\f3\i Wire
+\f2\i0  must be a single, contiguous line.  It must not be split into multiple line segments.  Draw.IO allows one to place multiple \'93bend points\'94 on a line - this is allowed, as long as the line is not split into multiple segments.\
+{\listtext	\uc0\u8226 	}The 
+\f3\i beginning
+\f2\i0  of a wire/line is unadorned.  The 
+\f3\i end 
+\f2\i0 of a wire is marked with an arrow-head.  
+\f3\i Events
+\f2\i0  flow from the beginning of a wire to the end.  The compiler expects the 
+\f3\i beginning
+\f2\i0  of a wire to touch the rectangle.  On the other hand, arrowheads (
+\f3\i ends 
+\f2\i0 of the wire(s)) can be +-20 units from the edge of a rectangle.  Draw.IO draws lines in way that the beginning 
+\f3\i touches 
+\f2\i0 a rectangle, but draws the 
+\f3\i end 
+\f2\i0 of a line so that they do not 
+\f3\i touch
+\f2\i0  a rectangle (only the arrowhead touches the rectangle ; it was easier to add a kludge factor to the end of wires than to sort out which arrowheads correspond to which lines ; the kludge factor only applies to arrowhead portion of a line, all other matches are exact).\
+{\listtext	\uc0\u8226 	}A 
+\f3\i Port
+\f2\i0  is a text box (3
+\fs18 \super rd
+\fs26 \nosupersub  item on General palette) that is not contained inside the rectangle, but is positioned \'93near\'94 one end or another of the wire.  The 
+\f3\i Port\'92s
+\f2\i0  name is a numeral.  The range of numerals depends on the compiler.  In this POC, 
+\f3\i Port
+\f2\i0  names start at 0 up to 15.  The compiler measures distance from the beginning or end of a wire to unenclosed text.  The text closest to the end of a wire is taken to be the index of the 
+\f3\i Port
+\f2\i0 . Currently, ports are \'93named\'94 by a numeric index. In the future, the compiler can be changed to accept arbitrary character strings for port \'93names\'94.  This is not the case, currently (the compiler only understands numeric indices).\
+{\listtext	\uc0\u8226 	}A 
+\f3\i port
+\f2\i0  with no arrow is an output pin.  A 
+\f3\i port
+\f2\i0  with an arrow-head is an input pin. \uc0\u8232 \u8232 <$img:Ports;w=400;h=300>\u8232 
+\f3\i Figure: <$n:figure:Ports>
+\f2\i0 \uc0\u8232 	\
+{\listtext	\uc0\u8226 	}Multiple wires can connect to input pins and to output pins. (\'93Fan out\'94 and \'93fan in\'94, resp.).  (N.B. FBP allows \'93fan in\'94 but does not allow \'93fan out\'94.  The drawings discussed here do not follow all FBP conventions and allow for \'93fan out\'94, similar to electronic schematics).\uc0\u8232 \u8232 <$img:MultipleWires>\u8232 
+\f3\i Figure: <$n:figure:MultipleWires>
+\f2\i0 \uc0\u8232 \
+{\listtext	\uc0\u8226 	}Time-ordering is preserved.  An 
+\f3\i event
+\f2\i0  that is placed on a wire arrives at all 
+\f3\i inputs
+\f2\i0  (in the same schematic) at the same \'93time\'94.  A 
+\f3\i wire 
+\f2\i0 that is attached to multiple inputs (\'93fan out\'94) is, therefore, more \'93costly\'94 than a wire that connects a single output to a single input (N.B. some care is needed when implementing multiple connection and simultaneous delivery in a preemptive (time-sliced) environment. Fan-out requires that the event be delivered to a group of wires/pins atomically.  When time-slicing and/or interrupts are being used, there might be a need for some 
+\f3\i locking
+\f2\i0  under-the-hood to guarantee atomic delivery of events to implement fan-out) [The current PoC performs atomic delivery implicitly].  It is, also, implementation-dependant as to what happens when non-scalar events are fanned out (e.g. an implementation can refuse to support non-scalar fan-in, or it can implement under-the-hood non-scalar event copying).\
+{\listtext	\uc0\u8226 	}Inputs from the outside and outputs to the outside are drawn as ellipses with a port number fully enclosed inside the ellipse. \
+{\listtext	\uc0\u8226 	}[Dots are currently unimplemented, since they are just \'93syntactic sugar\'94 for fan-in and fan-out at ports]. Dots, drawn as small black circles (Draw.IO ellipses that are round, and filled with color black).  \uc0\u8232 \u8232 <$img:Dots>\u8232 
+\f3\i Figure: <$n:figure:Dots>
+\f2\i0 \uc0\u8232 \u8232 Multiple wires can connect to a dot.  Dots are \'93one-way\'94.  A dot can have many arrow-heads pointing into it and only one wire emanating from it, or, one arrow-head pointing into it, and many wires emanating from it.  A dot must not have multiple inputs and multiple outputs.  The meaning of dots are (1) many inputs (arrow-heads) pointing in and one wire pointing out means that all of the incoming wires are compressed down into the single output (all inputs go the same place as the single output) and (2) one input and many outputs means that the input is split (copied) to all of the outputs simultaneously.\
+{\listtext	\uc0\u8226 	}Composite Parts \'97 parts which are made up of a schematic referring to other parts \'97 are managed manually.  A composite Part consists of a drawing (a schematic) containing boxes, arrows, ellipses and dots.  When a composite diagram is compiled and run, it is assumed that the children parts all exist (the compiler does not currently check for this).  Composite parts can be nested hierarchically, each part on its own schematic.\
+{\listtext	\uc0\u8226 	}Draw.IO must be instructed to save the drawing as an .SVG file (change the name to <name>.svg before saving).\
+{\listtext	\uc0\u8226 	}Hints: Draw wires first, then annotate the wires with port numbers.  When moving or re-drawing a wire, move existing port numbers far away from the rectangle and connect the wires, then move the port numbers back into position.  Draw.IO allows wires to connect to Text, but this is not what we want - wires must be connected to rectangles.  When a port number is left in place, while moving an reconnecting a wire, Draw.IO might connect the wire to the rectangle or to the port number - it remains visually unclear as to which connection is made.\
+}

@@ -1,0 +1,22 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Times-Roman;\f4\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Optimization\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+A very common form of optimiser is a tree-based one.  This kind of optimiser is described in [Aho,Ulmann,et al, {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools"}}{\fldrslt 
+\f3\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools}} (\'93the dragon book\'94)].\
+\
+A tree-based optimiser can convert a tree into a DAG and can easily reuse code sequences and allocations that appear more than once.\
+\
+A very simple form of optimisation is \'93peephole\'94 optimisation.  This method executes after the coder phase and looks at the emitted code through a \'93window\'94 of some number of instructions.  It pattern-matches the windowed instruction sequence and replaces matches with \'93better\'94 code (faster or less space, etc.).  Peephole optimisers can be built using very simple tools, like 
+\f4\i awk
+\f2\i0 .}

@@ -1,0 +1,16 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Maybe the editor is just an SVG editor?\
+\
+We need to use only a subset of SVG.  \
+\
+We could write a routine that strips out all of the unwanted parts of SVG.\
+\
+We could write a checker routine that checks that the stripped-down SVG diagram follows certain rules.  Such a checker is given the fancy name "parser" in traditional compiler lore.  A parser checks that the tokens follow certain rules.  In fancy compiler terminology: the parser checks that the tokens make up well-formed phrases in the language (DSL/PSL, in this case). \
+\
+Parsing is not contained in the editor proper.  Attempts at putting a lot of smarts into the editor were tried and failed.  Such editors - "structured editors" - were too complicated to maintain.  It was always better to put the parser in a separate pass.   Such structured editors also tried to deal with the conundrum of ill-formed code - some editors would not let you save an unfinished piece of code.  The user should be able to create garbage files using the editor, as long as the parser complains when fed garbage.  Let the editor edit, the parser parse, etc.\
+}

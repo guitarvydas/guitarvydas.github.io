@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Final Output\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 The final output of the preceding routines depends on which version of the code we use.\
+\
+Version 1 results in the following code path:\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Cs::1>
+\f3\fs22 main \{\
+ call B(q)\
+   B calls C(s)\
+     output <\'97 x\
+   C returns to B\
+  B returns to main\
+ call C(q)\
+    output <\'97 v\
+    C returns to main\
+\}\
+main done
+\f0\fs24 <!$Scr_Cs::1>
+\f2\fs26 \
+Fig. <$n:FinalOutput1> \ul Final Output for Version 1\ulnone \
+\
+The final output for Version 1 is {\field{\*\fldinst{HYPERLINK "scrivcmt://3358825A-9D63-4AD9-A8F5-38112F4E8345"}}{\fldrslt x,v}}.\
+\
+While version 2 results in the following code path:\
+\
+
+\f0\fs24 <$Scr_Cs::1>
+\f3\fs22 main () \{\
+  call C(q)\
+    output <\'97 v\
+  call B(q)\
+    B calls C(s)\
+      output <- x\
+      C returns to B\
+    B returns to main\
+\}\
+main done\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Cs::1>
+\f2\fs26 Fig. <$n:FinalOutput2> \ul Final Output for Version 2\ulnone \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Cs::1>
+\f3\fs22 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Cs::1>
+\f2\fs26 The final output for Version 2 if v,x.\
+\
+Version 1 and version 2 create different results.\
+}

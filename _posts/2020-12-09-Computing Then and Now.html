@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Computing Then and Now</title>
+  <meta name="CreationTime" content="2020-12-09T14:52:24Z">
+  <meta name="ModificationTime" content="2020-12-09T14:52:24Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {text-decoration: underline ; color: #000080}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h1 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 18.0px Helvetica"><b>Computing, Then and Now</b></h1>
+<p class="p2"><br></p>
+<p class="p3">(July 8, 2020)</p>
+<p class="p2"><br></p>
+<p class="p3">Computers are inherently parallel.</p>
+<p class="p2"><br></p>
+<p class="p3">Early on, hardware designers found ways to deal with the inherent parallelism (e.g. TTL, state machines, clocking, etc.).</p>
+<p class="p2"><br></p>
+<p class="p3">At an early stage, von Neumann suggested using a single-threaded approach in order to tame parallelism in software (N.B. note the similarity to consciousness - a single thread, coordinating the parallel processes of the human body)</p>
+<p class="p2"><br></p>
+<p class="p3">At that time, the assumptions were:</p>
+<ul class="ul1">
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>memory was a scarce resource and needed to be conserved and reused</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>CPUs were very expensive and needed to be time-shared across multiple users</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>mathematical notation (as it existed) could solve all problems</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>programming languages were hard to create.</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p3">Today, these basic assumptions have been overturned</p>
+<ul class="ul1">
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>we have nearly infinite memory</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>microprocessors are cheap and abundant</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>written mathematical forms do not use the full capabilities of what can be displayed with a computer</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span>programming languages (e.g. DSLs) are much easier to create now, e.g. using PEG and backtracking parsers.</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p3">The computing environment has changed drastically, but software programming languages have not kept up with the new reality.</p>
+<p class="p2"><br></p>
+<p class="p3">We continue to use languages whose design was based on these early prejudices. This has led us into many accidental complexities that continue to vex us.<span class="Apple-converted-space">  </span>The most glaring of such accidental complexities are time-sharing-based multi-tasking and memory sharing (I count some 40+ accidental complexities).</p>
+<p class="p2"><br></p>
+<p class="p3">We have developed a language, phrases and words to describe the problematic aspects of these choices, instead of dealing with the new reality and problems based on the early assumptions.<span class="Apple-converted-space">  </span>We talk of thread-safety, priority inversion, mmap, race conditions (some race conditions are inherent in parallel systems, but many of the race conditions we deal with are due to accidental complexity), garbage collection, parameter lists, return values, the vague notions of <i>complexity, </i>Agile, call-return, etc., all the while ignoring realities that TTL hardware dealt with – throughput time, asynchronous design, 1-page documentation, encapsulation, buses, etc.</p>
+<p class="p2"><br></p>
+<p class="p3">We use programming editors that can edit only text (which are graphical glyphs made up of mini-bitmaps) instead of programming with graphical symbols, of which text is only <i>one</i> of the choices.</p>
+<p class="p2"><br></p>
+<p class="p3">We have created variable font editors for business (e.g. Word), we have created diagram editors for business (e.g. Visio) and we have invented new UIs for business (Excel, iPad), but the basic model of editors for <i>programming</i> has not kept pace.<span class="Apple-converted-space">  </span>Programmers use all ten fingers for typing, but programmers are forced to take their hands off of keyboards to use much more limited mouse pointing devices.<span class="Apple-converted-space">  </span>For example, a <i>box</i> glyph could be bound to a single key on the keyboard<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> and two <i>boxes</i> could be selected (e.g. using <i>point </i>and <i>mark</i>) with another keystroke creating a line/connection between them.<span class="Apple-converted-space">  </span>Snippets of text could be typed anywhere on the screen and not be relegated to the 24x80 line-oriented mindset of early predecessors.<span class="Apple-converted-space">  </span>Technologies, once thought forbidden, like PROLOG backtracking, Early parsing, miniKanren (core.logic in clojure-speak) are now entirely viable and finish processing in the blink of an eye.<span class="Apple-converted-space">  </span>We <i>can</i> waste computing resources to make programming easier, but instead we waste resources on tool-tips and mountains of APIs based on outdated notions of function libraries.</p>
+<p class="p2"><br></p>
+<p class="p3">Most programming languages (and even tools like spreadsheets) use the outdated notion of <i>absolute addressing</i> – where functions are named and called directly instead of using indirection (which is much more flexible for architecting new solutions).<span class="Apple-converted-space">  </span>Hardware microprocessors underwent a transition from absolute addressing to relative addressing, but this has mostly not happened in the design of popular programming languages.<span class="Apple-converted-space">  </span>(See David Ackley’s MFM for someone who is thinking along these lines (albeit mostly for hardware, AFAICT) <a href="https://www.cs.unm.edu/~ackley/papers/hotos-11.pdf"><span class="s2">https://www.cs.unm.edu/~ackley/papers/hotos-11.pdf</span></a>).</p>
+<p class="p2"><br></p>
+<p class="p3">We spend time improving code tools instead of building new tools and languages for harder problems, like Architecture (which I call D.I. - Design Intent).<span class="Apple-converted-space">  </span>We relegate D.I. to whiteboards instead of concrete notations which can be compiled and executed.<span class="Apple-converted-space">  </span>We build languages that only mathematicians can only love, instead of building tools to concretely communicate between CEOs, CTOs, Architects, Engineers and Programmers.</p>
+<p class="p2"><br></p>
+<p class="p3">We have essentially <i>forgotten</i> that synchronous code is a <i>trick</i> used as <i>but one way</i> to tame parallelism.</p>
+<p class="p2"><br></p>
+<p class="p3">We expect all languages to provide call/return, parameters, return values, exceptions, etc. and we try to force-fit these ideas onto every problem we solve (“<i>when all you’ve got is a hammer, then everything looks like a nail”</i>).<span class="Apple-converted-space">  </span>The result is that we know how to solve only one problem (building unreliable websites).<span class="Apple-converted-space">  </span>The rest of the problems in the real world (gaming, machine control, etc.) are left to C and the new kid on the block Rust (which is just a re-hash of old ideas).</p>
+<p class="p2"><br></p>
+<p class="p3">The new reality consists of applications consisting of multiple microprocessors (I refuse to call them C.P.U.s<span class="Apple-converted-space">  </span>- Central Processing Units – and call them P.U.s instead (Processing Units)) each with their own private memories, distributed across space.<span class="Apple-converted-space">  </span>One thread per P.U.<span class="Apple-converted-space">  </span>Communicating over wires (not memory).</p>
+<p class="p2"><br></p>
+<p class="p3">Current programming languages, stack-based, can describe a program <i>on</i> a P.U. but cannot (easily, without accidental complexity) describe programs <i>across </i>distributed P.U.s.</p>
+<p class="p2"><br></p>
+<p class="p3">We need languages that <i>do less</i> so that Architects and Engineers can free their minds of unnecessary details (I discuss my ideas about how to structure a Software Organization elsewhere).<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">We have explored all sorts of tools and technologies and paradigms.<span class="Apple-converted-space">  </span>Now, we need to pick through the pile and select the best tools for every task and throw away the rest (see <a href="https://alarmingdevelopment.org/?p=766"><span class="s2">https://alarmingdevelopment.org/?p=766</span></a>).</p>
+<p class="p2"><br></p>
+<hr>
+<p class="p3"><a id="fn1"></a><a href="#fnlink1">[1]</a> Or, a single gesture consisting of multiple keys, or multiple gestures, or, just about anything that is repeatable and stays the same (modeless).</p>
+</div>
+</body>
+</html>

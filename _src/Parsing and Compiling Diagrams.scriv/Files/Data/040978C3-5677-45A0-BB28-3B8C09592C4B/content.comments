@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Comments>
+    <Comment ID="28618C35-D3AF-4F3C-9ADF-8D5FAAAD2C95" Author="Paul Tarvydas" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 The advantage to using a structure-less data structure is that one can apply no pre-conceptions to the data.  This leaves the software Architecture 
+\f1\i open 
+\f0\i0 for future consideration. An example I like to use is to create a completely different use for the 
+\f1\i unordered factbase, 
+\f0\i0 e.g. what if I want to create a Gantt Chart from the data?  If the data has a pre-determined structure, then it might not suit a Gantt Chart app.  This approach 
+\f1\i wastes
+\f0\i0  cpu in lieu of data design, but save human-time (we have lots of cpu time to burn, using the latest hardware). }]]></Comment>
+    <Comment ID="061FB6AF-F71D-4CE7-B088-EBBCAB516E68" Author="Paul Tarvydas" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 A 
+\f1\i factbase
+\f0\i0  is very similar to a 
+\f1\i triplestore
+\f0\i0  in Web3.}]]></Comment>
+    <Comment ID="E19E7ACC-BB86-48C3-88FE-FA3E87E19D4B" Author="Paul Tarvydas" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 In fact, can a Prolog be twisted inside-out to suggest what structure the 
+\f1\i factbase
+\f0\i0  should have to make future searches faster???}]]></Comment>
+    <Comment ID="81375CFD-3835-4D95-B2E7-D391A323DEAA" Author="Paul Tarvydas" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 We might need to delete the 
+\f1\i line
+\f0\i0  
+\f1\i facts, 
+\f0\i0 or mark them \'93used\'94, depending on the design of the compiler and the drawing conventions and whether the 
+\f1\i line facts
+\f0\i0  interfere with further pattern matching in downstream passes.  In this particular case (PoC), we don\'92t need to pattern match lines to make rectangles, since Draw.IO already provides 
+\f1\i rectangles
+\f0\i0 .\
+\
+In this POC, we simply invent new names for facts, such that old facts do not overlap with new facts, and old facts never need to be deleted.\
+\
+For example, 
+\f1\i rectangle
+\f0\i0  
+\f1\i fact
+\f0\i0  carries more \ul semantic\ulnone  information that any 
+\f1\i line facts
+\f0\i0 .  Once we create a 
+\f1\i rectangle fact
+\f0\i0 , we simply ignore all 
+\f1\i line facts
+\f0\i0  in future (downstream) passes.}]]></Comment>
+    <Comment ID="B24B1253-3BD5-4E82-BBE5-E76C76B299CD" Author="Paul Tarvydas" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 N.B. This method of backtracking parsing has not been fully explored (but, see {\field{\*\fldinst{HYPERLINK "http://bford.info/packrat/"}}{\fldrslt 
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 http://bford.info/packrat/}}
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 )
+\f0 \cf0 \kerning1\expnd0\expndtw0 \ulnone \outl0\strokewidth0 , hence, creating useful error messages has not been explored fully.}]]></Comment>
+</Comments>

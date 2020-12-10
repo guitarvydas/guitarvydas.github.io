@@ -1,0 +1,75 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Nov. 6, 2020: \
+It turns out that the final version of the prolog transpiler was broken.  The error was in the hand-rewritten code for print-frame (a parenthesis was off-by-one).\
+I re-examined the original prolog-6.scm and rewrote it (in Scheme) as a simple recursive function that did not used Scheme's named let feature.  In the process, I lifted as many implementation details out and put them into auxiliary functions.\
+The result appears to work, is in branch "main" commit 70989e3333021327b472f56a548a6e81c8abcbca, in {\field{\*\fldinst{HYPERLINK "https://github.com/guitarvydas/OhmSmallSteps"}}{\fldrslt https://github.com/guitarvydas/OhmSmallSteps}}.\
+To run it, simply execute\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+./run.bash\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+in the OhmSmallSteps directory.  This should create a file j
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 unk.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26  by concatenating 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 support.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26  and 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 prolog-6.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26 .  The script then runs \
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+node junk.js\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+which should print the final set of matches as bindings to X and Y:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (((X . baz)  (Y . bar))  ((X . baz)  (Y . foo))  ((X . bar)  (Y . baz))  ((X . bar)  (Y . foo))  ((X . foo)  (Y . baz))  ((X . foo)  (Y . bar)))\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+To re-create "prolog-6.js" and watch the transpiler transpile the Scheme code, load "index.html" in a browser (I used Chrome) and hit the "emit JavaScript" button.  This should produce JavaScript code in the browser.  Copy the code and paste it into a file or 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 prolog-6.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26 .  The transpiled Javascript should have no differences with the file 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 prolog-6.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26  found in the above-mentioned git repository.\
+The Javascript in 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 support.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26  and 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 prolog-6.js
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26  forms the basis for new, follow-on, work in 
+\f1\fs24 <$Scr_Cs::1>
+\f2\fs22 ../js-match
+\f1\fs24 <!$Scr_Cs::1>
+\f0\fs26 .}

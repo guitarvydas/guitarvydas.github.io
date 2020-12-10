@@ -1,0 +1,21 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{lower-alpha\})}{\leveltext\leveltemplateid1\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 I now have the JS code for a PROLOG interpreter.  It consists of the support.js routines plus the output from our transpiler.  \
+"Prove6" is the entry point.\
+ I need to create a database of facts, rules and, a database of goals.  I pass these to prove6() and it prints the results.\
+I need several simple things:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	a)	}Prove6() needs to return a list of answers instead of printing them out.\
+{\listtext	b)	}A PROLOG-like syntax skin over JS, that converts PROLOG-like statements into databases and calls to prove6().  This is probably going to be another grammar (Ohm-JS).\
+{\listtext	c)	}A way to combine chunks of PROLOG-like statements into JS.  Each chunk will be fed into the above PROLOG-to-JS transpiler and the result will be pasted back into the JS program.  When done, the final JS program will be fed to the JS compiler/interpreter.  In its simplest form this will involve calls to String.search() and String.split() (etc.).  Q: What do I do with the resulting JS code?  Can I overwrite <script> segments in the DOM?  Do I generate another .html page with new <script>\'85</script> segments?  Do I generate a .JS file and feed it to node.js? The ideal would be a page, an .html file, that contains the mixed PROLOG and JS script, which invisibly transpiles the code and runs and produces a result.  [This is the "hard part" for me.  I don't yet have enough JS and HTML experience.  Grammars are the "easy part" for me:-].\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+I will address point (a) and leave (b) and (c) for other {\field{\*\fldinst{HYPERLINK "scrivcmt://F7B3E721-D5F7-4A54-9346-1D06A0845D5C"}}{\fldrslt essays.}}\
+\
+}

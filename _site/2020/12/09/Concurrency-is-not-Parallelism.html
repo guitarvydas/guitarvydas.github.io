@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Concurrency is not Parallelism</title>
+  <meta name="CreationTime" content="2020-12-09T14:53:15Z">
+  <meta name="ModificationTime" content="2020-12-09T14:53:15Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    li.li1 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px Times}
+    span.s4 {font: 7.0px Times}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Concurrency is a programming <i>paradigm</i>.</p>
+<p class="p1">Parallelism is an application problem, <i>not</i> a paradigm.<span class="Apple-converted-space">  </span>Parallel programs must use the concurrent paradigm.<span class="Apple-converted-space">  </span>Concurrent programs, though, are not necessarily parallel.</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">https://vimeo.com/49718712</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">I used to conflate parallelism and concurrency until I watched Rob Pike’s talk.</p>
+<p class="p1">I used to try to convince people that they could write concurrent programs using something “better” than Processes (Threads).<span class="Apple-converted-space">  </span>What I didn’t realize was that I was trying to explain the difference between the <span class="s1">paradigm</span> called “concurrency” and the application <span class="s1">problem</span> called “parallelism”.</p>
+<p class="p1">A parallel program <i>must</i> run on multiple processors.</p>
+<p class="p1">A program designed using the concurrent paradigm can run on a <i>single</i> Processor or on multiple processors. <span class="Apple-converted-space"> </span></p>
+<p class="p1">The advantages of using the concurrent paradigm can be seen even on a single processor system.</p>
+<p class="p1">One can write concurrent software that uses only a single Processor.<span class="Apple-converted-space">  </span>One cannot write parallel software that uses a single Processor.<span class="Apple-converted-space">  </span>One can <i>simulate</i> parallel software on a single processor, but this is not necessary (although it might help debugging, while hindering debugging). <span class="Apple-converted-space"> </span></p>
+<p class="p1">Multi-tasking – as we know it today – is a <i>simulation</i> of parallelism.<span class="Apple-converted-space">  </span>Multi-tasking, as we know it today, tries valiantly to solve too many problems at once – e.g. memory sharing, bandwidth optimization, time-sharing, etc.<span class="Apple-converted-space">  </span>Multi-tasking as we know it today, is a simulation of parallelism that attempts to optimize concurrency using multiple stacks (a form of memory sharing optimization + processor optimization and sharing).</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">A concurrent system is composed of a number of <i>closures</i>.<span class="Apple-converted-space">  </span>There is a single distinguished routine, called the Dispatcher().<span class="Apple-converted-space">  </span>The Distpacher() invokes closures, at random.</p>
+<p class="p1">That’s all there is.</p>
+<p class="p1">It is simple – almost too simple – to implement concurrency in any language that supports <i>closures</i>.<span class="Apple-converted-space">  </span>It is possible to implement the concurrent paradigm in C or assembler, too, one just needs to pay more attention to details.</p>
+<p class="p1">As simple as this sounds, the concurrent paradigm forces one to program in a completely different manner.<span class="Apple-converted-space">  </span>The program cannot rely on synchrony.<span class="Apple-converted-space">  </span>The program – composed of many communicating closures – must be written in a way that acknowledges that <i>any</i> closure might be awakened at <i>any </i>time (by the Dispatcher()).</p>
+<p class="p1">This seemingly simple requirement causes programmers to re-evaluate control-flow coupling.</p>
+<p class="p1">Operating system Processes and threading libraries are heavy-handed approaches to creating closures and a Dispatcher().<span class="Apple-converted-space">  </span>In some, <i>but not most</i>, cases it is necessary to use hardware to protect one program from another (e.g. MMUs).<span class="Apple-converted-space">  </span>In some, <i>but not most</i>, cases it is necessary to optimize memory usage using memory-sharing and stacks (stacks are just an optimized form of linked lists).<span class="Apple-converted-space">  </span>In some, <i>but not most</i>, cases it is necessary to use time-sharing.<span class="Apple-converted-space">  </span>When you strip these features out of threading libraries, you get multi-tasking that is easy.<span class="Apple-converted-space">  </span>Closures have been around for a long time, and they don’t require MMUs, memory sharing, stacks and time-sharing.</p>
+<p class="p1">Closures are like GOTOs – they <i>can</i> be misused.<span class="Apple-converted-space">  </span>Organizing closures in a hierarchical manner (see my other essays on this subject) is one way to tame their use.<span class="Apple-converted-space">  </span>We have found that we need “languages” that encourage certain usage patterns – e.g. C vs. assembler programming (C encourages Structured control flow, through if-then-else statements, etc.) - e.g. OO encourages data encapsulation (but leaves control-flow encapsulation wide open, if not worse off).</p>
+<p class="p1">GOTOs are assembler-level details.<span class="Apple-converted-space">  </span>GOTOs must exist.<span class="Apple-converted-space">  </span>GOTOs must be tamed.<span class="Apple-converted-space">  </span>Likewise, Closures exist and must be tamed.</p>
+<p class="p1">Message-passing is another GOTO-like atomic element.<span class="Apple-converted-space">  </span>It must be tamed.<span class="Apple-converted-space">  </span>Message-passing enables the concurrent paradigm.<span class="Apple-converted-space">  </span>A component can send another component a message, but the receiving component is not constrained as to when it deals with the message.<span class="Apple-converted-space">  </span>Message-passing defeats rendezvous.<span class="Apple-converted-space">  </span>Message-passing allows asynchrony.<span class="Apple-converted-space">  </span>The concurrent paradigm requires asynchrony.<span class="Apple-converted-space">   </span></p>
+<p class="p1">Backus asked “Can Programming Be Liberated From The von Neumann Style?”.<span class="Apple-converted-space">  </span>The question is a good one.<span class="Apple-converted-space">  </span>The answer that Backus proposed was insufficient, though.<span class="Apple-converted-space">  </span>Mathematics, as we know it today, implies synchronous evaluation.<span class="Apple-converted-space">  </span>We need to think of mathematics and synchrony being <i>isolated</i> on asynchronous <i>islands</i>.</p>
+<p class="p1">Computers are parallel by default.<span class="Apple-converted-space">  </span>Forcing synchrony onto every part of computing is contrary to the manner in which computers work.<span class="Apple-converted-space">  </span>For example, multi-tasking is considered to be a “hard” problem mostly because multi-tasking is being solved using only one paradigm – a paradigm that is not the best choice for every problem in a particular solution.<span class="Apple-converted-space">  </span>It is like trying to emulate C-like <i>format</i> statements in PROLOG.<span class="Apple-converted-space">  </span>It can be done, but results in accidental complexity.<span class="Apple-converted-space"> </span></p>
+<p class="p1">“Yes” to synchronous operations floating on asynchronous islands.</p>
+<p class="p1">“No” to synchronous <i>everything</i>.</p>
+<p class="p1">It is OK to use more than one paradigm at a time.<span class="Apple-converted-space">  </span>For example, again, PROLOG leads the way towards thinking in relational terms, but casting <i>everything </i>as a relation brings unnecessary difficulty.</p>
+<p class="p1">Paradigms are DSLs draped over full-featured assemblers.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">The API for the concurrent paradigm consists of one routine – Send().<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a><br>
+</p>
+<p class="p3"><br></p>
+<p class="p1">These are some examples of the concurrent paradigm:</p>
+<ul class="ul1">
+  <li class="li1"><span class="s2">•<span class="Apple-tab-span">	</span></span>UNIX® shell pipelines</li>
+  <li class="li1"><span class="s2">•<span class="Apple-tab-span">	</span></span>closures using queues/mailboxes for inter-closure communication.</li>
+</ul>
+<p class="p1">O/S threads, and threading libraries, are often conflated with the concurrent paradigm.<span class="Apple-converted-space">  </span>O/S threads – and many threading libraries – solve much greater problems,<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> and are poor examples of the concurrent paradigm.</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li1"><span class="s2">•<span class="Apple-tab-span">	</span></span>Encourages the absence of dependencies</li>
+  <li class="li1"><span class="s2">•<span class="Apple-tab-span">	</span></span>Isolation.</li>
+  <hr>
+  <p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>Most HLL PLs started out life as DSLs built on top of full-featured substrate languages.<span class="Apple-converted-space">  </span>Greenspun’s 10<span class="s4"><sup>th</sup></span> rule is usually taken as a joke, but taken in the light of HLLs-as-DSLs, it begins to ring true.</p>
+  <p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>OK, OK, I am simplifying.<span class="Apple-converted-space">  </span>There are some house-keeping functions that might be necessary.<span class="Apple-converted-space">  </span>We definitely don’t need RETURN and we don’t need CATCH/THROW.<span class="Apple-converted-space">  </span>Send() is sufficient. <span class="Apple-converted-space">  </span>RETURN?<span class="Apple-converted-space">  </span>Use Send() instead. CATCH/THROW?<span class="Apple-converted-space">  </span>Use Send() instead.<span class="Apple-converted-space">  </span>LOOP?<span class="Apple-converted-space">  </span>Get rid of it.<span class="Apple-converted-space">  </span>Recursion?<span class="Apple-converted-space">  </span>Get rid of it.<span class="Apple-converted-space">  </span>[Also, we don’t need dynamicism.<span class="Apple-converted-space">  </span>Dynamic programming is just another way to say “self modifying code”, which is even worse than using the word “GOTO”]. RETURN &amp; CATCH/THROW &amp; LOOP &amp; Recursion make sense <i>only </i>on a synchronous island.<span class="Apple-converted-space">  </span>They are not atomic elements of the concurrent paradigm.</p>
+  <p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>Problems such as time-sharing, memory-sharing, protecting apps from one another, protecting against long-running apps, code-reuse, etc..<span class="Apple-converted-space">  </span>Most single apps don’t need these features / problems.<span class="Apple-converted-space">  </span>Note that mutual-multitasking is OK within a single app.<span class="Apple-converted-space">  </span>A “bug” is just a “bug” regardless of whether the concurrent paradigm or the synchronous paradigm is used.</p>
+</div>
+</body>
+</html>

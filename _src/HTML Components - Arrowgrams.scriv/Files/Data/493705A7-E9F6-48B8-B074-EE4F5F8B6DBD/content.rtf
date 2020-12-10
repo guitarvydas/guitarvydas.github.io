@@ -1,0 +1,122 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The system in this simple example consists of an HTML 
+\f1\i input file
+\f0\i0  component and an HTML 
+\f1\i paragraph
+\f0\i0  component that displays the contents of the file.\
+\
+Obviously, such a system can be directly implemented - and easily understood - as HTML + JavaScript.  The intention here, though, is to show the \ul fundamentals\ulnone  of creating large systems using pluggable components.\
+\
+In essence, we want is:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <$Scr_Ps::0>
+\f3\fs22 <input type="file" id="part1" onchange="sendMessageToPart2(\'85)>\'85</input>\
+<p id="part2"></p>\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 Further, we want a top-level component that "owns" these two components.\
+\
+<div id="topLevel">\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <$Scr_Ps::0>
+\f3\fs22 <input type="file" id="part1" onchange="sendMessageToPart2(\'85)>\'85</input>\
+<p id="part2"></p>\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 </div>\
+\
+We want the top-level component to route messages between its children.  \
+\
+The children cannot send messages directly to one another.  \
+\
+The routing is represented as an Nx2 table in the parent part (in this case "topLevel"). \
+\
+I use the name "wire" to refer to each row in the table.  \
+\
+Each wire contains one sender and 0-or-more receivers.  \
+\
+Every reference to a part consists of two parts - the id of the part and a {\field{\*\fldinst{HYPERLINK "scrivcmt://0A06F3AF-F8DE-40A9-97C8-7EB4CB716A9B"}}{\fldrslt string}} which I call a {\field{\*\fldinst{HYPERLINK "scrivcmt://E63E35E3-DA24-4427-80E1-E2AB6EF8046A"}}{\fldrslt 
+\f1\i pin}}
+\f1\i .
+\f0\i0 \
+\
+The 
+\f1\i pin
+\f0\i0  is merely a selector which can be used to subdivide messages.\
+\
+So, the above is embellished as:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <$Scr_Ps::0>
+\f3\fs22 <div id="topLevel">\
+  <input type="file" id="part1" onchange="sendMessageToPart2(\'85)>\'85</input>\
+  <p id="part2"></p>\
+  <wire> \
+    <sender ref="[part1,'fileObject']" />\
+    <receiver ref="[part2,'displayText']" />\
+  </wire>\
+</div>\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+Note that a wire can have zero (0) receivers.  This is named {\field{\*\fldinst{HYPERLINK "scrivcmt://8E6F963B-E369-4F4B-82DD-ED9EE52C43C1"}}{\fldrslt NC}} (for No Connection).  An event that arrives at an NC is simply {\field{\*\fldinst{HYPERLINK "scrivcmt://D146AA01-F032-4D87-B32C-516C00725E97"}}{\fldrslt ignored (dropped)}}.\
+\
+Note, also, that the wiring table (routing table) is stored in the 
+\f1\i parent
+\f0\i0  {\field{\*\fldinst{HYPERLINK "scrivcmt://691F9ED0-5F2C-4498-BC62-75F8BF07A8D4"}}{\fldrslt 
+\f1\i schematic}} (div) and not in the children.  The children \ul must\ulnone  not communicate directly with one {\field{\*\fldinst{HYPERLINK "scrivcmt://530814E3-D809-443B-8CE0-6A3F88975159"}}{\fldrslt another.}}  This is an important design principle for maintaining architectural flexibility, e.g. an architecture can be 
+\f1\i reused
+\f0\i0  by simply changing the wiring table.  \
+\
+The pseudo-code above shows "sendMessageToPart2" which directly names "part2".  This, in my opinion, is bad {\field{\*\fldinst{HYPERLINK "scrivcmt://3EFD3D85-4B1C-46F2-BB5F-22C40E9E3077"}}{\fldrslt practice}}.  The above example is meant as a stepping-stone between current practices and better componentization.  A further rewrite that avoids this problem is:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <$Scr_Ps::0>
+\f3\fs22 <div id="topLevel">\
+  <input type="file" id="part1" onchange="sendChanged()">\'85</input>\
+  <p id="part2" onreact="display()"></p>\
+  <wire> \
+    <sender ref="[part1,'changed']" />\
+    <receiver ref="[part2,'displayText']" />\
+  </wire>\
+</div>\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+where "sendChanged()" is a JavaScript routine, associated with the 
+\f1\i input file
+\f0\i0  component, that sends the File {\field{\*\fldinst{HYPERLINK "scrivcmt://D08A01C6-899B-472F-9A3A-921275462616"}}{\fldrslt object}} to its own "changed" 
+\f1\i pin. 
+\f0\i0 Note that, in this case, the 
+\f1\i input file
+\f0\i0  component doesn't know, nor need to know, where its output message will be routed, it simply 
+\f1\i send()s
+\f0\i0  a message to one of its own 
+\f1\i pins
+\f0\i0 .  The data (the File object) will arrive at part2 with the 
+\f1\i pin
+\f0\i0  tag 'displayText'.  This is specified by the 
+\f1\i wire
+\f0\i0  in the routing table of "topLevel".  All messages to "part2" will invoke the JavaScript routine "display(\'85)" using events of the form \{pin, data\}, which in this case will be \{'displayText',
+\f1\i  fileObject
+\f0\i0 \}.\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\i \cf0 Detail: [skip on first reading] - the "onchange" event is defined by HTML.  "Onreact", though, is a custom event.}

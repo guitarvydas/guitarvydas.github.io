@@ -1,0 +1,155 @@
+<html>
+
+<head>
+<title>Scalability</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="itemTextStart">Complexity is not the problem.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTextStart">There is no silver bullet.<span class="Apple-converted-space">  </span>There are many silver bullets.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTextStart">Further explanation:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The main problem in software design is scalability.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We want to "plug" pieces tother like LEGO blocks.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Better scalability implies fewer dependencies.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Early hardware people got this "right".<span class="Apple-converted-space">  </span>They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Chips were black boxes.<span class="Apple-converted-space">  </span>They had a set of input/output pins.<span class="Apple-converted-space">  </span>The insides of the chips were inscrutable - encased in opaque epoxy.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Nothing leaked ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Insidious Form of Dependency</p>
+<p class="itemText">Dependency: An insidious form of dependency that is overlooked is the "dynamic call chain" created by using a (usually hidden) stack to store state and return addresses between function invocations.<span class="Apple-converted-space">  </span>This dependency must be broken if software is to scale to new heights.<span class="Apple-converted-space">  </span>Breaking this kind of dependency requires Concurrency.<span class="Apple-converted-space">  </span>Concurrency, currently, has a bad name (i.e. it is thought to be a "hard" problem) because it has been tangled up with Time Sharing and Operating Systems.<span class="Apple-converted-space">  </span>Most application...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Old Reality vs. New Reality</p>
+<p class="itemText">Old reality - The old reality was: limited memory and one CPU (hence, the name "Central Processing Unit").<span class="Apple-converted-space">  </span>In this reality, it was reasonable to simulate concurrency and have one stack per process.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">New reality - Huge amounts of memory and many processors (none of those being "Central").<span class="Apple-converted-space">  </span>In this reality we can afford to have multiple stacks (e.g. one for each type) and use SEND() for every kind of data movement (displacing function parameters, return values, exceptions, all of which came about...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Measuring Isolation</p>
+<p class="itemText">Measuring early successes at isolation:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• No need for make</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• No need for any package managers</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• No need for tools like AutoConfig.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Manuals that are only one page long.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Other measures:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- Using a hierarchy of DSLs to solve a given problem.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- Breaking out of a text-only syntax mentality, using DaS (Diagrams as Syntax).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

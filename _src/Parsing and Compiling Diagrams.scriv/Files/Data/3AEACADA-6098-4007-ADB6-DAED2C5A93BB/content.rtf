@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+\f3\froman\fcharset0 Palatino-Roman;\f4\fnil\fcharset0 Menlo-Italic;\f5\froman\fcharset0 Palatino-Bold;
+\f6\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::0>
+\f1\fs22 The algorithm for handling ports is a subset of the main algorithm.  Port handling is described below.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><!$Scr_Ps::0><$Scr_Ps::1>
+\f2\b\fs26 Scanning\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f3\fs26 \
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::0>
+\f1\fs22 During scanning, we know that each line has a port at its beginning and a port at each end.  We don\'92t yet know what the port is attached to or if it is an N/C (no connection.\
+\
+During scanning, we attach a port to each end of the line, and, since all lines are arrows, we can also assign a \'93direction\'94 (source (output) or sink (input)) during this pass.  For example, each line has the following 
+\f4\i facts
+\f1\i0  entered into the 
+\f4\i factbase
+\f1\i0 : an new id for the line, a source port (output port), a bounding box for the port based on (x1,y1) of the line and a sink port (input port).\
+\
+The bounding boxes for the ports are \'93invented\'94 at scan time.  These \'93invented\'94 ports are made to be 40 pixels on all sides.\
+\
+The 
+\f4\i facts
+\f1\i0  appear in the 
+\f4\i factbase 
+\f1\i0 as:\
+\
+  line(new-id).\
+\
+  % port at line beginning\
+  source(line-id,begin-id).\
+  eltype(begin-id,'port').\
+  bounding_box_left(begin-id,(x1 - 20)).\
+  bounding_box_top(begin-id,(y1 - 20)).\
+  bounding_box_right(begin-id,(x1 + 20)).\
+  bounding_box_bottom(begin-id,(y1 + 20)).\
+\
+  % port at line end\
+  sink(line-id,end-id).\
+  eltype(end-id,'port').\
+  bounding_box_left(end-id,(x2 - 20)).\
+  bounding_box_top(end-id,(y2 - 20)).\
+  bounding_box_right(end-id,(x2 + 20)).\
+  bounding_box_bottom(end-id,(y2 + 20)).\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><!$Scr_Ps::0><$Scr_Ps::1>
+\f5\b\fs26 Parsing\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f3\fs26 \
+In \'93make_unknown_port_names\'94, we find all pieces of text that have not yet been associated with any Parts (rectangles).  This includes all text that consist only of digits (i.e. port indices).  Each of these pieces of text are given an \'93unassigned(TextID)\'94 
+\f6\i fact
+\f3\i0 .\
+\
+In \'93create_centers\'94 we assign \'93center_x(ID,N)\'94 and \'93center_y(ID,N)\'94 
+\f6\i facts 
+\f3\i0  to all unassigned pieces of text and all ports (eltype(ID,port)).\
+\
+In \'93calculate_distances\'94 we create a distance vector from every port to every unassigned piece of text (this is inefficient but works in the POC. Maybe there is a better way).  In this particular case, I decided to create a new Object called a Join with a unique ID.  A unique \'93join_centerPair\'94 is created for every Port.  Each join_centerPair has two 
+\f6\i facts 
+\f3\i0 created for it - \'93join_distance(Join_centerPairID, TextID)\'94 and \'93distance_xy(Join_centerPairID,Distance)\'94.  The former connects the Port to 
+\f6\i one
+\f3\i0  unassigned piece of text and the latter gives the distance between the Port and the 
+\f6\i one
+\f3\i0  unassigned piece of text.  Again, there might be more efficient ways to express this connection.\uc0\u8232 \u8232 <$img:CenterPairs>\u8232 
+\f6\i Figure: <$n:figure:CenterPairs>
+\f3\i0 \
+\
+In \'93assign_portnames\'94 (finally), for each port, we find the unassigned piece of text that is closest to the given port and associate the port and the text via a portIndex 
+\f6\i fact.  
+\f3\i0 Furthermore, we associate the text with a back-pointer 
+\f6\i fact
+\f3\i0  \'93portIndexByID\'94.  Historically, we create two more facts that mirror this two-way association with \'93portName\'94 and \'93portNameByID\'94 for pieces of text that are not numeric.  Historically, we started out with textual port names.  Later, we discovered that every port needs an index (for the coder pass) and made a new convention that insists that 
+\f6\i every
+\f3\i0  port must have an index and that only some ports may have names.  We currently ignore textual port names.  In the future, I may return to using textual names for ports while automatically creating numeric indices for ports.\
+\
+In the two-Part pipeline, \'93markIndexedPorts\'94 and \'93coincidentPorts\'94, I implement fan-out and fan-in.  I find all ports that overlap each other and assign the same index to all of those Ports. \
+\
+The Part \'93mark_directions\'94 is a no-op for this POC compiler.  In some editors, the direction of lines is not specified.  In such cases, lines might be made up of segments with no direction associated with them.  In such cases, the compiler needs to trace all connected segments to find the ultimate beginnings (sources) and ends (sinks) of the lines and create a virtual directed line between the beginning and end Ports.  In this POC, we use Draw.IO, and use the convention that all lines (wires) use Draw.IO\'92s arrows.  Draw.IO arrows already provide direction information, so \'93mark_directions\'94 is a no-op in this case.}

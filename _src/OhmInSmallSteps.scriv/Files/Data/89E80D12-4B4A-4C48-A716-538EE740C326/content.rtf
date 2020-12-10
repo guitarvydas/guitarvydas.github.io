@@ -1,0 +1,27 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 IDEAS\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 Ohm-JS does not parse anything but single characters.\
+\
+In an ideal situation, we would want to parse "tokens".\
+\
+Tokens would provide:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}separation between Syntactic entities - when we ignore spaces, we would still have (delimited) tokens, for example, in the scanner pass (the very first pass), we would recognize identifiers.  If we had tokens, the scanner would emit 3 tokens for: abc<space>def - token(identifier, "abc"), token(spaces," "), token(identifier, "def").  In later passes, we could ignore spaces and still see distinct identifiers, e.g. token(identifier,"abc"), token(identifier,"def").  In the current version of Ohm-JS, the string abc<space>def is recognized as a single token, when spaces are ignored, e.g. "abcdef".  Maybe this problem just needs more thought\'85\
+{\listtext	\uc0\u8226 	}extra information, such as line#, character position and filename, e.g. token(identifier, "abc", line=10, startPosition="3", filename="sample.txt").\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+The above could be accomplished by using distinguished strings, for example "!!!<token identifier abc \'85 !!!>".  The "problem" with this solution is that strings are not terminals and, hence, there is no automatic backtracking.\
+Maybe we could use Unicode characters instead of distinguished strings?  For example "\'86 identifier abc \'85 \'ae".  JS purportedly supports unicode characters, so, in theory, Ohm-JS should be able to parse them, with backtracking.  Is this worth it?  Maybe the whole issue is moot?}

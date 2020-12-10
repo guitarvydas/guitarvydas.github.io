@@ -1,0 +1,28 @@
+#!/bin/bash
+./debug-entry $0
+
+filename=pin_$RANDOM
+content=pin_$RANDOM
+
+find ../_new -mindepth 1 -maxdepth 1 -iname '*' | while read targetMaybeWithBlanks
+do
+    base=`basename "${targetMaybeWithBlanks}"`
+    if [ ".DS_Store" == "${base}" ]
+    then   
+	echo "skipping [\"${targetMaybeWithBlanks}\"]"
+    else
+	echo "scrivener to jekyll [\"${targetMaybeWithBlanks}\"]"
+	rm -f "${filename}" "${content}"
+	mkfifo "${filename}"
+	mkfifo "${content}"
+
+	./scrivener-to-jekyll 3<"${filename}" 4<"${content}" &
+	
+	echo "${targetMaybeWithBlanks}" >"${filename}" &
+	echo "don't care" >"${content}" &
+	
+	wait
+    fi
+done
+
+./debug-exit $0

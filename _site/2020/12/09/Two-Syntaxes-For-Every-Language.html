@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Two Syntaxes For Every Language</title>
+  <meta name="CreationTime" content="2020-12-09T15:21:24Z">
+  <meta name="ModificationTime" content="2020-12-09T15:21:24Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -18.0px; font: 10.0px Times}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Times}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: decimal}
+    ol.ol2 {list-style-type: lower-alpha}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">There is a class of error that is well understood and can be detected by automation.</p>
+<p class="p2"><br></p>
+<p class="p1">This class of errors is known as “syntax errors”.</p>
+<p class="p2"><br></p>
+<p class="p1">For this to work,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> the input language must contain <i>syntax </i>in the form of <i>syntactic sugar</i>.</p>
+<p class="p2"><br></p>
+<p class="p1">There are, at least, two kinds of syntax errors:</p>
+<p class="p2"><br></p>
+<ol class="ol1">
+  <li class="li1"><span class="Apple-converted-space"> </span>1.<span class="Apple-tab-span">	</span>simple typos</li>
+  <li class="li1"><span class="Apple-converted-space"> </span>2.<span class="Apple-tab-span">	</span>deeply nested constructs with incorrect nestings.</li>
+</ol>
+<p class="p2"><br></p>
+<p class="p1">There are, at least, two kinds of programming languages:</p>
+<p class="p2"><br></p>
+<ol class="ol2">
+  <li class="li1"><span class="Apple-converted-space"> </span>a)<span class="Apple-tab-span">	</span>Those that provide syntactic sugar that allows syntax errors to be detected</li>
+  <li class="li1"><span class="Apple-converted-space"> </span>b)<span class="Apple-tab-span">	</span>Those that eschew syntactic sugar and do not provide (much, if any) syntactic sugar.</li>
+</ol>
+<p class="p2"><br></p>
+<p class="p1">Languages in class (a) typically come from the Algol (Pascal) lineage where most structured constructs are clearly delimited by end phrases.<span class="Apple-converted-space">  </span>For example, languages that provide “if ... end if” fall into what I call class (a).</p>
+<p class="p2"><br></p>
+<p class="p1">Languages like Common Lisp and C fall into what I call class (b).<span class="Apple-converted-space">  </span>In C, an “if” statement ends with a single character “}” and constructs like “for” end with the same symbol “}”.<span class="Apple-converted-space">  </span>In Common Lisp, all constructs end with the character “)”.<span class="Apple-converted-space">  </span>It is impossible to know what “}” and “)” pertain to, except by scanning backwards to find the beginning of the corresponding construct.<span class="Apple-converted-space">  </span>This is harder if the construct is deeply nested and if the beginning of the construct is off-screen (or outside of the window).<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">Shallow solutions to this symptom (b) have included attempts to make pretty printers and to embed them into code editors. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">With the advent of better and better code optimizations (including functional alpha and beta substitution), the editor-debugger combination cannot easily display, correctly, the various constructs.</p>
+<p class="p2"><br></p>
+<p class="p1">Syntactic correctness is important when the code is freshly minted (newly written, alpha-level, not tested yet).</p>
+<p class="p2"><br></p>
+<p class="p1">In such cases, automation, in the form of syntax checking, can help weed out this class of errors.</p>
+<p class="p2"><br></p>
+<p class="p1">In later stages of coding, syntax checking becomes less important. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">At later stages, a programmer becomes less concerned with syntactic correctness of the code (since it has already been checked) and more concerned with expression of the algorithms being used. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">In even later stages, programmers new to the code (e.g. Msaintenance Engineers) explore the (already-working) code and try to understand it.</p>
+<p class="p2"><br></p>
+<p class="p1">Those who favour languages in class (b) tend to be programmers who place more importance on the later stages of coding and maintenance.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">It was believed that designing programming languages was a hard problem. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">This is no longer the case.</p>
+<p class="p2"><br></p>
+<p class="p1">It was believed that processing time was valuable.<span class="Apple-converted-space">  </span>This affected programming language design – all languages were created with a <i>single</i> syntax.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">A solution to the apparent dichotomy of syntax checking via syntactic sugar vs. deeper understanding is to provide two (2) syntaxes for every language – a <i>writing syntax</i> and a <i>reading syntax</i>.</p>
+<p class="p2"><br></p>
+<p class="p1">The <i>writing syntax</i> would contain syntactic sugar such as “end if”.</p>
+<p class="p2"><br></p>
+<p class="p1">The <i>reading syntax</i> would contain no syntactic sugar and would conserve screen real-estate to allow for easier understanding of details.</p>
+<p class="p2"><br></p>
+<p class="p1">In some cases, syntactic sugar could help maintainers understand the structure of unfamiliar code.<span class="Apple-converted-space">  </span>Programming editor(s) could assist the human reader (developer, maintainer) by switching between <i>writing </i>and <i>reading</i> syntaxes on command.</p>
+<p class="p2"><br></p>
+<p class="p1">DSLs could be used to restructure programmers’ workflows, e.g. a front-end DSL could perform syntax checking and generate syntactic-sugar-free source code for later understanding and processing.</p>
+<p class="p2"><br></p>
+<p class="p1"><i>Divide and conquer</i> means that once some aspect of a problem is understood, that aspect should be chopped off and isolated, leaving a “simpler” problem to be solved.<span class="Apple-converted-space">  </span>When it comes to language design, we can apply <i>divide &amp; conquer.</i></p>
+<p class="p2"><i></i><br></p>
+<ol class="ol1">
+  <li class="li1"><span class="Apple-converted-space"> </span>1.<span class="Apple-tab-span">	</span>We already know how to detect one class of problems in a language.<span class="Apple-converted-space">  </span>It is well-understood how to create syntax and parsers for a reasonable set of programming languages, and<span class="Apple-converted-space"> </span></li>
+  <li class="li1"><span class="Apple-converted-space"> </span>2.<span class="Apple-tab-span">	</span>The rest of language processing remains a “hard” problem. <span class="Apple-converted-space">  </span>[In fact, the problem of generating good, portable code was explored and is also well-understood.<span class="Apple-converted-space">  </span>What’s left?<span class="Apple-converted-space">  </span>Maybe we already know how to make semantic sense of a program (e.g. Denotational Semantics)?<span class="Apple-converted-space">  </span>Most previous attempts tried to solve the <i>whole</i> problem in a <i>single</i> notation.<span class="Apple-converted-space">  </span>Peter Lee<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> and Uwe Pleban made interesting progress on these fronts, but tried to define all passes using a single tool instead of using multiple tools and multiple paradigms.]</li>
+  <hr>
+  <p class="p3"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>For automatic detection of syntax errors.</p>
+  <p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 I've reached the point where I need to consider how every kind of Scheme expression should be transpiled into valid - and meaningful - JS.  This is call "semantics".\
+\
+First, let's look at (quote \'85).  What does it mean in JS?\
+\
+'() needs to become an empty list.  In JS, I can convert that to an empty array "[]", or I can define a class called List and call "new" on it.\
+\
+Let's choose the List class solution.\
+\
+I have constructed a pattern matcher (aka parser) for Scheme.  I can simply add a pattern for '() to the matcher and have it convert '"()" into "new List()".\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\i \cf0 [breaking news: I change this decision, later, near the end and I use Cons() instead of List().  Again, divide and conquer means not having to care until you have to care.  Glossing over details is a good design choice. PROLOG itself is a good example - we know how to write nested loops, but the details of looping discourages higher level thinking.  Using PROLOG, we are allowed to think in terms of relations instead of in terms of looping details + relations.  I argue that most programming languages shackle us in details instead of allowing us to think at higher levels (much like C/Pascal broke the strangle-hold on designers, who had to express everything in assembler)].
+\f0\i0 \
+\
+}

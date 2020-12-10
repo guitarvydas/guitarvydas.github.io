@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\deftab709
+\pard\pardeftab709\partightenfactor0
+
+\f0\fs24 \cf0 A DSL is best built as a hierarchy.\
+\
+At the \'93leaf nodes\'94 of the hierarchy are characters (or better yet, {\field{\*\fldinst{HYPERLINK "scrivcmt://9CD74F5B-89B1-4976-8C93-3B00DE7CFC55"}}{\fldrslt glyphs).}}\
+\
+Leaf nodes are collected into composite structures, called 
+\f1\i tokens
+\f0\i0 .\
+\
+A language (and a DSL) is composed of layers.  At each layer, a certain set of tokens is parsed and transpiled into another set of tokens.\
+\
+An 
+\f1\i unparser
+\f0\i0  is a layer processor.  It takes a set of tokens and emits them as a simpler set of tokens.  For example, we might construct a tree representing a Scheme program, then unparse it into a JavaScript program.\
+\
+
+\f1\i [I have begun using the term SCL - Solution Centric Language - instead of DSL.  An SCL is a DSL, but is more specific.]}

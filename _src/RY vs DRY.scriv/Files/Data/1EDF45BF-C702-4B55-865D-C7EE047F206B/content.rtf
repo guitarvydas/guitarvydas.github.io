@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+\f3\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 RY vs. DRY\
+\pard\pardeftab709\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2 \
+DRY means \'93Don\'92t Repeat Yourself\'94.\
+\
+The wisdom in DRY is that subsuming all similar {\field{\*\fldinst{HYPERLINK "scrivcmt://D4FD8D7A-2D6B-489E-A318-19E47FE5104A"}}{\fldrslt code}} into one routine ensures that subsequent fixes/changes affect all uses of that particular code.\
+\
+DRY is a 
+\f3\i maintenance
+\f2\i0  
+\f3\i engineering
+\f2\i0  issue.\
+\
+But, it 
+\f3\i makes sense
+\f2\i0  to repeat yourself when 
+\f3\i designing
+\f2\i0  a system.  Repetition & cloning are ways to compose ideas into solutions.\
+\
+Additionally, abstraction is not at the top of mind of \'93normal\'94 people.  Abstraction is taught \'96 as a technique \'96 in computer science school.\
+\
+RY is a design issue.\
+\
+DRY \'96 and abstraction \'96 should be automated.  This is already done with Git, but in-the-small.  We need to extend our automation facilities to detect instances of RY at the design level (code level, if you {\field{\*\fldinst{HYPERLINK "scrivcmt://AE136F3F-A732-45DD-812B-59E2855C3A18"}}{\fldrslt will).}}  \
+\
+Much of RY can be converted into DRY using edit scripts.  The unsolved part is that of detecting RY that can be collapsed into DRY routines.\
+\
+We see CSE technology \'96 common subexpression elimination \'96 used in compilers (see the Dragon Book).\
+\
+Paul Bassett\'92s Frames {\field{\*\fldinst{HYPERLINK "scrivcmt://1C9BCB57-27E0-4B11-9E87-A3456CC2D2C6"}}{\fldrslt technology}} attacked RY in a different way.  Frames saw light as a product in the company Netron.  Netron\'92s product was used in some banks. \
+\
+From my very light understanding, NiCad (Cordy, Roy) might be related.\
+\
+All of the bits and pieces are in place for automated DRY...}

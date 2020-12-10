@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Javascript Concurrency</title>
+  <meta name="CreationTime" content="2020-12-09T15:10:25Z">
+  <meta name="ModificationTime" content="2020-12-09T15:10:25Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    span.s1 {font: 12.0px Times}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h1 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 18.0px Helvetica"><b>JavaScript Concurrency</b></h1>
+<p class="p2"><br></p>
+<p class="p3">JavaScript supports <i>closures.</i></p>
+<p class="p2"><i></i><br></p>
+<p class="p3">Closures form the basis for <i>concurrency.<a id="fnlink1"></a></i><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p2"><i></i><br></p>
+<p class="p3">In a <i>concurrent</i> design, all routines are <i>closures</i>, except one distinguished routine – the <i>dispatcher</i> – that invokes closures “at random”.</p>
+<p class="p2"><br></p>
+<p class="p3">Closures communicate with each other solely through message queues.<span class="Apple-converted-space">  </span>Yes, I am describing a message passing architecture.<span class="Apple-converted-space">  </span>We have a prejudice against message passing, assuming that message passing fails<span class="Apple-converted-space">  </span>This prejudice is based on the idea that message-passing is used to build a flat system.<span class="Apple-converted-space">  </span>The way to tame message passing is the same way that GOTOs were tamed – through the use of structured isolation<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> and hierarchy.</p>
+<p class="p2"><br></p>
+<p class="p3">Flat-<i>anything</i> is bad.<span class="Apple-converted-space">  </span>Flat-<i>anything </i>results in spaghetti.<span class="Apple-converted-space">  </span>Global variables were bad because they were “flat”.<span class="Apple-converted-space">  </span>Local variable scoping solved that problem.<span class="Apple-converted-space">  </span>A flat type-system is bad (have we recognized this fact yet?).<span class="Apple-converted-space">  </span>A flat function space is bad (we’ve been playing whack-a-mole with packaging, packaging systems, imports, exports, etc., trying to fix this problem).<span class="Apple-converted-space">  </span>Flat data is bad.<span class="Apple-converted-space">  </span>We tried to fix this problem with<span class="Apple-converted-space">  </span>OO.</p>
+<p class="p2"><br></p>
+<p class="p3">That’s it – to implement concurrency in JS, you need closures, message queues and a dispatcher.<span class="Apple-converted-space">  </span>A good dollop of hierarchical organization will help.</p>
+<p class="p2"><br></p>
+<p class="p3">(See my essay on <i>isolation.<span class="Apple-converted-space">  </span></i>See my essay on simple systems).</p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Note that <i>concurrency </i>and <i>parallelism</i> are not the same things.<span class="Apple-converted-space">  </span>See Rob Pike’s talk “Concurrency is not Parallelism”.<span class="Apple-converted-space">  </span>Concurrency is a programming paradigm.<span class="Apple-converted-space">  </span>Parallelism is a solution that requires the use of the concurrent paradigm.<span class="Apple-converted-space">  </span>Parallelism requires concurrency, but not the reverse – concurrency does not imply parallelism.</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>Nesting, scoping, etc.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Note that it is hard(er) to implement filters as shown in Fig. <$n:figure:lowLevelFilters> using only 
+\f1\i functions.
+\f0\i0 \
+\
+The boxes emit two kinds of objects (good {\field{\*\fldinst{HYPERLINK "scrivcmt://DB486D60-773E-4D57-BDEE-5A8966C09E87"}}{\fldrslt output}} and errors), but could emit many different kinds of objects.  Functions {\field{\*\fldinst{HYPERLINK "scrivcmt://A5526F86-9EA1-47F0-B061-4361FCD9584F"}}{\fldrslt 
+\f1\i return}} only one object.\
+\
+These boxes emit objects at various times.  For example, the UNIX Line filter might need to wait for 80 bytes before seeing a {\field{\*\fldinst{HYPERLINK "scrivcmt://0088AD4F-ACF1-4501-AB88-C446F71E7D78"}}{\fldrslt line-feed}}.  It emits a full line only after it has seen all bytes that belong to that line.  It waits and SENDs nothing until it has sees all {\field{\*\fldinst{HYPERLINK "scrivcmt://C9C09BC5-B1DB-421B-B62F-C012F435F02C"}}{\fldrslt 80}} bytes.  If the UNIX Line filter contains a buffer that overflows, it can emit an {\field{\*\fldinst{HYPERLINK "scrivcmt://A5FEA16B-5716-41C1-8C3A-C29297DE4A8E"}}{\fldrslt error}} at a 
+\f1\i random 
+\f0\i0 time.\
+\
+}

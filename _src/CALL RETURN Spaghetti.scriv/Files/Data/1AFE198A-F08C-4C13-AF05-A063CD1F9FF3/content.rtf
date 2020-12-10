@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Most modern languages provide the concept of {\field{\*\fldinst{HYPERLINK "scrivcmt://D3D054B7-EF53-497E-AA7B-749F556EC8EC"}}{\fldrslt 
+\f1\i closures
+\f0\i0 .}}  Closures might be called 
+\f1\i anonymous functions, 
+\f0\i0 or 
+\f1\i callbacks,
+\f0\i0  or be embedded in concepts such as 
+\f1\i futures
+\f0\i0 , etc.\
+\
+Even C has a way to make 
+\f1\i closures,
+\f0\i0  using function pointers.\
+\
+The minimum closure required by this system requires some static, but not exported, data, and a temporary {\field{\*\fldinst{HYPERLINK "scrivcmt://4D9CC6BC-4845-4714-AE64-06CFE90CF31B"}}{\fldrslt stack}}.  N.B. one stack, for the complete system, is {\field{\*\fldinst{HYPERLINK "scrivcmt://A8175897-2E8A-48B8-B8B8-13BDDC9D2C38"}}{\fldrslt enough}}.\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "scrivcmt://D3342650-63F0-4DA5-9AA3-7CC12F03EEDF"}}{\fldrslt \cf0 OO}} Objects and Blocks are very close, in principle, to the ideas expressed here.  The difference is that I specify 
+\f1\i closures
+\f0\i0  that run asynchronously whereas OO uses Objects that perform synchronous 
+\f1\i call-return 
+\f0\i0 and explicit naming of receivers
+\f1\i .  
+\f0\i0 I recommend that 
+\f1\i closures
+\f0\i0  send messages to their parents and do \ul not\ulnone  refer to each other directly.\
+\
+In my opinion, and experience, creating separate stacks for each 
+\f1\i closure
+\f0\i0  and using MMUs is overkill.  I don't wish to use time-sharing in my programs.  I might use time-sharing if I were to build an operating {\field{\*\fldinst{HYPERLINK "scrivcmt://C0ECC115-E213-42A0-B665-4E58DD6D356E"}}{\fldrslt system.}}\
+\
+If one imagines that 
+\f1\i closures
+\f0\i0  contain state-machines, then, this method could be considered to be a system of \ul communicating state machines\ulnone .   I think in terms of {\field{\*\fldinst{HYPERLINK "scrivcmt://E6557382-BEB8-4368-A877-25D7A5F3F0A5"}}{\fldrslt \ul clockwork}}.}

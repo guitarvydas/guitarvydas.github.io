@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+## inputs:
+## filename (fd 3)
+## go (fd 4)
+#
+## outputs:
+## prefix (fd 5)
+#
+./debug-entry "[$1] $0"
+
+read filename </dev/fd/3
+read go </dev/fd/4
+
+if [ "go" == "${go}" ]
+then
+    prefix=`date "+%Y-%m-%d"`
+    # error check needed here - filename should not be "" at this point
+    creation_time=`grep "<meta name=\"CreationTime\"" "${filename}"`
+    if [ ! -z "${creation_time}" ]
+    then
+	prefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(2020-..-..\)T..:..:..Z">/\1/'`
+    fi
+    echo "${prefix}" >/dev/fd/5
+else
+    echo "???" >/dev/fd/5
+fi
+./debug-exit "[$1] $0"
+

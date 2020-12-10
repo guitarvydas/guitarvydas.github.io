@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Programming Languages Are Skins</title>
+  <meta name="CreationTime" content="2020-12-09T15:14:38Z">
+  <meta name="ModificationTime" content="2020-12-09T15:14:38Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h1 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 18.0px Helvetica"><b>Programming Language are Skins</b></h1>
+<p class="p2"><br></p>
+<p class="p3">Languages are just <i>skins</i> for paradigms.</p>
+<p class="p2"><br></p>
+<p class="p3">Each language should have (IMO) two syntaxes – one for writing and one for reading.<span class="Apple-converted-space">  </span>The differences can be subtle and are influenced by the biases of the language creator.</p>
+<p class="p2"><br></p>
+<p class="p3">One extreme is Lisp – <i>readable – </i>after successful compilation.</p>
+<p class="p3">The other extreme is Pascal – <i>writable.</i></p>
+<p class="p2"><i></i><br></p>
+<p class="p3">Important paradigms:</p>
+<ul class="ul1">
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">search with backtracking</span> – examples: PROLOG, miniKanren, Nils Holm’s PROLOG in 6 Slides</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">pipelines</span> – isolation</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Functional</span> – Haskell, Clojure, early Lisp, CPS (supported by Lisp and JS)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">assembler</span> – Lisp, JS – possible to program in any paradigm without being forced in one direction or another</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">OO</span> (Object Oriented) – Smalltalk is the classic example, a form of code editing that emphasizes DRY – copying super-classes into final code results in no semantic differences, just DRY ; could be replaced by a smarter editor or edit script (see Paul Bassett’s Frames technology)<span class="Apple-converted-space"> </span></li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">ownership</span> – FBP, (flow-based programming), Rust</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">early typing</span> – strongly typed languages like Haskell</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">late typing</span> – early Lisp (before Common Lisp), interpreted Common Lisp, BASIC, etc.</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">coordination</span> – FBP, Linda, Bash, closures, cl-event-passing, etc.</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">concurrent</span> – concurrency is a paradigm, concurrency is a prerequisite for parallelism</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">looping, recursion</span> – not suitable for distributed apps, suitable for component apps</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">sequential</span> – very common. CALL / RETURN, not suitable for distributed apps</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">asynchronous</span><span class="Apple-converted-space">  </span>- operating systems (e.g. Linux, MacOSX, Windows), closures with a dispatcher</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">time-sharing</span> – needed by only a few apps (e.g. operating systems), but supplied in almost every threading library (=accidental complexity, =overkill)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">multiple-stage execution</span> (compiler --&gt; linker --&gt; executable)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">single-stage execution</span> (interpreter)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">waterfall</span> <span class="s2">development</span> – assumption that “it” will work, rigor = waterfall, strong typing = waterfall (assumption that the given type system will be what is needed)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">iterative development</span> – assumption that “it” will fail, assume that you don’t know the answer and need to develop the answer.<span class="Apple-converted-space">  </span>This leads to the conclusion that everything must be automated – it won’t work the first time and will need to be tweaked ; automation costs “up front”, but, saves time when tweaking.<span class="Apple-converted-space">  </span>This leads to the concept of D.I. (Design Intent) – succinctly say what was intended, then automate the solution into a DSL – it won’t work the first time, so you need to be reminded of what you <i>thought</i> you were doing and you need to fix that thinking as rapidly as possible.<span class="Apple-converted-space">  </span>When is it “good enough”?<span class="Apple-converted-space">  </span>If you don’t know what you were doing, then using rigor to implement the wrong solution leads to too many details and long rework times.<span class="Apple-converted-space">  </span>If the Intention is wrong, it doesn’t matter how rigorously (provably) it is implemented.<span class="Apple-converted-space">  </span>Rigor is useful only after the Design has been proven to solve the problem that it was supposed to solve.</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – DRY – a good edit script can accomplish all DRY</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – subroutines</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – modules for data-hiding – C already had this in 1970’s ; see closures</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – memory management – Garbage Collection – already existed in early Lisps (late 1950’s)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – assign-once variables – why do we need variables and variable names, if they are assigned only once?<span class="Apple-converted-space">  </span>Type names should be enough esp. when type synonyms exist. <span class="Apple-converted-space"> </span></li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – types – why are objects of different types put on the same stack?</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – syntax – why only 1 syntax per language? Why is syntax restricted to rigid grids of NxM bitmaps (aka “characters”)?<span class="Apple-converted-space">  </span>Why not overlap?<span class="Apple-converted-space">  </span>Why not diagrammatic figures?</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Abstraction</span> – VLSI chips with limited number of I/O pins.</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Encapsulation</span> – not enough – encapsulates data, but smears control-flow</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Isolation</span> – UNIX processes (encapsulate data AND control flow)</li>
+  <li class="li3"><span class="s1">•<span class="Apple-tab-span">	</span></span><span class="s2">Error Reporting</span> – good == Elm, hostile == JS</li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="CEDB68AA-15D5-47BE-8C03-1BDCB84116F8">
+            <Title>Sequencing All-Server</Title>
+        </Document>
+        <Document ID="07A72922-8B81-4B92-B29E-48F9603574C5">
+            <Title>Sequencing All-FP (Functional Programming)</Title>
+        </Document>
+        <Document ID="66013A5D-F38C-4968-823E-60B80CB9D0EB">
+            <Title>Sequencing All-FBP (Flow Based Programming)</Title>
+        </Document>
+        <Document ID="D7ACFA45-8863-40B1-A059-D474E024056C">
+            <Title>Pull</Title>
+            <Text>#
+
+In a pull-based sequence, workers are arranged in a chain and respond to REQuests from downstream components.
+</Text>
+        </Document>
+        <Document ID="54E7511A-6EFF-45F0-9E50-16C4D74D86CF">
+            <Title>Sequencing All-Stack Based</Title>
+        </Document>
+        <Document ID="0B4991CC-54A8-4EF1-A239-2EFBC6C260AA">
+            <Title>Sequencing All-Hierarchy</Title>
+        </Document>
+        <Document ID="735B9880-B9A6-4C6F-B8CA-FA59893E2D21">
+            <Title>Sequencing All-Sequencer</Title>
+        </Document>
+        <Document ID="B1123F4F-ABC6-468A-8A22-38126343AFD3">
+            <Title>Sequencing All-Statement</Title>
+        </Document>
+        <Document ID="F8600888-6455-4F5F-A4B4-C89365BB0351">
+            <Title>Sequencing All-Preemption</Title>
+        </Document>
+        <Document ID="8029F04F-0D88-4D9F-A12D-ABAC98DCB1BD">
+            <Title>Sequencing All-Pull</Title>
+        </Document>
+        <Document ID="9D19CB2A-DD65-4B19-BC71-E9BBEFD8AA11">
+            <Title>Sequencing All-Hoare Monitors</Title>
+        </Document>
+        <Document ID="E7C3608B-81B3-4BA3-A80C-138AC8D564AD">
+            <Title>FBP (Flow Based Programming)</Title>
+            <Text>#
+
+Each component is a concurrent machine.  
+
+Concurrent machines communicate with one another via bounded buffers.
+
+Components have input and output ports that are connected to bounded buffers.
+
+Data flowing between components is called IPs (Information Packets).
+
+Components can read-from and write-to ports in a random manner.
+
+A component suspends if it attempts to send to an output port which has a full buffer.
+
+A component suspends if it attempts to read from an input port that has an empty buffer.
+
+FBP can route IPs in a feedback and feedforward manner.
+
+FBP is similar to FP, in that all state is contained in IPs.
+
+FBP can be used to construct filter pipelines, but FBP is more general in that it allows feedback and feedforward.  Unlike pipelines, FBP allows connections that "skip over" components in the chain and connections to components that come "earlier" in the chain.
+
+FBP systems have been, traditionally, simulated on top of preemptive sequencing.
+
+(See, also, https://groups.google.com/g/flow-based-programming/c/l5SkeB40iwE)
+
+(See also https://jpaulm.github.io/fbp/).
+
+</Text>
+            <Comments>Functional Programming
+Flow-Based Programming</Comments>
+        </Document>
+        <Document ID="A128CD7C-3B41-4249-8406-B9988800FF16">
+            <Title>Sequencing All-Handshake Protocol</Title>
+        </Document>
+        <Document ID="748B7968-E32A-4019-A5E4-31EDF4A6020B">
+            <Title>Reactive</Title>
+            <Text>#
+
+In the reactive pattern, components receive events (aka messages) and react to the messages.  
+
+Events (messages) are queued.
+
+One message is processed, fully to completion, before another message is taken from the input queue.
+
+ A reactive system is a system of concurrent components wherein every component processes events in a hierarchical pattern.
+
+Components are isolated from one another.
+
+Components can be implemented as composites or leaves.  
+
+It is not possible to discern how a component is implemented without looking inside the component.
+
+Components have multiple input ports and multiple output ports.
+
+Input events are queued (on a single queue) and a component processes an event to completion before processing another event.
+
+A leaf component processes an event using some other technology, e.g. by using a specific programming language.
+
+A composite component contains children components.  A composite component process input events by forwarding them to its children.  A composite component is considered "busy" if any of its children are busy.
+
+The reactive pattern is a realization of the divide and conquer paradigm.  A problem can be dissected into two components - the leaf and the rest (conquer and divide, resp.).
+
+</Text>
+            <Comments>Arrowgrams™ is the trade name of a reactive system that I am developing.</Comments>
+        </Document>
+        <Document ID="3012D2D3-CD05-483E-B670-39107AA83873">
+            <Title>Sequencing All-Sequencer</Title>
+        </Document>
+        <Document ID="AAB5EB7C-28BB-48A4-A344-54FCA904A068">
+            <Title>Sequencing All-Arrowgrams</Title>
+        </Document>
+        <Document ID="94B98716-B2D5-4124-A405-C77D9CE384C4">
+            <Title>Sequencing All-Flat Message Sending</Title>
+        </Document>
+        <Document ID="BAEB5D84-3A2B-4076-85DF-9846C6868755">
+            <Title>Stack</Title>
+            <Text>#
+
+Stack-based sequencing is the common form of CALL/RETURN.
+
+A routine transfers control to another routine and waits for it to complete its processing.
+
+The caller uses a stack - i.e. an optimized collection - to create a list of parameters to the callee, then leaves a breadcrumb (return address) on the stack.
+
+The callee performs processing and leaves a return value (usually a single value) and uses the stacked breadcrumb to return control to the caller.
+
+Stack based sequencing is caused by text-only syntax.
+</Text>
+            <Comments>The stack is an optimized Collection.  A stack is an Array allocated in "inexpensive" reusable, memory.  An Array is a Collection with most of the housekeeping details optimized away.  A Stack is an Array is a Collection with items stored in contiguous locations.  Early computer architectures, e.g. some IBM 360s, did not have hardware-supported stacks, and used special instructions, e.g. BALR, to create linked lists of optimized islands of memory.  The idea of scoping was conflated with memory and CPU optimization as was common in early forms of computing.
+A form of accidental complexity.</Comments>
+        </Document>
+        <Document ID="54B62A2B-A6C5-4C1E-BB02-815C5C22B440">
+            <Title>Sequencing All-Pull</Title>
+        </Document>
+        <Document ID="732CEBE3-6B16-42B2-A2F8-0E76010E7EA3">
+            <Title>SVG</Title>
+        </Document>
+        <Document ID="63C7CD7D-E255-4872-968B-B79ED0950942">
+            <Title>Introduction</Title>
+            <Text>Sequencing is an aspect of program design.  
+
+Sequencing describes the flow of control in a program, e.g. answering the question: when a program element executes, what element will be executed next? 
+
+Most languages encourage statement based sequencing.
+
+Another common sequencing style is the use of full preemption - threads of code execute in a synchronous (statement based) manner.  
+
+The operating system's dispatcher decides that a given thread should run.
+
+The use of synchronous sequencing is a design choice.  Other choices are possible.  I list some of the possible choices and attempt to draw diagrams of their flow.</Text>
+            <Comments>Denotational Semantics deals explicitly with generalized sequencing.</Comments>
+        </Document>
+        <Document ID="A4F7CAF2-6D11-4F94-8B07-B235CB553A37">
+            <Title>Sequencing All-BlockChain</Title>
+        </Document>
+        <Document ID="8F12E1B2-A5E1-4ED5-945A-D4C434DCE873">
+            <Title>Sequencing All-FP (Functional Programming)</Title>
+        </Document>
+        <Document ID="0A40D962-2A61-4175-A3AF-9951229B39B9">
+            <Title>Hoare Monitors</Title>
+            <Text>Hoare Monitors operate like the server sequencer, but do so in an environment where memory sharing and/or CPU minimization is employed.
+
+A monitor is a server and all other processes can be clients of the server.  "Requests" are made by calling routines that are protected by the monitor.  The O/S allows only one process to enter the monitor at a time, and all other requesting processes are suspended and placed on a queue, waiting for the monitor to become free.
+
+Processes inside the monitor could signal events to other (waiting) processes.
+
+The original manifestation of Hoare Monitors required a rendezvous between the process in the monitor and a process waiting on a monitor signal.
+
+The requirement for rendezvous was relaxed to allow deferred signals.
+
+See, also, "Server" for a discussion of the basic pattern.</Text>
+            <Comments>reduced number of CPUs needed - usually as an optimization in the face of costly CPU hardware
+The execution thread of the server is provided by the calling processes.
+Calling a routine in a monitor "lends" the caller's thread-of-execution to the "server" (aka monitor).
+Operating System
+e.g. in the Turing+ language</Comments>
+        </Document>
+        <Document ID="A18C6F4C-0D09-4C0E-AE8C-14847F70E9A3">
+            <Title>Sequencing All-BlockChain</Title>
+        </Document>
+        <Document ID="191AB8C3-DD72-45A4-8365-2EA7CE172DA5">
+            <Title>Flat Message Passing</Title>
+            <Text>#
+
+In message passing, every component has an input queue of messages.  All components are asynchronous and can process messages at different speeds.
+
+Flat message passing does not scale well to large systems (as is the case for anything that is designed in a flat manner).  Flat message passing can be tamed and scaled using hierarchical scoping.</Text>
+        </Document>
+        <Document ID="8360767A-05E0-4FD5-BCB3-254D795CBE24">
+            <Title>Filter Pipelines</Title>
+            <Text>#
+
+Filter pipelines form chains of routines.  Each routine in the chain has no side-effects, or its side effects are isolated from the rest of the system.
+
+Information flows strictly down the pipeline, e.g. from left to right.  Feedback loops do not exist.
+
+Pipeline sequencing has been implemented in:
+
+	•	Bash pipelines
+	•	FP filter chains
+	•	Smalltalk ";" operators
+	•	etc.
+
+In a filter pipeline pattern, the data flowing between components contains all of the state.
+
+(See, also, FBP, for a pattern of data flows which allows feedback).</Text>
+            <Comments>In memory-sharing systems.</Comments>
+        </Document>
+        <Document ID="1821F9AD-AC33-401C-BFF8-0A58EF2765E8">
+            <Title>Preemption</Title>
+            <Text>#
+
+In a preemption-based sequence, each worker is given a private memory space and stack.  A distinguished routine - the dispatcher - determines the order in which workers execute.
+
+The dispatcher routine is, typically, supplied by the O/S.</Text>
+            <Comments>Operating System - essentially a library.</Comments>
+        </Document>
+        <Document ID="D01A551B-2D72-4F91-B90C-40B0D83A150B">
+            <Title>Statement</Title>
+            <Text>#
+
+Statement-based sequencing is common in most current text-based PLs.
+
+Statements are executed in an order based on their textual appearance.
+
+Subroutines are executed in stack-based sequencing.  (See "Stack").
+
+Statement based sequencing is caused by text-only syntax.
+
+Routines are called in a synchronous manner.  See stack-based sequencing.
+</Text>
+            <Comments>Programming Languages
+A form of accidental complexity.
+I.E. the caller waits for the callee to execute a RETURN statement.</Comments>
+        </Document>
+        <Document ID="A4126FC3-28FB-463D-A266-FDB92E26EC01">
+            <Title>Server</Title>
+            <Text>#
+
+A server based sequencer is one where a single process contains and hides a resource.  Client processes send requests for resource data.
+
+[Note that a Hoare Monitor is a essentially a server-based sequencer in the context of time-sharing and memory sharing.  See Hoare Monitor for further discussion.]</Text>
+        </Document>
+        <Document ID="73028F80-8608-4978-B1F5-7DA961956EE4">
+            <Title>Handshake Protocol</Title>
+            <Text>#
+
+In handshake sequencing, a component sends a request to another component (instead of directly "calling" it).
+
+The receiving component responds with a "handshake" message - usually an ACK in the case of successful receipt.  The receiver might respond with a NAK (not acknowledge) if it deems that the message was garbled, or, the receiver might not respond at all.
+
+The requestor expects one of 3 responses:
+
+	1.	ACK - means that the receiver received the message and is acting on it,
+	2.	NAK - means that the receiver received a message, but has deemed that the message has been damaged in transit - the requestor resends the message or, after several retries, declares a send error of some kind,
+	3.	silence - the requestor times-out waiting for an ACK/NAK from the  receiver - the requestor resends the message, or, after several retries, declares a send error of some kind.
+
+This handshake pattern is most often seen in network protocols.
+
+I would expect to see this pattern arise more often with the advent of (more) distributed computing and IoT.
+</Text>
+        </Document>
+        <Document ID="2848F9DB-8826-4601-93A5-EFD731EF0023">
+            <Title>Sequencing All-FBP (Flow Based Programming)</Title>
+        </Document>
+        <Document ID="2EA97F44-F6E0-4B83-9099-75489446FE7F">
+            <Title>Sequencing All-Spawn And Wait</Title>
+        </Document>
+        <Document ID="8CD1A532-1ECE-47DF-AE4C-EACF3D6CD68A">
+            <Title>Sequencing All-Flat Message Sending</Title>
+        </Document>
+        <Document ID="0F4B30ED-D315-475E-8432-92784C3080D1">
+            <Title>Sequencing All-Handshake Protocol</Title>
+        </Document>
+        <Document ID="CB3F19D9-4327-4D00-A19C-6506F5FE4BCB">
+            <Title>Sequencing All-Hierarchy</Title>
+        </Document>
+        <Document ID="CC35D6D1-B30B-49C9-8701-42DF406B0AF4">
+            <Title>Sequencing All-Preemption</Title>
+        </Document>
+        <Document ID="7828916F-91B9-4439-8E00-D606E394D2BD">
+            <Title>Spawn and Wait 2</Title>
+            <Text>#
+
+The above diagram is simply another way to diagram a spawn and wait design.
+
+See spawn and wait.
+</Text>
+        </Document>
+        <Document ID="080199E0-45C5-4719-8843-A704DAED6714">
+            <Title>Spawn and Wait</Title>
+            <Text>#
+
+In spawn and wait sequencing, the caller "spawns" processes for each child/called routine and then waits until all of the child processes have died (and left results, if any, in distinguished locations).
+
+Spawn and wait has been implemented in several forms:
+
+	•	UNIX® fork() and waitpid()
+	•	Bash (sh, etc.) &amp; and wait commands
+	•	hardware DMA (Direct Memory Access)
+	•	"par" statement in several "parallel" languages
+	•	node.js (anonymous functions provide wait() operation)
+	•	etc.
+
+Spawn and wait has been traditionally conflated with full-blown operating system processes (aka threads). Processes have been traditionally conflated with solutions to the (harder) problems of time-sharing and memory sharing.</Text>
+        </Document>
+        <Document ID="C1C4B627-4003-4A9A-AB04-25ECEB83F151">
+            <Title>Blockchain</Title>
+            <Text>#
+A blockchain, in current technology, is a spawn-and-wait system wherein the parent node is changed on every "cycle" (defined by the blockchain algorithm).  The choice of "parent" is randomized to prevent attackers from guessing the future behaviour of the system.
+
+Blockchains typically consist of two parts:
+	1.	cryptography
+	2.	sequencing.
+</Text>
+        </Document>
+        <Document ID="908ED498-1897-4067-BF55-9138844DF825">
+            <Title>Sequencing All-Spawn And Wait (2)</Title>
+        </Document>
+        <Document ID="CC6AA96D-4A27-4E13-9476-D79D4FEF984D">
+            <Title>PNG</Title>
+        </Document>
+        <Document ID="FFB582F3-0330-4534-A0F7-4A200DADDEF7">
+            <Title>Sequencing All-Hoare Monitors</Title>
+        </Document>
+        <Document ID="3B33B763-4A83-40D6-BE55-3497D6AA1F01">
+            <Title>Sequencing All-Daisy Chain</Title>
+        </Document>
+        <Document ID="3A671A28-A924-4816-8D39-CD393BAB4579">
+            <Title>Sequencing All-Daisy Chain</Title>
+        </Document>
+        <Document ID="7F5F22BD-806D-49BB-92FC-C4EF48A6914A">
+            <Title>Hierarchy</Title>
+            <Text>#
+Hierarchical sequencing is a sequencing style where children components are contained within parents, like Russian dolls.  As incoming events arrive, the parent gets first-right-of-refusal to act on the events.  If the parent does not act on the events, the events are passed on to contained children, recursively.
+
+This pattern is common in windowing systems.
+</Text>
+        </Document>
+        <Document ID="5FC2D82C-079C-47FF-B9E7-DE08609B7E7F">
+            <Title>Sequencing All-Stack Based</Title>
+        </Document>
+        <Document ID="1C32FE06-2C2E-4BBF-A572-1774E2F003C3">
+            <Title>Daisy Chain</Title>
+            <Text>#
+
+A daisy chain sequence arranges components in a chain.  
+
+Each component has a unique address.
+
+Each component in the chain inspects incoming messages to determine if the message is addressed to them.   If the message is not addressed to the given component, the message is forwarded to downstream components.  If the message is addressed to the given component, the message is not forwarded and is processed by the component.
+
+Component outputs are all tied together to form a result.  One component processes the message and creates one result (which is fed to the common output).
+
+If no component processes the message, either
+	•	the message is completely ignored, or, 
+	•	the last component in the chain produces some sort of exception result.
+
+A daisy chain system has, logically, two output ports - one is the result, another is an exception.
+
+In a daisy chain, the earlier components in the chain receive priority over later components in the chain.  In general, fairness doesn't matter as long as the "work" gets done. </Text>
+            <Comments>Note that the sender might also be the "last" component in the chain.</Comments>
+        </Document>
+        <Document ID="B052FEB5-805D-458E-896A-44052C64A66A">
+            <Title>Sequencing All-Arrowgrams</Title>
+        </Document>
+        <Document ID="8C1ACB5D-80E1-4D28-8E56-7813089F6814">
+            <Title>Sequencing All-Spawn And Wait (2)</Title>
+        </Document>
+        <Document ID="C01CCB66-FD77-4E7A-9451-BEF297665610">
+            <Title>Sequencing All-Server</Title>
+        </Document>
+        <Document ID="BDBAED7D-CC44-4146-BAFF-ED541A3975F0">
+            <Title>Explicit Sequencer</Title>
+            <Text>#
+
+In the Explicit Sequencer design, work is sent to all workers, then a Sequencer process dictates the order in which each worker executes.</Text>
+        </Document>
+        <Document ID="DD65A6B9-CF54-4E00-927C-DA9CC76F977B">
+            <Title>Sequencing All-Spawn And Wait</Title>
+        </Document>
+    </Documents>
+</SearchIndexes>

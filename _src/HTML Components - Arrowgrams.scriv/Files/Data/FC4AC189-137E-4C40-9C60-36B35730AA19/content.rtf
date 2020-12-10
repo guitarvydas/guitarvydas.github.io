@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 A part is 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 ready()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  only if:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}it has at least one event in its input queue\
+{\listtext	2.	}it is not
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22  busy().\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Cs::0>
+\f0\fs26 Any part that is 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 ready()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  can be 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 dispatch()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 ed.  \
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Cs::0>
+\f2\fs22 Ready()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  parts cannot (must not) rely on 
+\f3\i when
+\f0\i0  they might be 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 dispatch()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 ed.  Ordering of part 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 dispatch()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  is indeterminate.\
+\
+Parts are {\field{\*\fldinst{HYPERLINK "scrivcmt://4903EBC8-E7BB-49A8-865F-2AA02E29E9F9"}}{\fldrslt concurrent}}.\
+}

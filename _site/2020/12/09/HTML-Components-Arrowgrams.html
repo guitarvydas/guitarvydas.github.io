@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>HTML Comonents - Arrowgrams</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T15:07:49Z">
+  <meta name="ModificationTime" content="2020-12-09T15:07:49Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 9.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 10.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo; min-height: 10.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p16 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+    span.s4 {font: 9.0px Palatino}
+    span.s5 {font: 13.0px 'Lucida Grande'}
+    span.s6 {font: 12.0px Helvetica}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I discuss a very simple system composed of two visual components.</p>
+<p class="p3"><br></p>
+<p class="p2">I call this system Arrowgrams, or AG for short.</p>
+<p class="p3"><br></p>
+<p class="p2">The components communicate through messages via a third component - their common parent.</p>
+<p class="p3"><br></p>
+<p class="p2">As motivation, I provide the pseudo-html, and, I provide a diagram of the system.</p>
+<p class="p3"><br></p>
+<p class="p2">The two main components are shepherded by a top-level component.</p>
+<p class="p3"><br></p>
+<p class="p2">The two components can only communicate by using messages.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">The messages <i>cannot</i> be sent directly from one component to another.<span class="Apple-converted-space">  </span>All message routing is performed by the parent, schematic<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> component.<span class="Apple-converted-space">  </span>In this very simple example, that composite component is the top-level component.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space"> </span>The message delivery system is implemented by a <i>kernel</i> of code, in this case written as a JavaScript script.<span class="Apple-converted-space">  </span>I show the details of a very straight-forward implementation of such a <i>kernel.</i><span class="Apple-converted-space">  </span>I consider the implementation details to be a distraction and, hence, I leave them to the end of this document<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">I happen to use HTML + JavaScript.<span class="Apple-converted-space">  </span>This system can be implemented in any language.<span class="Apple-converted-space">  </span>In fact, I have implemented it in Common Lisp and various pre-cursors in C and assembler.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>github</b></h2>
+<p class="p2">The code for this system can be found at <a href="https://github.com/guitarvydas/ag-js">https://github.com/guitarvydas/ag-js</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">See, also, any follow-on or preceding versions of this system (I will try to call them ag-js-*).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Pseudo-HTML</b></h2>
+<p class="p2">The system in this simple example consists of an HTML <i>input file</i> component and an HTML <i>paragraph</i> component that displays the contents of the file.</p>
+<p class="p3"><br></p>
+<p class="p2">Obviously, such a system can be directly implemented - and easily understood - as HTML + JavaScript.<span class="Apple-converted-space">  </span>The intention here, though, is to show the <span class="s1">fundamentals</span> of creating large systems using pluggable components.</p>
+<p class="p3"><br></p>
+<p class="p2">In essence, what we want is:</p>
+<p class="p3"><br></p>
+<p class="p4">&lt;input type="file" id="part1" onchange="sendMessageToPart2(…)&gt;…&lt;/input&gt;</p>
+<p class="p4">&lt;p id="part2"&gt;&lt;/p&gt;</p>
+<p class="p5"><br></p>
+<p class="p2">Further, we want a top-level component that "owns" these two components.</p>
+<p class="p3"><br></p>
+<p class="p6">&lt;div id="topLevel"&gt;</p>
+<p class="p4">&lt;input type="file" id="part1" onchange="sendMessageToPart2(…)&gt;…&lt;/input&gt;</p>
+<p class="p4">&lt;p id="part2"&gt;&lt;/p&gt;</p>
+<p class="p6">&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p2">We want the top-level component to route messages between its children. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The children cannot send messages directly to one another. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Routing of messages is done only by parent components.</p>
+<p class="p3"><br></p>
+<p class="p2">The routing is represented as an Nx2 table in the parent part (in this case "topLevel").<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I use the name "wire" to refer to each row in the table. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Each wire contains one sender and 0-or-more receivers. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Every reference to a part consists of two parts - the id of the part and a string<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> which I call a <i>pin<a id="fnlink5"></a></i><a href="#fn5"><sup>[5]</sup></a><i>.</i></p>
+<p class="p3"><br></p>
+<p class="p2">The <i>pin</i> is merely a selector which can be used to subdivide messages.</p>
+<p class="p3"><br></p>
+<p class="p2">So, the above is embellished as:</p>
+<p class="p3"><br></p>
+<p class="p4">&lt;div id="topLevel"&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;input type="file" id="part1" onchange="sendMessageToPart2(…)&gt;…&lt;/input&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;p id="part2"&gt;&lt;/p&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;wire&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;sender ref="[part1,'fileObject']" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;receiver ref="[part2,'displayText']" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;/wire&gt;</p>
+<p class="p4">&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p2">Note that a wire can have zero (0) receivers.<span class="Apple-converted-space">  </span>This is named NC<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> (for No Connection).<span class="Apple-converted-space">  </span>An event that arrives at an NC is simply ignored (dropped)<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Note, also, that the wiring table (routing table) is stored in the <i>parent</i> <i>schematic<a id="fnlink8"></a></i><a href="#fn8"><sup>[8]</sup></a> (div) and not in the children.<span class="Apple-converted-space">  </span>The children <span class="s1">must</span> not communicate directly with one another.<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a><span class="Apple-converted-space">  </span>This is an important design principle for maintaining architectural flexibility, e.g. an architecture can be <i>reused</i> by simply changing the wiring table. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The pseudo-code above shows "sendMessageToPart2" which directly names "part2".<span class="Apple-converted-space">  </span>This, in my opinion, is bad practice<a id="fnlink10"></a><a href="#fn10"><sup>[10]</sup></a>.<span class="Apple-converted-space">  </span>The above example is only meant as a stepping-stone between current practices and better componentization.<span class="Apple-converted-space">  </span>A further rewrite that avoids this problem is:</p>
+<p class="p3"><br></p>
+<p class="p7">&lt;div id="topLevel"&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;input type="file" id="part1" onchange="sendChanged()"&gt;…&lt;/input&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;p id="part2" onreact="display()"&gt;&lt;/p&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;wire&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space">    </span>&lt;sender ref="[part1,'changed']" /&gt;</p>
+<p class="p7"><span class="Apple-converted-space">    </span>&lt;receiver ref="[part2,'displayText']" /&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;/wire&gt;</p>
+<p class="p7">&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p2">where "sendChanged()" is a JavaScript routine, associated with the <i>input file</i> component, that sends the File object<a id="fnlink11"></a><a href="#fn11"><sup>[11]</sup></a> to its own "changed" <i>pin. </i>Note that, in this case, the <i>input file</i> component doesn't know, nor need to know, where its output message will be routed, it simply <i>send()s</i> a message to one of its own <i>pins</i>.<span class="Apple-converted-space">  </span>The data (the File object) will arrive at part2 with the <i>pin</i> tag 'displayText'.<span class="Apple-converted-space">  </span>This is specified by the <i>wire</i> in the routing table of "topLevel".<span class="Apple-converted-space">  </span>All messages to "part2" will invoke the JavaScript routine "display(…)" using events of the form {pin, data}, which in this case will be {'displayText',<i> fileObject</i>}.</p>
+<p class="p3"><br></p>
+<p class="p2">My working example1.html has the form:</p>
+<p class="p3"><br></p>
+<p class="p4">&lt;div id="topLevel"&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>... details ...</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p8"><span class="Apple-converted-space">      </span></p>
+<p class="p8"><span class="Apple-converted-space">      </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;input type="file" id="part1" onchange="sendChanged()"&gt;&lt;/input&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>...<span class="Apple-converted-space">  </span><i>details</i> ...</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p8"><span class="Apple-converted-space">      </span></p>
+<p class="p8"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;p id="part2"&gt;&lt;/p&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>... <i>details</i> ...</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p8"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">       </span>// initialization of topLevel part</p>
+<p class="p4"><span class="Apple-converted-space">       </span>... <i>details</i> ...</p>
+<p class="p4"><span class="Apple-converted-space">       </span>/* map each output pin {part,pin} to an array of <span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">          </span>receivers [{part,pin},...] */</p>
+<p class="p4"><span class="Apple-converted-space">          </span>topLevel.initializeWires ( [ ... <i>details</i> ... ] );<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">       </span>&lt;/script&gt;</p>
+<p class="p8"><br></p>
+<p class="p4"><span class="Apple-converted-space">       </span>&lt;script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">         </span>var kernel = new Kernel (topLevel);</p>
+<p class="p4"><span class="Apple-converted-space">       </span>&lt;/script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p4">&lt;/div&gt;</p>
+<p class="p5"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><i>Detail: [skip on first reading] - the </i><span class="s2">onchange</span><i> event is defined by HTML.<span class="Apple-converted-space">  </span></i><span class="s2">Onreact</span><i>, though, is a custom event.<span class="Apple-converted-space">  </span>In fact, I defined my own events - AGevents - in raw JavaScript, instead of relying on CustomEvent()s.<span class="Apple-converted-space">  </span>In this set of examples, I choose to use JavScript's </i><span class="s2">{…}</span><i> operator to define events on the spot, instead of defining a "class" for Events.<span class="Apple-converted-space">  </span>This is a design choice and nothing more.<span class="Apple-converted-space">  </span>The reader will note that </i><span class="s2">Onreact</span> <i>does not even appear in my code.</i></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagram</b></h2>
+<p class="p2">A first-cut diagram is shown in Fig. 1</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-First Cut - Logic Tangled Into Part2.png" width="450px" height="44px" alt="Image"></p>
+<p class="p2">Fig. 1 First Version of Diagram</p>
+<p class="p3"><br></p>
+<p class="p2">This diagram has the "problem" that all callback logic is implicit, probably buried in "part2".</p>
+<p class="p3"><br></p>
+<p class="p2">We can pull the callback logic out into a separate component, as in Fig. 2:</p>
+<p class="p3"><br></p>
+<p class="p9"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-Second Cut - Logic As A Separate Part.png" width="450px" height="45px" alt="Image"></p>
+<p class="p2">Fig. 2 Second Version of Diagram</p>
+<p class="p3"><br></p>
+<p class="p2">The second diagram shows <span class="s2">onreact<a id="fnlink12"></a><a href="#fn12"><span class="s3"><sup>[12]</sup></span></a></span> as the input <i>pin</i> of, both, the "callback logic" and the "part2" components.<span class="Apple-converted-space">  </span>This is as intended, but is very JavaScript-y.<span class="Apple-converted-space">  </span>In fact, every component reacts to the custom <span class="s2">onreact()</span> function in the same way - by calling its own <span class="s2">onreact()</span> function with two arguments - the <i>pin</i> and the <i>data</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Let's refine the diagram to use better <i>pin</i> names in<span class="Apple-converted-space">  </span>Fig. 3</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-Better Names.png" width="450px" height="45px" alt="Image"></p>
+<p class="p2">Fig. 3 Third Version of Diagram - Better Pin Names</p>
+<p class="p3"><br></p>
+<p class="p2">This diagram still has a problem - it does not describe the entire situation.<span class="Apple-converted-space">  </span>The callback logic has at least 3<a id="fnlink13"></a><a href="#fn13"><sup>[13]</sup></a> possible outcomes -<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li9">success</li>
+  <li class="li9">error</li>
+  <li class="li9">no response</li>
+</ol>
+<p class="p10"><br></p>
+<p class="p9">and, only (1) outputs a good File descriptor.<span class="Apple-converted-space">  </span>Let's redraw the diagram with this detail, in Fig. 4</p>
+<p class="p10"><br></p>
+<p class="p9"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-Fourth Cut.png" width="450px" height="228px" alt="Image"></p>
+<p class="p9">Fig. 4 Diagram That Shows 3 Callback Outcomes</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p9">but, how does "no response" get generated?<span class="Apple-converted-space">  </span>Answer: a timer component, as in Fig. 5:</p>
+<p class="p10"><br></p>
+<p class="p9"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-FifthCut.png" width="450px" height="228px" alt="Image"></p>
+<p class="p9">Fig. 5 Diagram That Shows a Timer Input</p>
+<p class="p10"><br></p>
+<p class="p9">If this last diagram looks complicated, remember that this is what needs to be done in JavaScript code, without a diagram, using only text (which, I claim, is even more complicated to understand).</p>
+<p class="p10"><br></p>
+<p class="p9">If we wanted to simplify the diagram, we could show only the <i>happy path</i> as in Fig. 3, and lasso the rest of the components - the <i>unhappy path</i> - into various other hierarchical, composite, components. <span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p9">Better yet, we could invent a programmers' diagram editor that showed layers - different views - of the diagram (e.g. the <i>happy path</i> layer, the <i>error </i>layer, the <i>timeout</i> layer, etc., etc.).<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Happy Path</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-HappyPath.png" width="450px" height="225px" alt="Image"></p>
+<p class="p9">Fig. 6 Happy Path</p>
+<p class="p10"><br></p>
+<p class="p9">The green arrow shows what happens when everything goes according to plan.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Error Path</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-ErrorPath.png" width="450px" height="228px" alt="Image"></p>
+<p class="p9">Fig. 7 Error Path</p>
+<p class="p10"><br></p>
+<p class="p9">The yellow arrow shows what happens when the system (e.g. HTML) finds something wrong.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Timeout Path</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-TimeoutPath.png" width="450px" height="228px" alt="Image"></p>
+<p class="p9">Fig. 8 Timeout Path</p>
+<p class="p10"><br></p>
+<p class="p9">The red arrows show the control flow when things go horribly wrong, e.g. the FileReader can't read the file due to a server being down (or a break in the routing to the server, or, …).</p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagram Layers</b></h2>
+<p class="p2">From the previous description, it becomes obvious that<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li9">We want to describe the system using diagrams, instead of using code - the diagrams could be automatically compiled to code.</li>
+  <li class="li9">We want to draw diagrams in layers, e.g. a layer for the <i>happy path, </i>a layer for the <i>error path</i> and a layer for the <i>no response</i> path.</li>
+</ol>
+<p class="p10"><br></p>
+<p class="p9">I will show one way to do each of the above - how to compile diagrams and how to draw and combine layers. <span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p9">I will show this later,<a id="fnlink14"></a><a href="#fn14"><sup>[14]</sup></a> after having described the code thus far. <span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p9">For motivation, note that:</p>
+<ul class="ul1">
+  <li class="li9">I treat JavaScript as an assembly language and will be compiling diagrams into this kind of assembly language.<span class="Apple-converted-space">  </span>This has similarities to the <i>no code</i> movement.<span class="Apple-converted-space">  </span>I argue that compiling diagrams compiled to assembly language (e.g. JavaScript) is more flexible than most <i>no code </i>approaches.</li>
+  <li class="li9">New-breed assembly languages don't complicate the transpiler (compiler) with details such as declaration-before-use and strong typing.<a id="fnlink15"></a><a href="#fn15"><sup>[15]</sup></a><span class="Apple-converted-space">  </span>New-breed assembly languages provide easy access to 1<span class="s4"><sup>st</sup></span>-class functions and anonymous functions.<span class="Apple-converted-space">  </span>See my essay "New-Breed HLLs" for further discussion.</li>
+  <li class="li9">Note that the preceding diagrams used only 3 kinds of <i>glyphs</i>: boxes, text<span class="s5">,</span> and, lines (arrows).<span class="Apple-converted-space">  </span>Unlike in programming editors, the glyphs are not arranged in a fixed 2D grid, and, unlike in state-of-the-art programming editors, the glyphs can overlap.<span class="Apple-converted-space">  </span>If we consider the <i>glyphs</i> to be <i>tokens</i>, then there is almost nothing new here - we already know how to compile strings of tokens to code, e.g. most existing textual 3GL<a id="fnlink16"></a><a href="#fn16"><sup>[16]</sup></a> compilers do this.<span class="Apple-converted-space">  </span>The main aspects of these new-breed tokens is that they carry an (x,y) point with them and that they are hierarchical<a id="fnlink17"></a><a href="#fn17"><sup>[17]</sup></a>.</li>
+  <li class="li9">Diff, git, github, etc., already know how to compare two code files and to merge them.<span class="Apple-converted-space">  </span>Layers might be thought of as a git-style merge.<span class="Apple-converted-space">  </span>In fact, we can stoop even lower by simply comparing items for equality - e.g. two layers are mergeable if the items<a id="fnlink18"></a><a href="#fn18"><sup>[18]</sup></a> that they contain are exactly equal, and, missing items are simply unioned into the merged result.<span class="Apple-converted-space">  </span>Readers who have studied EE (Electrical Engineering) will see similarities of this mentality to Kirchoff's Laws of Superposition.</li>
+  <li class="li10"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Details</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>50,000 Foot View</b></h2>
+<p class="p2">The file "example1.html" contains:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li9">script includes for the kernel</li>
+  <li class="li9">script includes for 3 kinds of parts - constructor functions for schematics, file selectors and text output boxes</li>
+  <li class="li9">a &lt;body&gt; that defines a top-level &lt;div&gt; called <i>topLevel</i>, and 2 components: (1) <i>part1</i> (a file selector input widget) and (2) <i>part2</i> (a text file output box (an HTML &lt;p&gt;).</li>
+</ul>
+<p class="p10"><br></p>
+<p class="p9">This corresponds to Fig. 9.</p>
+<p class="p10"><br></p>
+<p class="p9"><img src="/assets/2020-12-09-15-07-49-Images/HTMLComponents-Example1.html as a Diagram.png" width="450px" height="45px" alt="Image"></p>
+<p class="p2">Fig. 9 Example1.html as a Diagram</p>
+<p class="p3"><br></p>
+<p class="p2">Fig. 9 is almost the same as Fig. 1.<span class="Apple-converted-space">  </span>The pin names have been changed.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>File Selector (part1)</b></h2>
+<p class="p2">Line 20 of example1.html defines a standard HTML file input element.</p>
+<p class="p3"><br></p>
+<p class="p2">Lines 21-29 define the programmer-supplied JavaScript for this file selector element, namely the function <i>sendChanged()</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">When the user pushes the button and selects a file, the <i>sendChanged()</i> function is called. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This function grabs the appropriate data from the part1 HTML element and <i>send()</i>s it out the output pin of part1.<span class="Apple-converted-space">  </span>The output pin is called 'changed'.</p>
+<p class="p3"><br></p>
+<p class="p2">After the <i>send()</i>, we call <a href="http://kernel.io"><i>kernel.io</i></a><i>()</i> to run the kernel dispatcher.<span class="Apple-converted-space">  </span>This is a detail that will, later, be performed automatically by the transpiler.<span class="Apple-converted-space">  </span>Only in this early example1.html, do we show the gory details of what is going on under the hood.</p>
+<p class="p3"><br></p>
+<p class="p2">In fact, <a href="http://kernel.io"><i>kernel.io</i></a><i>()</i> is an optimization.<a id="fnlink19"></a><a href="#fn19"><sup>[19]</sup></a><span class="Apple-converted-space">  </span>The kernel's dispatcher could <i>loop</i> forever, running parts that are <span class="s2">ready</span> and obviate the need for calling <a href="http://kernel.io"><i>kernel.io</i></a><i>()</i>.<span class="Apple-converted-space">  </span>This<a id="fnlink20"></a><a href="#fn20"><sup>[20]</sup></a> is a technique I learned by building production kernels on bare metal<a id="fnlink21"></a><a href="#fn21"><sup>[21]</sup></a> and is suitable for asynchronous operation, like node.js calls.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Text Output Box (part2)</b></h2>
+<p class="p2">The text output box is defined in lines 32-70 of example1.html as a <span class="s2">&lt;p&gt;</span> element plus some (a lot of) JavaScript supporting functionality.</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>happy path</i> is the call to <span class="s2">reader.readAsText(…)</span> followed by a successul call to the callback function for <span class="s2">onload()</span>.<span class="Apple-converted-space">  </span>After the reader loads the file, the <span class="s2">onload()</span> function is called as a callback to display the text contents of the file<a id="fnlink22"></a><a href="#fn22"><sup>[22]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Two (2) other outcomes might occur and are handled by the <span class="s2">onerror()</span> and <span class="s2">onabort()</span> callbacks.<span class="Apple-converted-space">  </span>Later, I will show how I create these callbacks in a more "structured" manner<a id="fnlink23"></a><a href="#fn23"><sup>[23]</sup></a>.<span class="Apple-converted-space">  </span>For now, the gory details are on display.<span class="Apple-converted-space">  </span>Note that the code for a simple text display component is "not so simple" when written out in JavaScript (or any textual) form.</p>
+<p class="p3"><br></p>
+<p class="p2">In all, the code for our text component must handle 1 input and 3 outcomes (good, error, abort).<span class="Apple-converted-space">  </span>Current programming languages provide a way to express 1 input and 1 outcome easily.<span class="Apple-converted-space">  </span>Syntax for handling 1 input and 2 outcomes exists (<i>throw</i>).<span class="Apple-converted-space">  </span>There is no syntax for 1 input and 3 outcomes, hence, the JavaScript code is written at a very low level - an "assembly" level, in my opinion - and programmers can try to deal with such situations in a myriad of ways, e.g. by conflating the two <i>unhappy paths</i> into one by returning a non-scalar object<a id="fnlink24"></a><a href="#fn24"><sup>[24]</sup></a>.<span class="Apple-converted-space">  </span>The code, as written in this example1.html, is not production ready - it punts on the issue of errors and aborts.</p>
+<p class="p3"><br></p>
+<p class="p2">Diagram notations, e.g. StateCharts and the notations I describe, can be used to express functionality with multiple outcomes and asynchronous behaviours.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Part topLevel</b></h2>
+<p class="p2">The <span class="s2">topLevel</span> component is defined in lines 15-17 and is initialized in lines 72-77 of example1.html.</p>
+<p class="p3"><br></p>
+<p class="p2">Further discussion regarding schematics, parts, events, etc., follow.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Wires</b></h2>
+<p class="p2">A <i>wire</i> is a data structure that contains one <i>sender</i> and a list of <i>receivers.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">The <i>sender</i> is defined by a { part, pin } pair.</p>
+<p class="p3"><br></p>
+<p class="p2">Each <i>receiver</i> is defined by a { part, pin } pair.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Kernel</b></h2>
+<p class="p2">The kernel provides 2 main functions:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li9">Send() - called by parts to deliver events to their outputs</li>
+  <li class="li9">Dispatch() - the only "loop" in the system - it invokes parts that are <span class="s2">ready().</span></li>
+</ul>
+<p class="p10"><br></p>
+<p class="p9">This version of the kernel, based on HTML and HTML events, also provides the <span class="s2">kernel.io()<a id="fnlink25"></a><a href="#fn25"><span class="s3"><sup>[25]</sup></span></a></span> function.<span class="Apple-converted-space">  </span>This allows asynchronous events to be converted from HTML (and JavaScript) into events supported by AG.<span class="Apple-converted-space">  </span>In the least-optimized case, the <span class="s2">Dispatcher()</span> would be a loop that continually checks the <span class="s2">ready()</span>ness of parts and dispatches them.<span class="Apple-converted-space">  </span><a href="http://Kernel.io"><span class="s2">Kernel.io</span></a><span class="s2">()</span> allows us to spread this "loop" over every HTML event receiver and prevents wasting cycles until actual (asynchronous) IO occurs.<span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p9">We don't need <a href="http://kernel.io"><span class="s2">kernel.io</span></a><span class="s2">()</span> in dedicated systems, e.g. bare metal where the <span class="s2">Dispatcher()</span> can run an idle loop, without optimizing use of cycles.<span class="Apple-converted-space">  </span>This kind of system might be an IoT<a id="fnlink26"></a><a href="#fn26"><sup>[26]</sup></a> device, in which the code runs a simple (idle) loop checking for input and (maybe) running a task in the background.</p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Key Points - Semantics</b></h2>
+<ol class="ol1">
+  <li class="li9">Children cannot (must not) send messages directly to one another, but must route messages through the parents' routing table.</li>
+  <li class="li9">A wire must lock all input queues of its receivers and deliver events to all receivers <i>atomically</i>.</li>
+</ol>
+<p class="p3"><br></p>
+<p class="p2">(1) is a key aspect of treating components as pluggable LEGO® blocks.</p>
+<p class="p3"><br></p>
+<p class="p2">(2) ensures "sanity" of multi-tasking.<span class="Apple-converted-space">  </span>Events must not supercede one another.<span class="Apple-converted-space">  </span>Events cannot be tangled<a id="fnlink27"></a><a href="#fn27"><sup>[27]</sup></a>.<span class="Apple-converted-space">  </span>In hardware, this detail is addressed by using maskable interrupts (IRQs).<span class="Apple-converted-space">  </span>Software can never run faster than the underlying hardware.<span class="Apple-converted-space">  </span>Software techniques to regularize this problem of atomicity, can be invented (and have been), but, come with a performance penalty.<span class="Apple-converted-space">  </span>The time saved in software development is paid back with slower hardware performance.<span class="Apple-converted-space">  </span>Engineers (not programmers) should consider and make trade-offs depending on specific problems and specific solutions.<span class="Apple-converted-space">  </span>They should find a local minimum for a specific solution, e.g. it might be acceptable to use slow, regularized, generalized locking in some cases, for example websites that must only respond in "human time", but such speed penalties might not be acceptable in missile systems and financial trading systems.<span class="Apple-converted-space">  </span>The issue of creating a working design should be left to Architects, while the optimization of speed should be left to Production Engineers<a id="fnlink28"></a><a href="#fn28"><sup>[28]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Dispatching should be performed in a <span class="s1">breadth</span>-first manner.<span class="Apple-converted-space">  </span>Delivering events in a <span class="s1">depth</span>-first manner might result in the equivalent of the <i>priority inversion </i>problem encountered in traditional operating systems.</p>
+<p class="p3"><br></p>
+<p class="p2">Fairness doesn't actually matter in this kind of system<a id="fnlink29"></a><a href="#fn29"><sup>[29]</sup></a> , but, the actual dispatching algorithm can be tuned for specific problems and solutions.</p>
+<p class="p3"><br></p>
+<p class="p2">Long-running operations, such as loop or a deep recursion, are considered to be "bugs"<a id="fnlink30"></a><a href="#fn30"><sup>[30]</sup></a> <span class="Apple-converted-space">  </span>Repetition can be had by sending events to oneself, e.g. sending a "continue" event to oneself.</p>
+<p class="p3"><br></p>
+<p class="p2">Feedback is allowed - parts can send events to themselves (directly or indirectly).<span class="Apple-converted-space">  </span>Feedback is not quite the same as recursion, due to the fact that events are buffered by the input queues.<span class="Apple-converted-space">  </span>Recursion tends to imply that a routine will run again immediately.<span class="Apple-converted-space">  </span>Feedback events do not imply such a behaviour - only the <span class="s2">dispatcher()</span> determines when a part gets to run<a id="fnlink31"></a><a href="#fn31"><sup>[31]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Events can be delivered to "nothing".<span class="Apple-converted-space">  </span>NC - no connection.<span class="Apple-converted-space">  </span>Such events are ignored and dropped.<span class="Apple-converted-space">  </span>This, also, is a key aspect of LEGO® style component composition.<span class="Apple-converted-space">  </span>It is not possible to know beforehand whether all functionality provided by a part will be used.<span class="Apple-converted-space">  </span>Some parts might generate output events that are not needed for a certain application.<span class="Apple-converted-space">  </span>It must be possible to ignore some events, i.e. to connect some pins as NC.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Main Loop</b></h2>
+<p class="p2">It is possible to think of parts as each having a <span class="s2">mainloop</span>, analogous to windowed apps.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Mutual Multitasking</b></h2>
+<p class="p2">This system employs mutual multitasking between components.</p>
+<p class="p3"><br></p>
+<p class="p2">Mutual Multitasking was discredited as a way of building operating systems in early versions of Windows®.</p>
+<p class="p3"><br></p>
+<p class="p2">Mutual Multitasking is, indeed, not a suitable paradigm for building time-sharing operating systems, where the operating system must guarantee isolation between components, but, mutual multitasking can be used to compose a single App - application.</p>
+<p class="p3"><br></p>
+<p class="p2">In the case of an App, a "bug" is just a bug, and it is not reasonable<a id="fnlink32"></a><a href="#fn32"><sup>[32]</sup></a> to expect a system to protect parts of the App from bugs in other parts of the App.<span class="Apple-converted-space">  </span>Mutual Multitasking is suitable for this kind of design.</p>
+<p class="p3"><br></p>
+<p class="p2">Mutual multitasking is inherently more efficient than time-sharing multi-tasking which uses full preemption<a id="fnlink33"></a><a href="#fn33"><sup>[33]</sup></a><span class="Apple-converted-space">  </span>In fact, time-sharing brings a lot of baggage and bugs that are not needed by most Apps<a id="fnlink34"></a><a href="#fn34"><sup>[34]</sup></a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Part</b></h2>
+<p class="p2">There are two kinds of parts:</p>
+<ul class="ul1">
+  <li class="li9"><span class="s2">schematics</span> - composite parts that contain other schematics and/or leaf parts</li>
+  <li class="li9"><span class="s2">leaves</span> - parts that contain functionality, usually as code, and cannot be broken down further by the component system.</li>
+</ul>
+<p class="p10"><br></p>
+<p class="p9">Every part, schematic and leaf, contains the following items:</p>
+<ul class="ul1">
+  <li class="li9">An <span class="s2">attribute</span> that tells the system whether the part is a schematic or a leaf</li>
+  <li class="li11"><span class="s3">An </span>input<span class="s3"> </span>queue</li>
+  <li class="li9">A function that determines if the ready queue is not empty</li>
+  <li class="li9">A function to determine whether the part is <span class="s2">busy</span></li>
+  <li class="li9">A function to determine when the part is <span class="s2">ready</span> to be dispatched (see discussion below)</li>
+  <li class="li9">A function that is called, by the dispatcher, when the part is activated and sent an event.<span class="Apple-converted-space">  </span>I call this function <span class="s2">react()</span>.<span class="Apple-converted-space"> </span></li>
+  <li class="li10"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Event</b></h2>
+<p class="p2">An event is of the form:</p>
+<p class="p3"><br></p>
+<p class="p12">{ pin: "…", data: "…" }</p>
+<p class="p3"><br></p>
+<p class="p2">i.e. an event - in the component system that I describe - is defined as consisting of two fields.</p>
+<p class="p3"><br></p>
+<p class="p2">The first field is called <span class="s2">pin</span>.<span class="Apple-converted-space">  </span>A <span class="s2">pin</span> is essentially a tag that identifies the kind of event.<span class="Apple-converted-space">  </span>Receiving parts can case/switch on the <span class="s2">pin</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">The second field is called <span class="s2">data</span>.<span class="Apple-converted-space">  </span>The data field can contain any arbitrary object, from a scalar number and a scalar string to a more complicated object, like <span class="s2">{ … }</span>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The sender and receiver must "agree" on what the shape of the data is. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Event Type Safety</b></h2>
+<p class="p2">The sender and receiver must "agree" on what the shape of the data is. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Checking type safety is punted to enclosing layers. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">An analogy to this layered approach is: the layers in a network protocol.<span class="Apple-converted-space">  </span>Each <span class="s1">receiving</span> layer strips off a part of the message<a id="fnlink35"></a><a href="#fn35"><sup>[35]</sup></a> and checks it.<span class="Apple-converted-space">  </span>Each <span class="s1">sending</span> layer wraps the data in micro-information that allows the receiving end to check the data, in layers.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that, if one takes composition of components to heart, then type checking becomes simply a layer (or filter) that is snapped into place in front of pins.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Schematic</b></h2>
+<p class="p2">A <i>schematic</i> is a part that contains other parts (leaf and/or schematic parts).</p>
+<p class="p3"><br></p>
+<p class="p2">A schematic contains two more pieces of information than the generalized <i>part</i> ancestor class:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li9">A list of part instances - its children.</li>
+  <li class="li9">A list of wires.<span class="Apple-converted-space">  </span>This is basically a routing table of messages between children.<span class="Apple-converted-space">  </span>See below.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Children cannot (must not) send messages directly to one another, but must route messages through their parent's routing table.</p>
+<p class="p3"><br></p>
+<p class="p2">This indirection is a fundamental principle of a component-based system that makes architectures flexible.<span class="Apple-converted-space">  </span>One cannot treat components as composable LEGO® blocks if components can identify one another directly.<span class="Apple-converted-space">  </span>Direct calls are <i>verboten</i> in the system that I describe<a id="fnlink36"></a><a href="#fn36"><sup>[36]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">The same <span class="s2">react()</span> function can be shared by all schematics.<span class="Apple-converted-space">  </span>The job of a schematic's react() function is to pull an event from its own input queue and deliver it to all of its (direct) children that are waiting for the event<a id="fnlink37"></a><a href="#fn37"><sup>[37]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">For an example of schematic parts, see <span class="s2">schematic.js</span> and how it is used in <span class="s2">example1.html</span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Leaf Part</b></h2>
+<p class="p2">A leaf part is one that has a <span class="s2">react()</span> function that is specific to the part.</p>
+<p class="p3"><br></p>
+<p class="p2">A leaf part contains no children<a id="fnlink38"></a><a href="#fn38"><sup>[38]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Leaf parts can be implemented using code in some language, e.g. JavaScript.</p>
+<p class="p3"><br></p>
+<p class="p2">For examples of leaf parts, see <span class="s2">fileselector.js</span> and <span class="s2">text.js</span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Busy</b></h2>
+<p class="p2">A <span class="s2">part</span> is <span class="s2">busy</span> if it is doing work.</p>
+<p class="p3"><br></p>
+<p class="p2">In a system that sits on top of an operating system, and, in which, parts cannot be interrupted, all leaf parts never appear to be busy and schematics are busy only if any of their children are busy.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that most simple applications of AG sit on top of an operating system, and, all parts run within the same user thread, i.e. all components run in the same app.<span class="Apple-converted-space">  </span>This kind of system can ignore busy-ness of leaves and use a simple recursive algorithm to calculate schematic busy-ness.</p>
+<p class="p3"><br></p>
+<p class="p2">In a system that allows preemption - e.g. a system using bare metal with IRQ<a id="fnlink39"></a><a href="#fn39"><sup>[39]</sup></a>s, or a system using time-shared threads with parts spread across threads, busy-ness of leaves becomes an issue that needs to be dealt with.<span class="Apple-converted-space">  </span>This would involve semaphores and locks and the standard bag of technologies used in present-day multi-tasking threads.<span class="Apple-converted-space">  </span>The issues that need to be dealt with are: atomic enqueueing of events onto input queues and locking all input queues of all parts on a single wire, during event delivery.<span class="Apple-converted-space">  </span>The main semantic that must be guaranteed is that a single event arrives at <i>all</i> receivers in an atomic fashion.<span class="Apple-converted-space">  </span>Variations on handling this problem might include STM technologies (which, by definition, have worse timing than finely tuned systems of locks and semaphores<a id="fnlink40"></a><a href="#fn40"><sup>[40]</sup></a>). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The problem of keeping locks for as short a time as possible cannot be solved in general, and, depends on specific problems and their solutions.<span class="Apple-converted-space">  </span>In hardware, and sufficiently modular technology, it is possible to calculate the <i>worst-case</i> lock time - if a system cannot lock a wire and finish depositing an event to all locked receivers within a given time, we just throw our hands up and use faster, more expensive, hardware.</p>
+<p class="p3"><br></p>
+<p class="p2">Software designers should strive towards calculating throughput and worst-case throughput.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that classic operating systems, such as MacOS®, Windows®, Linux and most "real-time" RTOSs have throughputs that are so bad that no one bothers to mention the results. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The throughput calculation for classic operating systems is made harder by the use of full preemption - one must calculate the effect of an timer interrupt happening between any atomic machine instruction and the next, and, the cost of calling the system to perform context switching<a id="fnlink41"></a><a href="#fn41"><sup>[41]</sup></a>.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ready</b></h2>
+<p class="p2">A part is <span class="s2">ready()</span> only if:</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li9">it has at least one event in its input queue</li>
+  <li class="li9">it is not<span class="s2"> busy().</span></li>
+</ol>
+<p class="p13"><br></p>
+<p class="p2">Any part that is <span class="s2">ready()</span> can be <span class="s2">dispatch()</span>ed. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Ready()</span> parts cannot (must not) rely on <i>when</i> they might be <span class="s2">dispatch()</span>ed.<span class="Apple-converted-space">  </span>Ordering of part <span class="s2">dispatch()</span> is indeterminate.</p>
+<p class="p3"><br></p>
+<p class="p2">Parts are concurrent<a id="fnlink42"></a><a href="#fn42"><sup>[42]</sup></a>.</p>
+<p class="p14"><br></p>
+<hr>
+<p class="p15"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>E.G. The components cannot share memory.</p>
+<p class="p15"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>composite</p>
+<p class="p15"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>and github</p>
+<p class="p15"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>Detail: for this simple example, we will use single quotes for pins to avoid the need for JavaScript string escapes.<span class="Apple-converted-space">  </span>We will use double-quotes only for calling JavaScript functions.</p>
+<p class="p15"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>A <i>pin</i> can be equated with the concept of a <i>topic</i> in pubsub.</p>
+<p class="p15"><a id="fn6"></a><a href="#fnlink6"><span class="s3">[6]</span></a><span class="s3"> </span>FYI: Most of this terminology comes from the field of digital electronics.</p>
+<p class="p15"><a id="fn7"></a><a href="#fnlink7"><span class="s3">[7]</span></a><span class="s3"> </span>Exception: when an event arrives at an NC of a top-level part, it is added to the results of the system, or, printed using console.log().</p>
+<p class="p15"><a id="fn8"></a><a href="#fnlink8"><span class="s3">[8]</span></a><span class="s3"> </span>I used the word "schematic" to mean a component that contains other components, i.e. a composite component.</p>
+<p class="p15"><a id="fn9"></a><a href="#fnlink9"><span class="s3">[9]</span></a><span class="s3"> </span>Most current PLs (Programming Languages) use <i>call</i> to name the receiver directly.<span class="Apple-converted-space">  </span>This is merely an optimization and calcifies architecture.</p>
+<p class="p15"><a id="fn10"></a><a href="#fnlink10"><span class="s3">[10]</span></a><span class="s3"> </span>"do as I say, not as I do" :-)</p>
+<p class="p15"><a id="fn11"></a><a href="#fnlink11"><span class="s3">[11]</span></a><span class="s3"> </span>the result from the input operation</p>
+<p class="p15"><a id="fn12"></a><a href="#fnlink12"><span class="s3">[12]</span></a><span class="s3"> </span>I continue to talk about Onreact, since it might be more familiar to the reader, as a CustomEvent().<span class="Apple-converted-space">  </span>In reality, I implemented custom events directly in raw JavaScript.</p>
+<p class="p15"><a id="fn13"></a><a href="#fnlink13"><span class="s3">[13]</span></a><span class="s3"> </span>In fact, there are more than 3, but let's keep things simple (to read and understand).</p>
+<p class="p15"><a id="fn14"></a><a href="#fnlink14"><span class="s3">[14]</span></a><span class="s3"> </span>Maybe in other essays.</p>
+<p class="p16"><a id="fn15"></a><a href="#fnlink15"><span class="s3">[15]</span></a><span class="s3"> </span>Strong typing is for programmers, not transpilers.<span class="Apple-converted-space">  </span>Strong typing for programmers will be provided by SCLs (Solution-Specific-Languages, a subset of DSLs).<span class="Apple-converted-space">  </span>See my essay "New-breed HLLs".</p>
+<p class="p16"><a id="fn16"></a><a href="#fnlink16"><span class="s3">[16]</span></a><span class="s3"> </span>like JavaScript, Java, Python, C, etc.</p>
+<p class="p16"><a id="fn17"></a><a href="#fnlink17"><span class="s3">[17]</span></a><span class="s3"> </span>e.g. text glyphs, which contain all of the properties that we already associate with text.</p>
+<p class="p16"><a id="fn18"></a><a href="#fnlink18"><span class="s3">[18]</span></a><span class="s3"> </span>Compilers consists of various phases.<span class="Apple-converted-space">  </span>The early phases (e.g. scanning and parsing) break a program down into separate items, e.g. types, functions, etc.<span class="Apple-converted-space">  </span>In HTML, we would consider HTML elements to be items for comparison, for example &lt;div&gt; elements, &lt;input …&gt; elements, etc.<span class="Apple-converted-space">  </span>HTML files (layers) could be merged if one file contained elements that did not appear at at in the second file.<span class="Apple-converted-space">  </span>If both files contain, say, an &lt;input …&gt; element with the same id, then those elements would be considered to be equal only if (a) each attribute in each element was exactly the same, or, (b) if any specific attribute exists in only one file, but not the other.<span class="Apple-converted-space">  </span>For example, '&lt;input id="a" type="file" onchange="b"&gt;' could be merged with another attribute '&lt;input id="a" type="file" accept="c"&gt;'.</p>
+<p class="p16"><a id="fn19"></a><a href="#fnlink19"><span class="s3">[19]</span></a><span class="s3"> </span>Is this a premature optimization?</p>
+<p class="p15"><a id="fn20"></a><a href="#fnlink20"><span class="s3">[20]</span></a><span class="s3"> </span>using <i>kernel.io()</i></p>
+<p class="p15"><i><a id="fn21"></a></i><a href="#fnlink21"><span class="s3">[21]</span></a><span class="s3"> </span>no operating system</p>
+<p class="p15"><a id="fn22"></a><a href="#fnlink22"><span class="s3">[22]</span></a><span class="s3"> </span>Note: this code works only for .txt files.</p>
+<p class="p15"><a id="fn23"></a><a href="#fnlink23"><span class="s3">[23]</span></a><span class="s3"> </span>For motvation, consider Drakon and StateCharts.</p>
+<p class="p15"><a id="fn24"></a><a href="#fnlink24"><span class="s3">[24]</span></a><span class="s3"> </span>e.g. {…, …}</p>
+<p class="p15"><a id="fn25"></a><a href="#fnlink25"><span class="s3">[25]</span></a><span class="s3"> </span>Influenced by Ric Holt, et al.</p>
+<p class="p15"><a id="fn26"></a><a href="#fnlink26"><span class="s3">[26]</span></a><span class="s3"> </span>Internet of Things</p>
+<p class="p15"><a id="fn27"></a><a href="#fnlink27"><span class="s3">[27]</span></a><span class="s3"> </span>or, all bets are off</p>
+<p class="p15"><a id="fn28"></a><a href="#fnlink28"><span class="s3">[28]</span></a><span class="s3"> </span>see my essay about "Roles for Software Development"</p>
+<p class="p15"><a id="fn29"></a><a href="#fnlink29"><span class="s3">[29]</span></a><span class="s3"> </span>Parts finish a processing step in near-0 time.<span class="Apple-converted-space">  </span>Long-running parts are "bugs".</p>
+<p class="p15"><a id="fn30"></a><a href="#fnlink30"><span class="s3">[30]</span></a><span class="s3"> </span>LOOP (and recursion) is the exception<i> </i>not the rule.</p>
+<p class="p15"><a id="fn31"></a><a href="#fnlink31"><span class="s3">[31]</span></a><span class="s3"> </span>corollary: a part cannot name other parts, not even itself, in event send()s</p>
+<p class="p15"><a id="fn32"></a><a href="#fnlink32"><span class="s3">[32]</span></a><span class="s3"> </span>Maybe this statement is not forward-looking enough?<span class="Apple-converted-space">  </span>What if <span class="s1">every</span> routine/function could be protected by hardware MMUs?<span class="Apple-converted-space">  </span>What if all pointer accesses were hardware-protected?</p>
+<p class="p15"><a id="fn33"></a><a href="#fnlink33"><span class="s3">[33]</span></a><span class="s3"> </span>Although full preemption is used in almost every threading library and O/S, full preemption is actually quite expensive.<span class="Apple-converted-space">  </span>The literature calls the worst-case scenario "thrashing".</p>
+<p class="p15"><a id="fn34"></a><a href="#fnlink34"><span class="s3">[34]</span></a><span class="s3"> </span>This baggage is needed only by time-sharing applications, such as operating systems.</p>
+<p class="p15"><a id="fn35"></a><a href="#fnlink35"><span class="s3">[35]</span></a><span class="s3"> like peeling an onion</span></p>
+<p class="p15"><span class="s3"><a id="fn36"></a><a href="#fnlink36">[36]</a> </span>Call/Return can be used <i>within</i> a component, but cannot be used to communicate with other components.</p>
+<p class="p15"><a id="fn37"></a><a href="#fnlink37"><span class="s3">[37]</span></a><span class="s3"> </span>e.g. connected to the same wire</p>
+<p class="p15"><a id="fn38"></a><a href="#fnlink38"><span class="s3">[38]</span></a><span class="s3"> </span>at least, no children known to the AG system</p>
+<p class="p15"><a id="fn39"></a><a href="#fnlink39"><span class="s3">[39]</span></a><span class="s3"> </span>hardware interrupts</p>
+<p class="p9"><span class="s6"><a id="fn40"></a><a href="#fnlink40"><span class="s3">[40]</span></a></span> STM is basically a 2-phase Hoare Monitor which keeps locks longer than might be necessary, due to generality.</p>
+<p class="p15"><span class="s3"><a id="fn41"></a><a href="#fnlink41">[41]</a> </span>including fiddling with the hardware MMU, etc.</p>
+<p class="p15"><a id="fn42"></a><a href="#fnlink42"><span class="s3">[42]</span></a><span class="s3"> </span>See my essays on concurrency vs. parallelism.</p>
+</div>
+</body>
+</html>

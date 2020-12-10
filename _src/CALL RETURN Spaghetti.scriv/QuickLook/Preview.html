@@ -1,0 +1,477 @@
+<html>
+
+<head>
+<title>Box and Arrow Diagrams</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">In this essay, I show that a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I show the fundamental operation of a concurrent system and argue that it is inherently simpler than a system based on Call/Return.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Simple System</p>
+<p class="itemText">Fig. &lt;$n:figure:SyncVsAsync-main&gt; contains a diagram of a simple system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync-main&gt; A Simple System</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The diagram contains one input port and one output port. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The diagram contains two components.<span class="Apple-converted-space">  </span>The algorithms for the boxes are straight-forward.<span class="Apple-converted-space">  </span>The algorithms are stated in terms of what each box outputs when inputs arrive at that box.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The flow of data within the diagram is shown by arrows.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It appears that we have plugged two software components together to form ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">What Happens?</p>
+<p class="itemText">What Happens When Events Arrive?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync-WhatHappens&gt;<span class="Apple-converted-space">  </span>An Event Arrives</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">What happens when an event arrives at the input?<span class="Apple-converted-space">  </span>See Fig. &lt;$n:figure:SyncVsAsync-WhatHappens&gt;.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The event, "q", is injected into the input.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The algorithms specify exactly what each box does for any given input.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">What is the expected output?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Do we see the expected output every time?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Do we see the expected output for every coding of the diagram?</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Current State of the Art</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">The Code for Components B and C</p>
+<p class="itemText">We can implement the diagram in pseudo-code.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Function B</p>
+<p class="itemText">function B(in) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (in == q) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>call C(s)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else if (in == r) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>call C(t)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>FatalError()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:FunctionB&gt; Function B</p>
+</li>
+<li>
+<p class="itemTitle">Function C</p>
+<p class="itemText">function C(in) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (in == q) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;- v</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>} else if (in == r) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;- w</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>} else if (in == s) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;- x</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>} else if (in == t) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;- y</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>} else if (in == u) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;- z</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>FatalError ()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:FunctionC&gt; Function C</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Code Version 1</p>
+<p class="itemText">Version 1 of the code might call component B first:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call B(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call C(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:CodeVersion1&gt; Code Version 1</p>
+</li>
+<li>
+<p class="itemTitle">Code Version 2</p>
+<p class="itemText">Version 2 of the code might call C first:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call C(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call B(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:CodeVersion2&gt; Code Version 2</p>
+</li>
+<li>
+<p class="itemTitle">Final Output</p>
+<p class="itemText">Final Output</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The final output of the preceding routines depends on which version of the code we use.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Version 1 results in the following code path:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>call B(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>B calls C(s)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>output &lt;— x</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>C returns to B</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>B returns to main</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>call C(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;— v</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>C returns to main</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main done</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:FinalOutput1&gt; Final Output for Version 1</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The final output for Version 1 is x,v.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">While version 2 results in the following code path:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call C(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>output &lt;— v</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>call B(q)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>B c...</p>
+</li>
+<li>
+<p class="itemTitle">Control Flow</p>
+<p class="itemText">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows the control flows for code versions 1 and 2.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; Control Flow for Versions 1 &amp; 2</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">The Desired Outcome</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We want to plug software components together.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We want the diagram(s) to mean exactly one thing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We want the diagram(s) to mean the same thing every time.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is possible.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will show the event flow that we desire, in a series of diagrams, then, I will discuss how this flow can be achieved.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Event Delivery 1</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; Event q Delivered</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows event "q" being delivered to B and C.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Nothing else happens, no routines are called.</p>
+</li>
+<li>
+<p class="itemTitle">After Event Delivery 1</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; After Event Delivery 1</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SyncVsAsync_SyncControlFlow&gt; shows what the system looks like after Event Delivery 1 has occurred.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Both, Components B and C have an event "q" at their inputs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(Neither Component has acted yet).</p>
+</li>
+<li>
+<p class="itemTitle">Two Possible Control Flow Paths</p>
+<p class="itemText">At this point, two control flow paths are possible:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Component B runs first.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. Component C runs first.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will draw a sequence of diagrams for each path.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">B Runs First - Path BC</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:AsyncControlFlowBC&gt; Control Flow BC</p>
+</li>
+<li>
+<p class="itemTitle">C Runs First - Path CB</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:AsyncControlFlowCB&gt; Control Flow CB</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Final Result</p>
+<p class="itemText">In both cases, Path BC and Path CB, the final result is the same - v is output first, then x is output.</p>
+</li>
+<li>
+<p class="itemTitle">Achieving the Desired Result</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Requirements</p>
+<p class="itemText">All Components have an input queue, onto which incoming events are placed.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Components cannot call one another.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Components are asynchronous.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A Dispatcher routine decides which Component will run and in what order.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Components are ready if they have events in their input queues.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Components consume one input event and produce as many output events as necessary in reaction to the input event.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Components perform a co-routine dance with the Dispatcher.<span class="Apple-converted-space">  </span>When a Component has processed ...</p>
+</li>
+<li>
+<p class="itemTitle">Using Threads</p>
+<p class="itemText">Operating system threads can be used to trivially implement components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Each Component has a mailbox and it sends messages to it parent.<span class="Apple-converted-space">  </span>The parent routes the messages to the mailboxes of appropriate receivers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note - using threads is overkill.<span class="Apple-converted-space">  </span>An operating system based thread involves hardware MMUs and separate stacks.<span class="Apple-converted-space">  </span>Operating system threads implement the out-dated notion of time-sharing.<span class="Apple-converted-space">  </span>None of these are actually required to make this system work.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Fairness</p>
+<p class="itemText">Fairness is not an issue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components run a single incoming event to completion, they yield only to the Dispatcher.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This system mimics, more closely, the modern ideas of distributed systems.</p>
+</li>
+<li>
+<p class="itemTitle">Thread Safety</p>
+<p class="itemText">Thread Safety is not an issue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components cannot share memory, hence, thread safety is not an issue.</p>
+</li>
+<li>
+<p class="itemTitle">Shared Memory</p>
+<p class="itemText">Shared memory is not an issue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components cannot share memory.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components can only send immutable messages.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In very tightly coupled systems, we have the temptation to send pointers to large blobs of memory.<span class="Apple-converted-space">  </span>The sender might mutate the blobs of memory before the message is read by the receiver. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This system makes no guarantees for such situations.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This system gives the Architect all of the atomic tools necessary to create systems that work.<span class="Apple-converted-space">  </span>For example, the memory-sharing issue was encoun...</p>
+</li>
+<li>
+<p class="itemTitle">Priority Inversion</p>
+<p class="itemText">Priority inversion is not an issue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I don't use, nor specify priorities, hence, priority inversion cannot happen.</p>
+</li>
+<li>
+<p class="itemTitle">Loops and Recursion</p>
+<p class="itemText">It turns out that Looping (and Recursion) is the exception, not the rule.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components must not enter long-running loops (or deep recursion).<span class="Apple-converted-space">  </span>Components must yield to the Dispatcher.<span class="Apple-converted-space">  </span>Note that compilers could insert yields at the bottom of Loops to accomplish this behaviour.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The Dispatcher routine is the only routine in the system that runs a loop.<span class="Apple-converted-space">  </span>It loops through a list of ready closures and, randomly, invokes a ready closure.<span class="Apple-converted-space">  </span>When the closure finishes, the Dispatcher simply picks another ...</p>
+</li>
+<li>
+<p class="itemTitle">Dynamic Routing</p>
+<p class="itemText">Dynamic routing is not an issue, because it's not supported.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dynamic routing used to be called self-modifying code.<span class="Apple-converted-space">  </span>Self modifying code is a bad idea.</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Using Closures</p>
+<p class="itemText">Most modern languages provide the concept of closures.<span class="Apple-converted-space">  </span>Closures might be called anonymous functions, or callbacks, or be embedded in concepts such as futures, etc.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Even C has a way to make closures, using function pointers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The minimum closure required by this system requires some static, but not exported, data, and a temporary stack.<span class="Apple-converted-space">  </span>N.B. one stack, for the complete system, is enough.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OO Objects and Blocks are very close, in principle, to the ideas expressed here.<span class="Apple-converted-space">  </span>The difference is that I...</p>
+</li>
+<li>
+<p class="itemTitle">Other Features</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Reuse</p>
+<p class="itemText">This system emphasizes reuse of Architecture. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Architecture reuse is more valuable than code reuse.</p>
+</li>
+<li>
+<p class="itemTitle">Refactoring</p>
+<p class="itemText">Software Component Architectures composed in this manner can be easily refactored into other Architectures, simply by moving/deleting/adding arrows.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components SEND() messages to their parents. Parents contain the routing tables.<span class="Apple-converted-space">  </span>Parents route messages between their children.<span class="Apple-converted-space">  </span>This combination makes refactoring of Architectures easy.</p>
+</li>
+<li>
+<p class="itemTitle">Isolation</p>
+<p class="itemText">This system produces a natural hierarchical composition of Architectures.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parents route messages between their children.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parents act like Components in all other respects.<span class="Apple-converted-space">  </span>Parents cannot SEND() messages to their peers.<span class="Apple-converted-space">  </span>They can only SEND() messages upwards to their parents, and route messages of their direct children.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Global Variables</p>
+<p class="itemText">Global variables are not an issue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Global variables cannot leak beyond the boundaries of their Components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Global variables are not a problem, if properly encapsulated.</p>
+</li>
+<li>
+<p class="itemTitle">Global Types</p>
+<p class="itemText">Global Types in synchronous languages are just as bad as Global Variables in those languages.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Global anything is bad.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Encapsulation must be applied to every concept in software architecture.</p>
+</li>
+<li>
+<p class="itemTitle">Namespaces</p>
+<p class="itemText">A component has two external namespaces:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• The set of inputs.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• The set of outputs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The internal namespace(s) of Components does not leak out.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">All input names must be unique within the input namespace.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">All output names must be unique within the output namespace.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The same name may appear in, both, the input and output namespaces.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Namespaces are naturally encapsulated in a hierarchical manner, due to hierarchical encapsulation of Components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If two Components have exactly the same input n...</p>
+</li>
+<li>
+<p class="itemTitle">Isolation of Control Flow</p>
+<p class="itemText">Control Flow within Components is naturally isolated by the fact that Components are truly asynchronous.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Control flow begins when a Component is invoked, and, control flow ends when the Component yields to the Dispatcher.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Control Flow does not leak beyond the boundaries of Components.</p>
+</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

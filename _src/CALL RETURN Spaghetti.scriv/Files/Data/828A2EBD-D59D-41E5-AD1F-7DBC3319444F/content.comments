@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Comments>
+    <Comment ID="05705EA8-B59A-40C0-9763-1FECD034120B" Footnote="Yes" Color="0.949769 0.949769 0.949769"><![CDATA[{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Control Flow cannot leak because Components cannot 
+\f1\i CALL
+\f0\i0  other components.  Components can only SEND() messages upwards to their parents for routing.  Corollary: the direction of SEND() is vertical-only - SEND() cannot be used to deliver messages 
+\f1\i sideways
+\f0\i0  to peer components.  Components can SEND() data upwards to their parent.  A parent can route messages between children (and their own input and output pins).  Parents can SEND() commands downwards to children.}]]></Comment>
+</Comments>

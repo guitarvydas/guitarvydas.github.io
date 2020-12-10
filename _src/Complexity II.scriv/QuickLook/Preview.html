@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<title>Complexity II</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Diagrams</p>
+<p class="itemText">Q: Which is simpler, diagram A or<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">diagram B?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Code</p>
+<p class="itemText">Q: Which code is simpler?<span class="Apple-converted-space">  </span>Code C:<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function Cons(x,y) {<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>this.car = x;<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>this.cdr = y;<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function car(cell) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return cell.car;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function cdr(cell) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return cell.cdr;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">or Code D?<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function Cons(x,y) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return function(placeholderFunction) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>placeholderFunction(x,y);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function car(cell) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return cell(</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>function(x,y){</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>return x;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function cdr(cell) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return cell(</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>function(x,y){</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>return y;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">};</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Simplicity</p>
+<p class="itemText">Simplicity can be defined as “lack of nuance”.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Architects' Responsibility</p>
+<p class="itemText">It is the Software Architect’s responsibility to make the design readable and understandable.</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

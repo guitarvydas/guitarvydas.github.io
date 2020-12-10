@@ -1,0 +1,36 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The parser consists of two main parts:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}a grammar\
+{\listtext	\uc0\u8226 	}a set of semantics hung off of the grammar\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+I am using the {\field{\*\fldinst{HYPERLINK "scrivcmt://21574B46-DBB9-489D-BF38-1B3246771B91"}}{\fldrslt grammar}} to help me build the transpiler.\
+\
+I start a new pass when I want encapsulation.  The encapsulation provided by pure OO is not enough.  Just creating new sets of semantics is not sufficient to encapsulate all of the changes I need to make.  \
+\
+In particular, whenever I need to hack on the grammar to make things easier, I need to start a new pass.  OO encapsulation won't save me here - I need to start with a simple grammar (e.g. Scm2JSBasic) and freeze my work.  Then, I need to create new layers of grammars that perform specific functions for my transpiler.  \
+\
+Ohm-JS has a way to extend grammars in an OO-like manner, but this feature does not actually encapsulate the changes.  The final result is a "flat" grammar that may contain hidden dependencies that make debugging harder.\
+\
+It is much better (safer, less debugging) to use a hierarchy of composed grammars instead of inherited grammars.\
+\
+I want to freeze what I've got.  I don't want new changes to interfere with previously-correct grammars.  The only way that I know of to accomplish this is to use 
+\f1\i passes
+\f0\i0  (passes like pipelines in the UNIX\'ae shell.  This feature - composition - might be why pipelines became popular). \
+\
+The List Constant changes could be done in the pass1 grammar, but, then, the layering Architecture would be lost.  The grammar would become a ball of lint - collecting every change I've made, instead of laying out the changes in a layered manner.\
+\
+PEG's backtracking leads to unexpected bugs when new changes are added to an existing grammar.\
+\
+An example of the problem is seen when comparing the original pass1 grammar with the changes I added in pass2.  Pass2 has more details.  When trying to understand the grammar, one should begin by looking at the pass1 grammar.  The changes for pass2 could have been added by extending the grammar via inheritance and overriding, but overriding can lead to hidden dependencies and new bugs in previously working code.  What I want is a freeze of what already works.  Then, I want to compose new changes in layers over what already works.  Overriding does not layer my changes - inheritance and overriding change the final grammar and, possibly, the final result.\
+\
+Paul Bassett's work on Frame-based {\field{\*\fldinst{HYPERLINK "scrivcmt://8899B848-77D1-4F31-8B8F-31B4911F7C5F"}}{\fldrslt software}} might be a direction to look into.  Bassett's Frames are not the same concept as the concept called "frames" in older forms of AI.}

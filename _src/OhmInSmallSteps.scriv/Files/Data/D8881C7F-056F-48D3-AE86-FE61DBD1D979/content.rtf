@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 A token-based representation allows us to stick debugging information into each token.\
+\
+For example, when there's a syntax error, we might want to know the line & character position of each character and which file it came from.\
+\
+For now, we can use a trick pioneered by C compilers - create 
+\f1\i pragmas
+\f0\i0  for file and lines.  The pragmas are passed down the pipeline and, if an error occurs, the filename and line number of the erroneous input can be examined and displayed.  \
+\
+In C, the file pragma appears as a single line with the contents {\field{\*\fldinst{HYPERLINK "scrivcmt://6833920C-0874-4EC6-9019-EA2B3364BB91"}}{\fldrslt '#file}} "<\'85>"'.  The line pragma appears as a different pragma '#line {\field{\*\fldinst{HYPERLINK "scrivcmt://2FC07573-93FC-4A54-8B5D-D870D6300037"}}{\fldrslt nn}}'.  The various passes in the pipeline record the pragmas but otherwise ignore them until an error occurs.\
+\
+Question: if the grammar is embedded as a script in HTML, what is the #file for it?\
+Answer: I don't know yet.  It will depend on the debugger.\
+\
+Question: if the grammar is embedded as a script in HTML, what is 
+\f1\i nn
+\f0\i0  in the #line for it?  Is 
+\f1\i nn
+\f0\i0  a line-offset within the script or is it a line-offset from the beginning of the HTML file?\
+Answer: I don't know yet.\
+\
+Question: if the grammar is embedded as a script in HTML, maybe #file and #line can be replaced by something else, like hidden HTML elements?  Is #file even useful in this context?\
+Answer: I don't know yet.\
+\
+TODO:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}I want to create a unity grammar that simply outputs what is input (probably stripping out comments).  This might give us ideas on how to proceed - {\field{\*\fldinst{HYPERLINK "scrivcmt://4C70EA7F-4A60-4632-9CFE-823A54FDBCBE"}}{\fldrslt DI}} via 
+\f1\i divide&conquer
+\f0\i0  and 
+\f1\i experimentation
+\f0\i0 .\
+{\listtext	2.	}I want to create a semantics that inserts #line pragmas.\
+{\listtext	3.	}I want to create a grammar that expands the ' (QUOTE) shorthand in Scheme to its full form (also Scheme, just harder for humans to read).\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+I will switch to using an index.html page for these experiments, instead of using node.js\'85\
+}

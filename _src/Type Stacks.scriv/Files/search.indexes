@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="7AD785A9-CBC8-421B-B0D1-7741F704B4EE">
+            <Title>Type-stacks-Bits-Parsed-to-Bytes</Title>
+        </Document>
+        <Document ID="56DD7D05-977E-4685-A34B-9DB1B1EA12E4">
+            <Title>Everything Starts Out as a Bit</Title>
+            <Text>Everything starts out as a bit.
+
+</Text>
+        </Document>
+        <Document ID="2E2616F7-7CF1-427B-9B22-C74016C80BEE">
+            <Title>Bytes Parsed into More Interesting Structures</Title>
+            <Text>We, then, create a handful of filters.  Some low-level filters are shown in Fig. &lt;$n:figure:lowLevelFilters&gt;
+
+
+#
+Fig. &lt;$n:figure:lowLevelFilters&gt; Low Level Filters
+
+(Filters can further be chained together to recognize more interesting, more complicated, types).
+</Text>
+        </Document>
+        <Document ID="51B63EC9-78F9-4566-B5E0-4C8EF01F8F4E">
+            <Title>Type stacks</Title>
+            <Text>We can think in terms of stacks of types.
+
+</Text>
+            <Comments>or “pipelines”, here “stack” is used in the way it is used to describe ethernet handlers</Comments>
+        </Document>
+        <Document ID="067532F3-2096-4EAA-8191-C4A304CC0C81">
+            <Title>RATFOR, Software Tools</Title>
+            <Text>RATFOR built line filters using Procedures and Functions.  It used the Operating System to preempt filters.</Text>
+            <Comments>https://www.amazon.com/Software-Tools-Brian-W-Kernighan/dp/020103669X/ref=sr_1_1?keywords=ratfor&amp;qid=1577201614&amp;sr=8-1</Comments>
+        </Document>
+        <Document ID="D72FDC16-515E-40A1-BC82-5C40B1F8058A">
+            <Title>Efficiency</Title>
+            <Text>We might prefer something that is more efficient than full-blown Operating Systems, to implement filters.  Ideally, we want filters to be at least as efficient as function calls.
+
+The concept of closures is prevalent in modern languages.
+
+I argue that closures are threads.
+
+Operating system-level processes (threads) are threads that include provisions for time-sharing, full-preemption, memory sharing, etc.  Most of these features are unnecessary in most uses of threads.  Most problems in multi-tasking can be ascribed to these, mostly unnecessary features.  These complications are needed only by programs such as Linux, Windows, MacOS, etc.
+
+I argue that operating-system threads are ad-hoc closures, implemented in assembler.</Text>
+            <Comments>Anonymous functions, callbacks, futures, etc.
+accidental complexity
+libraries</Comments>
+        </Document>
+        <Document ID="A5C2E9DC-A528-4A2A-8BC6-CB4BED4B1CD3">
+            <Title>Bits are Parsed Into Bytes</Title>
+            <Text>#
+Fig. &lt;$n:figure:Type-statck-Bits-Parsed-to-Bytes&gt;
+
+Bits can be parsed into bytes.
+
+The filter for such a parser is nearly trivial: collect 8 bits, emit a byte.  Emit an error if you see an EOF when you have collected fewer than 8 bits.
+
+Even a filter as simple as that above can have more than one implementation.  
+
+Another implementation might pad 0’s onto the end of an unfinished byte, when an EOF is seen.
+
+Or, we might pad 0’s at the front of the byte upon EOF.
+
+Or, we might pad with trailing 1’s, or we might pad with leading 1’s.
+
+Or, we might parse bits into ASCII and use the top bit as a parity bit.
+
+Or, we might parse bits into EBCDIC.
+
+Clearly, if we try to do all of the above in a single filter, the code will become unreadable and there will be option flags (TL;DR).  There will be too many flags. They will need to be documented and memorized.</Text>
+            <Comments>We ignore how EOF is recognized, for simplicity.  EOF might be another input, it might be a timeout, etc.
+a.k.a. parameters.
+Common Lisp format directive strings are like that.  There are many, many options.  One simply memorizes the subset of directives that one tends to use.  Then, over time, one learns how to use new options, one at a time.  The documentation is split into two major streams - a legalistic explanation of every option, and, a cookbook version that lists immediately useful patterns. Emacs is like that, also.</Comments>
+        </Document>
+        <Document ID="D83DE3E5-810A-4E50-9DB8-A960839963B1">
+            <Title>Composition</Title>
+            <Text>Note that it is hard(er) to implement filters as shown in Fig. &lt;$n:figure:lowLevelFilters&gt; using only functions.
+
+The boxes emit two kinds of objects (good output and errors), but could emit many different kinds of objects.  Functions return only one object.
+
+These boxes emit objects at various times.  For example, the UNIX Line filter might need to wait for 80 bytes before seeing a line-feed.  It emits a full line only after it has seen all bytes that belong to that line.  It waits and SENDs nothing until it has sees all 80 bytes.  If the UNIX Line filter contains a buffer that overflows, it can emit an error at a random time.
+
+</Text>
+            <Comments>Unicode, lines, ASCII
+Return is a subset of Send().  Return pre-assumes that every function will always produce a single output.  Send() can be used multiple times to produce multiple outputs.
+\n
+In this example
+Of some kind.</Comments>
+        </Document>
+        <Document ID="9B2DBFC5-3202-4BB7-A4C4-599690145309">
+            <Title>lowLevelFilters</Title>
+        </Document>
+    </Documents>
+</SearchIndexes>

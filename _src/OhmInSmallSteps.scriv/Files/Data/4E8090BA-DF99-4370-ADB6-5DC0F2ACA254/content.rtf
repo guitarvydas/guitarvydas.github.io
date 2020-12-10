@@ -1,0 +1,51 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fnil\fcharset0 LucidaGrande;\f2\froman\fcharset0 Palatino-Italic;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid102\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid302\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 It turns out the Scheme and the way that the code is written, makes it easy to use an accumulator in print-frame (and print-frame-loop)\
+\
+The accumulator is intialized to '() in the top call to print-frame.  Successive calls to print-frame-loop either \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}pass the accumulator unchanged, or, \
+{\listtext	\uc0\u8226 	}cons a result onto the accumulator.  \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 The bottom-most call to print-fame-loop simply returns the accumulator.\
+\
+Wiring an accumulator into prove6 requires some non-local changes - all calls to prove6() need to be altered, and, back6() needs to be altered, and all calls to back6() need to be altered.  \
+\
+Discussion: \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}If proves6() were written as a nested set of loops, locality would have been "better".  The goal of PROLOG is a one-off problem - stop after every answer and let the user decide whether more answers are wanted.  Discussion: should all of the code be affected by this one-off problem?  Should the solution be first described in its simplest form (a set of nested loops), and show points where user interaction is required?  If I had infinitely fast hardware, I would simply generate all of the answers, then print them out (in a REPL) one by one.  Everything beyond this is an optimization.  Clouding the {\field{\*\fldinst{HYPERLINK "scrivcmt://846FD6D7-C0D1-4106-B18E-C7773480A37D"}}{\fldrslt DI}} with optimization details is something I dislike.  Optimization is a valid concern, but should not be tangled up with DI.\
+		The PROLOG "problem" breaks down (divide&conquer) into two sub-problems\
+\pard\tx940\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li1440\fi-1440\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	
+\f1 \uc0\u8259 
+\f0 	}find all solutions\
+{\listtext	
+\f1 \uc0\u8259 
+\f0 	}allow the user to ask for solutions one by one.\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls3\ilvl0\cf0 		Paul {\field{\*\fldinst{HYPERLINK "scrivcmt://8FDB0A3A-B0B2-41EC-8742-000B50F914A0"}}{\fldrslt Graham}} and Peter {\field{\*\fldinst{HYPERLINK "scrivcmt://F95F7242-DCEF-4030-867D-D9D9870D9F1F"}}{\fldrslt Norvig}} went to great lengths to show optimized solutions to the PROLOG problem, essentially using {\field{\*\fldinst{HYPERLINK "scrivcmt://2C63018E-E070-498F-BE2C-4F81B0DAF157"}}{\fldrslt CPS}}.  Their code is very complicated and imparts a mystical property to their books.\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\uc0\u8226 	}At what point does the cognitive load get so large that using an accumulator makes the code no clearer?  As a 
+\f2\i maintainer
+\f0\i0 , I want to make as few changes as possible - using a global variable to "cross-cut" prove6 and back6 makes sense from this perspective (back6 doesn't even use the accumulator), but, as a 
+\f2\i designer
+\f0\i0 , I might want to describe the algorithm in terms of an accumulator and would be happy to wire it into prove6 and back6.\
+\pard\tx940\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li1440\fi-1440\sl264\slmult1\pardirnatural\partightenfactor0
+\ls4\ilvl1\cf0 {\listtext	
+\f1 \uc0\u8259 
+\f0 	}The mutual recursion between prove6 and back6 is a code-driven, non-natural split, but, the if emphasis is on showing how backtracking works, is this split needed?\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\uc0\u8226 	}The original intent of Nils Holm's paper (and code) was to show how backtracking in PROLOG works.  "Back6()" shows the backtracking and "prove6()" calls it at the appropriate points.  When "prove6()" finds an answer, it calls "print-frame()", then backtracks to find more answers.  I, firstly, want to find 
+\f2\i all
+\f0\i0  of the answers.  Later, I might want to cut the PROLOG behaviour in - which is: stop after any answer is found, let the user choose whether more answers are wanted.\
+}

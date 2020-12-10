@@ -1,0 +1,49 @@
+#!/bin/bash
+./debug-entry $0
+
+## inputs
+## port 3 --> filename
+## port 4 --> go
+#
+## outputs
+## <none> - side effect creates a file in ./_post and, maybe in ./assets/
+#
+
+wire1=wire_s2j_1
+wire1a=wire_s2j_1a
+wire1b=wire_s2j_1b
+wire1c=wire_s2j_1c
+
+wire2=wire_s2j_2
+wire2a=wire_s2j_2a
+wire2b=wire_s2j_2b
+
+wire3=wire_s2j_3
+wire4=wire_s2j_4
+
+mkfifo ${wire1}
+mkfifo ${wire1a}
+mkfifo ${wire1b}
+mkfifo ${wire1c}
+mkfifo ${wire2}
+mkfifo ${wire2a}
+mkfifo ${wire2b}
+mkfifo ${wire3}
+mkfifo ${wire4}
+
+
+# sub components
+./wire-splitter3 "$0" 3<${wire1} 4>${wire1a} 5>${wire1b} 6>${wire1c} &
+./wire-splitter2 "$0" 3<${wire2} 4>${wire2a} 5>${wire2b} &
+./isADirectory "$0" 3<${wire1c} 4>${wire3} 5>${wire4} &
+./pathB "dir $0" 3<${wire1a} 4<${wire2a} 5<${wire3} &
+./pathA "file $0" 3<${wire1b} 4<${wire2b} 5<${wire4} &
+
+read filename </dev/fd/3
+echo "${filename}" >${wire1}
+
+read contents </dev/fd/4
+echo "${contents}" >${wire2}
+
+wait
+./debug-exit $0

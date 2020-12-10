@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="3FA8A4ED-55CC-4B95-BFD5-DC8E9D126C45">
+            <Title>Architects' Responsibility</Title>
+            <Text>It is the Software Architect’s responsibility to make the design readable and understandable.</Text>
+        </Document>
+        <Document ID="CC94946C-33B1-48C5-8C19-A635D879DA92">
+            <Title>Code</Title>
+            <Text>Q: Which code is simpler?  Code C: 
+function Cons(x,y) { 
+    this.car = x; 
+    this.cdr = y; 
+};
+function car(cell) {
+    return cell.car;
+};
+function cdr(cell) {
+    return cell.cdr;
+};
+
+
+or Code D? 
+function Cons(x,y) {
+    return function(placeholderFunction) {
+	placeholderFunction(x,y);
+    };
+};
+function car(cell) {
+    return cell(
+	function(x,y){
+	    return x;
+	}
+    );
+};
+function cdr(cell) {
+    return cell(
+	function(x,y){
+	    return y;
+	}
+    );
+};
+
+</Text>
+        </Document>
+        <Document ID="311A579B-DCE9-461E-B893-5226A750D73D">
+            <Text>Complexity II
+
+	Diagrams
+
+Q: Which is simpler, diagram A or 
+
+#
+diagram B?
+
+#
+	Code
+Q: Which code is simpler?  Code C: 
+function Cons(x,y) { 
+    this.car = x; 
+    this.cdr = y; 
+};
+function car(cell) {
+    return cell.car;
+};
+function cdr(cell) {
+    return cell.cdr;
+};
+
+
+or Code D? 
+function Cons(x,y) {
+    return function(placeholderFunction) {
+	placeholderFunction(x,y);
+    };
+};
+function car(cell) {
+    return cell(
+	function(x,y){
+	    return x;
+	}
+    );
+};
+function cdr(cell) {
+    return cell(
+	function(x,y){
+	    return y;
+	}
+    );
+};
+
+Simplicity can be defined as “lack of nuance”.
+
+It is the Software Architect’s responsibility to make the design readable and understandable.</Text>
+        </Document>
+        <Document ID="E5FF6986-CE36-4D94-BA28-B432E05ED13E">
+            <Title>Diagrams</Title>
+            <Text>Q: Which is simpler, diagram A or 
+
+#
+
+
+
+diagram B?
+
+#
+</Text>
+        </Document>
+        <Document ID="97D4ADA6-0AA0-4A21-A37A-55DCAC449ECA">
+            <Title>Simplicity</Title>
+            <Text>Simplicity can be defined as “lack of nuance”.
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

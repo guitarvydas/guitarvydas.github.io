@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Divide and Conquer</title>
+  <meta name="CreationTime" content="2020-12-09T14:55:24Z">
+  <meta name="ModificationTime" content="2020-12-09T14:55:24Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px Times}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">When a problem looks to be complicated, a strategy for attacking the problem is “divide &amp; conquer”.<span class="Apple-converted-space">   </span></p>
+<p class="p2"><br></p>
+<p class="p1">Most programmers know about Divide &amp; Conquer.</p>
+<p class="p2"><br></p>
+<p class="p1">What problems look to be complicated?</p>
+<p class="p2"><br></p>
+<p class="p1">For one – multi-tasking is considered “hard” by many programmers.<span class="Apple-converted-space">  </span>Multi-tasking is actually simple, but needs to be further divided (and conquered).<span class="Apple-converted-space">  </span>For example, multi-tasking, as it is know today consists of several sub-problems:</p>
+<p class="p2"><br></p>
+<ul class="ul1">
+  <li class="li1"><span class="s1">•<span class="Apple-tab-span">	</span></span>time-sharing</li>
+  <li class="li1"><span class="s1">•<span class="Apple-tab-span">	</span></span>memory sharing</li>
+  <li class="li1"><span class="s1">•<span class="Apple-tab-span">	</span></span>networking, IPC, communication</li>
+  <li class="li1"><span class="s1">•<span class="Apple-tab-span">	</span></span>concurrency.</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p1">Let’s apply Divide &amp; Conquer to the multi-tasking.<span class="Apple-converted-space">  </span>(1) Time-sharing is needed only by operating systems, such as Linux, Windows, MacOS, etc.<span class="Apple-converted-space">  </span>Let’s throw time-sharing aside.<span class="Apple-converted-space">  </span>Gnarly problems, like priority inversion go out the window.</p>
+<p class="p2"><br></p>
+<p class="p1">Memory sharing was an issue when memory was expensive.<span class="Apple-converted-space">  </span>Memory is no longer expensive.<span class="Apple-converted-space">  </span>Let’s throw memory-sharing aside.<span class="Apple-converted-space">  </span>Thread-safety, etc., go out the window.</p>
+<p class="p2"><br></p>
+<p class="p1">We are left with networking and concurrency.</p>
+<p class="p2"><br></p>
+<p class="p1">Networking is easily reduced to it most basic form – a wire.</p>
+<p class="p2"><br></p>
+<p class="p1">Concurrency, at its most basic form is 2 apps communicating across a wire.</p>
+<p class="p2"><br></p>
+<p class="p1">We know how to write the two apps –say, using Python, JS, etc., etc.. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">Yet, we don’t have a “language” for app-to-app communication.<span class="Apple-converted-space">  </span>There is no popular Python-for-comms language.<span class="Apple-converted-space">  </span>There are budding attempts at this kind of language, the most common being UNIX® <i>bash</i>, but <i>bash</i> is tangled up in complexity – time-sharing and memory sharing and variables and, etc., etc. ... <span class="Apple-converted-space">  </span>FBP<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> is a not-popular-enough attempt as this kind of language, but it tends to be tangled up with multi-tasking libraries which are tangled up with time-sharing and memory-sharing.<span class="Apple-converted-space">  </span>The FBP site references Linda.<span class="Apple-converted-space">  </span>CPS<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> and CSP<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> are text-only attempts to tackle this problem – they simply demonstrate that the text-only mentality does not extend well to concurrent applications.<span class="Apple-converted-space">  </span>TC;DU (Too Complicated ; Didn’t Use).</p>
+<p class="p2"><br></p>
+<p class="p1">An acquaintance of mine builds products that measure the health of race horses.<span class="Apple-converted-space">  </span>His app uses some 37 processors.<span class="Apple-converted-space">  </span>He uses a language called MicroPython.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a><span class="Apple-converted-space">  </span>He has no problem with multi-tasking.<span class="Apple-converted-space">  </span>One processor, one thread.<span class="Apple-converted-space">  </span>Node.js?<span class="Apple-converted-space">  </span>Why bother?<span class="Apple-converted-space">  </span>Processors are cheap. <span class="Apple-converted-space">  </span>Linux?<span class="Apple-converted-space">  </span>Why bother?<span class="Apple-converted-space">  </span>Processors are cheap.<span class="Apple-converted-space">  </span>When he wants to get <i>really</i> complicated, he creates an event loop on a processor, that checks for incoming events and does some work in the background.</p>
+<p class="p2"><br></p>
+<p class="p1">We need a lean language for coordinating a hierarchy of processors<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">We need to apply divide &amp; conquer – throw out operating systems, throw out heavy-weight thread libraries, throw out memory sharing, etc.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">Divide &amp; Conquer and Hierarchy leads to thinking about the Design task as a fractal.<span class="Apple-converted-space">  </span>Every Component in a Design “does one thing well” and leaves the rest for further sub-dividing.</p>
+<p class="p3">Where does this stop?<span class="Apple-converted-space">  </span>It depends on the application and the Designer’s tolerance for boredom.</p>
+<p class="p3">As long as the Designer makes the choices clear, expresses the DI,<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> then future readers (Optimization Engineers, Maintenance Engineers, Testing Engineers, etc.) can understand – and deal with – the choices made in the design.<span class="Apple-converted-space">  </span>There is no <i>one way</i> to Design something, there is only “here is how I chose to design it” documentation (executable documentation would be more precise than static documentation).</p>
+<p class="p2"><br></p>
+<p class="p3">Q: Is the documentation for a Design, itself a fractal?<span class="Apple-converted-space">  </span>A binary tree.<span class="Apple-converted-space">  </span>Each node contains a bite of the solution and “the rest”.<span class="Apple-converted-space">  </span>Each Bite describes the paradigm and details used for that bite.</p>
+<p class="p3">For example:</p>
+<p class="p3"><img src="/assets/2020-12-09-14-55-24-Images/Fractal Design Tree-Simplified Fractal Design.png" width="521px" height="461px" alt="Image"></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Flow-Based Programming &lt;ref&gt;</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Continuation Passing Style</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Communicating Sequential Processes &lt;ref&gt;</p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>https://micropython.org/</p>
+<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>N.B.<span class="Apple-converted-space">  </span>I do not use the phrase CPU, since none of the processors are Central.</p>
+<p class="p4"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>Design Intent.</p>
+</div>
+</body>
+</html>

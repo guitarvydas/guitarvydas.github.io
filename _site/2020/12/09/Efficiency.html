@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Efficiency</title>
+  <meta name="CreationTime" content="2020-12-09T15:06:08Z">
+  <meta name="ModificationTime" content="2020-12-09T15:06:08Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 12.0px Times}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Using C++ will not automatically produce more efficient code.</p>
+<p class="p1">Using Rust will not automatically produce more efficient code.</p>
+<p class="p1">Using C will not automatically produce more efficient code.</p>
+<p class="p1">Learning to use a debugger is a step towards producing efficient code.</p>
+<p class="p1">Learning to use a profiler is a step toward producing efficient code.</p>
+<p class="p1">Rust’s Ownership concept has been tried before.<span class="Apple-converted-space">  </span>See FBP.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space">   </span></p>
+<p class="p1">I used ownership in the 1990’s, but called it “physical objects”.<span class="Apple-converted-space">  </span>I didn’t write about it.<span class="Apple-converted-space">  </span>Garbage Collection turned out to be more convenient.</p>
+<p class="p1">Lisp uses Garbage Collection, but it is possible to craft a Lisp program that doesn’t need Garbage Collection during its steady state.<span class="Apple-converted-space">  </span>Lisp allocates and GC’s memory when CONS is called.<span class="Apple-converted-space">  </span>It is possible to write Lisp code that doesn’t invoke CONS.</p>
+<p class="p1">Efficiency is a per-project concern and cannot, reasonably, be generalized.</p>
+<p class="p1">Efficiency is the concern of Efficiency Engineering.<span class="Apple-converted-space">  </span>Efficiency concerns should not pollute Architectural concerns.</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">MC6809 (an 8-bit processor) was more memory efficient than MC68000 (a 16-bit processor) code.<span class="Apple-converted-space">  </span>I measured that 6809 code was 40% the size of 68000 code.<span class="Apple-converted-space">  </span>I attributed the size difference to be due to the size of instructions – for the 6809, opcodes were bytes (8 bits), whereas for the 68000 opcodes were words (16 bits).</p>
+<p class="p1">One of the early Burroughs processors used Huffman Encoding to encode instructions.<span class="Apple-converted-space">  </span>The most common instruction was 2-bits long.</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">Smalltalk supported duck-typing with caches.<span class="Apple-converted-space">  </span>Methods were first looked up dynamically, then cached.<span class="Apple-converted-space">  </span>As the app ran and reached steady-state, the caches would tend towards containing the most-frequently-used methods, resulting in faster lookup for more-frequently-used methods.<span class="Apple-converted-space">  </span>Obviously the caches were populated on a per-application basis.<span class="Apple-converted-space">  </span>This was “good enough” and the compiler remained simple, not needing to predict the frequency-of-use for every method. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">This method of optimization (caching) allowed the original Architecture to remain intact, while allowing Efficiency Engineers to make the result faster.</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">I view everything as an interpreter.<span class="Apple-converted-space">  </span>The difference between compile-time and run-time is simply a function of the number of times each interpreter runs.<span class="Apple-converted-space">  </span>It is generally expected that compile-time interpreters (“the compiler”) will be run much less frequently than the run-time interpreters (“the app”).</p>
+<p class="p1">We can view this as a slider ...</p>
+<p class="p1"><img src="/assets/2020-12-09-15-06-08-Images/sliders-One Knob.png" width="481px" height="41px" alt="Image"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">Our division between compile-time and run-time is arbitrary.</p>
+<p class="p1">What if the slider had two knobs?<span class="Apple-converted-space">  </span>Compile-time, pre-run-time, run-time?</p>
+<p class="p1"><img src="/assets/2020-12-09-15-06-08-Images/sliders-Two Knobs.png" width="481px" height="41px" alt="Image"></p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">What if we had an infinite number of knobs on the slider?<span class="Apple-converted-space">  </span>What if, say, pre-run-time were divided up into smaller and smaller pieces, each with its own distinct purpose?<span class="Apple-converted-space">  </span>The tenet of component-based design is to “do one thing, and do it well” in each phase.<span class="Apple-converted-space">  </span>Could pre-run-time be broken down into method-lookup caching, branch-prediction, etc.?</p>
+<p class="p1">The front-end, compile-time, would have to create an intermediate form (IR – internal representation) that was easily searched and re-arranged in a successive manner.<span class="Apple-converted-space">  </span>I think of RTL<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> and OCG (Orthogonal Code Generator, Cordy)<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> technologies.<span class="Apple-converted-space">  </span>Data Descriptors (Holt)<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> show a way to represent data locations in a generalized manner.<span class="Apple-converted-space">  </span>FP (Functional Programming) leads to thinking about chains of filters.</p>
+<p class="p2"><br></p>
+<p class="p3"><br></p>
+<p class="p1">O(N) analysis says that O(1) is “better” than O(3).</p>
+<p class="p1">The real analysis is UX time.<span class="Apple-converted-space">  </span>What performance does the user see? What performance does the user care about?<span class="Apple-converted-space">  </span>What performance does the user <span class="s1">not</span> care about?</p>
+<p class="p1">O(3) is OK in a Component, if the Component is small, from a user’s perspective.</p>
+<p class="p1">How do the O(N)s in Components add up in UX?<span class="Apple-converted-space">  </span>The answer used to be a no-brainer, when everything was done on one CPU.<span class="Apple-converted-space">  </span>Now, a long time after O(N) analysis was invented, hardware is much cheaper, processors are much cheaper and memory is cheaper and more abundant.</p>
+<p class="p1">We need to re-examine efficiency analysis in light of the new realities and, in light of FD.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>https://jpaulm.github.io/fbp/index.html</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>https://www.researchgate.net/publication/220404697_The_Design_and_Application_of_a_Retargetable_Peephole_Optimizer</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y</p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>https://en.wikipedia.org/wiki/Data_descriptor</p>
+<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Fractal Design</p>
+</div>
+</body>
+</html>

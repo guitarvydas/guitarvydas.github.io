@@ -1,0 +1,31 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 In Scheme, almost everything is a function call with evaluated arguments.\
+\
+There are some special forms, though:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}cond\
+{\listtext	\uc0\u8226 	}let (and let*)\
+{\listtext	\uc0\u8226 	}if\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+These are handled by adding more detailed rules to the grammar.  \
+(See commit f6c5b87c7a5995ea1a2486c8f05c6d92798c6610 and the preceding commits).\
+\
+Test expressions in COND and IF are essentially the same, but it helps to give rules different names depending on their context (e.g. test expression in COND vs. test expression in IF).  The transpiler might emit different code for each of these rules, depending on the target language and its {\field{\*\fldinst{HYPERLINK "scrivcmt://6DDA2DD6-4988-41A1-B40E-F8400B9DF924"}}{\fldrslt syntax.}} \
+\
+For example, I created separate parsing rules for the first test+clause in COND vs. the rest of the test+clauses of a COND, even though they are semantically the same.  I want to transpile Scheme's COND into if-then-elseif-then\'85 statements in JS.  In this case, the first test+clause needs to transpile to an "if" statement, whereas the rest of test+clauses need to transpile into "\} else if (\'85) \{" statements.\
+\
+The pattern matcher doesn't care when I split rules, but, this can be helpful in making the transpiler simpler, for me, to write.  Patterns can help tell me in which order phrases arrive, even when the patterns match for the same phrases.\
+\
+At this moment, in this commit I've transpiled the special forms into pseudo-code, to watch how certain Scheme phrases are transpiled.\
+\
+Later, I will convert the pass2 semantics from emitting pseudo-code to emitting JS.\
+}

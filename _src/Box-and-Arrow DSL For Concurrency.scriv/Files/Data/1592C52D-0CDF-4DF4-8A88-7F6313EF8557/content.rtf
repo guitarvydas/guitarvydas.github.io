@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The system guarantees 
+\f1\i only
+\f0\i0  that an output event sent to multiple receivers is delivered "at the same time" to all receivers.\
+\
+This implies that the 
+\f1\i dispatcher() 
+\f0\i0 follows the following protocol for delivering an output event:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}pop event from output queue of 
+\f1\i Send()
+\f0\i0 er\
+{\listtext	\uc0\u8226 	}examine / get routing table (in parent of 
+\f1\i Send()
+\f0\i0 er)\
+{\listtext	\uc0\u8226 	}lock input queues of associated receivers\
+{\listtext	\uc0\u8226 	}for every receiver:\
+\pard\tx940\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li1440\fi-1440\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	
+\f2 \uc0\u8259 
+\f0 	}create a new event\
+{\listtext	
+\f2 \uc0\u8259 
+\f0 	}translate output pin tag to receiver-relative input pin tag, in new event\
+{\listtext	
+\f2 \uc0\u8259 
+\f0 	}copy {\field{\*\fldinst{HYPERLINK "scrivcmt://10BB41BB-D6B7-4B11-AEC1-D5797D676474"}}{\fldrslt data}} from output event to new event\
+{\listtext	
+\f2 \uc0\u8259 
+\f0 	}push new event onto input queue of receiver\
+\pard\tx220\tx720\tx1120\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}discard, {\field{\*\fldinst{HYPERLINK "scrivcmt://B1C0909B-24BB-49EC-8E8C-D6A61165AC56"}}{\fldrslt GC,}} output event\
+{\listtext	\uc0\u8226 	}unlock input queues of associated receivers.\
+\pard\tx560\tx1120\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+Obviously, the lock-time determines the throughput of the system.  This is a matter for Optimization Engineering.  It is probably problem-specific.  One solution does not fit all.  \
+\
+Digital hardware works this way.  A system that is still locked when new inputs arrive is said to "over-run".  It is, also, deemed to be "too slow" to solve a particular problem.  The definition of slow-ness depends on the problem and cannot be easily generalized.  Production {\field{\*\fldinst{HYPERLINK "scrivcmt://7E33DAAB-2A19-4938-B72D-B65693965DC4"}}{\fldrslt Engineering}} can worry about whether a penny can be saved by using slower components and avoiding over-kill (over-design) for a particular problem.\
+}

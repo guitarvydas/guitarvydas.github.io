@@ -1,0 +1,97 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Scheme (and Lisp in general) reads code into lists.  It interprets the first item in a list as the function and the rest of the items in the list as (evaluated) arguments.\
+\
+QUOTE is used to create list constants.  The Lisp runtime doesn't try to execute constants, but only creates them.  This is very similar to how, say, string constants are created in JS.\
+\
+For example, the "goals" database used in prolog-6.scm is:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (define goals '((some (? X))\
+                (some (? Y))\
+                (neq (? X) (? Y))))\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+which says that the global variable "goals" is created as a list constant containing 3 items.  \
+\
+Pass1 of the transpiler converts this into:\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+(define goals (quote ((some (? X)) (some (? Y)) (neq (? X) (? Y))))\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+I want this to transpile to something like the following, in pseudo-code:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (? X) \'97> new List("?", "X") (where ? is a valid identifier in Lisp)\
+(some (new  List("?","X"))) \'97> new List("some", new List("?","X"))\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 and the whole global constant (global variable) definition becomes:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 var goals = new List( new List("some",new List("?","X")),\
+                      new List("some",new List("?","Y")),\
+                      new List("neq", new List("?","X"), new List("?","Y") );\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+Looking at it this way, I see that the prolog-6.scm code uses "(? X)" to create "logic variables" (in this case, a logic variable called X).  Lists are used for all sorts of data in Lisp, but in this specific example, (? X) creates a logic variable.  Hmm, maybe I want the transpiler to turn this into:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 var goals = new List( new List("some",new LogicVar("X")),\
+                      new List("some",new LogicVar("Y")),\
+                      new List("neq", new LogicVar("X"), new LogicVar("Y")) );\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+It would be easy to have the transpiler convert patterns like "(? X)" into something more meaningful.  Hmm, maybe I should stick to the List version and make such changes later, after the basics are debugged.\
+\
+Decision made - I'll stick with the List version for now and optimize later\'85\
+\
+So, the transpiler should convert\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (quote (\'85)) \'97> new List(\'85)\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 And, it should do this recursively.\
+\
+The syntax for JS is wildly different from that of Scheme.  In order to continue using (the simpler) Scheme syntax, I transpile the above into valid Scheme.  I will unwind this in the final (emitter) pass.\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (quote (\'85)) \'97> (@newList@ (\'85)) \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+(See commit 0c410d333c6370d39b9f648c38dff2f505a5502e).}

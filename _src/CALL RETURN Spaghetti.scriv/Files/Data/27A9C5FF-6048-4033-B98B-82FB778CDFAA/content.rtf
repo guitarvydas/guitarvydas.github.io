@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f0\fs24 \cf0 All Components have an input queue, onto which incoming events are {\field{\*\fldinst{HYPERLINK "scrivcmt://F19F5F9D-4D92-4919-9FB8-9260531EBA9F"}}{\fldrslt placed.}}\
+{\listtext	\uc0\u8226 	}Components cannot 
+\f1\i call
+\f0\i0  one another.\
+{\listtext	\uc0\u8226 	}Components are 
+\f1\i asynchronous.
+\f0\i0 \
+{\listtext	\uc0\u8226 	}A 
+\f1\i Dispatcher
+\f0\i0  routine decides which Component will run and in what {\field{\*\fldinst{HYPERLINK "scrivcmt://DB25634F-BDBA-4EA8-896D-C02DBC90A9C6"}}{\fldrslt order}}.\
+{\listtext	\uc0\u8226 	}Components are 
+\f1\i ready
+\f0\i0  if they have events in their input queues.\
+{\listtext	\uc0\u8226 	}Components consume one input event and produce as many output {\field{\*\fldinst{HYPERLINK "scrivcmt://CF0AF2E0-3E28-4F0B-92AC-C8019DC946F0"}}{\fldrslt events}} as necessary in reaction to the input event.\
+{\listtext	\uc0\u8226 	}Components perform a {\field{\*\fldinst{HYPERLINK "scrivcmt://962B8C06-86DC-4FBF-A756-825AE58C4457"}}{\fldrslt co-routine}} dance with the Dispatcher.  When a Component has processed a single event to completion, the the Component 
+\f1\i yields 
+\f0\i0 to the Dispatcher.  The Dispatcher decides which Component will run {\field{\*\fldinst{HYPERLINK "scrivcmt://15C73F8C-1F98-422C-9B70-107F601660BD"}}{\fldrslt next.}} Components do not decide on the order of dispatching (as with call-return based code) nor can Components rely on any certain dispatching {\field{\*\fldinst{HYPERLINK "scrivcmt://3F841430-DFDC-4BD1-99D4-0BF8F969835D"}}{\fldrslt order.}}\
+{\listtext	\uc0\u8226 	}Events and data contained in events, are immutable.\
+{\listtext	\uc0\u8226 	}If a Component sends one event to multiple receivers, it must 
+\f1\i lock
+\f0\i0  the routing {\field{\*\fldinst{HYPERLINK "scrivcmt://DCA5D36E-E194-4DD6-9D1C-770FD6FF6CF8"}}{\fldrslt wire.}}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\
+In addition,\
+\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}Components have no parameters,  {\field{\*\fldinst{HYPERLINK "scrivcmt://99D5A86E-D48B-4203-94A6-FCD916C7FBF2"}}{\fldrslt Send()}} is used instead.\
+{\listtext	\uc0\u8226 	}Components have no return values.  Send() is used instead.\
+{\listtext	\uc0\u8226 	}There is no syntax for {\field{\*\fldinst{HYPERLINK "scrivcmt://AB1E4143-A895-4A7D-8F0A-29B680EB3AAF"}}{\fldrslt exceptions}}.  Send() is used instead.}

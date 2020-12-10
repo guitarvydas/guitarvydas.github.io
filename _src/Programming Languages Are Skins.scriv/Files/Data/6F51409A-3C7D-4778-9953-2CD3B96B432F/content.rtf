@@ -1,0 +1,122 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+\f3\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 Programming Language are Skins\
+\pard\pardeftab709\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2 \
+Languages are just 
+\f3\i skins
+\f2\i0  for paradigms.\
+\
+Each language should have (IMO) two syntaxes \'96 one for writing and one for reading.  The differences can be subtle and are influenced by the biases of the language creator.\
+\
+One extreme is Lisp \'96 
+\f3\i readable \'96 
+\f2\i0 after successful compilation.\
+The other extreme is Pascal \'96 
+\f3\i writable.
+\f2\i0 \
+
+\f3\i \
+
+\f2\i0 Important paradigms:\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls1\ilvl0
+\f0 \cf0 \'95	
+\f2 \ul \ulc0 search with backtracking\ulnone  \'96 examples: PROLOG, miniKanren, Nils Holm\'92s PROLOG in 6 Slides\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls1\ilvl0
+\f0 \cf0 \'95	
+\f2 \ul pipelines\ulnone  \'96 isolation\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Functional\ulnone  \'96 Haskell, Clojure, early Lisp, CPS (supported by Lisp and JS)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul assembler\ulnone  \'96 Lisp, JS \'96 possible to program in any paradigm without being forced in one direction or another\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul OO\ulnone  (Object Oriented) \'96 Smalltalk is the classic example, a form of code editing that emphasizes DRY \'96 copying super-classes into final code results in no semantic differences, just DRY ; could be replaced by a smarter editor or edit script (see Paul Bassett\'92s Frames technology) \
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul ownership\ulnone  \'96 FBP, (flow-based programming), Rust\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul early typing\ulnone  \'96 strongly typed languages like Haskell\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul late typing\ulnone  \'96 early Lisp (before Common Lisp), interpreted Common Lisp, BASIC, etc.\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul coordination\ulnone  \'96 FBP, Linda, Bash, closures, cl-event-passing, etc.\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul concurrent\ulnone  \'96 concurrency is a paradigm, concurrency is a prerequisite for parallelism\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul looping, recursion\ulnone  \'96 not suitable for distributed apps, suitable for component apps\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul sequential\ulnone  \'96 very common. CALL / RETURN, not suitable for distributed apps\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul asynchronous\ulnone   - operating systems (e.g. Linux, MacOSX, Windows), closures with a dispatcher\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul time-sharing\ulnone  \'96 needed by only a few apps (e.g. operating systems), but supplied in almost every threading library (=accidental complexity, =overkill)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul multiple-stage execution\ulnone  (compiler --> linker --> executable)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul single-stage execution\ulnone  (interpreter)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul waterfall\ulnone  \ul development\ulnone  \'96 assumption that \'93it\'94 will work, rigor = waterfall, strong typing = waterfall (assumption that the given type system will be what is needed)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul iterative development\ulnone  \'96 assumption that \'93it\'94 will fail, assume that you don\'92t know the answer and need to develop the answer.  This leads to the conclusion that everything must be automated \'96 it won\'92t work the first time and will need to be tweaked ; automation costs \'93up front\'94, but, saves time when tweaking.  This leads to the concept of D.I. (Design Intent) \'96 succinctly say what was intended, then automate the solution into a DSL \'96 it won\'92t work the first time, so you need to be reminded of what you 
+\f3\i thought
+\f2\i0  you were doing and you need to fix that thinking as rapidly as possible.  When is it \'93good enough\'94?  If you don\'92t know what you were doing, then using rigor to implement the wrong solution leads to too many details and long rework times.  If the Intention is wrong, it doesn\'92t matter how rigorously (provably) it is implemented.  Rigor is useful only after the Design has been proven to solve the problem that it was supposed to solve.\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 DRY \'96 a good edit script can accomplish all DRY\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 subroutines\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 modules for data-hiding \'96 C already had this in 1970\'92s ; see closures\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 memory management \'96 Garbage Collection \'96 already existed in early Lisps (late 1950\'92s)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 assign-once variables \'96 why do we need variables and variable names, if they are assigned only once?  Type names should be enough esp. when type synonyms exist.  \
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 types \'96 why are objects of different types put on the same stack?\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 syntax \'96 why only 1 syntax per language? Why is syntax restricted to rigid grids of NxM bitmaps (aka \'93characters\'94)?  Why not overlap?  Why not diagrammatic figures?\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Abstraction\ulnone  \'96 VLSI chips with limited number of I/O pins.\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Encapsulation\ulnone  \'96 not enough \'96 encapsulates data, but smears control-flow\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Isolation\ulnone  \'96 UNIX processes (encapsulate data AND control flow)\
+\ls1\ilvl0
+\f0 \'95	
+\f2 \ul Error Reporting\ulnone  \'96 good == Elm, hostile == JS}

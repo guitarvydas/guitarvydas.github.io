@@ -1,0 +1,1058 @@
+<html>
+
+<head>
+<title>OhmInSmallSteps</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Contents</p>
+<p class="itemText">Contents &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Introduction &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">GitHub &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Source to Source &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">1. Get the Grammar to Work &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">2. Add Semantics &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Matching Pairs &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Flip Chunks of Code &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Find and Replace &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Skip Spaces &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Skipping Comments &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Grammar Inheritance &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Extending a Rule &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Overriding a Rule &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Start Rule &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">CST &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pipelining Grammars &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Lines and Filenames &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Math Example in Browser &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm and PROLOG &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Introduction &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PROLOG CONTROL in 6 SLIDES &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm and Scheme &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Basic Sch...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">This is a set of experiments with 2 outcomes:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. PROLOG in JavaScript - transpilation of Nils Holm's PROLOG in Scheme to JavaScript.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. A deep dive into Ohm-JS with commentary along the way.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ How to build a transpiler in OHM (which is a lot less work than building a whole language)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ a "stream of consciousness" description of how I built the transpiler, including errors on my part</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If you want only the PROLOG in JS, feel free to skip to the end of this document and latest commit in github....</p>
+</li>
+<li>
+<p class="topLevelItemTitle">GitHub</p>
+<p class="itemText">https://github.com/guitarvydas/OhmSmallSteps</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Source to Source</p>
+<p class="itemText">This is the most basic example I could think of - input a string from a file, then dump it out. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">NPM install ohm</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm file source2source.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>code = any*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">JS (JavaScript) file source2source.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node source2source.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('source2source.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammar = ohm.grammar(grammarData)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const input = fs.readFileSync('s2s.js')</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">1. Get the Grammar to Work</p>
+<p class="itemText">My workflow is:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Get the grammar right. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. Add semantics.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is step 1 - see that the grammar is working as expected. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This should print "Matching Succeeded".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See source2source1a.js.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm file source2source.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>code = any*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">JS (JavaScript) file source2source1a.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node source2source1a.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('source2source.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammar = ohm.grammar(gr...</p>
+</li>
+<li>
+<p class="itemTitle">2. Add Semantics</p>
+<p class="itemText">Ohm file source2source.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>code = any*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">JS (JavaScript) file source2source1b.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node source2source.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('source2source.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammar = ohm.grammar(grammarData)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const input = fs.readFileSync('s2s.js')</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result = grammar.match(input)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if (result.succeeded()) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log("Matching Succeeded")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log("Matching Failed")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Matching Pairs</p>
+<p class="itemText">Ohm can parse matching pairs of delimiters.<span class="Apple-converted-space">  </span>This can't be done easily with YACC or REGEX.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm, PEG and recursive-descent parsers in general can include rules that call themselves.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A very simple example is shown below…</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>code = matchingBraces+ eol</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>matchingBraces =<span class="Apple-converted-space">    </span>"{" matchingBraces "}" -- braces</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>| innards</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>innards = "inside"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>eol = "\n"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The "magic" happens in the "matchingBraces" rule.<span class="Apple-converted-space">  </span>It consumes an opening brace "{", calls itself, then consumes a cl...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Flip Chunks of Code</p>
+<p class="itemText">I, finally, "do something". <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The parser figures out "chunkA" and "chunkB" for me.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Then, I use JS to construct a final string with chunkA and chunkB reversed.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is a cheesy solution, but hey, I believe in single-use DSLs, so it's open season.<span class="Apple-converted-space">  </span>Anything that will get me from Point a to Point b in a repeatable fashion is OK with me.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This simple example could have been done solely in JS using RegExps and .replace(), but, when the problem becomes larger, e.g. using a parser to refactor code, ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Find and Replace</p>
+<p class="itemText">More JS cheeze.<span class="Apple-converted-space">  </span>I use the previously built code and JS's .replace() with REGEXs to edit the final result…</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Again, this toy example doesn't show the full power of this kind of parsing/editing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I suggest that this is a technique that needs to be stored one's toolbelt.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">FindAndReplace.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node flip.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('flip.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammar = ohm.grammar(grammarData)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const input =...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Skip Spaces</p>
+<p class="itemText">To skip spaces, I simply need to change all of the rules so that they begin with uppercase letters.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">N.B. The semantic action "code" must also be changed to "Code".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I used the flip code for this test…</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">skipspacestest.js:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">ccc<span class="Apple-converted-space">  </span>ddd</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">skipspaces.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Code = ChunkC ChunkD</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ChunkC = "ccc" Eol*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ChunkD = "ddd" Eol*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Eol = "\n"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">skipspaces.js:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node skipspaces.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readF...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Skipping Comments</p>
+<p class="itemText">I use the original s2s.js as a test file, add (+=) a set of rules that treat comments as whitespace.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">skipcomments.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Code = any*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>space += <span class="Apple-converted-space">  </span>slashStarComment</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">           </span>| slashSlashComment</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>slashStarComment = "/*" (~"*/" any)* "*/"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>slashSlashComment = "//" (~"\n" any)* "\n"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">skipcomments.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node source2source1b.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('skipcomments.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const gram...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Grammar Inheritance</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Extending a Rule</p>
+<p class="itemText">I've written a grammar where Program2 inherits from Program.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Both grammars are in the same file.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I use the += operator to extend the rule "Code" in the second grammar Program2.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">N.B. I need to call ohm.grammars(…) not ohm.grammar(…) when there is more than one grammar in the file.<span class="Apple-converted-space">  </span>This call returns a namespace instead of a grammar object.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">N.B. The default start rule remains "Code" (inherited from the original grammar).<span class="Apple-converted-space">  </span>I deal with the start rule later.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">inherittest.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">eee</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">aaa</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">bbb</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">inherit...</p>
+</li>
+<li>
+<p class="itemTitle">Overriding a Rule</p>
+<p class="itemText"><span class="Apple-converted-space">  </span>Code := ChunkF ChunkA ChunkB</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Use the := operator instead of = (and +=).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">overridetest.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">fff</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">aaa</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">bbb</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">override.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Code = ChunkA ChunkB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ChunkA = "aaa" Eol*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ChunkB = "bbb" Eol*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Eol = "\n"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Program2 &lt;: Program {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Code := ChunkF ChunkA ChunkB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ChunkF = "fff" Eol*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">override.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// usage:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// npm install ohm-js</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">// node inherit.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('override.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarsNamespace = ohm.g...</p>
+</li>
+<li>
+<p class="itemTitle">Start Rule</p>
+<p class="itemText">- .match specifies start rule?<br></p>
+<p class="itemText">- g.match(str: string, optStartRule?: string) → MatchResult (see https://github.com/harc/ohm/blob/master/doc/api-reference.md)</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">CST</p>
+<p class="itemText">(Concrete Syntax Tree)</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Pipelining Grammars</p>
+<p class="itemText">Ideally, I would want a grammar that inputs a string and produces a token stream which I could then feed into other grammars in a pipeline fashion.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OMeta is able to run grammar pattern matchers on arbitrary input (e.g. strings and tokens).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm-JS cannot do this and works only with input strings (of characters).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I can compromise and produce strings.<span class="Apple-converted-space">  </span>I'll ignore low-level efficiency for the moment and see that our idea works.<span class="Apple-converted-space">  </span>Later, I can switch to OMeta if needed.<span class="Apple-converted-space">  </span>It might turn out that eve...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Lines and Filenames</p>
+<p class="itemText">A token-based representation allows us to stick debugging information into each token.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For example, when there's a syntax error, we might want to know the line &amp; character position of each character and which file it came from.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For now, we can use a trick pioneered by C compilers - create pragmas for file and lines.<span class="Apple-converted-space">  </span>The pragmas are passed down the pipeline and, if an error occurs, the filename and line number of the erroneous input can be examined and displayed. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In C, the file pragma appea...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Math Example in Browser</p>
+<p class="itemText">See https://github.com/harc/ohm/tree/master/examples/math.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This example shows how to embed a grammar into a webpage and then process it using different sets of semantics.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The grammar and semantics can be found in https://github.com/harc/ohm/blob/master/examples/math/index.html.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The grammar is embedded as a script with type="text/ohm-js".<span class="Apple-converted-space">  </span>This type distinguishes the Ohm-JS grammar from the other scripts and is read into variable "g" by line 63:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">var g = ohm.grammarFromScriptElement();</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The ac...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Ohm and PROLOG</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Introduction</p>
+<p class="itemText">PROLOG is just an exhaustive pattern matcher.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PROLOG uses backtracking to exhaustively explore a search space.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One could implement backtracking pattern matching with loops of loops, but the result quickly becomes unmaintainable and defies DI (expression of Design Intent), by overwhelming the code-reader with details.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Once one splits the expression of backtracking pattern matching away from the details, one can begin to think in terms of relations.<span class="Apple-converted-space">  </span>PROLOG was an early attempt to make this spl...</p>
+</li>
+<li>
+<p class="itemTitle">PROLOG CONTROL in 6 SLIDES</p>
+<p class="itemText">https://www.t3x.org/bits/prolog6.html</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Ohm and Scheme</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Basic Scheme Parser</p>
+<p class="itemText">The fundamental data type of Scheme is the SEXP (s-expression).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A SEXP is either an atom or a list.<span class="Apple-converted-space">  </span>A list can contain atoms and other lists.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If I get the basics right, I could use Ohm's grammar inheritance to build bigger grammars.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I don't expect to get that grammar right on the first pass.<span class="Apple-converted-space">  </span>Divide and Conquer.<span class="Apple-converted-space">  </span>I try out bits of ideas first, then, modify the bits to suit the bigger picture.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">My first attempt at a basic parser for SEXPs:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Scm2jsbasic1.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Scm2JSBasic {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Scm = List | Atom...</p>
+</li>
+<li>
+<p class="itemTitle">Inherit the Basic Parser</p>
+<p class="itemText">Let's try to inherit the basic scheme parser.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I think that I'm going to need to revisit that basic parser many times. I'm going to iterate on the basic definition as I build up more interesting parsers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is anti-waterfall thinking.<span class="Apple-converted-space">  </span>Beginning with the belief that one doesn't know where this is going to go.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Waterfall design would be the idea that I can get the basic grammar (and all subsequent layers) right without iterating the code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Programmers like languages that have REPLs (Read-Eval ...</p>
+</li>
+<li>
+<p class="itemTitle">Basic Scheme Version #2</p>
+<p class="itemText">Add ! as a valid identifier (first &amp; follow) character.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Add "-" as a valid identifier (follow) character.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Move "-", "_", "!", "?" to first (&amp; follow) character sets.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Add Strings (stunted, no escapes yet).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Add comments as whitespace.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Add () as a valid atom (NullList) and make List use + instead of * (looking ahead to future conversion simplicity).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Add ' recognizer.<span class="Apple-converted-space">  </span>(Single quote).<span class="Apple-converted-space">  </span>Single quote is a convenience operator that expands into a QUOTE form.<span class="Apple-converted-space">  </span>E.G. "'(a b c)" =&gt; "(quote (a b c))"....</p>
+</li>
+<li>
+<p class="itemTitle">Basic Scheme vs prolog-6.scm</p>
+<p class="itemText">Try the whole enchilada.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">test:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">see prolog-6.scm https://www.t3x.org/bits/prolog6.html</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">ohm grammar:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">see Basic Scheme Version #2</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">scm3jsbasic3.js:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const fs = require ('fs')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammarData = fs.readFileSync('scm2jsbasic2.ohm')</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const grammar = ohm.grammar(grammarData)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const input = fs.readFileSync('prolog-6.scm')</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result = grammar.match(input)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">//console.log(grammar.trace(input).toString())</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if (result.succeeded()) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log("Matching Succeeded")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} ...</p>
+</li>
+<li>
+<p class="itemTitle">Lisp is Assembly Language</p>
+<p class="itemText">Lisp makes a wonderful assembly language - it does just about everything.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Programs can be built in multiple paradigms and, Lisp has no syntax to get in the way.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Scheme is a stripped-down Lisp.<span class="Apple-converted-space">  </span>CL (Common Lisp) is a production tool.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I think that Lisp should form the basis of most languages and most projectional editors, but, I digress.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Basic Scheme to JS</p>
+<p class="itemText">I will settle on scm2jsbasic2.ohm and call it scm2js.ohm.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Likewise scm2js.js.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">test:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">prolog-6.scm</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">scm2js.ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Scm2JSBasic {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Program = Scm+</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Scm = List | Atom |<span class="Apple-converted-space">  </span>Boolean</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>QuotedSexp = "'" Scm</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>BackQuotedSexp = "`" Scm</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>CommaSexp = "," Scm</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>List = DottedList | NullTerminatedList</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>DottedList = "(" ListItem+ "." ListItem ")"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>NullTerminatedList = <span class="Apple-converted-space">  </span>"(" ListItem+ ")"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ListItem = (Atom | List)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>Atom = Integer | Symbol | String | Boolean | NullList | QuotedSexp | BackQuotedSexp | CommaSex...</p>
+</li>
+<li>
+<p class="itemTitle">Unity Parser</p>
+<p class="itemText">The first step towards pipelining grammars is to create a unity parser. The Unity parser contains a grammar plus an unparser. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The grammar I need is the bare minimum to parse prolog-6.scm.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The unparser simply walks the CST (Concrete Syntax Tree) and re-emits the sub-trees as needed.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Spaces and comments are dumped by the parser, so they don't appear in the CST and are not re-emitted.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This exercise showed a deficiency in the original Scm2JSBasic grammar.<span class="Apple-converted-space">  </span>The grammar, as written, was slurpi...</p>
+</li>
+<li>
+<p class="itemTitle">Expanding Quotes</p>
+<p class="itemText">In Lisp, "quote" is used so often that it has been given a shortcut, consisting of a single quote.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A quoted symbol, 'a is internally expanded into (quote a) and, ('(a b)) is internally expanded into ((quote (a b))).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Unquote is simple to implement as a tweak of the Unity parser:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(See commit f2105736ed1fb19b582986c4e8c2ba588c118eb8) [this code has a bug - see later]</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>sem.addOperation(</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>'unquote',</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>{</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>Program: function(tree) {return toListOfStrings(tree.unquote())},</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>For...</p>
+</li>
+<li>
+<p class="itemTitle">Expanding Backquotes</p>
+<p class="itemText">In Common Lisp (and Scheme), backquote is used as a shorthand to create lists.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Backquote evolved as a way to create programs that create programs.<span class="Apple-converted-space">  </span>In Lisp, programs are lists, so programs that create programs are just programs that create and modify lists.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In Lisp, the function "(LIST …)" creates a list containing all of its arguments.<span class="Apple-converted-space">  </span>In Lisp, all arguments are evaluated before being passed to a function.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In creating programs that create programs, using Lisp, one of the often-used idioms was ...</p>
+</li>
+<li>
+<p class="itemTitle">Pipelning Grammar</p>
+<p class="itemText">I should be able to feed the result from the latest unbackquote expander into the unity transformer.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This will test whether I can pipeline the grammar, i.e. feed one grammar into another.<span class="Apple-converted-space">  </span>Ohm-JS can only parse character strings.<span class="Apple-converted-space">  </span>The backquote expander produces strings, so this shouldn't be a problem for Ohm-JS.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pipelinetest() runs each test case twice.<span class="Apple-converted-space">  </span>The first time, the original Scheme is run through unbackquote.<span class="Apple-converted-space">  </span>Then, the result from unbackquote is run, again, through unbackquote (which...</p>
+</li>
+<li>
+<p class="itemTitle">Top Level Forms</p>
+<p class="itemText">In prolog-6.scm, there are only 3 kinds of top-level forms:<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. global variable definition</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. global function definition</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>3. call a function.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I created a new grammar - Scm2JSPass2 - knowing that the grammar does not need to handle quotes and backquotes.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I added new rules to the pass2 grammar, to handle the 3 top level forms.<span class="Apple-converted-space">  </span>The earlier grammar handled all forms, including top-level ones, with one rule "Form".<span class="Apple-converted-space">  </span>Now, the pass2 grammar differentiates between the 3 top-level forms.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(See comm...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Tweak the Grammar for the 3 Top-Level Scheme Constructs</p>
+<p class="itemText">The minimal Scheme parser that I need to parse and transpile prolog-6.scm contains (only) 3 top-level constructs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Global variable definitions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. Global function definitions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>3. Function calls.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A global variable definition looks like "(define sym &lt;form&gt;)".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A global function definition looks like "(define (sym syms) &lt;form&gt;)".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Function calls look like "(sym &lt;forms&gt;)".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">To pattern match this (aka parse this), I first need to differentiate syms from other kinds of atoms. <span class="Apple-converted-space">  </span>I call these Ident...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Multiple Grammars in One HTML File</p>
+<p class="itemText">I can have multiple grammars in an .HTML file, but I need to use .grammarsFromScriptElements() which returns a namespace containing multiple grammars, each contained in &lt;script<span class="Apple-converted-space">  </span>type="text/ohm-js"&gt;…&lt;/script&gt;<span class="Apple-converted-space">  </span>in the HTML document.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Semantics - Quoting</p>
+<p class="itemText">I've reached the point where I need to consider how every kind of Scheme expression should be transpiled into valid - and meaningful - JS.<span class="Apple-converted-space">  </span>This is call "semantics".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">First, let's look at (quote …).<span class="Apple-converted-space">  </span>What does it mean in JS?</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">'() needs to become an empty list.<span class="Apple-converted-space">  </span>In JS, I can convert that to an empty array "[]", or I can define a class called List and call "new" on it.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Let's choose the List class solution.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I have constructed a pattern matcher (aka parser) for Scheme.<span class="Apple-converted-space">  </span>I can simply add a pattern ...</p>
+</li>
+<li>
+<p class="itemTitle">Special Forms</p>
+<p class="itemText">In Scheme, almost everything is a function call with evaluated arguments.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There are some special forms, though:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• cond</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• let (and let*)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• if</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">These are handled by adding more detailed rules to the grammar. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(See commit f6c5b87c7a5995ea1a2486c8f05c6d92798c6610 and the preceding commits).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Test expressions in COND and IF are essentially the same, but it helps to give rules different names depending on their context (e.g. test expression in COND vs. test expression in IF).<span class="Apple-converted-space">  </span>The transpiler mig...</p>
+</li>
+<li>
+<p class="itemTitle">Interlude - Illegal Characters</p>
+<p class="itemText">At this point, I can see that the transpiler, in its present state, allows characters, like "?" and "-" and "*" in identifiers that are illegal in JS identifiers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will deal with these later.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The transpiler is a pattern matcher, and, changing single characters to other strings will be easy.<span class="Apple-converted-space">  </span>For now, it is easier on the eyes (at least for me, since I'm very familiar with Lisp) to leave the illegal characters and debug the operation of the transpiler at the 30,000 foot level.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I proceed using ...</p>
+</li>
+<li>
+<p class="itemTitle">List Constants</p>
+<p class="itemText">Scheme (and Lisp in general) reads code into lists.<span class="Apple-converted-space">  </span>It interprets the first item in a list as the function and the rest of the items in the list as (evaluated) arguments.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">QUOTE is used to create list constants.<span class="Apple-converted-space">  </span>The Lisp runtime doesn't try to execute constants, but only creates them.<span class="Apple-converted-space">  </span>This is very similar to how, say, string constants are created in JS.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For example, the "goals" database used in prolog-6.scm is:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define goals '((some (? X))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>(some (? Y))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>(neq (...</p>
+</li>
+<li>
+<p class="itemTitle">When Do You Create a New Pass?</p>
+<p class="itemText">The parser consists of two main parts:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a grammar</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a set of semantics hung off of the grammar</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I am using the grammar to help me build the transpiler.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I start a new pass when I want encapsulation.<span class="Apple-converted-space">  </span>The encapsulation provided by pure OO is not enough.<span class="Apple-converted-space">  </span>Just creating new sets of semantics is not sufficient to encapsulate all of the changes I need to make. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In particular, whenever I need to hack on the grammar to make things easier, I need to start a new pass.<span class="Apple-converted-space">  </span>OO encapsulation won't save m...</p>
+</li>
+<li>
+<p class="itemTitle">Grammar Inheritance</p>
+<p class="itemText">Grammars for Scm2JSListConstants and Scm2JSEmitter are rewritten to inherit from Scm2JSBasic.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that this creates new "flat" grammars and does not, by itself, create new isolated passes.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that Scm2JSEmitter inherits from Scm2JSBasic and not from its immediate predecessor Scm2JSListConstants (as would be done if I used only OO instead of a pass-based strategy).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OO is essentially a fancy form of cut&amp;paste - it creates new "flat" grammars by piling changes up on predecessor grammars.<span class="Apple-converted-space">  </span>Thi...</p>
+</li>
+<li>
+<p class="itemTitle">Isolation</p>
+<p class="itemText">I will use the word "isolation" to mean encapsulation that supports freezing.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Emitting JavaScript</p>
+<p class="itemText">I copy&amp;pasted the emitter semantics and created a new semantics (for the same grammar) called 'emitjs'.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I modified the IF-THEN-ELSE code to emit JS ?: expressions.<span class="Apple-converted-space">  </span>(See commit cc41021f1f3efe0b02598ba25020064470f95093). </p>
+</li>
+<li>
+<p class="itemTitle">Functional JS</p>
+<p class="itemText">Lisp - and Scheme - does not have statements.<span class="Apple-converted-space">  </span>Lisp only has expressions (called s-exprs) and special forms</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Every expression returns a value.<span class="Apple-converted-space">  </span>Always.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">To stay true to the semantics of Scheme, I must emit JS code that is expression-based.<span class="Apple-converted-space">  </span>This is possible in JS using anonymous functions.<span class="Apple-converted-space">  </span>The emitted code is going to look horrible, but it will be a true representation of the original Scheme program.<span class="Apple-converted-space">  </span>Later, after I see things work and can regression test, I can try to "optimize" some of the se...</p>
+</li>
+<li>
+<p class="itemTitle">Waterfall</p>
+<p class="itemText">In software, it is never true that one can get it right the first time around. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If you think that you know what you are doing, then you are employing a technique called the Waterall method. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Even really smart people don't get it right most of the time - for example, refer to most existing multi-tasking libraries and the agony that these have caused.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">[If you thought that you got it right the "first time", odds are that you have done this before.] </p>
+</li>
+<li>
+<p class="itemTitle">Workflow</p>
+<p class="itemText">- use https://ohmlang.github.io/editor/ to debug the syntax (grammar)<br></p>
+<p class="itemText">- then, switch to semantics</p>
+</li>
+<li>
+<p class="itemTitle">Mapping Illegals to JS</p>
+<p class="itemText">Scheme allows many more characters as valid identifier characters than does JS.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">At this stage in debugging, I want to test the emitted code using the node compiler.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The illegal characters must be mapped to valid JS character strings.<span class="Apple-converted-space">  </span>This is done using the .replace() function and JS REGEXs.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See the function doReplacements() in index.html for a list of the actual replacements.</p>
+</li>
+<li>
+<p class="itemTitle">Refining Scheme to JS Emission</p>
+<p class="itemText">The JS emitter, as currently written, shows some weaknesses and bugs.<span class="Apple-converted-space">  </span>Notably, the emitted code is extremely hard to read.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This chapter of this essay describes a second attempt at code emission in JS…</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Instead of emitting everything as a function, I pay closer attention to which parts of JS are expressions and which parts are statements.<span class="Apple-converted-space">  </span>I hope to emit the expressions alone and to let them be emitted in "normal" JS.<span class="Apple-converted-space">  </span>I will wrap "function (…){…}" blocks around only the JS statements that do no...</p>
+</li>
+<li>
+<p class="itemTitle">Writability vs. Readability</p>
+<p class="itemText">Ohm-JS documentation emphasizes the fact that grammars are "clean" and semantics have been moved out of the grammar.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This makes sense for readability.<span class="Apple-converted-space">  </span>The grammar and semantics have been created and checked by the compiler. <span class="Apple-converted-space">  </span>A Maintenance Engineer can read the grammar and then refer to the semantics object.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This separation of semantics from grammar, though, makes writing more difficult, since one needs to refer to the grammar when writing semantic rules.<span class="Apple-converted-space">  </span>For example, I have broken CondExpre...</p>
+</li>
+<li>
+<p class="itemTitle">Greedy Matching</p>
+<p class="itemText">PEG (and ohm-js) uses greedy matching.<span class="Apple-converted-space">  </span>It matches the longest possible phrase and doesn't turn back.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This means that I can write a rule, like:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>CondExpressionWithElse = BEGIN lexical_COND FirstCondClause MoreCondClause CondElseClause END</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">but not a rule like:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>StatementBlock = Statement* LastStatement<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first pattern matches one CondClause then matches more CondClauses.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The second pattern matches a bunch of statements, greedily matching all statements, then I want it to back up and lea...</p>
+</li>
+<li>
+<p class="itemTitle">Quoting Revisited</p>
+<p class="itemText">As I get further and try more detailed examples, I see some bugs in the quote expander code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Firstly,<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define db '(5)) </span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Comes out as</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define db (@newList@ "5")) </span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">whereas it should be</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define db (@newList@ 5)).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is a variant of the problem I solved in the Scm2JS grammar, and should be easy to repair.<span class="Apple-converted-space">  </span>Thankfully, the quote expansion is isolated, so I know that changes to it will not affect what I've done so far. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See commit 8946e4f755f5b3083fcf0203c0d3246d0b8cd399 which fixes quoted...</p>
+</li>
+<li>
+<p class="itemTitle">Dotted Lists</p>
+<p class="itemText">There is but one instance of a dotted list in prolog-6.scm</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define db</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>'(((edge a b))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge a f))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge a g))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge b c))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge b d))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge c d))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge c e))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge g h))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge d h))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge h e))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((edge h f))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((path (? A) (? B) ((? A) (? B)))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>(edge (? A) (? B)))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((path (? A) (? B) ((? A) . (? CB)))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>(edge (? A) (? C))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>(path (? C) (? B) (? CB)))))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I could handle the dotted list in the grammar, but, it is easier to change th...</p>
+</li>
+<li>
+<p class="itemTitle">Dissecting the Parse</p>
+<p class="itemText">I found that the parsing results from the ohm editor were misleading.<span class="Apple-converted-space">  </span>I implemented my own tree viewer, using Lisp-like syntax.<span class="Apple-converted-space">  </span>See commit 950c308f28e5a3360afc14fb6b9f171c4a4acb32.</p>
+</li>
+<li>
+<p class="itemTitle">Larger Tests</p>
+<p class="itemText">The new grammars now handle all of prolog-6.scm.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I view the JavaScript output using my favourite pretty-printer (emacs, JavaScript-mode, in my case).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I am manually eyeing the output backwards - starting with the final call to prove6().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I see something suspicious in the transpilation of the function "resolve".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I have saved the output in prolog-6.js.<span class="Apple-converted-space">  </span>Running "node" on it shows an error at function "back5".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">That gives me at least two errors to look at.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will start debugging by looking at ba...</p>
+</li>
+<li>
+<p class="itemTitle">Sweeping Changes</p>
+<p class="itemText">In debugging support.js, I hit a variable scoping problem which looks like a JS problem</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The problem appears to go away if I use "let" instead of "var" in the transpiled code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is one of the advantages of using the DSL approach.<span class="Apple-converted-space">  </span>This is a late change in strategy, but the fix is easy and all of the code is regenerated (transpiled).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Now, node complains that "db" is defined more than one.<span class="Apple-converted-space">  </span>This is true - the original code in prolog-6.scm uses "db" as a global and relies on Lisp's ability to ...</p>
+</li>
+<li>
+<p class="itemTitle">Quote List Expansion</p>
+<p class="itemText">I've revamped the emitjs semantics to output "cons(…)" instead of "new List(…)".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The quote list expansion is not fully correct.<span class="Apple-converted-space">  </span>A quoted list should be converted to "list(…)",<span class="Apple-converted-space">  </span>where list() inserts a null at the end of the list.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See commit 9ba41fe9151d5bde775852f573f19de3fcc9e251.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that this was anti-waterfall development, I made progress without needing to get everything right at first.<span class="Apple-converted-space">  </span>A placeholder was enough.<span class="Apple-converted-space">  </span>I fixed the error, then iterated.<span class="Apple-converted-space">  </span>Fixing the error was easy - a minor ch...</p>
+</li>
+<li>
+<p class="itemTitle">Let*</p>
+<p class="itemText">The let* (LetSequential) emission is incorrect.<span class="Apple-converted-space">  </span>It needs to be transformed into sequential Lets.<span class="Apple-converted-space">  </span>There are at least 2 ways forward -<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. fix LetSequential, or<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. manually rewrite prolog-6a.scm to remove all let*s.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For now, let's take choice 2 (there is only one let* in prolog-6a.scm).</p>
+</li>
+<li>
+<p class="itemTitle">Function Copy()</p>
+<p class="itemText">The Copy() function is not being emitted correctly.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first clause returns "x" as an atom.<span class="Apple-converted-space">  </span>There is no "return" statement emitted.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will copy/paste it into my test-harness element and zero in on it.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I pare the test case down to:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(define (copy x n)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(cond</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>((not (pair? x)) x)))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">and look at "pass1 &amp; listConstants &amp; emitter tree".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The parse tree is:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(:Program<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>(:GlobalFunctionDefinition<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(:Identifier<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>(:symbol [[copy]] ))<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(:Identifier<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>(:symbol [[x]] )),</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(:Identifier<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>...</p>
+</li>
+<li>
+<p class="itemTitle">MIssing Support Routines</p>
+<p class="itemText">Append is missing.<span class="Apple-converted-space">  </span>I will write one in Scheme, called AppendInefficient, and replace all calls to Append by this - in the Scheme code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">N.B. I am now using the Scheme to JS transpiler.<span class="Apple-converted-space">  </span>I will write AppendInefficient in Scheme and let the transpiler convert it to JS.<span class="Apple-converted-space">  </span>There are some interesting trade-offs to be had when the transpiler begins to work (even hobbling).<span class="Apple-converted-space">  </span>Should I write Append() in JS or in Scheme?<span class="Apple-converted-space">  </span>Or, should I rewrite it in PROLOG?<span class="Apple-converted-space">  </span>I'm not worried about efficiency (yet), and I am...</p>
+</li>
+<li>
+<p class="itemTitle">Working</p>
+<p class="itemText">Now, the full test is working (compared to the Scheme output for prolog-6a.scm).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See commit 544c1d52c9278b1cb90724f6452408a8154fc750.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Recap</p>
+<p class="itemText">I now have the JS code for a PROLOG interpreter.<span class="Apple-converted-space">  </span>It consists of the support.js routines plus the output from our transpiler. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">"Prove6" is the entry point.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>I need to create a database of facts, rules and, a database of goals.<span class="Apple-converted-space">  </span>I pass these to prove6() and it prints the results.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I need several simple things:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>a) Prove6() needs to return a list of answers instead of printing them out.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>b) A PROLOG-like syntax skin over JS, that converts PROLOG-like statements into databases and calls to prove6()...</p>
+</li>
+<li>
+<p class="itemTitle">Transpiling to Other Languages</p>
+<p class="itemText">I claim that the transpiler can be modified to emit the code in other languages.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">All that is necessary is to write a new<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>emitter_semantics.addOperation(</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>'emit???',</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">…</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">);</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I don't plan to prove this assertion and to show how it would be done, in this essay.<span class="Apple-converted-space">  </span>By now, it should be clear how to do this.</p>
+</li>
+<li>
+<p class="itemTitle">Returning a List of Answers</p>
+<p class="itemText">As it stands, prolog6 prints every answer (a successful match) in the function print-frame.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I want to collect the answers into a list and return it, instead of printing it.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I have a number of choices in how to do this.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first choice is whether the return will be a Cons() list or something more amenable to<span class="Apple-converted-space">  </span>JS - an array, for example.<span class="Apple-converted-space">  </span>The code generated by the transpiler will be used in JS programs.<span class="Apple-converted-space">  </span>The better choice seems to be that of returning a JS Array.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The PROLOG code creates a Cons...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Accumulator in print-frame</p>
+<p class="itemText">It turns out the Scheme and the way that the code is written, makes it easy to use an accumulator in print-frame (and print-frame-loop)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The accumulator is intialized to '() in the top call to print-frame.<span class="Apple-converted-space">  </span>Successive calls to print-frame-loop either<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• pass the accumulator unchanged, or,<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• cons a result onto the accumulator. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The bottom-most call to print-fame-loop simply returns the accumulator.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Wiring an accumulator into prove6 requires some non-local changes - all calls to prove6() need...</p>
+</li>
+</ul>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Deeper</p>
+<p class="itemText">Chapter 2 contains a good overview of Ohm:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://escholarship.mcgill.ca/concern/theses/j67316286</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OMeta: an Object-Oriented Language for Pattern Matching</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">http://www.tinlizzie.org/~awarth/papers/dls07.pdf</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(N.B. Ohm is not OMeta, but Ohm is a descendant of OMeta</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>N.B. Ohm only understands how to parse characters</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>N.B. Ohm breaks semantics and grammar apart, whereas OMeta expects semantics to be a part of the grammar description)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OMeta: PhD Thesis</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">http://www.vpri.org/pdf/tr2008003_experimentin...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Ideas</p>
+<p class="itemText">IDEAS</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ohm-JS does not parse anything but single characters.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In an ideal situation, we would want to parse "tokens".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Tokens would provide:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• separation between Syntactic entities - when we ignore spaces, we would still have (delimited) tokens, for example, in the scanner pass (the very first pass), we would recognize identifiers.<span class="Apple-converted-space">  </span>If we had tokens, the scanner would emit 3 tokens for: abc&lt;space&gt;def - token(identifier, "abc"), token(spaces," "), token(identifier, "def").<span class="Apple-converted-space">  </span>In later passes, we c...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Errata</p>
+<p class="itemText">Nov. 6, 2020:<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It turns out that the final version of the prolog transpiler was broken.<span class="Apple-converted-space">  </span>The error was in the hand-rewritten code for print-frame (a parenthesis was off-by-one).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I re-examined the original prolog-6.scm and rewrote it (in Scheme) as a simple recursive function that did not used Scheme's named let feature.<span class="Apple-converted-space">  </span>In the process, I lifted as many implementation details out and put them into auxiliary functions.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The result appears to work, is in branch "main" commit 70989e3333021327b472f56...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Addendum - Foreign Call</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Addendum - Rewrite MAP</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

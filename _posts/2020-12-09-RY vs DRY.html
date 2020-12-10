@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>RY vs DRY</title>
+  <meta name="CreationTime" content="2020-12-09T15:15:46Z">
+  <meta name="ModificationTime" content="2020-12-09T15:15:46Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    span.s1 {font: 12.0px Times}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h1 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 18.0px Helvetica"><b>RY vs. DRY</b></h1>
+<p class="p2"><br></p>
+<p class="p3">DRY means “Don’t Repeat Yourself”.</p>
+<p class="p2"><br></p>
+<p class="p3">The wisdom in DRY is that subsuming all similar code<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> into one routine ensures that subsequent fixes/changes affect all uses of that particular code.</p>
+<p class="p2"><br></p>
+<p class="p3">DRY is a <i>maintenance</i> <i>engineering</i> issue.</p>
+<p class="p2"><br></p>
+<p class="p3">But, it <i>makes sense</i> to repeat yourself when <i>designing</i> a system.<span class="Apple-converted-space">  </span>Repetition &amp; cloning are ways to compose ideas into solutions.</p>
+<p class="p2"><br></p>
+<p class="p3">Additionally, abstraction is not at the top of mind of “normal” people.<span class="Apple-converted-space">  </span>Abstraction is taught – as a technique – in computer science school.</p>
+<p class="p2"><br></p>
+<p class="p3">RY is a design issue.</p>
+<p class="p2"><br></p>
+<p class="p3">DRY – and abstraction – should be automated.<span class="Apple-converted-space">  </span>This is already done with Git, but in-the-small.<span class="Apple-converted-space">  </span>We need to extend our automation facilities to detect instances of RY at the design level (code level, if you will).<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">Much of RY can be converted into DRY using edit scripts.<span class="Apple-converted-space">  </span>The unsolved part is that of detecting RY that can be collapsed into DRY routines.</p>
+<p class="p2"><br></p>
+<p class="p3">We see CSE technology – common subexpression elimination – used in compilers (see the Dragon Book).</p>
+<p class="p2"><br></p>
+<p class="p3">Paul Bassett’s Frames technology<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> attacked RY in a different way.<span class="Apple-converted-space">  </span>Frames saw light as a product in the company Netron.<span class="Apple-converted-space">  </span>Netron’s product was used in some banks.<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">From my very light understanding, NiCad (Cordy, Roy) might be related.</p>
+<p class="p2"><br></p>
+<p class="p3">All of the bits and pieces are in place for automated DRY...</p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>What does “similar code” mean?<span class="Apple-converted-space">  </span>The definition is kind of mushy.<span class="Apple-converted-space">  </span>Code can be parameterized.<span class="Apple-converted-space">  </span>Programmers try to “abstract” code by parameterizing it.<span class="Apple-converted-space">  </span>“Similar code”, then, means any code that produces the desired result after having been parameterized and being given the appropriate parameters.<span class="Apple-converted-space">  </span>I argue that every parameterization makes code hard to read.<span class="Apple-converted-space">  </span>Parameterized Types make code even less readable – I’ve seen code that couldn’t be understood because of copious amounts of parameterization.<span class="Apple-converted-space">  </span>Each parameterization makes the resulting parameterized routine more “tricky” to understand.<span class="Apple-converted-space">  </span>I argue, elsewhere, that parameters should be entirely eschewed.<span class="Apple-converted-space">  </span>I argue that a hierarchy of pipelines is a better construct than parameterization.</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>I argue, elsewhere, that code is a poor vehicle for expressing Design.</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>https://www.amazon.ca/Framing-Software-Reuse-Lessons-1996-08-05/dp/B01K17JFS4/ref=sr_1_4?dchild=1&amp;keywords=paul+bassett&amp;qid=1600861493&amp;sr=8-4</p>
+</div>
+</body>
+</html>

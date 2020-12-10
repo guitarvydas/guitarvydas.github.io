@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="6CAD96E3-147A-4EAB-8D8D-E99781F732F5">
+            <Text>Variable Names Not Needed
+
+We are tending towards assign-once variables.
+
+Why do we need variable names, if the variables are not variables?
+
+Example:
+
+plus( b : integer, c : integer) : integer
+
+becomes
+
+plus (integer, integer) : integer
+
+and, in the presence of type synonyms, becomes
+
+plus (b, c) : a
+
+a = integer
+b = integer
+c = integer
+
+
+[N.B. in the last case, the checker can insist on unique names for all parameters and return types.  This, IMO, is makes the checker simpler, while preserving DI.]
+
+</Text>
+            <Comments>Design Intent</Comments>
+        </Document>
+    </Documents>
+</SearchIndexes>

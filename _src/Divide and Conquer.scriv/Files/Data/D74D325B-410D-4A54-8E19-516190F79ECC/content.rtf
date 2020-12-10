@@ -1,0 +1,80 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid102\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid202\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid203\'02\'02.;}{\levelnumbers\'01;}\fi-360\li2160\lin2160 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\deftab709
+\pard\pardeftab709\sb240\sa120\qc\partightenfactor0
+
+\f0\b\fs56 \cf0 Divide And Conquer\
+\pard\pardeftab709\partightenfactor0
+
+\f1\b0\fs24 \cf0 When a problem looks to be complicated, a strategy for attacking the problem is \'93divide & conquer\'94.   \
+\
+Most programmers know about Divide & Conquer.\
+\
+What problems look to be complicated?\
+\
+For one \'96 multi-tasking is considered \'93hard\'94 by many programmers.  Multi-tasking is actually simple, but needs to be further divided (and conquered).  For example, multi-tasking, as it is know today consists of several sub-problems:\
+\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls1\ilvl0
+\f0 \cf0 \'95	
+\f1 time-sharing\
+\ls1\ilvl0
+\f0 \'95	
+\f1 memory sharing\
+\ls1\ilvl0
+\f0 \'95	
+\f1 networking, IPC, communication\
+\ls1\ilvl0
+\f0 \'95	
+\f1 concurrency.\
+\pard\pardeftab709\partightenfactor0
+\cf0 \
+Let\'92s apply Divide & Conquer to the multi-tasking.  (1) Time-sharing is needed only by operating systems, such as Linux, Windows, MacOS, etc.  Let\'92s throw time-sharing aside.  Gnarly problems, like priority inversion go out the window.\
+\
+Memory sharing was an issue when memory was expensive.  Memory is no longer expensive.  Let\'92s throw memory-sharing aside.  Thread-safety, etc., go out the window.\
+\
+We are left with networking and concurrency.\
+\
+Networking is easily reduced to it most basic form \'96 a wire.\
+\
+Concurrency, at its most basic form is 2 apps communicating across a wire.\
+\
+We know how to write the two apps \'96say, using Python, JS, etc., etc..  \
+\
+Yet, we don\'92t have a \'93language\'94 for app-to-app communication.  There is no popular Python-for-comms language.  There are budding attempts at this kind of language, the most common being UNIX\'ae 
+\i bash
+\i0 , but 
+\i bash
+\i0  is tangled up in complexity \'96 time-sharing and memory sharing and variables and, etc., etc. ...   {\field{\*\fldinst{HYPERLINK "scrivcmt://0330EC6D-DEEE-4BEB-BEBE-118DCBE062C2"}}{\fldrslt FBP}} is a not-popular-enough attempt as this kind of language, but it tends to be tangled up with multi-tasking libraries which are tangled up with time-sharing and memory-sharing.  The FBP site references Linda.  {\field{\*\fldinst{HYPERLINK "scrivcmt://EDCFA9AF-EE17-43A2-872F-36F14C26622B"}}{\fldrslt CPS}} and {\field{\*\fldinst{HYPERLINK "scrivcmt://596F18C4-27EE-43F2-B09A-003CD85E60B8"}}{\fldrslt CSP}} are text-only attempts to tackle this problem \'96 they simply demonstrate that the text-only mentality does not extend well to concurrent applications.  TC;DU (Too Complicated ; Didn\'92t Use).\
+\
+An acquaintance of mine builds products that measure the health of race horses.  His app uses some 37 processors.  He uses a language called {\field{\*\fldinst{HYPERLINK "scrivcmt://4A62F13B-AF5A-4234-A8DA-50914D979031"}}{\fldrslt MicroPython.}}  He has no problem with multi-tasking.  One processor, one thread.  Node.js?  Why bother?  Processors are cheap.   Linux?  Why bother?  Processors are cheap.  When he wants to get 
+\i really
+\i0  complicated, he creates an event loop on a processor, that checks for incoming events and does some work in the background.\
+\
+We need a lean language for coordinating a hierarchy of {\field{\*\fldinst{HYPERLINK "scrivcmt://17FCF69C-2494-4BA8-A7A5-4288943EEC69"}}{\fldrslt processors}}  \
+\
+We need to apply divide & conquer \'96 throw out operating systems, throw out heavy-weight thread libraries, throw out memory sharing, etc.\
+\
+\pard\pardeftab709\sb200\sa120\partightenfactor0
+\ls2\ilvl1\cf0 	
+\f0\b\fs32 Fractal Design\
+\pard\pardeftab709\sl276\slmult1\sa140\partightenfactor0
+
+\f1\b0\fs24 \cf0 Divide & Conquer and Hierarchy leads to thinking about the Design task as a fractal.  Every Component in a Design \'93does one thing well\'94 and leaves the rest for further sub-dividing.\
+Where does this stop?  It depends on the application and the Designer\'92s tolerance for boredom.\
+As long as the Designer makes the choices clear, expresses the {\field{\*\fldinst{HYPERLINK "scrivcmt://DA8BCF63-D1FA-4063-B926-DEC38AD3C2AF"}}{\fldrslt DI,}} then future readers (Optimization Engineers, Maintenance Engineers, Testing Engineers, etc.) can understand \'96 and deal with \'96 the choices made in the design.  There is no 
+\i one way
+\i0  to Design something, there is only \'93here is how I chose to design it\'94 documentation (executable documentation would be more precise than static documentation).\
+\pard\pardeftab709\sb140\sa120\partightenfactor0
+\ls3\ilvl2\cf0 	
+\f0\b\fs28 Fractal Design Documentation\
+\pard\pardeftab709\sl276\slmult1\sa140\partightenfactor0
+
+\f1\b0\fs24 \cf0 Q: Is the documentation for a Design, itself a fractal?  A binary tree.  Each node contains a bite of the solution and \'93the rest\'94.  Each Bite describes the paradigm and details used for that bite.\
+For example:}

@@ -1,0 +1,138 @@
+<html>
+
+<head>
+<title>Twenty Milliseconds - The Magic Number</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Keyboard Debouncing</p>
+<p class="itemText">When writing code to debounce a keyboard, it was found that the magic number was 20 msec (twenty milliseconds).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If a keystroke took longer than 20 milliseconds to be recognized, the keyboard "felt slow" to the human operator.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If the software sampled the keystrokes too quickly (e.g. 1 msec), then the sampler found that the key switch actually, physically, bounced (1 to 0 to 1 to 0, etc.) and settled down to a final, steady value before the magic number of 20 msec.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I don't know how this magic n...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Music Software</p>
+<p class="itemText">Music software - DAWs (Digital Audio Workstations) - need to worry about sluggishness and latency.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Piano-style keyboards are polyphonic - the musician can press more than one key at once (or in sequence) and expects to hear notes "right away".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Playback of multiple tracks is/was also a problem.<span class="Apple-converted-space">  </span>When multiple tracks are played by the DAW, the musician expects to hear them all "in sync".<span class="Apple-converted-space">  </span>If the number of tracks (and effects processors contained in the track - e.g. reverb) exceeds the ability of...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Game Industry</p>
+<p class="itemText">I expect, but don't have the direct experience, that this problem also affects the game industry.<span class="Apple-converted-space">  </span>Production Engineering of software can save money when shipping a zillion xboxes.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">IoT</p>
+<p class="itemText">I expect that IoT will run into this problem.<span class="Apple-converted-space">  </span>Using Linux on a small processor is (usually) over-kill for what is actually needed, and, Linux could be production engineered away if economy of scale requires it. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Concurrency (and parallelism) can be built less expensively than by using Linux.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"><span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One needs to make a trade-off assessment - how many $'s can by saved in hardware by spending $'s on software optimization?<span class="Apple-converted-space">  </span>And, reliability enters the equation, too - preemptive multitasking is notorio...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

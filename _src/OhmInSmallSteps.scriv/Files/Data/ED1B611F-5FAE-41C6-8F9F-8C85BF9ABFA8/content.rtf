@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The fundamental data type of Scheme is the SEXP (s-expression).\
+\
+A SEXP is either an atom or a list.  A list can contain atoms and other lists.\
+\
+If I get the basics right, I could use Ohm's grammar inheritance to build bigger grammars.\
+\
+I don't expect to get that grammar right on the first pass.  Divide and Conquer.  I try out bits of ideas first, then, modify the bits to suit the bigger picture.\
+\
+My first attempt at a basic parser for SEXPs:\
+\
+Scm2jsbasic1.ohm:\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+Scm2JSBasic \{\
+  Scm = List | Atom |  Boolean\
+  List =   "(" ListInnards ")"\
+  ListInnards = (Atom | List)*\
+  Atom = Integer | Symbol | Boolean\
+  Boolean = "#f" | "#t"\
+  Integer = Numchar+\
+  Numchar = "0".."9"\
+  Symbol = Letchar (Letchar | Numchar | "?" | "_")*\
+  Letchar = LC | UC | "+" | "*"\
+  LC = "a".."z"\
+  UC = "A".."Z"\
+\}\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 I can already see that I'm going to be replacing Letchar with something more interesting\'85\
+\
+Hmm, maybe the whole definition of "symbol" needs to be replaced\'85\
+\
+Just to be clear - I am 
+\f3\i not
+\f0\i0  trying to parse all of Scheme, only enough to parse Nils' PROLOG code.  This will be a single-use DSL\'85\
+\
+Engineering trade-off - I don't need to do everything (the last 5% of details always kill).  YAGNI.  I hope to transpile Nils' Scheme code to JS, then let the JS compiler do the heavy lifting.\
+\
+I'm planning to use the Ohm-js parser as a fancy editor\'85. Think of Ohm-JS as "sed" on steroids.\
+\
+Next step - pour all of Nils' code into the test, fix what doesn't parse\'85\
+\
+scm2jsbasictest1.scm:\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+(null? xyz)\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 scm2jsbasic1.js:\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+// usage:\
+// npm install ohm-js\
+// node scm2jsbasic1.js\
+\
+\
+const fs = require ('fs')\
+const ohm = require ('ohm-js')\
+const grammarData = fs.readFileSync('scm2jsbasic1.ohm')\
+const grammar = ohm.grammar(grammarData)\
+\
+const input = fs.readFileSync('scm2jstest1.scm')\
+\
+const result = grammar.match(input)\
+\
+if (result.succeeded()) \{\
+    console.log("Matching Succeeded")\
+\} else \{\
+    console.log("Matching Failed")\
+\}\
+
+\f1\fs24 <!$Scr_Ps::0>}

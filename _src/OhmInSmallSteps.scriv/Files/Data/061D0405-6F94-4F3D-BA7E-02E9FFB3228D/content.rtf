@@ -1,0 +1,21 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 I should be able to feed the result from the latest unbackquote expander into the unity transformer.\
+\
+This will test whether I can pipeline the grammar, i.e. feed one grammar into another.  Ohm-JS can only parse character strings.  The backquote expander produces strings, so this shouldn't be a problem for Ohm-JS.\
+\
+Pipelinetest() runs each test case twice.  The first time, the original Scheme is run through unbackquote.  Then, the result from unbackquote is run, again, through unbackquote (which should parse, but find no quotes or backquotes to expand).  The first run expands all quotes and backquotes.  The second run does nothing, but parses the (already expanded) Scheme.  The results from the first run should be the same as the results from the second (regression) run, using JS string equality "==".  \
+\
+This means that the results from unbackquote form a valid Scheme program (at least as far as this grammar goes - as far as I need it to).\
+\
+(See commit 56569e3b6e33344db9409368f5754454c71b37ce)\
+\
+This means that I can pipe output from one grammar into another grammar.\
+\
+The point of pipelining is to remove possible dependencies - Divide and Conquer.  Once I have a grammar that expands quotes and backquotes, I know that it works.  I never have to alter that grammar again.  It does one job.  Then it gets {\field{\*\fldinst{HYPERLINK "scrivcmt://097BCCC0-B0E0-48BC-9970-8AC9B72D7AF0"}}{\fldrslt frozen.}}\
+\
+As I progress further, I will want to tweak the grammar (to give us better handles on parts of the parse).  Pipelining ensures that no tweaks can alter the functioning of previously written code (grammars).  Quote and backquote expansion is working and I can forget about it, knowing that it will always work in the same way.}

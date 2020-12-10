@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 A 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 part
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  is 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 busy
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  if it is doing work.\
+\
+In a system that sits on top of an operating system, and, in which, parts cannot be interrupted, all leaf parts never appear to be busy and schematics are busy only if any of their children are busy.\
+\
+Note that most simple applications of AG sit on top of an operating system, and, all parts run within the same user thread, i.e. all components run in the same app.  This kind of system can ignore busy-ness of leaves and use a simple recursive algorithm to calculate schematic busy-ness.\
+\
+In a system that allows preemption - e.g. a system using bare metal with {\field{\*\fldinst{HYPERLINK "scrivcmt://ACF3DA24-1C4C-4D16-9AA5-98A73D7E43F0"}}{\fldrslt IRQ}}s, or a system using time-shared threads with parts spread across threads, busy-ness of leaves becomes an issue that needs to be dealt with.  This would involve semaphores and locks and the standard bag of technologies used in present-day multi-tasking threads.  The issues that need to be dealt with are: atomic enqueueing of events onto input queues and locking all input queues of all parts on a single wire, during event delivery.  The main semantic that must be guaranteed is that a single event arrives at 
+\f3\i all
+\f0\i0  receivers in an atomic fashion.  Variations on handling this problem might include STM technologies (which, by definition, have worse timing than finely tuned systems of locks and {\field{\*\fldinst{HYPERLINK "scrivcmt://AB47FDBF-ECC8-4B11-A578-622481D82B83"}}{\fldrslt semaphores}}).  \
+\
+The problem of keeping locks for as short a time as possible cannot be solved in general, and, depends on specific problems and their solutions.  In hardware, and sufficiently modular technology, it is possible to calculate the 
+\f3\i worst-case
+\f0\i0  lock time - if a system cannot lock a wire and finish depositing an event to all locked receivers within a given time, we just throw our hands up and use faster, more expensive, hardware.\
+\
+Software designers should strive towards calculating throughput and worst-case throughput.\
+\
+Note that classic operating systems, such as MacOS\'ae, Windows\'ae, Linux and most "real-time" RTOSs have throughputs that are so bad that no one bothers to mention the results.  \
+\
+The throughput calculation for classic operating systems is made harder by the use of full preemption - one must calculate the effect of an timer interrupt happening between any atomic machine instruction and the next, and, the cost of calling the system to perform context {\field{\*\fldinst{HYPERLINK "scrivcmt://AFD5D691-E26E-427D-B6B0-5635A41686EC"}}{\fldrslt switching}}.\
+}

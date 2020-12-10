@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+\f3\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 JavaScript Concurrency\
+\pard\pardeftab709\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2 \
+JavaScript supports 
+\f3\i closures.
+\f2\i0 \
+
+\f3\i \
+
+\f2\i0 Closures form the basis for {\field{\*\fldinst{HYPERLINK "scrivcmt://181941A4-A255-477E-9C52-441F8F5BEA5E"}}{\fldrslt 
+\f3\i concurrency.}}\
+
+\f3\i \
+
+\f2\i0 In a 
+\f3\i concurrent
+\f2\i0  design, all routines are 
+\f3\i closures
+\f2\i0 , except one distinguished routine \'96 the 
+\f3\i dispatcher
+\f2\i0  \'96 that invokes closures \'93at random\'94.\
+\
+Closures communicate with each other solely through message queues.  Yes, I am describing a message passing architecture.  We have a prejudice against message passing, assuming that message passing fails  This prejudice is based on the idea that message-passing is used to build a flat system.  The way to tame message passing is the same way that GOTOs were tamed \'96 through the use of structured iso{\field{\*\fldinst{HYPERLINK "scrivcmt://0362E182-9C62-471A-BC16-052D61BEBC8B"}}{\fldrslt lation}} and hierarchy.\
+\
+Flat-
+\f3\i anything
+\f2\i0  is bad.  Flat-
+\f3\i anything 
+\f2\i0 results in spaghetti.  Global variables were bad because they were \'93flat\'94.  Local variable scoping solved that problem.  A flat type-system is bad (have we recognized this fact yet?).  A flat function space is bad (we\'92ve been playing whack-a-mole with packaging, packaging systems, imports, exports, etc., trying to fix this problem).  Flat data is bad.  We tried to fix this problem with  OO.\
+\
+That\'92s it \'96 to implement concurrency in JS, you need closures, message queues and a dispatcher.  A good dollop of hierarchical organization will help.\
+\
+(See my essay on 
+\f3\i isolation.  
+\f2\i0 See my essay on simple systems).}

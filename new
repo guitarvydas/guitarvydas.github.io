@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+rm -rf _bin
+cp -R ~/quicklisp/local-projects/scrivener-to-jekyll/_bin .
+
+cd _bin
+./clean
+./run
+cd ..
+
+jekyll build
+jekyll serve
+

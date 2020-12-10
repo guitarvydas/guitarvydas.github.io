@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Scanner\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f1\fs26 \
+The 
+\i scanner
+\i0  takes in a stream of characters and outputs a stream of 
+\i tokens
+\i0 .\
+\
+The main job of a scanner is to ensure that downstream compiler passes do not need to perform string compares.\
+\
+The 
+\i scanner
+\i0  performs string matching to determine whether a string of characters in a program match with keywords and operators in the language, or whether  strings of characters fall into the class of user-defined identifiers.\
+\
+Once a match has been recognised, the 
+\i scanner
+\i0  replaces the matched string with a 
+\i token
+\i0  that is known to all downstream passes.  The main feature of a 
+\i token
+\i0  is that it can be recognised by downstream passes by a simple numeric or symbolic comparison, instead of a full string comparison.\
+\
+Depending on the design intent of the compiler-writer, a token may also include information about the token and the matched string.  For example, an ID (identifier) token may be a simple integer coupled with a reference to a table entry that contains the actual string of characters, the ID\'92s type information (updated in later passes), etc.\
+\
+Early compilers did not contain a scanner pass nor tokens, and they relied solely on 
+\b streq()
+\b0  operations everywhere.  Such compilers ran more slowly.\
+\
+Early tools, such as 
+\i Lex
+\i0  [\'85] ,  read descriptions of strings and converted them into state machines to improve speed, much like the familiar 
+\i regex().  
+\i0 The techniques of compiling string matchers into state machines are covered in the 
+\i Dragon Book
+\i0  [\'85].}

@@ -1,0 +1,41 @@
+#!/bin/bash
+./debug-entry "[$1] $0"
+
+#
+## inputs:
+## filename (fd 3)
+## content (fd 4) N/C
+## go (fd 5)
+#
+## outputs:
+## <none> - side-effect - file.html moved to ./_posts/<prefix>_filename.html
+#
+
+wire1=wire_$RANDOM
+wire1a=wire_$RANDOM
+wire1b=wire_$RANDOM
+wire2=wire_$RANDOM
+wire2a=wire_$RANDOM
+wire2b=wire_$RANDOM
+wire3=wire_$RANDOM
+wire4=wire_$RANDOM
+mkfifo ${wire1} ${wire1a} ${wire1b} ${wire2} ${wire2a} ${wire2b} ${wire3} ${wire4}
+
+./wire-splitter2 "[$1] $0" 3<${wire1} 4>${wire1a} 5>${wire1b} &
+./wire-splitter2 "[$1] $0" 3<${wire2} 4>${wire2a} 5>${wire2b} &
+./create-file-prefix "[$1] $0" 3<${wire1a} 4<${wire2a} 5>${wire3} &
+./move-to-posts "[$1] $0" 3<${wire1b} 4<${wire3} 5<${wire2b} &
+
+read filename </dev/fd/3
+echo "${filename}" > ${wire1} &
+
+read content </dev/fd/4
+echo "${content}" > ${wire4} &
+./nc 3<${wire4} &
+
+read pin_go </dev/fd/5
+echo "${pin_go}" > ${wire2} &
+
+./debug-exit "[$1] $0"
+wait
+

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="3C978BD3-009F-4D31-BECB-4CBBC7FB7771">
+            <Title>Cheat</Title>
+            <Text>When possible, cheat.
+
+</Text>
+        </Document>
+        <Document ID="00A80568-85BC-4EF5-9915-34252AA26B20">
+            <Title>Create Small DSLs</Title>
+        </Document>
+        <Document ID="4A19978D-E97C-4D1D-A9BE-0208FBD00216">
+            <Title>Scalability</Title>
+            <Text>Further explanation:
+
+The main problem in software design is scalability.
+
+We want to "plug" pieces tother like LEGO blocks.
+
+Better scalability implies fewer dependencies.
+
+Early hardware people got this "right".  They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).
+
+Chips were black boxes.  They had a set of input/output pins.  The insides of the chips were inscrutable - encased in opaque epoxy.
+
+Nothing leaked out of or into a chip except through the pins of the chip.
+
+Properties of a chip were described in easily-measured terms:
+
+	•	voltage on a pin
+	•	current needed by a pin
+	•	diagram / chart of the outputs, given a set of inputs
+	•	timing.
+
+Then, hardware designers "discovered" that point-to-point wiring between chips led to non-scalable designs.
+
+They built a (small) hierarchy - chips mounted on boards plugged into backplanes.
+
+The earliest backplanes were basically point-to-point wiring harnesses.  For example, an early Wang word processor I owned, had a backplane with some 400 pins, allowing a chip on one board to send signals directly to a chip on another board.
+
+Then, came the S100 bus.  It had only 100 pins.  It was well defined and documented.  Certain connections were not allowed, even if they could be done more efficiently as point-to-point connections.
+
+The idea of the Bus led to Apple computers and, ultimately, the IBM desktop computer.  (There was more than one Bus definition, but the market shook those out).
+
+Can software be built like chips?  I argue Yes.
+
+We need to build software in hierarchies.
+
+Divide and conquer.
+
+There must be no leakage - of anything - between layers in a hierarchy.  ("Anything" includes things like variables, types, control flow, dependencies of any kind, etc.).
+</Text>
+        </Document>
+        <Document ID="CFDEFCEE-4A64-4F04-A97F-4A620A4C8A6A">
+            <Title>Reduce Coding Using DSLs</Title>
+        </Document>
+        <Document ID="11F38C23-0BED-41E5-A718-FBCDC8578714">
+            <Title>Rigor and Trade-offs</Title>
+            <Text>Engineering is about making trade-offs.
+
+Engineers don't strive to prove that a design works - they simply build safety margins into a design.  
+
+The current quest for provable software designs will not lead to Engineering.  
+
+What is needed is characterization of the possible trade-offs, e.g. How fast does it run? How much memory is needed? How much processing power is needed? What is the fail-safe, the "big red button"? What can be done if it crashes? Does it have a "known beginning state"?  How much will it cost to design each feature?  How much will it cost to test each feature? What is at stake?  How thoroughly does it need to be tested?  What is the worst-case throughput?  What is the average throughput? What is the MTBF? Is it single-sourced or multiply-sourced and what are the implications?</Text>
+        </Document>
+        <Document ID="681615D4-1308-4958-91E0-8FDBB95B852F">
+            <Title>Black Box Architecture</Title>
+            <Text>I see software as a hierarchy of black boxes.  The Architect for each box chooses the best way to describe the design intent of a black box.  The Engineer figures out how to dot the I's and cross the T's.  The Production Engineer figures out how to make the black box "more efficient" and the Coder lays the bricks to implement the black box.
+
+</Text>
+            <Comments>Actually, a directed, acyclic graph.  Information flows upwards, control (commands) flows downwards.</Comments>
+        </Document>
+        <Document ID="CBD922D3-9874-49E7-BAFE-307B4760D187">
+            <Title>Why Management Hated DSLs</Title>
+        </Document>
+        <Document ID="139AB580-B324-42D1-B7E3-5AE06897B38D">
+            <Title>Use More than Text</Title>
+            <Text>Management uses diagrams (e.g. on whiteboards).
+
+Programmers should use diagrams, too.
+
+It is OK to mix diagrams and text in the same document.
+
+</Text>
+        </Document>
+        <Document ID="9D939A4D-CA19-4E5B-A2CD-42514CDFB678">
+            <Title>Complexity</Title>
+            <Text>I see software as a hierarchy of black boxes.  The Architect for each box chooses the best way to describe the design intent of a black box.  The Engineer figures out how to dot the I's and cross the T's.  The Production Engineer figures out how to measure and make the black box "more efficient" and the Coder lays the bricks to implement the black box.
+</Text>
+        </Document>
+        <Document ID="58A81B5A-787B-4618-8B74-9CB2C95B272C">
+            <Title>Use DSLs to Express Design Intent</Title>
+            <Text>We currently don't have a language for DI (Design Intent, aka Architecture, aka Business Rules).
+
+Refactoring is a symptom of DI being embedded in code.  Corollary: if you need to refactor, then it is likely that the code hasn't been split into DI and Implementation.
+
+Excess detail is the antithesis of DI.  
+
+Most languages pride themselves on how many features they have, instead of how few features they have.  
+
+When you create DI, you don't want to care how something is implemented (e.g. Arrays vs. Lists).
+
+Low-level efficiency is the concern of Efficiency Engineers, not Architects.
+
+DSLs are one way to split DI from Implementation.
+</Text>
+        </Document>
+        <Document ID="D06C1483-5DF5-4CC4-B80B-255A69ABE05F">
+            <Title>PSLs</Title>
+            <Text>I will use the term PSL instead of DSL to emphasize problem-specific issues for every problem+solution.  
+
+PSL means problem-specific language.  The older term, DSL, means domain-specific language.  In my opinion, "domain" is too broad a term, we must focus down on problems and we must use specialization instead of generalization to solve specific problems.
+</Text>
+        </Document>
+        <Document ID="A7BA3F59-A3EB-49CE-8A9F-BC8F3E31FFC3">
+            <Title>Round Tripping is Not Used in Engineering</Title>
+            <Text>Engineers put their seal (stamp or signature) on designs and are responsible - in Law - for their designs.
+
+Brick-layers might detect "bugs" or "improvements" in designs, but they never make substantial changes to blueprints.  The changes must be approved by the signing Engineer(s).
+
+The practice of round-tripping is never used in labour and Engineering.
+</Text>
+        </Document>
+        <Document ID="0E34BED5-70E8-49EB-B526-A891F4DC4871">
+            <Title>DSL (mis-)Perceptions</Title>
+            <Text>Management perceive DSL-writing as a sink-hole for time.  This impression is based on the mistaken notion that writing DSLs is the same as writing compilers.
+
+Management sees the up-front cost of creating a DSL.  Management knows how to measure development time (and cost) but doesn't know how to measure maintenance (understanding) costs.
+
+Management can't hire interchangeable units, called programmers, who already understand a given DSL.  Understanding a DSL requires thinking, understanding a product design requires thinking, too.  
+
+</Text>
+        </Document>
+        <Document ID="ADB42514-047A-4A12-A077-37E055723273">
+            <Title>Blueprints</Title>
+            <Text>Current programming languages cannot be used like blueprints.
+
+Current programming languages expose too much detail to be effectively used as communication mechanisms, such as blueprints.
+
+In my opinion, the answer lies in isolation.</Text>
+        </Document>
+        <Document ID="CB75C0E4-5ECB-4E43-9A2D-CFCA605CE591">
+            <Title>Round Tripping Is a Symptom</Title>
+            <Text>People use round-tripping technology when they believe that the generating technology doesn't work in all cases.
+
+Round-tripping usually causes accidental complexity.
+
+If you think you need round-tripping, then 
+	a.	prove that the notation doesn't work for some case
+	b.	fix ithe notation, don't use round-tripping as a band-aid.
+</Text>
+        </Document>
+        <Document ID="FB4BAA7D-E3A1-470E-A26D-441FDEF6681C">
+            <Title>Many Silver Bullets</Title>
+            <Text>A good Architect will have a tool-belt full of Silver Bullets.  Maybe a problem is best described in Relational terms, maybe a problem is best described as a State Machine (as a diagram, yet), maybe a problem can be broken down in a synchronous manner, etc., etc.
+
+</Text>
+        </Document>
+        <Document ID="4A1255C5-6BEE-4277-A24F-B566A7B53365">
+            <Title>Automate Everything</Title>
+        </Document>
+        <Document ID="311A52FD-3F03-4A47-9391-0396A93755B8">
+            <Title>Drawings</Title>
+            <Text>Blueprints are drawings that expose little detail.
+
+Blueprints are composed of simple elements.
+
+Current programming languages expose too many details to be used in the way that blueprints are used in Engineering and construction.</Text>
+        </Document>
+        <Document ID="AA2EFD25-6D0B-4B76-A348-7CE2335B563E">
+            <Title>Don't Do Things That the Base Language Already Does</Title>
+            <Text>Let the underlying base language handle the heavy lifting.
+</Text>
+        </Document>
+        <Document ID="C1A1FB78-FB75-4EAF-AF55-B74531CD79B1">
+            <Title>The Profession of Engineering</Title>
+            <Text>The profession of Engineering encountered the problem, of hiring thinkers, decades ago.  
+
+The answer was to split the profession into parts.  
+
+If you attend university courses for 4 years and are rubber-stamped with an Engineering degree, then you are deemed to be an Engineer.
+
+People who attend trades colleges for 2 years are deemed to be tradespeople.  
+
+Others are deemed to be labourers and brick-layers.
+
+For this scheme to work, a method of communication between the strata must be used - blueprints.  </Text>
+        </Document>
+        <Document ID="F5B59673-4E52-4480-ACF2-8FF8409F20DB">
+            <Title>Use a DSL Only If It Saves Effort</Title>
+            <Text>Design
+Can a design be expressed "better" - e.g. more accurately - using a DSL instead of using a detailed HLL?
+Reuse of Architecture
+Reuse of DI (Design Intent, aka Architecture) is more important than the reuse of code.
+
+Code is cheap, thinking is hard.
+
+Keep "business rules" separated from code.   Use one language for DI, another for Implementation.
+Coding
+Does using a DSL reduce coding time?
+
+Automation - get the DSL to write code.  Write programs that write programs.
+Maintenance
+Does using the DSL reduce maintenance effort?
+
+Can a Maintenance Engineer understand the DI (Design Intent) more quickly?
+
+Does the DSL perform D.R.Y. (Don't Repeat Yourself) for you?
+
+Can a Maintenance Engineer perform bug fixes more quickly by tweaking the DSL?
+
+Can a Maintenance Engineer perform feature upgrades more quickly by tweaking the DSL?
+
+</Text>
+        </Document>
+        <Document ID="96D9F959-548A-4C76-AC10-065B3518767B">
+            <Title>Rely on the Base Language to do the Heavy Lifting</Title>
+        </Document>
+        <Document ID="7CDCE26C-460B-4326-8525-AECFD7A7E081">
+            <Title>DSL Prescription</Title>
+        </Document>
+        <Document ID="87EC93C0-F6D9-49FE-B7A0-0558BDCA95B5">
+            <Title>Diagrams Can Be Easy to Transpile</Title>
+            <Text>Diagrams can be easy to transpile.
+
+Think glyphs, not pixels.  Use backtracking parsers (e.g. Ohm, PROLOG, etc.).
+
+Gedanken examples: 
+	•	How do you know if 4 lines make a box? 
+	•	How do you know if one box is smaller than another box?  
+	•	How do you know if the smaller box intersects the edge of the bigger box?  
+	•	How do you know if a piece of text is completely inside a box?
+	•	How do you know if an arrow (a glorified line) joins two boxes?
+	•	What if the line is made up of many smaller segments?
+	•	How do you draw a network?
+	•	How do you draw a state machine?
+	•	What changes when you have ellipses instead of boxes?
+	•	What changes when you have curvy lines instead of straight line segments?
+</Text>
+            <Comments>If you know PROLOG or something like it, how would you declaratively write this relationship of 4 lines?
+If you don't already know, refer to Harel's StateCharts paper.</Comments>
+        </Document>
+        <Document ID="7C2F89A9-9CA5-440B-8650-D4F2A46C8AB9">
+            <Title>Hiring</Title>
+            <Text>At the moment, we don't know how to hire thinkers based on only a resume.  
+</Text>
+        </Document>
+        <Document ID="2B72F0F8-D5D9-4818-815A-FE6F783951B7">
+            <Title>Round Tripping</Title>
+        </Document>
+        <Document ID="BE85D1DD-2BE8-494D-BBA1-4FFB8F35251D">
+            <Title>When All Else Fails. Automate</Title>
+            <Text>Generate code, in some way, automatically.  Use a pretty printer to make the code human-readable.
+
+You can always use the generated code as if it were written manually (by someone else).
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

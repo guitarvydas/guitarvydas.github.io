@@ -1,0 +1,13 @@
+rm -rf _bin
+cp -R ~/quicklisp/local-projects/scrivener-to-jekyll/_bin .
+
+rm -rf assets
+mkdir -p assets
+
+rm -rf _posts
+mkdir -p _posts
+
+cd _bin
+./clean
+./run
+cd ..

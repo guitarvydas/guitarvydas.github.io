@@ -1,0 +1,370 @@
+<html>
+
+<head>
+<title>Parsing and Compiling Diagrams</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">On Compiling Diagrams to Code</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Disclaimer</p>
+<p class="itemText">Disclaimer</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This essay is not meant to be an academic work. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It contains my opinions from 30+ years of experience in the Software field, running a software consultancy.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As such, references, when included, refer to inspiration and may not be thoroughly researched.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Introduction</p>
+<p class="itemText">Introduction</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This essay discusses a simple compiler that compiles diagrams to executable code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I believe that diagrams can express certain design elements more easily than textual code.<span class="Apple-converted-space">  </span>For example, many people draw box &amp; arrow pictures of a desired system on a whiteboard.<span class="Apple-converted-space">  </span>Such diagrams form a “syntax” for system design.<span class="Apple-converted-space">  </span>This “syntax” can be made more concrete and can be automatically compiled to code (the old idea of “executable specification” becomes a reality).<span class="Apple-converted-space">  </span>To make this transition, ...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Classical Compiler Technology</p>
+<p class="itemText">Classical Compiler Technology</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Classical compiler technology splits a text compiler into about four phases, described below.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Scanner</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Parser</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Semantic Pass</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Coder</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that this kind of technology is based on “old” ideas, such as : computers are not fast enough to base compilers on backtracking, computers represent text (characters) on the screen, but are too slow and inflexible to represent other glyphs and diagrams on the screen.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The above assumptions led to a great deal of researc...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Scanner</p>
+<p class="itemText">Scanner</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The scanner takes in a stream of characters and outputs a stream of tokens.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The main job of a scanner is to ensure that downstream compiler passes do not need to perform string compares.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The scanner performs string matching to determine whether a string of characters in a program match with keywords and operators in the language, or whether<span class="Apple-converted-space">  </span>strings of characters fall into the class of user-defined identifiers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Once a match has been recognised, the scanner replaces the matched string...</p>
+</li>
+<li>
+<p class="itemTitle">Parser</p>
+<p class="itemText">Parser</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The job of a parser is to check that tokens are correctly placed / sequenced to fit the particular language being compiled and to signal errors if the tokens do not form well-formed phrases in the language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For example in C, the string “(x ==y)”,<span class="Apple-converted-space">  </span>might be represented by the sequence of tokens (represented by symbolic names):</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tokLPar</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tokIdent {ref. to table entry for ident “x”}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tokEqualsEquals</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tokIdent {ref. to table entry for ident “y”}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tokRPar<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In this case, each...</p>
+</li>
+<li>
+<p class="itemTitle">Semantic Pass</p>
+<p class="itemText">Semantic Pass</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A Semantic Pass has the job of checking the semantics of program token phrases.<span class="Apple-converted-space">  </span>The semantic pass doesn’t need to check tokens or the validity of token phrases - these are verified in preceding passes (the scanner and the parser).<span class="Apple-converted-space">  </span>Checking the semantic validity of token phrases can be a complicated matter, but is simplified by information generated by the preceding passes.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In general, the semantic pass needs to determine the scopes of all variables (subject to scoping rules of ...</p>
+</li>
+<li>
+<p class="itemTitle">Conversion to Code</p>
+<p class="itemText">Allocation and Coding</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">After a program (a token stream) has been “certified correct” by preceding passes, the compiler-writing job consists of creating code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The act of code creation breaks down into, at least, two phases:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Allocation - figuring out where each variable, constant, parameter and return value is going to end up in the memory space (stack, etc.).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. Choosing code sequences (in the appropriate assembler) that faithfully carry out operations in the higher level language (being c...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Allocator</p>
+<p class="itemText">Allocation</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For allocation, one needs to represent data-locations in some manner.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One method is to use a data structure called “data descriptors” [Holt, https://dl.acm.org/citation.cfm?id=24051].</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fraser/Davidson designed RTL [Fraser-Davidson, https://people.well.com/user/cwf/pro/Davidson%20and%20Fraser.20The%20design%20and%20application%20of%20a%20retargetable%20peephole%20optimizer.pdf], the method used in gcc.</p>
+</li>
+<li>
+<p class="itemTitle">Coder</p>
+<p class="itemText">Coder</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A coder is the final pass in a compiler.<span class="Apple-converted-space">  </span>Coders are also called “emitters” and “back ends”.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It simply walks the stream / tree and emits code (as assembler text, or binary) for a particular cpu architecture.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Another aspect of coding is “optimisation”.<span class="Apple-converted-space">  </span>This pass can precede or succeed allocation and emission, depending on design constraints and implementation of various compiler data structures.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Coders often rely on a library known to contain certain operations that will be included at...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Tree-based Coders</p>
+<p class="itemText">Tree-Based Coding</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools .</p>
+</li>
+<li>
+<p class="itemTitle">Optimization</p>
+<p class="itemText">Optimization</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A very common form of optimiser is a tree-based one.<span class="Apple-converted-space">  </span>This kind of optimiser is described in [Aho,Ulmann,et al, https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools (“the dragon book”)].</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A tree-based optimiser can convert a tree into a DAG and can easily reuse code sequences and allocations that appear more than once.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A very simple form of optimisation is “peephole” optimisation.<span class="Apple-converted-space">  </span>This method executes after the coder phase and looks at the emitted code throu...</p>
+</li>
+<li>
+<p class="itemTitle">Run Time Library</p>
+<p class="itemText">Run-time Library</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In older C compilers, the run time library was called “crt0” (C Run Time zero).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Run time libraries often perform startup and initialisation task, as well as providing routines for certain repetitive code sequences (e.g. floating point) that are better (space-wise) left as libraries instead of full-unrolled code sequences emitted by the coder.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Portability</p>
+<p class="itemText">Portability</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There has been a fair amount of thought put into creating machine descriptions that reduce cognitive load for the compiler writers.<span class="Apple-converted-space">  </span>For example, OCG (orthogonal code generation [Cordy, https://books.google.ca/books?id=X0OaMQEACAAJ&amp;dq=bibliogroup:%22Technical+report+CSRI%22&amp;hl=en&amp;sa=X&amp;ved=0ahUKEwjg4Y7a7ZbiAhUMwlkKHfzdD_MQ6AEIMzAC]) allows one to declaratively specify a tree of code sequences based on cpu architecture. The tree(s) specify how to map operations, in some low-level form...</p>
+</li>
+</ul>
+</ul>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Backtracking and Pattern Matching</p>
+<p class="itemText">Backtracking</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In the past, it was assumed that a single cpu was expensive and that it needed to be time-shared between users.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In the past, machines were much slower than they are today.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It was “determined” that backtracking was not practical, hence, compilers were designed to conserve speed.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Compiler technology was invented to accommodate speed and determinism.<span class="Apple-converted-space">  </span>YACC reduced the acceptable set of languages to LALR(1), so that it could implement parsers as NFDAs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG [Bryan Ford, http://bford...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Diagram Conventions / Diagrammatic Syntax</p>
+<p class="itemText">Drawing Conventions</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As it stands, we do not have an off-the-shelf drawing editor.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We use an existing diagram editor plus some conventions that make its output suitable for compilation.<span class="Apple-converted-space">  </span>We do not check all drawings for correctness and the compiler may fail (or produce incorrect code) if drawings contain features not specified below.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For now, we will use the (free) Draw.IO drawing editor and save the drawings as .SVG files.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"><span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For drawings made with Draw.IO, the following conventions are used:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">...</p>
+</li>
+<li>
+<p class="itemTitle">Algorithm</p>
+<p class="itemText">The Algorithm</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">To describe the algorithm for compiling 2D drawings to code, I will use the “standard” four-pass model for compiler-building from the 1D text language paradigm.<span class="Apple-converted-space">  </span>A final version of the diagram compiler might use a separation that is different from the four-pass model, but it appears that the four-pass model might make for a simpler explanation at this time.<span class="Apple-converted-space">  </span>In fact, the current compiler has about twenty “passes”, grouped into four larger (composite) parts.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Draw.IO outputs drawin...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Algorithm for Ports</p>
+<p class="itemText">The algorithm for handling ports is a subset of the main algorithm.<span class="Apple-converted-space">  </span>Port handling is described below.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Scanning</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">During scanning, we know that each line has a port at its beginning and a port at each end.<span class="Apple-converted-space">  </span>We don’t yet know what the port is attached to or if it is an N/C (no connection.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">During scanning, we attach a port to each end of the line, and, since all lines are arrows, we can also assign a “direction” (source (output) or sink (input)) during this pass.<span class="Apple-converted-space">  </span>For example, each line has the f...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Drawing Compiler</p>
+<p class="itemText">The Drawing Compiler</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This section documents the actual facts and passes used by the current POC (proof of concept) compiler.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">These choices might not be the best ones, since understanding of the architecture grew over time, but they do represent the contents of the current POC.</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Basic Concepts</p>
+<p class="itemText">Basic Concepts</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The basic requirements for compiling a diagram are:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• To “arbitrarily” choose a set of graphical “atoms” which can be used to<span class="Apple-converted-space">  </span>draw the diagrams for the language.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Then, use pattern matching and backtracking to infer new, semantic information which builds a knowledge base (some kind of data structure) that represents the interesting details within the diagram.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Finally, convert the inferred information into some other text language, which is then compiled into executable co...</p>
+</li>
+<li>
+<p class="itemTitle">Scanner</p>
+<p class="itemText">Scanner</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The purpose of this (Composite) Part, the “Scanner”, is to create a Prolog factbase from a .SVG file drawn in Draw.IO using the drawing conventions described earlier.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Facts are written as Prolog 3-tuples, eg. “relation(id1,id2).” or “relation(id1,data).”<span class="Apple-converted-space">  </span>These facts correspond to triplestore databases (e.g. semantic web).<span class="Apple-converted-space">  </span>The full capabilities of Prolog are not used e.g. no functors, and all facts consist of one relation, one subject and one object, e.g. “relation(subject, object).”....</p>
+</li>
+<li>
+<p class="itemTitle">Parser</p>
+<p class="itemText">Parser</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This Part - the Parser (a Composite Part) does most of the work for the compiler.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This Part accepts the fairly simple factbase and infers a great deal of information about the drawing. No sanity checking is performed in the Parser pass (checking is the domain of the following pipeline part “Semantic Check”).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This Part emits (to stdout) an updated factbase containing “more interesting” details about the drawing.<span class="Apple-converted-space">  </span>In the POC / bootstrap, we do not elide any facts, all facts are kept in t...</p>
+</li>
+<li>
+<p class="itemTitle">Semantic Pass</p>
+<p class="itemText">Semantic Pass</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The Semantic Pass should check as many design constraints as possible, e.g. types, and prevent the coder from producing code, if any design constraints are violated.<span class="Apple-converted-space">  </span>In this POC, the semantic pass exists only as an exemplar and does any real amount of design-rules checking.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Once the factbase is emitted by the Semantic Pass, the factbase is “certified correct”, meaning that the original program is a correct program and meets all requirements posed by the language (a diagrammatic ...</p>
+</li>
+<li>
+<p class="itemTitle">Emitter</p>
+<p class="itemText">Code Emitter</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The Coder (aka Code Emitter) produces code from the diagram, for various languages.<span class="Apple-converted-space">  </span>In this particular POC, we produce code for JavaScript (JS).<span class="Apple-converted-space">  </span>In this particular POC, the JS code we produce is a JSON wiring table. (We join the JSON with leaf parts (JS) and a kernel in a later “build” pass).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A Coder might also contain an optimiser, but this POC does not contain an optimiser.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In this POC, the code consists of seven child Parts.<span class="Apple-converted-space">  </span>The first four Parts are written in Prolog and de...</p>
+</li>
+</ul>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

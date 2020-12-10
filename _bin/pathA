@@ -1,0 +1,90 @@
+#!/bin/bash
+./debug-entry "[$1] $0"
+
+#
+## inputs:
+## filename (fd 3)
+## content (fd 4) N/C
+## go (fd 5)
+#
+## outputs:
+## <none> - side-effect - file.html moved to ./_posts/<prefix>_filename.html
+#
+
+wire1=wire_pA_1
+wire1a=wire_pA_1a
+wire1b=wire_pA_1b
+wire2=wire_pA_2
+wire2a=wire_pA_2a
+wire2b=wire_pA_2b
+wire3=wire_pA_3
+wire4=wire_pA_4
+mkfifo ${wire1} ${wire1a} ${wire1b} ${wire2} ${wire2a} ${wire2b} ${wire3} ${wire4}
+
+./wire-splitter2 "[$1] $0" 3<${wire1} 4>${wire1a} 5>${wire1b} &
+./wire-splitter2 "[$1] $0" 3<${wire2} 4>${wire2a} 5>${wire2b} &
+./create-file-prefix "[$1] $0" 3<${wire1a} 4<${wire2a} 5>${wire3} &
+./move-to-posts "[$1] $0" 3<${wire1b} 4<${wire3} 5<${wire2b} &
+
+read filename </dev/fd/3
+echo "${filename}" > ${wire1} &
+
+read content </dev/fd/4
+echo "${content}" > ${wire4} &
+./nc 3<${wire4} &
+
+read pin_go </dev/fd/5
+echo "${pin_go}" > ${wire2} &
+
+./debug-exit "[$1] $0"
+wait
+
+
+## pseudo code
+#
+# initialize filename to empty
+# while running
+# do
+#     go = non-blocking-read port["go"]
+#     if go {
+# 	    exit loop
+#     } else {
+# 	   temp = non-blocking-read port["filename"]
+# 	   if temp {
+# 	      send temp to create-file-prefix["filename"], move-to-posts["filename"]
+# 	   }
+#     }	      
+# end while
+# send "go" to create-file-prefix["go"], move-to-posts["go"]
+#
+#
+## pseudo code with more detail
+#
+# self.input filename --> wire10[3]
+# self.input go --> wire20[3]
+
+# wire10 --> wire10a, wire10b
+# wire10a --> create-file-prefix[3]
+# wire10b --> move-to-posts[3]
+
+# wire20 --> wire20a, wire20b
+# wire20a --> create-file-prefix[4]
+# wire20b --> move-to-posts[5]
+
+# wire30 --> move-to-posts[4]
+
+# initialize filename to ""
+# initialize running to "true"
+# while running == "true"
+# do
+#     go = read fd 3 
+#     if go {
+# 	    set running = "false"
+#     } else {
+# 	   temp = read fd 4
+# 	   if temp is not empty {
+# 	      send temp to wire10
+# 	   }
+#     }	      
+# end while
+# send "go" to wire20

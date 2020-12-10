@@ -1,0 +1,70 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;\f4\fnil\fcharset0 Menlo-Regular;\f5\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;\csgray\c0;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 Introduction\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2\fs26 \
+This essay discusses a simple compiler that compiles diagrams to executable code.\
+\
+I believe that diagrams can express certain design elements more easily than textual code.  For example, many people draw box & arrow pictures of a desired system on a whiteboard.  Such diagrams form a \'93syntax\'94 for system design.  This \'93syntax\'94 can be made more concrete and can be automatically compiled to code (the old idea of \'93executable specification\'94 becomes a reality).  To make this transition, one needs to \'93think like a compiler builder\'94 and ask oneself \'93can I imagine compiling these graphics to code?\'94.  For example, diagrams of stick people and clouds probably cannot be compiled.  Diagrams of boxes and arrows can be compiled to executable code, when one creates and follows certain conventions.\
+\
+In my opinion, diagrams are most useful in the hands of professionals, not children.  Most real-world Engineering professions use diagrams, e.g. EE\'92s use schematics, Civil Engineers use blueprints, etc.\
+\
+In my opinion, diagrams should 
+\f3\i not
+\f2\i0  be used to express ideas that are already, sufficiently expressed in textual code, for example\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::1>
+\f4\fs22 a = b + c;\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::1>
+\f2\fs26 should not be drawn as a diagram.  Such statements communicate perfectly well when written in text form.\
+\
+Text cannot express - conveniently - a network diagram, for example.  A network as text, is a list of components and a detailed \'93wiring list\'94 between such components and does not communicate the layout of the network to other human readers.  For such cases, diagrams excel.\
+\
+In fact, I believe that a single language cannot express all of the nuances of Software Design.  I believe that multiple languages need to be used, e.g. diagrams for software architecture, text code for implementation details, etc.  Already, we see many different languages being used in the software creation / distribution pipelines, e.g. bash, npm, gradle, HTTP, CSS, yaml, Docker, etc.\
+\
+In this essay, I show how to create compilable conventions for drawing such a network diagram  and how to compile it to executable code.  \
+\
+The diagrams discussed here are 
+\f3\i hybrids
+\f2\i0  - diagrams with text annotations.  A diagram does not 
+\f3\i need
+\f2\i0  to express every possible operation.  A diagram needs only to express operations that are not conveniently written as text.\
+\
+Most diagram editors do not make good code editors (DaS - diagrams as syntax).  The creation of better DaS editors is discussed in another essay.  [Programmers use all 10 fingers, not just a single mouse].\
+\
+For now, we will use a free editor called Draw.IO ({\field{\*\fldinst{HYPERLINK "https://www.draw.io/"}}{\fldrslt 
+\f5\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 https://www.draw.io/}}
+\f5\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 ).\ulnone  
+\f2\fs26 \cf3 Draw.IO exhibits the drawbacks of known diagram editors - e.g. one often needs to use a mouse. Draw.IO makes assumptions about the drawing (it begins automagically drawing lines between graphical atoms).  Yet, Draw.IO exists, is free and can produce SVG files.\cf0 \kerning1\expnd0\expndtw0 \
+\
+The kinds of diagrams we are concerned with are the kinds of diagrams that Engineers use (e.g. Electrical Engineers (schematics), Civil Engineers (blueprints), etc.).\
+\
+These diagrams are not meant to make software design easier for novices.  They are meant to add further meaning to software designs.  \
+\
+These are
+\f3\i  technical diagrams.
+\f2\i0 \
+\
+I believe that technical diagrams for software design have been overlooked due to a bias that assumes that \'93diagrams are for kids\'94.  In fact, many technical diagrams for software design do exist - on whiteboards in just about every software house.  Whiteboard diagrams are, typically, not rigorous enough to be compiled to executable code.  I hope to show that compilable technical diagrams are possible and that they do add information to a software project that cannot be easily expressed as text.\
+\
+The main goal of this essay is to show how modern tools and technologies can be used to implement diagram compilers. We will not emphasise, here, the reasoning behind use of such technical diagrams.\
+\
+If you already know how a compiler works, you can skip the following section.  Note that, I use the \'93pass\'94 model for compilers instead of the \'93tree\'94 model.  These models are essentially the same, except that the \'93pass\'94 model uses a pipeline for the compiler and data in the pipeline moves, strictly, from left to right.  In the \'93tree\'94model of compilation, the tree is traversed downward (top down) then upward (bottom up) - if one is more familiar with the tree model, it might help to imagine that the tree has been flattened and passed from left to right.   I find that the pipeline model \'93keeps things simple\'94 - each pass does exactly one job instead of folding all compiler work into a single textual script based on tree traversal.  A major point of simplification is to decompose a problem (in this case a compiler) into subsequent passes (like a bash pipeline) instead of as a data structure.\
+\
+}

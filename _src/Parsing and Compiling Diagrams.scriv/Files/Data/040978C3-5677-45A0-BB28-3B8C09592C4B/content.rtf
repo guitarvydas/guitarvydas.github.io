@@ -1,0 +1,342 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;\f4\fnil\fcharset0 Menlo-Bold;\f5\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid501\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 Basic Concepts\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2\fs26 \
+The basic requirements for compiling a diagram are:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}To \'93arbitrarily\'94 choose a set of graphical \'93atoms\'94 which can be used to  draw the diagrams for the language.\
+{\listtext	\uc0\u8226 	}Then, use pattern matching and backtracking to infer new, semantic information which builds a knowledge base (some kind of data structure) that represents the interesting details within the diagram.\
+{\listtext	\uc0\u8226 	}Finally, convert the inferred information into some other text language, which is then compiled into executable code in the usual way, using existing compilers and tools.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+At first, this may seem difficult or impossible.  One 
+\f3\i can
+\f2\i0  use the method of \'93divide and conquer\'94 to create ridiculously small components, to produce a working diagram compiler.\
+\
+I have concluded that no single programming language can do everything that is required, to solve an actual real-world problem.  Several \'93design principles\'94 come from this conclusion:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}Use a paradigm and a language that is most suited to the task(s) at hand.\
+{\listtext	\uc0\u8226 	}Don\'92t over-design.  Create only what is needed to solve the problem.  Abstraction and generalisation are over-sold.  If done too early (e.g. before some 3 iterations on the solution), abstraction is a bad idea that wastes time and usually doesn\'92t solve the problem at hand.  A corollary is: code reuse is a bad idea, design (architecture) reuse is a better goal - code is (can be) cheap, thinking is hard.  Reuse \'93thinking\'94.  
+\f3\i Refactoring
+\f2\i0  is a 
+\f3\i symptom
+\f2\i0  of poorly-expressed design.  If you feel a need to refactor code (instead of just throwing it away), then you are probably doing something else wrong.\
+{\listtext	\uc0\u8226 	}Don\'92t build the Design into the program - encapsulate the Design and pull it out of the code.  Spaghetti Design is worse than spaghetti code.  \
+{\listtext	\uc0\u8226 	}Don\'92t generalise, just get the job done. Code libraries bring other problems into the mix, which detract from getting the job done, as we\'92ve seen over the decades.  Making it possible to 
+\f3\i reuse the Design
+\f2\i0  (the thinking time, e.g. patterns) results in better use of human resources than taking the time to abstract code and to make it a part of a library.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+The above principles have led to an extremely simple diagram language, as discussed below.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f4\b\fs26 Graphical Atoms\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 \
+In this diagrammatic language, we simply need about two (2) graphical objects - straight lines and text.  This diagrammatic language consists of \
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls3\ilvl0\cf0 {\listtext	\uc0\u8226 	}boxes and \
+{\listtext	\uc0\u8226 	}arrows. \
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+I will show that a language as simple as this, 
+\f3\i can 
+\f2\i0 result in useful expression of software concepts that cannot be done with text alone (esp. when the boxes represent asynchronous actions, not synchronous ones).\
+\
+The next step up is to infer rectangular boxes.  Rectangular boxes can be inferred from a diagram by pattern matching straight lines and discovering lines that have common (x,y) end points.\
+\
+Many drawing tools provide rectangular boxes, so we can simply add them to the list above.  In this POC (proof of concept), we are using Draw.IO.  Draw.IO provides rectangles as atomic graphical objects, hence, we can avoid inferencing rectangles. We extend the above list to three (3) items - \
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\uc0\u8226 	}straight lines, \
+{\listtext	\uc0\u8226 	}text, and\
+{\listtext	\uc0\u8226 	}rectangular boxes.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+Draw.IO also provides straight lines with arrow-heads as primitive graphic atoms.  We will need to know the \'93direction\'94 that lines point in, hence, we extend the the above list to four (4) items: \
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls5\ilvl0\cf0 {\listtext	\uc0\u8226 	}straight lines, \
+{\listtext	\uc0\u8226 	}text, \
+{\listtext	\uc0\u8226 	}rectangular boxes, and\
+{\listtext	\uc0\u8226 	}arrow-heads.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+Another diagrammatic language, say one for expressing StateCharts, might use another completely different set of graphical primitives (e.g. curved lines, text, ellipses, dotted ellipses, callouts), but, using the \'93do not over design\'94 principle, above, we will ignore these other atoms for now.  Building a compiler for StateCharts is another project (and, it has been done in the past).\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 FactBases\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 \
+The \'93ideal\'94 data structure for the compiler is one that implies no structure (!) to the {\field{\*\fldinst{HYPERLINK "scrivcmt://28618C35-D3AF-4F3C-9ADF-8D5FAAAD2C95"}}{\fldrslt data.}}  One such data structure is the {\field{\*\fldinst{HYPERLINK "scrivcmt://061FB6AF-F71D-4CE7-B088-EBBCAB516E68"}}{\fldrslt 
+\f3\i factbase}} . \
+\
+A 
+\f3\i factbase
+\f2\i0  is an unordered collection of {\field{\*\fldinst{HYPERLINK "scrivcmt://E19E7ACC-BB86-48C3-88FE-FA3E87E19D4B"}}{\fldrslt 
+\f3\i facts
+\f2\i0 .}}  A 
+\f3\i fact 
+\f2\i0 is a simple 3-tuple that contains a Subject, an Object and a Relation between them.\
+\
+In Lisp, a 
+\f3\i fact
+\f2\i0  might be represented as\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::2>
+\f5\fs22 (relation subject object)\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::2>
+\f2\fs26 In Prolog, a 
+\f3\i fact 
+\f2\i0 might be represented as\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::2>
+\f5\fs22 relation(subject, object).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::2>
+\f2\fs26 To keep things ridiculously simple, we can implement a 
+\f3\i factbase
+\f2\i0  as a file, with one 
+\f3\i fact
+\f2\i0  per line and with empty lines being ignored.  We append new 
+\f3\i facts
+\f2\i0  to the front or to the end of the file (whichever is easiest - we don\'92t actually care, since the 
+\f3\i factbase
+\f2\i0  is unordered).\
+\
+In this example, the most basic 
+\f3\i factbase 
+\f2\i0 would contain only the four graphical atoms plus geometry 
+\f3\i facts
+\f2\i0  that describe their X and Y positions on the diagram plus width and height information (if appropriate).  For example, a simple 
+\f3\i factbase 
+\f2\i0  might be:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::2>
+\f5\fs22 text(id1,\'92\'92).\
+text_string(id1,\'92hello\'92).\
+text_x(id1,100).\
+text_y(id1,200).\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::2>
+\f2\fs26 \
+Here, \'91id1\'92 is some unique ID for the text.  The first line \'93declares\'94 the existence of a piece of text on the diagram.  The rest of the lines all refer to the same ID (id1) and specify properties of the text e.g. the actual string of characters of the text, the (x,y) coordinates of the text.\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f3\i \cf0 Facts 
+\f2\i0 are very similar to N-tuples found in the semantic web, etc.  A 
+\f3\i factbase
+\f2\i0  is very similar to 
+\f3\i triple-stores
+\f2\i0 .  Triple-stores and n-tuples are more general than what is needed for a diagram compiler, so they will be ignored for now. \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 \
+<$ScrKeepWithNext>Pattern Matching & Backtracking\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 One operation that will be used repeatedly is 
+\f3\i pattern matching
+\f2\i0  for inferring new information within the 
+\f3\i factbase
+\f2\i0 .\
+Prolog is a language that expresses both of these operations conveniently, and Prolog is freely available.  \
+I use gprolog in this project.\
+I assume that mini-Kanren (micro-Kanren) could be used (but, I haven\'92t explicitly tried that idea yet ; micro-Karen is available in Scheme, Clojure and Haskell, among other languages, and its use is detailed in the book \'93The Reasoned Schemer\'94).\
+\
+As an example of what we might use Pattern Matching & Backtracking for is to infer that a rectangle is formed out of four lines (not that, if we use Draw.IO, we won\'92t actually need to do this):\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::2>
+\f5\fs22 line(id2,\'92\'92).\
+line_x1(id2,10).\
+line_y1(id2,10).\
+line_x2(id2,20).\
+line_y2(id2,10).\
+line(id3,\'92\'92).\
+line_x1(id3,20).\
+line_y1(id3,10).\
+line_x2(id3,20).\
+line_y2(id3,20).\
+line(id4,\'92\'92).\
+line_x1(id4,20).\
+line_y1(id4,20).\
+line_x2(id4,10).\
+line_y2(id4,20).\
+line(id5,\'92\'92).\
+line_x1(id5,10).\
+line_y1(id5,20).\
+line_x2(id5,10).\
+line_y2(id5,10).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::2>
+\f2\fs26 The above 
+\f3\i factbase
+\f2\i0  describes one rectangle as a set of four lines (id2, id3, id4, id5).  [X\'92s increase to the right, Y\'92s increase downwards, in this coordinate system].\
+\
+Pattern matching can be used to infer the rectangle by checking the endpoints, for example, the end-point of id2 matches the beginning-point of id3 and so on, all the way around.\
+\
+When we find such a closed rectangle, we insert a \ul new\ulnone  set of 
+\f3\i facts
+\f2\i0  into the factbase, for example:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$Scr_Ps::2>
+\f5\fs22 rectangle(id6,\'92\'92).\
+rectangle_center_x(id6,15).\
+rectangle_center_y(id6,15).\
+rectangle_width(id6,10).\
+rectangle_height(id6,10).\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!$Scr_Ps::2>
+\f2\fs26 \
+It is simple-enough to write rules in Prolog, that pattern-match and backtrack to find all such rectangles in the {\field{\*\fldinst{HYPERLINK "scrivcmt://81375CFD-3835-4D95-B2E7-D391A323DEAA"}}{\fldrslt 
+\f3\i factbase
+\f2\i0 .}}  \
+\
+In earlier days of computing, it was considered impractical to use backtracking in this way.  Numerous methods were developed to pattern match streams of characters (e.g. Lex to match strings of characters using state machines, Yacc to match strings of tokens using state machines).  These methods tended to restrict the kinds of sequences (languages) that could be recognised (e.g. Yacc could pattern match LALR(1) grammars and would raise errors if the incoming language did not conform to LALR(1)).  \
+\
+Modern computers (2010 +) and Prolog engines make backtracking practical and quick.\
+\
+Using successive pattern matches, it is possible to infer a great deal of information about diagrams and to use this information to produce code from a {\field{\*\fldinst{HYPERLINK "scrivcmt://B24B1253-3BD5-4E82-BBE5-E76C76B299CD"}}{\fldrslt diagram.}}\
+\
+As an example, one version of this notation denoted 
+\f3\i Ports
+\f2\i0  as small squares positioned on the edge of larger 
+\f3\i Parts.  
+\f2\i0 The inference was done using small steps - (1) pattern match ALL rectangles (and squares) (2) find all squares (3) find all squares that intersect the edges of bigger rectangles, and declare (by adding 
+\f3\i facts 
+\f2\i0 to the factbase) that the small squares are 
+\f3\i Ports
+\f2\i0  and which rectangular 
+\f3\i Parts
+\f2\i0  they belong to, e.g.\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f5\fs22 \cf0 \'85\
+port(id31,\'92\'92).\
+parent(id31,id77).\
+\'85\
+part(id77,\'92\'92).\
+\'85\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Intersection\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 Most of the work in building a diagram compiler in this way is no more difficult than calculating whether lines intersect.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Pipelines\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 In the \'9270\'92s and \'9280\'92s,  the use of pipelines (shell \'93|\'94) was explored for applying \'93divide and conquer\'94 strategy to solving problems, but, for some reason, the pipeline work has not been carried over into software language design (beyond Bash, etc).\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Small Components\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 TBD\
+Rules of thumb:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls6\ilvl0\cf0 {\listtext	\uc0\u8226 	}  The smaller the better.\
+{\listtext	\uc0\u8226 	}  Remain practical - reasonable speed on current hardware.\
+{\listtext	\uc0\u8226 	}  Continue Dividing and Conquering until any professional can understand the purpose of the component and can implement the details in a few hours.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Prolog, Relational Programming\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 TBD\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Garbage collection\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 TBD\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Efficiency\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26   TBD\
+O/S threads vs mutual dispatch.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Concurrency\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26   TBD\
+Cooperative Dispatching\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Agile Methods\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs26 TBD\
+- Agile attempts to solve the Specification problem, but does it in a non-rigorous manner (e.g. results, diagrams, comments, cannot be compiled).}

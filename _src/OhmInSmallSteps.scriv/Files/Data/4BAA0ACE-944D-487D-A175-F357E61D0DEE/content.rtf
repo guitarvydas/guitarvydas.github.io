@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Stub out code for transpileMixedPrologAndJS() and createPageForRunningJS();\
+\
+After some fixing, the rough-in test works.  The code is:\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 <html>\
+  <head>\
+    <title>sample mixed PROLOG and JS - ohm/js in small steps</title>\
+    <meta charset=utf-8>\
+\
+    <script type="text/js-and-prolog">\
+      this is a test\
+    </script>\
+    \
+    <script>\
+      \
+      function displayDate () \{\
+	  document.getElementById('timestamp').innerHTML = Date();\
+      \}\
+      \
+      function displayResults(str) \{\
+	  document.getElementById('result').innerHTML = str;\
+      \}\
+      \
+      function transpileMixedPrologAndJS(s) \{\
+	  // stubbed out\
+	  return s;\
+      \}\
+      \
+      function createPageForRunningJS(s) \{\
+	  // stubbed out\
+	  return s;\
+      \}\
+      \
+      function runSample() \{\
+	  let jsAndPrologString = document.querySelector('script[type="text/js-and-prolog"]').innerHTML;\
+	  let transpiledToJS = transpileMixedPrologAndJS(jsAndPrologString);\
+	  let newPage = createPageForRunningJS(transpiledToJS);\
+	  displayResults(newPage);\
+	  displayDate();\
+      \}\
+    </script>\
+\
+  </head>\
+  <body>\
+    <button onclick="runSample()">run sample</button>\
+    <p id="timestamp"></p>\
+    <p id="result"></p>\
+  </body>\
+</html>\
+
+\f1\fs24 <!$Scr_Ps::0>}

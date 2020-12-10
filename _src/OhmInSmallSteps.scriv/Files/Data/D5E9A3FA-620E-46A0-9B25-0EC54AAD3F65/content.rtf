@@ -1,0 +1,29 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The grammar IDE at {\field{\*\fldinst{HYPERLINK "https://ohmlang.github.io/editor/"}}{\fldrslt 
+\f1\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 https://ohmlang.github.io/editor/}}
+\f1\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2  
+\f0\fs26 \cf0 \kerning1\expnd0\expndtw0 \ulnone is useful, although it appears not to accept grammars that inherit from user-defined grammars (not a big loss, since inheritance applied to code serves to de-localize the code, making it more difficult to debug).\
+My suggested workflow becomes: \
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}write the grammar (aka the pattern matcher)\
+{\listtext	\uc0\u8226 	}test the grammar against various cases, using the grammar editor {\field{\*\fldinst{HYPERLINK "https://ohmlang.github.io/editor/"}}{\fldrslt 
+\f1\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul https://ohmlang.github.io/editor/}}
+\f1\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul , 
+\f0\fs26 \cf0 \kerning1\expnd0\expndtw0 \ulnone starting with simple cases, then escalating in complexity\
+{\listtext	\uc0\u8226 	}once the grammar is fully debugged, build the semantics object(s) associated with the grammar\
+{\listtext	\uc0\u8226 	}copy the output to a file and run 
+\f1\fs24 node
+\f0\fs26  on it, to find further transpilation mistakes.\
+}

@@ -1,0 +1,371 @@
+<html>
+
+<head>
+<title>HTML Comonents - Arrowgrams</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">I discuss a very simple system composed of two visual components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I call this system Arrowgrams, or AG for short.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The components communicate through messages via a third component - their common parent.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As motivation, I provide the pseudo-html, and, I provide a diagram of the system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The two main components are shepherded by a top-level component.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The two components can only communicate by using messages.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The messages cannot be sent directly from one component to another.<span class="Apple-converted-space">  </span>All message rout...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">github</p>
+<p class="itemText">The code for this system can be found at https://github.com/guitarvydas/ag-js.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See, also, any follow-on or preceding versions of this system (I will try to call them ag-js-*).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Pseudo-HTML</p>
+<p class="itemText">The system in this simple example consists of an HTML input file component and an HTML paragraph component that displays the contents of the file.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Obviously, such a system can be directly implemented - and easily understood - as HTML + JavaScript.<span class="Apple-converted-space">  </span>The intention here, though, is to show the fundamentals of creating large systems using pluggable components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In essence, what we want is:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">&lt;input type="file" id="part1" onchange="sendMessageToPart2(…)&gt;…&lt;/input&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">&lt;p id="part2"&gt;&lt;/p&gt;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Further, we want ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Diagram</p>
+<p class="itemText">A first-cut diagram is shown in Fig. &lt;$n:figure:FirstCut&gt;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:FirstCut&gt; First Version of Diagram</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This diagram has the "problem" that all callback logic is implicit, probably buried in "part2".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We can pull the callback logic out into a separate component, as in Fig. &lt;$n:figure:SecondCut&gt;:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:SecondCut&gt; Second Version of Diagram</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The second diagram shows onreact as the input pin of, both, the "callback logic" and the "part2" components.<span class="Apple-converted-space">  </span>This is as intended, but is...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Happy Path</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:HappyPath&gt; Happy Path</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The green arrow shows what happens when everything goes according to plan.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Error Path</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:ErrorPath&gt; Error Path</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The yellow arrow shows what happens when the system (e.g. HTML) finds something wrong.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Timeout Path</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:TimeoutPath&gt; Timeout Path</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The red arrows show the control flow when things go horribly wrong, e.g. the FileReader can't read the file due to a server being down (or a break in the routing to the server, or, …).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Diagram Layers</p>
+<p class="itemText">From the previous description, it becomes obvious that<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. We want to describe the system using diagrams, instead of using code - the diagrams could be automatically compiled to code.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. We want to draw diagrams in layers, e.g. a layer for the happy path, a layer for the error path and a layer for the no response path.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will show one way to do each of the above - how to compile diagrams and how to draw and combine layers. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will show this later, after having described the code thus far. ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Details</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">50,000 Foot View</p>
+<p class="itemText">The file "example1.html" contains:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• script includes for the kernel</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• script includes for 3 kinds of parts - constructor functions for schematics, file selectors and text output boxes</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a &lt;body&gt; that defines a top-level &lt;div&gt; called topLevel, and 2 components: (1) part1 (a file selector input widget) and (2) part2 (a text file output box (an HTML &lt;p&gt;).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This corresponds to Fig. &lt;$n:figure:Example1&gt;.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:Example1&gt; Example1.html as a Diagram</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:Example1&gt; is almost ...</p>
+</li>
+<li>
+<p class="itemTitle">File Selector (part1)</p>
+<p class="itemText">Line 20 of example1.html defines a standard HTML file input element.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Lines 21-29 define the programmer-supplied JavaScript for this file selector element, namely the function sendChanged().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">When the user pushes the button and selects a file, the sendChanged() function is called. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This function grabs the appropriate data from the part1 HTML element and send()s it out the output pin of part1.<span class="Apple-converted-space">  </span>The output pin is called 'changed'.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">After the send(), we call kernel.io() to run the kernel dispatch...</p>
+</li>
+<li>
+<p class="itemTitle">Text Output Box (part2)</p>
+<p class="itemText">The text output box is defined in lines 32-70 of example1.html as a &lt;p&gt; element plus some (a lot of) JavaScript supporting functionality.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The happy path is the call to reader.readAsText(…) followed by a successul call to the callback function for onload().<span class="Apple-converted-space">  </span>After the reader loads the file, the onload() function is called as a callback to display the text contents of the file.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Two (2) other outcomes might occur and are handled by the onerror() and onabort() callbacks.<span class="Apple-converted-space">  </span>Later, I will show how I ...</p>
+</li>
+<li>
+<p class="itemTitle">Part topLevel</p>
+<p class="itemText">The topLevel component is defined in lines 15-17 and is initialized in lines 72-77 of example1.html.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Further discussion regarding schematics, parts, events, etc., follow.</p>
+</li>
+<li>
+<p class="itemTitle">Wires</p>
+<p class="itemText">A wire is a data structure that contains one sender and a list of receivers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The sender is defined by a { part, pin } pair.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Each receiver is defined by a { part, pin } pair.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Kernel</p>
+<p class="itemText">The kernel provides 2 main functions:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Send() - called by parts to deliver events to their outputs</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Dispatch() - the only "loop" in the system - it invokes parts that are ready().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This version of the kernel, based on HTML and HTML events, also provides the kernel.io() function.<span class="Apple-converted-space">  </span>This allows asynchronous events to be converted from HTML (and JavaScript) into events supported by AG.<span class="Apple-converted-space">  </span>In the least-optimized case, the Dispatcher() would be a loop that continually checks the ready()ness of part...</p>
+</li>
+<li>
+<p class="itemTitle">Key Points - Semantics</p>
+<p class="itemText"> 1. Children cannot (must not) send messages directly to one another, but must route messages through the parents' routing table.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. A wire must lock all input queues of its receivers and deliver events to all receivers atomically.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(1) is a key aspect of treating components as pluggable LEGO® blocks.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(2) ensures "sanity" of multi-tasking.<span class="Apple-converted-space">  </span>Events must not supercede one another.<span class="Apple-converted-space">  </span>Events cannot be tangled.<span class="Apple-converted-space">  </span>In hardware, this detail is addressed by using maskable interrupts (IRQs).<span class="Apple-converted-space">  </span>Software can...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Main Loop</p>
+<p class="itemText">It is possible to think of parts as each having a mainloop, analogous to windowed apps.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Mutual Multitasking</p>
+<p class="itemText">This system employs mutual multitasking between components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Mutual Multitasking was discredited as a way of building operating systems in early versions of Windows®.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Mutual Multitasking is, indeed, not a suitable paradigm for building time-sharing operating systems, where the operating system must guarantee isolation between components, but, mutual multitasking can be used to compose a single App - application.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In the case of an App, a "bug" is just a bug, and it is not reasonable to expect a...</p>
+</li>
+<li>
+<p class="itemTitle">Part</p>
+<p class="itemText">There are two kinds of parts:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• schematics - composite parts that contain other schematics and/or leaf parts</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• leaves - parts that contain functionality, usually as code, and cannot be broken down further by the component system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Every part, schematic and leaf, contains the following items:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• An attribute that tells the system whether the part is a schematic or a leaf</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• An input queue</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A function that determines if the ready queue is not empty</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A function to determine whether the part i...</p>
+</li>
+<li>
+<p class="itemTitle">Event</p>
+<p class="itemText">An event is of the form:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">{ pin: "…", data: "…" }</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">i.e. an event - in the component system that I describe - is defined as consisting of two fields.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first field is called pin.<span class="Apple-converted-space">  </span>A pin is essentially a tag that identifies the kind of event.<span class="Apple-converted-space">  </span>Receiving parts can case/switch on the pin.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The second field is called data.<span class="Apple-converted-space">  </span>The data field can contain any arbitrary object, from a scalar number and a scalar string to a more complicated object, like { … }. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The sender and receiver must "agree" on w...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Event Type Safety</p>
+<p class="itemText">The sender and receiver must "agree" on what the shape of the data is. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Checking type safety is punted to enclosing layers. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">An analogy to this layered approach is: the layers in a network protocol.<span class="Apple-converted-space">  </span>Each receiving layer strips off a part of the message and checks it.<span class="Apple-converted-space">  </span>Each sending layer wraps the data in micro-information that allows the receiving end to check the data, in layers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that, if one takes composition of components to heart, then type checking becomes simply a layer (or filt...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Schematic</p>
+<p class="itemText">A schematic is a part that contains other parts (leaf and/or schematic parts).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A schematic contains two more pieces of information than the generalized part ancestor class:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A list of part instances - its children.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A list of wires.<span class="Apple-converted-space">  </span>This is basically a routing table of messages between children.<span class="Apple-converted-space">  </span>See below.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Children cannot (must not) send messages directly to one another, but must route messages through their parent's routing table.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This indirection is a fundamental principle of a compo...</p>
+</li>
+<li>
+<p class="itemTitle">Leaf Part</p>
+<p class="itemText">A leaf part is one that has a react() function that is specific to the part.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A leaf part contains no children.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Leaf parts can be implemented using code in some language, e.g. JavaScript.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For examples of leaf parts, see fileselector.js and text.js.</p>
+</li>
+<li>
+<p class="itemTitle">Busy</p>
+<p class="itemText">A part is busy if it is doing work.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In a system that sits on top of an operating system, and, in which, parts cannot be interrupted, all leaf parts never appear to be busy and schematics are busy only if any of their children are busy.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Note that most simple applications of AG sit on top of an operating system, and, all parts run within the same user thread, i.e. all components run in the same app.<span class="Apple-converted-space">  </span>This kind of system can ignore busy-ness of leaves and use a simple recursive algorithm to calcu...</p>
+</li>
+<li>
+<p class="itemTitle">Ready</p>
+<p class="itemText">A part is ready() only if:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. it has at least one event in its input queue</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. it is not busy().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Any part that is ready() can be dispatch()ed. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Ready() parts cannot (must not) rely on when they might be dispatch()ed.<span class="Apple-converted-space">  </span>Ordering of part dispatch() is indeterminate.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Parts are concurrent.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

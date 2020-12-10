@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{lower-alpha\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\deftab709
+\pard\pardeftab709\partightenfactor0
+
+\f0\fs24 \cf0 There is a class of error that is well understood and can be detected by automation.\
+\
+This class of errors is known as \'93syntax errors\'94.\
+\
+For this to {\field{\*\fldinst{HYPERLINK "scrivcmt://8AF79323-F53F-4802-98AA-3C542375EFC9"}}{\fldrslt work,}} the input language must contain 
+\f1\i syntax 
+\f0\i0 in the form of 
+\f1\i syntactic sugar
+\f0\i0 .\
+\
+There are, at least, two kinds of syntax errors:\
+\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls1\ilvl0\cf0  1.	simple typos\
+ 2.	deeply nested constructs with incorrect nestings.\
+\pard\pardeftab709\partightenfactor0
+\cf0 \
+There are, at least, two kinds of programming languages:\
+\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls2\ilvl0\cf0  a)	Those that provide syntactic sugar that allows syntax errors to be detected\
+ b)	Those that eschew syntactic sugar and do not provide (much, if any) syntactic sugar.\
+\pard\pardeftab709\partightenfactor0
+\cf0 \
+Languages in class (a) typically come from the Algol (Pascal) lineage where most structured constructs are clearly delimited by end phrases.  For example, languages that provide \'93if ... end if\'94 fall into what I call class (a).\
+\
+Languages like Common Lisp and C fall into what I call class (b).  In C, an \'93if\'94 statement ends with a single character \'93\}\'94 and constructs like \'93for\'94 end with the same symbol \'93\}\'94.  In Common Lisp, all constructs end with the character \'93)\'94.  It is impossible to know what \'93\}\'94 and \'93)\'94 pertain to, except by scanning backwards to find the beginning of the corresponding construct.  This is harder if the construct is deeply nested and if the beginning of the construct is off-screen (or outside of the window). \
+\
+Shallow solutions to this symptom (b) have included attempts to make pretty printers and to embed them into code editors.  \
+\
+With the advent of better and better code optimizations (including functional alpha and beta substitution), the editor-debugger combination cannot easily display, correctly, the various constructs.}

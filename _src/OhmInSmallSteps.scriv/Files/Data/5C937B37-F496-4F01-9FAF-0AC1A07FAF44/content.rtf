@@ -1,0 +1,58 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 In Common Lisp (and Scheme), backquote is used as a shorthand to create lists.\
+Backquote evolved as a way to create programs that create programs.  In Lisp, programs are lists, so programs that create programs are just programs that create and modify lists.\
+In Lisp, the function "(LIST \'85)" creates a list containing all of its arguments.  In Lisp, all arguments are evaluated before being passed to a function.\
+In creating programs that create programs, using Lisp, one of the often-used idioms was a call to the function LIST with arguments that are quoted and with only 
+\f1\i some
+\f0\i0  of the arguments that are evaluated.\
+This idiom occurred so frequently, that a shorthand was invented - the backquote.\
+ \
+Backquote is a kind of an inverted QUOTE.  \
+Inside a backquoted form, an unquoted sexp is quoted and a form preceded by a comma is not quoted (it is eval'ed in the usual manner).  \
+\
+For example 
+\f2 (LIST (QUOTE A)  (QUOTE B) (QUOTE C)) 
+\f0 is written in shorthand as 
+\f2 `(A B C)
+\f0 , and,  
+\f2 (LIST (QUOTE A) B (QUOTE C))
+\f0  is written in shorthand as 
+\f2 `(A ,B C)
+\f0 .  Note that, in this latter case, B is evaluated but A and C are quoted.  A list of 3 values is {\field{\*\fldinst{HYPERLINK "scrivcmt://6A126974-01E2-42D7-8B54-67726AE4F4E0"}}{\fldrslt created.}}  Clearly, 
+\f2 `(A ,B C)
+\f0  is more expressive, and easier to write and read, than 
+\f2 (LIST (QUOTE A) B (QUOTE C))
+\f0 , if you know the shorthand.\
+\
+The following examples form some of the tests I use for the backquote expander:\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f3\fs24 \cf0 <$Scr_Ps::0>
+\f4\fs22 `a \'97> (quote a)\
+`,a \'97> a\
+`(a) \'97> (list (quote a))\
+`(a b c) \'97> (list (quote a) (quote b) (quote c))\
+`(a ,b c) \'97> (list (quote a) b (quote c))\
+,a \'97-> error (comma not inside backquote)\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f3\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 To parse this, I use the grammar already developed.  I 
+\f1\i could
+\f0\i0  write some code within the rule "BackQuotedSexp" to rewrite the backquoted code, but, I will use a 
+\f1\i trick
+\f0\i0  - I will switch to another set of semantic rules when I see a backquote.  The main set of semantic rules is called 'unbackquote' and the backquote helper is called 'inbackquote'.  The semantic rules in 'inbackquote' are written to return reverse-quoted strings, which is what I want when I see a backquote.  The BackQuotedSexp rule of the main semantics calls the unparser in 'inbackquote' instead of recursively calling 'unbackquote' (as is done in the straight-forward 'unquote' semantics).\
+\
+What happens in the case where a backquoted sexp is seen while already processing a backquote?  I don't care.  This case never happens in the prolog-6.scm code that I want to automatically process.  This is, obviously, a place where I leave it as an exercise to the reader: try double-backquoting in a Lisp REPL to test your theory about how this is supposed to work, then mimic this behaviour in the parser.\
+\
+Numeric, string and boolean atoms are essentially constants, so their values aren't changed by backquote.\
+\
+(See commit 33eb0eb6f6389ab3423e2561b04e5e9221145ac4).}

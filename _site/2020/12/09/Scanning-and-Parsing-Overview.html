@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Scanning and Parsing Overview</title>
+  <meta name="CreationTime" content="2020-12-09T15:16:43Z">
+  <meta name="ModificationTime" content="2020-12-09T15:16:43Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Times}
+    p.p6 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    span.s1 {font: 12.0px Times}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">A DSL is best built as a hierarchy.</p>
+<p class="p2"><br></p>
+<p class="p1">At the “leaf nodes” of the hierarchy are characters (or better yet, glyphs).<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p2"><br></p>
+<p class="p1">Leaf nodes are collected into composite structures, called <i>tokens</i>.</p>
+<p class="p2"><br></p>
+<p class="p1">A language (and a DSL) is composed of layers.<span class="Apple-converted-space">  </span>At each layer, a certain set of tokens is parsed and transpiled into another set of tokens.</p>
+<p class="p2"><br></p>
+<p class="p1">An <i>unparser</i> is a layer processor.<span class="Apple-converted-space">  </span>It takes a set of tokens and emits them as a simpler set of tokens.<span class="Apple-converted-space">  </span>For example, we might construct a tree representing a Scheme program, then unparse it into a JavaScript program.</p>
+<p class="p2"><br></p>
+<p class="p1"><i>[I have begun using the term SCL - Solution Centric Language - instead of DSL.<span class="Apple-converted-space">  </span>An SCL is a DSL, but is more specific.]</i></p>
+<p class="p2"><br></p>
+<p class="p1">The first layer of a DSL is the <i>scanner.</i><span class="Apple-converted-space">  </span>It reads input data, e.g. characters, and converts the data into <i>tokens</i>.<span class="Apple-converted-space">  </span>A <i>token</i> might contain file and position information. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">The scanner might compress runs of similar characters into single tokens.<span class="Apple-converted-space">  </span>For example a run of whitespace – spaces, tabs, etc. - might be compressed into a single <i>whitespace</i> <i>token</i>.<span class="Apple-converted-space">  </span>These are semantically uninteresting, but <i>whitespace tokens</i> can act as delimiters between other tokens.</p>
+<p class="p2"><br></p>
+<p class="p1">More importantly, the scanner compresses semantically interesting runs of related characters.<span class="Apple-converted-space">  </span>For example, an identifier, <i>id</i>, in a language is usually composed of a single alpha character followed by 0 or more alphanumeric characters.<span class="Apple-converted-space">  </span>The scanner groups such identifier characters together and assigns a single token (e.g. a token code plus a string hashcode) to such runs.<span class="Apple-converted-space">  </span>Compressing such runs of characters into single tokens relieves subsequent passes from having to re-scan the input character by character.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> The scanner also worries about the low-level details of delimiter<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> characters. In languages where indentation is significant (e.g. Python), the scanner might keep track of indentation levels and attach these to <i>tokens</i> or, might create special indentation <i>tokens</i>.</p>
+<p class="p1">Scanners are, fundamentally, pattern matchers.</p>
+<p class="p2"><br></p>
+<p class="p1">Scanners often use REGEX libraries to specify string matching. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">A tool that build scanners from declarative specifications is LEX.</p>
+<p class="p2"><br></p>
+<p class="p1">PEG technology obsoletes the use of LEX.<span class="Apple-converted-space">  </span>See below.</p>
+<p class="p2"><br></p>
+<p class="p3">A <i>parser</i> inputs a sequential stream of <i>tokens</i>, and checks that the tokens form valid phrases – in sequence – for the language being processed (compiled, transpiled, etc.).</p>
+<p class="p3">Parsers are pattern matchers, albeit more elaborate than the pattern matchers in scanners.</p>
+<p class="p3">Parsing is typically specified as a set of rules (patterns) that describe parts of the language being processed. <span class="Apple-converted-space"> </span></p>
+<p class="p3">Parsing typically uses subroutines (stack based) to do pattern matching.<span class="Apple-converted-space">  </span>As such, parser pattern matchers cannot use REGEX directly, since REGEX does not provide stack-based routines.</p>
+<p class="p3">Parsers can match patterns across line boundaries, whereas REGEX cannot.</p>
+<p class="p3">Parsers can match structured code (phrases), whereas REGEX cannot.</p>
+<p class="p3">A tool that builds parsers from declarative specifications is YACC.</p>
+<p class="p3">Parser fall, broadly, into two categories – top-down and bottom-up.<span class="Apple-converted-space">  </span>Top-down parsers are typically implemented as recursive descent routines.<span class="Apple-converted-space">  </span>Bottom-up parsers match phrases, then bubble such matches upwards to recognize a full program.<span class="Apple-converted-space">  </span>Bottom-up parsers have been formalized (see the Dragon Book). <span class="Apple-converted-space"> </span></p>
+<p class="p3">One such formalization is the set of languages called LR.<span class="Apple-converted-space">  </span>A very common subset of LR is called LALR(1).<span class="Apple-converted-space">  </span>YACC builds LALR(1) parsers, as state machines, from declarative specifications.<span class="Apple-converted-space">  </span>Languages that fit the LALR(1) mould are a subset of LR languages.<span class="Apple-converted-space">  </span>LR languages are a subset of more general languages.<span class="Apple-converted-space">  </span>The restrictions of LR and LALR(1) languages are tolerated because they can be formalized.<span class="Apple-converted-space">  </span>LALR(1) is popular because of the YACC tool.</p>
+<p class="p3">Top-down languages are less restrictive than LR languages, but, top down parsers were not easily formalized. <span class="Apple-converted-space"> </span></p>
+<p class="p3">LALR(1) (through YACC) was “first to market” and has gained most of the mind-share in this problem space.</p>
+<p class="p3">Bryan Ford,<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> in the early 2000’s, invented the PEG parsing technology, which creates top-down pattern-matchers (parsers) using a syntax similar to that of REGEX.<span class="Apple-converted-space">  </span>PEG also uses backtracking in some cases.</p>
+<p class="p3">The class of languages that PEG can recognize is larger than the LR class of languages.<span class="Apple-converted-space">  </span>PEG can match some patterns that LR cannot match, and vice versa. <span class="Apple-converted-space"> </span></p>
+<p class="p3">In my opinion, top-down parsing (e.g. PEG) matches languages that are easier to create than the class of LR languages. <span class="Apple-converted-space"> </span></p>
+<p class="p3">In top-down pattern matching, order matters – the programmer can specify which patterns to match first.<span class="Apple-converted-space">  </span>In LR, it is possible to create ambiguities which are, in my opinion, “not obvious”.<span class="Apple-converted-space">  </span>Such LR ambiguities need to be dealt with by rearranging the grammars or by using exception-processing rules.<span class="Apple-converted-space">  </span>Typically, a LALR(1) grammar programmer waits for the tool to detect and declare ambiguities, instead of intuiting them.</p>
+<p class="p3">PEG subsumes scanning and parsing into a single notation.</p>
+<p class="p4"><br></p>
+<p class="p3">In my opinion, PEG is a break-through, which makes building DSLs very simple.<span class="Apple-converted-space">  </span>I expect that simple DSLs<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> will over-take language design.<span class="Apple-converted-space">  </span>It is now possible to design and use multiple DSLs in a single project.<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a></p>
+<p class="p3">Tools such as OMetaII and Ohm-JS are based on PEG technology.</p>
+<p class="p3">PEG libraries exist for many common languages, e.g. Ohm-JS for JavaScript, ESRAP for Common Lisp, etc.</p>
+<p class="p2"><br></p>
+<p class="p3">PEG is not the first tool to process and create top-down grammars.<span class="Apple-converted-space">  </span>S/SL is another such tool.<span class="Apple-converted-space">  </span>S/SL was invented in the 1980’s.<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p3">S/SL has the advantage that it works with <i>tokens, </i>whereas Ohm-JS works only with character streams.</p>
+<p class="p3">S/SL has the advantage that it is pass-based.<span class="Apple-converted-space">  </span>Ohm-JS does not default to this behaviour, but could be twisted to conform to passes.<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a><span class="Apple-converted-space">  </span>Since Ohm-JS accepts only characters as input, it discourages pass-based and token-based approaches.</p>
+<p class="p3">S/SL has the disadvantage that it tends not to subsume scanning and parsing.<span class="Apple-converted-space">  </span>PT Pascal,<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a> though, uses a scanner created in S/SL.</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3">TXL<a id="fnlink10"></a><a href="#fn10"><sup>[10]</sup></a> is a source-to-source technology, based on backtracking, ostensibly used for experimental language design.</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3">PROLOG is a language that expresses exhaustive pattern-matching using backtracking.</p>
+<p class="p3">As such, PROLOG should be ideal for building parsers (and, maybe, scanners).</p>
+<p class="p3">The early wisdom stated that backtracking was not a viable strategy for building parsers.<span class="Apple-converted-space">  </span>Early attempts to use backtracking in parsers was quashed after Early’s (a researcher’s name) Parsing technology.</p>
+<p class="p3">Now, with much faster computers, and almost-unlimited memory, this “wisdom” could be re-investigated.<span class="Apple-converted-space">  </span>To my knowledge, this has not been done.</p>
+<p class="p3">PEG parsers use a limited form of backtracking.</p>
+<p class="p3">Searches for parsers built in PROLOG tend to turn up experimental research into natural language parsing (a superset of PEG based languages and LR languages).</p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>In fact, characters <i>are</i> glyphs.<span class="Apple-converted-space">  </span>Characters are small pixmaps.<span class="Apple-converted-space">  </span>The glyphs are bound to certain keys and/or certain input gestures, e.g. multiple keys pressed at the same time, mouse movement and buttons, etc.<span class="Apple-converted-space">  </span>It is possible to imagine a wider set of glyphs, e.g. boxes and lines, that are not constrained to a fixed bitmap size.<span class="Apple-converted-space">  </span>Historically, most programming languages are based on rigid, non-overlapping grids of character glyphs.<span class="Apple-converted-space">  </span>This is due to the limitations of early hardware, keyboards, memory and processors.<span class="Apple-converted-space">  </span>Newer hardware can display overlapping glyphs, but these advances are not widely used for programming language design, yet.</p>
+<p class="p5"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>This used to be very important for efficiency.<span class="Apple-converted-space">  </span>Wasting processor time in re-scanning character strings caused noticeable slow-downs in processing (and ate memory).<span class="Apple-converted-space">  </span>Modern hardware processes character strings much more quickly, but the notion of <i>tokenizing</i> remains.<span class="Apple-converted-space">  </span>On faster hardware, the act of creating tokens is not (necessarily) about speed, but does help with “divide &amp; conquer”.<span class="Apple-converted-space">  </span>A scanner recognizes low-level strings, subsequent passes recognize patterns of increasing complexity – the <i>semantics</i>.<span class="Apple-converted-space">  </span>Untangling scanning from semantics-recognition is easier to reason about when a scanner “gets the low-level details out of the way”.<span class="Apple-converted-space">  </span>See my other essays for more discussion about layers of pattern matchers.</p>
+<p class="p5"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>Separator characters, such as “)”, “(“, etc..<span class="Apple-converted-space">  </span>For example, <i>ids </i>are terminated when a separator character is seen, e.g. when the next character is not an alphanumeric.</p>
+<p class="p5"><a id="fn4"></a><a href="#fnlink4"><span class="s1">[4]</span></a><span class="s1"> </span>https://bford.info/packrat/</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s1">[5]</span></a><span class="s1"> </span>Especially source-to-source translation.</p>
+<p class="p6"><a id="fn6"></a><a href="#fnlink6"><span class="s1">[6]</span></a><span class="s1"> </span>See my essay “DSLs – The Future of Computing”</p>
+<p class="p6"><a id="fn7"></a><a href="#fnlink7"><span class="s1">[7]</span></a><span class="s1"> </span>https://en.wikipedia.org/wiki/S/SL_programming_language#:~:text=The%20Syntax%2FSemantic%20Language%20(S,University%20of%20Toronto%20in%201980.&amp;text=S%2FSL%20is%20designed%20to,syntax%20error%20recovery%20and%20repair.</p>
+<p class="p6"><a id="fn8"></a><a href="#fnlink8"><span class="s1">[8]</span></a><span class="s1"> </span>See my essay “Ohm In Small Steps”</p>
+<p class="p6"><a id="fn9"></a><a href="#fnlink9"><span class="s1">[9]</span></a><span class="s1"> </span>https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/</p>
+<p class="p6"><a id="fn10"></a><a href="#fnlink10"><span class="s1">[10]</span></a><span class="s1"> </span>https://www.txl.ca/</p>
+</div>
+</body>
+</html>

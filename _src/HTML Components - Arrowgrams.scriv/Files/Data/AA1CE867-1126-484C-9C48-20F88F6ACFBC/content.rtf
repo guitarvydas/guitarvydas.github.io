@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 From the previous description, it becomes obvious that \
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}We want to describe the system using diagrams, instead of using code - the diagrams could be automatically compiled to code.\
+{\listtext	2.	}We want to draw diagrams in layers, e.g. a layer for the 
+\f1\i happy path, 
+\f0\i0 a layer for the 
+\f1\i error path
+\f0\i0  and a layer for the 
+\f1\i no response
+\f0\i0  path.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+I will show one way to do each of the above - how to compile diagrams and how to draw and combine layers.  \
+\
+I will show this {\field{\*\fldinst{HYPERLINK "scrivcmt://3F8A7421-18CF-4C72-97E3-DCF999BBD86C"}}{\fldrslt later,}} after having described the code thus far.  \
+\
+For motivation, note that:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}I treat JavaScript as an assembly language and will be compiling diagrams into this kind of assembly language.  This has similarities to the 
+\f1\i no code
+\f0\i0  movement.  I argue that compiling diagrams compiled to assembly language (e.g. JavaScript) is more flexible than most 
+\f1\i no code 
+\f0\i0 approaches.\
+{\listtext	\uc0\u8226 	}New-breed assembly languages don't complicate the transpiler (compiler) with details such as declaration-before-use and strong {\field{\*\fldinst{HYPERLINK "scrivcmt://4221AE75-DF0D-4A6F-BE6F-F5B9342E976B"}}{\fldrslt typing.}}  New-breed assembly languages provide easy access to 1
+\fs18 \super st
+\fs26 \nosupersub -class functions and anonymous functions.  See my essay "New-Breed HLLs" for further discussion.\
+{\listtext	\uc0\u8226 	}Note that the preceding diagrams used only 3 kinds of 
+\f1\i glyphs
+\f0\i0 : boxes, text
+\f2 ,
+\f0  and, lines (arrows).  Unlike in programming editors, the glyphs are not arranged in a fixed 2D grid, and, unlike in state-of-the-art programming editors, the glyphs can overlap.  If we consider the 
+\f1\i glyphs
+\f0\i0  to be 
+\f1\i tokens
+\f0\i0 , then there is almost nothing new here - we already know how to compile strings of tokens to code, e.g. most existing textual {\field{\*\fldinst{HYPERLINK "scrivcmt://0C804987-A082-4AFE-B811-51B072E2DEC1"}}{\fldrslt 3GL}} compilers do this.  The main aspects of these new-breed tokens is that they carry an (x,y) point with them and that they are {\field{\*\fldinst{HYPERLINK "scrivcmt://37919998-BE92-47CA-9AB8-12902FF880B8"}}{\fldrslt hierarchical}}.\
+{\listtext	\uc0\u8226 	}Diff, git, github, etc., already know how to compare two code files and to merge them.  Layers might be thought of as a git-style merge.  In fact, we can stoop even lower by simply comparing items for equality - e.g. two layers are mergeable if the {\field{\*\fldinst{HYPERLINK "scrivcmt://E28A89E4-A444-453B-A185-A16D3DF250A5"}}{\fldrslt items}} that they contain are exactly equal, and, missing items are simply unioned into the merged result.  Readers who have studied EE (Electrical Engineering) will see similarities of this mentality to Kirchoff's Laws of Superposition.\
+}

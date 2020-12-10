@@ -1,0 +1,50 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The kernel provides 2 main functions:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}Send() - called by parts to deliver events to their outputs\
+{\listtext	\uc0\u8226 	}Dispatch() - the only "loop" in the system - it invokes parts that are 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 ready().
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 \
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+This version of the kernel, based on HTML and HTML events, also provides the {\field{\*\fldinst{HYPERLINK "scrivcmt://5B9522B9-5A47-4C09-A32B-3D41BA14BDBE"}}{\fldrslt 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 kernel.io()}}
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  function.  This allows asynchronous events to be converted from HTML (and JavaScript) into events supported by AG.  In the least-optimized case, the 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 Dispatcher()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  would be a loop that continually checks the 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 ready()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 ness of parts and dispatches them.  {\field{\*\fldinst{HYPERLINK "http://Kernel.io"}}{\fldrslt 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 Kernel.io}}
+\f2\fs22 ()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  allows us to spread this "loop" over every HTML event receiver and prevents wasting cycles until actual (asynchronous) IO occurs. \
+\
+We don't need {\field{\*\fldinst{HYPERLINK "http://kernel.io"}}{\fldrslt 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 kernel.io}}
+\f2\fs22 ()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  in dedicated systems, e.g. bare metal where the 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 Dispatcher()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  can run an idle loop, without optimizing use of cycles.  This kind of system might be an {\field{\*\fldinst{HYPERLINK "scrivcmt://77A7C39C-44FC-48B7-A43B-20FC6EED44EF"}}{\fldrslt IoT}} device, in which the code runs a simple (idle) loop checking for input and (maybe) running a task in the background.\
+}

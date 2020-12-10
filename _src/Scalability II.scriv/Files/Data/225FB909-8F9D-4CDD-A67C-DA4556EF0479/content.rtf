@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Further explanation:\
+\
+The main problem in software design is scalability.\
+\
+We want to "plug" pieces tother like LEGO blocks.\
+\
+Better scalability implies fewer dependencies.\
+\
+Early hardware people got this "right".  They took incredibly complicated devices (semiconductors made up of various kinds of rust) and built chips / ICs (integrated circuits).\
+\
+Chips were black boxes.  They had a set of input/output pins.  The insides of the chips were inscrutable - encased in opaque epoxy.\
+\
+Nothing leaked out of or into a chip except through the pins of the chip.\
+\
+Properties of a chip were described in easily-measured terms:\
+\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}voltage on a pin\
+{\listtext	\uc0\u8226 	}current needed by a pin\
+{\listtext	\uc0\u8226 	}diagram / chart of the outputs, given a set of inputs\
+{\listtext	\uc0\u8226 	}timing.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+Then, hardware designers "discovered" that point-to-point wiring between chips led to non-scalable designs.\
+\
+They built a (small) hierarchy - chips mounted on boards plugged into backplanes.\
+\
+The earliest backplanes were basically point-to-point wiring harnesses.  For example, an early Wang word processor had a backplane with some 400 pins, allowing a chip on one board to send signals directly to a chip on another board.\
+\
+Then, came the S100 bus.  It had only 100 pins.  It was well defined and documented.  Certain connections were not allowed, even if they could be done more efficiently as point-to-point connections.\
+\
+The idea of the Bus led to Apple computers and, ultimately, the IBM desktop computer.  (There was more than one Bus definition, but the market shook those out).\
+\
+Can software be built like chips?  I argue Yes.\
+\
+We need to build software in hierarchies.\
+\
+Divide and conquer.\
+\
+No leakage - of anything - between layers in a hierarchy.  ("Anything" includes things like variables, types, control flow, dependencies of any kind, etc.).\
+\
+\
+Coming back to Complexity: we *don't care* how complicated a component is, as long as it is well-encapsulated and as long as we don't have to deal with any of its leakage of dependencies.\
+\
+I see software as a hierarchy of black boxes.  The Architect for each box 
+\f1\i chooses 
+\f0\i0 the best way to describe the design intent of a black box.  The Engineer figures out how to dot the I's and cross the T's.  The Production Engineer figures out how to make the black box "more efficient" and the Coder lays the bricks to implement the black box.\
+\
+A good Architect will have a tool-belt full of Silver Bullets.  Maybe a problem is best described in Relational terms, maybe a problem is best described as a State Machine (as a diagram, yet), maybe a problem can be broken down in a synchronous manner, etc., etc.\
+\
+}

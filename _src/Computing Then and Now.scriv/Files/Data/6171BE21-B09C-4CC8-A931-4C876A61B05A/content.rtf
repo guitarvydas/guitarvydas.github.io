@@ -1,0 +1,113 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue128;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c50196;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\b\fs36 Computing, Then and Now\
+\pard\pardeftab709\partightenfactor0
+
+\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f1 \
+(July 8, 2020)\
+\
+Computers are inherently parallel.\
+\
+Early on, hardware designers found ways to deal with the inherent parallelism (e.g. TTL, state machines, clocking, etc.).\
+\
+At an early stage, von Neumann suggested using a single-threaded approach in order to tame parallelism in software (N.B. note the similarity to consciousness - a single thread, coordinating the parallel processes of the human body)\
+\
+At that time, the assumptions were:\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls1\ilvl0
+\f0 \cf0 \'95	
+\f1 memory was a scarce resource and needed to be conserved and reused\
+\ls1\ilvl0
+\f0 \'95	
+\f1 CPUs were very expensive and needed to be time-shared across multiple users\
+\ls1\ilvl0
+\f0 \'95	
+\f1 mathematical notation (as it existed) could solve all problems\
+\ls1\ilvl0
+\f0 \'95	
+\f1 programming languages were hard to create.\
+\pard\pardeftab709\partightenfactor0
+\cf0 \
+Today, these basic assumptions have been overturned\
+\pard\pardeftab709\li720\fi-360\partightenfactor0
+\ls2\ilvl0
+\f0 \cf0 \'95	
+\f1 we have nearly infinite memory\
+\ls2\ilvl0
+\f0 \'95	
+\f1 microprocessors are cheap and abundant\
+\ls2\ilvl0
+\f0 \'95	
+\f1 written mathematical forms do not use the full capabilities of what can be displayed with a computer\
+\ls2\ilvl0
+\f0 \'95	
+\f1 programming languages (e.g. DSLs) are much easier to create now, e.g. using PEG and backtracking parsers.\
+\pard\pardeftab709\partightenfactor0
+\cf0 \
+The computing environment has changed drastically, but software programming languages have not kept up with the new reality.\
+\
+We continue to use languages whose design was based on these early prejudices. This has led us into many accidental complexities that continue to vex us.  The most glaring of such accidental complexities are time-sharing-based multi-tasking and memory sharing (I count some 40+ accidental complexities).\
+\
+We have developed a language, phrases and words to describe the problematic aspects of these choices, instead of dealing with the new reality and problems based on the early assumptions.  We talk of thread-safety, priority inversion, mmap, race conditions (some race conditions are inherent in parallel systems, but many of the race conditions we deal with are due to accidental complexity), garbage collection, parameter lists, return values, the vague notions of 
+\i complexity, 
+\i0 Agile, call-return, etc., all the while ignoring realities that TTL hardware dealt with \'96 throughput time, asynchronous design, 1-page documentation, encapsulation, buses, etc.\
+\
+We use programming editors that can edit only text (which are graphical glyphs made up of mini-bitmaps) instead of programming with graphical symbols, of which text is only 
+\i one
+\i0  of the choices.\
+\
+We have created variable font editors for business (e.g. Word), we have created diagram editors for business (e.g. Visio) and we have invented new UIs for business (Excel, iPad), but the basic model of editors for 
+\i programming
+\i0  has not kept pace.  Programmers use all ten fingers for typing, but programmers are forced to take their hands off of keyboards to use much more limited mouse pointing devices.  For example, a 
+\i box
+\i0  glyph could be bound to a single key on the {\field{\*\fldinst{HYPERLINK "scrivcmt://636A0B8F-1E6A-450F-AF57-98ACEF4ADF42"}}{\fldrslt keyboard}} and two 
+\i boxes
+\i0  could be selected (e.g. using 
+\i point 
+\i0 and 
+\i mark
+\i0 ) with another keystroke creating a line/connection between them.  Snippets of text could be typed anywhere on the screen and not be relegated to the 24x80 line-oriented mindset of early predecessors.  Technologies, once thought forbidden, like PROLOG backtracking, Early parsing, miniKanren (core.logic in clojure-speak) are now entirely viable and finish processing in the blink of an eye.  We 
+\i can
+\i0  waste computing resources to make programming easier, but instead we waste resources on tool-tips and mountains of APIs based on outdated notions of function libraries.\
+\
+Most programming languages (and even tools like spreadsheets) use the outdated notion of 
+\i absolute addressing
+\i0  \'96 where functions are named and called directly instead of using indirection (which is much more flexible for architecting new solutions).  Hardware microprocessors underwent a transition from absolute addressing to relative addressing, but this has mostly not happened in the design of popular programming languages.  (See David Ackley\'92s MFM for someone who is thinking along these lines (albeit mostly for hardware, AFAICT) {\field{\*\fldinst{HYPERLINK "https://www.cs.unm.edu/~ackley/papers/hotos-11.pdf"}}{\fldrslt \cf2 \ul \ulc0 https://www.cs.unm.edu/~ackley/papers/hotos-11.pdf}}).\
+\
+We spend time improving code tools instead of building new tools and languages for harder problems, like Architecture (which I call D.I. - Design Intent).  We relegate D.I. to whiteboards instead of concrete notations which can be compiled and executed.  We build languages that only mathematicians can only love, instead of building tools to concretely communicate between CEOs, CTOs, Architects, Engineers and Programmers.\
+\
+We have essentially 
+\i forgotten
+\i0  that synchronous code is a 
+\i trick
+\i0  used as 
+\i but one way
+\i0  to tame parallelism.\
+\
+We expect all languages to provide call/return, parameters, return values, exceptions, etc. and we try to force-fit these ideas onto every problem we solve (\'93
+\i when all you\'92ve got is a hammer, then everything looks like a nail\'94
+\i0 ).  The result is that we know how to solve only one problem (building unreliable websites).  The rest of the problems in the real world (gaming, machine control, etc.) are left to C and the new kid on the block Rust (which is just a re-hash of old ideas).\
+\
+The new reality consists of applications consisting of multiple microprocessors (I refuse to call them C.P.U.s  - Central Processing Units \'96 and call them P.U.s instead (Processing Units)) each with their own private memories, distributed across space.  One thread per P.U.  Communicating over wires (not memory).\
+\
+Current programming languages, stack-based, can describe a program 
+\i on
+\i0  a P.U. but cannot (easily, without accidental complexity) describe programs 
+\i across 
+\i0 distributed P.U.s.\
+\
+We need languages that 
+\i do less
+\i0  so that Architects and Engineers can free their minds of unnecessary details (I discuss my ideas about how to structure a Software Organization elsewhere). \
+\
+We have explored all sorts of tools and technologies and paradigms.  Now, we need to pick through the pile and select the best tools for every task and throw away the rest (see {\field{\*\fldinst{HYPERLINK "https://alarmingdevelopment.org/?p=766"}}{\fldrslt \cf2 \ul \ulc0 https://alarmingdevelopment.org/?p=766}}).\
+}

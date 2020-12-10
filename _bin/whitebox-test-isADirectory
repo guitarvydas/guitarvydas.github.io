@@ -1,0 +1,26 @@
+#!/bin/bash
+
+wire1=wire_$RANDOM
+wire2=wire_$RANDOM
+wire3=wire_$RANDOM
+mkfifo ${wire1} ${wire2} ${wire3}
+
+find ../_new -mindepth 1 -maxdepth 1 -iname '*' | while read targetMaybeWithBlanks
+do
+    base=`basename "${targetMaybeWithBlanks}"`
+    if [ ".DS_Store" == "${base}" ]
+    then   
+	echo "skipping [\"${targetMaybeWithBlanks}\"]"
+    else
+	./isADirectory 3<${wire1} 4>${wire2} 5>${wire3} &
+	echo "port 4 (directory): " `cat <${wire2}` &
+	echo "port 5 (not directory): " `cat <${wire3}` &
+	echo "testing isADirectory with \"${targetMaybeWithBlanks}\""
+	echo "${targetMaybeWithBlanks}" >${wire1}
+	wait
+    fi
+done
+
+       
+
+

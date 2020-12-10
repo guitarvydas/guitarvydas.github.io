@@ -1,0 +1,52 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f0\fs26 \cf0 {\listtext	\uc0\u8226 	}the 
+\f1\i dispatcher()
+\f0\i0  routine distributes events and invokes components\
+{\listtext	\uc0\u8226 	}all components, when finished processing a single event, return control back to the 
+\f1\i dispatcher()
+\f0\i0 \
+{\listtext	\uc0\u8226 	}a component is 
+\f1\i ready 
+\f0\i0 if it has at least one input event in its input queue and if it is not 
+\f1\i busy
+\f0\i0 \
+{\listtext	\uc0\u8226 	}leaf components are 
+\f1\i busy
+\f0\i0  only when they are processing an event ; on a single-threaded system, this means that leaf components appear always to be 
+\f1\i not busy
+\f0\i0 \
+{\listtext	\uc0\u8226 	}composite components are 
+\f1\i busy 
+\f0\i0 if any of their children are busy (recursively)\
+{\listtext	\uc0\u8226 	}the 
+\f1\i dispatcher() 
+\f0\i0 contains an unordered list of all components on that processor\
+{\listtext	\uc0\u8226 	}the 
+\f1\i dispatcher()
+\f0\i0  visits every component in the system and, if the component is 
+\f1\i ready
+\f0\i0 , the 
+\f1\i dispatcher()
+\f0\i0  pulls one (1) event off of that component's input queue and invokes the component with that event, if a component is 
+\f1\i not busy
+\f0\i0  the 
+\f1\i dispatcher()
+\f0\i0  does not invoke it (and moves on to examining the next component)\
+{\listtext	\uc0\u8226 	}there is one (1) 
+\f1\i dispatcher() 
+\f0\i0 per processor\
+{\listtext	\uc0\u8226 	}parallel 
+\f1\i dispatching()
+\f0\i0  is done in a recursive manner - a top-level, parallel dispatcher metes out "work" to 
+\f1\i dispatchers()
+\f0\i0  on parallel processors, then spawns sub-dispatchers (one on each processor)\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+}

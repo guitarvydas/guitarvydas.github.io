@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f0\fs26 \cf0 {\listtext	1.	}Children cannot (must not) send messages directly to one another, but must route messages through the parents' routing table.\
+{\listtext	2.	}A wire must lock all input queues of its receivers and deliver events to all receivers 
+\f1\i atomically
+\f0\i0 .\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+(1) is a key aspect of treating components as pluggable LEGO\'ae blocks.\
+\
+(2) ensures "sanity" of multi-tasking.  Events must not supercede one another.  Events cannot be {\field{\*\fldinst{HYPERLINK "scrivcmt://BA0D043E-C000-495D-B36B-5E6FE492BE67"}}{\fldrslt tangled}}.  In hardware, this detail is addressed by using maskable interrupts (IRQs).  Software can never run faster than the underlying hardware.  Software techniques to regularize this problem of atomicity, can be invented (and have been), but, come with a performance penalty.  The time saved in software development is paid back with slower hardware performance.  Engineers (not programmers) should consider and make trade-offs depending on specific problems and specific solutions.  They should find a local minimum for a specific solution, e.g. it might be acceptable to use slow, regularized, generalized locking in some cases, for example websites that must only respond in "human time", but such speed penalties might not be acceptable in missile systems and financial trading systems.  The issue of creating a working design should be left to Architects, while the optimization of speed should be left to Production {\field{\*\fldinst{HYPERLINK "scrivcmt://34C0B697-66F0-4347-8513-2337828A0330"}}{\fldrslt Engineers}}.\
+\
+Dispatching should be performed in a \ul breadth\ulnone -first manner.  Delivering events in a \ul depth\ulnone -first manner might result in the equivalent of the 
+\f1\i priority inversion 
+\f0\i0 problem encountered in traditional operating systems.\
+\
+Fairness doesn't actually matter in this kind of {\field{\*\fldinst{HYPERLINK "scrivcmt://8EA14658-BDF9-4988-B457-095EA2D03ED4"}}{\fldrslt system}} , but, the actual dispatching algorithm can be tuned for specific problems and solutions.\
+\
+Long-running operations, such as loop or a deep recursion, are considered to be {\field{\*\fldinst{HYPERLINK "scrivcmt://971B6094-2E67-4F06-9AD8-37EDDB7C44A5"}}{\fldrslt "bugs"}}   Repetition can be had by sending events to oneself, e.g. sending a "continue" event to oneself.\
+\
+Feedback is allowed - parts can send events to themselves (directly or indirectly).  Feedback is not quite the same as recursion, due to the fact that events are buffered by the input queues.  Recursion tends to imply that a routine will run again immediately.  Feedback events do not imply such a behaviour - only the 
+\f2\fs24 <$Scr_Cs::0>
+\f3\fs22 dispatcher()
+\f2\fs24 <!$Scr_Cs::0>
+\f0\fs26  determines when a part gets to {\field{\*\fldinst{HYPERLINK "scrivcmt://A8B56872-6394-473A-89EF-2FE964E4ECAD"}}{\fldrslt run}}.\
+\
+Events can be delivered to "nothing".  NC - no connection.  Such events are ignored and dropped.  This, also, is a key aspect of LEGO\'ae style component composition.  It is not possible to know beforehand whether all functionality provided by a part will be used.  Some parts might generate output events that are not needed for a certain application.  It must be possible to ignore some events, i.e. to connect some pins as NC.}

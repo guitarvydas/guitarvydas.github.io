@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Complexity II</title>
+  <meta name="CreationTime" content="2020-12-09T14:51:20Z">
+  <meta name="ModificationTime" content="2020-12-09T14:51:20Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p4 {margin: 10.0px 0.0px 6.0px 0.0px; font: 16.0px Helvetica}
+    p.p5 {margin: 10.0px 0.0px 6.0px 0.0px; font: 16.0px Helvetica; min-height: 19.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; min-height: 19.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Arial; min-height: 11.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Q: Which is simpler, diagram A or<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><img src="/assets/2020-12-09-14-51-20-Images/ConCarCdr-flat.png" width="241px" height="61px" alt="Image"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">diagram B?</p>
+<p class="p2"><br></p>
+<p class="p4"><b><img src="/assets/2020-12-09-14-51-20-Images/ConCarCdr-closure.png" width="361px" height="61px" alt="Image"></b></p>
+<p class="p5"><b></b><br></p>
+<p class="p6"><br></p>
+<p class="p3">Q: Which code is simpler?<span class="Apple-converted-space">  </span>Code C:<span class="Apple-converted-space"> </span></p>
+<p class="p7">function Cons(x,y) {<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space">    </span>this.car = x;<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space">    </span>this.cdr = y;<span class="Apple-converted-space"> </span></p>
+<p class="p7">};</p>
+<p class="p7">function car(cell) {</p>
+<p class="p7"><span class="Apple-converted-space">    </span>return cell.car;</p>
+<p class="p7">};</p>
+<p class="p7">function cdr(cell) {</p>
+<p class="p7"><span class="Apple-converted-space">    </span>return cell.cdr;</p>
+<p class="p7">};</p>
+<p class="p8"><br></p>
+<p class="p9"><br></p>
+<p class="p3">or Code D?<span class="Apple-converted-space"> </span></p>
+<p class="p7">function Cons(x,y) {</p>
+<p class="p7"><span class="Apple-converted-space">    </span>return function(placeholderFunction) {</p>
+<p class="p7"><span class="Apple-tab-span">	</span>placeholderFunction(x,y);</p>
+<p class="p7"><span class="Apple-converted-space">    </span>};</p>
+<p class="p7">};</p>
+<p class="p7">function car(cell) {</p>
+<p class="p7"><span class="Apple-converted-space">    </span>return cell(</p>
+<p class="p7"><span class="Apple-tab-span">	</span>function(x,y){</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return x;</p>
+<p class="p7"><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><span class="Apple-converted-space">    </span>);</p>
+<p class="p7">};</p>
+<p class="p7">function cdr(cell) {</p>
+<p class="p7"><span class="Apple-converted-space">    </span>return cell(</p>
+<p class="p7"><span class="Apple-tab-span">	</span>function(x,y){</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return y;</p>
+<p class="p7"><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><span class="Apple-converted-space">    </span>);</p>
+<p class="p7">};</p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p10">Simplicity can be defined as “lack of nuance”.</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p10">It is the Software Architect’s responsibility to make the design readable and understandable.</p>
+</div>
+</body>
+</html>

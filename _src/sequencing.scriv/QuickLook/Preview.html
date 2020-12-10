@@ -1,0 +1,319 @@
+<html>
+
+<head>
+<title>sequencing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">Sequencing is an aspect of program design. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Sequencing describes the flow of control in a program, e.g. answering the question: when a program element executes, what element will be executed next?<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Most languages encourage statement based sequencing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Another common sequencing style is the use of full preemption - threads of code execute in a synchronous (statement based) manner. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The operating system's dispatcher decides that a given thread should run.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The use of synchronous sequencing is...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Statement</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Statement-based sequencing is common in most current text-based PLs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Statements are executed in an order based on their textual appearance.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Subroutines are executed in stack-based sequencing.<span class="Apple-converted-space">  </span>(See "Stack").</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Statement based sequencing is caused by text-only syntax.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Routines are called in a synchronous manner.<span class="Apple-converted-space">  </span>See stack-based sequencing.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Stack</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Stack-based sequencing is the common form of CALL/RETURN.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A routine transfers control to another routine and waits for it to complete its processing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The caller uses a stack - i.e. an optimized collection - to create a list of parameters to the callee, then leaves a breadcrumb (return address) on the stack.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The callee performs processing and leaves a return value (usually a single value) and uses the stacked breadcrumb to return control to the caller.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Stack based sequencing is caused by t...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Spawn and Wait</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In spawn and wait sequencing, the caller "spawns" processes for each child/called routine and then waits until all of the child processes have died (and left results, if any, in distinguished locations).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Spawn and wait has been implemented in several forms:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• UNIX® fork() and waitpid()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Bash (sh, etc.) &amp; and wait commands</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• hardware DMA (Direct Memory Access)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• "par" statement in several "parallel" languages</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• node.js (anonymous functions provide wait() operation)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• etc.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Spawn and w...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Spawn and Wait 2</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The above diagram is simply another way to diagram a spawn and wait design.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">See spawn and wait.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Server</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A server based sequencer is one where a single process contains and hides a resource.<span class="Apple-converted-space">  </span>Client processes send requests for resource data.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">[Note that a Hoare Monitor is a essentially a server-based sequencer in the context of time-sharing and memory sharing.<span class="Apple-converted-space">  </span>See Hoare Monitor for further discussion.]</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Explicit Sequencer</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In the Explicit Sequencer design, work is sent to all workers, then a Sequencer process dictates the order in which each worker executes.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Pull</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In a pull-based sequence, workers are arranged in a chain and respond to REQuests from downstream components.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Preemption</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In a preemption-based sequence, each worker is given a private memory space and stack.<span class="Apple-converted-space">  </span>A distinguished routine - the dispatcher - determines the order in which workers execute.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The dispatcher routine is, typically, supplied by the O/S.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Hoare Monitors</p>
+<p class="itemText">Hoare Monitors operate like the server sequencer, but do so in an environment where memory sharing and/or CPU minimization is employed.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A monitor is a server and all other processes can be clients of the server.<span class="Apple-converted-space">  </span>"Requests" are made by calling routines that are protected by the monitor.<span class="Apple-converted-space">  </span>The O/S allows only one process to enter the monitor at a time, and all other requesting processes are suspended and placed on a queue, waiting for the monitor to become free.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Processes inside the monitor coul...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Hierarchy</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Hierarchical sequencing is a sequencing style where children components are contained within parents, like Russian dolls.<span class="Apple-converted-space">  </span>As incoming events arrive, the parent gets first-right-of-refusal to act on the events.<span class="Apple-converted-space">  </span>If the parent does not act on the events, the events are passed on to contained children, recursively.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This pattern is common in windowing systems.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Handshake Protocol</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In handshake sequencing, a component sends a request to another component (instead of directly "calling" it).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The receiving component responds with a "handshake" message - usually an ACK in the case of successful receipt.<span class="Apple-converted-space">  </span>The receiver might respond with a NAK (not acknowledge) if it deems that the message was garbled, or, the receiver might not respond at all.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The requestor expects one of 3 responses:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. ACK - means that the receiver received the message and is acting on it,</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. NAK - me...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Filter Pipelines</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Filter pipelines form chains of routines.<span class="Apple-converted-space">  </span>Each routine in the chain has no side-effects, or its side effects are isolated from the rest of the system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Information flows strictly down the pipeline, e.g. from left to right.<span class="Apple-converted-space">  </span>Feedback loops do not exist.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pipeline sequencing has been implemented in:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Bash pipelines</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• FP filter chains</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Smalltalk ";" operators</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• etc.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In a filter pipeline pattern, the data flowing between components contains all of the state.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(See, also, FBP, for a patte...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Flat Message Passing</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In message passing, every component has an input queue of messages.<span class="Apple-converted-space">  </span>All components are asynchronous and can process messages at different speeds.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Flat message passing does not scale well to large systems (as is the case for anything that is designed in a flat manner).<span class="Apple-converted-space">  </span>Flat message passing can be tamed and scaled using hierarchical scoping.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">FBP (Flow Based Programming)</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Each component is a concurrent machine. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Concurrent machines communicate with one another via bounded buffers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components have input and output ports that are connected to bounded buffers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Data flowing between components is called IPs (Information Packets).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components can read-from and write-to ports in a random manner.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A component suspends if it attempts to send to an output port which has a full buffer.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A component suspends if it attempts to read from an input port that has an empty ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Daisy Chain</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A daisy chain sequence arranges components in a chain. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Each component has a unique address.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Each component in the chain inspects incoming messages to determine if the message is addressed to them. <span class="Apple-converted-space">  </span>If the message is not addressed to the given component, the message is forwarded to downstream components.<span class="Apple-converted-space">  </span>If the message is addressed to the given component, the message is not forwarded and is processed by the component.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Component outputs are all tied together to form a result.<span class="Apple-converted-space">  </span>One compon...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Blockchain</p>
+<p class="itemText">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A blockchain, in current technology, is a spawn-and-wait system wherein the parent node is changed on every "cycle" (defined by the blockchain algorithm).<span class="Apple-converted-space">  </span>The choice of "parent" is randomized to prevent attackers from guessing the future behaviour of the system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Blockchains typically consist of two parts:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. cryptography</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. sequencing.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Reactive</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In the reactive pattern, components receive events (aka messages) and react to the messages. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Events (messages) are queued.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One message is processed, fully to completion, before another message is taken from the input queue.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>A reactive system is a system of concurrent components wherein every component processes events in a hierarchical pattern.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components are isolated from one another.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Components can be implemented as composites or leaves. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It is not possible to discern how a compone...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

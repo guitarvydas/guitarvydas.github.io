@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The text output box is defined in lines 32-70 of example1.html as a 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 <p>
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  element plus some (a lot of) JavaScript supporting functionality.\
+\
+The 
+\f3\i happy path
+\f0\i0  is the call to 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 reader.readAsText(\'85)
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  followed by a successul call to the callback function for 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onload()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 .  After the reader loads the file, the 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onload()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  function is called as a callback to display the text contents of the {\field{\*\fldinst{HYPERLINK "scrivcmt://B1AC93B9-0CA1-484C-8D2E-0208EA04D85D"}}{\fldrslt file}}.\
+\
+Two (2) other outcomes might occur and are handled by the 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onerror()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  and 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onabort()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  callbacks.  Later, I will show how I create these callbacks in a more "structured" {\field{\*\fldinst{HYPERLINK "scrivcmt://47C311EB-0BEF-4A34-A628-3659D264641E"}}{\fldrslt manner}}.  For now, the gory details are on display.  Note that the code for a simple text display component is "not so simple" when written out in JavaScript (or any textual) form.\
+\
+In all, the code for our text component must handle 1 input and 3 outcomes (good, error, abort).  Current programming languages provide a way to express 1 input and 1 outcome easily.  Syntax for handling 1 input and 2 outcomes exists (
+\f3\i throw
+\f0\i0 ).  There is no syntax for 1 input and 3 outcomes, hence, the JavaScript code is written at a very low level - an "assembly" level, in my opinion - and programmers can try to deal with such situations in a myriad of ways, e.g. by conflating the two 
+\f3\i unhappy paths
+\f0\i0  into one by returning a non-scalar {\field{\*\fldinst{HYPERLINK "scrivcmt://2B1CEBEF-2F6E-4257-B442-83632E13B40F"}}{\fldrslt object}}.  The code, as written in this example1.html, is not production ready - it punts on the issue of errors and aborts.\
+\
+Diagram notations, e.g. StateCharts and the notations I describe, can be used to express functionality with multiple outcomes and asynchronous behaviours.}

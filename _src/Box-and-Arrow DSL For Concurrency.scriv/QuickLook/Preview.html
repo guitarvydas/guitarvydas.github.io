@@ -1,0 +1,317 @@
+<html>
+
+<head>
+<title>Box-and-Arrow PL For Concurrency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">In this essay, I discuss the design of a box-and-arrow diagram language (PSL) that describes a system of concurrent, isolated software components. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Software components are drawn as boxes and event-flows between the components are drawn as arrows.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I treat the diagrams as a syntax for a PSL.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The diagram language is based on a set of conventions.<span class="Apple-converted-space">  </span>N.B. programming languages are, also, based on conventions - you can't get them to compile just any English phrase.<span class="Apple-converted-space">  </span>The language manual tells you wh...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Goal</p>
+<p class="itemText">The goal of this language (PSL) is to describe software components and events flowing between them.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Isolation</p>
+<p class="itemText">Isolation means:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• components cannot share memory</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• components cannot share control flow</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all components are asynchronous - they cannot rely on running in a specific order, except through explicit design, e.g. through the use of an explicitly designed/drawn handshake protocol</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Concurrency</p>
+<p class="itemText"> • (See my essay "Concurrency is not Parallelism" which was derived from Rob Pike's talk with the same name).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrent components cannot rely on order of execution</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrent components cannot share control flow</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrent components are scheduled and executed by a single routine, which I call the dispatcher()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• analogy: web workers that communicate solely via messages</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrent components can be the basis of a parallel system, if the problem requires parallelism</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• concurrency d...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Events</p>
+<p class="itemText"> • represented as directed lines (arrows)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• one-way only</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Components</p>
+<p class="itemText"> • boxes</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• input ports</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• output ports</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• kind</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all components are isolated</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all components are concurrent</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all components are asynchronous - they cannot rely on running in a specific order, except through explicit design, e.g. through the use of an explicitly designed/drawn handshake protocol</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• components cannot share memory</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• components cannot share control flow</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">       </span></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Leaf Components</p>
+<p class="itemText"> • leaf components are implementations in some other language</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• leaves could use existing PLs</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• leaves could use other diagram PSLs, e.g. Hierarchical State Machines</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Composite Components</p>
+<p class="itemText"> • aka Schematics</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• composed, recursively, of box-and-arrow components</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• "busy" if any child component is busy</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• component can Send() its input events to its children and/or directly to one of its own output pins</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Input Event Queues</p>
+<p class="itemText"> • each component has one (1) input queue</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• queue contains events (tag + data)<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• any component can process only one event at a time</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a component is "busy" while it is processing an input event</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• component can react to an input event by generating 0 or more output events</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Output Event Queues</p>
+<p class="itemText"> • each component has one (1) output queue</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• while processing an input event, a component can Send() 0 or more output events</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• generated output events are queued on the output queue with an output-pin tag and data</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• the output queue is processed (by the dispatcher) at any time after a component has finished processing a single input event</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Input Pins</p>
+<p class="itemText"> • a component can have 0 or more input "pins" - input ports tagged with a name (symbol, index, etc.)</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Output Pins</p>
+<p class="itemText">A component can have 0 or more output "pins" - input ports tagged with a name (symbol, index, etc.).</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Details</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Input Event Delivery</p>
+<p class="itemText"> • the dispatcher() routine distributes events and invokes components</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all components, when finished processing a single event, return control back to the dispatcher()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a component is ready if it has at least one input event in its input queue and if it is not busy</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• leaf components are busy only when they are processing an event ; on a single-threaded system, this means that leaf components appear always to be not busy</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• composite components are busy if any of their children are busy (rec...</p>
+</li>
+<li>
+<p class="itemTitle">Output Event Delivery</p>
+<p class="itemText"> • the dispatcher() distributes events from the output queue of finished components (when event distribution occurs is indeterminate, we guarantee only that output events are distributed only after a component has finished processing - e.g. the dispatcher() could choose to distribute all output events from a component as soon as the component has finished processing, or, the dispatcher() could invoke many components and, only later, distribute output events)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• output events are queued up on the...</p>
+</li>
+<li>
+<p class="itemTitle">Dropping (Skipping) Events</p>
+<p class="itemText"> • any output event that is connected to an output pin, that is not connected to other input pins, is dropped and ignored</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• components cannot rely on how they've been connected to other components</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Event Delivery Guarantees</p>
+<p class="itemText">The system guarantees only that an output event sent to multiple receivers is delivered "at the same time" to all receivers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This implies that the dispatcher() follows the following protocol for delivering an output event:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• pop event from output queue of Send()er</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• examine / get routing table (in parent of Send()er)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• lock input queues of associated receivers</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• for every receiver:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ create a new event</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ translate output pin tag to receiver-relative input pin tag, in new event</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ copy dat...</p>
+</li>
+<li>
+<p class="itemTitle">Top Level Component</p>
+<p class="itemText"> • a component at the top level has exactly 0 input pins and exactly 0 output pins</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a system can have 1 or more top level components</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• events "from the outside world" are collected by a top level component and distributed to its children</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• analogy: this is very similar in function to a window event loop, every box-and-arrow system is a system of concurrent components that reacts to events from the top level</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all other components must have at least one (1) input pin</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Bottom Level Component</p>
+<p class="itemText"> • a bottom level component has exactly 0 output pins</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a bottom level component is executed solely for its side effect (e.g. controlling a piece of hardware) - this is OK, because all components are isolated</p>
+</li>
+<li>
+<p class="itemTitle">Mid-Level Component</p>
+<p class="itemText"> • mid-level components have at least one (1) input pin and at least one (1) output pin</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• mid-level components can be leaf components or composite components</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Namespaces - Name Clashes</p>
+<p class="itemText"> • all input pins for one component must each have unique names</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• all output pins for one component must each have unique names</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• input pin names can be the same as output pin names (input pins and output pins are in different namespaces)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Long-Running Loops</p>
+<p class="itemText"> • long running loops are not allowed - this is a bug</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• long running (deep) recursion is not allowed - this is a bug</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Data in Events</p>
+<p class="itemText"> • the system makes no guarantees about the data in an event (other than it, or a pointer to it, can be contained in the data field of an event)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• data is designed in a hierarchical manner - the Send()er and the receiver must agree on the shape of the data</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• the system knows only that an event contains a pin tag and a data field</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• input pin tags refer to the input port names of a receiving component</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• output pin tags refer to the output port name of the Send()ing component</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• the dispatcher(...</p>
+</li>
+<li>
+<p class="itemTitle">Dispatching / Routing Events</p>
+<p class="itemText"> • I talk about events travelling along wires between parts - language borrowed from digital electronics.<span class="Apple-converted-space">  </span>In this language, wires are lines (event flows), parts are components, schematics are composite components</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• wires are always explicitly drawn on a schematic</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• wires are fixed and never routed dynamically</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• events are alway Send()t to a component's output queue - only the parent can route output events of a child component</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• the routing table for events is scoped - a parent contains onl...</p>
+</li>
+<li>
+<p class="itemTitle">Measurement</p>
+<p class="itemText"> • each component is characterized by the amount of memory that it consumes</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ amount of memory is: static memory plus (+) heap memory plus (+) stack memory</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• each component is characterized by its worst-case throughput rate</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• a system is characterized by its throughput rate for:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ one-to-one output events</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ one-to-many output events</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>⁃ overhead incurred by running the dispatcher()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• we should be able to do a worst-case analysis of throughput of a completed system using simple math - for ex...</p>
+</li>
+<li>
+<p class="itemTitle">Control Events</p>
+<p class="itemText">In general, a component Send()s control events to its children.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Data Events</p>
+<p class="itemText">In general, a component Send()s data events to its parent (for further routing by the parent).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Trigger Events</p>
+<p class="itemText">Some events are sent only for their effect - the data value doesn't matter, only the fact that the event arrived matters. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I call these triggers.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Triggers are even "smaller" than Booleans.<span class="Apple-converted-space">  </span>Triggers don't have a value.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

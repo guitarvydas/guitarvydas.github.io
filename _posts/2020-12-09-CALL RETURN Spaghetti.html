@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Box and Arrow Diagrams</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-09T14:50:50Z">
+  <meta name="ModificationTime" content="2020-12-09T14:50:50Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 12.0px Helvetica}
+    span.s4 {font: 8.0px Helvetica}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I show that a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.</p>
+<p class="p3"><br></p>
+<p class="p2">I show the fundamental operation of a concurrent system and argue that it is inherently simpler than a system based on Call/Return.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Simple System</b></h2>
+<p class="p2">Fig. 1 contains a diagram of a simple system.</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/SyncVsAsync-SimpleDiagram.png" width="400px" height="150px" alt="Image"></p>
+<p class="p2">Fig. 1 <span class="s1">A Simple System</span></p>
+<p class="p3"><br></p>
+<p class="p2">The diagram contains one input<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> port and one output<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> port. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The diagram contains two components<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.<span class="Apple-converted-space">  </span>The algorithms for the boxes are straight-forward<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.<span class="Apple-converted-space">  </span>The algorithms are stated in terms of what each box outputs when inputs arrive at that box.</p>
+<p class="p3"><br></p>
+<p class="p2">The flow of data within the diagram is shown by arrows.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">It <i>appears</i> that we have plugged two software components together to form a system.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What Happens?</b></h2>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>What Happens When Events Arrive?</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/SyncVsAsync-WhatHappens.png" width="411px" height="115px" alt="Image"></p>
+<p class="p2">Fig. 2<span class="Apple-converted-space">  </span><span class="s1">An Event Arrives</span></p>
+<p class="p3"><br></p>
+<p class="p2">What happens when an event arrives at the input?<span class="Apple-converted-space">  </span>See Fig. 2.</p>
+<p class="p3"><br></p>
+<p class="p2">The event, "q", is injected into the input.</p>
+<p class="p3"><br></p>
+<p class="p2">The algorithms specify exactly what each box does for any given input.</p>
+<p class="p3"><br></p>
+<p class="p2">What is the expected output?</p>
+<p class="p3"><br></p>
+<p class="p2">Do we see the expected output every time?</p>
+<p class="p3"><br></p>
+<p class="p2">Do we see the expected output for every coding of the diagram?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Current State of the Art</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Code for Components B and C</b></h2>
+<p class="p2">We can implement the diagram in pseudo-code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Function B</b></h2>
+<p class="p5">function B(in) {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>if (in == q) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>call C(s)</p>
+<p class="p5">} else if (in == r) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>call C(t)</p>
+<p class="p5">} else {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>FatalError()</p>
+<p class="p5">}</p>
+<p class="p2">Fig. 3 <span class="s1">Function B</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Function C</b></h2>
+<p class="p5">function C(in) {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>if (in == q) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;- v</p>
+<p class="p5"><span class="Apple-converted-space"> </span>} else if (in == r) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;- w</p>
+<p class="p5"><span class="Apple-converted-space"> </span>} else if (in == s) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;- x</p>
+<p class="p5"><span class="Apple-converted-space"> </span>} else if (in == t) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;- y</p>
+<p class="p5"><span class="Apple-converted-space"> </span>} else if (in == u) {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;- z</p>
+<p class="p5">} else {</p>
+<p class="p5"><span class="Apple-converted-space">   </span>FatalError ()</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p2">Fig. 4 <span class="s1">Function C</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Version 1</b></h2>
+<p class="p2">Version 1 of the code might <i>call </i>component B first:</p>
+<p class="p3"><br></p>
+<p class="p5">main () {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call B(q)</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call C(q)</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p2">Fig. 1 <span class="s1">Code Version 1</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Version 2</b></h2>
+<p class="p2">Version 2 of the code might call C first:</p>
+<p class="p6"><br></p>
+<p class="p5">main () {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call C(q)</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call B(q)</p>
+<p class="p5"><span class="Apple-converted-space"> </span>}</p>
+<p class="p2">Fig. 1 <span class="s1">Code Version 2</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Final Output</b></h2>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Final Output</b></h2>
+<p class="p2">The final output of the preceding routines depends on which version of the code we use.</p>
+<p class="p3"><br></p>
+<p class="p2">Version 1 results in the following code path:</p>
+<p class="p3"><br></p>
+<p class="p5">main {</p>
+<p class="p5"><span class="Apple-converted-space"> </span>call B(q)</p>
+<p class="p5"><span class="Apple-converted-space">   </span>B calls C(s)</p>
+<p class="p5"><span class="Apple-converted-space">     </span>output &lt;— x</p>
+<p class="p5"><span class="Apple-converted-space">   </span>C returns to B</p>
+<p class="p5"><span class="Apple-converted-space">  </span>B returns to main</p>
+<p class="p5"><span class="Apple-converted-space"> </span>call C(q)</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;— v</p>
+<p class="p5"><span class="Apple-converted-space">    </span>C returns to main</p>
+<p class="p5">}</p>
+<p class="p5">main done</p>
+<p class="p2">Fig. 1 <span class="s1">Final Output for Version 1</span></p>
+<p class="p3"><br></p>
+<p class="p2">The final output for Version 1 is x,v<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">While version 2 results in the following code path:</p>
+<p class="p3"><br></p>
+<p class="p5">main () {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call C(q)</p>
+<p class="p5"><span class="Apple-converted-space">    </span>output &lt;— v</p>
+<p class="p5"><span class="Apple-converted-space">  </span>call B(q)</p>
+<p class="p5"><span class="Apple-converted-space">    </span>B calls C(s)</p>
+<p class="p5"><span class="Apple-converted-space">      </span>output &lt;- x</p>
+<p class="p5"><span class="Apple-converted-space">      </span>C returns to B</p>
+<p class="p5"><span class="Apple-converted-space">    </span>B returns to main</p>
+<p class="p5">}</p>
+<p class="p5">main done</p>
+<p class="p2">Fig. 1 <span class="s1">Final Output for Version 2</span></p>
+<p class="p6"><br></p>
+<p class="p2">The final output for Version 2 if v,x.</p>
+<p class="p3"><br></p>
+<p class="p2">Version 1 and version 2 create different results.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Control Flow</b></h2>
+<p class="p2">Fig. 5 shows the control flows for code versions 1 and 2.</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/diagrams-sync.png" width="443px" height="186px" alt="Image"></p>
+<p class="p3"><br></p>
+<p class="p2">Fig. 5 <span class="s1">Control Flow for Versions 1 &amp; 2</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Desired Outcome</b></h2>
+<p class="p3"><br></p>
+<p class="p2">We want to plug software components together.<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">We want the diagram(s) to mean <span class="s1">exactly</span> one thing.</p>
+<p class="p3"><br></p>
+<p class="p2">We want the diagram(s) to mean the same thing <span class="s1">every</span> time.</p>
+<p class="p3"><br></p>
+<p class="p2">This is possible.</p>
+<p class="p3"><br></p>
+<p class="p2">I will show the event flow that we desire, in a series of diagrams, then, I will discuss how this flow can be achieved<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Event Delivery 1</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/SyncVsAsync-AsyncDelivery1.png" width="438px" height="92px" alt="Image"></p>
+<p class="p2">Fig. 5 <span class="s1">Event q Delivered</span></p>
+<p class="p3"><br></p>
+<p class="p2">Fig. 5 shows event "q" being delivered to B and C.</p>
+<p class="p3"><br></p>
+<p class="p2">Nothing else happens, no routines are called.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>After Event Delivery 1</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/SyncVsAsync-AfterAsyncDelivery1.png" width="421px" height="97px" alt="Image"></p>
+<p class="p2">Fig. 5 <span class="s1">After Event Delivery 1</span></p>
+<p class="p3"><br></p>
+<p class="p2">Fig. 5 shows what the system looks like after Event Delivery 1 has occurred.</p>
+<p class="p3"><br></p>
+<p class="p2">Both, Components B and C have an event "q" at their inputs.</p>
+<p class="p3"><br></p>
+<p class="p2">(Neither Component has acted yet).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Two Possible Control Flow Paths</b></h2>
+<p class="p2">At this point, two control flow paths are possible:</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li7">Component B runs first.</li>
+  <li class="li7">Component C runs first.</li>
+</ol>
+<p class="p8"><br></p>
+<p class="p7">I will draw a sequence of diagrams for each path.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>B Runs First - Path BC</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/PathBC.png" width="281px" height="616px" alt="Image"></p>
+<p class="p2">Fig. 6 <span class="s1">Control Flow BC</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>C Runs First - Path CB</b></h2>
+<p class="p2"><img src="/assets/2020-12-09-14-50-50-Images/PathCB.png" width="274px" height="626px" alt="Image"></p>
+<p class="p2">Fig. 7 <span class="s1">Control Flow CB</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Final Result</b></h2>
+<p class="p2">In both cases, Path BC and Path CB, the final result is the same - v is output first, then x is output.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Achieving the Desired Result</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Requirements</b></h2>
+<ul class="ul1">
+  <li class="li9">All Components have an input queue, onto which incoming events are placed.<a id="fnlink9"></a><a href="#fn9"><span class="s2"><sup>[9]</sup></span></a></li>
+  <li class="li9">Components cannot <i>call</i> one another.</li>
+  <li class="li9">Components are <i>asynchronous.</i></li>
+  <li class="li9">A <i>Dispatcher</i> routine decides which Component will run and in what order<a id="fnlink10"></a><a href="#fn10"><span class="s2"><sup>[10]</sup></span></a>.</li>
+  <li class="li9">Components are <i>ready</i> if they have events in their input queues.</li>
+  <li class="li9">Components consume one input event and produce as many output events<a id="fnlink11"></a><a href="#fn11"><span class="s2"><sup>[11]</sup></span></a> as necessary in reaction to the input event.</li>
+  <li class="li9">Components perform a co-routine<a id="fnlink12"></a><a href="#fn12"><span class="s2"><sup>[12]</sup></span></a> dance with the Dispatcher.<span class="Apple-converted-space">  </span>When a Component has processed a single event to completion, the the Component <i>yields </i>to the Dispatcher.<span class="Apple-converted-space">  </span>The Dispatcher decides which Component will run next.<a id="fnlink13"></a><a href="#fn13"><span class="s2"><sup>[13]</sup></span></a> Components do not decide on the order of dispatching (as with call-return based code) nor can Components rely on any certain dispatching order.<a id="fnlink14"></a><a href="#fn14"><span class="s2"><sup>[14]</sup></span></a></li>
+  <li class="li9">Events and data contained in events, are immutable.</li>
+  <li class="li9">If a Component sends one event to multiple receivers, it must <i>lock</i> the routing wire.<a id="fnlink15"></a><a href="#fn15"><span class="s2"><sup>[15]</sup></span></a></li>
+</ul>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p9">In addition,</p>
+<p class="p10"><br></p>
+<ul class="ul1">
+  <li class="li9">Components have no parameters,<span class="Apple-converted-space">  </span>Send()<a id="fnlink16"></a><a href="#fn16"><span class="s2"><sup>[16]</sup></span></a> is used instead.</li>
+  <li class="li9">Components have no return values.<span class="Apple-converted-space">  </span>Send() is used instead.</li>
+  <li class="li9">There is no syntax for exceptions<a id="fnlink17"></a><a href="#fn17"><span class="s2"><sup>[17]</sup></span></a>.<span class="Apple-converted-space">  </span>Send() is used instead.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Using Threads</b></h2>
+<p class="p2">Operating system <i>threads<a id="fnlink18"></a></i><a href="#fn18"><sup>[18]</sup></a> can be used to trivially implement components.</p>
+<p class="p3"><br></p>
+<p class="p2">Each Component has a <i>mailbox<a id="fnlink19"></a></i><a href="#fn19"><sup>[19]</sup></a><i> </i>and it sends messages to it parent<a id="fnlink20"></a><a href="#fn20"><sup>[20]</sup></a>.<span class="Apple-converted-space">  </span>The parent routes the messages to the mailboxes of appropriate receivers<a id="fnlink21"></a><a href="#fn21"><sup>[21]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Note - using <i>threads</i> is overkill.<span class="Apple-converted-space">  </span>An operating system based <i>thread</i> involves hardware MMUs<a id="fnlink22"></a><a href="#fn22"><sup>[22]</sup></a> and separate stacks.<span class="Apple-converted-space">  </span>Operating system <i>threads </i>implement the out-dated notion of <i>time-sharing.<span class="Apple-converted-space">  </span></i>None of these are actually required to make this system work.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fairness</b></h2>
+<p class="p2">Fairness is not an issue.</p>
+<p class="p3"><br></p>
+<p class="p2">Components run a single incoming event to completion, they <i>yield</i> only to the Dispatcher.</p>
+<p class="p3"><br></p>
+<p class="p2">This system mimics, more closely, the modern ideas of distributed systems<a id="fnlink23"></a><a href="#fn23"><sup>[23]</sup></a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Thread Safety</b></h2>
+<p class="p2">Thread Safety is not an issue.</p>
+<p class="p3"><br></p>
+<p class="p2">Components cannot share memory, hence, thread safety is not an issue.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Shared Memory</b></h2>
+<p class="p2">Shared memory is not an issue.</p>
+<p class="p3"><br></p>
+<p class="p2">Components cannot share memory.</p>
+<p class="p3"><br></p>
+<p class="p2">Components can only send immutable messages.</p>
+<p class="p3"><br></p>
+<p class="p2">In very tightly coupled systems, we have the temptation to send pointers to large blobs of memory.<span class="Apple-converted-space">  </span>The sender might mutate the blobs of memory before the message is read by the receiver. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This system makes no guarantees for such situations.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">This</span> system<a id="fnlink24"></a><a href="#fn24"><sup>[24]</sup></a> gives the Architect all of the atomic tools necessary to create systems that work.<span class="Apple-converted-space">  </span>For example, the memory-sharing issue was encountered 40+ years ago in TTL-based hardware systems.<span class="Apple-converted-space">  </span>The solution was to use "double-buffering" and "overrun" flags.<span class="Apple-converted-space">  </span>If a system could not switch between buffers quickly enough, then it created an overrun condition.<span class="Apple-converted-space">  </span>A system which encountered overrun was deemed simply to be "too slow". <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The Architect must make the calculation<a id="fnlink25"></a><a href="#fn25"><sup>[25]</sup></a> of whether his/her design is "fast enough" for a given purpose.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Priority Inversion</b></h2>
+<p class="p2">Priority inversion is not an issue.</p>
+<p class="p3"><br></p>
+<p class="p2">I don't use<a id="fnlink26"></a><a href="#fn26"><sup>[26]</sup></a>, nor specify priorities<a id="fnlink27"></a><a href="#fn27"><sup>[27]</sup></a>, hence, priority inversion cannot happen.<a id="fnlink28"></a><a href="#fn28"><sup>[28]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Loops and Recursion</b></h2>
+<p class="p2">It turns out that Looping (and Recursion) is the <span class="s1">exception</span>, not the rule.</p>
+<p class="p3"><br></p>
+<p class="p2">Components must not enter long-running loops (or deep recursion).<span class="Apple-converted-space">  </span>Components must <i>yield</i> to the Dispatcher.<span class="Apple-converted-space">  </span>Note that compilers could insert <i>yields</i> at the bottom of Loops to accomplish this behaviour.</p>
+<p class="p3"><br></p>
+<p class="p2">The Dispatcher routine is the only routine in the system that runs a loop.<span class="Apple-converted-space">  </span>It loops through a list of <i>ready</i> closures and, randomly, invokes a <i>ready </i>closure.<span class="Apple-converted-space">  </span>When the <i>closure</i> finishes<a id="fnlink29"></a><a href="#fn29"><sup>[29]</sup></a>, the Dispatcher simply picks another <i>ready</i> closure to run.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dynamic Routing</b></h2>
+<p class="p2">Dynamic routing is not an issue, because it's not supported.</p>
+<p class="p3"><br></p>
+<p class="p2">Dynamic routing used to be called <i>self-modifying code</i>.<span class="Apple-converted-space">  </span>Self modifying code is a bad idea.<a id="fnlink30"></a><a href="#fn30"><sup>[30]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Using Closures</b></h2>
+<p class="p2">Most modern languages provide the concept of <i>closures</i>.<a id="fnlink31"></a><a href="#fn31"><sup>[31]</sup></a><span class="Apple-converted-space">  </span>Closures might be called <i>anonymous functions, </i>or <i>callbacks,</i> or be embedded in concepts such as <i>futures</i>, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">Even C has a way to make <i>closures,</i> using function pointers.</p>
+<p class="p3"><br></p>
+<p class="p2">The minimum closure required by this system requires some static, but not exported, data, and a temporary stack<a id="fnlink32"></a><a href="#fn32"><sup>[32]</sup></a>.<span class="Apple-converted-space">  </span>N.B. one stack, for the complete system, is enough<a id="fnlink33"></a><a href="#fn33"><sup>[33]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">OO<a id="fnlink34"></a><a href="#fn34"><sup>[34]</sup></a> Objects and Blocks are very close, in principle, to the ideas expressed here.<span class="Apple-converted-space">  </span>The difference is that I specify <i>closures</i> that run asynchronously whereas OO uses Objects that perform synchronous <i>call-return </i>and explicit naming of receivers<i>.<span class="Apple-converted-space">  </span></i>I recommend that <i>closures</i> send messages to their parents and do <span class="s1">not</span> refer to each other directly.</p>
+<p class="p3"><br></p>
+<p class="p2">In my opinion, and experience, creating separate stacks for each <i>closure</i> and using MMUs is overkill.<span class="Apple-converted-space">  </span>I don't wish to use time-sharing in my programs.<span class="Apple-converted-space">  </span>I might use time-sharing if I were to build an operating system.<a id="fnlink35"></a><a href="#fn35"><sup>[35]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">If one imagines that <i>closures</i> contain state-machines, then, this method could be considered to be a system of <span class="s1">communicating state machines</span>. <span class="Apple-converted-space">  </span>I think in terms of <span class="s1">clockwork<a id="fnlink36"></a><a href="#fn36"><sup>[36]</sup></a></span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Other Features</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reuse</b></h2>
+<p class="p2">This system emphasizes <i>reuse</i> of Architecture<a id="fnlink37"></a><a href="#fn37"><sup>[37]</sup></a>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Architecture reuse is more valuable than code reuse.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Refactoring</b></h2>
+<p class="p2">Software Component Architectures composed in this manner can be easily refactored into other Architectures, simply by moving/deleting/adding arrows.</p>
+<p class="p3"><br></p>
+<p class="p2">Components SEND() messages to their parents. Parents contain the routing tables<a id="fnlink38"></a><a href="#fn38"><sup>[38]</sup></a>.<span class="Apple-converted-space">  </span>Parents route messages between their children.<span class="Apple-converted-space">  </span>This combination makes <i>refactoring</i> of Architectures easy<a id="fnlink39"></a><a href="#fn39"><sup>[39]</sup></a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Isolation</b></h2>
+<p class="p2">This system produces a natural hierarchical composition of Architectures.</p>
+<p class="p3"><br></p>
+<p class="p2">Parents route messages between their children.</p>
+<p class="p3"><br></p>
+<p class="p2">Parents act like Components in all other respects.<span class="Apple-converted-space">  </span>Parents cannot SEND() messages to their peers.<span class="Apple-converted-space">  </span>They can only SEND() messages upwards to <i>their</i> parents, and route messages of their direct children.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Global Variables</b></h2>
+<p class="p2">Global variables are not an issue.</p>
+<p class="p3"><br></p>
+<p class="p2">Global variables cannot leak beyond the boundaries of their Components.</p>
+<p class="p3"><br></p>
+<p class="p2">Global variables are not a problem, if properly encapsulated.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Global Types</b></h2>
+<p class="p2">Global Types in synchronous languages are just as bad as Global Variables in those languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Global <i>anything</i> is bad.</p>
+<p class="p3"><br></p>
+<p class="p2">Encapsulation must be applied to every concept in software architecture.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Namespaces</b></h2>
+<p class="p2">A component has two external namespaces:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li7">The set of inputs.</li>
+  <li class="li7">The set of outputs<a id="fnlink40"></a><a href="#fn40"><sup>[40]</sup></a>.</li>
+</ul>
+<p class="p8"><br></p>
+<p class="p7">The internal namespace(s) of Components does not leak out.</p>
+<p class="p8"><br></p>
+<p class="p7">All input names must be unique within the input namespace.</p>
+<p class="p8"><br></p>
+<p class="p7">All output names must be unique within the output namespace.</p>
+<p class="p8"><br></p>
+<p class="p7">The same name may appear in, both, the input and output namespaces.</p>
+<p class="p8"><br></p>
+<p class="p7">Namespaces are naturally encapsulated in a hierarchical manner, due to hierarchical encapsulation of Components.</p>
+<p class="p8"><br></p>
+<p class="p7">If two Components have <i>exactly</i> the same input namespace and the same output namespace, then the components are considered to be interchangeable, and "pin compatible".<a id="fnlink41"></a><a href="#fn41"><sup>[41]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Isolation of Control Flow</b></h2>
+<p class="p2">Control Flow within Components is naturally isolated by the fact that Components are truly asynchronous.</p>
+<p class="p3"><br></p>
+<p class="p2">Control flow begins when a Component is invoked, and, control flow ends when the Component <i>yields</i> to the Dispatcher.</p>
+<p class="p3"><br></p>
+<p class="p2">Control Flow does not leak beyond the boundaries of Components<a id="fnlink42"></a><a href="#fn42"><sup>[42]</sup></a>.</p>
+<hr>
+<p class="p7"><a id="fn1"></a><a href="#fnlink1">[1]</a> The oval labelled "input".</p>
+<p class="p7"><a id="fn2"></a><a href="#fnlink2">[2]</a> <span class="s3">The oval labelled "output".</span></p>
+<p class="p9"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Boxes labelled B and C.</p>
+<p class="p9"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>See the dashed callouts pointing to each box.</p>
+<p class="p9"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>The input flows to B and to C.<span class="Apple-converted-space">  </span>B's output flows to C.<span class="Apple-converted-space">  </span>C's output flows to the output.</p>
+<p class="p9"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>in left to right order</p>
+<p class="p9"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>After all, computer (digital) hardware is plugged together.</p>
+<p class="p9"><a id="fn8"></a><a href="#fnlink8"><span class="s2">[8]</span></a><span class="s2"> </span>Even on synchronous operating systems.</p>
+<p class="p11"><a id="fn9"></a><a href="#fnlink9"><span class="s2">[9]</span></a><span class="s2"> </span>In a production version, Components also have output queues.<span class="Apple-converted-space">  </span>That requirement is a fine point, discussed elsewhere.</p>
+<p class="p11"><a id="fn10"></a><a href="#fnlink10"><span class="s2">[10]</span></a><span class="s2"> </span>The order is arbitrary.<span class="Apple-converted-space">  </span>Components are fully asynchronous.</p>
+<p class="p11"><a id="fn11"></a><a href="#fnlink11"><span class="s2">[11]</span></a><span class="s2"> </span>0 or more.<span class="Apple-converted-space">  </span>In this example, each component produces exactly 1 output for each input, but this is not a requirement.</p>
+<p class="p11"><a id="fn12"></a><a href="#fnlink12"><span class="s2">[12]</span></a><span class="s2"> </span>FYI - This is easy to accomplish using closures and state-machine mentality.<span class="Apple-converted-space">  </span>Discussed later.<span class="Apple-converted-space">  </span>It is also easy to accomplish using threads, albeit this is overkill.</p>
+<p class="p11"><a id="fn13"></a><a href="#fnlink13"><span class="s2">[13]</span></a><span class="s2"> </span>There are many scheduling possibilities.<span class="Apple-converted-space">  </span>For example, the Dispatcher may invoke a Component repeatedly until the Component's input queue is empty.<span class="Apple-converted-space">  </span>Or, the Dispatcher may choose to work in a <i>round-robin</i> fashion.<span class="Apple-converted-space">  </span>Fairness is not an issue (since a Component will eventually go idle when its input queue is empty).</p>
+<p class="p11"><a id="fn14"></a><a href="#fnlink14"><span class="s2">[14]</span></a><span class="s2"> </span>Components are truly asynchronous and must survive through any dispatching order.</p>
+<p class="p11"><a id="fn15"></a><a href="#fnlink15"><span class="s2">[15]</span></a><span class="s2"> </span>In practical systems, this is not an issue.<span class="Apple-converted-space">  </span>It becomes an issue for bare metal systems (no operating system) or systems where Components are distributed along "very slow" connections.<span class="Apple-converted-space">  </span>I leave this "problem" to the Architect to solve in a manner suitable for the application.<span class="Apple-converted-space">  </span>I simply want to give the Architect the tools to work with to build reliable systems.<span class="Apple-converted-space">  </span>The Architect makes guarantees of reliability.<span class="Apple-converted-space">  </span>This system provides only the bare minimum tool set.</p>
+<p class="p11"><a id="fn16"></a><a href="#fnlink16"><span class="s2">[16]</span></a><span class="s2"> </span>SEND() is the only mechanism for transferring data.<span class="Apple-converted-space">  </span>Data can be transferred to any number of receivers up and down the line, using SEND().<span class="Apple-converted-space">  </span>There is no need for a specialized RETURN() expression.</p>
+<p class="p11"><a id="fn17"></a><a href="#fnlink17"><span class="s2">[17]</span></a><span class="s2"> </span>SEND() is the only mechanism for transferring data.<span class="Apple-converted-space">  </span>Exceptions are simply data.<span class="Apple-converted-space">  </span>Data can be transferred to any receiver using SEND().</p>
+<p class="p11"><a id="fn18"></a><a href="#fnlink18"><span class="s2">[18]</span></a><span class="s2"> </span>a.k.a. processes</p>
+<p class="p9"><a id="fn19"></a><a href="#fnlink19"><span class="s2">[19]</span></a><span class="s2"> </span>a.k.a. input queue</p>
+<p class="p9"><a id="fn20"></a><a href="#fnlink20"><span class="s2">[20]</span></a><span class="s2"> </span>which I call a <i>schematic</i></p>
+<p class="p9"><i><a id="fn21"></a></i><a href="#fnlink21"><span class="s2">[21]</span></a><span class="s2"> </span>The routing information is based on the arrows on the diagram(s).</p>
+<p class="p9"><a id="fn22"></a><a href="#fnlink22"><span class="s2">[22]</span></a><span class="s2"> </span>Memory Management Units</p>
+<p class="p9"><a id="fn23"></a><a href="#fnlink23"><span class="s2">[23]</span></a><span class="s2"> </span>e.g. IoT, multi-core and internet systems</p>
+<p class="p9"><a id="fn24"></a><a href="#fnlink24"><span class="s2">[24]</span></a><span class="s2"> </span>We call it Arrowgrams.</p>
+<p class="p9"><a id="fn25"></a><a href="#fnlink25"><span class="s2">[25]</span></a><span class="s2"> </span>Calculation is discussed elsewhere.</p>
+<p class="p9"><a id="fn26"></a><a href="#fnlink26"><span class="s2">[26]</span></a><span class="s2"> </span>This is not a flippant statement, regardless of how it sounds.<span class="Apple-converted-space">  </span>It is based on hard-won experience with real products.<span class="Apple-converted-space">  </span>Priorities can (almost) always be designed out of a system.</p>
+<p class="p9"><a id="fn27"></a><a href="#fnlink27"><span class="s2">[27]</span></a><span class="s2"> </span>This is system of atomic tools.<span class="Apple-converted-space">  </span>Priorities are non-atomic and can be implemented using the atomic tools.</p>
+<p class="p9"><a id="fn28"></a><a href="#fnlink28"><span class="s2">[28]</span></a><span class="s2"> </span>If a system must act using priorities, then the Architect is referred to literature on hardware priorities<sup>⁠1</sup> fully documented some 40+ years ago<span class="s2">.</span></p>
+<p class="p9"><span class="s4"><sup>1 </sup></span>NMI and IRQ levels.</p>
+<p class="p9"><a id="fn29"></a><a href="#fnlink29"><span class="s2">[29]</span></a><span class="s2"> </span>e.g. executes a <i>RETURN</i></p>
+<p class="p9"><i><a id="fn30"></a></i><a href="#fnlink30"><span class="s2">[30]</span></a><span class="s2"> </span>Self-modifying code is especially bad from the maintenance perspective.</p>
+<p class="p9"><a id="fn31"></a><a href="#fnlink31"><span class="s2">[31]</span></a><span class="s2"> </span>Closures were explored in the 1950's using Lisp.</p>
+<p class="p9"><a id="fn32"></a><a href="#fnlink32"><span class="s2">[32]</span></a><span class="s2"> </span>A temporary stack is used for compiler-generated temporary values.</p>
+<p class="p9"><a id="fn33"></a><a href="#fnlink33"><span class="s2">[33]</span></a><span class="s2"> </span>One stack is needed for implemenationon von Neumann architectures.<span class="Apple-converted-space">  </span>Maybe one stack is one too many in non-von Neumann architectures?</p>
+<p class="p9"><a id="fn34"></a><a href="#fnlink34"><span class="s2">[34]</span></a><span class="s2"> </span>Object Oriented</p>
+<p class="p9"><a id="fn35"></a><a href="#fnlink35"><span class="s2">[35]</span></a><span class="s2"> </span>I argue that we shouldn't use operating systems at all.</p>
+<p class="p9"><a id="fn36"></a><a href="#fnlink36"><span class="s2">[36]</span></a><span class="s2"> </span>Rendezvous techniques also form clockwork systems.<span class="Apple-converted-space">  </span>Rendezvous has the drawback that it imposes synchronous operation of processes.<span class="Apple-converted-space">  </span>This is anathema to concurrency.<span class="Apple-converted-space">  </span>In a concurrent system, processes are asynchronous by default.<span class="Apple-converted-space">  </span>Synchronization is the exception not the rule.<span class="Apple-converted-space">  </span>If synchronization is needed, it must be explicitly designed (for example, see ACK/NAK protocols in networking, and, synchronization techniques used in TTL hardware of the 1980's).</p>
+<p class="p9"><a id="fn37"></a><a href="#fnlink37"><span class="s2">[37]</span></a><span class="s2"> </span>Reuse can be performed by cut/copy/paste.<span class="Apple-converted-space">  </span>According to Paul Bassett, OO does not provide <i>reuse.<span class="Apple-converted-space">  </span></i>OO provides <i>multiple-use</i> (which leads to parameterization, which leads to accidental complexities, and so on).</p>
+<p class="p9"><a id="fn38"></a><a href="#fnlink38"><span class="s2">[38]</span></a><span class="s2"> </span>a.k.a. arrows</p>
+<p class="p9"><a id="fn39"></a><a href="#fnlink39"><span class="s2">[39]</span></a><span class="s2"> </span>Routing tables is nothing more than indirection.<span class="Apple-converted-space">  </span>It also allows for reuse (as opposed to multiple use) of architectures.</p>
+<p class="p11"><a id="fn40"></a><a href="#fnlink40"><span class="s2">[40]</span></a><span class="s2"> </span>I call them "input pins" and "output pins", resp., inspired by TTL hardware concepts.</p>
+<p class="p11"><a id="fn41"></a><a href="#fnlink41"><span class="s2">[41]</span></a><span class="s2"> </span>This is similar to <i>referential transparency, </i>but, without the constraint that pin-compatible components must produce the same outputs (this loosening of the same-output restriction allows upgrading).</p>
+<p class="p9"><a id="fn42"></a><a href="#fnlink42"><span class="s2">[42]</span></a><span class="s2"> </span>Control Flow cannot leak because Components cannot <i>CALL</i> other components.<span class="Apple-converted-space">  </span>Components can only SEND() messages upwards to their parents for routing.<span class="Apple-converted-space">  </span>Corollary: the direction of SEND() is vertical-only - SEND() cannot be used to deliver messages <i>sideways</i> to peer components.<span class="Apple-converted-space">  </span>Components can SEND() data upwards to their parent.<span class="Apple-converted-space">  </span>A parent can route messages between children (and their own input and output pins).<span class="Apple-converted-space">  </span>Parents can SEND() commands downwards to children.</p>
+</div>
+</body>
+</html>

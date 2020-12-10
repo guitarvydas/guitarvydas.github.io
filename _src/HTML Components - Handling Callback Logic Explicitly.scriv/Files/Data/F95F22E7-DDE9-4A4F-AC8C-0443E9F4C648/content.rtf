@@ -1,0 +1,69 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 CallbackLogic is, now, the interface between FileReader() events - HTML + JavaScript - and AG events.\
+\
+The initial call to CallbackLogic is done by the FileSelector component.  It sends an AG event to the CallbackLogic component.\
+\
+In that first call to 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 react()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 , the code sets up JS callbacks for 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onload
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 , 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onerror
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 , 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 onabort
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26   and a timer.  Then it starts the ball rolling by calling 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 readAsText().\
+\
+
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 After that initial call, all subsequent events are AG events.\
+\
+After fielding the HTML+JS events, CallbackLogic makes calls to 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 kernel.send()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  (and {\field{\*\fldinst{HYPERLINK "http://kernel.io"}}{\fldrslt 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 kernel.io}}
+\f2\fs22 ()
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 ) to propagate events further into the system.  In this example, the events from CallbackLogic flow into one of 4 downstream components - 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 Display
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 , 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 ErrorHandler
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 , 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 AbortHandler
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  and 
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 NoResponseHandler
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26 . \
+\
+The 
+\f3\i happy path
+\f0\i0  
+\f1\fs24 <$Scr_Cs::0>
+\f2\fs22 send()s
+\f1\fs24 <!$Scr_Cs::0>
+\f0\fs26  a pair of items to Display - the filename and the file contents.  CallbackLogic handles the unpacking of the HTML+JS event data.}

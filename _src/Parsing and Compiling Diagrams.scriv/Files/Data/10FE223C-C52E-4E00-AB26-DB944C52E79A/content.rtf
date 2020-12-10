@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::0>
+\f1\b\fs26 Coder\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::0>
+\f2\fs26 \
+A coder is the final pass in a compiler.  Coders are also called \'93emitters\'94 and \'93back ends\'94.\
+\
+It simply walks the stream / tree and emits code (as assembler text, or binary) for a particular cpu architecture.\
+\
+Another aspect of coding is \'93optimisation\'94.  This pass can precede or succeed allocation and emission, depending on design constraints and implementation of various compiler data structures.\
+\
+Coders often rely on a library known to contain certain operations that will be included at run time ( a \'93run time\'94 library).  The final emitted code is linked with this library.\
+\
+Coders/emitters/backends make trade-offs for speed vs. code (and data) size.\
+\
+Coders need to determine which cpu registers will be used.  [Note that, in a multi-process environment, each register which 
+\f3\i might
+\f2\i0  contain data must be pushed onto a stack (to save the value(s)) during context switches)].}

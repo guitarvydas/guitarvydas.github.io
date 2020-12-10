@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
+{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 IMO, \'93blockchain\'94 (the generic term for BitCoin, Etherium, et al) breaks apart into two broad pieces:\
+\
+1) Crypto - generating some number, based on mathematical theory, as quickly as possible. This number-crunching code can be synchronous and doesn\'92t need asynchrony. PBC and libgmp are done in C (for \'93efficiency\'94) [Did they consider FORTRAN and/or typed Common Lisp (which was trying to compete with FORTRAN for efficiency) or assembler?].\
+\
+2) Distributed networking algorithms. This is the \'93heart\'94 of blockchain technology. Distribution allows \'93untrusted\'94 computers to verify transactions and report back if any problems (cheating) are found. Various distributed networking algorithms make it much harder to cheat the system. Other distributed algorithms try to \'93optimise\'94 the shortcomings of BitCoin (where *all* non-light nodes try to verify. Distributed networking is not \'93hard\'94 unless the wrong technology (language) is used. Languages using pervasive synchrony (which includes just about every known computer language) are bad news for implementation of network protocols. transactions and uses \'93inefficient\'94 (energy-burning) proof-of-work).\
+\
+FBP contributes little to (1), unless one performs crypto calculations in some sort of pipeline (analogous, say, to a video processing pipeline) or re-architects crypto to use LEGO-like, snappable, components.\
+\
+FBP is ideal for (2). \
+\
+The other possible choice for (2) is goroutines in Go (golang), but, Go includes too much of the crufty history of synchronous languages. People will try to use Go in the same way they are used to doing, i.e. continuing to use the worst way to build protocols, using pervasive synchrony instead of using pervasive asynchrony and pervasive concurrency.\
+\
+FBP is ideal for (2) because it imposes a concurrent design principle on all components. Distributed code is naturally designed to be concurrent. \
+\
+Asynchronous to synchronous transformers, like RPC, act to bring warm-and-fuzzy, non-concurrent techniques into the concurrent world (everything new is old again). [I\'92m currently reading \'93Digital Darwinism\'94, Tom Goodwin, which mentions (chapter 2) how electricity was first used (ideas eerily similar to today\'92s software techniques) \'97 electric motors were not used to directly drive millwork in factories, instead, electric motors were used to pump water up into storage facilities to create fast-running streams that drove the waterwheels that drove the factories\'92 millwork in the same old ways. {\field{\*\fldinst{HYPERLINK "https://www.amazon.com/Digital-Darwinism-Survival-Business-Disruption/dp/0749482281/ref=sr_1_1?keywords=digital+darwinism&qid=1556296197&s=gateway&sr=8-1"}}{\fldrslt 
+\f1\fs24 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 https://www.amazon.com/Digital-Darwinism-Survival-Business-Disruption/dp/0749482281/ref=sr_1_1?keywords=digital+darwinism&qid=1556296197&s=gateway&sr=8-1}}]\
+\
+[In my experience and IMO, FBP-for-networks needs to be slanted towards using \'93small\'94 IPs that have lots of space (time) between incoming IPs. The \'93small\'94 IPs come in random, sporadic bumps, as opposed to nearly-contiguous streams of data (e.g. shell pipelines). IMO, FBP-for-networks, must store \'93state\'94 in the components, as opposed to storing state in the IPs themselves.]\
+}

@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 As I get further and try more detailed examples, I see some bugs in the quote expander code.\
+\
+Firstly, \
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 (define db '(5))\'a0\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 Comes out as\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+(define db (@newList@ "5"))\'a0\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 whereas it should be\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 \
+(define db (@newList@ 5)).\
+\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 This is a variant of the problem I solved in the Scm2JS grammar, and should be easy to repair.  Thankfully, the quote expansion is isolated, so I know that changes to it will not affect what I've done so far.  \
+\
+See commit 8946e4f755f5b3083fcf0203c0d3246d0b8cd399 which fixes quoted lists of single atoms and a quoted null list.  The result still has problems\'85\
+\
+Next, I see (1) that the Scm2JS grammar treats the insides of quoted lists as function calls and (2) something looks odd for input "(define db '(((edge a b))):.\
+\
+Actually, after a more detailed look, I see that (1) is misdiagnosed.  The emitter has left-over code that places "()" after every item when emitting for SList_atnewlistat.  I need to remove the spurious "()".  See commit 0ce488124f292152754348e030b78be3b449fb13 (now back on the 'master' branch, once again).\
+\
+Now, (2) looks more reasonable, but still has spurious "function"s emitted.  Again, this is just legacy code - easy to clean up and fix.  See commit 6a5a268cccdc04c593c79983bd5d02ccf80160ed.\
+\
+The emitted code is\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 var db = new List(new List(new List("edge","a","b")));\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+but the node compiler balks with the error that List is undefined.\
+\
+Manually stubbing in List\'85\
+\
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <$Scr_Ps::0>
+\f2\fs22 function List(args) \{\
+\};\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 <!$Scr_Ps::0>
+\f0\fs26 \
+and the code compiles cleanly under node (put the code into "junk.js" and run node: "node junk.js").}

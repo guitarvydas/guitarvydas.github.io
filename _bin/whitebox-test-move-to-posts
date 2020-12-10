@@ -1,0 +1,15 @@
+#!/bin/bash
+wire3=wire_$RANDOM
+wire4=wire_$RANDOM
+wire5=wire_$RANDOM
+mkfifo ${wire3} ${wire4} ${wire5}
+
+./move-to-posts 3<${wire3} 4<${wire4} 5<${wire5} &
+
+echo ../_new/test.html >${wire3} &
+echo 2020-12-03 >${wire4} &
+echo true >${wire5} &
+
+wait
+
+

@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+## inputs:
+## filename (fd 3)
+## prefix (fd 4) YYYY-MM-DD
+## go (fd 5)
+## fullprefix (fd 6) YYYY-MM-DD-HH-MM-SS
+#
+## outputs:
+## <none>
+##   - edit _new/filename/basename change all occurences of Images to ../assets/prefix-Images --> /tmp/basename
+##   - moves /tmp/basename to ../_posts/filename/prefix-basename
+##   - moves _new/filename/Images   to ../assets/prefix-Images
+#
+## specific to Scrivener: Compile the document as a Web Page (.html) and leave it in ../_new
+## specific to Scrivener: if a .scriv file contains images, a directory will be created - it contains the .html file plus a sub-directory Images/, for example, abc.sriv --> abc.html/abc.html and abc.html/Images (yes, the directory is named abc.html)
+#
+./debug-entry "[$1] $0"
+read filename </dev/fd/3
+read prefix </dev/fd/4
+read go </dev/fd/5
+read fullprefix </dev/fd/6
+if [ "${go}" == "go" ]
+then
+    base=`basename "${filename}"`
+    # edit to new file and move it to _posts
+    sed -e "s@<img src=\"Images@<img src=\"/assets/${fullprefix}-Images@g" <"${filename}/${base}" >"../_posts/${prefix}-${base}"
+    # move Images folder to ../assets/prefix-Images
+    mv "${filename}/Images" "../assets/${fullprefix}-Images"
+    # delete source(s), completing the mv (mv is not cp)
+    rm -rf "${filename}"
+fi
+./debug-exit "[$1] $0"
+
+

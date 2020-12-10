@@ -1,0 +1,31 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\deftab709
+\pard\pardeftab709\sl276\slmult1\sa140\partightenfactor0
+
+\f0\fs24 \cf0 A 
+\f1\i parser
+\f0\i0  inputs a sequential stream of 
+\f1\i tokens
+\f0\i0 , and checks that the tokens form valid phrases \'96 in sequence \'96 for the language being processed (compiled, transpiled, etc.).\
+Parsers are pattern matchers, albeit more elaborate than the pattern matchers in scanners.\
+Parsing is typically specified as a set of rules (patterns) that describe parts of the language being processed.  \
+Parsing typically uses subroutines (stack based) to do pattern matching.  As such, parser pattern matchers cannot use REGEX directly, since REGEX does not provide stack-based routines.\
+Parsers can match patterns across line boundaries, whereas REGEX cannot.\
+Parsers can match structured code (phrases), whereas REGEX cannot.\
+A tool that builds parsers from declarative specifications is YACC.\
+Parser fall, broadly, into two categories \'96 top-down and bottom-up.  Top-down parsers are typically implemented as recursive descent routines.  Bottom-up parsers match phrases, then bubble such matches upwards to recognize a full program.  Bottom-up parsers have been formalized (see the Dragon Book).  \
+One such formalization is the set of languages called LR.  A very common subset of LR is called LALR(1).  YACC builds LALR(1) parsers, as state machines, from declarative specifications.  Languages that fit the LALR(1) mould are a subset of LR languages.  LR languages are a subset of more general languages.  The restrictions of LR and LALR(1) languages are tolerated because they can be formalized.  LALR(1) is popular because of the YACC tool.\
+Top-down languages are less restrictive than LR languages, but, top down parsers were not easily formalized.  \
+LALR(1) (through YACC) was \'93first to market\'94 and has gained most of the mind-share in this problem space.\
+Bryan {\field{\*\fldinst{HYPERLINK "scrivcmt://AE962FCB-F344-4B76-B571-03C9C9FB5413"}}{\fldrslt Ford,}} in the early 2000\'92s, invented the PEG parsing technology, which creates top-down pattern-matchers (parsers) using a syntax similar to that of REGEX.  PEG also uses backtracking in some cases.\
+The class of languages that PEG can recognize is larger than the LR class of languages.  PEG can match some patterns that LR cannot match, and vice versa.  \
+In my opinion, top-down parsing (e.g. PEG) matches languages that are easier to create than the class of LR languages.  \
+In top-down pattern matching, order matters \'96 the programmer can specify which patterns to match first.  In LR, it is possible to create ambiguities which are, in my opinion, \'93not obvious\'94.  Such LR ambiguities need to be dealt with by rearranging the grammars or by using exception-processing rules.  Typically, a LALR(1) grammar programmer waits for the tool to detect and declare ambiguities, instead of intuiting them.\
+PEG subsumes scanning and parsing into a single notation.\
+\
+In my opinion, PEG is a break-through, which makes building DSLs very simple.  I expect that simple {\field{\*\fldinst{HYPERLINK "scrivcmt://9C60CD89-8DF7-4AA2-9256-461F11D11B8C"}}{\fldrslt DSLs}} will over-take language design.  It is now possible to design and use multiple DSLs in a single {\field{\*\fldinst{HYPERLINK "scrivcmt://1B61F4AD-6FD4-4C44-88A9-8CFF2AE9FC73"}}{\fldrslt project.}}\
+Tools such as OMetaII and Ohm-JS are based on PEG technology.\
+PEG libraries exist for many common languages, e.g. Ohm-JS for JavaScript, ESRAP for Common Lisp, etc.}

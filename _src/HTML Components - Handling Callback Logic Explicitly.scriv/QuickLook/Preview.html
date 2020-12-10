@@ -1,0 +1,177 @@
+<html>
+
+<head>
+<title>HTML Components - Handling Callback Logic Explicitly</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction - Structuring Asynchronous Components</p>
+<p class="itemText">[This essay builds upon explanations given in a previous essay - https://github.com/guitarvydas/ag-js/blob/master/HTML%20Components%20-%20Arrowgrams.pdf]</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In this essay, I discuss how to pull the callback logic out of the "part2" component.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In essence, I am describing how I structure asynchronous components.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Callback.js</p>
+<p class="itemText">Refer to the diagram drawing.drawio.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I've given better - more descriptive - names to the components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I've renamed "part1" to "FileSelector".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I've renamed "part2" to "Display".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I've created a new JavaScript file called callbacklogic.js and have inserted a 3rd component in between the FileSelector and the Display components.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I've moved the callback logic from Display (part2) into the new component CallbackLogic.<span class="Apple-converted-space">  </span>The code now resides in the react() function of CallbackLogic.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Interface Between HTML Events and AG</p>
+<p class="itemText">CallbackLogic is, now, the interface between FileReader() events - HTML + JavaScript - and AG events.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The initial call to CallbackLogic is done by the FileSelector component.<span class="Apple-converted-space">  </span>It sends an AG event to the CallbackLogic component.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In that first call to react(), the code sets up JS callbacks for onload, onerror, onabort<span class="Apple-converted-space">  </span>and a timer.<span class="Apple-converted-space">  </span>Then it starts the ball rolling by calling readAsText().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">After that initial call, all subsequent events are AG events.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">After fielding the HTML+JS events, Callback...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Event Interface &amp; Conversion</p>
+<p class="itemText">HTML + JavaScript cause one of 4 events - onload, onerror, onabort, timer. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">These HTML + JavaScript events are fielded by the CallbackLogic component. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For each HTML + JavaScript event, the component re-calls this.react() with a pin tag.<span class="Apple-converted-space">  </span>The pin tags correspond to the pins shown on the diagram drawing.drawio.</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">CustomEvent()</p>
+<p class="itemText">The blog article https://javascript.info/dispatch-events discusses the use of HTML+JS CustomEvent()s.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This article points out one crucial problem with the design of CustomEvent().</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Events sent from within an event handler are synchronous - they happen immediately, they are sent in a depth-first manner.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">All other events, though, are processed differently - in a breadth-first manner.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There are two ways that events are handled, where there should only be one way. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In addition, the event handl...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Structuring Asynchronous Activity</p>
+<p class="itemText">The above implicitly shows how to structure event handlers - make all events arrive at the same place.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In fact, this is what Structured Programming recommended.<span class="Apple-converted-space">  </span>1 entry point and 1 exit point.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This allows us to view the full gamut of events together, in one piece of code.<span class="Apple-converted-space">  </span>This structure retains one's sanity and allows any state handling to occur in one place, instead of being spread out across many pieces of code.<span class="Apple-converted-space">  </span>This kind of funnel also benefits from being arranged in a hierarchical manne...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

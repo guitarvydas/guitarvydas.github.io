@@ -1,0 +1,21 @@
+#!/bin/bash
+filename=pin_filename
+content=pin_content
+find ../_new -mindepth 1 -maxdepth 1 -iname '*' | while read targetMaybeWithBlanks
+do
+    if [ "../_new/.DS_Store" == "${targetMaybeWithBlanks}" ]
+    then
+	echo "skipping [${targetMaybeWithBlanks}]"
+    else
+	target=`echo "${targetMaybeWithBlanks}" | sed -e 's/ /\\ /g'`
+	echo "creating post from [${target}]"
+	./cleanfifos
+	mkfifo ${filename}
+	mkfifo ${content}
+	./scrivener-to-jekyll 3<"${filename}" 4<"${content}" &
+	echo "${target}" >"${filename}" &
+	echo "don't care" >"${content}" &
+	wait
+    fi
+done
+

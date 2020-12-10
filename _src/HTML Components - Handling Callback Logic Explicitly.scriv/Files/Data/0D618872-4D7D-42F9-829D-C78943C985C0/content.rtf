@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The blog article {\field{\*\fldinst{HYPERLINK "https://javascript.info/dispatch-events"}}{\fldrslt https://javascript.info/dispatch-events}} discusses the use of HTML+JS CustomEvent()s.\
+\
+This article points out one crucial problem with the design of CustomEvent().\
+\
+Events sent from within an event handler are 
+\f1\i synchronous
+\f0\i0  - they happen immediately, they are sent in a 
+\f1\i depth-first
+\f0\i0  manner.\
+\
+All other events, though, are processed differently - in a 
+\f1\i breadth-first
+\f0\i0  manner. \
+\
+There are two ways that events are handled, where there should only be one way.  \
+\
+In addition, the event handling is 
+\f1\i implicit
+\f0\i0 .  The onus is on the programmer to figure out what will happen.  This is an unnecessary implementation detail that interferes with design-flow.\
+\
+I strongly recommend that all events be dispatched in a 
+\f1\i breadth-first
+\f0\i0  manner, as this promotes the use of the 
+\f1\i concurrent
+\f0\i0  programming paradigm and prevents future problems similar to priority-inversion.\
+\
+The article explains how to dispatch events in a 
+\f1\i breadth-first
+\f0\i0  manner - using a 0-time timeout.  This is counter-intuitive, but could be hidden behind a well-chosen {\field{\*\fldinst{HYPERLINK "scrivcmt://D0A0C06C-8839-48E5-9B8D-5E9F683A8B37"}}{\fldrslt SCL}} syntax.}
