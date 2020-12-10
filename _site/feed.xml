@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-10T15:38:39-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Software development roles</title><link href="https://computingsimplicity.neocities.org/2020/12/10/Software-Development-Roles.html" rel="alternate" type="text/html" title="Software development roles" /><published>2020-12-10T00:00:00-05:00</published><updated>2020-12-10T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/10/Software%20Development%20Roles</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/10/Software-Development-Roles.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-10T15:45:03-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Software development roles</title><link href="https://computingsimplicity.neocities.org/2020/12/10/Software-Development-Roles.html" rel="alternate" type="text/html" title="Software development roles" /><published>2020-12-10T00:00:00-05:00</published><updated>2020-12-10T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/10/Software%20Development%20Roles</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/10/Software-Development-Roles.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
   &lt;title&gt;Software Development Roles (2)&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-10T15:37:34Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-10T15:37:34Z&quot;&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-10T15:44:21Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-10T15:44:21Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
@@ -27,6 +27,7 @@
     td.td5 {height: 14.6px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #999999 #999999 #999999 #999999; padding: 0.0px 5.0px 0.0px 5.0px}
     td.td6 {background-color: #ccff66; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #999999 #999999 #999999 #999999; padding: 0.0px 5.0px 0.0px 5.0px}
     td.td7 {height: 8.8px; background-color: #80ff08; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #999999 #999999 #999999 #999999; padding: 0.0px 5.0px 0.0px 5.0px}
+    td.td8 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #bfbfbf #bfbfbf #bfbfbf #bfbfbf; padding: 0.0px 5.0px 0.0px 5.0px}
     ol.ol1 {list-style-type: decimal}
     ul.ul1 {list-style-type: disc}
   &lt;/style&gt;
@@ -1022,11 +1023,8 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;top&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;Hardware production test used HP Trace Analyzers that would generate a GUID for every test (including sequencing over time) for a “golden unit” (known to be good), when GUID didn’t match in production unit, then further testing was used to determine&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;where the fault was (kind of a Canary CI, replacing Unit test with faster/cheaper tests which signalled Go/no-go only)&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -1050,10 +1048,7 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;top&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;different set of concerns than providing tools to Professionals&lt;/p&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
@@ -1065,10 +1060,7 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;top&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;Rhetorical Question: would you drive across a bridge designed by a gifted child?&lt;/p&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
@@ -1093,10 +1085,7 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;top&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;Rhetorical Question: would you drive across a bridge designed by a Professional who isn’t an Engineer?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;E.g. a Dentist?&lt;/p&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
@@ -1331,10 +1320,7 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;transitional (only)&lt;/p&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
@@ -1345,10 +1331,7 @@
       &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
-      &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+      &lt;td colspan=&quot;2&quot; valign=&quot;middle&quot; class=&quot;td8&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;will be supplanted by designs&lt;br&gt;
 based on computing-driven&lt;br&gt;
 paradigms&lt;/p&gt;
@@ -1619,17 +1602,6 @@ paradigms&lt;/p&gt;
       &lt;/td&gt;
       &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
         &lt;p class=&quot;p8&quot;&gt;old: automobile&lt;/p&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;bottom&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-      &lt;/td&gt;
-      &lt;td valign=&quot;top&quot; class=&quot;td2&quot;&gt;
-        &lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
