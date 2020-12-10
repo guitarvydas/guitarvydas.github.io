@@ -5,8 +5,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>5 Whys of Full Preemption</title>
   <meta name="Author" content="Paul Tarvydas">
-  <meta name="CreationTime" content="2020-12-10T14:49:46Z">
-  <meta name="ModificationTime" content="2020-12-10T14:49:46Z">
+  <meta name="CreationTime" content="2020-12-10T15:29:10Z">
+  <meta name="ModificationTime" content="2020-12-10T15:29:10Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -37,9 +37,11 @@
 <p class="p2"><span class="Apple-converted-space"> </span></p>
 <p class="p1">A: Because that is the way we always did it, starting with when processors were expensive.</p>
 <p class="p2"><br></p>
-<p class="p1">Conclusion: Use multiple processors.<span class="Apple-converted-space">  </span>Stop trying to simulate multiple threads on a single processor.<span class="Apple-converted-space">  </span>If you do simulate multiple threads on a single processor, don't simulate scenarios, like memory sharing, that cannot be done using multiple processors (that just invites accidental complexity).</p>
 <p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Conclusion</b></h2>
+<p class="p1">Use <i>multiple</i> processors.<span class="Apple-converted-space">  </span>Stop trying to simulate multiple threads on a single processor.<span class="Apple-converted-space">  </span>If we must simulate multiple threads on a single processor, don't simulate scenarios, like memory sharing, that cannot be done using multiple processors (that just invites accidental complexity).</p>
 <p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Acknowledgement</b></h2>
 <p class="p1"><i>[5 Whys suggested by Daniel Pink in Masterclass: https://www.youtube.com/watch?v=My7hjBp4wH0]</i></p>
 </div>
 </body>
