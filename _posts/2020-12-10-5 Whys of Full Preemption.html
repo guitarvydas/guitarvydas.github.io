@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>5 Whys of Full Preemption</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-10T14:49:46Z">
+  <meta name="ModificationTime" content="2020-12-10T14:49:46Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Q1: Why are multitasking libraries and operating systems difficult to use?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because they use full preemption.</p>
+<p class="p2"><br></p>
+<p class="p1">Q2: Why do multitasking libraries and operating systems use full preemption?</p>
+<p class="p2"><br></p>
+<p class="p1">A: That is how multiple threads can be <i>simulated</i> on a single processor.</p>
+<p class="p2"><br></p>
+<p class="p1">Q3: Why do we simulate multiple threads on a single processor?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Processors are expensive, so we can only afford to use one processor.</p>
+<p class="p2"><br></p>
+<p class="p1">Q4: Why are processors expensive?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Processors used to be expensive, but they are inexpensive now.</p>
+<p class="p2"><br></p>
+<p class="p1">Q5: Why don't we use multiple processors, one for each thread?</p>
+<p class="p2"><span class="Apple-converted-space"> </span></p>
+<p class="p1">A: Because that is the way we always did it, starting with when processors were expensive.</p>
+<p class="p2"><br></p>
+<p class="p1">Conclusion: Use multiple processors.<span class="Apple-converted-space">  </span>Stop trying to simulate multiple threads on a single processor.<span class="Apple-converted-space">  </span>If you do simulate multiple threads on a single processor, don't simulate scenarios, like memory sharing, that cannot be done using multiple processors (that just invites accidental complexity).</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><i>[5 Whys suggested by Daniel Pink in Masterclass: https://www.youtube.com/watch?v=My7hjBp4wH0]</i></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>5 Whys of Multiprocessing</title>
+  <meta name="Author" content="Paul Tarvydas">
+  <meta name="CreationTime" content="2020-12-10T14:59:56Z">
+  <meta name="ModificationTime" content="2020-12-10T14:59:56Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">Q1: Why don't we use multiprocessing more often?</p>
+<p class="p2"><span class="Apple-converted-space"> </span></p>
+<p class="p1">A: Because multiprocessing is difficult.</p>
+<p class="p2"><br></p>
+<p class="p1">Q2: Why is multiprocessing difficult?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because it is complicated.</p>
+<p class="p2"><br></p>
+<p class="p1">Q3: Why is multiprocessing complicated?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because it has race conditions.</p>
+<p class="p2"><br></p>
+<p class="p1">Q4: Why does multiprocessing have race conditions?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because Threads share memory.</p>
+<p class="p2"><br></p>
+<p class="p1">Q5: Why do Threads share memory?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because it is more efficient to share memory when Threads are on the same processor. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">Q6: Why do you use the same processor for Threads?</p>
+<p class="p2"><br></p>
+<p class="p1">A: Because processors and memory are expensive.</p>
+<p class="p2"><br></p>
+<p class="p1">Q7: Why are processors and memory expensive?</p>
+<p class="p2"><br></p>
+<p class="p1">A: They're not expensive anymore.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">Conclusion:<span class="Apple-converted-space">  </span>We need to stop sharing memory.<span class="Apple-converted-space">  </span>We need to put Threads on separate processors (aka, IoT and distributed processing).</p>
+<p class="p2"><br></p>
+<p class="p1"><i>Actually, the physics of parallel systems implies that we must always deal with real race conditions, but, race conditions based on memory sharing, priorities, etc. are accidental complexities.<span class="Apple-converted-space">  </span>Race conditions caused by physics were explored and handled in the 1970's by Electrical Engineers.<span class="Apple-converted-space">  </span>Maybe even earlier.<span class="Apple-converted-space">  </span>Race conditions due to physics are found in the arrival of so-called simultaneous events (we are re-discovering these real problems, when dealing with distributed systems).</i></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><i>[5 Whys suggested by Daniel Pink in Masterclass: https://www.youtube.com/watch?v=My7hjBp4wH0]</i></p>
+</div>
+</body>
+</html>

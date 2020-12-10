@@ -1,0 +1,16 @@
+#!/bin/bash
+set -x
+./reset
+jekyll build
+
+rm _site/build
+rm _site/copy.txt
+rm _site/debug.txt
+rm _site/fresh
+rm _site/new
+rm _site/junk
+rm _site/reset
+rm _site/assets/main.css.map
+
+#jekyll serve
+
