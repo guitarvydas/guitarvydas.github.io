@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="CD5B19A7-DDF8-4DD0-8DC1-6FF6D9FB5A22">
+            <Title>Schematics (Composite Parts)</Title>
+            <Text>- fractal
+- recursive
+</Text>
+        </Document>
+        <Document ID="D5E2E5DC-5B91-4ED9-99C8-A054981E38BF">
+            <Title>What is Architectural Flexibility?</Title>
+            <Text>Architectural flexibility is the idea that a complete software system can be modified on short notice.
+
+We can change the way a software system works by simply "rewiring" it.
+
+Furthermore, flexibility allows us to cut/copy/paste elements of a software system to create a new software system.  Software libraries and APIs are meant for this kind of purpose.  Using the concurrent paradigm makes such reuse and multiple use easier to accomplish.</Text>
+        </Document>
+        <Document ID="6CE9758E-8D0B-4D0C-9E48-20E1CE56AD11">
+            <Title>Goals of Flexibility</Title>
+            <Text>What are the goals of flexibility?
+
+	•	Create software components
+	•	Plug software components together like LEGO® blocks
+	•	Rewire a software system to easily create different behaviours
+	•	"Borrow" bits of architecture when creating new software systems
+</Text>
+        </Document>
+        <Document ID="AE2F8CAE-336F-41CB-B08B-48B3AE0AF09E">
+            <Title>Flexiblity</Title>
+            <Text>Add an output queue</Text>
+        </Document>
+        <Document ID="E23D2930-2FFA-4FCF-B905-F8FD3BCA8A66">
+            <Title>Introduction</Title>
+            <Text>In this essay, I address the issue of architectural flexibility.
+</Text>
+        </Document>
+        <Document ID="0027F540-FC82-4FB7-816F-73B659FA958B">
+            <Title>Requirements</Title>
+            <Text>To achieve flexibility, we require:
+	•	dependencies - components have no dependencies (or very few and very explicit)
+	•	isolation - components are isolated from one another, in memory, control flow, namespaces, etc.
+
+Present technologies encourage the use of dependencies.  Tools, such as make, npm, etc. are provided to manage dependencies.  The goal of zero-dependencies means that make, npm, etc. must not be used during construction of a software system.
+
+OO provides encapsulation of data, but does not provide encapsulation of control flow.  In fact, OO creates spaghetti control flow paths by allowing method overriding.
+
+Operating system processes provide encapsulation of control flow and namespace isolation.
+
+Present languages allow naming of targets.  For example, to call a function, one must specify the name of the called function.
+
+DLLs - dynamic link libraries, place a layer of indirection between callers and callees.
+
+Calling a function usually involves pushing a breadcrumb onto a stack. Often, the breadcrumb is hidden from programmers' view. This creates  dynamic dependency chains which are often expressed as backtraces when problems occur.
+
+Present-day function syntax requires syntactic sugaring to express data delivered as parameters, a different syntactic sugaring for data delivered as return values and yet another syntactic sugaring for data delivered as exceptions. </Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

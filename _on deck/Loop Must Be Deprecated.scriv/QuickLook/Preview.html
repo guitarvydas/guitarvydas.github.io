@@ -1,0 +1,223 @@
+<html>
+
+<head>
+<title>Looping Should Be Deprecated</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction - Remove Looping and Recursion</p>
+<p class="itemText">In this essay, I argue that looping and recursion should be removed from new programming languages.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Language Influences Thought</p>
+<p class="itemText">Programming languages influence the way in which we think about programming.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We have entered a new phase of programming - distributed programming.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We must expunge the use of Loop and Recursion from new-breed languages to allow us to think and reason beyond the borders of single-processor problem solutions.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We must create new-breed programming languages that leave old-fashioned constructs behind.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Loop and Recursion are old ideas that are not suited to distributed programming.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">New Breed Languages - Distributed Computing</p>
+<p class="itemText">We see the beginnings of movement towards distributed computing in HTML (and JavaScript) and in blockchain.<span class="Apple-converted-space">  </span>IoT is a distributed programming platform, but has little language support for expressing cross-processor operations.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I expect that new languages will address the problems of distributed programming, while leaving the problems of non-distributed programming behind. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Existing languages, such as Python, JavaScript, C, etc., are sufficient for expressing solutions to non-distributed probl...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Poor-Man's Distributed Programming</p>
+<p class="itemText">Currently, we can program distributed solutions, but at a very low level, using islands of non-distributed code.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For example, distributed solutions to production problems are being solved with languages like MicroPython.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Such distributed solutions can be characterized by the following statements:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Distributed solutions do not need large amounts of memory</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Distributed solutions use Operating Systems to provide low-level inter-process operations (e.g. sockets, threads)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Distributed solutio...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Loops and Tail-Call Recursion</p>
+<p class="itemText">Looping in all forms - loops and tail-recursion - is a process-local operation.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">All code that belongs to a loop is assumed to execute on the same processor. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">It is not natural to program a loop that "jumps" between distributed processors.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The code of a loop is localized on the same processor.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As such, loops have no place in distributed programming.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">New-breed languages will not inherently support loops.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Loops are the exception, not the rule.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Recursion</p>
+<p class="itemText">implies use of a stack<br></p>
+<p class="itemText">- stack does not fit will with distributed programming</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Dependencies</p>
+<p class="itemText">Distributed programs run independently and are fully isolated.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dependencies between distributed programs must be avoided to allow maximum parallelism.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dependencies are sometimes required by the architecture of a solution. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Such architectural decisions should be made explicit.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dependencies are the exception and not the rule.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Full architectural documentation requires that dependencies are not hidden (and forgotten) behind syntactic sugar.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Phone Apps</p>
+<p class="itemText">Phone apps are forms of distributed computing.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Phone apps are programmed as islands of local-only programs on distributed hardware.<span class="Apple-converted-space">  </span>Such programming is performed using the built-in biases of local-only programming languages.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Phone app software will become more powerful, and more interesting, when it can be easily programmed as fully distributed application code.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Replacing Loops</p>
+<p class="itemText">Loops across distributed processors can be fashioned by sending messages between processors, or, messages sent back to the same processor.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For example, the old-fashioned notion of loop could simply be implemented as a message-send from a processor to itself.<span class="Apple-converted-space">  </span>This operation could be automatically compiled using syntactic sugar which looks like a loop operation in any current, non-distributed, language, such as C, JavaScript, etc..</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Blockchain</p>
+<p class="itemText">- 2 parts (1) crypto (2) distributed protocol</p>
+</li>
+<li>
+<p class="topLevelItemTitle">HTML</p>
+<p class="itemText">HTML is an early attempt at the creation of a distributed programming language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">HTML carries forward the baggage of non-distributed programming, e.g. the notion that an app is described in a local-only declarative manner, wherein most operations have one input and one output.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Distributed operations, such as various events, are special-cased into HTML (and JavaScript) and used at a very low level.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Natural Looping Diagram</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:NaturalLoop&gt; Natural Loop</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Looping naturally fits the notions of non-distributed programming.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Unnatural Looping Diagram</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:UnnaturalLoop&gt; Unnatural Loop</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Looping does not naturally fit the notions of distributed programming.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Running one loop across several processors is possible but requires extra programming work and implementation details.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Force-fitting an unnatural construct onto a paradigm usually results in accidental complexities.</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

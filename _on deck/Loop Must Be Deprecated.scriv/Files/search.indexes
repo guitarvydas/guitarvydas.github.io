@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="F0622DEF-83B5-4EAB-BD51-AEBA28F98DE0">
+            <Title>New Breed Languages - Distributed Computing</Title>
+            <Text>We see the beginnings of movement towards distributed computing in HTML (and JavaScript) and in blockchain.  IoT is a distributed programming platform, but has little language support for expressing cross-processor operations.
+
+I expect that new languages will address the problems of distributed programming, while leaving the problems of non-distributed programming behind.  
+
+Existing languages, such as Python, JavaScript, C, etc., are sufficient for expressing solutions to non-distributed problems.
+
+Constructs such as looping and recursion will become the exception, rather than the rule, in new-breed, distributed, languages.</Text>
+        </Document>
+        <Document ID="AE7EBB54-3211-476F-8330-46E60FCD87F3">
+            <Title>Introduction - Remove Looping and Recursion</Title>
+            <Text>In this essay, I argue that looping and recursion should be removed from new programming languages.
+</Text>
+        </Document>
+        <Document ID="1036C050-0CB9-4826-9FD1-3ACA682E0AD8">
+            <Title>Natural Looping Diagram</Title>
+            <Text>#
+Fig. &lt;$n:figure:NaturalLoop&gt; Natural Loop
+
+Looping naturally fits the notions of non-distributed programming.</Text>
+        </Document>
+        <Document ID="476F8372-E7F3-4F5C-B684-0DCDE6E7FB57">
+            <Title>Stacks</Title>
+            <Text>The use of stacks - e.g. for call/return - create dependencies.
+
+In many languages, the creation of such dependencies is hidden behind syntactic sugar.
+
+The use of CALL/RETURN is so pervasive that most programmers do not notice its cost nor the dynamic dependency chains it creates.</Text>
+            <Comments>e.g. CALL and RETURN</Comments>
+        </Document>
+        <Document ID="6D936552-17A0-4AFB-82F8-B07BFE92F22F">
+            <Title>HTML</Title>
+            <Text>HTML is an early attempt at the creation of a distributed programming language.
+
+HTML carries forward the baggage of non-distributed programming, e.g. the notion that an app is described in a local-only declarative manner, wherein most operations have one input and one output.
+
+Distributed operations, such as various events, are special-cased into HTML (and JavaScript) and used at a very low level.</Text>
+        </Document>
+        <Document ID="C6EB6DA6-2EA3-4B1A-8BF5-EF2C43E357EF">
+            <Title>Poor-Man's Distributed Programming</Title>
+            <Text>Currently, we can program distributed solutions, but at a very low level, using islands of non-distributed code.
+
+For example, distributed solutions to production problems are being solved with languages like MicroPython.
+
+Such distributed solutions can be characterized by the following statements:
+	•	Distributed solutions do not need large amounts of memory
+	•	Distributed solutions use Operating Systems to provide low-level inter-process operations (e.g. sockets, threads)
+	•	Distributed solutions access local hardware using low-level operations, e.g. pyb.LED(1).on() 
+	•	Distributed solutions don't use many local threads
+	•	Distributed solutions are naturally isolated  (they cannot affect one another in hidden ways)
+	•	Distributed solutions do not share memory
+	•	Fairness is not an issue - each program runs on its own processor at its own speed
+	•	Loops are local-only constructs
+	•	Distributed solutions use loops only to simulate and to optimize threading
+	•	Distributed solutions are loosely coupled
+	•	Subsystems (i.e. code islands) can have more than one result.  In contrast, most protocols have at least 3 results: ACK , NAK and no response.
+
+The fact that small/simple distributed systems do not share memory means that many accidental complexities simply do not exist - e.g. thread safety, context switching, etc.  Such accidental complexities have given many programmers the impression that multi-tasking is a difficult problem.
+
+</Text>
+            <Comments>I am aware of at least one product, in production, that uses some 37 processors and is programmed in MicroPython.
+https://micropython.org/
+I argue that using Operating Systems for such low-level operations is overkill.</Comments>
+        </Document>
+        <Document ID="2CCFCC6D-018D-44E7-B4FB-5DF838E8C7FA">
+            <Title>Operating Systems</Title>
+            <Text>Operating system threads cater to the notion of long-running loops and impact the efficiency of every program, including those that do not contain long-running loops.
+
+Operating systems cater to the notion that threads will share memory.
+
+The method used by Operating Systems to handle long-running loops - full preemption - brings a plethora of accidental complexities into play.</Text>
+        </Document>
+        <Document ID="C0B1EBC7-C260-4CE5-911E-D27B02A11ADC">
+            <Title>Unnatural Looping Diagram</Title>
+            <Text>#
+Fig. &lt;$n:figure:UnnaturalLoop&gt; Unnatural Loop
+
+Looping does not naturally fit the notions of distributed programming.
+
+Running one loop across several processors is possible but requires extra programming work and implementation details.
+
+Force-fitting an unnatural construct onto a paradigm usually results in accidental complexities.</Text>
+        </Document>
+        <Document ID="2961B1B7-D649-4D0C-A7FD-79FF4A6A3ECC">
+            <Title>Phone Apps</Title>
+            <Text>Phone apps are forms of distributed computing.
+
+Phone apps are programmed as islands of local-only programs on distributed hardware.  Such programming is performed using the built-in biases of local-only programming languages.
+
+Phone app software will become more powerful, and more interesting, when it can be easily programmed as fully distributed application code.</Text>
+        </Document>
+        <Document ID="C99E908C-B655-48C5-9AEC-674DD4021B3D">
+            <Title>Recursion</Title>
+            <Synopsis>implies use of a stack - stack does not fit will with distributed programming</Synopsis>
+            <Text>General recursion implies the use of a stack.
+
+Like loops, recursion (of all forms) expects all code to reside on the same processor.
+</Text>
+        </Document>
+        <Document ID="757F0DE2-B698-4C13-A48C-B8CA79ADD0C3">
+            <Title>Loops and Tail-Call Recursion</Title>
+            <Text>Looping in all forms - loops and tail-recursion - is a process-local operation.
+
+All code that belongs to a loop is assumed to execute on the same processor.  
+
+It is not natural to program a loop that "jumps" between distributed processors.
+
+The code of a loop is localized on the same processor.
+
+As such, loops have no place in distributed programming.
+
+New-breed languages will not inherently support loops.
+
+Loops are the exception, not the rule.
+</Text>
+        </Document>
+        <Document ID="E3F6AE44-9F14-47D0-874D-CFE215633522">
+            <Title>Blockchain</Title>
+            <Synopsis>- 2 parts (1) crypto (2) distributed protocol</Synopsis>
+            <Text>Blockchain programming consists of two main portions:
+
+	•	cryptography
+	•	distributed protocols.
+
+The distributed protocols are used to segment the cryptography and to obfuscate the results, as a method of countering malicious attacks.
+
+The distributed protocols are programmed at a very low level. </Text>
+        </Document>
+        <Document ID="61B79584-4177-4023-BA0D-5BF343C62B9A">
+            <Title>Language Influences Thought</Title>
+            <Text>Programming languages influence the way in which we think about programming.
+
+We have entered a new phase of programming - distributed programming.
+
+We must expunge the use of Loop and Recursion from new-breed languages to allow us to think and reason beyond the borders of single-processor problem solutions.
+
+We must create new-breed programming languages that leave old-fashioned constructs behind.
+
+Loop and Recursion are old ideas that are not suited to distributed programming.</Text>
+        </Document>
+        <Document ID="E82C9FE1-7593-4F4B-B49D-7380EBD05957">
+            <Title>RPC - Remote Procedure Call</Title>
+            <Text>RPC - Remote Procedure Call - is a failed attempt at preserving the unnatural notion of CALL / RETURN in a distributed environment.</Text>
+        </Document>
+        <Document ID="991BE79B-D4E1-46A3-B002-35626D9A654E">
+            <Title>SEND() - MOAC</Title>
+            <Synopsis>- send() is the Mother of All Constructs</Synopsis>
+        </Document>
+        <Document ID="66B3E577-319B-4442-A3CF-C32461FE8369">
+            <Title>Dependencies</Title>
+            <Text>Distributed programs run independently and are fully isolated.
+
+Dependencies between distributed programs must be avoided to allow maximum parallelism.
+
+Dependencies are sometimes required by the architecture of a solution.  
+
+Such architectural decisions should be made explicit.
+
+Dependencies are the exception and not the rule.
+
+Full architectural documentation requires that dependencies are not hidden (and forgotten) behind syntactic sugar.</Text>
+            <Comments>which I call DI - Design Intent</Comments>
+        </Document>
+        <Document ID="A2E07CE1-447F-4797-B449-43A943FE9CCA">
+            <Title>Replacing Loops</Title>
+            <Text>Loops across distributed processors can be fashioned by sending messages between processors, or, messages sent back to the same processor.
+
+For example, the old-fashioned notion of loop could simply be implemented as a message-send from a processor to itself.  This operation could be automatically compiled using syntactic sugar which looks like a loop operation in any current, non-distributed, language, such as C, JavaScript, etc..</Text>
+            <Comments>I do not recommend doing this, but mention the possibility only for warm-and-fuzzy reasons.</Comments>
+        </Document>
+    </Documents>
+</SearchIndexes>

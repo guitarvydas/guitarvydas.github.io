@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="8F75A800-82E5-4E54-905A-18C66740121E">
+            <Title>Components - JavaScript</Title>
+            <Text>I wish to keep this essay very simple, so I will describe an example which contains only two components.  One component Sends a string to the other component - the usual "Hello World".
+
+I will name the components "sender()" and "receiver()".
+
+The component sender(), is:
+
+	function sender (message) {
+        send ("sender", "Hello World");
+    }
+
+
+and the component receiver() is
+
+function receiver (message) {
+    console.log (message);
+}
+
+</Text>
+        </Document>
+        <Document ID="E30C2915-DA85-4A98-8760-1CDC63EC2C9B">
+            <Title>Steady State</Title>
+            <Text>dispatcher ();
+</Text>
+        </Document>
+        <Document ID="F6D59341-6E67-476B-AB2F-DD79C3F0761D">
+            <Title>Dispatcher - JavaScript</Title>
+            <Text>The dispatcher invokes, arbitrarily, any routine that is ready to run.
+
+A routine is ready to run if its input queue is non-empty.
+
+function dispatcher () {
+    while (true) {
+	     if (sender_input_queue.length &gt; 0) {
+	        var message = sender_input_queue.pop ();
+	        sender (message);
+	     } else if (receiver_input_queue.length &gt; 0) {
+	        var message = receiver_input_queue.pop ();
+	        receiver (message);
+        }
+	 }
+}
+
+
+
+</Text>
+            <Comments>In production, we would write the example code differently.  Many optimizations present themselves, for example, we don't need to burn a hole in the processor using a while(true) loop.
+</Comments>
+        </Document>
+        <Document ID="70BE8635-C82A-4141-B81D-451F2C38E228">
+            <Title>Index.html</Title>
+            <Text>see https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html
+
+load index.html in a browser, hit the "run" button
+</Text>
+        </Document>
+        <Document ID="EB96B1A3-F796-4F4F-ADA5-616FE330FD20">
+            <Title>Startup</Title>
+            <Text>sender ();
+</Text>
+        </Document>
+        <Document ID="96D61058-AE84-4801-9270-D780375D8F39">
+            <Title>Example</Title>
+            <Text>In the following example, I will show how to build a simple system with two components and one dispatcher.  I have used this same technique to build much larger systems (100s and 1,000s of components).
+
+This example probably looks too simple and not complicated enough.  It is an "overnight success" - it took me only 30 years to arrive at this conclusion.
+
+The technique has been used to build distributed systems and has been put into production (several times).
+
+[I don't recommend that components, queues and dispatchers be implemented as in this example.  I am trying to be excruciatingly transparent.]
+
+The example appears in the rest of this essay and can be found at  &lt; … &gt;
+</Text>
+        </Document>
+        <Document ID="AC3E30F3-B6CE-40C3-861A-1F58E5162503">
+            <Title>Send - JavaScript</Title>
+            <Text>The send () function is:
+
+function send (from, data) {
+    if (from == "sender") {
+	     receiver_input_queue.push (data);
+    } else if (from == "receiver") {
+        sender_input_queue.push (data);  
+    } else {
+        fail ();
+    }
+}
+
+[in this simple example, sender's output is always piped to receiver's input]
+</Text>
+        </Document>
+        <Document ID="7BFA4B00-11B4-4445-931F-5C00CB1EA4CD">
+            <Title>Overview of Concurrency</Title>
+            <Text>Concurrency, at its most basic, is very simple.
+
+We need some routines.
+
+We need a dispatcher.
+
+We need a way to transfer data between routines.
+
+That's about it.
+
+Present-day multitasking is inflicted with accidental complexity.  Multitasking seems to be difficult.  I will describe something much simpler, but just as useful.
+
+	1.	Routines are functions with no parameters, no return values, no exceptions and no way to call other routines.
+	2.	A dispatcher is the only routine that can call other routines.  Called routines always return to the dispatcher.
+	3.	We will transfer data using queues.
+
+The above 3 items can be easily created in any programming language, even assembler, by any competent software developer.
+
+</Text>
+            <Comments>I claim that the accidental complexity comes from premature optimization.  Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited. </Comments>
+        </Document>
+        <Document ID="6ABE63AD-A081-4FAC-BA0E-769A4BC39626">
+            <Title>Queues</Title>
+            <Text>Each component has a pair of private queues that can be accessed only by the send() an receive() routines.
+
+[In Javascript, queues are implemented as arrays.  An empty queue is [].  A queue can hold mixed elements of any type.]
+
+var sender_input_queue = [];
+var receiver_input_queue = [];
+</Text>
+        </Document>
+        <Document ID="5E14692D-B413-473E-88DC-ADEC32D4DB82">
+            <Title>Introduction</Title>
+            <Text>In this essay, I describe the very bare bones for implementing concurrency in any language.
+
+I know that this can be implemented in JavaScript - I've done it and will blog about it in further essays.  Incidentally, I've also built preliminary versions of this in Common Lisp, C, C++ and assembler.  Variations of this technique have been put into production, in multiple projects)  
+
+Concurrency is very simple and its implementation should be "obvious".  You might wish to skip over the details, once you get the hang of it.
+
+Forget what you already know about multitasking and read on …
+
+[The point of this essay is to show only the basics of this technique.  I use hard-wired code for illustration.  If a more fully-developed version of the code is desired, see my essays about HTML Components - ag-js-1, ag-js-2, and ag-js-3]</Text>
+        </Document>
+        <Document ID="9109F5BD-ECBB-4CCF-B305-4FB974881F5B">
+            <Title>Call Return Spaghetti</Title>
+            <Text>see https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html
+</Text>
+        </Document>
+        <Document ID="EEB738CD-9458-4EE2-8E57-4B3858A0574B">
+            <Title>Benefits of Concurrency</Title>
+            <Text>I claim that concurrency addresses many issues, including:
+
+	•	architectural flexibility
+	•	scalability
+	•	isolation
+	•	namespaces
+	•	type checking
+	•	thread safety, fairness, and all that …
+	•	synchronization
+	•	asynchronous I/O
+	•	box-and-arrow diagrams (that work)
+	•	machine control instead of calculation
+	•	readability
+	•	expressiveness - DI (Design Intent)
+	•	multiple use (augmented reuse)
+	•	removal of exception syntactic sugar
+	•	removal of parameter syntactic sugar
+	•	remove of return value syntactic sugar
+	•	layers, scoping
+	•	easier scheduling
+	•	better testabilty
+	•	compartmentalization of development tasks
+	•	etc.
+
+but, I will not conflate this simple example with such issues.  I will address these issues in other essays.
+
+</Text>
+        </Document>
+        <Document ID="E16ACFB5-02E4-4B96-9014-6CA91B803DD2">
+            <Title>JS Code</Title>
+            <Text>node basic.js
+
+see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</Text>
+        </Document>
+        <Document ID="F2FDF979-A1AF-43A0-B8B3-84066A3AD1E9">
+            <Title>Diagram</Title>
+            <Text>The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;
+
+
+#
+
+
+Fig. &lt;$n:figure:basic&gt; Basic Concurrency
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

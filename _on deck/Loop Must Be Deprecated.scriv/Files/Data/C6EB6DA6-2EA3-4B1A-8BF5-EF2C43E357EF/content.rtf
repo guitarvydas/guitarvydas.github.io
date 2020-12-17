@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 Currently, we 
+\f1\i can
+\f0\i0  program distributed solutions, but at a very low level, using islands of non-distributed code.\
+\
+For example, distributed solutions to production {\field{\*\fldinst{HYPERLINK "scrivcmt://5206CFDF-FD4E-4832-8BEA-FE5C7771A104"}}{\fldrslt problems}} are being solved with languages like {\field{\*\fldinst{HYPERLINK "scrivcmt://4AE8FCB1-8643-47B5-B92C-CC81715DE219"}}{\fldrslt MicroPython}}.\
+\
+Such distributed solutions can be characterized by the following statements:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}Distributed solutions do not need large amounts of memory\
+{\listtext	\uc0\u8226 	}Distributed solutions use Operating Systems to provide low-level inter-process operations (e.g. sockets, {\field{\*\fldinst{HYPERLINK "scrivcmt://DDBC78ED-E000-48B6-9F30-C23A8DE52CE2"}}{\fldrslt threads)}}\
+{\listtext	\uc0\u8226 	}Distributed solutions access local hardware using low-level operations, e.g. 
+\f2\fs24 <$Scr_Cs::0>
+\f3\fs22 pyb.LED(1).on() 
+\f2\fs24 <!$Scr_Cs::0>
+\f0\fs26 \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}Distributed solutions don't use many local threads\
+{\listtext	\uc0\u8226 	}Distributed solutions are naturally 
+\f1\i isolated
+\f0\i0   (they cannot affect one another in hidden ways)\
+{\listtext	\uc0\u8226 	}Distributed solutions do not share memory\
+{\listtext	\uc0\u8226 	}
+\f1\i Fairness
+\f0\i0  is not an issue - each program runs on its own processor at its own speed\
+{\listtext	\uc0\u8226 	}Loops are local-only constructs\
+{\listtext	\uc0\u8226 	}Distributed solutions use loops only to simulate and to optimize threading\
+{\listtext	\uc0\u8226 	}Distributed solutions are loosely coupled\
+{\listtext	\uc0\u8226 	}Subsystems (i.e. code islands) can have more than one result.  In contrast, most protocols have at least 3 results: ACK , NAK and no response.\
+\pard\tx560\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+The fact that small/simple distributed systems do not share memory means that many accidental complexities simply do not exist - e.g. thread safety, context switching, etc.  Such accidental complexities have given many programmers the impression that multi-tasking is a difficult problem.\
+\
+}

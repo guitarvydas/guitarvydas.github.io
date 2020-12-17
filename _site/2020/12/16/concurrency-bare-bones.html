@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>concurrency bare bones</title>
+  <meta name="CreationTime" content="2020-12-16T23:14:02Z">
+  <meta name="ModificationTime" content="2020-12-16T23:14:02Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">In this essay, I describe the very bare bones for implementing concurrency in any language.</p>
+<p class="p2"><br></p>
+<p class="p1">I know that this can be implemented in JavaScript - I've done it and will blog about it in further essays.<span class="Apple-converted-space">  </span>Incidentally, I've also built preliminary versions of this in Common Lisp, C, C++ and assembler.<span class="Apple-converted-space">  </span>Variations of this technique have been put into production, in multiple projects) <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1">Concurrency is very simple and its implementation should be "obvious".<span class="Apple-converted-space">  </span>You might wish to skip over the details, once you get the hang of it.</p>
+<p class="p2"><br></p>
+<p class="p1">Forget what you already know about multitasking and read on …</p>
+<p class="p2"><br></p>
+<p class="p1">[<i>The point of this essay is to show only the basics of this technique.<span class="Apple-converted-space">  </span>I use hard-wired code for illustration.<span class="Apple-converted-space">  </span>If a more fully-developed version of the code is desired, see my essays about HTML Components - ag-js-1, ag-js-2, and ag-js-3</i>]</p>
+<p class="p2"><br></p>
+<p class="p1">Concurrency, at its most basic, is very simple.</p>
+<p class="p2"><br></p>
+<p class="p1">We need some routines.</p>
+<p class="p2"><br></p>
+<p class="p1">We need a dispatcher.</p>
+<p class="p2"><br></p>
+<p class="p1">We need a way to transfer data between routines.</p>
+<p class="p2"><br></p>
+<p class="p1">That's about it.</p>
+<p class="p2"><br></p>
+<p class="p1">Present-day multitasking is inflicted with accidental complexity.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space">  </span>Multitasking seems to be difficult.<span class="Apple-converted-space">  </span>I will describe something much simpler, but just as useful.</p>
+<p class="p2"><br></p>
+<ol class="ol1">
+  <li class="li3">Routines are functions with no parameters, no return values, no exceptions and no way to call other routines.</li>
+  <li class="li3">A dispatcher is the only routine that can call other routines.<span class="Apple-converted-space">  </span>Called routines <i>always</i> return to the dispatcher.</li>
+  <li class="li3">We will transfer data using queues.</li>
+</ol>
+<p class="p4"><br></p>
+<p class="p3">The above 3 items can be easily created in any programming language, even assembler, by any competent software developer.</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p1">The most simple example of concurrency can be summed up in <span class="s1">Fig. 1</span></p>
+<p class="p5"><br></p>
+<p class="p4"><br></p>
+<p class="p6"><img src="/assets/2020-12-16-23-14-02-Images/concurrency-basic.png" width="361px" height="61px" alt="Image"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6">Fig. 1 Basic Concurrency</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3">In the following example, I will show how to build a simple system with two components and one dispatcher.<span class="Apple-converted-space">  </span>I have used this same technique to build much larger systems (100s and 1,000s of components).</p>
+<p class="p2"><br></p>
+<p class="p1">This example probably looks too simple and not complicated enough.<span class="Apple-converted-space">  </span>It is an "overnight success" - it took me only 30 years to arrive at this conclusion.</p>
+<p class="p2"><br></p>
+<p class="p1">The technique has been used to build distributed systems and has been put into production (several times).</p>
+<p class="p2"><br></p>
+<p class="p1"><i>[I don't recommend that components, queues and dispatchers be implemented as in this example.<span class="Apple-converted-space">  </span>I am trying to be excruciatingly transparent.]</i></p>
+<p class="p2"><i></i><br></p>
+<p class="p1">The example appears in the rest of this essay and can be found at<span class="Apple-converted-space">  </span>&lt; … &gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">I wish to keep this essay very simple, so I will describe an example which contains only two components.<span class="Apple-converted-space">  </span>One component Sends a string to the other component - the usual "Hello World".</p>
+<p class="p2"><br></p>
+<p class="p1">I will name the components "sender()" and "receiver()".</p>
+<p class="p2"><br></p>
+<p class="p1">The component sender(), is:</p>
+<p class="p2"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>function sender (message) {</p>
+<p class="p7"><span class="Apple-converted-space">        </span>send ("sender", "Hello World");</p>
+<p class="p7"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p1">and the component receiver() is</p>
+<p class="p2"><br></p>
+<p class="p9">function receiver (message) {</p>
+<p class="p9"><span class="Apple-converted-space">    </span>console.log (message);</p>
+<p class="p9">}</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p1">Each component has a pair of private queues that can be accessed only by the send() an receive() routines.</p>
+<p class="p2"><br></p>
+<p class="p1"><i>[In Javascript, queues are implemented as arrays.<span class="Apple-converted-space">  </span>An empty queue is [].<span class="Apple-converted-space">  </span>A queue can hold mixed elements of any type.]</i></p>
+<p class="p2"><br></p>
+<p class="p1">var sender_input_queue = [];</p>
+<p class="p1">var receiver_input_queue = [];</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">The dispatcher<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> invokes, arbitrarily, any routine that is <i>ready to run</i>.</p>
+<p class="p2"><br></p>
+<p class="p1">A routine is <i>ready to run</i> if its input queue is non-empty.</p>
+<p class="p2"><br></p>
+<p class="p9">function dispatcher () {</p>
+<p class="p9"><span class="Apple-converted-space">    </span>while (true) {</p>
+<p class="p9"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>if (sender_input_queue.length &gt; 0) {</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>var message = sender_input_queue.pop ();</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>sender (message);</p>
+<p class="p9"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>} else if (receiver_input_queue.length &gt; 0) {</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>var message = receiver_input_queue.pop ();</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>receiver (message);</p>
+<p class="p9"><span class="Apple-converted-space">        </span>}</p>
+<p class="p9"><span class="Apple-tab-span">	</span> }</p>
+<p class="p9">}</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">The send () function is:</p>
+<p class="p2"><br></p>
+<p class="p9">function send (from, data) {</p>
+<p class="p9"><span class="Apple-converted-space">    </span>if (from == "sender") {</p>
+<p class="p9"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>receiver_input_queue.push (data);</p>
+<p class="p9"><span class="Apple-converted-space">    </span>} else if (from == "receiver") {</p>
+<p class="p9"><span class="Apple-converted-space">        </span>sender_input_queue.push (data); <span class="Apple-converted-space"> </span></p>
+<p class="p9"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p9"><span class="Apple-converted-space">        </span>fail ();</p>
+<p class="p9"><span class="Apple-converted-space">    </span>}</p>
+<p class="p9">}</p>
+<p class="p10"><br></p>
+<p class="p1"><i>[in this simple example, sender's output is always piped to receiver's input]</i></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p9">sender ();</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p9">dispatcher ();</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p1">node basic.js</p>
+<p class="p2"><br></p>
+<p class="p1">see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</p>
+<p class="p2"><br></p>
+<p class="p1">see <a href="https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html">https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html</a></p>
+<p class="p2"><br></p>
+<p class="p1">load index.html in a browser, hit the "run" button</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">I claim that concurrency addresses many issues, including:</p>
+<p class="p4"><br></p>
+<ul class="ul1">
+  <li class="li3">architectural flexibility</li>
+  <li class="li3">scalability</li>
+  <li class="li3">isolation</li>
+  <li class="li3">namespaces</li>
+  <li class="li3">type checking</li>
+  <li class="li3">thread safety, fairness, and all that …</li>
+  <li class="li3">synchronization</li>
+  <li class="li3">asynchronous I/O</li>
+  <li class="li3">box-and-arrow diagrams (that work)</li>
+  <li class="li3">machine control instead of calculation</li>
+  <li class="li3">readability</li>
+  <li class="li3">expressiveness - DI (Design Intent)</li>
+  <li class="li3">multiple use (augmented reuse)</li>
+  <li class="li3">removal of exception syntactic sugar</li>
+  <li class="li3">removal of parameter syntactic sugar</li>
+  <li class="li3">remove of return value syntactic sugar</li>
+  <li class="li3">layers, scoping</li>
+  <li class="li3">easier scheduling</li>
+  <li class="li3">better testabilty</li>
+  <li class="li3">compartmentalization of development tasks</li>
+  <li class="li3">etc.</li>
+</ul>
+<p class="p4"><br></p>
+<p class="p3">but, I will not conflate this simple example with such issues.<span class="Apple-converted-space">  </span>I will address these issues in other essays.</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p1">see <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a></p>
+<p class="p11"><br></p>
+<hr>
+<p class="p12"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>I claim that the accidental complexity comes from premature optimization.<span class="Apple-converted-space">  </span>Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited.</p>
+<p class="p3"><span class="s1"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a></span> In production, we would write the example code differently.<span class="Apple-converted-space">  </span>Many optimizations present themselves, for example, we don't need to burn a hole in the processor using a while(true) loop.</p>
+</div>
+</body>
+</html>

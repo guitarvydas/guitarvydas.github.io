@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="2BE1422D-8EC5-48F1-994A-1DF56581625F">
+            <Text>- no dependencies
+- no way to call peers
+- parent routes data
+</Text>
+        </Document>
+        <Document ID="3336106E-7F6C-40C9-83EB-DEBAEEB52AA6">
+            <Title>Fine Points</Title>
+            <Text>I recommend that every component have two queues - input and outputs.  This allows deferred sending and promotes architectural flexibility.
+
+I recommend that a component never mentions or calls another component.   This causes hidden dependencies.  I recommend that components send messages to their outputs, allowing their parents (and the dispatcher) to route data to its destination.
+
+I recommend that messages be 2-tuples - a pin (essentially a tag) and data.</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

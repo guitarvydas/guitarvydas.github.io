@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="A4BD0766-93BE-406A-83D9-627320D913A9">
+            <Text>Q: What is the first step in automating code emission?
+
+A: Ensure that the code is very regular - cookie cutter code.  No optimizations.
+
+Q: Why shouldn't we optimize the code before automating emission?
+
+A: Optimizations tend to disrupt the regularity of the code.  Automation is easier when the code is regular (normalized).
+
+Q: But, if the code is not optimized, won't the result be worse (less efficient) than what a human programmer could produce?
+
+A: No, in the long run.  At first, the automator will produce code that is less efficient.  Then, someone "smart" will fix the automator to produce more efficient code, e.g. by adding optimizable patterns to the transpiler.
+
+Q: Has this been done before?
+
+A: Yes.  When we transitioned from using assembler code to HLLs, e.g. C and Pascal, smart people - Optimization Engineers - figured out how to make the transpiler produce more efficient code.  GCC is a great example at first, all compiled code was less efficient than that produced by smart assembler programmers, then, GCC came along and produced more efficient code than that produced by smart assembler programmers.  Now, we use HLLs and no one thinks of writing code in assembler for efficiency.
+
+Q: How did GCC do this?
+
+A: 50,000 foot level: by using pattern matching.  GCC would detect certain patterns and emit more efficient code for them. 
+
+Q: Are there some research papers documenting these ideas?
+
+A: Yes.  Cordy's OCG (orthogonal code generator) is a declarative pattern matcher.  Fraser-Davidson wrote a paper on peephole optimization - a technique that was used in GCC.  The UNIX® language AWK can be used for peephole optimization. Sed and just about anything that matches patterns can probably be used.  Regex works, but only one level deep, because regex does not use a stack.  Parsers use a stack and are "better" than regex.  PEG has potential.  I think that PEG is a break-through technology.  Cordy's TXL did pattern matching using backtracking and preceded PEG.</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

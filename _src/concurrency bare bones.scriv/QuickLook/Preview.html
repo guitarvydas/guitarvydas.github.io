@@ -1,0 +1,277 @@
+<html>
+
+<head>
+<title>concurrency bare bones</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Introduction</p>
+<p class="itemText">In this essay, I describe the very bare bones for implementing concurrency in any language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I know that this can be implemented in JavaScript - I've done it and will blog about it in further essays.<span class="Apple-converted-space">  </span>Incidentally, I've also built preliminary versions of this in Common Lisp, C, C++ and assembler.<span class="Apple-converted-space">  </span>Variations of this technique have been put into production, in multiple projects) <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Concurrency is very simple and its implementation should be "obvious".<span class="Apple-converted-space">  </span>You might wish to skip over the details, onc...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Overview of Concurrency</p>
+<p class="itemText">Concurrency, at its most basic, is very simple.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We need some routines.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We need a dispatcher.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">We need a way to transfer data between routines.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">That's about it.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Present-day multitasking is inflicted with accidental complexity.<span class="Apple-converted-space">  </span>Multitasking seems to be difficult.<span class="Apple-converted-space">  </span>I will describe something much simpler, but just as useful.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Routines are functions with no parameters, no return values, no exceptions and no way to call other routines.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. A dispatcher is the only routine that can call other ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Diagram</p>
+<p class="itemText">The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:basic&gt; Basic Concurrency</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Example</p>
+<p class="itemText">In the following example, I will show how to build a simple system with two components and one dispatcher.<span class="Apple-converted-space">  </span>I have used this same technique to build much larger systems (100s and 1,000s of components).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This example probably looks too simple and not complicated enough.<span class="Apple-converted-space">  </span>It is an "overnight success" - it took me only 30 years to arrive at this conclusion.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The technique has been used to build distributed systems and has been put into production (several times).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">[I don't recommend that components...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Components - JavaScript</p>
+<p class="itemText">I wish to keep this essay very simple, so I will describe an example which contains only two components.<span class="Apple-converted-space">  </span>One component Sends a string to the other component - the usual "Hello World".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I will name the components "sender()" and "receiver()".</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The component sender(), is:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>function sender (message) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>send ("sender", "Hello World");</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">and the component receiver() is</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function receiver (message) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log (message);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Queues</p>
+<p class="itemText">Each component has a pair of private queues that can be accessed only by the send() an receive() routines.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">[In Javascript, queues are implemented as arrays.<span class="Apple-converted-space">  </span>An empty queue is [].<span class="Apple-converted-space">  </span>A queue can hold mixed elements of any type.]</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">var sender_input_queue = [];</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">var receiver_input_queue = [];</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Dispatcher - JavaScript</p>
+<p class="itemText">The dispatcher invokes, arbitrarily, any routine that is ready to run.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A routine is ready to run if its input queue is non-empty.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function dispatcher () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>while (true) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (sender_input_queue.length &gt; 0) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>var message = sender_input_queue.pop ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>sender (message);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>} else if (receiver_input_queue.length &gt; 0) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>var message = receiver_input_queue.pop ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>receiver (message);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Send - JavaScript</p>
+<p class="itemText">The send () function is:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function send (from, data) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (from == "sender") {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>receiver_input_queue.push (data);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else if (from == "receiver") {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>sender_input_queue.push (data); <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>fail ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">[in this simple example, sender's output is always piped to receiver's input]</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Startup</p>
+<p class="itemText">sender ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Steady State</p>
+<p class="itemText">dispatcher ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">JS Code</p>
+<p class="itemText">node basic.js</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</p>
+</li>
+<li>
+<p class="itemTitle">Index.html</p>
+<p class="itemText">see https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">load index.html in a browser, hit the "run" button</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Benefits of Concurrency</p>
+<p class="itemText">I claim that concurrency addresses many issues, including:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• architectural flexibility</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• scalability</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• isolation</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• namespaces</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• type checking</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• thread safety, fairness, and all that …</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• synchronization</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• asynchronous I/O</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• box-and-arrow diagrams (that work)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• machine control instead of calculation</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• readability</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• expressiveness - DI (Design Intent)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• multiple use (augmented reuse)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• removal of exception syntactic sugar</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• removal of parameter syntactic sugar</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• remove of return va...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Call Return Spaghetti</p>
+<p class="itemText">see https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

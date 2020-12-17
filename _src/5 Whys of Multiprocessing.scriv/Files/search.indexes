@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
+        <Document ID="A68122A9-E85F-4852-A7C8-48B9E24FFCE9">
+            <Title>Conclusion</Title>
+            <Text>We need to stop sharing memory.  We need to put Threads on separate processors (aka, IoT and distributed processing).</Text>
+        </Document>
         <Document ID="5C601BE4-C026-47C1-941B-2BE7C7F89954">
             <Title>Acknowledgement</Title>
             <Text>[5 Whys suggested by Daniel Pink in Masterclass: https://www.youtube.com/watch?v=My7hjBp4wH0]</Text>
-        </Document>
-        <Document ID="744D8F5F-D090-4C8F-813D-AE2C86338CD5">
-            <Title>Aside</Title>
-            <Text>Actually, the physics of parallel systems implies that we must always deal with real race conditions, but, race conditions based on memory sharing, priorities, etc. are accidental complexities.  Race conditions caused by physics were explored and handled in the 1970's by Electrical Engineers.  Maybe even earlier.  Race conditions due to physics are found in the arrival of so-called simultaneous events (we are re-discovering these real problems, when dealing with distributed systems).
-
-</Text>
         </Document>
         <Document ID="655BC963-8468-4140-BDCF-A153BBB7E629">
             <Title>5 Whys of Multiprocessing</Title>
@@ -33,16 +31,18 @@ Q5: Why do Threads share memory?
 
 A: Because it is more efficient to share memory when Threads are on the same processor.  
 
-Q6: Why do you use the same processor for Threads?
+Q6: Why do we use the same processor for Threads?
 
 A: Because processors and memory are expensive.
 
 Q7: Why are processors and memory expensive?
 
 A: They're not expensive anymore.
-
-
-Conclusion:  We need to stop sharing memory.  We need to put Threads on separate processors (aka, IoT and distributed processing).
+</Text>
+        </Document>
+        <Document ID="744D8F5F-D090-4C8F-813D-AE2C86338CD5">
+            <Title>Aside</Title>
+            <Text>Actually, the physics of parallel systems implies that we must always deal with real race conditions, but, race conditions based on memory sharing, priorities, etc. are accidental complexities.  Race conditions caused by physics were explored and handled in the 1970's by Electrical Engineers.  Maybe even earlier.  Race conditions due to physics are found in the arrival of so-called simultaneous events (we are re-discovering these real problems, when dealing with distributed systems).
 
 </Text>
         </Document>
