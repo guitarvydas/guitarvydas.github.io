@@ -32,8 +32,14 @@ Points to note:
 	•	neither part, producer nor consumer, gets to define the parameter list, there is always one message parameter passed in to the action code.
 </Text>
         </Document>
-        <Document ID="EAEEC503-FBD4-478A-B00C-AC0B7350A9A5">
-            <Title>Implementing Concurrency</Title>
+        <Document ID="F2FDF979-A1AF-43A0-B8B3-84066A3AD1E9">
+            <Title>Diagram</Title>
+            <Text>The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;
+
+
+#
+Fig. &lt;$n:figure:basic&gt; Basic Concurrency
+</Text>
         </Document>
         <Document ID="F250C5CC-045A-4570-9E41-47770C786A25">
             <Title>Concurrency - Simple Implementation</Title>
@@ -63,6 +69,21 @@ Present-day multitasking is inflicted with accidental complexity.  Multitasking 
 load index.html in a browser, hit the "run" button
 </Text>
         </Document>
+        <Document ID="17575AF0-8DDA-469E-B91F-0FF9A2F80329">
+            <Title>Threads - Current Implementations</Title>
+            <Text>[Not Recommended!]
+
+The common way to implement concurrency in today's programming languages is to avoid concurrency and to use threads.
+
+Threads (aka processes) implement concurrency, but, the code inside them tends not to use the concurrent paradigm.  Instead, threads allow programmers to avoid concurrency (almost) entirely and to program in a sequential - decidedly non-concurrent - fashion.
+
+This has a cost.
+— Paradigm
+— Cpu power
+— Dyamic call chain
+— Conflate with issues - memory-sharing and time-sharing - that are not related to the concurrent paradigm.  This conflation has caused many programmers to conclude that concurrency
+</Text>
+        </Document>
         <Document ID="F6D59341-6E67-476B-AB2F-DD79C3F0761D">
             <Title>Dispatcher - JavaScript</Title>
             <Text>The dispatcher invokes, arbitrarily, any routine that is ready to run.
@@ -90,12 +111,6 @@ function dispatcher () {
         <Document ID="E30C2915-DA85-4A98-8760-1CDC63EC2C9B">
             <Title>Steady State</Title>
             <Text>dispatcher ();
-</Text>
-        </Document>
-        <Document ID="17575AF0-8DDA-469E-B91F-0FF9A2F80329">
-            <Title>Threads - Current Implementations</Title>
-            <Text>[Not Recommended!]
-
 </Text>
         </Document>
         <Document ID="EB96B1A3-F796-4F4F-ADA5-616FE330FD20">
@@ -217,20 +232,14 @@ but, I will not conflate this simple example with such issues.  I will address t
 
 </Text>
         </Document>
+        <Document ID="EAEEC503-FBD4-478A-B00C-AC0B7350A9A5">
+            <Title>Implementing Concurrency</Title>
+        </Document>
         <Document ID="E16ACFB5-02E4-4B96-9014-6CA91B803DD2">
             <Title>JS Code</Title>
             <Text>node basic.js
 
 see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</Text>
-        </Document>
-        <Document ID="F2FDF979-A1AF-43A0-B8B3-84066A3AD1E9">
-            <Title>Diagram</Title>
-            <Text>The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;
-
-
-#
-Fig. &lt;$n:figure:basic&gt; Basic Concurrency
-</Text>
         </Document>
     </Documents>
 </SearchIndexes>
