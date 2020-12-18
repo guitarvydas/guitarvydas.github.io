@@ -7,20 +7,54 @@
 
 I will name the components "sender()" and "receiver()".
 
-The component sender(), is:
+In JavaScript, a part is a function that receives messages.  [The function can use a switch statement (or an if-then-else) to examine the message's pin field, and decide which action to invoke.  In this simple example, we won't bother with pins, we'll just assume that every part has one input pin and one output pin.  We'll hard-code the wiring table in the JavaScript function that I call Send() (see section Send - JavaScript). 
 
-	function sender (message) {
+The component producer(), is:
+
+	function producer (message) {
         send ("sender", "Hello World");
     }
 
 
-and the component receiver() is
+and the component consumer() is
 
-function receiver (message) {
+function consumer (message) {
     console.log (message);
 }
 
+
+Points to note:
+	•	producer() does not call consumer() directly
+	•	the action in the producer part consists of one line of JavaScript code (send (…))
+	•	the action in the consumer part consists of one line of JavaScript code (console.log (…))
+	•	the action code in producer does not bother to check the message - it just fires its result "Hello World" out of its output pin
+	•	the action code of consumer doesn't bother to look at the incoming message, it just logs it (console.log (message))
+	•	neither part, producer nor consumer, gets to define the parameter list, there is always one message parameter passed in to the action code.
 </Text>
+        </Document>
+        <Document ID="EAEEC503-FBD4-478A-B00C-AC0B7350A9A5">
+            <Title>Implementing Concurrency</Title>
+        </Document>
+        <Document ID="F250C5CC-045A-4570-9E41-47770C786A25">
+            <Title>Concurrency - Simple Implementation</Title>
+            <Text>We can implement a simulation of concurrent parts in any programming language.
+
+For this, we need some routines.
+
+We need a dispatcher.
+
+We need a way to transfer data between routines.
+
+That's about it.
+
+Present-day multitasking is inflicted with accidental complexity.  Multitasking seems to be difficult.  I will describe something much simpler, but just as useful.
+
+	1.	Actions are functions with no user-defined parameters, no return values, no exceptions and no way to call other routines.
+	2.	A dispatcher is the only routine that can call other routines.  Called routines always return to the dispatcher.
+	3.	We will transfer data using queues.
+
+</Text>
+            <Comments>I claim that the accidental complexity comes from premature optimization.  Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited. </Comments>
         </Document>
         <Document ID="70BE8635-C82A-4141-B81D-451F2C38E228">
             <Title>Index.html</Title>
@@ -58,13 +92,18 @@ function dispatcher () {
             <Text>dispatcher ();
 </Text>
         </Document>
+        <Document ID="17575AF0-8DDA-469E-B91F-0FF9A2F80329">
+            <Title>Threads - Current Implementations</Title>
+            <Text>[Not Recommended!]
+
+</Text>
+        </Document>
         <Document ID="EB96B1A3-F796-4F4F-ADA5-616FE330FD20">
             <Title>Startup</Title>
             <Text>sender ();
 </Text>
         </Document>
         <Document ID="96D61058-AE84-4801-9270-D780375D8F39">
-            <Title>Example</Title>
             <Text>In the following example, I will show how to build a simple system with two components and one dispatcher.  I have used this same technique to build much larger systems (100s and 1,000s of components).
 
 This example probably looks too simple and not complicated enough.  It is an "overnight success" - it took me only 30 years to arrive at this conclusion.
@@ -97,24 +136,29 @@ function send (from, data) {
             <Title>Overview of Concurrency</Title>
             <Text>Concurrency, at its most basic, is very simple.
 
-We need some routines.
+A part is a black box with input pins and output pins.
 
-We need a dispatcher.
+A part can send events to another part.   The event is pushed out of the first part's output pin and arrives at the other part's input pin.  Events can only travel on wires.
 
-We need a way to transfer data between routines.
+A part contains a number of actions.
 
-That's about it.
+Every time an event arrives at the input pin of a part some action is triggered.
 
-Present-day multitasking is inflicted with accidental complexity.  Multitasking seems to be difficult.  I will describe something much simpler, but just as useful.
+There are rules for how actions are triggered, but we'll skip that for now.
 
-	1.	Routines are functions with no parameters, no return values, no exceptions and no way to call other routines.
-	2.	A dispatcher is the only routine that can call other routines.  Called routines always return to the dispatcher.
-	3.	We will transfer data using queues.
+There are two kinds of parts:
+	•	a leaf part
+	•	a schematic
 
-The above 3 items can be easily created in any programming language, even assembler, by any competent software developer.
+A schematic contains other parts and a set of wires (that connect the parts together).
+
+In other words, a schematic can be broken down further into more parts.
+
+A leaf part cannot be broken down any further.  A leaf part contains actions which might (or might not) produce outputs on the output pins of the leaf part.
+
+A schematic also contains actions, but those actions are composed of the actions of the parts contained in the schematic.  We can keep breaking parts down until we hit bottom - i.e. a leaf part that does something.  On the outside, looking in, we see parts as black boxes - we don't know (or care) whether a part is a leaf or if it is a schematic.
 
 </Text>
-            <Comments>I claim that the accidental complexity comes from premature optimization.  Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited. </Comments>
         </Document>
         <Document ID="6ABE63AD-A081-4FAC-BA0E-769A4BC39626">
             <Title>Queues</Title>
@@ -185,8 +229,6 @@ see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/ba
 
 
 #
-
-
 Fig. &lt;$n:figure:basic&gt; Basic Concurrency
 </Text>
         </Document>

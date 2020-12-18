@@ -96,10 +96,46 @@
 <p class="itemText"><p class="p1"><span class="s1">Concurrency is very simple and its implementation should be "obvious".<span class="Apple-converted-space">  </span>You might wish to skip over the details, onc...</p>
 </li>
 <li>
+<p class="topLevelItemTitle">Diagram</p>
+<p class="itemText">The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:basic&gt; Basic Concurrency</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
 <p class="topLevelItemTitle">Overview of Concurrency</p>
 <p class="itemText">Concurrency, at its most basic, is very simple.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">We need some routines.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A part is a black box with input pins and output pins.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A part can send events to another part. <span class="Apple-converted-space">  </span>The event is pushed out of the first part's output pin and arrives at the other part's input pin.<span class="Apple-converted-space">  </span>Events can only travel on wires.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A part contains a number of actions.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Every time an event arrives at the input pin of a part some action is triggered.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There are rules for how actions are triggered, but we'll skip that for now.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There are two kinds of ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Implementing Concurrency</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Threads - Current Implementations</p>
+<p class="itemText">[Not Recommended!]</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Concurrency - Simple Implementation</p>
+<p class="itemText">We can implement a simulation of concurrent parts in any programming language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">For this, we need some routines.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">We need a dispatcher.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
@@ -109,22 +145,14 @@
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">Present-day multitasking is inflicted with accidental complexity.<span class="Apple-converted-space">  </span>Multitasking seems to be difficult.<span class="Apple-converted-space">  </span>I will describe something much simpler, but just as useful.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Routines are functions with no parameters, no return values, no exceptions and no way to call other routines.</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. A dispatcher is the only routine that can call other ...</p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. Actions are functions with no user-defined parameters, no return values, no exceptions and no way to call other routines.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. ...</p>
 </li>
+</ul>
+<hr class="afterText"/>
+
 <li>
-<p class="topLevelItemTitle">Diagram</p>
-<p class="itemText">The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">Fig. &lt;$n:figure:basic&gt; Basic Concurrency</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"></p>
-</li>
-<li>
-<p class="topLevelItemTitle">Example</p>
+<p class="topLevelItemTitle">Example - JavaScript Implementation</p>
 <p class="itemText">In the following example, I will show how to build a simple system with two components and one dispatcher.<span class="Apple-converted-space">  </span>I have used this same technique to build much larger systems (100s and 1,000s of components).</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">This example probably looks too simple and not complicated enough.<span class="Apple-converted-space">  </span>It is an "overnight success" - it took me only 30 years to arrive at this conclusion.</span></p></p>
@@ -141,20 +169,7 @@
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">I will name the components "sender()" and "receiver()".</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">The component sender(), is:</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>function sender (message) {</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>send ("sender", "Hello World");</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">and the component receiver() is</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">function receiver (message) {</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log (message);</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1"></p>
+<p class="itemText"><p class="p1"><span class="s1">In JavaScript, a part is a function that receives messages.<span class="Apple-converted-space">  </span>[The function can use a switch statement (or an if-then-else) to examine the message's pin field, and decide which action to invoke.<span class="Apple-converted-space">  </span>In this simple example, we won't bother with pins, we'll just ...</p>
 </li>
 <li>
 <p class="itemTitle">Queues</p>
