@@ -1,77 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-24T12:19:39-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/24/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-24T00:00:00-05:00</published><updated>2020-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/24/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/24/The-ALGOL-Bottleneck.html">&lt;p&gt;Title: The ALGOL Bottlenck  &lt;br /&gt;
-Author:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-24T12:53:08-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/24/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-24T00:00:00-05:00</published><updated>2020-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/24/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/24/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;The ALGOL Bottlenck&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-24T12:52:08Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-24T12:52:08Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-
-&lt;h2 id=&quot;von-neuman-bottleneck&quot;&gt;von Neuman Bottleneck&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;The von Neumann architecture is a hardware architecture.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;von Neumann architecture uses a single bus for both, code and data.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;This architecture gives rise to something called the von Neumann Bottleneck.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The problem is that code cannot execute while data is being transferred.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Other hardware architectures repair this problem by using multiple buses.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Other architectures allow asynchronous (at the same time) transfer of data and code.&lt;/p&gt;
-  &lt;/li&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;von Neuman Bottleneck&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;The von Neumann architecture is a hardware architecture.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&quot;can-programming-be-liberated&quot;&gt;Can Programming Be Liberated…&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;famous paper “Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs”&lt;sup id=&quot;fnref:fn1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;proposes the idea that the von Neumann hardware architecture translates directly into the software domain&lt;/p&gt;
-  &lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;von Neumann architecture uses a single bus for both, code and data.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&quot;algol-bottleneck&quot;&gt;ALGOL Bottleneck&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Software has yet another bottleneck that doesn’t involve the underlying hardware&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;I call this the ALGOL Bottleneck&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Lack of asynchrony&lt;/p&gt;
-  &lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;This architecture gives rise to something called the von Neumann Bottleneck.&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;The problem is that code cannot execute while data is being transferred.&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Other hardware architectures repair this problem by using multiple buses. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Other architectures allow asynchronous (at the same time) transfer of data and code.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&quot;fiction-vs-reality&quot;&gt;Fiction vs. Reality&lt;/h1&gt;
-
-&lt;h2 id=&quot;fiction-libraries-are-independent&quot;&gt;Fiction: Libraries are Independent&lt;/h2&gt;
-
-&lt;p&gt;How Programmers Think About Libraries&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;Libraries-Fiction.png width=250px height=387px&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reality-libraries-share-a-global-variable&quot;&gt;Reality: Libraries Share A Global Variable&lt;/h2&gt;
-
-&lt;p&gt;How Libraries Actually Work&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;Libraries-Reality.png width=250px height=388px&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:fn1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;https://dl.acm.org/doi/10.1145/359576.359579 &lt;a href=&quot;#fnref:fn1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Title: The ALGOL Bottlenck Author:</summary></entry><entry><title type="html">Concurrency bare bones</title><link href="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html" rel="alternate" type="text/html" title="Concurrency bare bones" /><published>2020-12-17T00:00:00-05:00</published><updated>2020-12-17T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/17/concurrency%20bare%20bones</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Can Programming Be Liberated...&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;famous paper &quot;Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs&quot;&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;proposes the idea that the von Neumann &lt;i&gt;hardware &lt;/i&gt;architecture translates directly into the &lt;i&gt;software &lt;/i&gt;domain&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;ALGOL Bottleneck&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Software has yet another bottleneck that doesn't involve the underlying hardware&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;I call this the ALGOL Bottleneck&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Lack of asynchrony&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction vs. Reality&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction: Libraries are Independent&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;How Programmers Think About Libraries&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-12-52-08-Images/Libraries-Fiction.png&quot; width=&quot;250px&quot; height=&quot;387px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality: Libraries Share A Global Variable&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;How Libraries Actually Work&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-12-52-08-Images/Libraries-Reality.png&quot; width=&quot;250px&quot; height=&quot;388px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; https://dl.acm.org/doi/10.1145/359576.359579&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The ALGOL Bottlenck</summary></entry><entry><title type="html">Concurrency bare bones</title><link href="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html" rel="alternate" type="text/html" title="Concurrency bare bones" /><published>2020-12-17T00:00:00-05:00</published><updated>2020-12-17T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/17/concurrency%20bare%20bones</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
