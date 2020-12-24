@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="4A40117E-9A00-4528-9317-546D0E26E5BF">
+            <Title>Breakthrough Technology</Title>
+            <Text>PEG is a breakthrough technology.
+</Text>
+        </Document>
+        <Document ID="4ED2F6E5-6DA5-4D23-BF93-62B0C5B02226">
+            <Text>
+REGEXP
+PEG (Ohm-JS)
+/a/
+const example1_grammar = `
+Example1 {
+  OneA = "a"
+}`;
+/ab/
+const example2_grammar = `
+Example2 {
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+}`;
+/(a)(b)/
+
+
+
+
+</Text>
+        </Document>
+        <Document ID="C15DF378-9FBE-415F-AE95-29FEFC4F1682">
+            <Title>Ohm-JS</Title>
+            <Text>Ohm-JS
+const text = "ab";
+
+const example1_grammar = '
+Example1 {
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+}';
+
+const ohm = require ('ohm-js');
+const ohmParser = ohm.grammar (example1_grammar);
+const result = ohmParser.match (text);
+
+if (result.succeeded ()) {
+    var semantics = ohmParser.createSemantics ();
+    semantics.addOperation (
+	'flip',
+	{
+	    OneAThenOneB: function (a, b) { 
+		return `${b.flip ()}${a.flip ()}`;
+	    },
+	    OneA: function (a) { return a.flip (); },
+	    OneB: function (b) { return b.flip ();},
+	      _terminal: function() { return this.primitiveValue; }
+	}
+    );
+    console.log ("Ohm flipped : " + semantics (result).flip ());
+} else {
+    console.log ("Ohm matching failed");
+}
+</Text>
+        </Document>
+        <Document ID="910361FF-A0CB-4E1D-AD65-1A512402E264">
+            <Title>Ohm-JS</Title>
+            <Text>Ohm-JS
+
+const text = `
+&lt;svg width="800" height="800"&gt;
+      &lt;rect id="id0" x="40" y="120" width="150" height="60"&gt;&lt;/rect&gt;
+      &lt;rect id="id1" x="40" y="320" width="150" height="60"&gt;&lt;/rect&gt;
+      &lt;rect id="id2" x="280" y="120" width="250" height="130"&gt;&lt;/rect&gt;
+      &lt;rect id="id3" x="650" y="120" width="150" height="60"&gt;&lt;/rect&gt;
+      &lt;rect id="id4" x="650" y="270" width="150" height="60"&gt;&lt;/rect&gt;
+      &lt;rect id="id5" x="650" y="360" width="150" height="60"&gt;&lt;/rect&gt;
+      &lt;rect id="id6" x="650" y="440" width="150" height="60"&gt;&lt;/rect&gt;
+&lt;/svg&gt;
+`;
+
+
+const example6_grammar = `
+Example1 {
+  SVGElement = "&lt;svg" SVGAttribute* "&gt;" SVGRect+ "&lt;/svg&gt;"
+  SVGAttribute = WidthAttribute | HeightAttribute
+  SVGRect = "&lt;rect" RectContent+ "&gt;" "&lt;/rect&gt;"
+  RectContent = IDAttribute | XAttribute | YAttribute | WidthAttribute | HeightAttribute
+
+  IDAttribute = "id=" string
+  XAttribute = "x=" integerString
+  YAttribute = "y=" integerString
+  WidthAttribute = "width=" integerString
+  HeightAttribute = "height=" integerString
+
+  string = "\\"" notDQuote* "\\""
+  notDQuote = ~"\\"" any
+  integerString = "\\"" integerDigit+ "\\""
+  integerDigit = "0" .. "9"
+}`;
+
+const ohm = require ('ohm-js');
+const ohmParser = ohm.grammar (example6_grammar);
+const result = ohmParser.match (text);
+
+if (result.succeeded ()) {
+    var semantics = ohmParser.createSemantics ();
+    addExample6 (semantics);
+    addJSON6 (semantics);
+    console.log ('example6 ohm:');
+    console.log (semantics (result).example6 ());
+    console.log ('example6 ohm JSON:');
+    console.log (semantics (result).JSON6 ());
+} else {
+    console.log ("Ohm matching failed");
+}
+
+function addExample6 (semantics) {
+    semantics.addOperation (
+	'example6',
+	{
+	    SVGElement: function (_svg, attrs, _gt, rects, _end) {
+		return "&lt;svg" + attrs.example6 ().join ('') + "&gt;\n" + rects.example6 ().join ('\n') + "\n&lt;/svg&gt;"; },
+	    SVGAttribute: function (attribute) { return attribute.example6 (); },
+	    SVGRect: function (_rect, contents, _gt, _end) {
+		return "&lt;rect" + contents.example6 ().join ('') + "&gt;" + "&lt;/rect&gt;";},
+	    RectContent: function (attribute) { return attribute.example6 (); },
+	    IDAttribute: function (_id, str) {return "id=" + str.example6 (); },
+	    XAttribute: function (_x, n) { return "x=" + n.example6 (); },
+	    YAttribute: function (_y, n) { return "y=" + n.example6 (); },
+	    WidthAttribute: function (_w, n) { return "width="+ n.example6 (); },
+	    HeightAttribute: function (_h, n) { return "height=" + n.example6 (); },
+	    string: function (_q1, characters, _q2) { return '"' + characters.example6 ().join('') + '"'; },
+	    notDQuote: function (c) { return c.example6 (); },
+	    integerString: function (_q1, digits, _q2) { return '"' + digits.example6 ().join('') + '"'; },
+	    integerDigit: function (d) { return d.example6 (); },
+	    _terminal: function() { return this.primitiveValue; }
+	}
+    );
+}
+
+function addJSON6 (semantics) {
+    semantics.addOperation (
+	'JSON6',
+	{
+	    SVGElement: function (_svg, attrs, _gt, rects, _end) {
+		return "svg {\n" + attrs.JSON6 ().join (',\n') + ",\ncontents: [\n  " + rects.JSON6 ().join (',\n  ') + "\n]}"; },
+	    SVGAttribute: function (attribute) { return attribute.JSON6 (); },
+	    SVGRect: function (_rect, contents, _gt, _end) {
+		return "{ kind: 'rect', " + contents.JSON6 ().join (', ') + " }";},
+	    RectContent: function (attribute) { return attribute.JSON6 (); },
+	    IDAttribute: function (_id, str) {return "id: " + str.JSON6 (); },
+	    XAttribute: function (_x, n) { return "x: " + n.JSON6 (); },
+	    YAttribute: function (_y, n) { return "y: " + n.JSON6 (); },
+	    WidthAttribute: function (_w, n) { return "w: "+ n.JSON6 (); },
+	    HeightAttribute: function (_h, n) { return "h: " + n.JSON6 (); },
+	    string: function (_q1, characters, _q2) { return "'" + characters.JSON6 ().join('') + "'"; },
+	    notDQuote: function (c) { return c.JSON6 (); },
+	    integerString: function (_q1, digits, _q2) { return digits.JSON6 ().join(''); },
+	    integerDigit: function (d) { return d.JSON6 (); },
+	    _terminal: function() { return this.primitiveValue; }
+	}
+    );
+}
+</Text>
+        </Document>
+        <Document ID="7AB8772A-1D70-4822-A779-0CC6E73672F2">
+            <Title>Top Down Parsing</Title>
+            <Text>Top Down Parsing - Recursive Descent
+
+Familiar to anyone using a recursive language.
+
+Until Ford’s thesis, TDPL was either hand-built or used in little-known tools, such as S/SL,TXL, etc.
+
+</Text>
+        </Document>
+        <Document ID="650A0CE4-7851-47A4-BEC1-F58614EE4A0E">
+            <Title>PEG Enables SCLs</Title>
+            <Text>PEG Enables SCLs.
+
+SCL means Solution Centric Language.
+
+SCL is like DSL (but more focussed).</Text>
+        </Document>
+        <Document ID="2FEDBFDD-D828-4F3A-8BA2-6002EE4EBC5F">
+            <Title>Unity Grammar</Title>
+            <Text>PEG (TDPL) makes it possible to easily preserve spaces.
+
+YACC does not preserve spaces (easily).
+
+Unity Grammar === first step towards cheap and dirty transpilers
+
+E.g. HTML → HTML+
+</Text>
+        </Document>
+        <Document ID="6F84AA4C-74AE-4080-83B2-84C298870A90">
+            <Title>PhD Thesis</Title>
+            <Text>Bryan Ford’s Thesis
+
+http://pdos.csail.mit.edu/~baford/packrat/thesis</Text>
+        </Document>
+        <Document ID="FDDC0EEE-FF8F-4BA2-B322-3D2B7CC59FAB">
+            <Title>ESRAP</Title>
+            <Text>
+sequence
+(and ...)
+ordered choice
+(or …)
+negation
+(not …)
+one or more
+(+ …)
+zero or more
+(* …)
+optional
+(? …)
+follow
+(&amp; …)
+left recursion allowed
+
+
+I haven’t tried these features (see ESRAP documentation):
+lookahead
+(&gt; amount …)
+lookbehind
+(&lt; amount …)
+semantic predicates
+(pred …)
+functions as terminals
+(function-name)
+</Text>
+        </Document>
+        <Document ID="433E7553-BE7C-4EFC-95D1-A2392B231786">
+            <Title>JavaScript</Title>
+            <Text>JavaScript
+
+const text = "ab";
+const re = /ab/;
+
+function main () {
+    if (re.test (text)) {
+	console.log ('Success');
+    } else {
+	console.log ('Failure'ß);
+    }
+}
+main ();
+</Text>
+        </Document>
+        <Document ID="2756F96B-37CF-45C3-9CB5-7BE23F3F5074">
+            <Title>JavaScript</Title>
+            <Text>JavaScript
+const text = "a";
+const re = /a/;
+
+function main () {
+    if (re.test (text)) {
+		console.log ('Success');
+    } else {
+		console.log ('Failure');
+    }
+}
+main ();
+</Text>
+        </Document>
+        <Document ID="0B9525DF-185A-458A-9078-0735A4A4D417">
+            <Title>Common Lisp</Title>
+            <Text>Common Lisp (ESRAP)
+
+(defparameter text2 "ab")
+
+(defun example2-esrap ()
+  (esrap:defrule oneA #\a (:lambda (x) x))
+  (esrap:defrule oneB #\b (:lambda (x) x))
+  (esrap:defrule oneAThenOneB (and oneA oneB) (:lambda (x) x))
+  (esrap:parse 'oneAThenOneB text2))
+
+</Text>
+        </Document>
+        <Document ID="08323C21-E04C-4DA4-AD12-6EAA4DB11E2C">
+            <Title>Ohm-JS</Title>
+            <Text>Ohm-JS
+const text = "ab";
+
+const example2_grammar = `
+Example2 {
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+}`;
+
+const ohm = require ('ohm-js');
+const ohmParser = ohm.grammar (example2_grammar);
+const result = ohmParser.match (text);
+
+if (result.succeeded ()) {
+    console.log ("Ohm matching succeeded");
+} else {
+    console.log ("Ohm matching failed");
+}
+</Text>
+        </Document>
+        <Document ID="73464502-0039-4F95-A837-116BF4747ABA">
+            <Title>Common Lisp</Title>
+            <Text>Common Lisp (ESRAP)
+
+
+(defparameter svgRectString "
+&lt;svg width=\"800\" height=\"800\"&gt;
+      &lt;rect id=\"id0\" x=\"40\" y=\"120\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id1\" x=\"40\" y=\"320\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id2\" x=\"280\" y=\"120\" width=\"250\" height=\"130\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id3\" x=\"650\" y=\"120\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id4\" x=\"650\" y=\"270\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id5\" x=\"650\" y=\"360\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+      &lt;rect id=\"id6\" x=\"650\" y=\"440\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;
+&lt;/svg&gt;
+")
+
+(defun example6-esrap ()
+  (esrap:defrule SVGElement 
+      (and (* ws) "&lt;svg" (* ws) (* SVGAttribute) "&gt;" (* ws) (+ SVGRect) "&lt;/svg&gt;" (* ws))
+    (:lambda (x)
+      (format nil "svg: {~%~{~a~^,~% ~},~% contents :[~%~{~a~^,~%~}~%]~%}~%"
+	      (fourth x) (seventh x))))
+  (esrap:defrule SVGAttribute (or WidthAttribute HeightAttribute))
+  (esrap:defrule WidthAttribute (and "width=" IntegerString)
+    (:function second)
+    (:lambda (n) (format nil "w: ~a" n)))
+  (esrap:defrule HeightAttribute (and "height=" IntegerString)
+    (:destructure (h n)
+		  (declare (ignore h))
+		  (format nil "h: ~a" n)))
+  (esrap:defrule SVGRect 
+      (and "&lt;rect" (* ws) (+ RectContent) "&gt;" (* ws) "&lt;/rect&gt;" (* ws))
+    (:function third)
+    (:lambda (content) (format nil "{ kind: 'rect', ~{~a~^, ~} }"
+			content)))
+  (esrap:defrule RectContent (or IDattr Xattr Yattr WidthAttr HeightAttr) 
+    (:lambda (x) x))
+  (esrap:defrule IDattr (and "id=" (* ws) String) 
+    (:function third) (:lambda (str) (format nil "id: '~a'" str)))
+  (esrap:defrule Xattr (and "x=" (* ws) IntegerString) 
+    (:function third) (:lambda (str) (format nil "x: ~a" str)))
+  (esrap:defrule Yattr (and "y=" (* ws) IntegerString) 
+    (:function third) (:lambda (str) (format nil "y: ~a" str)))
+  (esrap:defrule WidthAttr (and "width=" (* ws) IntegerString) 
+    (:function third) (:lambda (str) (format nil "w: ~a" str)))
+  (esrap:defrule HeightAttr (and "height=" (* ws) IntegerString) 
+    (:function third) (:lambda (str) (format nil "h: ~a" str)))
+  (esrap:defrule IntegerString 
+      (and "\"" (* (esrap:character-ranges (#\0 #\9))) "\"" (* ws))
+    (:destructure (q1 digits q2 w)
+		  (declare (ignore q1 q2 w))
+		  (parse-integer (esrap:text digits))))
+  (esrap:defrule String (and #\" (* NotQuote) #\" (* ws)) 
+    (:function second)
+    (:text t))
+  (esrap:defrule ws (or #\Space #\Newline))
+  (esrap:defrule NotQuote (and (esrap::! #\") esrap::character) 
+    (:function second)
+    (:text t))
+
+  (esrap:parse 'SVGElement svgRectString))
+</Text>
+        </Document>
+        <Document ID="0F71DF62-FF70-42A1-8CBD-3D5267FC9075">
+            <Title>PEG for Lisp</Title>
+        </Document>
+        <Document ID="FA54CFB3-799E-43AD-B538-A25662B1ABA1">
+            <Title>PEGs Are Better Than REGEXPs</Title>
+            <Text>PEGs can parse languages that REGEXPs can’t parse
+
+PEGs use a stack → parsing subroutines
+</Text>
+        </Document>
+        <Document ID="E8A528B4-8C22-4C94-AA6F-58D0F7A0AEF9">
+            <Title>Example - SVG Parser</Title>
+            <Text>
+(can't do this in REGEXP)</Text>
+        </Document>
+        <Document ID="D0666CCA-389E-4989-8BBA-C790C0275D64">
+            <Title>Common Lisp</Title>
+            <Text>Common Lisp (ESRAP)
+
+(defparameter text "ab")
+
+(defun example3-esrap ()
+  (esrap:defrule oneA #\a (:lambda (x) x))
+  (esrap:defrule oneB #\b (:lambda (x) x))
+  (esrap:defrule oneAThenOneBAndFlip (and oneA oneB) 
+     (:destructure (a b) (list b a)))
+  (esrap:parse 'oneAThenOneBAndFlip text))
+  
+
+</Text>
+        </Document>
+        <Document ID="E6B99D0A-5864-4B9F-8EBE-452F95852FBA">
+            <Title>JavaScript</Title>
+            <Text>JavaScript
+
+const text = "ab";
+const re = /(a)(b)/;
+
+function main () {
+    var matchArray = text.match (re);
+    if (matchArray) {
+	var first = matchArray[1];
+	var second = matchArray[2];
+	console.log (`(javascript) flipped is "${second}${first}"`);
+    } else {
+	console.log (`pattern failed`);
+    }
+}
+main ();
+</Text>
+        </Document>
+        <Document ID="2A8DB495-CF6F-42B7-93B3-4E8CA8CE9169">
+            <Title>PEG Syntax</Title>
+            <Text>(see section 2.3.1 of thesis)
+
+Empty String
+''
+Terminal (fancy word for character)
+'a'
+Non-Terminal (fancy word for a rule)	
+rule
+Sequence		
+e1 e2 e3 ...
+Choice	
+e1 / e2 / e3 / ...
+0 or more	
+e*
+1 or more	
+e+
+Optional		
+e?
+Followed-by	
+&amp;e
+Not followed-by
+!e
+
+</Text>
+        </Document>
+        <Document ID="6A5467AE-0813-4E3C-9461-8437FA635AC1">
+            <Title>Many SCLs for One Project</Title>
+            <Text>We can use many SCLs for one project.</Text>
+        </Document>
+        <Document ID="B970BE3A-837C-4DBB-A628-61FE5BC1EFAD">
+            <Title>Transpilers</Title>
+            <Text>Source-to-source translation
+
+Easy with PEG
+
+Hard with YACC
+
+example: markdown is a transpiler, e.g. .md syntax → HTML
+
+example: Shopify’s Liquid is a transpiler, e.g. HTML+restricted syntax {{ … }} → HTML+JavaScript
+</Text>
+        </Document>
+        <Document ID="20AE905E-A88B-43B1-ACE9-2B2AA5F00B1C">
+            <Title>Cheating - Using Existing Languages</Title>
+            <Text>	•	What is a “good assembler”?
+	◦	Lisp
+	◦	JavaScript
+
+	•	A good base language (nice to have):
+	◦	does not need declaration-before-use
+	◦	First-class functions
+	◦	Closures
+	◦	Little syntactic sugar
+	◦	Dynamic typing 
+</Text>
+        </Document>
+        <Document ID="6F001C07-3A72-44B2-BA9A-25542B949349">
+            <Title>Why Management Disliked SCLs</Title>
+            <Text>	•	DSLs used to be hard to design
+	•	DSLs are a “whole language” unto themselves
+	•	Needed to budget enormous amounts of time for DSL Development
+	•	Can’t hire replaceable programmers for DSL languages
+	•	Need to invest time learning DSL 
+
+
+</Text>
+        </Document>
+        <Document ID="6C9BC801-5D42-4153-9E5F-6AE3C20A086B">
+            <Title>Ohm-JS</Title>
+            <Text>Ohm-JS
+const text = "a";
+
+const example1_grammar = '
+Example1 {
+  OneA = "a"
+}';
+
+const ohm = require ('ohm-js');
+const ohmParser = ohm.grammar (example1_grammar);
+const result = ohmParser.match (text);
+
+if (result.succeeded ()) {
+    console.log ("Success");
+} else {
+    console.log ("Failure");
+}
+</Text>
+        </Document>
+        <Document ID="1A06A483-EA41-4C00-85C0-F1004632EDF1">
+            <Title>Example - Groups</Title>
+            <Text>
+REGEXP
+PEG (Ohm-JS)
+/(a)(b)/
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+
+</Text>
+        </Document>
+        <Document ID="E2C5C8C7-C0BA-4343-9285-E964833016F5">
+            <Title>Example - Match One Character</Title>
+            <Text>
+REGEXP
+PEG
+/a/
+OneA = "a"
+
+</Text>
+        </Document>
+        <Document ID="87FD32AA-F9C2-4641-A08C-6D2329308A00">
+            <Title>JavaScript</Title>
+            <Text>JavaScript
+
+const text = "ab";
+const re = /(a)(b)/;
+
+function main () {
+    var matchArray = text.match (re);
+    if (matchArray) {
+	var first = matchArray[1];
+	var second = matchArray[2];
+	console.log (`(javascript) flipped is "${second}${first}"`);
+    } else {
+	console.log (`pattern failed`);
+    }
+}
+main ();
+</Text>
+        </Document>
+        <Document ID="C2F621C7-C5C2-49ED-BE06-80352D47FD43">
+            <Title>PEGs Are Better Than YACC</Title>
+            <Text>PEGs define a parser in “top down” manner
+
+YACC (LR) defines a language in “bottom up” manner
+
+LR can be more rigorous but, also, harder to use
+
+ PEG (and Recursive Descent) can parse matching parentheses, YACC cannot
+
+PEG does (some) backtracking, resulting in “more natural” feeling for programmers  (PROLOG &amp; TXL do full backtracking, more than PEG).
+
+PEG (packrat) memoizes some sequences, making backtracking tractable.
+</Text>
+        </Document>
+        <Document ID="279AE4B0-9D17-4712-9FEF-8DEE956118F0">
+            <Title>Common Lisp</Title>
+            <Text>Common Lisp (ESRAP)
+
+(defparameter text1 "a")
+
+(defun example1-esrap ()
+  (esrap:defrule oneA #\a (:lambda (x) x))
+  (esrap:parse 'oneA text1))
+
+</Text>
+        </Document>
+        <Document ID="CFC01E63-E680-4810-85A3-FC36B440BC48">
+            <Title>Example - Match Two Characters</Title>
+            <Text>
+REGEXP
+PEG (Ohm-JS)
+/ab/
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+
+</Text>
+        </Document>
+        <Document ID="BB55A752-7774-477D-9427-E0079A195826">
+            <Title>Example Trivial Arithmetic</Title>
+            <Text>E.g. trivial arithmetic expressions
+
+E ← N  /  ‘(‘ E ‘+’ E ‘)’  /  ‘(‘ E ‘)-’ E ‘)’
+N ← D N / D
+D ← ‘0’ / … / ‘9’
+
+(note parsing of nested, matched, parentheses ‘(‘ … ‘)’
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

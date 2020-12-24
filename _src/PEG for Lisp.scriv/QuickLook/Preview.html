@@ -1,0 +1,505 @@
+<html>
+
+<head>
+<title>PEG for Lisp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">PEG for Lisp</p>
+</li>
+<li>
+<p class="topLevelItemTitle">PhD Thesis</p>
+<p class="itemText">Bryan Ford’s Thesis</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">http://pdos.csail.mit.edu/~baford/packrat/thesis</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Breakthrough Technology</p>
+<p class="itemText">PEG is a breakthrough technology.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">PEG Enables SCLs</p>
+<p class="itemText">PEG Enables SCLs.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">SCL means Solution Centric Language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">SCL is like DSL (but more focussed).</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Many SCLs for One Project</p>
+<p class="itemText">We can use many SCLs for one project.</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Top Down Parsing</p>
+<p class="itemText">Top Down Parsing - Recursive Descent</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Familiar to anyone using a recursive language.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Until Ford’s thesis, TDPL was either hand-built or used in little-known tools, such as S/SL,TXL, etc.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Why Management Disliked SCLs</p>
+<p class="itemText"> • DSLs used to be hard to design</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• DSLs are a “whole language” unto themselves</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Needed to budget enormous amounts of time for DSL Development</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Can’t hire replaceable programmers for DSL languages</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• Need to invest time learning DSL<br></p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Cheating - Using Existing Languages</p>
+<p class="itemText"> • What is a “good assembler”?</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ Lisp</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ JavaScript</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>• A good base language (nice to have):</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ does not need declaration-before-use</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ First-class functions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ Closures</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ Little syntactic sugar</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>◦ Dynamic typing<br></p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">PEGs Are Better Than REGEXPs</p>
+<p class="itemText">PEGs can parse languages that REGEXPs can’t parse</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEGs use a stack → parsing subroutines</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">PEGs Are Better Than YACC</p>
+<p class="itemText">PEGs define a parser in “top down” manner</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">YACC (LR) defines a language in “bottom up” manner</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">LR can be more rigorous but, also, harder to use</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>PEG (and Recursive Descent) can parse matching parentheses, YACC cannot</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG does (some) backtracking, resulting in “more natural” feeling for programmers  (PROLOG &amp; TXL do full backtracking, more than PEG).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG (packrat) memoizes some sequences, making backtracking tractable.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Unity Grammar</p>
+<p class="itemText">PEG (TDPL) makes it possible to easily preserve spaces.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">YACC does not preserve spaces (easily).</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Unity Grammar === first step towards cheap and dirty transpilers</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">E.g. HTML → HTML+</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Transpilers</p>
+<p class="itemText">Source-to-source translation</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Easy with PEG</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Hard with YACC</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">example: markdown is a transpiler, e.g. .md syntax → HTML</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">example: Shopify’s Liquid is a transpiler, e.g. HTML+restricted syntax {{ … }} → HTML+JavaScript</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">PEG Syntax</p>
+<p class="itemText">(see section 2.3.1 of thesis)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Empty String</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">''</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Terminal (fancy word for character)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">'a'</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Non-Terminal (fancy word for a rule)<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">rule</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Sequence <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">e1 e2 e3 ...</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Choice<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">e1 / e2 / e3 / ...</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">0 or more<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">e*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">1 or more<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">e+</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Optional <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">e?</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Followed-by<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">&amp;e</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Not followed-by</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">!e</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Example Trivial Arithmetic</p>
+<p class="itemText">E.g. trivial arithmetic expressions</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">E ← N  /  ‘(‘ E ‘+’ E ‘)’  /  ‘(‘ E ‘)-’ E ‘)’</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">N ← D N / D</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">D ← ‘0’ / … / ‘9’</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(note parsing of nested, matched, parentheses ‘(‘ … ‘)’</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Example - Match One Character</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">REGEXP</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">/a/</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">OneA = "a"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">JavaScript</p>
+<p class="itemText">JavaScript</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "a";</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const re = /a/;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (re.test (text)) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>console.log ('Success');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>console.log ('Failure');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Common Lisp</p>
+<p class="itemText">Common Lisp (ESRAP)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defparameter text1 "a")</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defun example1-esrap ()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneA #\a (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:parse 'oneA text1))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Ohm-JS</p>
+<p class="itemText">Ohm-JS</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "a";</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const example1_grammar = '</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Example1 {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneA = "a"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}';</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohmParser = ohm.grammar (example1_grammar);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result = ohmParser.match (text);</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if (result.succeeded ()) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log ("Success");</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log ("Failure");</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Example - Match Two Characters</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">REGEXP</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG (Ohm-JS)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">/ab/</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneAThenOneB = OneA OneB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneA = "a"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneB = "b"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">JavaScript</p>
+<p class="itemText">JavaScript</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "ab";</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const re = /ab/;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (re.test (text)) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>console.log ('Success');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>console.log ('Failure'ß);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Common Lisp</p>
+<p class="itemText">Common Lisp (ESRAP)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defparameter text2 "ab")</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defun example2-esrap ()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneA #\a (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneB #\b (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneAThenOneB (and oneA oneB) (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:parse 'oneAThenOneB text2))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Ohm-JS</p>
+<p class="itemText">Ohm-JS</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "ab";</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const example2_grammar = `</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Example2 {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneAThenOneB = OneA OneB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneA = "a"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneB = "b"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}`;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohmParser = ohm.grammar (example2_grammar);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result = ohmParser.match (text);</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if (result.succeeded ()) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log ("Ohm matching succeeded");</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>console.log ("Ohm matching failed");</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Example - Groups</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">REGEXP</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">PEG (Ohm-JS)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">/(a)(b)/</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneAThenOneB = OneA OneB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneA = "a"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneB = "b"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">JavaScript</p>
+<p class="itemText">JavaScript</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "ab";</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const re = /(a)(b)/;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">function main () {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var matchArray = text.match (re);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (matchArray) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>var first = matchArray[1];</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>var second = matchArray[2];</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>console.log (`(javascript) flipped is "${second}${first}"`);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>console.log (`pattern failed`);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">main ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Common Lisp</p>
+<p class="itemText">Common Lisp (ESRAP)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defparameter text "ab")</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defun example3-esrap ()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneA #\a (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneB #\b (:lambda (x) x))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:defrule oneAThenOneBAndFlip (and oneA oneB)<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>(:destructure (a b) (list b a)))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>(esrap:parse 'oneAThenOneBAndFlip text))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"><span class="Apple-converted-space">  </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Ohm-JS</p>
+<p class="itemText">Ohm-JS</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = "ab";</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const example1_grammar = '</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Example1 {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneAThenOneB = OneA OneB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneA = "a"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>OneB = "b"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}';</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohm = require ('ohm-js');</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const ohmParser = ohm.grammar (example1_grammar);</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const result = ohmParser.match (text);</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if (result.succeeded ()) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var semantics = ohmParser.createSemantics ();</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>semantics.addOperation (</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>'flip',</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>{</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>OneAThenOneB: function (a, b) {<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>return `${b.flip ()}${a.flip ()}`;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>},</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>OneA: function (a) { return a.flip (); },</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>On...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Example - SVG Parser</p>
+<p class="itemText"></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(can't do this in REGEXP)</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Common Lisp</p>
+<p class="itemText">Common Lisp (ESRAP)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(defparameter svgRectString "</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">&lt;svg width=\"800\" height=\"800\"&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id0\" x=\"40\" y=\"120\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id1\" x=\"40\" y=\"320\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id2\" x=\"280\" y=\"120\" width=\"250\" height=\"130\"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id3\" x=\"650\" y=\"120\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id4\" x=\"650\" y=\"270\" width=\"150\" height=\"60\"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id=\"id...</p>
+</li>
+<li>
+<p class="itemTitle">Ohm-JS</p>
+<p class="itemText">Ohm-JS</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const text = `</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">&lt;svg width="800" height="800"&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id0" x="40" y="120" width="150" height="60"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id1" x="40" y="320" width="150" height="60"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id2" x="280" y="120" width="250" height="130"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id3" x="650" y="120" width="150" height="60"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id4" x="650" y="270" width="150" height="60"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id5" x="650" y="360" width="150" height="60"&gt;&lt;/rect&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;rect id="id6" x="650" y="4...</p>
+</li>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

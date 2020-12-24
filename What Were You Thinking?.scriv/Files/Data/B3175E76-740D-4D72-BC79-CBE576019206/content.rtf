@@ -1,0 +1,38 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\})}{\leveltext\leveltemplateid101\'02\'00);}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 The original intent for using a computer was to calculate ballistic trajectories of missiles and bombs.\
+\
+Treating a computer as a glorified calculator fits this kind of thinking.\
+\
+To do this well, you think in terms of sequential operations, e.g. (1) do this then (2) do that the (3) do something else then \'85 (4) print the result.\
+\
+Computer Scientists have been barrelling down this road for decades.  They have invented better and better ways to build sequential calculations.\
+\
+One of the techniques that has been invented is a pipeline of one-in/one-out clumps of software.  This has led to FP (Functional Programming).\
+\
+Early on, the technique of serialization invented several techniques:\
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}call/return languages\
+{\listtext	\uc0\u8226 	}the stack\
+{\listtext	\uc0\u8226 	}threads (processes) of sequential lumps of software.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 These techniques made it possible to build better and more complicated calculators.\
+\
+These techniques have been mis-applied to other kinds of computing.  As a counter-example, imagine the lowly HMTML File Reader.  It has one input - a user-supplied file name, that comes at "any" {\field{\*\fldinst{HYPERLINK "scrivcmt://C518BA46-0EC4-4DEA-A386-B14E5B7D0AE2"}}{\fldrslt time}} - and it has at least five (5) possible outcomes: \
+\pard\tx220\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\li720\fi-720\sl264\slmult1\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	1)	}OK - the file contents\
+{\listtext	2)	}error in the filename specified by the user\
+{\listtext	3)	}cancelling - the user cancels the operation\
+{\listtext	4)	}file read error\
+{\listtext	5)	}no response - the network is down, the server has crashed, etc.\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+When we mis-apply calculation-computing techniques to this kind of problem, we run into {\field{\*\fldinst{HYPERLINK "scrivcmt://D4266A18-935C-4EC4-91FE-861062F00811"}}{\fldrslt trouble}}\
+}

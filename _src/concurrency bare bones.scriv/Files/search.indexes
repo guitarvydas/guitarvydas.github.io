@@ -32,13 +32,34 @@ Points to note:
 	•	neither part, producer nor consumer, gets to define the parameter list, there is always one message parameter passed in to the action code.
 </Text>
         </Document>
-        <Document ID="F2FDF979-A1AF-43A0-B8B3-84066A3AD1E9">
-            <Title>Diagram</Title>
-            <Text>The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;
+        <Document ID="EEB738CD-9458-4EE2-8E57-4B3858A0574B">
+            <Title>Benefits of Concurrency</Title>
+            <Text>I claim that concurrency addresses many issues, including:
 
+	•	architectural flexibility
+	•	scalability
+	•	isolation
+	•	namespaces
+	•	type checking
+	•	thread safety, fairness, and all that …
+	•	synchronization
+	•	asynchronous I/O
+	•	box-and-arrow diagrams (that work)
+	•	machine control instead of calculation
+	•	readability
+	•	expressiveness - DI (Design Intent)
+	•	multiple use (augmented reuse)
+	•	removal of exception syntactic sugar
+	•	removal of parameter syntactic sugar
+	•	remove of return value syntactic sugar
+	•	layers, scoping
+	•	easier scheduling
+	•	better testabilty
+	•	compartmentalization of development tasks
+	•	etc.
 
-#
-Fig. &lt;$n:figure:basic&gt; Basic Concurrency
+but, I will not conflate this simple example with such issues.  I will address these issues in other essays.
+
 </Text>
         </Document>
         <Document ID="F250C5CC-045A-4570-9E41-47770C786A25">
@@ -202,44 +223,23 @@ Forget what you already know about multitasking and read on …
             <Text>see https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html
 </Text>
         </Document>
-        <Document ID="EEB738CD-9458-4EE2-8E57-4B3858A0574B">
-            <Title>Benefits of Concurrency</Title>
-            <Text>I claim that concurrency addresses many issues, including:
-
-	•	architectural flexibility
-	•	scalability
-	•	isolation
-	•	namespaces
-	•	type checking
-	•	thread safety, fairness, and all that …
-	•	synchronization
-	•	asynchronous I/O
-	•	box-and-arrow diagrams (that work)
-	•	machine control instead of calculation
-	•	readability
-	•	expressiveness - DI (Design Intent)
-	•	multiple use (augmented reuse)
-	•	removal of exception syntactic sugar
-	•	removal of parameter syntactic sugar
-	•	remove of return value syntactic sugar
-	•	layers, scoping
-	•	easier scheduling
-	•	better testabilty
-	•	compartmentalization of development tasks
-	•	etc.
-
-but, I will not conflate this simple example with such issues.  I will address these issues in other essays.
-
-</Text>
-        </Document>
-        <Document ID="EAEEC503-FBD4-478A-B00C-AC0B7350A9A5">
-            <Title>Implementing Concurrency</Title>
-        </Document>
         <Document ID="E16ACFB5-02E4-4B96-9014-6CA91B803DD2">
             <Title>JS Code</Title>
             <Text>node basic.js
 
 see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</Text>
+        </Document>
+        <Document ID="EAEEC503-FBD4-478A-B00C-AC0B7350A9A5">
+            <Title>Implementing Concurrency</Title>
+        </Document>
+        <Document ID="F2FDF979-A1AF-43A0-B8B3-84066A3AD1E9">
+            <Title>Diagram</Title>
+            <Text>The most simple example of concurrency can be summed up in Fig. &lt;$n:figure:basic&gt;
+
+
+#
+Fig. &lt;$n:figure:basic&gt; Basic Concurrency
+</Text>
         </Document>
     </Documents>
 </SearchIndexes>

@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>concurrency bare bones</title>
+  <meta name="CreationTime" content="2020-12-17T19:14:53Z">
+  <meta name="ModificationTime" content="2020-12-17T19:14:53Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p12 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {text-decoration: underline}
+    span.s3 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I describe the very bare bones for implementing concurrency in any language.</p>
+<p class="p3"><br></p>
+<p class="p2">I know that this can be implemented in JavaScript - I've done it and will blog about it in further essays.<span class="Apple-converted-space">  </span>Incidentally, I've also built preliminary versions of this in Common Lisp, C, C++ and assembler.<span class="Apple-converted-space">  </span>Variations of this technique have been put into production, in multiple projects) <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Concurrency is very simple and its implementation should be "obvious".<span class="Apple-converted-space">  </span>You might wish to skip over the details, once you get the hang of it.</p>
+<p class="p3"><br></p>
+<p class="p2">Forget what you already know about multitasking and read on …</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>The point of this essay is to show only the basics of this technique.<span class="Apple-converted-space">  </span>I use hard-wired code for illustration.<span class="Apple-converted-space">  </span>If a more fully-developed version of the code is desired, see my essays about HTML Components - ag-js-1, ag-js-2, and ag-js-3</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagram</b></h2>
+<p class="p2">The most simple example of concurrency can be summed up in <span class="s1">Fig. 1</span></p>
+<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p5"><img src="/assets/2020-12-17-19-14-53-Images/concurrency-basic.png" width="361px" height="61px" alt="Image"></p>
+<p class="p6">Fig. 1 Basic Concurrency</p>
+<p class="p4"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Overview of Concurrency</b></h2>
+<p class="p2">Concurrency, at its most basic, is very simple.</p>
+<p class="p3"><br></p>
+<p class="p2">A <i>part</i> is a black box with input <i>pins</i> and output <i>pins</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">A <i>part</i> can send <i>events</i> to another <i>part. <span class="Apple-converted-space">  </span></i>The <i>event</i> is pushed out of the first <i>part's</i> output <i>pin</i> and arrives at the other <i>part's</i> input <i>pin.<span class="Apple-converted-space">  </span>Events</i> can only travel on <i>wires</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">A <i>part</i> contains a number of <i>actions</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Every time an <i>event</i> arrives at the input <i>pin</i> of a <i>part</i> some <i>action </i>is triggered.</p>
+<p class="p3"><br></p>
+<p class="p2">There are rules for how <i>actions</i> are triggered, but we'll skip that for now.</p>
+<p class="p3"><br></p>
+<p class="p2">There are two kinds of <i>parts:</i></p>
+<ul class="ul1">
+  <li class="li7">a <i>leaf part</i></li>
+  <li class="li7">a <i>schematic</i></li>
+</ul>
+<p class="p8"><br></p>
+<p class="p7">A <i>schematic </i>contains other <i>parts </i>and a set of <i>wires</i> (that connect the <i>parts</i> together).</p>
+<p class="p8"><br></p>
+<p class="p7">In other words, a <i>schematic</i> <span class="s2">can</span> be broken down further into more <i>parts</i>.</p>
+<p class="p8"><br></p>
+<p class="p7">A <i>leaf part</i> <span class="s2">cannot</span> be broken down any further.<span class="Apple-converted-space">  </span>A <i>leaf part</i> contains actions which might (or might not) produce outputs on the output<i> pins</i> of the <i>leaf part.</i></p>
+<p class="p8"><i></i><br></p>
+<p class="p7">A <i>schematic </i>also contains <i>actions</i>, but those <i>actions</i> are composed of the <i>actions</i> of the <i>parts</i> contained in the <i>schematic</i>.<span class="Apple-converted-space">  </span>We can keep breaking <i>parts</i> down until we hit bottom - i.e. a <i>leaf</i> part that does something.<span class="Apple-converted-space">  </span>On the outside, looking in, we see <i>parts</i> as black boxes - we don't know (or care) whether a <i>part</i> is a <i>leaf</i> or if it is a <i>schematic.</i></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implementing Concurrency</b></h2>
+<p class="p2">We can implement a simulation of concurrent<i> parts</i> in any programming language.</p>
+<p class="p3"><br></p>
+<p class="p2">For this, we need some routines.</p>
+<p class="p3"><br></p>
+<p class="p2">We need a dispatcher.</p>
+<p class="p3"><br></p>
+<p class="p2">We need a way to transfer data between routines.</p>
+<p class="p3"><br></p>
+<p class="p2">That's about it.</p>
+<p class="p3"><br></p>
+<p class="p2">Present-day multitasking is inflicted with accidental complexity.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space">  </span>Multitasking seems to be difficult.<span class="Apple-converted-space">  </span>I will describe something much simpler, but just as useful.</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li7"><i>Actions</i> are functions with no user-defined parameters, no return values, no exceptions and no way to call other routines.</li>
+  <li class="li7">A dispatcher is the only routine that can call other routines.<span class="Apple-converted-space">  </span>Called routines <i>always</i> return to the dispatcher.</li>
+  <li class="li7">We will transfer data using queues.</li>
+</ol>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example - JavaScript Implementation</b></h2>
+<p class="p7">In the following example, I will show how to build a simple system with two components and one dispatcher.<span class="Apple-converted-space">  </span>I have used this same technique to build much larger systems (100s and 1,000s of components).</p>
+<p class="p3"><br></p>
+<p class="p2">This example probably looks too simple and not complicated enough.<span class="Apple-converted-space">  </span>It is an "overnight success" - it took me only 30 years to arrive at this conclusion.</p>
+<p class="p3"><br></p>
+<p class="p2">The technique has been used to build distributed systems and has been put into production (several times).</p>
+<p class="p3"><br></p>
+<p class="p2"><i>[I don't recommend that components, queues and dispatchers be implemented as in this example.<span class="Apple-converted-space">  </span>I am trying to be excruciatingly transparent.]</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">The example appears in the rest of this essay and can be found at<span class="Apple-converted-space">  </span>&lt; … &gt;</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components - JavaScript</b></h2>
+<p class="p2">I wish to keep this essay very simple, so I will describe an example which contains only two components.<span class="Apple-converted-space">  </span>One component Sends a string to the other component - the usual "Hello World".</p>
+<p class="p3"><br></p>
+<p class="p2">I will name the components "sender()" and "receiver()".</p>
+<p class="p3"><br></p>
+<p class="p2">In JavaScript, a <i>part</i> is a function that receives messages.<span class="Apple-converted-space">  </span>[<i>The function can use a switch statement (or an if-then-else) to examine the message's pin field, and decide which action to invoke.<span class="Apple-converted-space">  </span>In this simple example, we won't bother with pins, we'll just assume that every part has one input pin and one output pin.<span class="Apple-converted-space">  </span>We'll hard-code the wiring table in the JavaScript function that I call Send() (see section Send - JavaScript).<span class="Apple-converted-space"> </span></i></p>
+<p class="p3"><br></p>
+<p class="p2">The component producer(), is:</p>
+<p class="p3"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>function producer (message) {</p>
+<p class="p9"><span class="Apple-converted-space">        </span>send ("sender", "Hello World");</p>
+<p class="p9"><span class="Apple-converted-space">    </span>}</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p2">and the component consumer() is</p>
+<p class="p3"><br></p>
+<p class="p11">function consumer (message) {</p>
+<p class="p11"><span class="Apple-converted-space">    </span>console.log (message);</p>
+<p class="p11">}</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p2">Points to note:</p>
+<ul class="ul1">
+  <li class="li7">producer() does not call consumer() directly</li>
+  <li class="li7">the <i>action</i> in the producer <i>part</i> consists of one line of JavaScript code (send (…))</li>
+  <li class="li7">the <i>action </i>in the consumer <i>part</i> consists of one line of JavaScript code (console.log (…))</li>
+  <li class="li7">the <i>action</i> code in producer does not bother to check the message - it just fires its result "Hello World" out of its output <i>pin</i></li>
+  <li class="li7">the <i>action </i>code of consumer doesn't bother to look at the incoming message, it just logs it (console.log (message))</li>
+  <li class="li7">neither <i>part</i>, producer nor consumer<i>, </i>gets to define the parameter list, there is <b>always</b> one <i>message</i> parameter passed in to the action code.</li>
+  <li class="li8"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queues</b></h2>
+<p class="p2">Each component has a pair of private queues that can be accessed only by the send() an receive() routines.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>[In Javascript, queues are implemented as arrays.<span class="Apple-converted-space">  </span>An empty queue is [].<span class="Apple-converted-space">  </span>A queue can hold mixed elements of any type.]</i></p>
+<p class="p3"><br></p>
+<p class="p2">var sender_input_queue = [];</p>
+<p class="p2">var receiver_input_queue = [];</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dispatcher - JavaScript</b></h2>
+<p class="p2">The dispatcher<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> invokes, arbitrarily, any routine that is <i>ready to run</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">A routine is <i>ready to run</i> if its input queue is non-empty.</p>
+<p class="p3"><br></p>
+<p class="p11">function dispatcher () {</p>
+<p class="p11"><span class="Apple-converted-space">    </span>while (true) {</p>
+<p class="p11"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>if (sender_input_queue.length &gt; 0) {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>var message = sender_input_queue.pop ();</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>sender (message);</p>
+<p class="p11"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>} else if (receiver_input_queue.length &gt; 0) {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>var message = receiver_input_queue.pop ();</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>receiver (message);</p>
+<p class="p11"><span class="Apple-converted-space">        </span>}</p>
+<p class="p11"><span class="Apple-tab-span">	</span> }</p>
+<p class="p11">}</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Send - JavaScript</b></h2>
+<p class="p2">The send () function is:</p>
+<p class="p3"><br></p>
+<p class="p11">function send (from, data) {</p>
+<p class="p11"><span class="Apple-converted-space">    </span>if (from == "sender") {</p>
+<p class="p11"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>receiver_input_queue.push (data);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>} else if (from == "receiver") {</p>
+<p class="p11"><span class="Apple-converted-space">        </span>sender_input_queue.push (data); <span class="Apple-converted-space"> </span></p>
+<p class="p11"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p11"><span class="Apple-converted-space">        </span>fail ();</p>
+<p class="p11"><span class="Apple-converted-space">    </span>}</p>
+<p class="p11">}</p>
+<p class="p12"><br></p>
+<p class="p2"><i>[in this simple example, sender's output is always piped to receiver's input]</i></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Startup</b></h2>
+<p class="p11">sender ();</p>
+<p class="p12"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Steady State</b></h2>
+<p class="p11">dispatcher ();</p>
+<p class="p12"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>JS Code</b></h2>
+<p class="p2">node basic.js</p>
+<p class="p3"><br></p>
+<p class="p2">see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Index.html</b></h2>
+<p class="p2">see <a href="https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html">https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">load index.html in a browser, hit the "run" button</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Benefits of Concurrency</b></h2>
+<p class="p7">I claim that concurrency addresses many issues, including:</p>
+<p class="p8"><br></p>
+<ul class="ul1">
+  <li class="li7">architectural flexibility</li>
+  <li class="li7">scalability</li>
+  <li class="li7">isolation</li>
+  <li class="li7">namespaces</li>
+  <li class="li7">type checking</li>
+  <li class="li7">thread safety, fairness, and all that …</li>
+  <li class="li7">synchronization</li>
+  <li class="li7">asynchronous I/O</li>
+  <li class="li7">box-and-arrow diagrams (that work)</li>
+  <li class="li7">machine control instead of calculation</li>
+  <li class="li7">readability</li>
+  <li class="li7">expressiveness - DI (Design Intent)</li>
+  <li class="li7">multiple use (augmented reuse)</li>
+  <li class="li7">removal of exception syntactic sugar</li>
+  <li class="li7">removal of parameter syntactic sugar</li>
+  <li class="li7">remove of return value syntactic sugar</li>
+  <li class="li7">layers, scoping</li>
+  <li class="li7">easier scheduling</li>
+  <li class="li7">better testabilty</li>
+  <li class="li7">compartmentalization of development tasks</li>
+  <li class="li7">etc.</li>
+</ul>
+<p class="p8"><br></p>
+<p class="p7">but, I will not conflate this simple example with such issues.<span class="Apple-converted-space">  </span>I will address these issues in other essays.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Call Return Spaghetti</b></h2>
+<p class="p2">see <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a></p>
+<p class="p13"><br></p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>I claim that the accidental complexity comes from premature optimization.<span class="Apple-converted-space">  </span>Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited.</p>
+<p class="p7"><span class="s1"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a></span> In production, we would write the example code differently.<span class="Apple-converted-space">  </span>Many optimizations present themselves, for example, we don't need to burn a hole in the processor using a while(true) loop.</p>
+</div>
+</body>
+</html>
