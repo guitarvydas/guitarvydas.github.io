@@ -1,87 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>The ALGOL Bottlenck</title>
-  <meta name="CreationTime" content="2020-12-24T12:52:08Z">
-  <meta name="ModificationTime" content="2020-12-24T12:52:08Z">
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1894.6">
-  <style type="text/css">
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
-    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    span.Apple-tab-span {white-space:pre}
-    ul.ul1 {list-style-type: disc}
-  </style>
-</head>
-<body>
-<div style="width: 600px; margin: 0 auto">
+<p>Title: The ALGOL Bottlenck  <br />
+Author:</p>
 
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>von Neuman Bottleneck</b></h2>
-<ul class="ul1">
-  <li class="li2">The von Neumann architecture is a hardware architecture.</li>
+<h1 id="introduction">Introduction</h1>
+
+<h2 id="von-neuman-bottleneck">von Neuman Bottleneck</h2>
+
+<ul>
+  <li>
+    <p>The von Neumann architecture is a hardware architecture.</p>
+  </li>
+  <li>
+    <p>von Neumann architecture uses a single bus for both, code and data.</p>
+  </li>
+  <li>
+    <p>This architecture gives rise to something called the von Neumann Bottleneck.</p>
+  </li>
+  <li>
+    <p>The problem is that code cannot execute while data is being transferred.</p>
+  </li>
+  <li>
+    <p>Other hardware architectures repair this problem by using multiple buses.</p>
+  </li>
+  <li>
+    <p>Other architectures allow asynchronous (at the same time) transfer of data and code.</p>
+  </li>
 </ul>
-<p class="p3"><br></p>
-<ul class="ul1">
-  <li class="li2">von Neumann architecture uses a single bus for both, code and data.</li>
+
+<h2 id="can-programming-be-liberated">Can Programming Be Liberated…</h2>
+
+<ul>
+  <li>
+    <p>famous paper “Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs”<sup id="fnref:fn1" role="doc-noteref"><a href="#fn:fn1" class="footnote">1</a></sup></p>
+  </li>
+  <li>
+    <p>proposes the idea that the von Neumann hardware architecture translates directly into the software domain</p>
+  </li>
 </ul>
-<p class="p3"><br></p>
-<ul class="ul1">
-  <li class="li2">This architecture gives rise to something called the von Neumann Bottleneck.</li>
-  <li class="li3"><span class="Apple-tab-span">	</span></li>
-  <li class="li2">The problem is that code cannot execute while data is being transferred.</li>
-  <li class="li3"><span class="Apple-tab-span">	</span></li>
-  <li class="li2">Other hardware architectures repair this problem by using multiple buses. <span class="Apple-converted-space"> </span></li>
-  <li class="li3"><span class="Apple-tab-span">	</span></li>
-  <li class="li2">Other architectures allow asynchronous (at the same time) transfer of data and code.</li>
+
+<h2 id="algol-bottleneck">ALGOL Bottleneck</h2>
+
+<ul>
+  <li>
+    <p>Software has yet another bottleneck that doesn’t involve the underlying hardware</p>
+  </li>
+  <li>
+    <p>I call this the ALGOL Bottleneck</p>
+  </li>
+  <li>
+    <p>Lack of asynchrony</p>
+  </li>
 </ul>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Can Programming Be Liberated...</b></h2>
-<ul class="ul1">
-  <li class="li2">famous paper "Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs"<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space"> </span></li>
-</ul>
-<p class="p3"><br></p>
-<ul class="ul1">
-  <li class="li2">proposes the idea that the von Neumann <i>hardware </i>architecture translates directly into the <i>software </i>domain</li>
-</ul>
-<p class="p3"><br></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>ALGOL Bottleneck</b></h2>
-<ul class="ul1">
-  <li class="li2">Software has yet another bottleneck that doesn't involve the underlying hardware</li>
-</ul>
-<p class="p3"><br></p>
-<ul class="ul1">
-  <li class="li2">I call this the ALGOL Bottleneck</li>
-  <li class="li3"><span class="Apple-tab-span">	</span></li>
-  <li class="li2">Lack of asynchrony</li>
-</ul>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fiction vs. Reality</b></h2>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fiction: Libraries are Independent</b></h2>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5">How Programmers Think About Libraries</p>
-<p class="p4"><br></p>
-<p class="p6"><img src="/assets/2020-12-24-12-52-08-Images/Libraries-Fiction.png" width="250px" height="387px" alt="Image"></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reality: Libraries Share A Global Variable</b></h2>
-<p class="p5">How Libraries Actually Work</p>
-<p class="p4"><br></p>
-<p class="p6"><img src="/assets/2020-12-24-12-52-08-Images/Libraries-Reality.png" width="250px" height="388px" alt="Image"></p>
-<p class="p7"><br></p>
-<hr>
-<p class="p8"><a id="fn1"></a><a href="#fnlink1">[1]</a> https://dl.acm.org/doi/10.1145/359576.359579</p>
+
+<h1 id="fiction-vs-reality">Fiction vs. Reality</h1>
+
+<h2 id="fiction-libraries-are-independent">Fiction: Libraries are Independent</h2>
+
+<p>How Programmers Think About Libraries</p>
+
+<p><img src="Libraries-Fiction.png width=250px height=387px" alt="" /></p>
+
+<h2 id="reality-libraries-share-a-global-variable">Reality: Libraries Share A Global Variable</h2>
+
+<p>How Libraries Actually Work</p>
+
+<p><img src="Libraries-Reality.png width=250px height=388px" alt="" /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn1" role="doc-endnote">
+      <p>https://dl.acm.org/doi/10.1145/359576.359579 <a href="#fnref:fn1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-</body>
-</html>
