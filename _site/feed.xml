@@ -1,97 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-25T00:25:12-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2020-12-25T00:30:38-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
   &lt;title&gt;The ALGOL Bottlenck&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T00:18:07Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T00:18:07Z&quot;&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T00:30:01Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T00:30:01Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
-    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
     li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.Apple-tab-span {white-space:pre}
     ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Von Neuman Bottleneck&lt;/b&gt;&lt;/h2&gt;
+&lt;h1 style=&quot;margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica&quot;&gt;Introduction&lt;/h1&gt;
+&lt;h1 style=&quot;margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica&quot;&gt;&lt;hr&gt;&lt;/h1&gt;
+&lt;h1 style=&quot;margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica&quot;&gt;Von Neuman Bottleneck&lt;/h1&gt;
 &lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;The von Neumann architecture is a hardware architecture.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;von Neumann architecture uses a single bus for both, code and data.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;This architecture gives rise to something called the von Neumann Bottleneck.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li3&quot;&gt;The problem is that code cannot execute while data is being transferred.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li3&quot;&gt;Other hardware architectures repair this problem by using multiple buses. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li3&quot;&gt;Other architectures allow asynchronous (at the same time) transfer of data and code.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Can Programming Be Liberated...&lt;/b&gt;&lt;/h2&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;famous paper &quot;Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs&quot;&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;proposes the idea that the von Neumann &lt;i&gt;hardware &lt;/i&gt;architecture translates directly into the &lt;i&gt;software &lt;/i&gt;domain&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;ALGOL Bottleneck&lt;/b&gt;&lt;/h2&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;Software has yet another bottleneck that is orthogonal to the underlying hardware&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li3&quot;&gt;I call this the ALGOL Bottleneck&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li3&quot;&gt;Lack of asynchrony&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction vs. Reality&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction: Libraries are Independent&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;How Programmers Think About Libraries&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-18-07-Images/Libraries-Fiction.png&quot; width=&quot;250px&quot; height=&quot;387px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality: Libraries Share A Global Variable&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;How Libraries Actually Work&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-18-07-Images/Libraries-Reality.png&quot; width=&quot;250px&quot; height=&quot;389px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The stack is a data structure.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The stack is a global variable.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The stack is shared by all functions.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The stack records &lt;i&gt;dynamic&lt;/i&gt; call history.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The stack is a &lt;i&gt;dynamic&lt;/i&gt; dependency chain between functions.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; https://dl.acm.org/doi/10.1145/359576.359579&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-30-01-Images/Libraries-Fiction.png&quot; width=&quot;250px&quot; height=&quot;387px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p6&quot;&gt;How Libraries Actually Work&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-30-01-Images/Libraries-Reality.png&quot; width=&quot;250px&quot; height=&quot;389px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The stack is a data structure.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The stack is a global variable.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The stack is shared by all functions.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The stack records &lt;i&gt;dynamic&lt;/i&gt; call history.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The stack is a &lt;i&gt;dynamic&lt;/i&gt; dependency chain between functions.&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; https://dl.acm.org/doi/10.1145/359576.359579&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</content><author><name></name></author><summary type="html">The ALGOL Bottlenck</summary></entry><entry><title type="html">Dlls</title><link href="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html" rel="alternate" type="text/html" title="Dlls" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/DLLs</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;

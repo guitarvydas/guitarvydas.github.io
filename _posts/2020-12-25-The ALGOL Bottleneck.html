@@ -4,94 +4,53 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>The ALGOL Bottlenck</title>
-  <meta name="CreationTime" content="2020-12-25T00:18:07Z">
-  <meta name="ModificationTime" content="2020-12-25T00:18:07Z">
+  <meta name="CreationTime" content="2020-12-25T00:30:01Z">
+  <meta name="ModificationTime" content="2020-12-25T00:30:01Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
-    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
     li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.Apple-tab-span {white-space:pre}
     ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
   </style>
 </head>
 <body>
 <div style="width: 600px; margin: 0 auto">
 
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Von Neuman Bottleneck</b></h2>
+<h1 style="margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica">Introduction</h1>
+<h1 style="margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica"><hr></h1>
+<h1 style="margin: 36.0px 0.0px 36.0px 0.0px; text-align: center; font: 28.0px Helvetica">Von Neuman Bottleneck</h1>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
-<ul class="ul1">
-  <li class="li3">The von Neumann architecture is a hardware architecture.</li>
-</ul>
-<p class="p2"><br></p>
-<ul class="ul1">
-  <li class="li3">von Neumann architecture uses a single bus for both, code and data.</li>
-</ul>
-<p class="p2"><br></p>
-<ul class="ul1">
-  <li class="li3">This architecture gives rise to something called the von Neumann Bottleneck.</li>
-  <li class="li2"><span class="Apple-tab-span">	</span></li>
-  <li class="li3">The problem is that code cannot execute while data is being transferred.</li>
-  <li class="li2"><span class="Apple-tab-span">	</span></li>
-  <li class="li3">Other hardware architectures repair this problem by using multiple buses. <span class="Apple-converted-space"> </span></li>
-  <li class="li2"><span class="Apple-tab-span">	</span></li>
-  <li class="li3">Other architectures allow asynchronous (at the same time) transfer of data and code.</li>
-</ul>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Can Programming Be Liberated...</b></h2>
-<ul class="ul1">
-  <li class="li3">famous paper "Can programming be liberated from the von Neumann style?: a functional style and its algebra of programs"<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space"> </span></li>
-</ul>
-<p class="p2"><br></p>
-<ul class="ul1">
-  <li class="li3">proposes the idea that the von Neumann <i>hardware </i>architecture translates directly into the <i>software </i>domain</li>
-</ul>
-<p class="p2"><br></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>ALGOL Bottleneck</b></h2>
-<ul class="ul1">
-  <li class="li3">Software has yet another bottleneck that is orthogonal to the underlying hardware</li>
-</ul>
-<p class="p2"><br></p>
-<ul class="ul1">
-  <li class="li3">I call this the ALGOL Bottleneck</li>
-  <li class="li2"><span class="Apple-tab-span">	</span></li>
-  <li class="li3">Lack of asynchrony</li>
-</ul>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fiction vs. Reality</b></h2>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fiction: Libraries are Independent</b></h2>
-<p class="p5">How Programmers Think About Libraries</p>
-<p class="p4"><br></p>
-<p class="p6"><img src="/assets/2020-12-25-00-18-07-Images/Libraries-Fiction.png" width="250px" height="387px" alt="Image"></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reality: Libraries Share A Global Variable</b></h2>
-<p class="p4"><br></p>
-<p class="p5">How Libraries Actually Work</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><img src="/assets/2020-12-25-00-18-07-Images/Libraries-Reality.png" width="250px" height="389px" alt="Image"></p>
-<p class="p4"><br></p>
-<p class="p5">The stack is a data structure.</p>
-<p class="p4"><br></p>
-<p class="p5">The stack is a global variable.</p>
-<p class="p4"><br></p>
-<p class="p5">The stack is shared by all functions.</p>
-<p class="p4"><br></p>
-<p class="p5">The stack records <i>dynamic</i> call history.</p>
-<p class="p4"><br></p>
-<p class="p5">The stack is a <i>dynamic</i> dependency chain between functions.</p>
-<p class="p7"><br></p>
 <hr>
-<p class="p8"><a id="fn1"></a><a href="#fnlink1">[1]</a> https://dl.acm.org/doi/10.1145/359576.359579</p>
+<p class="p5"><br></p>
+<hr>
+<p class="p5"><br></p>
+<p class="p7"><img src="/assets/2020-12-25-00-30-01-Images/Libraries-Fiction.png" width="250px" height="387px" alt="Image"></p>
+<p class="p5"><br></p>
+<hr>
+<p class="p6">How Libraries Actually Work</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p7"><img src="/assets/2020-12-25-00-30-01-Images/Libraries-Reality.png" width="250px" height="389px" alt="Image"></p>
+<p class="p5"><br></p>
+<p class="p6">The stack is a data structure.</p>
+<p class="p5"><br></p>
+<p class="p6">The stack is a global variable.</p>
+<p class="p5"><br></p>
+<p class="p6">The stack is shared by all functions.</p>
+<p class="p5"><br></p>
+<p class="p6">The stack records <i>dynamic</i> call history.</p>
+<p class="p5"><br></p>
+<p class="p6">The stack is a <i>dynamic</i> dependency chain between functions.</p>
+<p class="p8"><br></p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1">[1]</a> https://dl.acm.org/doi/10.1145/359576.359579</p>
 </div>
 </body>
 </html>
