@@ -1,32 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
-        <Document ID="4A40117E-9A00-4528-9317-546D0E26E5BF">
-            <Title>Breakthrough Technology</Title>
-            <Text>PEG is a breakthrough technology.
-</Text>
-        </Document>
-        <Document ID="4ED2F6E5-6DA5-4D23-BF93-62B0C5B02226">
-            <Text>
-REGEXP
-PEG (Ohm-JS)
-/a/
-const example1_grammar = `
-Example1 {
-  OneA = "a"
-}`;
-/ab/
-const example2_grammar = `
-Example2 {
-  OneAThenOneB = OneA OneB
-  OneA = "a"
-  OneB = "b"
-}`;
-/(a)(b)/
+        <Document ID="BB55A752-7774-477D-9427-E0079A195826">
+            <Title>Example Trivial Arithmetic</Title>
+            <Text>E.g. trivial arithmetic expressions
 
+E ← N  /  ‘(‘ E ‘+’ E ‘)’  /  ‘(‘ E ‘)-’ E ‘)’
+N ← D N / D
+D ← ‘0’ / … / ‘9’
 
-
-
+(note parsing of nested, matched, parentheses ‘(‘ … ‘)’
 </Text>
         </Document>
         <Document ID="C15DF378-9FBE-415F-AE95-29FEFC4F1682">
@@ -165,23 +148,43 @@ function addJSON6 (semantics) {
 }
 </Text>
         </Document>
+        <Document ID="4ED2F6E5-6DA5-4D23-BF93-62B0C5B02226">
+            <Text>
+REGEXP
+PEG (Ohm-JS)
+/a/
+const example1_grammar = `
+Example1 {
+  OneA = "a"
+}`;
+/ab/
+const example2_grammar = `
+Example2 {
+  OneAThenOneB = OneA OneB
+  OneA = "a"
+  OneB = "b"
+}`;
+/(a)(b)/
+
+
+
+
+</Text>
+        </Document>
         <Document ID="7AB8772A-1D70-4822-A779-0CC6E73672F2">
             <Title>Top Down Parsing</Title>
             <Text>Top Down Parsing - Recursive Descent
 
 Familiar to anyone using a recursive language.
 
-Until Ford’s thesis, TDPL was either hand-built or used in little-known tools, such as S/SL,TXL, etc.
+Until Ford’s thesis, TDPL was either hand-built or used in lesser-known tools, such as S/SL,TXL, etc.
 
 </Text>
         </Document>
-        <Document ID="650A0CE4-7851-47A4-BEC1-F58614EE4A0E">
-            <Title>PEG Enables SCLs</Title>
-            <Text>PEG Enables SCLs.
-
-SCL means Solution Centric Language.
-
-SCL is like DSL (but more focussed).</Text>
+        <Document ID="E8A528B4-8C22-4C94-AA6F-58D0F7A0AEF9">
+            <Title>Example - SVG Parser</Title>
+            <Text>
+(can't do this in REGEXP)</Text>
         </Document>
         <Document ID="2FEDBFDD-D828-4F3A-8BA2-6002EE4EBC5F">
             <Title>Unity Grammar</Title>
@@ -193,12 +196,6 @@ Unity Grammar === first step towards cheap and dirty transpilers
 
 E.g. HTML → HTML+
 </Text>
-        </Document>
-        <Document ID="6F84AA4C-74AE-4080-83B2-84C298870A90">
-            <Title>PhD Thesis</Title>
-            <Text>Bryan Ford’s Thesis
-
-http://pdos.csail.mit.edu/~baford/packrat/thesis</Text>
         </Document>
         <Document ID="FDDC0EEE-FF8F-4BA2-B322-3D2B7CC59FAB">
             <Title>ESRAP</Title>
@@ -231,22 +228,11 @@ functions as terminals
 (function-name)
 </Text>
         </Document>
-        <Document ID="433E7553-BE7C-4EFC-95D1-A2392B231786">
-            <Title>JavaScript</Title>
-            <Text>JavaScript
+        <Document ID="6F84AA4C-74AE-4080-83B2-84C298870A90">
+            <Title>PhD Thesis</Title>
+            <Text>Bryan Ford’s Thesis
 
-const text = "ab";
-const re = /ab/;
-
-function main () {
-    if (re.test (text)) {
-	console.log ('Success');
-    } else {
-	console.log ('Failure'ß);
-    }
-}
-main ();
-</Text>
+http://pdos.csail.mit.edu/~baford/packrat/thesis</Text>
         </Document>
         <Document ID="2756F96B-37CF-45C3-9CB5-7BE23F3F5074">
             <Title>JavaScript</Title>
@@ -264,18 +250,19 @@ function main () {
 main ();
 </Text>
         </Document>
-        <Document ID="0B9525DF-185A-458A-9078-0735A4A4D417">
-            <Title>Common Lisp</Title>
-            <Text>Common Lisp (ESRAP)
+        <Document ID="650A0CE4-7851-47A4-BEC1-F58614EE4A0E">
+            <Title>PEG Enables SCLs</Title>
+            <Text>PEG Enables SCLs.
 
-(defparameter text2 "ab")
+SCL means Solution Centric Language.
 
-(defun example2-esrap ()
-  (esrap:defrule oneA #\a (:lambda (x) x))
-  (esrap:defrule oneB #\b (:lambda (x) x))
-  (esrap:defrule oneAThenOneB (and oneA oneB) (:lambda (x) x))
-  (esrap:parse 'oneAThenOneB text2))
+SCL is like DSL (but more focussed).</Text>
+        </Document>
+        <Document ID="FA54CFB3-799E-43AD-B538-A25662B1ABA1">
+            <Title>PEGs Are Better Than REGEXPs</Title>
+            <Text>PEGs can parse languages that REGEXPs can’t parse
 
+PEGs use a stack → parsing subroutines
 </Text>
         </Document>
         <Document ID="08323C21-E04C-4DA4-AD12-6EAA4DB11E2C">
@@ -368,17 +355,36 @@ if (result.succeeded ()) {
         <Document ID="0F71DF62-FF70-42A1-8CBD-3D5267FC9075">
             <Title>PEG for Lisp</Title>
         </Document>
-        <Document ID="FA54CFB3-799E-43AD-B538-A25662B1ABA1">
-            <Title>PEGs Are Better Than REGEXPs</Title>
-            <Text>PEGs can parse languages that REGEXPs can’t parse
+        <Document ID="0B9525DF-185A-458A-9078-0735A4A4D417">
+            <Title>Common Lisp</Title>
+            <Text>Common Lisp (ESRAP)
 
-PEGs use a stack → parsing subroutines
+(defparameter text2 "ab")
+
+(defun example2-esrap ()
+  (esrap:defrule oneA #\a (:lambda (x) x))
+  (esrap:defrule oneB #\b (:lambda (x) x))
+  (esrap:defrule oneAThenOneB (and oneA oneB) (:lambda (x) x))
+  (esrap:parse 'oneAThenOneB text2))
+
 </Text>
         </Document>
-        <Document ID="E8A528B4-8C22-4C94-AA6F-58D0F7A0AEF9">
-            <Title>Example - SVG Parser</Title>
-            <Text>
-(can't do this in REGEXP)</Text>
+        <Document ID="433E7553-BE7C-4EFC-95D1-A2392B231786">
+            <Title>JavaScript</Title>
+            <Text>JavaScript
+
+const text = "ab";
+const re = /ab/;
+
+function main () {
+    if (re.test (text)) {
+	console.log ('Success');
+    } else {
+	console.log ('Failure'ß);
+    }
+}
+main ();
+</Text>
         </Document>
         <Document ID="D0666CCA-389E-4989-8BBA-C790C0275D64">
             <Title>Common Lisp</Title>
@@ -575,6 +581,11 @@ PEG (packrat) memoizes some sequences, making backtracking tractable.
 
 </Text>
         </Document>
+        <Document ID="4A40117E-9A00-4528-9317-546D0E26E5BF">
+            <Title>Breakthrough Technology</Title>
+            <Text>PEG is a breakthrough technology.
+</Text>
+        </Document>
         <Document ID="CFC01E63-E680-4810-85A3-FC36B440BC48">
             <Title>Example - Match Two Characters</Title>
             <Text>
@@ -585,17 +596,6 @@ PEG (Ohm-JS)
   OneA = "a"
   OneB = "b"
 
-</Text>
-        </Document>
-        <Document ID="BB55A752-7774-477D-9427-E0079A195826">
-            <Title>Example Trivial Arithmetic</Title>
-            <Text>E.g. trivial arithmetic expressions
-
-E ← N  /  ‘(‘ E ‘+’ E ‘)’  /  ‘(‘ E ‘)-’ E ‘)’
-N ← D N / D
-D ← ‘0’ / … / ‘9’
-
-(note parsing of nested, matched, parentheses ‘(‘ … ‘)’
 </Text>
         </Document>
     </Documents>

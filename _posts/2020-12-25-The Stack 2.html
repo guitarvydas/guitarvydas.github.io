@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>The Stack</title>
+  <meta name="CreationTime" content="2020-12-25T22:52:44Z">
+  <meta name="ModificationTime" content="2020-12-25T22:52:44Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 9.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Desired</b></h2>
+<p class="p2"><br></p>
+<p class="p3">I have found that it is convenient to create separate stacks for every type. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">I found that I need only 5 basic operations and that I can generate/compile/transpile code to enact these operations.</p>
+<p class="p2"><br></p>
+<p class="p3">The "syntax" for talking about types in this manner, drops to something very small (<i>bizarrely, the number 5 comes up again - I can describe the new syntax using only 5 productions</i>).</p>
+<p class="p2"><br></p>
+<p class="p3">I describe this method in the following essay.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><img src="/assets/2020-12-25-22-52-44-Images/isolation-Desired.png" width="100%" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Achieving 2 Stacks for Each Type</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCL Syntax</b></h2>
+<p class="p5"><span class="Apple-converted-space">  </span>id = { ... } <span class="Apple-converted-space">    </span>--&gt; class with fields def</p>
+<p class="p5"><span class="Apple-converted-space">  </span>id = :string <span class="Apple-converted-space">    </span>--&gt; string def</p>
+<p class="p5"><span class="Apple-converted-space">  </span>id = :map<span class="Apple-converted-space">        </span>--&gt; map def</p>
+<p class="p5"><span class="Apple-converted-space">  </span>id = | ... <span class="Apple-converted-space">      </span>--&gt; or type def</p>
+<p class="p5"><span class="Apple-converted-space">  </span>id = '...' |<span class="Apple-converted-space">  </span>'...' | ... <span class="Apple-converted-space">      </span>--&gt; enum def</p>
+<p class="p6"><br></p>
+<p class="p3">[<i>This syntax was chosen for its regularity since it was originally parsed with manually written code.<span class="Apple-converted-space">  </span>Each construct has a </i>left handle.<i><span class="Apple-converted-space">  </span>Every construct begins with "id = ", then the next character determines the kind of construct, e.g. "id = {" means that the construct is a class with fields, "id = '" means enum, and so on.]</i></p>
+<p class="p2"><i></i><br></p>
+<p class="p3">For a prototype of this, see <a href="https://github.com/guitarvydas/stack-dsl">https://github.com/guitarvydas/stack-dsl</a></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example Type Specification</b></h2>
+<p class="p5">[<i>comments deleted, for full contents see </i><a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl"><i>https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl</i></a>]</p>
+<p class="p6"><br></p>
+<p class="p5">esaprogram = { typeDecls situations classes whenDeclarations<span class="Apple-converted-space">  </span>}</p>
+<p class="p5">typeDecls = :map typeDecl</p>
+<p class="p5">situations = :map situationDefinition</p>
+<p class="p5">classes = :map esaclass</p>
+<p class="p5">whenDeclarations = :map whenDeclaration</p>
+<p class="p5">typeDecl = { name typeName }</p>
+<p class="p5">situationDefinition =| name</p>
+<p class="p5">esaclass = { name fieldMap methodsTable }</p>
+<p class="p5">whenDeclaration = { situationReferenceList esaKind methodDeclarationsAndScriptDeclarations }</p>
+<p class="p5">situationReferenceList = :map situationReferenceName</p>
+<p class="p5">situationReferenceName =| name</p>
+<p class="p5">methodDeclarationsAndScriptDeclarations = :map declarationMethodOrScript</p>
+<p class="p5">declarationMethodOrScript =| methodDeclaration | scriptDeclaration</p>
+<p class="p5">methodDeclaration = { esaKind name formalList returnType }</p>
+<p class="p5">scriptDeclaration = { esaKind name formalList returnType implementation }</p>
+<p class="p5">returnType = { returnKind name }</p>
+<p class="p5">returnKind = 'map' | 'simple' | 'void'</p>
+<p class="p5">formalList = :map name</p>
+<p class="p5">esaKind =| name</p>
+<p class="p5">typeName =| name</p>
+<p class="p5">expression = { ekind object }</p>
+<p class="p5">ekind = 'true' | 'false' | 'object' | 'calledObject'</p>
+<p class="p5">object = { name fieldMap }</p>
+<p class="p5">fieldMap = :map field</p>
+<p class="p5">field = { name fkind actualParameterList }<span class="Apple-converted-space"> </span></p>
+<p class="p5">fkind = 'map' | 'simple'</p>
+<p class="p5">actualParameterList = :map expression</p>
+<p class="p5">name = :string</p>
+<p class="p5">methodsTable = :map declarationMethodOrScript</p>
+<p class="p5">externalMethod = { name formalList returnType }</p>
+<p class="p5">internalMethod = { name formalList returnType implementation }</p>
+<p class="p5">implementation = :map statement</p>
+<p class="p5">statement =| letStatement | mapStatement | exitMapStatement | setStatement | createStatement | ifStatement | loopStatement | exitWhenStatement | callInternalStatement | callExternalStatement | returnTrueStatement | returnFalseStatement | returnValueStatement</p>
+<p class="p5">letStatement = { varName expression implementation }</p>
+<p class="p5">mapStatement = { varName expression implementation }</p>
+<p class="p5">exitMapStatement = { filler }<span class="Apple-converted-space"> </span></p>
+<p class="p5">setStatement = { lval expression }</p>
+<p class="p5">createStatement = { varName indirectionKind name implementation }</p>
+<p class="p5">ifStatement = { expression thenPart elsePart }</p>
+<p class="p5">loopStatement = { implementation }</p>
+<p class="p5">exitWhenStatement = { expression }</p>
+<p class="p5">returnTrueStatement = { methodName }</p>
+<p class="p5">returnFalseStatement = { methodName }</p>
+<p class="p5">returnValueStatement = { methodName name }</p>
+<p class="p5">callInternalStatement = { functionReference }<span class="Apple-converted-space"> </span></p>
+<p class="p5">callExternalStatement = { functionReference }</p>
+<p class="p5">lval =| expression</p>
+<p class="p5">varName =| name</p>
+<p class="p5">functionReference =| expression</p>
+<p class="p5">thenPart =| implementation</p>
+<p class="p5">elsePart =| implementation</p>
+<p class="p5">indirectionKind = 'indirect' | 'direct'</p>
+<p class="p5">methodName =| name</p>
+<p class="p5">filler =| name</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>class id = { ... }<span class="Apple-converted-space"> </span></b></h2>
+<p class="p5"><span class="Apple-converted-space"> </span>id = { ... }</p>
+<p class="p6"><br></p>
+<p class="p3">Defines a class that contains the given fields.</p>
+<p class="p2"><br></p>
+<p class="p3">This construct does not explicitly define any methods for the class.</p>
+<p class="p2"><br></p>
+<p class="p3">Methods are generated automatically.</p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>type union id = | ...</b></h2>
+<p class="p5">id = | ...</p>
+<p class="p6"><br></p>
+<p class="p3">Defines a type <i>id</i> to be a union of other types.</p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>enum<span class="Apple-converted-space">  </span>id = '...' |<span class="Apple-converted-space">  </span>'...' | ...<span class="Apple-converted-space"> </span></b></h2>
+<p class="p5">id = '...' |<span class="Apple-converted-space">  </span>'...' | ...</p>
+<p class="p6"><br></p>
+<p class="p3">Defines a type to consist of one or more contants (symbols / strings).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>foreign string<span class="Apple-converted-space">  </span>id = :string</b></h2>
+<p class="p5">id = :string</p>
+<p class="p2"><br></p>
+<p class="p3">Defines a type <i>id</i> to be of a foreign type STRING.</p>
+<p class="p2"><br></p>
+<p class="p3">[<i>maybe I should have generalized this to </i>id = :foreign<i>?</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b><span class="Apple-converted-space"> </span>foreign list id = :map</b></h2>
+<p class="p5">id = :map<span class="Apple-converted-space">  </span>...</p>
+<p class="p6"><br></p>
+<p class="p3">Defines a type <i>id</i> to be a list of some other type.</p>
+<p class="p2"><br></p>
+<p class="p3">[<i>maybe I should have named this :</i>list<i> instead of :</i>map]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compiling to Separate Stacks</b></h2>
+<p class="p3">I find it useful to have 2 stacks for every type</p>
+<ol class="ol1">
+  <li class="li7">working stack</li>
+  <li class="li7">output stack</li>
+</ol>
+<p class="p2"><br></p>
+<p class="p3">The example type specification in Example Type Specification defines 54 types.</p>
+<p class="p2"><br></p>
+<p class="p3">This compiles to 54 type definitions and 54 * 2 = 108 stacks.</p>
+<p class="p2"><br></p>
+<p class="p3">Note that there are only 5 possible ways to define a type.</p>
+<p class="p2"><br></p>
+<p class="p3">Note that types can be defined as other types.<span class="Apple-converted-space">  </span>For example</p>
+<p class="p5">…</p>
+<p class="p5">methodName =| name</p>
+<p class="p5">…</p>
+<p class="p5">name = :string</p>
+<p class="p5">…</p>
+<p class="p2"><br></p>
+<p class="p3">Note that "variable names" are not needed.<span class="Apple-converted-space">  </span>We simply create a typename for each entity, e.g.<span class="Apple-converted-space"> </span></p>
+<p class="p5">fn (a: int, b : int)</p>
+<p class="p3">becomes</p>
+<p class="p5">fn (a, b)</p>
+<p class="p5">a =| int</p>
+<p class="p5">b =| int</p>
+<p class="p3">(this removes syntactic noise from the declarations and pushes implementation details deeper into the hierarchy).<span class="Apple-converted-space">  </span>In this example, <span class="s1">a</span> and <span class="s1">b</span> are types (not variables).</p>
+<p class="p2"><br></p>
+<p class="p3">Each stack contains enough information to:</p>
+<ul class="ul1">
+  <li class="li7">specify the type contained in the stack</li>
+  <li class="li7">the actual stack of values (of the given type)</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Operations</b></h2>
+<p class="p3">I find that there are 6 basic operations:</p>
+<p class="p2"><br></p>
+<ul class="ul1">
+  <li class="li7">NewScope</li>
+  <li class="li7">EndScope</li>
+  <li class="li7">Output</li>
+  <li class="li7">SetField_???_from_???</li>
+  <li class="li7">AppendFrom_???</li>
+  <li class="li7">&lt;foreign operation&gt;</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p3">The first 5 operations can be automatically generated for every type (and the corresponding stacks).</p>
+<p class="p2"><br></p>
+<p class="p3">The 6<span class="s2"><sup>th</sup></span> operation (&lt;foreign operation&gt;) is a catch-all for operations that are specific to the solution.</p>
+<p class="p2"><br></p>
+<p class="p3">In <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm">https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm</a> (and the other dsl*.pasm files), the stack names are prepended to the operations (followed by two underscores), and the typenames are prefixed with "$" e.g.</p>
+<p class="p8">$whenDeclarations__EndScope</p>
+<p class="p3">thus, in the prototype, one will see operations, like:</p>
+<ul class="ul1">
+  <li class="li7">$formalList__NewScope</li>
+  <li class="li7">$classes__EndScope</li>
+  <li class="li7">$formalList__Output</li>
+  <li class="li7">$scriptDeclaration__SetField_formalList_from_formalList</li>
+  <li class="li7">$formalList__AppendFrom_name</li>
+  <li class="li7">&lt;foreign operation&gt;: $name__GetName</li>
+  <li class="li9"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>NewScope</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__NewScope</span> pushes an empty item, of the appropriate type, onto the working stack of the type.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>EndScope</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__EndScope</span> pops the given working stack.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Output</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__Output</span> moves the top item from the working stack to the output stack for the given type.<span class="Apple-converted-space">  </span>The working stack is popped (once).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SetField</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__SetField_&lt;fieldName&gt;_from_&lt;other-type&gt; </span>sets the field <i>fieldName </i>of <i>type</i> to the value of the top of the Output stack of <i>other-type</i>.</p>
+<p class="p2"><i></i><br></p>
+<p class="p3">This operation checks that the <i>other-type</i> is of the type required by <i>fieldName</i>.</p>
+<p class="p2"><br></p>
+<p class="p3">This operation pops (once) the Output stack of <i>other-type.</i></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>AppendFrom</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__AppendFrom_&lt;other-type&gt; </span>appends the value of the top of the Output stack of <i>other-type</i> to the top list on the working stack of <i>type.</i></p>
+<p class="p2"><br></p>
+<p class="p3">This operation checks that <i>type</i> is a list (I've called it :map) and that the element-type of the list matches <i>other-type</i>.</p>
+<p class="p2"><i></i><br></p>
+<p class="p3">This operation pops (once) the Output stack of <i>other-type.</i></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Foreign</b></h2>
+<p class="p3"><span class="s1">&lt;type&gt;__??? </span>performs operation "???" on the given type.</p>
+<p class="p2"><br></p>
+<p class="p3">This operation has no arguments (other than <i>type</i>), but multiple operations can be declared and called, e.g. <i>counter__reset</i> … <i>counter__increment</i> … <i>counter__increment_by_2 …</i></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example Compilation (Lisp)</b></h2>
+<p class="p3">See <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp">https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp</a><span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">See <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json">https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json</a></p>
+<p class="p2"><br></p>
+<p class="p3">See <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp">https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp</a></p>
+<p class="p2"><br></p>
+<p class="p3">[<i>Push these through your favourite pretty-printer</i>]</p>
+</div>
+</body>
+</html>
