@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>The Stack</title>
-  <meta name="CreationTime" content="2020-12-25T22:52:44Z">
-  <meta name="ModificationTime" content="2020-12-25T22:52:44Z">
+  <meta name="CreationTime" content="2020-12-27T12:37:51Z">
+  <meta name="ModificationTime" content="2020-12-27T12:37:51Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -14,13 +14,17 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
     p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
     p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
     li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
     li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
     span.s1 {font: 11.0px Menlo}
-    span.s2 {font: 9.0px Palatino}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 9.0px Palatino}
     ol.ol1 {list-style-type: decimal}
     ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
   </style>
 </head>
 <body>
@@ -37,7 +41,7 @@
 <p class="p3">I describe this method in the following essay.</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><img src="/assets/2020-12-25-22-52-44-Images/isolation-Desired.png" width="100%" alt="Image"></p>
+<p class="p4"><img src="/assets/2020-12-27-12-37-51-Images/isolation-Desired.png" width="100%" alt="Image"></p>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Achieving 2 Stacks for Each Type</b></h2>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCL Syntax</b></h2>
 <p class="p5"><span class="Apple-converted-space">  </span>id = { ... } <span class="Apple-converted-space">    </span>--&gt; class with fields def</p>
@@ -173,6 +177,20 @@
 </ul>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Foreign Types</b></h2>
+<p class="p3">There are only 2 types at the bottom:</p>
+<ul class="ul1">
+  <li class="li7">a %typed-value: (<span class="s1"> %type, %value</span> ) [where <span class="s1">%type</span> is a String and <span class="s1">%value</span> is anything]</li>
+  <li class="li8"><span class="s2">a list of %typed-value: ( </span>%element-type, %ordered-list <span class="s2">) [where </span>%ordered-list<span class="s2"> contains </span>%type-values<span class="s2">]<span class="Apple-converted-space"> </span></span></li>
+</ul>
+<p class="p9"><br></p>
+<ul class="ul2">
+  <li class="li7">Both types are foreign and opaque</li>
+  <li class="li7">Only the implementation knows what is inside of them</li>
+  <li class="li7">type checking is done by-name (equality of <span class="s1">%type</span>s)</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Operations</b></h2>
 <p class="p3">I find that there are 6 basic operations:</p>
 <p class="p2"><br></p>
@@ -187,10 +205,10 @@
 <p class="p2"><br></p>
 <p class="p3">The first 5 operations can be automatically generated for every type (and the corresponding stacks).</p>
 <p class="p2"><br></p>
-<p class="p3">The 6<span class="s2"><sup>th</sup></span> operation (&lt;foreign operation&gt;) is a catch-all for operations that are specific to the solution.</p>
+<p class="p3">The 6<span class="s3"><sup>th</sup></span> operation (&lt;foreign operation&gt;) is a catch-all for operations that are specific to the solution.</p>
 <p class="p2"><br></p>
 <p class="p3">In <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm">https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm</a> (and the other dsl*.pasm files), the stack names are prepended to the operations (followed by two underscores), and the typenames are prefixed with "$" e.g.</p>
-<p class="p8">$whenDeclarations__EndScope</p>
+<p class="p10">$whenDeclarations__EndScope</p>
 <p class="p3">thus, in the prototype, one will see operations, like:</p>
 <ul class="ul1">
   <li class="li7">$formalList__NewScope</li>
