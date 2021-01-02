@@ -15,6 +15,7 @@ read go </dev/fd/5
 if [ "${go}" == "go" ]
 then
     basename=`basename "${filename}"`
+echo mv "${filename}" "../_posts/${prefix}-${basename}"
     mv "${filename}" "../_posts/${prefix}-${basename}"
 fi
 ./debug-exit "[$1] $0"

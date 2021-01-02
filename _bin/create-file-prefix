@@ -19,7 +19,7 @@ then
     creation_time=`grep "<meta name=\"CreationTime\"" "${filename}"`
     if [ ! -z "${creation_time}" ]
     then
-	prefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(2020-..-..\)T..:..:..Z">/\1/'`
+	prefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(202.-..-..\)T..:..:..Z">/\1/'`
     fi
     echo "${prefix}" >/dev/fd/5
 else
