@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>The Primary Issue</title>
+  <meta name="CreationTime" content="2021-01-02T08:32:26Z">
+  <meta name="ModificationTime" content="2021-01-02T08:32:26Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Palatino}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+    ul.ul3 {list-style-type: diamond}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Primary Issue: What is a Computer Used For?</b></h2>
+<p class="p2">There is one issue in software that all other issues follow from:</p>
+<p class="p3"><br></p>
+<p class="p4"><b>What is a computer used for?</b></p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Computing</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculation</b></h2>
+<p class="p2">A computer can be used to calculate mathematical results.</p>
+<p class="p2">In this perspective, a piece of software is a function with one input and one output.</p>
+<p class="p2">Error conditions are glued onto this perspective as an after-thought.</p>
+<p class="p2">This was the primary purpose behind the invention of computers. <span class="Apple-converted-space"> </span></p>
+<p class="p2">Computers were invented to calculate ballistic trajectories of projectiles.</p>
+<p class="p2">This perspective is inherently synchronous.</p>
+<p class="p2">I posit that computing, and software development, has outgrown this perspective.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Machine Control</b></h2>
+<p class="p2">Another perspective for using a computer is to control machinery, such as DAWs (Digital Audio Workstations), injection molding machines, printing machines, etc.</p>
+<p class="p2">In this perspective, each function can have more than one outcome.</p>
+<p class="p2">In this perspective, the computer receives inputs from outside sensors and produces control outputs to the outside world.</p>
+<p class="p2">Input from sensors can come "at any time".</p>
+<p class="p2">This perspective is inherently asynchronous.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Distributed Computing</b></h2>
+<p class="p2">Distributed computers come in two flavors</p>
+<ul class="ul1">
+  <li class="li5">client</li>
+  <li class="li5">server</li>
+</ul>
+<p class="p5">Some computers perform both of the above roles.</p>
+<p class="p5">Distributed computers receive asynchronous inputs from</p>
+<ul class="ul1">
+  <li class="li5">users</li>
+  <li class="li5">other computers on the network</li>
+  <li class="li6"><span class="s1">(</span><i>other stuff omitted for brevity</i><span class="s1">)</span></li>
+  <li class="li7"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Synchronous vs. Asynchronous</b></h2>
+<p class="p2">Several issues are important when discussing synchronicity:</p>
+<ul class="ul1">
+  <li class="li5">data delivery</li>
+  <li class="li5">code invocation</li>
+  <li class="li5">order of operations</li>
+  <li class="li5">order of data arrival</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Synchronous Behaviour</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Data Devliery</b></h2>
+<ul class="ul1">
+  <ul class="ul1">
+    <li class="li5">parameters deliver input data</li>
+    <li class="li5">output data is sent - only to the caller - via RETURN statements</li>
+    <li class="li5">error data is sent - only up the <span class="s2">dynamic</span> call chain - via exception statements, e.g. <i>throw</i></li>
+    <li class="li7"><br></li>
+  </ul>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Invocation</b></h2>
+<ul class="ul1">
+  <ul class="ul1">
+    <li class="li5">actions are invoked by the CALL statement</li>
+    <li class="li5">actions use input data (from parameters)</li>
+    <li class="li5">actions produce output data and exceptions</li>
+    <li class="li7"><br></li>
+  </ul>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ordering</b></h2>
+<ul class="ul1">
+  <li class="li5">(1) inputs are delivered (via parameters), then (2) code is invoked - all of this is subsumed into the CALL statement</li>
+  <li class="li5">(3) actions produce outputs or exceptions</li>
+  <li class="li5">caller <i>waits</i> for callee to perform its action</li>
+  <li class="li7"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Asynchronous Behaviour</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Data Devliery</b></h2>
+<ul class="ul1">
+  <li class="li5">data is delivered via Send()</li>
+  <li class="li5">there is no difference between parameters, return values and exceptions - they are all data delivered by Send()</li>
+  <li class="li5">data can be directed (Send()) to any component, not just the caller and the dynamic call-chain</li>
+  <li class="li7"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Invocation</b></h2>
+<ul class="ul1">
+  <li class="li5">at its most basic, actions are invoked for each piece of data received from Send() operations, e.g. fn(a,b,c) would invoke 3 actions - fn(a), fn(b) and fn(c)</li>
+  <li class="li5">various permutations of this behaviour have been posited,<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li5">for example, the misleadingly-named, <i>dataflow</i> model invokes actions <i>only</i> after all inputs have arrived</li>
+    <li class="li5">for example, FBP (Flow-Based Programming) invokes actions only when a <i>read</i> statement is waiting for input on a particular <i>port</i></li>
+    <li class="li7"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ordering</b></h2>
+<ul class="ul1">
+  <li class="li5">in the asynchronous model, data delivery and action invocation are not tied together, e.g. many pieces of data can be sent before any action is invoked</li>
+  <li class="li5">CALL does not exist</li>
+  <li class="li5">parameter delivery is divorced from action invocation</li>
+  <li class="li5">RETURN values are delivered via Send() and imply no action invocation(s)</li>
+  <li class="li5">exception values are delivered via Send() and imply no action invocation(s) ; since Send() supplants syntactic sugar like <i>throw</i>, error data can be sent to any component and does not imply immediate action invocation</li>
+  <li class="li5">Ordering is "arbitrary" and controlled only by a <i>dispatcher</i> function [<i>N.B. dispatchers are commonly used in operating system threads, but, operating systems impose a synchronous behaviour style on all contained actions - such threading protocol is not necessary, despite commonly-held beliefs</i>]</li>
+  <li class="li7"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Simplicity</b></h2>
+<p class="p2">Simplicity is <i>the lack of nuance</i>.</p>
+<p class="p2">Simplicity results when an appropriate programming paradigm is used.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How To Pick A Paradigm?</b></h2>
+<p class="p2">How does one decide which paradigm to use?</p>
+<p class="p2">Firstly, one must ask the right questions, then apply the principles of Divide &amp; Conquer.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example: Synchronous Paradigm</b></h2>
+<ul class="ul1">
+  <li class="li5">To build a calculator: the synchronous paradigm is appropriate. <span class="Apple-converted-space"> </span></li>
+</ul>
+<p class="p2">We have seen this paradigm - the synchronous paradigm - evolve into what we call Functional Programming.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example: Aynshcronous Paradigm</b></h2>
+<ul class="ul1">
+  <li class="li5">To build a controller, use the asynchronous paradigm. <span class="Apple-converted-space"> </span></li>
+  <li class="li5"><i>See also: Harel Statecharts http://www.inf.ed.ac.uk/teaching/courses/seoc/2005_2006/resources/statecharts.pdf</i></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Accidental Complexity</b></h2>
+<ul class="ul1">
+  <li class="li5">Using the wrong paradigm will lead to accidental complexity.</li>
+  <li class="li5">E.G. Threads grafted onto the synchronous paradigm.</li>
+  <li class="li5"> We have seen this evolve into the commonly-held belief that multitasking is hard.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></li>
+  <li class="li7"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Examples of Synchronous and Asynchronous Paradigms</b></h2>
+<p class="p2">I discuss concrete examples below.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example: Cryptography</b></h2>
+<p class="p2">Cryptography is a mathematical function of one input which produces one output.</p>
+<p class="p2">Cryptography is a calculator.</p>
+<p class="p2">The <i>synchronous paradigm</i> is appropriate for cryptography.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example: DAW</b></h2>
+<p class="p2">A DAW - digital audio workstation - is a controller.<span class="Apple-converted-space">  </span>It takes inputs from the user and from a clock and produces outputs, e.g. MIDI, that control various devices (sound generators, envelope generators, etc.)</p>
+<p class="p2">The <i>asynchronous paradigm</i> is most suited to programming a DAW.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>GUI</b></h2>
+<ul class="ul1">
+  <li class="li5">Graphical User Interface - accepts inputs from a user, then performs actions based on those inputs.</li>
+  <li class="li5">The inputs come at unpredictable times.</li>
+  <li class="li5">Use <i>asynchronous paradigm</i>.</li>
+  <li class="li5">Using more than one paradigm is OK
+  <ul class="ul2">
+    <li class="li5">e.g. if the actions, that a GUI performs, are sufficiently complex, one might switch to programming the actions in the <i>synchronous paradigm</i>).</li>
+  </ul></li>
+</ul>
+<ul class="ul1">
+  <li class="li5">Current practice: We currently don't favour programming in anything but the <i>synchronous paradigm</i>, hence, GUIs tend to be programmed in the <i>synchronous paradigm</i> with bandaids that allow programmers access to <i>asynchronous </i>behaviours.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>P2P - Peer To Peer</b></h2>
+<ul class="ul1">
+  <li class="li5">P2P - Peer-to-Peer sharing, was popularized by Napster and SETI.</li>
+  <li class="li5">primarily an asynchronous protocol that shares data and resources between several computers.<span class="Apple-converted-space"> </span></li>
+  <li class="li5">Asynchronous Data
+  <ul class="ul2">
+    <li class="li5">The primary activity of p2p is to listen for asynchronous communications and to accept data (asynchronously) from other peer computers on the network. <span class="Apple-converted-space"> </span></li>
+  </ul></li>
+  <li class="li5">Timers:<span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>
+  <ul class="ul2">
+    <li class="li5">Another activity of p2p is to push chunks of resources to other peer computers.<span class="Apple-converted-space">  </span>To achieve resource pushing without flooding the network and exhausting its own upload bandwidth, p2p must use timers, which, from the software perspective, raise timeout events asynchronously.</li>
+  </ul></li>
+  <li class="li5"><i>asynchronous paradigm</i></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blockchain</b></h2>
+<ul class="ul1">
+  <li class="li5">2 paradigms
+  <ul class="ul2">
+    <li class="li5">Synchronous
+    <ul class="ul2">
+      <li class="li5">cryptography</li>
+    </ul></li>
+    <li class="li5">Asynchronous
+    <ul class="ul2">
+      <li class="li5">protocols between distributed computers.</li>
+    </ul></li>
+  </ul></li>
+  <li class="li5">calculations performed in the <i>synchronous</i> <i>paradigm</i></li>
+  <li class="li5">distributed protocols performed in the <i>asynchronous paradigm</i>,<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li5">essentially p2p.</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Browsers, HTML, Internet</b></h2>
+<ul class="ul1">
+  <li class="li5">Browser are the new manifestation of GUIs.</li>
+  <li class="li5">Asynchronous
+  <ul class="ul2">
+    <li class="li5">Browsers communicate with server computers in a distributed fashion.</li>
+  </ul></li>
+  <li class="li5">Practice:
+  <ul class="ul2">
+    <li class="li5">popular programming tools and languages for the <i>asynchronous paradigm</i> are not common, hence, internet programming is performed with a grab-bag of low-level operations, including JavaScript, node.js, etc. <span class="Apple-converted-space"> </span></li>
+  </ul></li>
+  <li class="li5">The GO language has been evolved to provide better access to low-level functionality in the <i>asynchronous paradigm</i>, but GO is based on <i>synchronous</i> belief structures and, is, thus, not the simplest solution to the problem(s).</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Text Editing &amp; Layout</b></h2>
+<ul class="ul3">
+  <li class="li5">Text editing tools tend to be one-in-one-out programs.
+  <ul class="ul2">
+    <li class="li5">e.g. the UNIX® tools<span class="Apple-converted-space"> </span></li>
+  </ul></li>
+  <li class="li5">e.g. LaTeX,<span class="Apple-converted-space"> </span></li>
+  <li class="li5">etc.<span class="Apple-converted-space"> </span></li>
+  <li class="li5"><i>Synchronous paradigm</i></li>
+</ul>
+<p class="p8"><br></p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Multitasking is hard only if one attempts to solve the multitasking problem using the synchronous paradigm.</p>
+</div>
+</body>
+</html>

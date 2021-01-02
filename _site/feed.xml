@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-02T08:28:19-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-02T08:32:34-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -43,54 +43,244 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Refactoring</summary></entry><entry><title type="html">Compile time and runtime</title><link href="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html" rel="alternate" type="text/html" title="Compile time and runtime" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/Compile%20Time%20and%20Runtime</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Refactoring</summary></entry><entry><title type="html">The primary issue</title><link href="https://computingsimplicity.neocities.org/2021/01/02/The-Primary-Issue.html" rel="alternate" type="text/html" title="The primary issue" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/The%20Primary%20Issue</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/The-Primary-Issue.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Compile Time and Runtime&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
+  &lt;title&gt;The Primary Issue&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-02T08:32:26Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-02T08:32:26Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Palatino}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
     ul.ul1 {list-style-type: disc}
     ul.ul2 {list-style-type: hyphen}
+    ul.ul3 {list-style-type: diamond}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Primary Issue: What is a Computer Used For?&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;There is one issue in software that all other issues follow from:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;b&gt;What is a computer used for?&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Computing&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Calculation&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A computer can be used to calculate mathematical results.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In this perspective, a piece of software is a function with one input and one output.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Error conditions are glued onto this perspective as an after-thought.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This was the primary purpose behind the invention of computers. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Computers were invented to calculate ballistic trajectories of projectiles.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This perspective is inherently synchronous.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I posit that computing, and software development, has outgrown this perspective.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Machine Control&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Another perspective for using a computer is to control machinery, such as DAWs (Digital Audio Workstations), injection molding machines, printing machines, etc.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In this perspective, each function can have more than one outcome.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In this perspective, the computer receives inputs from outside sensors and produces control outputs to the outside world.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Input from sensors can come &quot;at any time&quot;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This perspective is inherently asynchronous.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Distributed Computing&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Distributed computers come in two flavors&lt;/p&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Overview of Comile-time vs. Run-time&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;eliding details&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;client&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;server&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Fiction.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;Some computers perform both of the above roles.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;Distributed computers receive asynchronous inputs from&lt;/p&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Programmers generalize (think of) 2 phases&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;users&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;other computers on the network&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;i&gt;other stuff omitted for brevity&lt;/i&gt;&lt;span class=&quot;s1&quot;&gt;)&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Reality.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Synchronous vs. Asynchronous&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Several issues are important when discussing synchronicity:&lt;/p&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Compiler generates object files and DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;Operating system loads object files and DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;Operating system &quot;fixes up&quot; holes in DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;App initializes
+  &lt;li class=&quot;li5&quot;&gt;data delivery&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;code invocation&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;order of operations&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;order of data arrival&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Synchronous Behaviour&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Data Devliery&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;ul class=&quot;ul1&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;parameters deliver input data&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;output data is sent - only to the caller - via RETURN statements&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;error data is sent - only up the &lt;span class=&quot;s2&quot;&gt;dynamic&lt;/span&gt; call chain - via exception statements, e.g. &lt;i&gt;throw&lt;/i&gt;&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Code Invocation&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;ul class=&quot;ul1&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;actions are invoked by the CALL statement&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;actions use input data (from parameters)&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;actions produce output data and exceptions&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ordering&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;(1) inputs are delivered (via parameters), then (2) code is invoked - all of this is subsumed into the CALL statement&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;(3) actions produce outputs or exceptions&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;caller &lt;i&gt;waits&lt;/i&gt; for callee to perform its action&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Asynchronous Behaviour&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Data Devliery&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;data is delivered via Send()&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;there is no difference between parameters, return values and exceptions - they are all data delivered by Send()&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;data can be directed (Send()) to any component, not just the caller and the dynamic call-chain&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Code Invocation&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;at its most basic, actions are invoked for each piece of data received from Send() operations, e.g. fn(a,b,c) would invoke 3 actions - fn(a), fn(b) and fn(c)&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;various permutations of this behaviour have been posited,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
   &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li2&quot;&gt;compiler leaves islands of initialization code&lt;/li&gt;
-    &lt;li class=&quot;li2&quot;&gt;top-level data, e.g. var x = &quot;abc&quot;;&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;for example, the misleadingly-named, &lt;i&gt;dataflow&lt;/i&gt; model invokes actions &lt;i&gt;only&lt;/i&gt; after all inputs have arrived&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;for example, FBP (Flow-Based Programming) invokes actions only when a &lt;i&gt;read&lt;/i&gt; statement is waiting for input on a particular &lt;i&gt;port&lt;/i&gt;&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
   &lt;/ul&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;App runs&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ordering&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;in the asynchronous model, data delivery and action invocation are not tied together, e.g. many pieces of data can be sent before any action is invoked&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;CALL does not exist&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;parameter delivery is divorced from action invocation&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;RETURN values are delivered via Send() and imply no action invocation(s)&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;exception values are delivered via Send() and imply no action invocation(s) ; since Send() supplants syntactic sugar like &lt;i&gt;throw&lt;/i&gt;, error data can be sent to any component and does not imply immediate action invocation&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Ordering is &quot;arbitrary&quot; and controlled only by a &lt;i&gt;dispatcher&lt;/i&gt; function [&lt;i&gt;N.B. dispatchers are commonly used in operating system threads, but, operating systems impose a synchronous behaviour style on all contained actions - such threading protocol is not necessary, despite commonly-held beliefs&lt;/i&gt;]&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Simplicity&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Simplicity is &lt;i&gt;the lack of nuance&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Simplicity results when an appropriate programming paradigm is used.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;How To Pick A Paradigm?&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;How does one decide which paradigm to use?&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Firstly, one must ask the right questions, then apply the principles of Divide &amp;amp; Conquer.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example: Synchronous Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;To build a calculator: the synchronous paradigm is appropriate. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p2&quot;&gt;We have seen this paradigm - the synchronous paradigm - evolve into what we call Functional Programming.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example: Aynshcronous Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;To build a controller, use the asynchronous paradigm. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;&lt;i&gt;See also: Harel Statecharts http://www.inf.ed.ac.uk/teaching/courses/seoc/2005_2006/resources/statecharts.pdf&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Accidental Complexity&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;Using the wrong paradigm will lead to accidental complexity.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;E.G. Threads grafted onto the synchronous paradigm.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt; We have seen this evolve into the commonly-held belief that multitasking is hard.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Examples of Synchronous and Asynchronous Paradigms&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I discuss concrete examples below.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example: Cryptography&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Cryptography is a mathematical function of one input which produces one output.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Cryptography is a calculator.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;synchronous paradigm&lt;/i&gt; is appropriate for cryptography.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example: DAW&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A DAW - digital audio workstation - is a controller.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It takes inputs from the user and from a clock and produces outputs, e.g. MIDI, that control various devices (sound generators, envelope generators, etc.)&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;asynchronous paradigm&lt;/i&gt; is most suited to programming a DAW.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;GUI&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;Graphical User Interface - accepts inputs from a user, then performs actions based on those inputs.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;The inputs come at unpredictable times.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Use &lt;i&gt;asynchronous paradigm&lt;/i&gt;.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Using more than one paradigm is OK
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;e.g. if the actions, that a GUI performs, are sufficiently complex, one might switch to programming the actions in the &lt;i&gt;synchronous paradigm&lt;/i&gt;).&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;Current practice: We currently don't favour programming in anything but the &lt;i&gt;synchronous paradigm&lt;/i&gt;, hence, GUIs tend to be programmed in the &lt;i&gt;synchronous paradigm&lt;/i&gt; with bandaids that allow programmers access to &lt;i&gt;asynchronous &lt;/i&gt;behaviours.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;P2P - Peer To Peer&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;P2P - Peer-to-Peer sharing, was popularized by Napster and SETI.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;primarily an asynchronous protocol that shares data and resources between several computers.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Asynchronous Data
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;The primary activity of p2p is to listen for asynchronous communications and to accept data (asynchronously) from other peer computers on the network. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Timers:&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;Another activity of p2p is to push chunks of resources to other peer computers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;To achieve resource pushing without flooding the network and exhausting its own upload bandwidth, p2p must use timers, which, from the software perspective, raise timeout events asynchronously.&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;&lt;i&gt;asynchronous paradigm&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Blockchain&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;2 paradigms
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;Synchronous
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li5&quot;&gt;cryptography&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+    &lt;li class=&quot;li5&quot;&gt;Asynchronous
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li5&quot;&gt;protocols between distributed computers.&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;calculations performed in the &lt;i&gt;synchronous&lt;/i&gt; &lt;i&gt;paradigm&lt;/i&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;distributed protocols performed in the &lt;i&gt;asynchronous paradigm&lt;/i&gt;,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;essentially p2p.&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Browsers, HTML, Internet&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;Browser are the new manifestation of GUIs.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Asynchronous
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;Browsers communicate with server computers in a distributed fashion.&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;Practice:
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;popular programming tools and languages for the &lt;i&gt;asynchronous paradigm&lt;/i&gt; are not common, hence, internet programming is performed with a grab-bag of low-level operations, including JavaScript, node.js, etc. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;The GO language has been evolved to provide better access to low-level functionality in the &lt;i&gt;asynchronous paradigm&lt;/i&gt;, but GO is based on &lt;i&gt;synchronous&lt;/i&gt; belief structures and, is, thus, not the simplest solution to the problem(s).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Text Editing &amp;amp; Layout&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul3&quot;&gt;
+  &lt;li class=&quot;li5&quot;&gt;Text editing tools tend to be one-in-one-out programs.
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li5&quot;&gt;e.g. the UNIX® tools&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;e.g. LaTeX,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;etc.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;&lt;i&gt;Synchronous paradigm&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Multitasking is hard only if one attempts to solve the multitasking problem using the synchronous paradigm.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Compile Time and Runtime</summary></entry><entry><title type="html">Peg</title><link href="https://computingsimplicity.neocities.org/2020/12/27/PEG.html" rel="alternate" type="text/html" title="Peg" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/PEG</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/PEG.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Primary Issue</summary></entry><entry><title type="html">Peg</title><link href="https://computingsimplicity.neocities.org/2020/12/27/PEG.html" rel="alternate" type="text/html" title="Peg" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/PEG</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/PEG.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1286,33 +1476,54 @@
 &lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;Push these through your favourite pretty-printer&lt;/i&gt;]&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry><entry><title type="html">Filereader</title><link href="https://computingsimplicity.neocities.org/2020/12/25/FileReader.html" rel="alternate" type="text/html" title="Filereader" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/FileReader</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/FileReader.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry><entry><title type="html">Compile time and runtime</title><link href="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html" rel="alternate" type="text/html" title="Compile time and runtime" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/Compile%20Time%20and%20Runtime</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;FileReader&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T22:58:29Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T22:58:29Z&quot;&gt;
+  &lt;title&gt;Compile Time and Runtime&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
 &lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;HTML + JavaScript&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-HTML + JavaScript.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lasoo&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-Lasso.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Part&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-sensible.png&quot; width=&quot;231px&quot; height=&quot;231px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Overview of Comile-time vs. Run-time&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;eliding details&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Fiction.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Programmers generalize (think of) 2 phases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Reality.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Compiler generates object files and DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Operating system loads object files and DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Operating system &quot;fixes up&quot; holes in DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;App initializes
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li2&quot;&gt;compiler leaves islands of initialization code&lt;/li&gt;
+    &lt;li class=&quot;li2&quot;&gt;top-level data, e.g. var x = &quot;abc&quot;;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;App runs&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">FileReader</summary></entry><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Compile Time and Runtime</summary></entry><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1487,7 +1698,33 @@
 &lt;p class=&quot;p5&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-24-26-Images/Rethinking DLLs-Isolated.png&quot; width=&quot;350px&quot; height=&quot;269px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">DLLs</summary></entry><entry><title type="html">The stack is a list</title><link href="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html" rel="alternate" type="text/html" title="The stack is a list" /><published>2020-12-24T00:00:00-05:00</published><updated>2020-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/24/The%20Stack%20is%20a%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">DLLs</summary></entry><entry><title type="html">Filereader</title><link href="https://computingsimplicity.neocities.org/2020/12/25/FileReader.html" rel="alternate" type="text/html" title="Filereader" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/FileReader</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/FileReader.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;FileReader&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T22:58:29Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T22:58:29Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;HTML + JavaScript&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-HTML + JavaScript.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lasoo&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-Lasso.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Part&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-sensible.png&quot; width=&quot;231px&quot; height=&quot;231px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">FileReader</summary></entry><entry><title type="html">The stack is a list</title><link href="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html" rel="alternate" type="text/html" title="The stack is a list" /><published>2020-12-24T00:00:00-05:00</published><updated>2020-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/24/The%20Stack%20is%20a%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1514,243 +1751,4 @@
 &lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-20-11-14-Images/stack-optimized stack.png&quot; width=&quot;121px&quot; height=&quot;181px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack is a List</summary></entry><entry><title type="html">Concurrency bare bones</title><link href="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html" rel="alternate" type="text/html" title="Concurrency bare bones" /><published>2020-12-17T00:00:00-05:00</published><updated>2020-12-17T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/17/concurrency%20bare%20bones</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/17/concurrency-bare-bones.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;concurrency bare bones&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-17T19:14:53Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-17T19:14:53Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p12 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    span.s1 {font: 12.0px Helvetica}
-    span.s2 {text-decoration: underline}
-    span.s3 {font: 13.0px Palatino}
-    span.Apple-tab-span {white-space:pre}
-    ol.ol1 {list-style-type: decimal}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;In this essay, I describe the very bare bones for implementing concurrency in any language.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I know that this can be implemented in JavaScript - I've done it and will blog about it in further essays.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Incidentally, I've also built preliminary versions of this in Common Lisp, C, C++ and assembler.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Variations of this technique have been put into production, in multiple projects) &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency is very simple and its implementation should be &quot;obvious&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;You might wish to skip over the details, once you get the hang of it.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Forget what you already know about multitasking and read on …&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;The point of this essay is to show only the basics of this technique.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I use hard-wired code for illustration.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If a more fully-developed version of the code is desired, see my essays about HTML Components - ag-js-1, ag-js-2, and ag-js-3&lt;/i&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Diagram&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The most simple example of concurrency can be summed up in &lt;span class=&quot;s1&quot;&gt;Fig. 1&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;img src=&quot;/assets/2020-12-17-19-14-53-Images/concurrency-basic.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Fig. 1 Basic Concurrency&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Overview of Concurrency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency, at its most basic, is very simple.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;part&lt;/i&gt; is a black box with input &lt;i&gt;pins&lt;/i&gt; and output &lt;i&gt;pins&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;part&lt;/i&gt; can send &lt;i&gt;events&lt;/i&gt; to another &lt;i&gt;part. &lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/i&gt;The &lt;i&gt;event&lt;/i&gt; is pushed out of the first &lt;i&gt;part's&lt;/i&gt; output &lt;i&gt;pin&lt;/i&gt; and arrives at the other &lt;i&gt;part's&lt;/i&gt; input &lt;i&gt;pin.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Events&lt;/i&gt; can only travel on &lt;i&gt;wires&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;part&lt;/i&gt; contains a number of &lt;i&gt;actions&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Every time an &lt;i&gt;event&lt;/i&gt; arrives at the input &lt;i&gt;pin&lt;/i&gt; of a &lt;i&gt;part&lt;/i&gt; some &lt;i&gt;action &lt;/i&gt;is triggered.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;There are rules for how &lt;i&gt;actions&lt;/i&gt; are triggered, but we'll skip that for now.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;There are two kinds of &lt;i&gt;parts:&lt;/i&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;a &lt;i&gt;leaf part&lt;/i&gt;&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;a &lt;i&gt;schematic&lt;/i&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;A &lt;i&gt;schematic &lt;/i&gt;contains other &lt;i&gt;parts &lt;/i&gt;and a set of &lt;i&gt;wires&lt;/i&gt; (that connect the &lt;i&gt;parts&lt;/i&gt; together).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;In other words, a &lt;i&gt;schematic&lt;/i&gt; &lt;span class=&quot;s2&quot;&gt;can&lt;/span&gt; be broken down further into more &lt;i&gt;parts&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;A &lt;i&gt;leaf part&lt;/i&gt; &lt;span class=&quot;s2&quot;&gt;cannot&lt;/span&gt; be broken down any further.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;leaf part&lt;/i&gt; contains actions which might (or might not) produce outputs on the output&lt;i&gt; pins&lt;/i&gt; of the &lt;i&gt;leaf part.&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;A &lt;i&gt;schematic &lt;/i&gt;also contains &lt;i&gt;actions&lt;/i&gt;, but those &lt;i&gt;actions&lt;/i&gt; are composed of the &lt;i&gt;actions&lt;/i&gt; of the &lt;i&gt;parts&lt;/i&gt; contained in the &lt;i&gt;schematic&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We can keep breaking &lt;i&gt;parts&lt;/i&gt; down until we hit bottom - i.e. a &lt;i&gt;leaf&lt;/i&gt; part that does something.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;On the outside, looking in, we see &lt;i&gt;parts&lt;/i&gt; as black boxes - we don't know (or care) whether a &lt;i&gt;part&lt;/i&gt; is a &lt;i&gt;leaf&lt;/i&gt; or if it is a &lt;i&gt;schematic.&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing Concurrency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;We can implement a simulation of concurrent&lt;i&gt; parts&lt;/i&gt; in any programming language.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;For this, we need some routines.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We need a dispatcher.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We need a way to transfer data between routines.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;That's about it.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Present-day multitasking is inflicted with accidental complexity.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multitasking seems to be difficult.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will describe something much simpler, but just as useful.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;&lt;i&gt;Actions&lt;/i&gt; are functions with no user-defined parameters, no return values, no exceptions and no way to call other routines.&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;A dispatcher is the only routine that can call other routines.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Called routines &lt;i&gt;always&lt;/i&gt; return to the dispatcher.&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;We will transfer data using queues.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example - JavaScript Implementation&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p7&quot;&gt;In the following example, I will show how to build a simple system with two components and one dispatcher.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I have used this same technique to build much larger systems (100s and 1,000s of components).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This example probably looks too simple and not complicated enough.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is an &quot;overnight success&quot; - it took me only 30 years to arrive at this conclusion.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The technique has been used to build distributed systems and has been put into production (several times).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;[I don't recommend that components, queues and dispatchers be implemented as in this example.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I am trying to be excruciatingly transparent.]&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The example appears in the rest of this essay and can be found at&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&amp;lt; … &amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Components - JavaScript&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I wish to keep this essay very simple, so I will describe an example which contains only two components.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One component Sends a string to the other component - the usual &quot;Hello World&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I will name the components &quot;sender()&quot; and &quot;receiver()&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In JavaScript, a &lt;i&gt;part&lt;/i&gt; is a function that receives messages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;The function can use a switch statement (or an if-then-else) to examine the message's pin field, and decide which action to invoke.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this simple example, we won't bother with pins, we'll just assume that every part has one input pin and one output pin.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We'll hard-code the wiring table in the JavaScript function that I call Send() (see section Send - JavaScript).&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The component producer(), is:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;function producer (message) {&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;send (&quot;sender&quot;, &quot;Hello World&quot;);&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;and the component consumer() is&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;function consumer (message) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;console.log (message);&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Points to note:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;producer() does not call consumer() directly&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;the &lt;i&gt;action&lt;/i&gt; in the producer &lt;i&gt;part&lt;/i&gt; consists of one line of JavaScript code (send (…))&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;the &lt;i&gt;action &lt;/i&gt;in the consumer &lt;i&gt;part&lt;/i&gt; consists of one line of JavaScript code (console.log (…))&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;the &lt;i&gt;action&lt;/i&gt; code in producer does not bother to check the message - it just fires its result &quot;Hello World&quot; out of its output &lt;i&gt;pin&lt;/i&gt;&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;the &lt;i&gt;action &lt;/i&gt;code of consumer doesn't bother to look at the incoming message, it just logs it (console.log (message))&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;neither &lt;i&gt;part&lt;/i&gt;, producer nor consumer&lt;i&gt;, &lt;/i&gt;gets to define the parameter list, there is &lt;b&gt;always&lt;/b&gt; one &lt;i&gt;message&lt;/i&gt; parameter passed in to the action code.&lt;/li&gt;
-  &lt;li class=&quot;li8&quot;&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Queues&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Each component has a pair of private queues that can be accessed only by the send() an receive() routines.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;[In Javascript, queues are implemented as arrays.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;An empty queue is [].&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A queue can hold mixed elements of any type.]&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;var sender_input_queue = [];&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;var receiver_input_queue = [];&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Dispatcher - JavaScript&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The dispatcher&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; invokes, arbitrarily, any routine that is &lt;i&gt;ready to run&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A routine is &lt;i&gt;ready to run&lt;/i&gt; if its input queue is non-empty.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;function dispatcher () {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;while (true) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (sender_input_queue.length &amp;gt; 0) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;var message = sender_input_queue.pop ();&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;sender (message);&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;} else if (receiver_input_queue.length &amp;gt; 0) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;var message = receiver_input_queue.pop ();&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;receiver (message);&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt; }&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Send - JavaScript&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The send () function is:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;function send (from, data) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (from == &quot;sender&quot;) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;receiver_input_queue.push (data);&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;} else if (from == &quot;receiver&quot;) {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;sender_input_queue.push (data); &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;} else {&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;fail ();&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p11&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;[in this simple example, sender's output is always piped to receiver's input]&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Startup&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p11&quot;&gt;sender ();&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Steady State&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p11&quot;&gt;dispatcher ();&lt;/p&gt;
-&lt;p class=&quot;p12&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;JS Code&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;node basic.js&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;see code in https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/basic.js&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Index.html&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;see &lt;a href=&quot;https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html&quot;&gt;https://github.com/bmfbp/arrowgrams/blob/master/basic-concurrency/index.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;load index.html in a browser, hit the &quot;run&quot; button&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Benefits of Concurrency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p7&quot;&gt;I claim that concurrency addresses many issues, including:&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;architectural flexibility&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;scalability&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;isolation&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;namespaces&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;type checking&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;thread safety, fairness, and all that …&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;synchronization&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;asynchronous I/O&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;box-and-arrow diagrams (that work)&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;machine control instead of calculation&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;readability&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;expressiveness - DI (Design Intent)&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;multiple use (augmented reuse)&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;removal of exception syntactic sugar&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;removal of parameter syntactic sugar&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;remove of return value syntactic sugar&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;layers, scoping&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;easier scheduling&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;better testabilty&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;compartmentalization of development tasks&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;but, I will not conflate this simple example with such issues.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will address these issues in other essays.&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Call Return Spaghetti&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;see &lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p13&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;I claim that the accidental complexity comes from premature optimization.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Optimization was necessitated by the ground truth in 1950 - processors were very expensive, memory was expensive and very limited.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; In production, we would write the example code differently.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Many optimizations present themselves, for example, we don't need to burn a hole in the processor using a while(true) loop.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">concurrency bare bones</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack is a List</summary></entry></feed>
