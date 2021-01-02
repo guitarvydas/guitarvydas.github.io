@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-02T08:18:40-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-02T08:22:14-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
   &lt;title&gt;Refactoring&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-02T08:18:32Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-02T08:18:32Z&quot;&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-02T08:22:01Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-02T08:22:01Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
     ul.ul1 {list-style-type: disc}
   &lt;/style&gt;
 &lt;/head&gt;
@@ -27,23 +25,21 @@
   &lt;li class=&quot;li2&quot;&gt;change Architecture&lt;/li&gt;
   &lt;li class=&quot;li2&quot;&gt;change, improve, maintainability&lt;/li&gt;
   &lt;li class=&quot;li2&quot;&gt;change, improve, testability&lt;/li&gt;
-  &lt;li class=&quot;li3&quot;&gt;&lt;br&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Changing the Architecture&lt;/b&gt;&lt;/h2&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;Lift the Architecture out of the code using an SCL&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;Refactor the Architecture, not the code&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;Lift the Architecture out of the code using an SCL&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;Refactor the Architecture, not the code&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Improving Maintainability&lt;/b&gt;&lt;/h2&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;often, maintainability implies a change to the Architecture (see Changing the Architecture)&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;otherwise, refactor the code&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;&lt;br&gt;&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;often, maintainability implies a change to the Architecture (see Changing the Architecture)&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;otherwise, refactor the code&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Improving Testability&lt;/b&gt;&lt;/h2&gt;
 &lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;often, testability implies a change to the Architecture (see Changing the Architecture)&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;otherwise, refactor the code&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;often, testability implies a change to the Architecture (see Changing the Architecture)&lt;/li&gt;
+  &lt;li class=&quot;li3&quot;&gt;otherwise, refactor the code&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/body&gt;
