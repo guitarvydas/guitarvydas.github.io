@@ -1,4 +1,445 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-05T16:37:04-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-05T16:44:53-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">The software ceiling.key</title><link href="https://computingsimplicity.neocities.org/2021/01/05/The-Software-Ceiling.key.html" rel="alternate" type="text/html" title="The software ceiling.key" /><published>2021-01-05T00:00:00-05:00</published><updated>2021-01-05T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/05/The%20Software%20Ceiling.key</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/05/The-Software-Ceiling.key.html">&lt;hr /&gt;
+&lt;p&gt;layout: post&lt;br /&gt;
+title: “The Software Ceiling”&lt;br /&gt;
+—&lt;/p&gt;
+&lt;h1 id=&quot;keynote-presentation-software-ceilingkey&quot;&gt;Keynote Presentation: Software Ceiling.key&lt;/h1&gt;
+
+&lt;h2 id=&quot;slide-1&quot;&gt;Slide 1&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-the-software-ceiling&quot;&gt;Title: The Software Ceiling&lt;/h3&gt;
+
+&lt;h4 id=&quot;body&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;(Paul Tarvydas, Jan 2021)&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-2&quot;&gt;Slide 2&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-who-uses-software&quot;&gt;Title: Who Uses Software?&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-1&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;End users, non-programmers&lt;br /&gt;
+Domain experts, non-programmers&lt;br /&gt;
+Software Professionals, programmers&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-3&quot;&gt;Slide 3&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-end-user-expectations&quot;&gt;Title: End User Expectations&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-2&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Apps&lt;br /&gt;
+Inexpensive&lt;br /&gt;
+All-in-one-device, instead of many devices&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-4&quot;&gt;Slide 4&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-apps&quot;&gt;Title: Apps&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-3&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Minecraft&lt;br /&gt;
+Weather&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-5&quot;&gt;Slide 5&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-inexpensive&quot;&gt;Title: Inexpensive&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-4&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Large volume, low price point&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-6&quot;&gt;Slide 6&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-all-in-one-device&quot;&gt;Title: All in one device&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-5&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;All-in-one-device, instead of many devices&lt;br /&gt;
+e.g. loyalty cards, credit cards&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-7&quot;&gt;Slide 7&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-simple-one-purpose-app&quot;&gt;Title: Simple One-Purpose App&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-6&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Hand-held calculator&lt;br /&gt;
+Gameboy&lt;br /&gt;
+Editor’s choice, high SEO choice, TL;DR&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-8&quot;&gt;Slide 8&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-end-user-expectations-more&quot;&gt;Title: End User Expectations (more)&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-7&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Hierarchy&lt;br /&gt;
+Sketch designs (pencil &amp;amp; paper, whiteboard, etc.)&lt;br /&gt;
+Uninterested in detail&lt;br /&gt;
+Learn incrementally&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-9&quot;&gt;Slide 9&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-hierarchy&quot;&gt;Title: Hierarchy&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-8&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;End users understand hierarchy&lt;br /&gt;
+e.g. org charts in business&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-10&quot;&gt;Slide 10&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-sketch-designs&quot;&gt;Title: Sketch Designs&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-9&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;pencil &amp;amp; paper, whiteboard, etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-11&quot;&gt;Slide 11&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-uninterested-in-details&quot;&gt;Title: Uninterested in Details&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-10&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Options unwelcome&lt;br /&gt;
+Don’t welcome interruptions&lt;br /&gt;
+e.g. where to save file&lt;br /&gt;
+e.g. what kind of document to create&lt;br /&gt;
+e.g. update available&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-12&quot;&gt;Slide 12&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-learn-incrementally&quot;&gt;Title: Learn Incrementally&lt;/h3&gt;
+&lt;p&gt;(End User Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-11&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Learn in a hierarchical / fractal manner&lt;br /&gt;
+Learn only a few things at a time&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-13&quot;&gt;Slide 13&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-domain-user-expectations&quot;&gt;Title: Domain User Expectations&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-12&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Snap-together apps, palettes of functionality&lt;br /&gt;
+LEGO® Blocks&lt;br /&gt;
+Whiteboards&lt;br /&gt;
+Science &amp;amp; Engineering&lt;br /&gt;
+To Remain Ignorant of Deeper Details&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-14&quot;&gt;Slide 14&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-lego-blocks&quot;&gt;Title: LEGO® Blocks&lt;/h3&gt;
+&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-13&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Users expect to Snap S/W together like LEGO® blocks&lt;br /&gt;
+Choose functionality from a palette&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-15&quot;&gt;Slide 15&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-whiteboards&quot;&gt;Title: Whiteboards&lt;/h3&gt;
+&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-14&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Users use whiteboards&lt;br /&gt;
+Q: Why?&lt;br /&gt;
+Whiteboards are an incremental improvement over pencil &amp;amp; paper sketches&lt;br /&gt;
+Q: Why sketch?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-16&quot;&gt;Slide 16&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-eschew-software-expertise&quot;&gt;Title: Eschew Software Expertise&lt;/h3&gt;
+&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-15&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Domain experts do not want to become S/W experts&lt;br /&gt;
+Domain experts expect the benefits of S/W&lt;br /&gt;
+Flexibility&lt;br /&gt;
+Easily design solutions within their domains&lt;br /&gt;
+e.g. VisiCalc (spreadsheets)&lt;br /&gt;
+Simple things are simple to implement&lt;br /&gt;
+Call in S/W professionals to handle complexity&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-17&quot;&gt;Slide 17&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-domain-expert-tools&quot;&gt;Title: Domain Expert Tools&lt;/h3&gt;
+&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-16&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Spreadsheets &lt;br /&gt;
+AppleScript&lt;br /&gt;
+Hypercard&lt;br /&gt;
+Sikuli&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-18&quot;&gt;Slide 18&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-software-professionals&quot;&gt;Title: Software Professionals&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-17&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;LEGO® blocks&lt;br /&gt;
+Whiteboards&lt;br /&gt;
+“Software is complicated” - essential complexity&lt;br /&gt;
+Hardware advanced faster than software&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-19&quot;&gt;Slide 19&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-software-lego-blocks&quot;&gt;Title: Software LEGO® Blocks&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-18&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Professionals use:&lt;br /&gt;
+Git&lt;br /&gt;
+GitHub, etc.&lt;br /&gt;
+Libraries&lt;br /&gt;
+Result &lt;br /&gt;
+not LEGO® blocks &lt;br /&gt;
+growing complexity&lt;br /&gt;
+Decreasing reliability&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-20&quot;&gt;Slide 20&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-whiteboards-1&quot;&gt;Title: Whiteboards&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-19&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;S/W professionals sketch designs&lt;br /&gt;
+Then, transfer to code&lt;br /&gt;
+Why?&lt;br /&gt;
+Why not use code instead of sketches?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-21&quot;&gt;Slide 21&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-software-is-complicated&quot;&gt;Title: “Software is Complicated”&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-20&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Excuse or reality?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-22&quot;&gt;Slide 22&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-hardware-advanced-faster-than-software&quot;&gt;Title: Hardware Advanced Faster Than Software&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-21&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Why?&lt;br /&gt;
+Glib answer: software is just more complicated&lt;br /&gt;
+Possibility: inhibiting technology underlies all of S/W&lt;br /&gt;
+Possibility: new technology?  Something more than “programming”?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-23&quot;&gt;Slide 23&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-new-technology&quot;&gt;Title: New Technology&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-22&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Is this just a different twist on existing S/W?&lt;br /&gt;
+Is this just the QWERTY effect?&lt;br /&gt;
+More than one technology?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-24&quot;&gt;Slide 24&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-qwerty-effect&quot;&gt;Title: QWERTY Effect&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-23&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Technology lock-in&lt;br /&gt;
+Incremental&lt;br /&gt;
+QWERTY vs. other keyboard layouts&lt;br /&gt;
+VHS vs. Beta&lt;br /&gt;
+808x vs. other CPU designs&lt;br /&gt;
+Inhibiting Technology&lt;br /&gt;
+Stops progress?&lt;br /&gt;
+Different category?&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-25&quot;&gt;Slide 25&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-1-uses-of-computers&quot;&gt;Title: &amp;gt;1 Uses of Computers&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-24&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Calculator&lt;br /&gt;
+Event-Driven Controllers&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-26&quot;&gt;Slide 26&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-computers-as-calculators&quot;&gt;Title: Computers As Calculators&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-25&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Ballistics&lt;br /&gt;
+Cryptography (not Blockchain!)&lt;br /&gt;
+One-in-one-out&lt;br /&gt;
+Synchronous&lt;br /&gt;
+Hard to implement asynchronous paradigm &lt;br /&gt;
+Functions, FP&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-27&quot;&gt;Slide 27&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-one-in-one-out&quot;&gt;Title: One-in One-out&lt;/h3&gt;
+&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-26&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;One-in-one-out&lt;br /&gt;
+One input —&amp;gt; One outcome&lt;br /&gt;
+Exceptions are a “special case” tacked onto the side&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-28&quot;&gt;Slide 28&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-synchronous&quot;&gt;Title: Synchronous&lt;/h3&gt;
+&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-27&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Attempts to add async to calculator paradigm&lt;br /&gt;
+Accidental Complexity &amp;lt;— using unsuitable paradigm&lt;br /&gt;
+e.g. Mars Rover disaster&lt;br /&gt;
+Hard to implement asynchronous paradigm in synchronous paradigm&lt;br /&gt;
+Epicycles on top of epicycles&lt;br /&gt;
+Threads, promises, various baubles, etc.)&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-29&quot;&gt;Slide 29&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-functional-approach&quot;&gt;Title: Functional Approach&lt;/h3&gt;
+&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-28&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Ilya Prigogene (Nobel laureate) “Order Out Of Chaos”&lt;br /&gt;
+[paraphrased] Functional thinking has set Physics back 100 years&lt;br /&gt;
+FP - Functional Programming&lt;br /&gt;
+Eschew time&lt;br /&gt;
+Eschew STATE&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-30&quot;&gt;Slide 30&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-call-return&quot;&gt;Title: CALL RETURN&lt;/h3&gt;
+&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-29&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Implicitly uses The Stack&lt;br /&gt;
+Creates dynamic record of invocations —&amp;gt; dependency&lt;br /&gt;
+Accidental complexity&lt;br /&gt;
+Useful only in calculator model of computing&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-31&quot;&gt;Slide 31&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-global-variable-hidden&quot;&gt;Title: Global Variable (Hidden)&lt;/h3&gt;
+&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-30&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;All PLs, incl. FP and Smalltalk, share a global variable&lt;br /&gt;
+The Stack&lt;br /&gt;
+CALL / RETURN manipulates this global variable&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-32&quot;&gt;Slide 32&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-computers-for-event-driven-control&quot;&gt;Title: Computers for Event-Driven Control&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-31&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Asynchronous&lt;br /&gt;
+Multiple Outcomes&lt;br /&gt;
+Eschew Dependencies&lt;br /&gt;
+Implement synchronous paradigm&lt;br /&gt;
+Isolation&lt;br /&gt;
+Examples&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-33&quot;&gt;Slide 33&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-asynchronous&quot;&gt;Title: Asynchronous&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-32&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Events come at any time&lt;br /&gt;
+e.g. GUI&lt;br /&gt;
+e.g. Browser&lt;br /&gt;
+e.g. mouse&lt;br /&gt;
+e.g. keyboard&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-34&quot;&gt;Slide 34&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-multiple-outcomes&quot;&gt;Title: Multiple Outcomes&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-33&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Multiple Outcomes&lt;br /&gt;
+One input —&amp;gt; multiple possible outcomes&lt;br /&gt;
+One input —&amp;gt; no outcomes&lt;br /&gt;
+Example, javascript FileReader()&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-35&quot;&gt;Slide 35&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-eschew-dependencies&quot;&gt;Title: Eschew Dependencies&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-34&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Scalability requires lack of dependency&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-36&quot;&gt;Slide 36&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-implement-synchronous-paradigm-using-asynchronous-paradigm&quot;&gt;Title: Implement Synchronous Paradigm Using Asynchronous Paradigm&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-35&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Blocking &amp;lt;— ACK/NAK&lt;br /&gt;
+Already explored&lt;br /&gt;
+Networking&lt;br /&gt;
+Electronics&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-37&quot;&gt;Slide 37&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-isolation&quot;&gt;Title: Isolation&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-36&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Isolation is more important than encapsulation&lt;br /&gt;
+Encapsulate data and control flow&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-38&quot;&gt;Slide 38&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-examples&quot;&gt;Title: Examples&lt;/h3&gt;
+&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
+
+&lt;h4 id=&quot;body-37&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Statecharts&lt;br /&gt;
+https://computingsimplicity.neocities.org/blogs/StateCharts.pdf&lt;/p&gt;
+
+&lt;h2 id=&quot;slide-39&quot;&gt;Slide 39&lt;/h2&gt;
+
+&lt;h3 id=&quot;title-blockchain&quot;&gt;Title: Blockchain&lt;/h3&gt;
+
+&lt;h4 id=&quot;body-38&quot;&gt;Body&lt;/h4&gt;
+
+&lt;p&gt;Two paradigms (not one)&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Calculation &amp;lt;— cryptography&lt;/li&gt;
+  &lt;li&gt;Event-driven &amp;lt;— time-based obfuscation and p2p&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">layout: post title: “The Software Ceiling” — Keynote Presentation: Software Ceiling.key Slide 1 Title: The Software Ceiling Body (Paul Tarvydas, Jan 2021) Slide 2 Title: Who Uses Software? Body End users, non-programmers Domain experts, non-programmers Software Professionals, programmers Slide 3 Title: End User Expectations Body Apps Inexpensive All-in-one-device, instead of many devices Slide 4 Title: Apps (End User Expectations) Body Minecraft Weather Slide 5 Title: Inexpensive (End User Expectations) Body Large volume, low price point Slide 6 Title: All in one device (End User Expectations) Body All-in-one-device, instead of many devices e.g. loyalty cards, credit cards Slide 7 Title: Simple One-Purpose App (End User Expectations) Body Hand-held calculator Gameboy Editor’s choice, high SEO choice, TL;DR Slide 8 Title: End User Expectations (more) Body Hierarchy Sketch designs (pencil &amp;amp; paper, whiteboard, etc.) Uninterested in detail Learn incrementally Slide 9 Title: Hierarchy (End User Expectations) Body End users understand hierarchy e.g. org charts in business Slide 10 Title: Sketch Designs (End User Expectations) Body pencil &amp;amp; paper, whiteboard, etc. Slide 11 Title: Uninterested in Details (End User Expectations) Body Options unwelcome Don’t welcome interruptions e.g. where to save file e.g. what kind of document to create e.g. update available Slide 12 Title: Learn Incrementally (End User Expectations) Body Learn in a hierarchical / fractal manner Learn only a few things at a time Slide 13 Title: Domain User Expectations Body Snap-together apps, palettes of functionality LEGO® Blocks Whiteboards Science &amp;amp; Engineering To Remain Ignorant of Deeper Details Slide 14 Title: LEGO® Blocks (Domain Expert Expectations) Body Users expect to Snap S/W together like LEGO® blocks Choose functionality from a palette Slide 15 Title: Whiteboards (Domain Expert Expectations) Body Users use whiteboards Q: Why? Whiteboards are an incremental improvement over pencil &amp;amp; paper sketches Q: Why sketch? Slide 16 Title: Eschew Software Expertise (Domain Expert Expectations) Body Domain experts do not want to become S/W experts Domain experts expect the benefits of S/W Flexibility Easily design solutions within their domains e.g. VisiCalc (spreadsheets) Simple things are simple to implement Call in S/W professionals to handle complexity Slide 17 Title: Domain Expert Tools (Domain Expert Expectations) Body Spreadsheets AppleScript Hypercard Sikuli Slide 18 Title: Software Professionals Body LEGO® blocks Whiteboards “Software is complicated” - essential complexity Hardware advanced faster than software Slide 19 Title: Software LEGO® Blocks Body Professionals use: Git GitHub, etc. Libraries Result not LEGO® blocks growing complexity Decreasing reliability Slide 20 Title: Whiteboards Body S/W professionals sketch designs Then, transfer to code Why? Why not use code instead of sketches? Slide 21 Title: “Software is Complicated” Body Excuse or reality? Slide 22 Title: Hardware Advanced Faster Than Software Body Why? Glib answer: software is just more complicated Possibility: inhibiting technology underlies all of S/W Possibility: new technology? Something more than “programming”? Slide 23 Title: New Technology Body Is this just a different twist on existing S/W? Is this just the QWERTY effect? More than one technology? Slide 24 Title: QWERTY Effect Body Technology lock-in Incremental QWERTY vs. other keyboard layouts VHS vs. Beta 808x vs. other CPU designs Inhibiting Technology Stops progress? Different category? Slide 25 Title: &amp;gt;1 Uses of Computers Body Calculator Event-Driven Controllers Slide 26 Title: Computers As Calculators Body Ballistics Cryptography (not Blockchain!) One-in-one-out Synchronous Hard to implement asynchronous paradigm Functions, FP Slide 27 Title: One-in One-out (Computers as Calculators) Body One-in-one-out One input —&amp;gt; One outcome Exceptions are a “special case” tacked onto the side Slide 28 Title: Synchronous (Computers as Calculators) Body Attempts to add async to calculator paradigm Accidental Complexity &amp;lt;— using unsuitable paradigm e.g. Mars Rover disaster Hard to implement asynchronous paradigm in synchronous paradigm Epicycles on top of epicycles Threads, promises, various baubles, etc.) Slide 29 Title: Functional Approach (Computers as Calculators) Body Ilya Prigogene (Nobel laureate) “Order Out Of Chaos” [paraphrased] Functional thinking has set Physics back 100 years FP - Functional Programming Eschew time Eschew STATE Slide 30 Title: CALL RETURN (Computers as Calculators) Body Implicitly uses The Stack Creates dynamic record of invocations —&amp;gt; dependency Accidental complexity Useful only in calculator model of computing Slide 31 Title: Global Variable (Hidden) (Computers as Calculators) Body All PLs, incl. FP and Smalltalk, share a global variable The Stack CALL / RETURN manipulates this global variable Slide 32 Title: Computers for Event-Driven Control Body Asynchronous Multiple Outcomes Eschew Dependencies Implement synchronous paradigm Isolation Examples Slide 33 Title: Asynchronous (Event-Driven Control) Body Events come at any time e.g. GUI e.g. Browser e.g. mouse e.g. keyboard Slide 34 Title: Multiple Outcomes (Event-Driven Control) Body Multiple Outcomes One input —&amp;gt; multiple possible outcomes One input —&amp;gt; no outcomes Example, javascript FileReader() Slide 35 Title: Eschew Dependencies (Event-Driven Control) Body Scalability requires lack of dependency Slide 36 Title: Implement Synchronous Paradigm Using Asynchronous Paradigm (Event-Driven Control) Body Blocking &amp;lt;— ACK/NAK Already explored Networking Electronics Slide 37 Title: Isolation (Event-Driven Control) Body Isolation is more important than encapsulation Encapsulate data and control flow Slide 38 Title: Examples (Event-Driven Control) Body Statecharts https://computingsimplicity.neocities.org/blogs/StateCharts.pdf Slide 39 Title: Blockchain Body Two paradigms (not one) Calculation &amp;lt;— cryptography Event-driven &amp;lt;— time-based obfuscation and p2p</summary></entry><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -280,7 +721,311 @@
 &lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Multitasking is hard only if one attempts to solve the multitasking problem using the synchronous paradigm.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Primary Issue</summary></entry><entry><title type="html">Peg</title><link href="https://computingsimplicity.neocities.org/2020/12/27/PEG.html" rel="alternate" type="text/html" title="Peg" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/PEG</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/PEG.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Primary Issue</summary></entry><entry><title type="html">The stack 2</title><link href="https://computingsimplicity.neocities.org/2020/12/27/The-Stack-2.html" rel="alternate" type="text/html" title="The stack 2" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/The%20Stack%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/The-Stack-2.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;The Stack&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T22:34:06Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T22:34:06Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 9.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Desired&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;I have found that it is convenient to create separate stacks for every type. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;I found that I need only 5 basic operations and that I can generate/compile/transpile code to enact these operations.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;The &quot;syntax&quot; for talking about types in this manner, drops to something very small (&lt;i&gt;bizarrely, the number 5 comes up again - I can describe the new syntax using only 5 productions&lt;/i&gt;).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;I describe this method in the following essay.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-22-34-06-Images/isolation-Desired.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Achieving 2 Stacks for Each Type&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SCL Syntax&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = { ... } &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;--&amp;gt; class with fields def&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :string &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;--&amp;gt; string def&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :map&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;--&amp;gt; map def&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = | ... &lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;--&amp;gt; or type def&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ... &lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;--&amp;gt; enum def&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;This syntax was chosen for its regularity since it was originally parsed with manually written code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Each construct has a &lt;/i&gt;left handle.&lt;i&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every construct begins with &quot;id = &quot;, then the next character determines the kind of construct, e.g. &quot;id = {&quot; means that the construct is a class with fields, &quot;id = '&quot; means enum, and so on.]&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;For a prototype of this, see &lt;a href=&quot;https://github.com/guitarvydas/stack-dsl&quot;&gt;https://github.com/guitarvydas/stack-dsl&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Type Specification&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;[&lt;i&gt;comments deleted, for full contents see &lt;/i&gt;&lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl&quot;&gt;&lt;i&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;esaprogram = { typeDecls situations classes whenDeclarations&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;typeDecls = :map typeDecl&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;situations = :map situationDefinition&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;classes = :map esaclass&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;whenDeclarations = :map whenDeclaration&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;typeDecl = { name typeName }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;situationDefinition =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;esaclass = { name fieldMap methodsTable }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;whenDeclaration = { situationReferenceList esaKind methodDeclarationsAndScriptDeclarations }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;situationReferenceList = :map situationReferenceName&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;situationReferenceName =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;methodDeclarationsAndScriptDeclarations = :map declarationMethodOrScript&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;declarationMethodOrScript =| methodDeclaration | scriptDeclaration&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;methodDeclaration = { esaKind name formalList returnType }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;scriptDeclaration = { esaKind name formalList returnType implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;returnType = { returnKind name }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;returnKind = 'map' | 'simple' | 'void'&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;formalList = :map name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;esaKind =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;typeName =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;expression = { ekind object }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;ekind = 'true' | 'false' | 'object' | 'calledObject'&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;object = { name fieldMap }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;fieldMap = :map field&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;field = { name fkind actualParameterList }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;fkind = 'map' | 'simple'&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;actualParameterList = :map expression&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;name = :string&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;methodsTable = :map declarationMethodOrScript&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;externalMethod = { name formalList returnType }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;internalMethod = { name formalList returnType implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;implementation = :map statement&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;statement =| letStatement | mapStatement | exitMapStatement | setStatement | createStatement | ifStatement | loopStatement | exitWhenStatement | callInternalStatement | callExternalStatement | returnTrueStatement | returnFalseStatement | returnValueStatement&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;letStatement = { varName expression implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;mapStatement = { varName expression implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;exitMapStatement = { filler }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;setStatement = { lval expression }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;createStatement = { varName indirectionKind name implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;ifStatement = { expression thenPart elsePart }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;loopStatement = { implementation }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;exitWhenStatement = { expression }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;returnTrueStatement = { methodName }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;returnFalseStatement = { methodName }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;returnValueStatement = { methodName name }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;callInternalStatement = { functionReference }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;callExternalStatement = { functionReference }&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;lval =| expression&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;varName =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;functionReference =| expression&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;thenPart =| implementation&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;elsePart =| implementation&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;indirectionKind = 'indirect' | 'direct'&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;methodName =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;filler =| name&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;class id = { ... }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;id = { ... }&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Defines a class that contains the given fields.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This construct does not explicitly define any methods for the class.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Methods are generated automatically.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;type union id = | ...&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;id = | ...&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be a union of other types.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;enum&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ...&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ...&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Defines a type to consist of one or more contants (symbols / strings).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;foreign string&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :string&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;id = :string&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be of a foreign type STRING.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;maybe I should have generalized this to &lt;/i&gt;id = :foreign&lt;i&gt;?&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;foreign list id = :map&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;id = :map&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;...&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be a list of some other type.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;maybe I should have named this :&lt;/i&gt;list&lt;i&gt; instead of :&lt;/i&gt;map]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Compiling to Separate Stacks&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;I find it useful to have 2 stacks for every type&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;working stack&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;output stack&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;The example type specification in Example Type Specification defines 54 types.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This compiles to 54 type definitions and 54 * 2 = 108 stacks.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Note that there are only 5 possible ways to define a type.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Note that types can be defined as other types.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;methodName =| name&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;name = :string&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Note that &quot;variable names&quot; are not needed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We simply create a typename for each entity, e.g.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;fn (a: int, b : int)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;becomes&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;fn (a, b)&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;a =| int&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;b =| int&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;(this removes syntactic noise from the declarations and pushes implementation details deeper into the hierarchy).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this example, &lt;span class=&quot;s1&quot;&gt;a&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;b&lt;/span&gt; are types (not variables).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Each stack contains enough information to:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;specify the type contained in the stack&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;the actual stack of values (of the given type)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Foreign Types&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;There are only 2 types at the bottom:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;a &lt;span class=&quot;s1&quot;&gt;%typed-valu&lt;/span&gt;e: (&lt;span class=&quot;s1&quot;&gt; %type, %value&lt;/span&gt; ) [where &lt;span class=&quot;s1&quot;&gt;%type&lt;/span&gt; is a String and &lt;span class=&quot;s1&quot;&gt;%value&lt;/span&gt; is anything]&lt;/li&gt;
+  &lt;li class=&quot;li8&quot;&gt;&lt;span class=&quot;s2&quot;&gt;a list of &lt;/span&gt;%typed-value&lt;span class=&quot;s2&quot;&gt;: ( &lt;/span&gt;%element-type, %ordered-list &lt;span class=&quot;s2&quot;&gt;) [where &lt;/span&gt;%ordered-list&lt;span class=&quot;s2&quot;&gt; contains &lt;/span&gt;%type-values&lt;span class=&quot;s2&quot;&gt;]&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul2&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;Both types are foreign and opaque&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;Only the implementation knows what is inside of them&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;type checking is done by-name (equality of &lt;span class=&quot;s1&quot;&gt;%type&lt;/span&gt;s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Operations&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;I find that there are 6 basic operations:&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;NewScope&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;EndScope&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;Output&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;SetField_???_from_???&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;AppendFrom_???&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&amp;lt;foreign operation&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;The first 5 operations can be automatically generated for every type (and the corresponding stacks).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;The 6&lt;span class=&quot;s3&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; operation (&amp;lt;foreign operation&amp;gt;) is a catch-all for operations that are specific to the solution.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;In &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm&lt;/a&gt; (and the other dsl*.pasm files), the stack names are prepended to the operations (followed by two underscores), and the typenames are prefixed with &quot;$&quot; e.g.&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;$whenDeclarations__EndScope&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;thus, in the prototype, one will see operations, like:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;$formalList__NewScope&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;$classes__EndScope&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;$formalList__Output&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;$scriptDeclaration__SetField_formalList_from_formalList&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;$formalList__AppendFrom_name&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&amp;lt;foreign operation&amp;gt;: $name__GetName&lt;/li&gt;
+  &lt;li class=&quot;li9&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;NewScope&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__NewScope&lt;/span&gt; pushes an empty item, of the appropriate type, onto the working stack of the type.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;EndScope&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__EndScope&lt;/span&gt; pops the given working stack.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Output&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__Output&lt;/span&gt; moves the top item from the working stack to the output stack for the given type.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The working stack is popped (once).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SetField&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__SetField_&amp;lt;fieldName&amp;gt;_from_&amp;lt;other-type&amp;gt; &lt;/span&gt;sets the field &lt;i&gt;fieldName &lt;/i&gt;of &lt;i&gt;type&lt;/i&gt; to the value of the top of the Output stack of &lt;i&gt;other-type&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This operation checks that the &lt;i&gt;other-type&lt;/i&gt; is of the type required by &lt;i&gt;fieldName&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This operation pops (once) the Output stack of &lt;i&gt;other-type.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;AppendFrom&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__AppendFrom_&amp;lt;other-type&amp;gt; &lt;/span&gt;appends the value of the top of the Output stack of &lt;i&gt;other-type&lt;/i&gt; to the top list on the working stack of &lt;i&gt;type.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This operation checks that &lt;i&gt;type&lt;/i&gt; is a list (I've called it :map) and that the element-type of the list matches &lt;i&gt;other-type&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This operation pops (once) the Output stack of &lt;i&gt;other-type.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Foreign&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__??? &lt;/span&gt;performs operation &quot;???&quot; on the given type.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;This operation has no arguments (other than &lt;i&gt;type&lt;/i&gt;), but multiple operations can be declared and called, e.g. &lt;i&gt;counter__reset&lt;/i&gt; … &lt;i&gt;counter__increment&lt;/i&gt; … &lt;i&gt;counter__increment_by_2 …&lt;/i&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Compilation (Lisp)&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;Push these through your favourite pretty-printer&lt;/i&gt;]&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry><entry><title type="html">Compile time and runtime</title><link href="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html" rel="alternate" type="text/html" title="Compile time and runtime" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/Compile%20Time%20and%20Runtime</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Compile Time and Runtime&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Overview of Comile-time vs. Run-time&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;eliding details&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Fiction.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Programmers generalize (think of) 2 phases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Reality.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;Compiler generates object files and DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Operating system loads object files and DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;Operating system &quot;fixes up&quot; holes in DLLs&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;App initializes
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li2&quot;&gt;compiler leaves islands of initialization code&lt;/li&gt;
+    &lt;li class=&quot;li2&quot;&gt;top-level data, e.g. var x = &quot;abc&quot;;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;App runs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Compile Time and Runtime</summary></entry><entry><title type="html">Peg</title><link href="https://computingsimplicity.neocities.org/2020/12/27/PEG.html" rel="alternate" type="text/html" title="Peg" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/PEG</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/PEG.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1219,311 +1964,7 @@
 &lt;p class=&quot;p13&quot;&gt;(&lt;i&gt;see next instalment&lt;/i&gt;)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG for Lisp</summary></entry><entry><title type="html">The stack 2</title><link href="https://computingsimplicity.neocities.org/2020/12/27/The-Stack-2.html" rel="alternate" type="text/html" title="The stack 2" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/The%20Stack%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/The-Stack-2.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;The Stack&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T22:34:06Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T22:34:06Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
-    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
-    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
-    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    span.s1 {font: 11.0px Menlo}
-    span.s2 {font: 13.0px Palatino}
-    span.s3 {font: 9.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: circle}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Desired&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;I have found that it is convenient to create separate stacks for every type. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;I found that I need only 5 basic operations and that I can generate/compile/transpile code to enact these operations.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The &quot;syntax&quot; for talking about types in this manner, drops to something very small (&lt;i&gt;bizarrely, the number 5 comes up again - I can describe the new syntax using only 5 productions&lt;/i&gt;).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;I describe this method in the following essay.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-22-34-06-Images/isolation-Desired.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Achieving 2 Stacks for Each Type&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SCL Syntax&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = { ... } &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;--&amp;gt; class with fields def&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :string &lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;--&amp;gt; string def&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :map&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;--&amp;gt; map def&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = | ... &lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;--&amp;gt; or type def&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ... &lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;--&amp;gt; enum def&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;This syntax was chosen for its regularity since it was originally parsed with manually written code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Each construct has a &lt;/i&gt;left handle.&lt;i&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every construct begins with &quot;id = &quot;, then the next character determines the kind of construct, e.g. &quot;id = {&quot; means that the construct is a class with fields, &quot;id = '&quot; means enum, and so on.]&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;For a prototype of this, see &lt;a href=&quot;https://github.com/guitarvydas/stack-dsl&quot;&gt;https://github.com/guitarvydas/stack-dsl&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Type Specification&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;[&lt;i&gt;comments deleted, for full contents see &lt;/i&gt;&lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl&quot;&gt;&lt;i&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;esaprogram = { typeDecls situations classes whenDeclarations&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;typeDecls = :map typeDecl&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;situations = :map situationDefinition&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;classes = :map esaclass&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;whenDeclarations = :map whenDeclaration&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;typeDecl = { name typeName }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;situationDefinition =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;esaclass = { name fieldMap methodsTable }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;whenDeclaration = { situationReferenceList esaKind methodDeclarationsAndScriptDeclarations }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;situationReferenceList = :map situationReferenceName&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;situationReferenceName =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;methodDeclarationsAndScriptDeclarations = :map declarationMethodOrScript&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;declarationMethodOrScript =| methodDeclaration | scriptDeclaration&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;methodDeclaration = { esaKind name formalList returnType }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;scriptDeclaration = { esaKind name formalList returnType implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;returnType = { returnKind name }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;returnKind = 'map' | 'simple' | 'void'&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;formalList = :map name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;esaKind =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;typeName =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;expression = { ekind object }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;ekind = 'true' | 'false' | 'object' | 'calledObject'&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;object = { name fieldMap }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;fieldMap = :map field&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;field = { name fkind actualParameterList }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;fkind = 'map' | 'simple'&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;actualParameterList = :map expression&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;name = :string&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;methodsTable = :map declarationMethodOrScript&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;externalMethod = { name formalList returnType }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;internalMethod = { name formalList returnType implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;implementation = :map statement&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;statement =| letStatement | mapStatement | exitMapStatement | setStatement | createStatement | ifStatement | loopStatement | exitWhenStatement | callInternalStatement | callExternalStatement | returnTrueStatement | returnFalseStatement | returnValueStatement&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;letStatement = { varName expression implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;mapStatement = { varName expression implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;exitMapStatement = { filler }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;setStatement = { lval expression }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;createStatement = { varName indirectionKind name implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;ifStatement = { expression thenPart elsePart }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;loopStatement = { implementation }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;exitWhenStatement = { expression }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;returnTrueStatement = { methodName }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;returnFalseStatement = { methodName }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;returnValueStatement = { methodName name }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;callInternalStatement = { functionReference }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;callExternalStatement = { functionReference }&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;lval =| expression&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;varName =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;functionReference =| expression&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;thenPart =| implementation&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;elsePart =| implementation&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;indirectionKind = 'indirect' | 'direct'&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;methodName =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;filler =| name&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;class id = { ... }&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;id = { ... }&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Defines a class that contains the given fields.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This construct does not explicitly define any methods for the class.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Methods are generated automatically.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;type union id = | ...&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;id = | ...&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be a union of other types.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;enum&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ...&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;id = '...' |&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;'...' | ...&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Defines a type to consist of one or more contants (symbols / strings).&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;foreign string&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;id = :string&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;id = :string&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be of a foreign type STRING.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;maybe I should have generalized this to &lt;/i&gt;id = :foreign&lt;i&gt;?&lt;/i&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;foreign list id = :map&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;id = :map&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;...&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Defines a type &lt;i&gt;id&lt;/i&gt; to be a list of some other type.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;maybe I should have named this :&lt;/i&gt;list&lt;i&gt; instead of :&lt;/i&gt;map]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Compiling to Separate Stacks&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;I find it useful to have 2 stacks for every type&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;working stack&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;output stack&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The example type specification in Example Type Specification defines 54 types.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This compiles to 54 type definitions and 54 * 2 = 108 stacks.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Note that there are only 5 possible ways to define a type.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Note that types can be defined as other types.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;methodName =| name&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;name = :string&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;…&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Note that &quot;variable names&quot; are not needed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We simply create a typename for each entity, e.g.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;fn (a: int, b : int)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;becomes&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;fn (a, b)&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;a =| int&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;b =| int&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;(this removes syntactic noise from the declarations and pushes implementation details deeper into the hierarchy).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this example, &lt;span class=&quot;s1&quot;&gt;a&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;b&lt;/span&gt; are types (not variables).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Each stack contains enough information to:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;specify the type contained in the stack&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;the actual stack of values (of the given type)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Foreign Types&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;There are only 2 types at the bottom:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;a &lt;span class=&quot;s1&quot;&gt;%typed-valu&lt;/span&gt;e: (&lt;span class=&quot;s1&quot;&gt; %type, %value&lt;/span&gt; ) [where &lt;span class=&quot;s1&quot;&gt;%type&lt;/span&gt; is a String and &lt;span class=&quot;s1&quot;&gt;%value&lt;/span&gt; is anything]&lt;/li&gt;
-  &lt;li class=&quot;li8&quot;&gt;&lt;span class=&quot;s2&quot;&gt;a list of &lt;/span&gt;%typed-value&lt;span class=&quot;s2&quot;&gt;: ( &lt;/span&gt;%element-type, %ordered-list &lt;span class=&quot;s2&quot;&gt;) [where &lt;/span&gt;%ordered-list&lt;span class=&quot;s2&quot;&gt; contains &lt;/span&gt;%type-values&lt;span class=&quot;s2&quot;&gt;]&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul2&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;Both types are foreign and opaque&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;Only the implementation knows what is inside of them&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;type checking is done by-name (equality of &lt;span class=&quot;s1&quot;&gt;%type&lt;/span&gt;s)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Operations&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;I find that there are 6 basic operations:&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;NewScope&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;EndScope&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;Output&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;SetField_???_from_???&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;AppendFrom_???&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;&amp;lt;foreign operation&amp;gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The first 5 operations can be automatically generated for every type (and the corresponding stacks).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The 6&lt;span class=&quot;s3&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; operation (&amp;lt;foreign operation&amp;gt;) is a catch-all for operations that are specific to the solution.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;In &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/dsl3.pasm&lt;/a&gt; (and the other dsl*.pasm files), the stack names are prepended to the operations (followed by two underscores), and the typenames are prefixed with &quot;$&quot; e.g.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;$whenDeclarations__EndScope&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;thus, in the prototype, one will see operations, like:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;$formalList__NewScope&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;$classes__EndScope&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;$formalList__Output&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;$scriptDeclaration__SetField_formalList_from_formalList&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;$formalList__AppendFrom_name&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;&amp;lt;foreign operation&amp;gt;: $name__GetName&lt;/li&gt;
-  &lt;li class=&quot;li9&quot;&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;NewScope&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__NewScope&lt;/span&gt; pushes an empty item, of the appropriate type, onto the working stack of the type.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;EndScope&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__EndScope&lt;/span&gt; pops the given working stack.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Output&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__Output&lt;/span&gt; moves the top item from the working stack to the output stack for the given type.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The working stack is popped (once).&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SetField&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__SetField_&amp;lt;fieldName&amp;gt;_from_&amp;lt;other-type&amp;gt; &lt;/span&gt;sets the field &lt;i&gt;fieldName &lt;/i&gt;of &lt;i&gt;type&lt;/i&gt; to the value of the top of the Output stack of &lt;i&gt;other-type&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This operation checks that the &lt;i&gt;other-type&lt;/i&gt; is of the type required by &lt;i&gt;fieldName&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This operation pops (once) the Output stack of &lt;i&gt;other-type.&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;AppendFrom&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__AppendFrom_&amp;lt;other-type&amp;gt; &lt;/span&gt;appends the value of the top of the Output stack of &lt;i&gt;other-type&lt;/i&gt; to the top list on the working stack of &lt;i&gt;type.&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This operation checks that &lt;i&gt;type&lt;/i&gt; is a list (I've called it :map) and that the element-type of the list matches &lt;i&gt;other-type&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This operation pops (once) the Output stack of &lt;i&gt;other-type.&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Foreign&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;type&amp;gt;__??? &lt;/span&gt;performs operation &quot;???&quot; on the given type.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;This operation has no arguments (other than &lt;i&gt;type&lt;/i&gt;), but multiple operations can be declared and called, e.g. &lt;i&gt;counter__reset&lt;/i&gt; … &lt;i&gt;counter__increment&lt;/i&gt; … &lt;i&gt;counter__increment_by_2 …&lt;/i&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Compilation (Lisp)&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.lisp&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-exprtypes.json&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;See &lt;a href=&quot;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp&quot;&gt;https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/example-generated-mechanisms.lisp&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;Push these through your favourite pretty-printer&lt;/i&gt;]&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry><entry><title type="html">Compile time and runtime</title><link href="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html" rel="alternate" type="text/html" title="Compile time and runtime" /><published>2020-12-27T00:00:00-05:00</published><updated>2020-12-27T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/27/Compile%20Time%20and%20Runtime</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/27/Compile-Time-and-Runtime.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Compile Time and Runtime&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-27T12:42:51Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: hyphen}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Overview of Comile-time vs. Run-time&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;eliding details&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Fiction.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Programmers generalize (think of) 2 phases&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2020-12-27-12-42-51-Images/CompileTimeAndRuntime-Reality.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;Compiler generates object files and DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;Operating system loads object files and DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;Operating system &quot;fixes up&quot; holes in DLLs&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;App initializes
-  &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li2&quot;&gt;compiler leaves islands of initialization code&lt;/li&gt;
-    &lt;li class=&quot;li2&quot;&gt;top-level data, e.g. var x = &quot;abc&quot;;&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;App runs&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Compile Time and Runtime</summary></entry><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG for Lisp</summary></entry><entry><title type="html">The algol bottleneck</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html" rel="alternate" type="text/html" title="The algol bottleneck" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20ALGOL%20Bottleneck</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-ALGOL-Bottleneck.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1626,42 +2067,7 @@
 &lt;p class=&quot;p11&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; https://dl.acm.org/doi/10.1145/359576.359579&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The ALGOL Bottlenck</summary></entry><entry><title type="html">The stack</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-Stack.html" rel="alternate" type="text/html" title="The stack" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20Stack</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-Stack.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;The Stack&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T00:23:23Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T00:23:23Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Fiction.png&quot; width=&quot;250px&quot; height=&quot;454px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Reality.png&quot; width=&quot;413px&quot; height=&quot;587px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The stack is a heterogeneous list.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;It contains data of different types.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;It contains control-flow information.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Desired (not reality yet)&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Desired.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry><entry><title type="html">Dlls</title><link href="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html" rel="alternate" type="text/html" title="Dlls" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/DLLs</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The ALGOL Bottlenck</summary></entry><entry><title type="html">Dlls</title><link href="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html" rel="alternate" type="text/html" title="Dlls" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/DLLs</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/DLLs.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1724,31 +2130,39 @@
 &lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-22-58-29-Images/FileReader-sensible.png&quot; width=&quot;231px&quot; height=&quot;231px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">FileReader</summary></entry><entry><title type="html">The stack is a list</title><link href="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html" rel="alternate" type="text/html" title="The stack is a list" /><published>2020-12-24T00:00:00-05:00</published><updated>2020-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/24/The%20Stack%20is%20a%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/24/The-Stack-is-a-List.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">FileReader</summary></entry><entry><title type="html">The stack</title><link href="https://computingsimplicity.neocities.org/2020/12/25/The-Stack.html" rel="alternate" type="text/html" title="The stack" /><published>2020-12-25T00:00:00-05:00</published><updated>2020-12-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2020/12/25/The%20Stack</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2020/12/25/The-Stack.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;The Stack is a List&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-24T20:11:14Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-24T20:11:14Z&quot;&gt;
+  &lt;title&gt;The Stack&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2020-12-25T00:23:23Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2020-12-25T00:23:23Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;List&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-20-11-14-Images/stack-List.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Array&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-20-11-14-Images/stack-array.png&quot; width=&quot;361px&quot; height=&quot;61px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Unoptimized Stack&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-20-11-14-Images/stack-unoptimized stack.png&quot; width=&quot;241px&quot; height=&quot;181px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Optimized Stack&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-24-20-11-14-Images/stack-optimized stack.png&quot; width=&quot;121px&quot; height=&quot;181px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Fiction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Fiction.png&quot; width=&quot;250px&quot; height=&quot;454px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reality&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Reality.png&quot; width=&quot;413px&quot; height=&quot;587px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The stack is a heterogeneous list.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;It contains data of different types.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;It contains control-flow information.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Desired (not reality yet)&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2020-12-25-00-23-23-Images/isolation-Desired.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack is a List</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">The Stack</summary></entry></feed>
