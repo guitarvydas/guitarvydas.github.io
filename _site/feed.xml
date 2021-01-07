@@ -1,445 +1,210 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-05T16:44:53-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">The software ceiling.key</title><link href="https://computingsimplicity.neocities.org/2021/01/05/The-Software-Ceiling.key.html" rel="alternate" type="text/html" title="The software ceiling.key" /><published>2021-01-05T00:00:00-05:00</published><updated>2021-01-05T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/05/The%20Software%20Ceiling.key</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/05/The-Software-Ceiling.key.html">&lt;hr /&gt;
-&lt;p&gt;layout: post&lt;br /&gt;
-title: “The Software Ceiling”&lt;br /&gt;
-—&lt;/p&gt;
-&lt;h1 id=&quot;keynote-presentation-software-ceilingkey&quot;&gt;Keynote Presentation: Software Ceiling.key&lt;/h1&gt;
-
-&lt;h2 id=&quot;slide-1&quot;&gt;Slide 1&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-the-software-ceiling&quot;&gt;Title: The Software Ceiling&lt;/h3&gt;
-
-&lt;h4 id=&quot;body&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;(Paul Tarvydas, Jan 2021)&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-2&quot;&gt;Slide 2&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-who-uses-software&quot;&gt;Title: Who Uses Software?&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-1&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;End users, non-programmers&lt;br /&gt;
-Domain experts, non-programmers&lt;br /&gt;
-Software Professionals, programmers&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-3&quot;&gt;Slide 3&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-end-user-expectations&quot;&gt;Title: End User Expectations&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-2&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Apps&lt;br /&gt;
-Inexpensive&lt;br /&gt;
-All-in-one-device, instead of many devices&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-4&quot;&gt;Slide 4&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-apps&quot;&gt;Title: Apps&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-3&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Minecraft&lt;br /&gt;
-Weather&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-5&quot;&gt;Slide 5&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-inexpensive&quot;&gt;Title: Inexpensive&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-4&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Large volume, low price point&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-6&quot;&gt;Slide 6&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-all-in-one-device&quot;&gt;Title: All in one device&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-5&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;All-in-one-device, instead of many devices&lt;br /&gt;
-e.g. loyalty cards, credit cards&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-7&quot;&gt;Slide 7&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-simple-one-purpose-app&quot;&gt;Title: Simple One-Purpose App&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-6&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Hand-held calculator&lt;br /&gt;
-Gameboy&lt;br /&gt;
-Editor’s choice, high SEO choice, TL;DR&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-8&quot;&gt;Slide 8&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-end-user-expectations-more&quot;&gt;Title: End User Expectations (more)&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-7&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Hierarchy&lt;br /&gt;
-Sketch designs (pencil &amp;amp; paper, whiteboard, etc.)&lt;br /&gt;
-Uninterested in detail&lt;br /&gt;
-Learn incrementally&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-9&quot;&gt;Slide 9&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-hierarchy&quot;&gt;Title: Hierarchy&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-8&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;End users understand hierarchy&lt;br /&gt;
-e.g. org charts in business&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-10&quot;&gt;Slide 10&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-sketch-designs&quot;&gt;Title: Sketch Designs&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-9&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;pencil &amp;amp; paper, whiteboard, etc.&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-11&quot;&gt;Slide 11&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-uninterested-in-details&quot;&gt;Title: Uninterested in Details&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-10&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Options unwelcome&lt;br /&gt;
-Don’t welcome interruptions&lt;br /&gt;
-e.g. where to save file&lt;br /&gt;
-e.g. what kind of document to create&lt;br /&gt;
-e.g. update available&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-12&quot;&gt;Slide 12&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-learn-incrementally&quot;&gt;Title: Learn Incrementally&lt;/h3&gt;
-&lt;p&gt;(End User Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-11&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Learn in a hierarchical / fractal manner&lt;br /&gt;
-Learn only a few things at a time&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-13&quot;&gt;Slide 13&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-domain-user-expectations&quot;&gt;Title: Domain User Expectations&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-12&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Snap-together apps, palettes of functionality&lt;br /&gt;
-LEGO® Blocks&lt;br /&gt;
-Whiteboards&lt;br /&gt;
-Science &amp;amp; Engineering&lt;br /&gt;
-To Remain Ignorant of Deeper Details&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-14&quot;&gt;Slide 14&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-lego-blocks&quot;&gt;Title: LEGO® Blocks&lt;/h3&gt;
-&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-13&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Users expect to Snap S/W together like LEGO® blocks&lt;br /&gt;
-Choose functionality from a palette&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-15&quot;&gt;Slide 15&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-whiteboards&quot;&gt;Title: Whiteboards&lt;/h3&gt;
-&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-14&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Users use whiteboards&lt;br /&gt;
-Q: Why?&lt;br /&gt;
-Whiteboards are an incremental improvement over pencil &amp;amp; paper sketches&lt;br /&gt;
-Q: Why sketch?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-16&quot;&gt;Slide 16&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-eschew-software-expertise&quot;&gt;Title: Eschew Software Expertise&lt;/h3&gt;
-&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-15&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Domain experts do not want to become S/W experts&lt;br /&gt;
-Domain experts expect the benefits of S/W&lt;br /&gt;
-Flexibility&lt;br /&gt;
-Easily design solutions within their domains&lt;br /&gt;
-e.g. VisiCalc (spreadsheets)&lt;br /&gt;
-Simple things are simple to implement&lt;br /&gt;
-Call in S/W professionals to handle complexity&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-17&quot;&gt;Slide 17&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-domain-expert-tools&quot;&gt;Title: Domain Expert Tools&lt;/h3&gt;
-&lt;p&gt;(Domain Expert Expectations)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-16&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Spreadsheets &lt;br /&gt;
-AppleScript&lt;br /&gt;
-Hypercard&lt;br /&gt;
-Sikuli&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-18&quot;&gt;Slide 18&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-software-professionals&quot;&gt;Title: Software Professionals&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-17&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;LEGO® blocks&lt;br /&gt;
-Whiteboards&lt;br /&gt;
-“Software is complicated” - essential complexity&lt;br /&gt;
-Hardware advanced faster than software&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-19&quot;&gt;Slide 19&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-software-lego-blocks&quot;&gt;Title: Software LEGO® Blocks&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-18&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Professionals use:&lt;br /&gt;
-Git&lt;br /&gt;
-GitHub, etc.&lt;br /&gt;
-Libraries&lt;br /&gt;
-Result &lt;br /&gt;
-not LEGO® blocks &lt;br /&gt;
-growing complexity&lt;br /&gt;
-Decreasing reliability&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-20&quot;&gt;Slide 20&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-whiteboards-1&quot;&gt;Title: Whiteboards&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-19&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;S/W professionals sketch designs&lt;br /&gt;
-Then, transfer to code&lt;br /&gt;
-Why?&lt;br /&gt;
-Why not use code instead of sketches?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-21&quot;&gt;Slide 21&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-software-is-complicated&quot;&gt;Title: “Software is Complicated”&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-20&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Excuse or reality?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-22&quot;&gt;Slide 22&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-hardware-advanced-faster-than-software&quot;&gt;Title: Hardware Advanced Faster Than Software&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-21&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Why?&lt;br /&gt;
-Glib answer: software is just more complicated&lt;br /&gt;
-Possibility: inhibiting technology underlies all of S/W&lt;br /&gt;
-Possibility: new technology?  Something more than “programming”?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-23&quot;&gt;Slide 23&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-new-technology&quot;&gt;Title: New Technology&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-22&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Is this just a different twist on existing S/W?&lt;br /&gt;
-Is this just the QWERTY effect?&lt;br /&gt;
-More than one technology?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-24&quot;&gt;Slide 24&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-qwerty-effect&quot;&gt;Title: QWERTY Effect&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-23&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Technology lock-in&lt;br /&gt;
-Incremental&lt;br /&gt;
-QWERTY vs. other keyboard layouts&lt;br /&gt;
-VHS vs. Beta&lt;br /&gt;
-808x vs. other CPU designs&lt;br /&gt;
-Inhibiting Technology&lt;br /&gt;
-Stops progress?&lt;br /&gt;
-Different category?&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-25&quot;&gt;Slide 25&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-1-uses-of-computers&quot;&gt;Title: &amp;gt;1 Uses of Computers&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-24&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Calculator&lt;br /&gt;
-Event-Driven Controllers&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-26&quot;&gt;Slide 26&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-computers-as-calculators&quot;&gt;Title: Computers As Calculators&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-25&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Ballistics&lt;br /&gt;
-Cryptography (not Blockchain!)&lt;br /&gt;
-One-in-one-out&lt;br /&gt;
-Synchronous&lt;br /&gt;
-Hard to implement asynchronous paradigm &lt;br /&gt;
-Functions, FP&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-27&quot;&gt;Slide 27&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-one-in-one-out&quot;&gt;Title: One-in One-out&lt;/h3&gt;
-&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-26&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;One-in-one-out&lt;br /&gt;
-One input —&amp;gt; One outcome&lt;br /&gt;
-Exceptions are a “special case” tacked onto the side&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-28&quot;&gt;Slide 28&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-synchronous&quot;&gt;Title: Synchronous&lt;/h3&gt;
-&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-27&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Attempts to add async to calculator paradigm&lt;br /&gt;
-Accidental Complexity &amp;lt;— using unsuitable paradigm&lt;br /&gt;
-e.g. Mars Rover disaster&lt;br /&gt;
-Hard to implement asynchronous paradigm in synchronous paradigm&lt;br /&gt;
-Epicycles on top of epicycles&lt;br /&gt;
-Threads, promises, various baubles, etc.)&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-29&quot;&gt;Slide 29&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-functional-approach&quot;&gt;Title: Functional Approach&lt;/h3&gt;
-&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-28&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Ilya Prigogene (Nobel laureate) “Order Out Of Chaos”&lt;br /&gt;
-[paraphrased] Functional thinking has set Physics back 100 years&lt;br /&gt;
-FP - Functional Programming&lt;br /&gt;
-Eschew time&lt;br /&gt;
-Eschew STATE&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-30&quot;&gt;Slide 30&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-call-return&quot;&gt;Title: CALL RETURN&lt;/h3&gt;
-&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-29&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Implicitly uses The Stack&lt;br /&gt;
-Creates dynamic record of invocations —&amp;gt; dependency&lt;br /&gt;
-Accidental complexity&lt;br /&gt;
-Useful only in calculator model of computing&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-31&quot;&gt;Slide 31&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-global-variable-hidden&quot;&gt;Title: Global Variable (Hidden)&lt;/h3&gt;
-&lt;p&gt;(Computers as Calculators)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-30&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;All PLs, incl. FP and Smalltalk, share a global variable&lt;br /&gt;
-The Stack&lt;br /&gt;
-CALL / RETURN manipulates this global variable&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-32&quot;&gt;Slide 32&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-computers-for-event-driven-control&quot;&gt;Title: Computers for Event-Driven Control&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-31&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Asynchronous&lt;br /&gt;
-Multiple Outcomes&lt;br /&gt;
-Eschew Dependencies&lt;br /&gt;
-Implement synchronous paradigm&lt;br /&gt;
-Isolation&lt;br /&gt;
-Examples&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-33&quot;&gt;Slide 33&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-asynchronous&quot;&gt;Title: Asynchronous&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-32&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Events come at any time&lt;br /&gt;
-e.g. GUI&lt;br /&gt;
-e.g. Browser&lt;br /&gt;
-e.g. mouse&lt;br /&gt;
-e.g. keyboard&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-34&quot;&gt;Slide 34&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-multiple-outcomes&quot;&gt;Title: Multiple Outcomes&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-33&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Multiple Outcomes&lt;br /&gt;
-One input —&amp;gt; multiple possible outcomes&lt;br /&gt;
-One input —&amp;gt; no outcomes&lt;br /&gt;
-Example, javascript FileReader()&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-35&quot;&gt;Slide 35&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-eschew-dependencies&quot;&gt;Title: Eschew Dependencies&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-34&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Scalability requires lack of dependency&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-36&quot;&gt;Slide 36&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-implement-synchronous-paradigm-using-asynchronous-paradigm&quot;&gt;Title: Implement Synchronous Paradigm Using Asynchronous Paradigm&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-35&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Blocking &amp;lt;— ACK/NAK&lt;br /&gt;
-Already explored&lt;br /&gt;
-Networking&lt;br /&gt;
-Electronics&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-37&quot;&gt;Slide 37&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-isolation&quot;&gt;Title: Isolation&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-36&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Isolation is more important than encapsulation&lt;br /&gt;
-Encapsulate data and control flow&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-38&quot;&gt;Slide 38&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-examples&quot;&gt;Title: Examples&lt;/h3&gt;
-&lt;p&gt;(Event-Driven Control)&lt;/p&gt;
-
-&lt;h4 id=&quot;body-37&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Statecharts&lt;br /&gt;
-https://computingsimplicity.neocities.org/blogs/StateCharts.pdf&lt;/p&gt;
-
-&lt;h2 id=&quot;slide-39&quot;&gt;Slide 39&lt;/h2&gt;
-
-&lt;h3 id=&quot;title-blockchain&quot;&gt;Title: Blockchain&lt;/h3&gt;
-
-&lt;h4 id=&quot;body-38&quot;&gt;Body&lt;/h4&gt;
-
-&lt;p&gt;Two paradigms (not one)&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Calculation &amp;lt;— cryptography&lt;/li&gt;
-  &lt;li&gt;Event-driven &amp;lt;— time-based obfuscation and p2p&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">layout: post title: “The Software Ceiling” — Keynote Presentation: Software Ceiling.key Slide 1 Title: The Software Ceiling Body (Paul Tarvydas, Jan 2021) Slide 2 Title: Who Uses Software? Body End users, non-programmers Domain experts, non-programmers Software Professionals, programmers Slide 3 Title: End User Expectations Body Apps Inexpensive All-in-one-device, instead of many devices Slide 4 Title: Apps (End User Expectations) Body Minecraft Weather Slide 5 Title: Inexpensive (End User Expectations) Body Large volume, low price point Slide 6 Title: All in one device (End User Expectations) Body All-in-one-device, instead of many devices e.g. loyalty cards, credit cards Slide 7 Title: Simple One-Purpose App (End User Expectations) Body Hand-held calculator Gameboy Editor’s choice, high SEO choice, TL;DR Slide 8 Title: End User Expectations (more) Body Hierarchy Sketch designs (pencil &amp;amp; paper, whiteboard, etc.) Uninterested in detail Learn incrementally Slide 9 Title: Hierarchy (End User Expectations) Body End users understand hierarchy e.g. org charts in business Slide 10 Title: Sketch Designs (End User Expectations) Body pencil &amp;amp; paper, whiteboard, etc. Slide 11 Title: Uninterested in Details (End User Expectations) Body Options unwelcome Don’t welcome interruptions e.g. where to save file e.g. what kind of document to create e.g. update available Slide 12 Title: Learn Incrementally (End User Expectations) Body Learn in a hierarchical / fractal manner Learn only a few things at a time Slide 13 Title: Domain User Expectations Body Snap-together apps, palettes of functionality LEGO® Blocks Whiteboards Science &amp;amp; Engineering To Remain Ignorant of Deeper Details Slide 14 Title: LEGO® Blocks (Domain Expert Expectations) Body Users expect to Snap S/W together like LEGO® blocks Choose functionality from a palette Slide 15 Title: Whiteboards (Domain Expert Expectations) Body Users use whiteboards Q: Why? Whiteboards are an incremental improvement over pencil &amp;amp; paper sketches Q: Why sketch? Slide 16 Title: Eschew Software Expertise (Domain Expert Expectations) Body Domain experts do not want to become S/W experts Domain experts expect the benefits of S/W Flexibility Easily design solutions within their domains e.g. VisiCalc (spreadsheets) Simple things are simple to implement Call in S/W professionals to handle complexity Slide 17 Title: Domain Expert Tools (Domain Expert Expectations) Body Spreadsheets AppleScript Hypercard Sikuli Slide 18 Title: Software Professionals Body LEGO® blocks Whiteboards “Software is complicated” - essential complexity Hardware advanced faster than software Slide 19 Title: Software LEGO® Blocks Body Professionals use: Git GitHub, etc. Libraries Result not LEGO® blocks growing complexity Decreasing reliability Slide 20 Title: Whiteboards Body S/W professionals sketch designs Then, transfer to code Why? Why not use code instead of sketches? Slide 21 Title: “Software is Complicated” Body Excuse or reality? Slide 22 Title: Hardware Advanced Faster Than Software Body Why? Glib answer: software is just more complicated Possibility: inhibiting technology underlies all of S/W Possibility: new technology? Something more than “programming”? Slide 23 Title: New Technology Body Is this just a different twist on existing S/W? Is this just the QWERTY effect? More than one technology? Slide 24 Title: QWERTY Effect Body Technology lock-in Incremental QWERTY vs. other keyboard layouts VHS vs. Beta 808x vs. other CPU designs Inhibiting Technology Stops progress? Different category? Slide 25 Title: &amp;gt;1 Uses of Computers Body Calculator Event-Driven Controllers Slide 26 Title: Computers As Calculators Body Ballistics Cryptography (not Blockchain!) One-in-one-out Synchronous Hard to implement asynchronous paradigm Functions, FP Slide 27 Title: One-in One-out (Computers as Calculators) Body One-in-one-out One input —&amp;gt; One outcome Exceptions are a “special case” tacked onto the side Slide 28 Title: Synchronous (Computers as Calculators) Body Attempts to add async to calculator paradigm Accidental Complexity &amp;lt;— using unsuitable paradigm e.g. Mars Rover disaster Hard to implement asynchronous paradigm in synchronous paradigm Epicycles on top of epicycles Threads, promises, various baubles, etc.) Slide 29 Title: Functional Approach (Computers as Calculators) Body Ilya Prigogene (Nobel laureate) “Order Out Of Chaos” [paraphrased] Functional thinking has set Physics back 100 years FP - Functional Programming Eschew time Eschew STATE Slide 30 Title: CALL RETURN (Computers as Calculators) Body Implicitly uses The Stack Creates dynamic record of invocations —&amp;gt; dependency Accidental complexity Useful only in calculator model of computing Slide 31 Title: Global Variable (Hidden) (Computers as Calculators) Body All PLs, incl. FP and Smalltalk, share a global variable The Stack CALL / RETURN manipulates this global variable Slide 32 Title: Computers for Event-Driven Control Body Asynchronous Multiple Outcomes Eschew Dependencies Implement synchronous paradigm Isolation Examples Slide 33 Title: Asynchronous (Event-Driven Control) Body Events come at any time e.g. GUI e.g. Browser e.g. mouse e.g. keyboard Slide 34 Title: Multiple Outcomes (Event-Driven Control) Body Multiple Outcomes One input —&amp;gt; multiple possible outcomes One input —&amp;gt; no outcomes Example, javascript FileReader() Slide 35 Title: Eschew Dependencies (Event-Driven Control) Body Scalability requires lack of dependency Slide 36 Title: Implement Synchronous Paradigm Using Asynchronous Paradigm (Event-Driven Control) Body Blocking &amp;lt;— ACK/NAK Already explored Networking Electronics Slide 37 Title: Isolation (Event-Driven Control) Body Isolation is more important than encapsulation Encapsulate data and control flow Slide 38 Title: Examples (Event-Driven Control) Body Statecharts https://computingsimplicity.neocities.org/blogs/StateCharts.pdf Slide 39 Title: Blockchain Body Two paradigms (not one) Calculation &amp;lt;— cryptography Event-driven &amp;lt;— time-based obfuscation and p2p</summary></entry><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-01-07T09:25:27-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">The problem</title><link href="https://computingsimplicity.neocities.org/2021/01/07/The-Problem.html" rel="alternate" type="text/html" title="The problem" /><published>2021-01-07T00:00:00-05:00</published><updated>2021-01-07T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/07/The%20Problem</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/07/The-Problem.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-07T09:25:12Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-07T09:25:12Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;THE PROBLEM&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Bad - Normal People&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I was invited to advise a lawyer friend.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;He wanted a website built for his company.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Two weeks went by and the website project was not yet finished.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;He brought the software contractor in and expected to run him over the coals, with my assistance.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When the contractor described the project and his current status, I ended up agreeing with him.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The lawyer was flabbergasted.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Two weeks, for a simple brochure?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Two weeks of paying consulting rates?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I had to explain to my lawyer friend that software development is not built out of black boxes pulled from a shelf.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This was a custom job and that he should not expect the job to be finished yet.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;My lawyer friend did not like my answer.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Bad - Programmers&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I gave a demo and showed a &lt;i&gt;working&lt;/i&gt; version of some software to a client.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;His techie grilled me on how I used mutexes in my software.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I told him that I didn’t use mutexes, at which point he declared that the demo was faked. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I was a liar and couldn’t possibly have finished the development work in so short a time.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Bad - Assets&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I have a friend who works in the Film &amp;amp; T.V. industry.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;He dabbles in software development.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I asked him how his company manages projects.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;His response was “Why do you want to know?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;These ideas can’t be applied to software development.”&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;After more prodding, he told me that Film and T.V. Development was based on a divide and conquer strategy.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Work is farmed out to contractors and the contractors return results as assets (3D graphical objects, in this case).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Don't Care&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;My friend has created a product for the equestrian world.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The product uses some 40 CPUs.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Each CPU has only about 16K (K not M) of memory.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;My friend does not have problems with multitasking.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Order Matters&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Order of operation should not matter to produce a given result.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;But, order &lt;i&gt;does&lt;/i&gt; matter in software.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I show this problem in &lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In that essay, I show that we cannot rely on the operation of even a simple 2-box system of software.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Real black boxes don’t work that way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If we have two black boxes plugged together, then we get the same result every time, regardless of how the innards of the black boxes (and the wiring between them) is implemented.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This does not happen in software.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Black Boxes&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Everyone &lt;i&gt;thinks&lt;/i&gt; that software is built using black boxes.&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;Non-programmers understand the concept of black boxes and think that software is built from black boxes.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Like Engineering.&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Software Professionals &lt;i&gt;think&lt;/i&gt; that they are using black boxes&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;i&gt;libraries&lt;/i&gt; are not black boxes&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;TDD (Test Driven Development) tries to fit black-box-like thinking onto software, but ultimately fails&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Functional programming throws the baby out with the bathwater to achieve black-box-like behaviour.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This only achieves black-box-like behaviour for a narrow range of problems (one-in-one-out problems - filters, calculators)&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;i&gt;Tells&lt;/i&gt; - we see problems at the edges of the software universe - called &lt;i&gt;epicycles&lt;/i&gt; in Ptolemaic cosmology - such as the continual churn of fixes applied to &lt;i&gt;threads&lt;/i&gt; (e.g. &lt;i&gt;promises&lt;/i&gt; are one of the latest fads) and fixes applied to fixes.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;Threads&lt;/i&gt; are &lt;span class=&quot;s1&quot;&gt;not&lt;/span&gt; essential complexity.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;Promises &lt;/i&gt;fix threads for only a certain class of problems.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;(&lt;i&gt;I discuss more &lt;/i&gt;tells&lt;i&gt; for broken software in another essay).&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Mars Pathfinder Disaster&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Priority Inversion is Accidental Complexity&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The Mars Pathfinder problem was caused by &lt;i&gt;priority inversion&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This problem was caused by the use of an RTOS.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;An RTOS is a stripped-down operating system.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The RTOS was built using “best practices”, but, these best practices led to a hoary, intermittent bug.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The cause of the bug was not understood at the time of construction of the Pathfinder software, but it was always there.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Priorities are Epicycles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Priorities were invented to ameliorate the problems of time-sharing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Time-sharing was invented to ameliorate the problems of CPU expense.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Priority inheritance was invented to ameliorate the problems of priorities. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Q: Why was it possible to enable/disable priority inheritance?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What niggly problem was that supposed to solve?&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Epicycles.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;To read more about Epicycles, read Arthur Koestler’s “The Sleepwalkers”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The book documents the switch from Ptolemaic Cosmology to Copernican Cosmology.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Ptolemaic scientists formalized the concept of adding baubles to the existing theory without fixing the root problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They called this formalism &lt;i&gt;Epicycles&lt;/i&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Avoiding Multitasking Problems&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;How To Avoid The Thread Safety Issue&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;To avoid thread safety issues, give each thread its own isolated CPU.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When CPUs are isolated from one another - they cannot interact, except via very constrained channels.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;There are no thread safety issues.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Problem solved.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Thread safety is accidental complexity.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Thread safety is not essential complexity.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Thread safety is caused by an optimization - the attempt to share memory across many tasks.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This attempt at premature optimization leads to new problems, i.e. accidental complexity.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;How to Avoid The Fairness Issue&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;To avoid fairness issues, give each thread its own isolated CPU.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When CPUs are isolated from one another - they cannot interact, except via very constrained channels - there are no fairness issues.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Each CPU runs at its own speed.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Problem solved.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Fairness is accidental complexity caused by an optimization (sharing the CPU for many tasks).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Fairness is not essential complexity.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The only issue is: are the CPUs &lt;i&gt;fast enough&lt;/i&gt; to accomplish the given task?&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;How to Conquer Multitasking&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;To conquer multitasking and to make multitasking easy to use, give each thread its own isolated CPU.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Problem solved.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;CPUs cannot share memory.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;CPUs cannot time-share.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Problem solved.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Deprecate Recursion and Loop&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Computer Science clings to the notion of using Recursion and Loops.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;Threads&lt;/i&gt; were invented to accomodate time-sharing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;To accomodate deep recursion and loops when using threads, Computer Science invented &lt;i&gt;full preemption&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Ironically, loops make no sense on the internet.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;You cannot “loop” a pair of distributed computers, you can only send messages between them.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Getting Rid of Full Preemption&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Full Preemption was invented to accommodate loops (and recursion) on &lt;i&gt;threads&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Full preemption causes many accidental complexities,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;e.g. allocating a stack (memory) for each thread&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;e.g. thread safety, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Full preemption is only needed to &lt;i&gt;simulate&lt;/i&gt; multiple CPUs on a single computer.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;To get rid of full preemption, just give each thread its own isolated CPU and its own isolated memory space.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Problem solved.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Multiple Cores&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;We, ultimately, want true distributed computing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We could do anything if CPUs were free.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Multi-core CPUs are but a half-measure towards achieving the above goal of truly distributed computing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Multiple cores were invented by hardware designers who were tired of waiting for software to catch up.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Simulation On Too Few CPUs&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;If we don’t have enough CPUs to go around, we end up simulating CPUs by using VMs and Threads, or, better yet, we can simulate &lt;i&gt;isolated&lt;/i&gt; CPUs (something software professionals tend &lt;span class=&quot;s1&quot;&gt;not&lt;/span&gt; to do, out of a zeal for premature optimization).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;CPUs used to be very expensive in the 1950’s. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Simulation of multiple CPUs was invented early to ameliorate this expense. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This kind of simulation - we call it &lt;i&gt;threads&lt;/i&gt; - has led to a myriad of accidental complexities. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;These complexities &lt;i&gt;only&lt;/i&gt; exist in the simulations, and disappear entirely if we allocate enough CPUs to the problem.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Computer Science&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A large portion of Computer Science consists of the analysis of accidental complexities caused by the imposition of the epicycle we call &lt;i&gt;threads&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Early Computer Science, also, tackled the ideas of how to structure data and wrestled that issue to the ground.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Yet, the issue of &lt;i&gt;threads&lt;/i&gt; continues to wriggle out of Computer Science’s grasp. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This is a &lt;i&gt;tell&lt;/i&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;If TDD had succeeded, then all software professionals would be using TDD exclusively.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They don’t.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Untitled</summary></entry><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-01-02T00:00:00-05:00</published><updated>2021-01-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/02/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/02/Refactoring.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
