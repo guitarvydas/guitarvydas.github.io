@@ -21,8 +21,8 @@ then
     creation_time=`grep "<meta name=\"CreationTime\"" "${filename}/${base}"`
     if [ ! -z "${creation_time}" ]
     then
-	prefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(2020-..-..\)T..:..:..Z">/\1/'`
-	fullprefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(2020-..-..\)T\(..\):\(..\):\(..\)Z">/\1-\2-\3-\4/'`
+	prefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(202.-..-..\)T..:..:..Z">/\1/'`
+	fullprefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(202.-..-..\)T\(..\):\(..\):\(..\)Z">/\1-\2-\3-\4/'`
     fi
     echo "${prefix}" >/dev/fd/5 &
     echo "${fullprefix}" >/dev/fd/6 &
