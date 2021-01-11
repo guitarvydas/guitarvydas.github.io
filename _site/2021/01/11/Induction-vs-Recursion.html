@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>Induction vs Recursion</title>
-  <meta name="CreationTime" content="2021-01-11T15:37:55Z">
-  <meta name="ModificationTime" content="2021-01-11T15:37:55Z">
+  <meta name="CreationTime" content="2021-01-11T15:47:56Z">
+  <meta name="ModificationTime" content="2021-01-11T15:47:56Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -26,7 +26,7 @@
 <p class="p3"><br></p>
 <p class="p2">Recursion is top-down.</p>
 <p class="p3"><br></p>
-<p class="p2">In parsing, YACC is bottom-up, PEG is top-down.</p>
+<p class="p2">In parsing, YACC is bottom-up, PEG<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> is top-down.</p>
 <p class="p3"><br></p>
 <p class="p2">YACC is LR(k), PEG is recursive-descent.</p>
 <p class="p3"><br></p>
@@ -34,21 +34,22 @@
 <p class="p3"><br></p>
 <p class="p2">LR(k) is theoretical, PEG is practical.</p>
 <p class="p3"><br></p>
-<p class="p2">Semi-colons exist in PL<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>s because of YACC.<span class="Apple-converted-space">  </span>PEG doesn't require semi-colons in PLs.</p>
+<p class="p2">Semi-colons exist in PL<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>s because of YACC.<span class="Apple-converted-space">  </span>PEG doesn't require semi-colons in PLs.</p>
 <p class="p3"><br></p>
-<p class="p2">Possible rewording: top-down is operational, whereas bottom-up is declarative<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>.</p>
+<p class="p2">Possible rewording: top-down is operational, whereas bottom-up is declarative<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.</p>
 <p class="p3"><br></p>
-<p class="p2">Top-down implies the use of a Stack<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.<span class="Apple-converted-space">  </span>Bottom-up does not.</p>
+<p class="p2">Top-down implies the use of a Stack<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.<span class="Apple-converted-space">  </span>Bottom-up does not.</p>
 <p class="p3"><br></p>
 <p class="p2">[Use of a Stack defies parallelism.]</p>
 <p class="p3"><br></p>
-<p class="p2">"Context free" means that <i>time<a id="fnlink4"></a></i><a href="#fn4"><sup>[4]</sup></a> has been removed, there is no <span class="s1">f(t)</span>.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p2">"Context free" means that <i>time<a id="fnlink5"></a></i><a href="#fn5"><sup>[5]</sup></a> has been removed, there is no <span class="s1">f(t)</span>.<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a></p>
 <hr>
-<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>PL means Programming Language.</p>
-<p class="p5"><span class="s3"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a></span> Question to self: Is this a correct characterization?</p>
-<p class="p4"><span class="s2"><a id="fn3"></a><a href="#fnlink3">[3]</a> </span>A stack of breadcrumbs - to "remember" where you were.</p>
-<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Time is also known as History.<span class="Apple-converted-space">  </span>History is also known as State.</p>
-<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Lack of f(t) has been decried by Ilya Prigogene (Nobel laureate, "Order Out of Chaos") and Grace Hopper.</p>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>PEG means Parsing Expression Grammar, see<span class="Apple-converted-space">  </span>https://bford.info/packrat/.<span class="Apple-converted-space">  </span>PEG is like REGEXPs on steroids.</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>PL means Programming Language.</p>
+<p class="p5"><span class="s3"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a></span> Question to self: Is this a correct characterization?</p>
+<p class="p4"><span class="s2"><a id="fn4"></a><a href="#fnlink4">[4]</a> </span>A stack of breadcrumbs - to "remember" where you were.</p>
+<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Time is also known as History.<span class="Apple-converted-space">  </span>History is also known as State.</p>
+<p class="p4"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>Lack of f(t) has been decried by Ilya Prigogene (Nobel laureate, "Order Out of Chaos") and Grace Hopper.</p>
 </div>
 </body>
 </html>
