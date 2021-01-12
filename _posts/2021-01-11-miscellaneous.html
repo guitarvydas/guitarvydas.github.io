@@ -1,0 +1,630 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>miscellaneous</title>
+  <meta name="CreationTime" content="2021-01-11T23:53:11Z">
+  <meta name="ModificationTime" content="2021-01-11T23:53:11Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 108.0px; text-indent: -108.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p11 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px Helvetica}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 11.0px Menlo}
+    span.s4 {font: 9.0px Palatino}
+    span.s5 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Contents</b></h2>
+<p class="p2">Homogeneous vs. Heterogeneous<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Flat vs. Scoped<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Modeling vs. Compiling<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Typing vs. Pattern Matching<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Compile-Time, Runtime vs. Fractals<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">UNIX® Pipes vs. Libraries<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Complexity vs Simplicity<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Dependencies vs. Simplicity<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Syntax Checking<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Relative vs. Absolute<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Arcitecture vs. Code<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Hardware Progress vs. Software Progress<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Telecom Four Nines 0.9999<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">PEG - Easy Language Design<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Architecture vs. Code<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Dynamic vs. Static Types vs. Assembler<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Normalization<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Visual Programming vs. Textual Programming vs. Diagrammatic Programming<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Whiteboards<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Org Charts<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Portability<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Rule of Thumb - Compiler Builder Inspired<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">5 Questions<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">One Language to Rule Them All<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">DRY vs RY<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Abstraction<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Snap Together Like LEGO® Blocks<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">3 Times<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">PLs Are Too Complicated<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Scalability<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Silver Bullet<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">70 Years<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Code is Cheap<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Deprecate Recursion and Loop<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Tired Paradigms<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Syntax Checking vs. Traceback<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">HTML<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Strong Typing<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Commas and Semicolons<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<p class="p2">Blockchain<span class="s1"><span class="Apple-tab-span">	</span></span>?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Miscellaneous</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Homogeneous vs. Heterogeneous</b></h2>
+<ul class="ul1">
+  <li class="li3">Current trend: avoid heterogenous data structures
+  <ul class="ul2">
+    <li class="li3">e.g. a Templated List - a different List for every kind of type</li>
+  </ul></li>
+  <li class="li3">Why, then, do we allow The Stack to be a homogenous data structure?</li>
+</ul>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Flat vs. Scoped</b></h2>
+<ul class="ul1">
+  <li class="li3">We fix every problem by applying Scope
+  <ul class="ul2">
+    <li class="li3">e.g. global variables —&gt; scoped locals</li>
+    <li class="li3">e.g. GOTO —&gt; Structured Programming</li>
+    <li class="li3">e.g. identifiers —&gt; namespaces</li>
+  </ul></li>
+  <li class="li3">Flatness will lead to trouble</li>
+  <li class="li3">What is currently flat?
+  <ul class="ul2">
+    <li class="li3">type spaces</li>
+    <li class="li3">function spaces</li>
+    <li class="li3">message passing</li>
+    <li class="li4"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Modeling vs. Compiling</b></h2>
+<ul class="ul1">
+  <li class="li2">Compiling mind-set:
+  <ul class="ul2">
+    <li class="li2">notation must be understood by a piece of software</li>
+  </ul></li>
+  <li class="li2">Modeling mind-set:
+  <ul class="ul2">
+    <li class="li2">any notation can be used
+    <ul class="ul2">
+      <li class="li2">leads to undisciplined use of notations</li>
+      <li class="li2">e.g. stick people</li>
+      <li class="li2">e.g. clouds with ill-defined inputs and outputs</li>
+      <li class="li5"><br></li>
+    </ul></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Typing vs. Pattern Matching</b></h2>
+<ul class="ul1">
+  <li class="li3">Typing research is showing that pattern matching is a win</li>
+  <li class="li3">We already know, since mid-1990's, how to match patterns
+  <ul class="ul2">
+    <li class="li3">Parsers</li>
+    <li class="li3">Lexical Analysis</li>
+  </ul></li>
+  <li class="li3">Lexical Analysis
+  <ul class="ul2">
+    <li class="li3">Lex</li>
+    <li class="li3">REGEX - accesible</li>
+  </ul></li>
+  <li class="li3">Parsers
+  <ul class="ul2">
+    <li class="li3">YACC</li>
+    <li class="li3">ANTLR</li>
+    <li class="li3">PEG - accessible
+    <ul class="ul2">
+      <li class="li3">built into REBOL</li>
+      <li class="li3">ESRAP for Common Lisp</li>
+      <li class="li3">Ohm-JS for Javascript</li>
+      <li class="li3">others…</li>
+      <li class="li3">Janet?</li>
+    </ul></li>
+  </ul></li>
+  <li class="li3">Advantages of PEG
+  <ul class="ul2">
+    <li class="li3">source to source transpilation</li>
+    <li class="li3">identity grammar</li>
+  </ul></li>
+</ul>
+<ul class="ul1">
+  <ul class="ul2">
+    <ul class="ul2">
+      <li class="li3">output &lt;— same as input, incl. spaces and comments</li>
+      <li class="li3">baseline for easy transpilation</li>
+    </ul>
+  </ul>
+</ul>
+<ul class="ul1">
+  <li class="li3">SCLs now possible
+  <ul class="ul2">
+    <li class="li3">per-project</li>
+    <li class="li3">many SCLs can be used in a single project</li>
+    <li class="li3">use SCL instead of REGEXP</li>
+  </ul></li>
+</ul>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compile-Time, Runtime vs. Fractals</b></h2>
+<ul class="ul1">
+  <li class="li3">everything is an interpreter</li>
+  <li class="li3">arbitrary boundary between "compile time" and "run time"</li>
+  <li class="li3">compile time
+  <ul class="ul2">
+    <li class="li3">extracts expensive calculations</li>
+    <li class="li3">extracts common code
+    <ul class="ul2">
+      <li class="li3">run it up front</li>
+      <li class="li3">run it infrequently</li>
+    </ul></li>
+  </ul></li>
+  <li class="li3">run time
+  <ul class="ul2">
+    <li class="li3">runs app as fast as possible</li>
+    <li class="li3">runs much more frequently than compile interpreter</li>
+    <li class="li3">lets compiler weed out expensive calculation</li>
+    <li class="li3">does no type checking</li>
+    <li class="li3">loader
+    <ul class="ul2">
+      <li class="li3">traditionally part of runtime</li>
+      <li class="li3">plugs holes in .OBJ file (address resolution)</li>
+      <li class="li3">does no type checking</li>
+    </ul></li>
+  </ul></li>
+  <li class="li3">what if?
+  <ul class="ul2">
+    <li class="li3">loader split into two phases
+    <ul class="ul2">
+      <li class="li3">type checking</li>
+      <li class="li3">address resolution</li>
+      <li class="li4"><br></li>
+    </ul></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>UNIX® Pipes vs. Libraries</b></h2>
+<ul class="ul1">
+  <li class="li2">pipes snap together</li>
+  <li class="li2">libraries don't snap together<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li2">due to dependencies</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Complexity vs Simplicity</b></h2>
+<ul class="ul1">
+  <li class="li3">How Do You Build A Light Airplane?<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>
+  <ol class="ol1">
+    <li class="li3">build an airplane</li>
+    <li class="li3">add lightness</li>
+  </ol></li>
+  <li class="li3">Simplicity is "lack of nuance"</li>
+  <li class="li4"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dependencies vs. Simplicity</b></h2>
+<ul class="ul1">
+  <li class="li2">Dependencies add complexity and defeat simplicity</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax Checking</b></h2>
+<ul class="ul1">
+  <li class="li2">We understand how to do syntax checking</li>
+  <li class="li2">Use syntax checking to automatically weed out typos</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Multiple Syntaxes for Every Language</b></h2>
+<ul class="ul1">
+  <li class="li2">2 Syntaxes for every language
+  <ol class="ol1">
+    <li class="li2">pre-syntax - aid syntax check</li>
+    <li class="li2">post-syntax - after syntax check</li>
+  </ol></li>
+  <li class="li2">PL designers impose(d) their perspective on the language
+  <ol class="ol1">
+    <li class="li2">e.g. Pascal "end if" helps syntax checker</li>
+    <li class="li2">e.g. Lisp ")" emphasizes post-syntax check</li>
+  </ol></li>
+  <li class="li2">(1) makes a language more writable</li>
+  <li class="li2">(2) makes a language more readable</li>
+  <li class="li2">Why not use both?</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Relative vs. Absolute</b></h2>
+<ul class="ul1">
+  <li class="li2"><i>absolute</i> is flatness</li>
+  <li class="li2"><i>relative</i> is scoping</li>
+  <li class="li2">Traditionally applied to assembler-level addressing modes
+  <ul class="ul2">
+    <li class="li2">relative-ness is creeping into technologies</li>
+    <li class="li2">see, also, MFM
+    <ul class="ul2">
+      <li class="li2"><a href="https://movablefeastmachine.org/">https://movablefeastmachine.org/</a></li>
+    </ul></li>
+  </ul></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Arcitecture vs. Code</b></h2>
+<ul class="ul1">
+  <li class="li3">Spaghetti Architecture built into Code</li>
+  <li class="li3">Architecture not separated from Code
+  <ul class="ul2">
+    <li class="li3">Architecture hidden in Code</li>
+    <li class="li3">can't see the forest for the trees</li>
+    <li class="li4"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hardware Progress vs. Software Progress</b></h2>
+<ul class="ul1">
+  <li class="li3">Hardware has progressed faster than Software
+  <ul class="ul2">
+    <li class="li3">WHY?</li>
+  </ul></li>
+  <li class="li3">Software modules tied together by dependency chain, hardware not bound by same constraint</li>
+  <li class="li3">The Stack is a Global Variable that maintains a <i>dynamic</i> dependency chain
+  <ul class="ul2">
+    <li class="li3">Smalltalk uses The Stack</li>
+    <li class="li3">FP uses The Stack</li>
+    <li class="li4"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Telecom Four Nines 0.9999</b></h2>
+<ul class="ul1">
+  <li class="li2">Telecom companies professed "four nines" reliability
+  <ul class="ul2">
+    <li class="li2">Telephones were up 0.9999 of the time</li>
+    <li class="li2">Power failures - phones still worked</li>
+  </ul></li>
+  <li class="li2">as early as 1960's</li>
+  <li class="li2">people stopped noticing high reliability of phone system</li>
+  <li class="li2">current websites are not as reliable as Telecom</li>
+  <li class="li2">current cell phones are not as reliable as Telecom</li>
+  <li class="li2">Telecom employed software before strong-typing was in regular use</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEG - Easy Language Design</b></h2>
+<p class="p7"><a href="https://bford.info/pub/lang/peg/">https://bford.info/pub/lang/peg/</a></p>
+<p class="p8"><br></p>
+<p class="p7">PEG is like REGEXP on steroids.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Architecture vs. Code</b></h2>
+<p class="p7">Architecture and Coding are two different things.</p>
+<p class="p8"><br></p>
+<p class="p7">They should not, both, use the same PL.</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dynamic vs. Static Types vs. Assembler</b></h2>
+<ul class="ul1">
+  <li class="li2">everthing is an interpreter</li>
+  <li class="li2">strong typing (early typing) is an interpreter that runs to completion before the App is executed</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Normalization</b></h2>
+<ul class="ul1">
+  <li class="li2">- factbases<br>
+- assembler<br>
+normalize everything first, then optimize normalized form</li>
+  <li class="li2">normalized code is <i>assembler</i></li>
+  <li class="li2">normalized data is <i>factbase</i></li>
+  <li class="li2">most basic normalized form is a triple
+  <ul class="ul2">
+    <li class="li2">relation(subject,object)</li>
+    <li class="li2">e.g. assembler MOV R0,R1</li>
+    <li class="li2">e.g. simple PROLOG<a id="fnlink2"></a><a href="#fn2"><span class="s2"><sup>[2]</sup></span></a> fact <span class="s3">relation(subject,object).</span></li>
+    <li class="li2">e.g. semantic web, XML</li>
+    <li class="li5"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Visual Programming vs. Textual Programming vs. Diagrammatic Programming</b></h2>
+<p class="p7">I divide programming up into several camps:</p>
+<ul class="ul1">
+  <li class="li2">textual programming</li>
+  <li class="li2">diagrammatic programming</li>
+  <li class="li2">visual programming.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p2">In my mind</p>
+<ul class="ul1">
+  <li class="li2"><i>textual</i> <i>programming</i> uses only text (characters) as syntax for a language</li>
+  <li class="li2">diagrammatic programming augments the syntax with very few diagrammatic elements, e.g. boxes, lines and ellipses, but includes text</li>
+  <li class="li2">visual programming is based on a syntax of pixels.</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Whiteboards</b></h2>
+<p class="p7">Software Professionals use whiteboards.</p>
+<p class="p8"><br></p>
+<p class="p7">Why?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Org Charts</b></h2>
+<p class="p7">Org charts are used to structure businesses.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">Just about everyone understands what an org chart is.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">People expect that all kinds of Engineering is built in an org-chart-like manner.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">People expect that software is built using black boxes arranged in some sort of org chart.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">They are wrong.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Portability</b></h2>
+<p class="p7">Portability is a chimera, at least in my mind.</p>
+<p class="p8"><br></p>
+<p class="p7">Programmers try to create portability by using glue-ons - preserve the existing code and glue new behaviours onto the syntax.<span class="Apple-converted-space">  </span>(This kind of thinking is very prevalent in the Common Lisp community, which uses <i>*features* </i>to create glue-ons).</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">I prefer the Engineering model instead.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">Specialize, don't generalize.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">In electronics, this model manifest itself as a chain of filters that implements only what is needed.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">Electronics designers use black boxes of functionality.<span class="Apple-converted-space">  </span>At the lowest level, a <i>chip</i> is composed of various kinds of rust that exhibit various electrical properties.<span class="Apple-converted-space">  </span>At higher levels, the rust is encased in blobs of epoxy that expose only certain functionality via <i>pins</i>.<span class="Apple-converted-space">  </span>At even higher levels, designers contstruct schematics and boards (e.g. motherboards) and VLSI designers use libraries of functionality (like FPGAs)</p>
+<p class="p8"><br></p>
+<p class="p7">When a designer can rely on black boxes, a designer can build specific solutions to specific problems.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">The fact that programmers need to resort to parameters and <i>#ifdefs</i> is a <i>tell</i> that demonstrates that programmers do not, and cannot, rely on black boxes of software.<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rule of Thumb - Compiler Builder Inspired</b></h2>
+<p class="p7">When building compilers, one uses the rule-of-thumb:</p>
+<p class="p8"><br></p>
+<p class="p7">An optimization is worth it only if it reduces code size.</p>
+<p class="p8"><br></p>
+<p class="p7">This rule can be extended in many other directions, e.g. to optimize for runtime.</p>
+<p class="p8"><br></p>
+<p class="p7">The same kind of rule can be applied to Type Checking - what &lt;<i>thing</i>&gt; does the type checking reduce?</p>
+<p class="p8"><br></p>
+<p class="p7">When profiling code, one attacks the worst problem first.</p>
+<p class="p8"><br></p>
+<p class="p7"><i>Correctness</i> is not the worst problem in software design.</p>
+<p class="p8"><br></p>
+<p class="p7">Some design rules can be checked using automation. <span class="Apple-converted-space"> </span></p>
+<p class="p8"><br></p>
+<p class="p7">What are the "worst" problems in software design?</p>
+<p class="p8"><br></p>
+<p class="p7">The answer to the above question might depend on one's viewpoint - are we discussing how to deliver a product, are we discussing pure research, … ?</p>
+<p class="p8"><br></p>
+<p class="p7">In my opinion, the worst problem in software is that of <i>dependencies</i>.<span class="Apple-converted-space">  </span>Chains of dependencies need to be snipped and made shorter.</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>5 Questions</b></h2>
+<p class="p7">Daniel Pink suggests asking a series 5 questions, e.g. ask "Why?" 5 times.</p>
+<p class="p8"><br></p>
+<p class="p7">This method can be applied to programming.</p>
+<p class="p8"><br></p>
+<p class="p7">I find that I can "interview" myself by just asking the same question again and again and again …</p>
+<p class="p8"><br></p>
+<p class="p7">For example, start with the statement:</p>
+<p class="p7">"multitasking is hard".</p>
+<p class="p8"><br></p>
+<p class="p7">Ask "Why?".<span class="Apple-converted-space">  </span>Keep drilling down.</p>
+<p class="p8"><br></p>
+<p class="p7">[<i>I record some of my questions and answers in other essays.<span class="Apple-converted-space">  </span>See </i><a href="https://guitarvydas.github.io/2020/12/10/5-Whys-of-Multiprocessing.html"><i>https://guitarvydas.github.io/2020/12/10/5-Whys-of-Multiprocessing.html</i></a><i>, </i><a href="https://guitarvydas.github.io/2020/12/10/5-Whys-of-Full-Preemption.html"><i>https://guitarvydas.github.io/2020/12/10/5-Whys-of-Full-Preemption.html</i></a><i>, </i><a href="https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html"><i>https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html</i></a>]</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>One Language to Rule Them All</b></h2>
+<p class="p7">Programmers seem obsessed with the notion that there is a "unifying theory" behind all of programming and that one language will be the result.</p>
+<p class="p8"><br></p>
+<p class="p7">I was schooled in Engineering (EE, to be exact and spent time in Core Physics courses before that).</p>
+<p class="p8"><br></p>
+<p class="p7">I believe that there is no need for one language to rule them all.</p>
+<p class="p8"><br></p>
+<p class="p7">I believe that we can use many languages to solve any one problem.</p>
+<p class="p8"><br></p>
+<p class="p7">I, also, spent time building compilers (starting with Anatomy of Lisp and Small C), and building operating systems (starting with Ric Holt's wonderful book "Concurrent Euclid, the Unix system and TUNIS" <a href="https://archive.org/details/concurrenteuclid00holt">https://archive.org/details/concurrenteuclid00holt</a> and reading the UNIX® V7 source code).</p>
+<p class="p8"><br></p>
+<p class="p7">I believe that languages are "easy" to build.<span class="Apple-converted-space">  </span>One can build a language in an afternoon.</p>
+<p class="p8"><br></p>
+<p class="p7">[<i>See technologies like PEG, and the idea of transpiling by building on top of "good" base languages.<span class="Apple-converted-space">  </span>I discuss this line of thinking in other essays.</i>]</p>
+<p class="p8"><br></p>
+<p class="p7">I believe that one <i>should</i> build many SCLs (like DSLs, but more focussed) to express the solution to a single problem.<span class="Apple-converted-space">  </span>Again, I discuss this philosophy in other essays.</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DRY vs RY</b></h2>
+<p class="p7">- a form of Abstraction - useful only for professionals</p>
+<p class="p8"><br></p>
+<p class="p7">DRY means Don't Repeat Yourself.</p>
+<p class="p8"><br></p>
+<p class="p7">RY means Repeat Yourself.</p>
+<p class="p8"><br></p>
+<p class="p7">DRY is a form of abstraction.</p>
+<p class="p8"><br></p>
+<p class="p7">Software professionals use abstraction.</p>
+<p class="p8"><br></p>
+<p class="p7">Normal people - non-programmers - don't want to know about abstraction.<span class="Apple-converted-space">  </span>They want to start out with something that "just works" (see my essay(s) on Shuhari).</p>
+<p class="p8"><br></p>
+<p class="p7">Spreadsheets are popular because they</p>
+<ul class="ul1">
+  <li class="li2">have a flat space / a palette of functions</li>
+  <li class="li2">encourage copy/paste between cells as a way of getting work done.</li>
+</ul>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">DRY is focussed on Maintenance Engineering.</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">I believe that software development should be chopped up into several sub-disciplines, e.g. Software Architecture, Software Engineering, Software Implementation, Maintenance Engineering, Software Testing, Q/A, etc.<span class="Apple-converted-space">  </span>[<i>see </i><a href="https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html"><i>https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html</i></a>]</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7">DRY should be automated and it should make RY inexpensive.<span class="Apple-converted-space">  </span>This might be in the form of a better editor and/or git/github/etc.</p>
+<p class="p8"><br></p>
+<p class="p7">Looking at Paul Bennett's Frames work might offer suggestions <a href="https://www.amazon.ca/Framing-Software-Reuse-Lessons-World/dp/013327859X">https://www.amazon.ca/Framing-Software-Reuse-Lessons-World/dp/013327859X</a>.</p>
+<p class="p8"><br></p>
+<p class="p7">I don't know much about Cordy and Roy's NiCad technology, but the abstract(s) seems intriguing.</p>
+<p class="p8"><br></p>
+<p class="p7">[<i>See also </i><a href="https://guitarvydas.github.io/2020/12/09/RY-vs-DRY.html"><i>https://guitarvydas.github.io/2020/12/09/RY-vs-DRY.html</i></a>]</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Abstraction</b></h2>
+<ul class="ul1">
+  <li class="li2"> learned in University</li>
+  <li class="li2">not wanted by non-programmers</li>
+  <li class="li2">avoids repetitive writing</li>
+  <li class="li2">should be assisted by automation (editor?)</li>
+  <li class="li2">avoids repetitive reading
+  <ul class="ul2">
+    <li class="li2">should be assisted by automation (editor?)</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Snap Together Like LEGO® Blocks</b></h2>
+<ul class="ul1">
+  <li class="li2">doesn't work with ALGOL bottleneck
+  <ul class="ul2">
+    <li class="li2">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</li>
+  </ul></li>
+  <li class="li2">needs concurrency</li>
+  <li class="li2">break out of ALGOL bottleneck, first<br>
+</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>3 Times</b></h2>
+<ul class="ul1">
+  <li class="li2">experience: need 3 iterations before a class can be considered done</li>
+  <li class="li2">Mythical Man Month - Fred Brooks
+  <ul class="ul2">
+    <li class="li2">says that 3 passes are needed</li>
+    <li class="li2">calls the 2<span class="s4"><sup>nd</sup></span> pass <i>second system syndrome</i></li>
+    <li class="li2">does not separate software development into sub-categories</li>
+    <li class="li5"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PLs Are Too Complicated</b></h2>
+<p class="p7">PLs (Programming Languages) are too complicated and encourage attention to optimizations.</p>
+<p class="p7">For example, I consider a language to be too complicated if it contains a <span class="s3">+</span> operator.</p>
+<p class="p7">I believe that programming should be broken into a number of sub-categories and layers.</p>
+<p class="p7">Only the bottom-most, implementation, layer of programming should use PLs that contain low-level operations, such as <span class="s3">+</span>.</p>
+<p class="p7">Other layers should only use <i>foreign</i> <i>types</i> and collections of <i>foreign types</i>.</p>
+<p class="p7">Such layers should refer to typed data, but perform no direct manipulation (nor definition) of the typed data. <span class="Apple-converted-space"> </span></p>
+<p class="p7">All such operations should be functions.</p>
+<p class="p7">Compilers should do the heavy lifting - for example, inlining functions.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scalability</b></h2>
+<p class="p7"><a href="https://guitarvydas.github.io/2020/12/09/Scalability.html">https://guitarvydas.github.io/2020/12/09/Scalability.html</a></p>
+<p class="p7"><a href="https://guitarvydas.github.io/2020/12/09/Scalability-II.html">https://guitarvydas.github.io/2020/12/09/Scalability-II.html</a></p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Silver Bullet</b></h2>
+<p class="p7">https://guitarvydas.github.io/2020/12/09/Scalability-II.html</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>70 Years</b></h2>
+<p class="p7">"And what have you done"</p>
+<p class="p7">- John Lennon</p>
+<p class="p8"><br></p>
+<p class="p7">70 years.<span class="Apple-converted-space">  </span>1950 to 2020.</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code is Cheap</b></h2>
+<p class="p7">Code is cheap.</p>
+<p class="p7">Thinking is hard.</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Deprecate Recursion and Loop</b></h2>
+<p class="p7">Computer Science clings to the notion of using Recursion and Loops.</p>
+<p class="p8"><i></i><br></p>
+<p class="p7"><i>Threads</i> were invented to accomodate time-sharing.</p>
+<p class="p8"><br></p>
+<p class="p7">To accomodate deep recursion and loops when using threads, Computer Science invented <i>full preemption</i>.</p>
+<p class="p8"><br></p>
+<p class="p7">Ironically, loops make no sense on the internet.</p>
+<p class="p8"><br></p>
+<p class="p7">You cannot “loop” a pair of distributed computers, you can only send messages between them.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tired Paradigms</b></h2>
+<ul class="ul1">
+  <li class="li2">desktop</li>
+  <li class="li2">time-sharing</li>
+  <li class="li2">memory-sharing</li>
+  <li class="li2">text editors (vs. scoped &amp; eliding editors)
+  <ul class="ul2">
+    <li class="li2">visual editors, text editors but no diagram editors (for programming)</li>
+  </ul></li>
+</ul>
+<ul class="ul1">
+  <li class="li2">footnotes (vs. footnotes in footnotes in …)</li>
+  <li class="li2">TODO lists</li>
+  <li class="li2">ORG mode</li>
+  <li class="li2">libraries</li>
+  <li class="li2">functions<br>
+</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax Checking vs. Traceback</b></h2>
+<ul class="ul1">
+  <li class="li2">UNIX® gave us #line, #file</li>
+  <li class="li2">what is the equivalent in functional representation?<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li2">and why aren't we using it more?</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>HTML</b></h2>
+<ul class="ul1">
+  <li class="li2">something smells wrong
+  <ul class="ul2">
+    <li class="li2">we keep inventing new ways to deal with HTML
+    <ul class="ul2">
+      <li class="li2">e.g. Liquid</li>
+      <li class="li2">e.g. Javascript</li>
+      <li class="li2">e.g. no code</li>
+      <li class="li5"><br></li>
+    </ul></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Strong Typing</b></h2>
+<ul class="ul1">
+  <li class="li2">currently, strong typing is being used as a bandaid for Architecture within code</li>
+  <li class="li2">imagine what we could do if we extracted Architecture from code, then used strong typing on the resulting Architecture</li>
+  <li class="li2">some programmers talk about epiphanies where "if it compiles then it just works"
+  <ul class="ul2">
+    <li class="li2">what they are really saying is that they (finally) got their app's Architecture right (with the help of strong typing automation)
+    <ul class="ul2">
+      <li class="li2">this is just a back-handed way of saying that their PL did not help in this quest</li>
+      <li class="li2">why not?</li>
+      <li class="li2">programmers talk about <i>syntactic sugar</i>, but a bigger problem is <i>implementation sugar (clutter)</i></li>
+      <li class="li2">remove the <i>implementation clutter</i> to expose the Architecture</li>
+    </ul></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Commas and Semicolons</b></h2>
+<ul class="ul1">
+  <li class="li2">noise - commas and semicolons are syntactic sugar</li>
+  <li class="li2">whitespace - commas and semicolons should be whitespace</li>
+  <li class="li2">YACC and LR(k) theory drove early decisions to use semicolons</li>
+  <li class="li2">Commas were, probably, included because they looked like natural language</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blockchain</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blockchain Contains 2 Paradigms</b></h2>
+<p class="p7">TWO paradigms - not one</p>
+<ol class="ol1">
+  <li class="li2">Calculation
+  <ul class="ul2">
+    <li class="li2">cryptography</li>
+  </ul></li>
+  <li class="li2">Event-Driven
+  <ul class="ul2">
+    <li class="li2">time-based obfuscation</li>
+    <li class="li2">p2p</li>
+  </ul></li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blockchain essay</b></h2>
+<p class="p7"><a href="https://guitarvydas.github.io/2020/12/10/Blockchain-Overview.html">https://guitarvydas.github.io/2020/12/10/Blockchain-Overview.html</a></p>
+<p class="p8"><br></p>
+<p class="p9"><br></p>
+<hr>
+<p class="p10"><a id="fn1"></a><a href="#fnlink1">[1]</a> Jim Rootham &lt;— L.J. (Ted) Rootham &lt;— William Bushnell Stout ("simplicate")</p>
+<p class="p11"><a id="fn2"></a><a href="#fnlink2">[2]</a> see also <a href="https://github.com/guitarvydas/js-prolog"><span class="s5"><i>https://github.com/guitarvydas/js-prolog</i></span></a><span class="s5">)</span></p>
+</div>
+</body>
+</html>
