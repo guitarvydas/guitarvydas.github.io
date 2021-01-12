@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Restricted Thinking - Programming Editors</title>
+  <meta name="CreationTime" content="2021-01-12T16:41:45Z">
+  <meta name="ModificationTime" content="2021-01-12T16:41:45Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Programming Editors</b></h2>
+<p class="p2">Our technology - namely programming editors - restrict our thinking in many ways, so pervasive that we don't even notice.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, most of our PLs (Programming Languages) are constrained by our 1950's notions of what a programming editor should be.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Grids of Non-Overlapping Cells</b></h2>
+<p class="p2">Currently, our editors treat programs as grids of non-overlapping cells.</p>
+<p class="p3"><br></p>
+<p class="p2">We put binary codes into each cell.</p>
+<p class="p3"><br></p>
+<p class="p2">We arrange cells in rows and columns.</p>
+<p class="p3"><br></p>
+<p class="p2">Cell must not overlap.</p>
+<p class="p3"><br></p>
+<p class="p2">We call these cells <i>characters</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Overlapping Cells</b></h2>
+<p class="p2">Imagine if cells were allowed to overlap.</p>
+<p class="p3"><br></p>
+<p class="p2">We might wish to assign an (x,y) point to each cell instead of just a (row,column).</p>
+<p class="p3"><br></p>
+<p class="p2">(x,y) would be based on pixels, or vectors.</p>
+<p class="p3"><br></p>
+<p class="p2">(row, column) is always based on a fixed grid.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>One Input One Output</b></h2>
+<p class="p2">Current programming languages are all based on the pen-and-paper-based concept of <i>functions.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">Functions get their input from parameters - all at the same time.<span class="Apple-converted-space">  </span>Inputs are all delivered synchronously at the time that a function is invoked.</p>
+<p class="p3"><br></p>
+<p class="p2">Functions produce all of their outputs at once - as return values.<span class="Apple-converted-space">  </span>Return values are returned synchronously to the caller.</p>
+<p class="p3"><br></p>
+<p class="p2">What happens if we want to return something else?<span class="Apple-converted-space">  </span>We invent a kludge called <i>exceptions.</i></p>
+<p class="p3"><br></p>
+<p class="p2">What if our function runs forever, like a <i>server</i> on the internet?<span class="Apple-converted-space">  </span>Uh, we force-fit the concept(s) into a restricted paradigm, using languages that can't express such concepts conveniently.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sizing Cells</b></h2>
+<p class="p2">Imagine if cells were not all the same size.</p>
+<p class="p3"><br></p>
+<p class="p2">We might wish to resize cells, making some cells larger than other cells.</p>
+<p class="p3"><br></p>
+<p class="p2">We might wish to show the boundaries of cells.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diff, git, github, etc.</b></h2>
+<p class="p2">Imagine if our editors implemented smart highlighting and elision.</p>
+<p class="p3"><br></p>
+<p class="p2">Using smart highlighting coupled with <i>diff,</i> we could mark regions of code that were the same.</p>
+<p class="p3"><br></p>
+<p class="p2">Automatic D.R.Y.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Maybe we would ask our editors to clone lumps of code, making the clones read-only, or, read-write, allowing multiple views on the same piece of mutable code.<span class="Apple-converted-space">  </span>Maybe we wouldn't need to bake such concepts into our languages (e.g OOP).</p>
+<p class="p3"><br></p>
+<p class="p2">Maybe our smart editors would allow us to show languages using more than one syntax for each language.<span class="Apple-converted-space">  </span>A write-able version, click, a read-able version.<span class="Apple-converted-space">  </span>Same language.<span class="Apple-converted-space">  </span>At present, we bake such ideas into the syntax of languages and bend to the whims of language designers.<span class="Apple-converted-space">  </span>For example, Pascal-like languages favor write-ability, giving us constructs like if …then … else … end if - which allows syntax checkers to go to town on our code, but, we are allowed only that one syntax for the language.<span class="Apple-converted-space">  </span>As another example, Lisp favors read-ability, but, every construct ends in the same way, using the character ")".<span class="Apple-converted-space">  </span>This makes the code easier to read (less syntactic sugar, more to see all at once) but thwarts syntax checkers.<span class="Apple-converted-space">  </span>Syntax checkers are only useful for a short while at the beginning of writing each program.<span class="Apple-converted-space">  </span>Once the syntax has been checked, we might wish to turn off syntax checking and all of the syntactic sugar that makes it possible, letting us savour more of the essence of the code in one glance.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Nesting</b></h2>
+<p class="p2">We keep re-discovering the big win for programming. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Nesting. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Scoping. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Eliding detail.</p>
+<p class="p3"><br></p>
+<p class="p2">The scourge of <i>global variables</i> was conquered using nesting, i.e. using scoped local variables.</p>
+<p class="p3"><br></p>
+<p class="p2">The scourge of GOTOs was conquered using nesting.<span class="Apple-converted-space">  </span>Structured Programming taught us to nest programming constructs and to not allow them to interleave.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Diagrams show nesting better than text does.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DaS</b></h2>
+<p class="p2">DaS stands for <i>Diagrams as Syntax.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">DaS is <span class="s1">not</span> <i>visual programming.</i> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">DaS adds only a few extra concepts to our languages - boxes, arrows, ellipses, text.</p>
+<p class="p3"><br></p>
+<p class="p2">Visual Programming seems to deal with <i>pixels</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Dealing with pixels is hard.<span class="Apple-converted-space">  </span>Dealing with only a few more graphical entities is much easier.</p>
+<p class="p3"><br></p>
+<p class="p2">DaS is not Unicode.<span class="Apple-converted-space">  </span>Syntactic atoms of DaS are not always the same size, not arranged on a grid, and can overlap.<span class="Apple-converted-space">  </span>Unicode works with cells, grids of cells, and imposes a non-overlapping constraint on cells.</p>
+<p class="p4"><br></p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>DRY means Don't Repeat Yourself.<span class="Apple-converted-space">  </span>A good idea for code maintenance.<span class="Apple-converted-space">  </span>A poorer idea for expressing code Architecture.</p>
+<p class="p5"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>YMMV.<span class="Apple-converted-space">  </span>You might disagree with my notion of what is readable and what is writable.<span class="Apple-converted-space">  </span>That's not the point here.</p>
+<p class="p5"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Structured Programming also professed the use of single-entry single-exit.<span class="Apple-converted-space">  </span>We broke that rule by introducing exceptions.<span class="Apple-converted-space">  </span>And, worse, we allow exceptions to be based on a runtime chain of dynamic dependencies (The Stack).</p>
+<p class="p5"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Maybe we would have designed exceptions differently if we looked at diagrams of our code, instead of using grid editors.</p>
+</div>
+</body>
+</html>
