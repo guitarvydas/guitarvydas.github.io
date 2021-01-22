@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>erlang</title>
+  <meta name="CreationTime" content="2021-01-22T06:51:57Z">
+  <meta name="ModificationTime" content="2021-01-22T06:51:57Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 11.0px Menlo}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Actors Erlang FBP</b></h2>
+<p class="p2">FBP (Flow-Based Programming) is often conflated with Actors.</p>
+<p class="p3"><br></p>
+<p class="p2">Actors are often conflated with Erlang.</p>
+<p class="p3"><br></p>
+<p class="p2">I discuss some of the issues in this essay.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>CALL / RETURN</b></h2>
+<p class="p2">I have found that one can <i>reason</i> (understand) a program if it doesn't cross the <i>great divide.</i></p>
+<p class="p3"><br></p>
+<p class="p2">The <i>great divide</i> is delimited by the use of CALL/RETURN.</p>
+<p class="p3"><br></p>
+<p class="p2">If a program doesn't use CALL/RETURN, one can reason about it.</p>
+<p class="p3"><br></p>
+<p class="p2">If a program uses CALL/RETURN, then all bets are off.</p>
+<p class="p3"><br></p>
+<p class="p2">Most programming languages expect programmers to implement functions using CALL/RETURN, e.g. <span class="s1">f(x);</span> is usually implemented using CALL / RETURN (the caller calls the function <i>f</i> and waits for a result).<span class="Apple-converted-space">  </span>[<i>N.B. Recursion is CALL/RETURN.<span class="Apple-converted-space">  </span>Smalltalk "message passing" is actually CALL / RETURN</i>].</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Call Return Spaghetti</b></h2>
+<p class="p2">Using CALL/RETURN, it is "natural" to skip over the fire-and-forget (concurrency) paradigm.<span class="Apple-converted-space">  </span>I discuss this issue further in my essay about CALL RETURN SPAGHETTI <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a>.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Call Return Uses a Global Variable</b></h2>
+<p class="p2">CALL RETURN uses a global variable to store breadcrumbs.</p>
+<p class="p3"><br></p>
+<p class="p2">This global variable is created/supported by most modern hardware.</p>
+<p class="p3"><br></p>
+<p class="p2">I discuss this issue in my essay ALGOL Bottleneck <a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Closures</b></h2>
+<p class="p2">Closures are a way to escape the CALL/RETURN handcuffs.</p>
+<p class="p3"><br></p>
+<p class="p2">In fact, <i>processes</i> in operating systems, are just honking big closures.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Actors vs CALL RETURN</b></h2>
+<p class="p2">Actor technology does not specify CALL / RETURN.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Erlang vs. CALL RETURN</b></h2>
+<p class="p2">Erlang implements its processes using its BEAM VM.</p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p2">Erlang expects programmers to explicitly create processes using <i>spawn</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang also allows creation of "smaller" closures, using <i>fun.</i></p>
+<p class="p3"><br></p>
+<p class="p2">Erlang uses <i>immutable data</i>.<span class="Apple-converted-space">  </span>This is not strictly necessary, since <i>isolation</i> hides the inner workings of components.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang allows hierarchical decomposition of processes, but does not encourage it.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang allows knowing the <i>pid</i> of a process, hence, allows dynamic reconfiguration of the architecture.<span class="Apple-converted-space">  </span>[<i>Dynamic reconfiguration is frowned upon from a Maintenance Engineering perspective. <span class="Apple-converted-space">  </span>Dynamic reconfiguration makes explicit Architecture difficult if not impossible.<span class="Apple-converted-space">  </span>Self-modifying code is an example of dynamic reconfiguration and can, also, lead to self-modifying architectures.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang defines a number of basic types.<span class="Apple-converted-space">  </span>This encourages programming <i>Implementation</i> instead of <i>Engineering</i> and <i>Architecture</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FBP vs CALL RETURN</b></h2>
+<p class="p2">FBP (Flow-Based Programming) encourages CALL RETURN-less construction of systems.</p>
+<p class="p3"><br></p>
+<p class="p2">FBP has been implemented on top of other, existing, base languages.<span class="Apple-converted-space">  </span>As soon as one writes programs in the base language (beyond the FBP paradigm), on returns to CALL/RETURN-full programming.</p>
+<p class="p3"><br></p>
+<p class="p2">FBP provides Isolation by implementing components as operating-system supports processes.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Turtles All The Way Down</b></h2>
+<p class="p2">I favour hierarchy.</p>
+<p class="p3"><br></p>
+<p class="p2">From this perspective, <i>processes</i> should be composed of other <i>processes</i> to a very deep level.</p>
+<p class="p3"><br></p>
+<p class="p2">FBP, Actors and Erlang support hierarchical organization of programs, but do not otherwise <i>encourage</i> this style.</p>
+<p class="p3"><br></p>
+<p class="p2">FBP goes beyond Actors and Erlang, by providing the concept of sub-nets.<span class="Apple-converted-space">  </span>Coordination of child processes is left to the programmer.</p>
+</div>
+</body>
+</html>
