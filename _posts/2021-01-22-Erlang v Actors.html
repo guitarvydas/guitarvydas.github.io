@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Erlang v Actors</title>
+  <meta name="CreationTime" content="2021-01-22T09:00:27Z">
+  <meta name="ModificationTime" content="2021-01-22T09:00:27Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Erlang v Actors</b></h2>
+<p class="p2">Erlang is a subset of Actors.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang is weaker than Actors.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Superposition</b></h2>
+<p class="p2">See <a href="https://guitarvydas.github.io/2021/01/22/superposition.html">https://guitarvydas.github.io/2021/01/22/superposition.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">Actors provides superposition.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang provides superposition, as long as the software components do not use CALL/RETURN to communicate with one another.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Isolation</b></h2>
+<p class="p2">Isolation is the idea that a software component be encapsulated in terms of:</p>
+<ul class="ul1">
+  <li class="li4">data</li>
+  <li class="li4">control flow.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Isolation is vital to superposition.</p>
+<p class="p3"><br></p>
+<p class="p2">UNIX® pipes provide isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">Threads and processes provide isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">OOP provides encapsulation but not isolation.<span class="Apple-converted-space">  </span>OOP encapsulates data only and hurts encapsulation of control-flow.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Docker provides isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang provides processes, hence, Erlang provides isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">(Isolation could be performed more efficiently using closures and /CC<span class="Apple-converted-space">  </span>(current continuations)).</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">https://guitarvydas.github.io/2020/12/09/Isolation.html</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Prohibit State</b></h2>
+<p class="p2">Prohibiting state is not necessary when <i>isolation</i> exists.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang provides <i>isolation</i> and, mostly prohibits state through the use of FP (functional programming) techniques.</p>
+<p class="p3"><br></p>
+<p class="p2">Actors do not prohibit state.</p>
+<p class="p3"><br></p>
+<p class="p2">I conclude that Erlang is buzzword-compliant but is a subset of Actors.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Prohibit CALL/RETURN</b></h2>
+<p class="p2">CALL/RETURN uses underlying hardware to modify a global variable.</p>
+<p class="p3"><br></p>
+<p class="p2">That variable is The Stack.</p>
+<p class="p3"><br></p>
+<p class="p2">I discuss this issue in my essay "The ALGOL Bottleneck" <a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</a> and in my essay Call Return Spaghetti <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">The use of CALL/RETURN hurts the ability to provide isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">Actors inhibit the use of CALL/RETURN.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang inhibits the use of CALL/RETURN at the component level.<span class="Apple-converted-space">  </span>[<i>Erlang appears to allow CALL/RETURN within a component</i>].</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hierarchy</b></h2>
+<p class="p2"><i>Hierarchy</i> is to message-passing as <i>structured programming </i>is to assembler programming.</p>
+<p class="p3"><br></p>
+<p class="p2">Actors allow, but do not encourage, hierarchy of components.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang allows hierarchy of components as long as CALL/RETURN is not used.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang is a subset of Actors, in that Erlang allows a mixture of CALL/RETURN-less and CALL/RETURN-full programming, whereas Actors prescribes only CALL/RETURN-less programming.</p>
+<p class="p3"><br></p>
+<p class="p2">Non-hierarchical message-passing - flat message-passing - has been associated with the apparent failure of message-passing in general.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Target Naming</b></h2>
+<p class="p2">Explicit naming of a target routine introduces dependencies.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, most current PLs (Programming Language) invoke routines through direct calling, e.g.</p>
+<p class="p3"><br></p>
+<p class="p5">f(x)</p>
+<p class="p6"><br></p>
+<p class="p2">(here, the function <span class="s1">f()</span> is CALLed by directly naming the function<span class="s1"> f()</span> that is to be used).</p>
+<p class="p3"><br></p>
+<p class="p2">Actors indirectly name targets by use of a <i>pid</i> (process id).</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang does the same.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Using a PID results in knowledge of the target and results in dependencies (IMO "bad").<span class="Apple-converted-space">  </span>Furthermore, using PIDs at runtime causes dynamic dependencies which is akin to self-modifying code ("very bad")</i>].</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Concurrency</b></h2>
+<p class="p2">Actors imply concurrency.</p>
+<p class="p3"><br></p>
+<p class="p2">Erlang implements concurrency using processes.</p>
+<p class="p3"><br></p>
+<p class="p2">See Rob Pike's talk - Concurrency Is Not Parallelism <a href="https://www.youtube.com/watch?v=oV9rvDllKEg">https://www.youtube.com/watch?v=oV9rvDllKEg</a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parallelism</b></h2>
+<p class="p2">Actors and Erlang allow construction of Software Components using the <i>concurrent</i> paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2">Hence, Actor and Erlang programs can be run in parallel.</p>
+<p class="p3"><br></p>
+<p class="p2">I don't know if Erlang (and BEAM) provides parallelism "out of the box".</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>One In - How Many Out?</b></h2>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/22/One-In-How-Many-Out.html">https://guitarvydas.github.io/2021/01/22/One-In-How-Many-Out.html</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Composition</b></h2>
+<p class="p2">Isolated software components can be composed to form a system (e.g. an app).</p>
+<p class="p3"><br></p>
+<p class="p2">Actors and Erlang provide isolation, so they support composition of components.</p>
+<p class="p7"><br></p>
+<hr>
+<p class="p8"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Inheritance is a good way to organize data.<span class="Apple-converted-space">  </span>Inheritance, with overrides, is a bad way to organize control flow (e.g. code).</p>
+</div>
+</body>
+</html>
