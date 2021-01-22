@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>One In How Many Out?</title>
+  <meta name="CreationTime" content="2021-01-22T08:45:07Z">
+  <meta name="ModificationTime" content="2021-01-22T08:45:07Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>One In - How Many Out?</b></h2>
+<p class="p2">A central issue to building controllers, instead of calculators, is the number of outputs that can be produced a single input.</p>
+<p class="p3"><br></p>
+<p class="p2">Most PLs (Programming Language) encourage the use of functions.<span class="Apple-converted-space">  </span>Functions have a strict one-in-one-out policy.<span class="Apple-converted-space">  </span>The function signature specifies the input and output APIs of the function.<span class="Apple-converted-space">  </span>For example:</p>
+<p class="p3"><br></p>
+<p class="p4">f(x) returns y throws e</p>
+<p class="p3"><br></p>
+<p class="p2">defines a function which takes one input parameter and almost-always returns one output datum to the caller.<span class="Apple-converted-space">  </span>Sometimes, the function returns an exception datum.<span class="Apple-converted-space">  </span>The receiver of the exception is usually dependent on the dynamic<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> call-chain.</p>
+<p class="p3"><br></p>
+<p class="p2">Some PLs relax the strict one-in-one-out rule by silently ignoring the return value.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Returning Void</b></h2>
+<p class="p2">NC is not the same as returning void. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">NC is determined by the <i>user</i> of the component.<span class="Apple-converted-space">  </span>The function <i>signature</i> might declare the existence of a returned value(s), but only the user determines if that returned value is used. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Ignoring the result is a special case of a more general concept.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>NC - No Connection</b></h2>
+<p class="p2">A common idiom in EE is the specification of NC - No Connection.</p>
+<p class="p3"><br></p>
+<p class="p2">Inputs can be NC.</p>
+<p class="p3"><br></p>
+<p class="p2">Outputs can be NC.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Function Signature vs. Invocation Signature</b></h2>
+<p class="p2">Typically, a software function is defined by its signature.</p>
+<p class="p3"><br></p>
+<p class="p2">I believe that each call-point should include a signature of how a component is intended to be used.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calling Signature</b></h2>
+<p class="p2">I believe that each <i>call-</i>point should include a signature of how a component is intended to be used.</p>
+<p class="p3"><br></p>
+<p class="p2">A <i>loader</i> might "match up" signatures and complete type-checking before running an application.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Interfaces</b></h2>
+<p class="p2">Interfaces are meant to provide a way to define multiple signatures for a software component.</p>
+<p class="p3"><br></p>
+<p class="p2">The concept of <i>interfaces </i>does not address the problem in full:</p>
+<p class="p2">functions are specified by</p>
+<ul class="ul1">
+  <li class="li5">the way they are defined</li>
+  <li class="li5">the way they are called.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Duck-Typing</b></h2>
+<p class="p2"><a href="https://en.wikipedia.org/wiki/Duck_typing">https://en.wikipedia.org/wiki/Duck_typing</a></p>
+<p class="p3"><br></p>
+<p class="p2">Duck typing is an attempt to provide calling signatures.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Checking Signatures</b></h2>
+<p class="p2">I believe that type signatures should be checked in phases.</p>
+<p class="p3"><br></p>
+<p class="p2">For example,<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li5">Phase 1 checks the definition point of a function.</li>
+  <li class="li5">Phase 2 checks the call-points of every function invocation (and determines if all function outputs are to be used).</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Intermediate object files could be used for carrying partially-checked types, along with code.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DLLs</b></h2>
+<p class="p3"><br></p>
+<p class="p2">DLLs address the calling signature problem in an epicyclic manner - they solve only part of the larger problem.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The larger problem is that of snipping all dependencies and to use later passes to fill in the details (this could be done in a layered manner instead of doing all of the work in one fell swoop).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anecdote - Eiffel Type Checking in eLisp</b></h2>
+<p class="p2">Anecdote:</p>
+<p class="p3"><br></p>
+<p class="p2">In the late 1980's, I worked with the Eiffel programming language.</p>
+<p class="p3"><br></p>
+<p class="p2">I noticed that compile-times were non-linear for large systems.<span class="Apple-converted-space">  </span>[<i>Non-linear and becoming larger with each additional class.<span class="Apple-converted-space">  </span>Exponential?</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">The problem was that many classes were dependent on other classes.<span class="Apple-converted-space">  </span>The type checker would check - and re-check - other classes while checking the validity of a unit being compiled.</p>
+<p class="p3"><br></p>
+<p class="p2">I wrote an Eiffel type-checker in eLisp. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The new type-checker snipped inter-class dependencies and would generate intermediate object files that contained partial type information.</p>
+<p class="p3"><br></p>
+<p class="p2">The final system-wide type check was performed by a loader that understood the partial type information stored in the intermediate object files.</p>
+<hr>
+<p class="p7"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Dynamic is equated with "bad" IMO.<span class="Apple-converted-space">  </span>Ask any Maintenance Engineer if it is easy to debug a dynamic system.<span class="Apple-converted-space">  </span>Dynamic reconfiguration used to be called "self modifying code".</p>
+</div>
+</body>
+</html>
