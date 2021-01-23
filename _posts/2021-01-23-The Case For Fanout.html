@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>The Case For Fanout</title>
+  <meta name="CreationTime" content="2021-01-23T11:18:39Z">
+  <meta name="ModificationTime" content="2021-01-23T11:18:39Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Fan Out</b></h2>
+<p class="p2">Fanout means that the output from one port can be split to several components.</p>
+<p class="p3"><br></p>
+<p class="p2">FBP does not allow fanout.</p>
+<p class="p3"><br></p>
+<p class="p2">AG does allow fanout.</p>
+<p class="p3"><br></p>
+<p class="p2">I show the difference between these methods, in this essay.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example</b></h2>
+<p class="p4">A simple "hello world" example is shown in Fig. 1.</p>
+<p class="p5"><br></p>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing.png" width="200px" height="101px" alt="Image"></p>
+<p class="p4">Fig. 1 Hello World</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FBP Hello World</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing1.png" width="200px" height="101px" alt="Image"></p>
+<p class="p4">Fig. 2 FBP Hello World</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Two Copies of FBP Hello World</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing2.png" width="200px" height="182px" alt="Image"></p>
+<p class="p4">Fig. 3 FBP Hello World Twice</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FBP Lasso Subnets</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing3.png" width="200px" height="220px" alt="Image"></p>
+<p class="p4">Fig. 4 Lasso FBP Subnets</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FBP Subcomponent</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing4.png" width="200px" height="330px" alt="Image"></p>
+<p class="p4">Fig. 5 FBP Subcomponent</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>AG Hello World</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing5.png" width="200px" height="92px" alt="Image"></p>
+<p class="p4">Fig. 6 AG Hello World</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Two Copies of AG Hello World</b></h2>
+<p class="p5"><br></p>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing6.png" width="200px" height="200px" alt="Image">Fig. 7 AG Hello World Twice</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>AG Lasso Subnets</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing7.png" width="200px" height="160px" alt="Image"></p>
+<p class="p4">Fig. 8 AG Lasso Subnets</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>AG Subcomponent</b></h2>
+<p class="p4"><img src="/assets/2021-01-23-11-18-39-Images/Time sharing8.png" width="200px" height="160px" alt="Image"></p>
+<p class="p4">Fig. 9 AG Subcomponent</p>
+</div>
+</body>
+</html>
