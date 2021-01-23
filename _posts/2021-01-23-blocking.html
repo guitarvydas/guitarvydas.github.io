@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>blocking</title>
+  <meta name="CreationTime" content="2021-01-23T12:49:08Z">
+  <meta name="ModificationTime" content="2021-01-23T12:49:08Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blocking</b></h2>
+<p class="p2">Operating Systems simulate parallel systems by time-sharing the CPU between processes.</p>
+<p class="p2">Each process <i>appears</i> to have its own cpu, its own memory space and its own stack, but these are just slices of the main CPU and the main memory.</p>
+<p class="p2">I have tried to diagram the situation in <span class="s1">Fig. 1 and Fig. 2.</span></p>
+<p class="p3"><br></p>
+<p class="p4"><img src="/assets/2021-01-23-12-49-08-Images/Time sharing.png" width="200px" height="288px" alt="Image"></p>
+<p class="p5">Fig. 1 Stylized view of Multi-Processing</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p6"><img src="/assets/2021-01-23-12-49-08-Images/Time sharing1.png" width="400px" height="256px" alt="Image"></p>
+<p class="p7"><br></p>
+<p class="p8">Fig. 2 Stylized view of Multi-Processing Including Time-Sharing Operating System</p>
+<p class="p7"><br></p>
+<p class="p9">A process "blocks" when:</p>
+<ul class="ul1">
+  <li class="li9">it's allotted time is up</li>
+  <li class="li9">it tries to perform some off-cpu operation (e.g. I/O) allowing the CPU to be used by other processes.</li>
+</ul>
+<p class="p9">The operating runs some software to switch to a new process (e.g. reload MMU registers, change the timer setting, grab pages from disk, etc.).</p>
+<p class="p9">This is also called "context switching".</p>
+<p class="p9">Context switching and hardware support are used to isolate processes from one another.</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Time-sharing</b></h2>
+<p class="p2"><a href="https://en.wikipedia.org/wiki/Time-sharing">https://en.wikipedia.org/wiki/Time-sharing</a></p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Yield</b></h2>
+<p class="p2">"Yield" is another term for blocking.</p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Loops / Recursion</b></h2>
+<p class="p2">Time-slicing a CPU is necessary only because PLs (Programming Languages) allow programs to contain long-running loops and deep recursion.</p>
+<p class="p10"><br></p>
+<p class="p2">Time-slicing would not be necessary if PLs prohibited the use of long-running loops and deep recursion.<span class="Apple-converted-space">  </span>[<i>N.B. This would be possible, if compilers compiled loop-ends into "yields" with a feedback-message-send that would signal the need for another pass through the loop</i>].</p>
+<p class="p10"><br></p>
+<p class="p2">Loops and recursion are the <i>exception</i> not the rule. <span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p2">We incur accidental complexity because we encourage the use of loops and recursion.</p>
+<p class="p10"><br></p>
+<p class="p2">Loops / recursion makes sense in a language that is meant to be used <i>inside</i> a network node - iPL (inner PL).</p>
+<p class="p10"><br></p>
+<p class="p2">Loops / recursion do not make sense in a language that is meant to be used to describe a <i>network</i> of nodes - oPL (outer PL).</p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>1950's</b></h2>
+<p class="p2">Time-sharing was invented in the 1950's.</p>
+<p class="p10"><br></p>
+<p class="p2">At that time, CPUs were very expensive.</p>
+<p class="p10"><br></p>
+<p class="p2">At that time, memory was very expensive.</p>
+<p class="p10"><br></p>
+<p class="p2">Time-sharing is an optimization that allows for the use of one computer to simulate many computers.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>2020's</b></h2>
+<p class="p2">CPUs are no longer expensive</p>
+<p class="p10"><br></p>
+<p class="p2">Memory is no longer expensive.</p>
+<p class="p10"><br></p>
+<p class="p2">Yet, we continue to use the time-sharing optimization.</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Distributed Programming</b></h2>
+<p class="p2">In distributed programming, we use CPUs like candy - each app gets its own CPU and memory.</p>
+<p class="p10"><br></p>
+<p class="p2">A piece of software, in distributed programming, runs at its own speed and never blocks. <span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bit Spinning</b></h2>
+<p class="p2">In a distributed environment, where CPUs are like candy, a piece of software waits for input by <i>bit-spinning<a id="fnlink1"></a></i><a href="#fn1"><sup>[1]</sup></a>.</p>
+<p class="p10"><br></p>
+<p class="p2">In a time-shared environment, bit-spinning is discouraged because it wastes CPU power that could be used by other processes.</p>
+<p class="p10"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Efficiency</b></h2>
+<p class="p2">Adding the overhead of using an Operating System (which is just a library) <i>adds</i> overhead and degrades the efficiency of the software.</p>
+<p class="p10"><br></p>
+<p class="p2">The use of an Operating System improves efficiency of a system only if most apps (processes) access much-slower I/O devices that would require the use of <i>bit-spinning</i>.</p>
+<p class="p10"><br></p>
+<p class="p2">Calculator software (one-in-one-out, functional) would be more efficient without the addition of an operating system.</p>
+<p class="p10"><br></p>
+<p class="p2">IoT devices would be more efficient (aka "cheaper") without the use of operating systems.</p>
+<p class="p10"><br></p>
+<p class="p2">[<i>IMO, what we really want is to be able to plug together software components to build the least amount of software-plus-operating-system possible to solve any one problem.<span class="Apple-converted-space">  </span>With current programming languages, this is not easy to do, because they are, mostly, iPLs and not oPLs that encourage structured design of distributed computing. (See </i>Loops / Recursion <i>for the definition of iPLs and oPLs).</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Blockchain and Sybil Attacks</b></h2>
+<p class="p9">Blockchain developers mention Sybil Attacks. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p9">Sybil Attacks are the idea of using one CPU to simulate many computers, i.e to give one computer multiple personalities like the Sybil character in the movie.<a id="fnlink2"></a><a href="#fn2"><span class="s2"><sup>[2]</sup></span></a> <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p9">Slicing a computer up into multiple personalities makes it look like there are more participants on a blockchain than there really are. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p9">If the multiple personalities collude to sway votes about who should receive $'s, then this is called a Sybil attack. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p9">The counter-measure to such Sybil attacks is to insist that all participants solve a puzzle before casting a vote.<span class="Apple-converted-space">  </span>The puzzle is chosen to be so onerous that a single computer must work on it full time.<span class="Apple-converted-space">  </span>If a computer is sliced up into multiple personalities, the probability of getting the right answer to the puzzle in any of the personalities is very low and only single-personality computers can solve the puzzle and can get to vote.</p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Bit-spinning is a "technical" term for spinning in a tight loop waiting for input.</p>
+<p class="p9"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>https://en.wikipedia.org/wiki/Sybil_(1976_film)</p>
+</div>
+</body>
+</html>
