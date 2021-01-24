@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>Compiling Diagrams 2</title>
-  <meta name="CreationTime" content="2021-01-24T10:49:21Z">
-  <meta name="ModificationTime" content="2021-01-24T10:49:21Z">
+  <meta name="CreationTime" content="2021-01-24T11:00:50Z">
+  <meta name="ModificationTime" content="2021-01-24T11:00:50Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -13,13 +13,14 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
     p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
   </style>
 </head>
 <body>
 <div style="width: 600px; margin: 0 auto">
 
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagram</b></h2>
-<p class="p2"><img src="/assets/2021-01-24-10-49-21-Images/Time sharing.png" width="400px" height="114px" alt="Image"></p>
+<p class="p2"><img src="/assets/2021-01-24-11-00-50-Images/Time sharing.png" width="400px" height="114px" alt="Image"></p>
 <p class="p2">Fig. 1 Hello World (Diagram)</p>
 <p class="p3"><br></p>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>JSON</b></h2>
@@ -29,38 +30,39 @@
 <p class="p4"><span class="Apple-converted-space">  </span>"outputs" : ["RESULT"],</p>
 <p class="p4"><span class="Apple-converted-space">  </span>"parts" :</p>
 <p class="p4"><span class="Apple-converted-space">  </span>[</p>
-<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "ASTRING-JOIN", "kindName" : "ASTRING-JOIN"},</p>
-<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "CWORLD", "kindName" : "CWORLD"},</p>
-<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "CHELLO", "kindName" : "CHELLO"}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "STRING-JOIN", "kindName" : "STRING-JOIN"},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "WORLD", "kindName" : "WORLD"},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>{ "partName" : "HELLO", "kindName" : "HELLO"}</p>
 <p class="p4"><span class="Apple-converted-space">  </span>],</p>
 <p class="p4"><span class="Apple-converted-space">  </span>"wiring" :</p>
 <p class="p4"><span class="Apple-converted-space">    </span>[</p>
-<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 0, "sources" : [{"part" : "CHELLO", "pin" : "S"}], "receivers" : [{"part" : "ASTRING-JOIN", "pin" : "A"}]},</p>
-<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 1, "sources" : [{"part" : "CWORLD", "pin" : "S"}], "receivers" : [{"part" : "ASTRING-JOIN", "pin" : "B"}]},</p>
-<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 2, "sources" : [{"part" : "ASTRING-JOIN", "pin" : "C"}], "receivers" : [{"part" : "SELF", "pin" : "RESULT"}]},</p>
-<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 3, "sources" : [{"part" : "SELF", "pin" : "START"}], "receivers" : [{"part" : "CWORLD", "pin" : "START"},{"part" : "CHELLO", "pin" : "START"}]}</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 0, "sources" : [{"part" : "HELLO", "pin" : "S"}], "receivers" : [{"part" : "STRING-JOIN", "pin" : "A"}]},</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 1, "sources" : [{"part" : "WORLD", "pin" : "S"}], "receivers" : [{"part" : "STRING-JOIN", "pin" : "B"}]},</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 2, "sources" : [{"part" : "STRING-JOIN", "pin" : "C"}], "receivers" : [{"part" : "SELF", "pin" : "RESULT"}]},</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{"wire-index" : 3, "sources" : [{"part" : "SELF", "pin" : "START"}], "receivers" : [{"part" : "WORLD", "pin" : "START"},{"part" : "HELLO", "pin" : "START"}]}</p>
 <p class="p4"><span class="Apple-converted-space">    </span>]</p>
 <p class="p4"><span class="Apple-converted-space">  </span>}</p>
 <p class="p5"><br></p>
+<p class="p6">[<i>N.B. Bootstrap version upcases all strings.</i>]</p>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Manifests (Two)</b></h2>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Expected Manifest</b></h2>
 <p class="p4">{</p>
 <p class="p4"><span class="Apple-converted-space">    </span>uses :</p>
 <p class="p4"><span class="Apple-converted-space">    </span>[</p>
 <p class="p4"><span class="Apple-converted-space">        </span>{</p>
-<p class="p4"><span class="Apple-converted-space">            </span>kind : "string-join",</p>
-<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["a", "b"],</p>
-<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["c"]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>kind : "STRING-JOIN",</p>
+<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["A", "B"],</p>
+<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["C"]</p>
 <p class="p4"><span class="Apple-converted-space">        </span>},</p>
 <p class="p4"><span class="Apple-converted-space">        </span>{</p>
-<p class="p4"><span class="Apple-converted-space">            </span>kind: "world",</p>
-<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["start"],</p>
-<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["s"]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>kind: "WORLD",</p>
+<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["START"],</p>
+<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["S"]</p>
 <p class="p4"><span class="Apple-converted-space">        </span>},</p>
 <p class="p4"><span class="Apple-converted-space">        </span>{</p>
-<p class="p4"><span class="Apple-converted-space">            </span>kind: "hello",</p>
-<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["start"],</p>
-<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["s"]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>kind: "HELLO",</p>
+<p class="p4"><span class="Apple-converted-space">            </span>inputs: ["START"],</p>
+<p class="p4"><span class="Apple-converted-space">            </span>outputs: ["S"]</p>
 <p class="p4"><span class="Apple-converted-space">        </span>}</p>
 <p class="p4"><span class="Apple-converted-space">    </span>]</p>
 <p class="p4">}</p>
