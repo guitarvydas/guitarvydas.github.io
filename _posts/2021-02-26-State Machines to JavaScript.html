@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Untitled</title>
+  <meta name="CreationTime" content="2021-02-26T16:43:50Z">
+  <meta name="ModificationTime" content="2021-02-26T16:43:50Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {text-decoration: underline}
+    span.s3 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I show how to transpile, manually, a simple state machine diagram to Javascript code.</p>
+<p class="p3"><br></p>
+<p class="p2">This essay tries to communicate the very fundamentals of this approach — State Machines and <i>layers</i> — aka Divide&amp;Conquer on steroids.</p>
+<p class="p3"><br></p>
+<p class="p2">I will discuss deeper issues in other essays.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Repo</b></h2>
+<p class="p2">The code for these examples can be found in<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://github.com/guitarvydas/example/tree/youtube">https://github.com/guitarvydas/example/tree/youtube</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Video</b></h2>
+<p class="p2"><a href="https://www.youtube.com/watch?v=7YBKWwC2-Ww&amp;list=PLVDkQ9A0-G_tLGQ3lbYxAJk_RFkCndu7a">https://www.youtube.com/watch?v=7YBKWwC2-Ww&amp;list=PLVDkQ9A0-G_tLGQ3lbYxAJk_RFkCndu7a</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Simple State Diagram</b></h2>
+<p class="p4">Fig. 1 shows the (simple) state machine used in this example.</p>
+<p class="p5"><br></p>
+<p class="p4"><img src="/assets/2021-02-26-16-43-50-Images/Components-ToggleSM.png" width="300px" height="145px" alt="Image"></p>
+<p class="p4">Fig. 1 Simple 2-state State Machine</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Component Overview Layer</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Name</b></h2>
+<p class="p2">The name of the Component is "Toggle".</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Inputs</b></h2>
+<p class="p2">The Component has 1 input:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li6">in</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Outputs</b></h2>
+<p class="p2">The Component has 2 outputs:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li6">no</li>
+  <li class="li6">yes</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>State Machine Overview Layer</b></h2>
+<p class="p2">Currently, the Component is implemented as a State Machine.</p>
+<p class="p3"><br></p>
+<p class="p2">The fact that this Component is implemented as a State Machine is only known by the IDE.</p>
+<p class="p3"><br></p>
+<p class="p2">The implementation of a Component cannot be determined by the Layer 0 diagram.<span class="Apple-converted-space">  </span>This detail is left to the IDE.<span class="Apple-converted-space">  </span>The IDE knows how to read Component Implementations (in this case Layer 1).</p>
+<p class="p3"><br></p>
+<p class="p2">The emphasis is on <i>need-to-know layers</i>.<span class="Apple-converted-space">  </span>The diagram (layer 0) does not need to know how Components are implemented.<span class="Apple-converted-space">  </span>The compiler does need to know this information.<span class="Apple-converted-space">  </span>We defer providing this information and push this kind of detail as far down the stack of layers as possible.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Note that code snippets on the diagram are just strings.<span class="Apple-converted-space">  </span>The diagram editor does not care what is inside of the strings.<span class="Apple-converted-space">  </span>The <i>programmer/architect/engineer</i> must send the transpiled code+strings to an appropriate compiler/interpreter/REPL.<span class="Apple-converted-space">  </span>At first, we manage this kind of detail manually.<span class="Apple-converted-space">  </span>Later, scripts could be written to add automation to the process.<span class="Apple-converted-space">  </span>It is important to perform all steps of the process manually at first (before adding automation), so that the process, itself, can be "debugged" and fleshed out.<span class="Apple-converted-space">  </span>The only way to <i>show </i>that a process is complete is to <i>show</i> each step of the process manually first.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">The first rule of Divide &amp; Conquer is to defer information until the last possible instant of time.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>States</b></h2>
+<p class="p2">This machine has two states:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li6">off</li>
+  <li class="li6">on.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Layers</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Outermost layer</b></h2>
+<p class="p7"><br></p>
+<p class="p8">function Toggle () {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.state = …</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.step = function (event) { … }</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.enter = function (next_state) { … }</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p2">At the outermost layer, the diagram transpiles into a block of code that</p>
+<ul class="ul1">
+  <li class="li6">creates a <i>state variable</i></li>
+  <li class="li6">creates a <i>step funtion</i></li>
+  <li class="li6">creates an <i>entry function</i> for each state.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Default State</b></h2>
+<p class="p7"><br></p>
+<p class="p8">function Toggle () {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.state = _off;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.step = function (event) { … }</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.enter = function (next_state) { … }</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p2">At the this layer, the diagram initializes that default state.</p>
+<p class="p3"><br></p>
+<p class="p2">I've <i>arbitrarily</i> chosen the name "_off" to signify the state name.</p>
+<p class="p3"><br></p>
+<p class="p2">I've <i>arbitrarily </i>chosen to represent states are integer constants.<span class="Apple-converted-space">  </span>I <i>could</i> have used strings (say), but then I wouldn't be able to use Javascript's <span class="s1">switch </span>statement, later.<span class="Apple-converted-space">  </span>What I really wanted is syntactic sugar for <span class="s1">case</span>-ing on strings.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Step Function</b></h2>
+<p class="p8">this.step = function (event) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>switch (this.state) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _off:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>...</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _on:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>...</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>default: <span class="Apple-converted-space">   </span></p>
+<p class="p8"><span class="Apple-converted-space">        </span>...</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p2">At this layer, we transpile the code for the state-machine step.<span class="Apple-converted-space">   </span></p>
+<p class="p3"><br></p>
+<p class="p2">It shows that we <span class="s1">case</span> on the <i>state variable</i>.<span class="Apple-converted-space">   </span></p>
+<p class="p3"><br></p>
+<p class="p2">In production versions, we can choose what happens in the default case — e.g. what happens when the machine is in neither of the <span class="s1">case</span>-ed states.<span class="Apple-converted-space">  </span>Is this an error?<span class="Apple-converted-space">  </span>(probably).<span class="Apple-converted-space">  </span>Is this ignored?</p>
+<p class="p3"><br></p>
+<p class="p2">The choice depends on the actual problem — in some cases, we want to build state machines that deal only with certain states and in other cases, we want this to be an error.</p>
+<p class="p3"><br></p>
+<p class="p2">There is no <i>one</i> way to define this behaviour.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Entry Functions</b></h2>
+<p class="p3"><br></p>
+<p class="p8">this.enter = function (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>switch (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _off:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>fire (_no, true);</p>
+<p class="p8"><span class="Apple-converted-space">        </span>this.state = _off;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _on:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>fire (_yes, true);</p>
+<p class="p8"><span class="Apple-converted-space">        </span>this.state = _on;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p2">At this layer, we transpile (add in) the code for event-<span class="s1">case</span>-ing.</p>
+<p class="p3"><br></p>
+<p class="p2">The machine breaks down into:</p>
+<ol class="ol1">
+  <li class="li6">examine the state</li>
+  <li class="li6">examine the incoming event.</li>
+</ol>
+<p class="p9"><br></p>
+<p class="p2">In production versions, we can choose what happens in the default case — e.g. what happens when the machine is not waiting for certain events.<span class="Apple-converted-space">  </span>Is this an error?<span class="Apple-converted-space">  </span>(probably).<span class="Apple-converted-space">  </span>Is this ignored?</p>
+<p class="p3"><br></p>
+<p class="p2">The choice depends on the actual problem — in some cases, we want to build state machines that deal only with certain events and, in other cases, we want this to be an error.</p>
+<p class="p3"><br></p>
+<p class="p2">There is no <i>one</i> way to define this behaviour.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Completists</i> might argue that <i>all</i> events must be handled in some way. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This is about <i>utility</i>, not <i>completism</i> — what features make it easier to architect/engineer/program the solution?<span class="Apple-converted-space">  </span>[<i>We don't throw information away, we just hide it, and make it more convenient to use</i>].</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">The <i>architect</i> is responsible for making the design clear and readable to others.</span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Some problems are more clear if we elide details and some problems need to show all details. <span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><br></p>
+<p class="p2">For example, imagine the difference between writing an account-consolidation app versus writing a robot controller.<span class="Apple-converted-space">  </span>The problems are different — and the expressions of the solutions are different.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, EEs do not draw schematics of the designs that show <i>all </i>of the details.<span class="Apple-converted-space">  </span>They tend to elide +V and GND connections.<span class="Apple-converted-space">  </span>EEs don't show the details of how chips are constructed (e.g. various layers of rust (oxides)) and so on.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, mechanical drawings often show three (3) views of the same object (front, top, side).<span class="Apple-converted-space">  </span>This might be explained as a mapping from 3D space to 2D space.</p>
+<p class="p3"><br></p>
+<p class="p2">Code is a mapping of computer operation through the dimension of <i>time</i>.<span class="Apple-converted-space">  </span>In <i>only some</i> of the cases, e.g. for designing calculators and mathematical functions, does it make sense to elide the dimension of <i>time</i>.<span class="Apple-converted-space">  </span>In other cases, e.g. the internet (networked computers), robots, etc., the dimension of <i>time </i>is important and must not be elided.</p>
+<p class="p3"><br></p>
+<p class="p2">Knowing what to elide comes with experience in a given field.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Exit Functions</b></h2>
+<p class="p2">This example does not contain any exit code for states, but the code would be similar to that of entry functions.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Transition Functions</b></h2>
+<p class="p2">The transitions between states in this example, are coded into the step function.</p>
+<p class="p3"><br></p>
+<p class="p2">It should be possible to move the transition code out into separate functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Transitions from one state to another, should:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li6">call exit code for the current state</li>
+  <li class="li6">call transition code for the transition itself (code snippets associated with the arrow, instead of with the previous and new states).</li>
+  <li class="li6">change the state variable of the state machine (to the new state)</li>
+  <li class="li6">call entry code for the new state</li>
+  <li class="li6">exit.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p6">The sequencing of a transition in a HSM (hierarchical state machine) is similar, but contains more details, e.g. a recursive descent into the current state and calling exit code from deepest-child through all of its parents, and e.g. a recursive descent into the new state and calling entry code from parent to child at each layer, and, e.g. setting the state variable to a dynamic chain of sub-states instead of setting just a single, flat, state variable.</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Next State</b></h2>
+<p class="p8">this.enter = function (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>switch (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _off:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>fire (_no, true);</p>
+<p class="p8"><span class="Apple-converted-space">        </span>this.state = _off;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>case _on:</p>
+<p class="p8"><span class="Apple-converted-space">        </span>fire (_yes, true);</p>
+<p class="p8"><span class="Apple-converted-space">        </span>this.state = _on;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8">}</p>
+<p class="p3"><br></p>
+<p class="p2">In this example, I've chosen to set the <i>next state</i> in the entry functions, as shown above.</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>next state</i> could be encoded in a number of other places.<span class="Apple-converted-space">  </span>Particularly, in a production version that uses HSMs (Hierarchical State Machines), the state variable would be changed as described in the Transition Functions section.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that it is possible to encode states and transitions in tables and to interpret the tables.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Snippets</b></h2>
+<p class="p2">At the lowest level, we insert code snippets, e.g. entry code specified as strings in the diagram:</p>
+<p class="p3"><br></p>
+<p class="p8">function Toggle () {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.state = _off;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.step = function (event) {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>switch (this.state) {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>case _off:</p>
+<p class="p8"><span class="Apple-converted-space">            </span>switch (event.tag) {</p>
+<p class="p8"><span class="Apple-converted-space">            </span>case _in:</p>
+<p class="p8"><span class="Apple-converted-space">                </span>this.enter (_on);</p>
+<p class="p8"><span class="Apple-converted-space">                </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">            </span>default:</p>
+<p class="p8"><span class="Apple-converted-space">                </span>throw "invalid input port";</p>
+<p class="p8"><span class="Apple-converted-space">            </span>}</p>
+<p class="p8"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>case _on:</p>
+<p class="p8"><span class="Apple-converted-space">            </span>switch (event.tag) {</p>
+<p class="p8"><span class="Apple-converted-space">            </span>case _in:</p>
+<p class="p8"><span class="Apple-converted-space">                </span>this.enter (_off);</p>
+<p class="p8"><span class="Apple-converted-space">                </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">            </span>default:</p>
+<p class="p8"><span class="Apple-converted-space">                </span>throw "invalid input port";</p>
+<p class="p8"><span class="Apple-converted-space">            </span>}</p>
+<p class="p8"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>default:</p>
+<p class="p8"><span class="Apple-converted-space">            </span>throw "can't happen";</p>
+<p class="p8"><span class="Apple-converted-space">        </span>}</p>
+<p class="p8"><span class="Apple-converted-space">    </span>};</p>
+<p class="p8"><span class="Apple-converted-space">    </span>this.enter = function (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>switch (next_state) {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>case _off:</p>
+<p class="p8"><span class="Apple-converted-space">            </span>fire (_no, true);</p>
+<p class="p8"><span class="Apple-converted-space">            </span>this.state = _off;</p>
+<p class="p8"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>case _on:</p>
+<p class="p8"><span class="Apple-converted-space">            </span>fire (_yes, true);</p>
+<p class="p8"><span class="Apple-converted-space">            </span>this.state = _on;</p>
+<p class="p8"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>}</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Defer</b></h2>
+<p class="p2">This set of layers follows the convention of <i>need-to-know</i> (aka Divide &amp; Conquer).</p>
+<p class="p3"><br></p>
+<p class="p2">For example, none of the upper layers <i>needs</i> to know anything about the actual code snippets nor about the intended target language (e.g. Javascript, Python, Rust, etc.), so we keep code snippets in strings and insert them into the generated code as late as is possible.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Deferred Details Layer</b></h2>
+<p class="p2">Many details can be deferred until the very end of the transpilation process.</p>
+<p class="p3"><br></p>
+<p class="p2">By <i>deferring</i>, I don't mean <i>getting rid of</i>, I simply mean pushing the details aside, pushing the details out of a given notation.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, the notation that we currently use for programming, elides the fact that CALL/RETURN uses a global stack.<span class="Apple-converted-space">  </span>This is a convenient <i>notation</i> for a certain class of problems.<span class="Apple-converted-space">  </span>It is an inconvenient <i>notation</i> for a different class of problems.<span class="Apple-converted-space">  </span>Neither notation is usable for <i>every</i> kind of programming.<span class="Apple-converted-space">  </span>Neither notation deletes the basic fact that the hardware uses a global variable — one notation hides this fact, another notation makes this fact explicit. <span class="Apple-converted-space">  </span>For example, an accounting application makes makes certain calculations and translates these calculations into function calls that use the global stack in a synchronous manner.<span class="Apple-converted-space">  </span>Another application, like an internet client client that request information from a server, cannot (easily) use the concept of a stack to describe asynchronous interaction with the server — the server does not act like a mathematical function, producing an output every time that it is sent a request (for example, it might produce a result, or, it might produce a timeout).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>State Machine Name</b></h2>
+<p class="p2">I've chosen to represent the name of this simple state machine as</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li6">a character string in the "name" line at layer 0</li>
+  <li class="li6">an identifier used to name the function in the outermost layer.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>State Names</b></h2>
+<p class="p2">This simple example has only two states "off" and "on".</p>
+<p class="p3"><br></p>
+<p class="p2">I've chosen to represent the states as integer constants in the code.</p>
+<p class="p3"><br></p>
+<p class="p2">I could have used some other representation.<span class="Apple-converted-space">  </span>I considered using strings "…" but I knew that I was intending to use <span class="s1">switch</span> statements which don't allow strings.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In a larger, production project, I would let the transpiler emit state names.</p>
+<p class="p3"><br></p>
+<p class="p2">To keep things architecturally generic, I would define an SCL<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> (aka DSL) that allowed me to use a "standard" notation, e.g. an identifier.<span class="Apple-converted-space">  </span>I would write the transpiler (say, using a PEG parser, like Ohm-JS) and put my decision in the transpiler itself.<span class="Apple-converted-space">  </span>For example, if I were emitting JavaScript, I would use strings, but if I were emitting C, I might use integer constants.</p>
+<p class="p3"><br></p>
+<p class="p2">In the best of all worlds, I would design the transpiler so that it could generate code for any language.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Input Names</b></h2>
+<p class="p2">This simple example has one input port - "in".</p>
+<p class="p3"><br></p>
+<p class="p2">The choice for naming input ports is the same as the discussion in the State Names section.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Output Names</b></h2>
+<p class="p2">This simple example has two output ports - "yes" and "no".</p>
+<p class="p3"><br></p>
+<p class="p2">The choice for naming ports is the same as the discussion in the State Names section.</p>
+<p class="p3"><br></p>
+<p class="p2">The decision for naming ports depends on the problem-at-hand.<span class="Apple-converted-space">  </span>In some cases, we are willing to spend the extra design time required to use integers, and in some other cases, we don't care and strings suffice.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Deferred (Foreign) Functions</b></h2>
+<p class="p2">This simple example invokes one routine — <i>fire() —</i>to do work that is not specified by the diagram.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">This is another example of <i>need-to-know</i> design. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most of the software layers do not need to understand the code contained in the deferred code snippets.</p>
+<p class="p3"><br></p>
+<p class="p2">In this case, the text string code snippets represent Javascript function calls.<span class="Apple-converted-space">  </span>The strings could contain Python code, Rust code, or erroneous code.<span class="Apple-converted-space">  </span>The upper layers do not need to know this detail.</p>
+<p class="p3"><br></p>
+<p class="p2">In the best of all worlds, I might choose to design a small language (an SCL)<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> for describing operations that appear in code snippets.<span class="Apple-converted-space">  </span>In this way, I could defer the decision of which target language to use until (even) later, as long as the SCL generates code in my chosen target language.</p>
+<p class="p3"><br></p>
+<p class="p2">The Drakon editor - <a href="http://drakon-editor.sourceforge.net/">http://drakon-editor.sourceforge.net/</a> - does something similar.<span class="Apple-converted-space">  </span>It allows the architect (engineer, programmer, etc.) to draw diagrams and to defer the decision about which language will be emitted.<span class="Apple-converted-space">  </span>The Drakon editor has a menu for selecting the target language.<span class="Apple-converted-space">  </span>Code snippets in the Drakon editor are language-specific strings.<span class="Apple-converted-space">  </span>If one writes snippets in one language, then tells Drakon to emit code in some other language, it will emit the code but the compiler will throw errors.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Kernel</b></h2>
+<p class="p2">We use a small library to enable operations in our State Machines.</p>
+<p class="p3"><br></p>
+<p class="p2">I call this library the <i>kernel</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">In this case, the kernel is very small, consisting of one function:</p>
+<p class="p3"><br></p>
+<p class="p8">function inject (component, event) {</p>
+<p class="p8"><span class="Apple-converted-space">  </span>component.step (event);</p>
+<p class="p8">}</p>
+<p class="p7"><br></p>
+<p class="p2">This kernel library function — <i>inject — </i>injects an event into to the state machine and then triggers the state machine into action.</p>
+<p class="p3"><br></p>
+<p class="p2">In a production version, the library will be slightly larger.<span class="Apple-converted-space">  </span>The main API of the library is:</p>
+<p class="p3"><br></p>
+<p class="p8">function send <span class="Apple-converted-space">  </span>(component, event) {…}</p>
+<p class="p8">function inject (component, event) {…}</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>send()</i> function does mostly what the <i>inject()</i> function does, but assumes that the state machine is already running.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">In a production version, components will each have one input queue and one output queue and the kernel functions will enqueue and dequeue events.</p>
+<p class="p3"><br></p>
+<p class="p2">In a production version of a system, components will be run by a single <i>Dispatch()</i> routine, breaking the synchronous behaviour of CALL/RETURN.<span class="Apple-converted-space">  </span>This is discussed elsewhere.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Main</b></h2>
+<p class="p3"><br></p>
+<p class="p8">var top = new Toggle ();</p>
+<p class="p8">inject (top, {tag: _in, value: true});</p>
+<p class="p8">inject (top, {tag: _in, value: true});</p>
+<p class="p8">inject (top, {tag: _in, value: true});</p>
+<p class="p3"><br></p>
+<p class="p2">In the mainline routine, we need to perform the rituals, required by our target language, to cause the state machine to "run".</p>
+<p class="p3"><br></p>
+<p class="p2">In this case the state machine is coded in Javascript.<span class="Apple-converted-space">  </span>We need to</p>
+<ul class="ul1">
+  <li class="li6">Create an instance of the state machine</li>
+  <li class="li6">Inject events into the state machine and observe the outputs on the terminal.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Execution</b></h2>
+<p class="p2">To execute the machine, in the code repo, we need to</p>
+<ol class="ol1">
+  <li class="li6">Strip the org-mode comments, leaving pure Javascript</li>
+  <li class="li6">Invoke the javascript.</li>
+</ol>
+<p class="p9"><br></p>
+<p class="p6">In this case, I have created a <i>bash</i> script that does both of the above.<span class="Apple-converted-space">  </span>It is in</p>
+<p class="p9"><br></p>
+<p class="p6"><a href="https://github.com/guitarvydas/example/blob/blog/run.bash">https://github.com/guitarvydas/example/blob/blog/run.bash</a></p>
+<p class="p9"><br></p>
+<p class="p6">(<a href="http://github.com/guitarvydas/example">github.com/guitarvydas/example</a> branch "blog", file run.bash)</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compilation vs. Interpretation</b></h2>
+<p class="p2">It is possible to tune the implementation of state machines by transpiling the state diagrams into code or transpiling them into tables to be interpreted.</p>
+<p class="p3"><br></p>
+<p class="p2">Everything is an interpreter.</p>
+<p class="p3"><br></p>
+<p class="p2">Under normal circumstances, binary object code is interpreted by the hardware, e.g. using microcode.</p>
+<p class="p3"><br></p>
+<p class="p2">Assembler is interpreted in two stages</p>
+<ol class="ol1">
+  <li class="li6">Convert the assembler source code into binary code</li>
+  <li class="li6">Interpret the binary code using hardware.</li>
+</ol>
+<p class="p9"><br></p>
+<p class="p6">Compilers are interpreters.<span class="Apple-converted-space">  </span>They interpret code in multiple layers:</p>
+<ol class="ol1">
+  <li class="li6">Transpile source code to assembler.</li>
+  <li class="li6">Convert assembler source code to binary code.</li>
+  <li class="li6">Interpret binary code using hardware.</li>
+</ol>
+<p class="p9"><br></p>
+<p class="p6">Likewise, type checkers — for example — are interpreters, too.<span class="Apple-converted-space">  </span>They interpret type annotations and "simplify" the incoming source into assembler (binary).<span class="Apple-converted-space">  </span>The "simplified" code is interpreted by the hardware and does not incur the cost of re-calculating types of certain data structures at runtime ("runtime" means: interpretation by hardware).</p>
+<p class="p9"><br></p>
+<p class="p6">Compilers are interpreters.<span class="Apple-converted-space">  </span>Compilers front-load certain checks and code sequences in the hope that such checks and sequences can be eliminated from the binary code, allowing for "more efficient" interpretation of the binary code by the hardware.</p>
+<p class="p9"><br></p>
+<p class="p6">Likewise, state machines can be transpiled directly into binary, transpiled into assembler, transpiled into code for various languages (e.g. Javascript, Python, etc.) or transpiled into tables that are interpreted by underlying libraries (written in, say, Javascript, Python, etc.).</p>
+<p class="p9"><br></p>
+<p class="p6">XState is a library that supports state machines (StateCharts, to be exact) in Javascript programs.</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCXML</b></h2>
+<p class="p2">SCXML is a specification of XML for StateCharts.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://en.wikipedia.org/wiki/SCXML">https://en.wikipedia.org/wiki/SCXML</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>StateCharts</b></h2>
+<p class="p2">I discuss Statecharts in<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/StateCharts.html">https://guitarvydas.github.io/2020/12/09/StateCharts.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">Basically, I think that the Statechart notation is too complicated.</p>
+<p class="p3"><br></p>
+<p class="p2">I think that Statecharts can be broken down into two separate notations:</p>
+<ul class="ul1">
+  <li class="li6">HSM — Hierarchical State Machines</li>
+  <li class="li6">Concurrency — Box-and-arrow diagrams, Arrowgrams, FBP, Bash, etc.<span class="Apple-converted-space">  </span>(More on these issues in other blogs).</li>
+  <hr>
+  <p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>This is a pet peeve of mine.<span class="Apple-converted-space">  </span>It is often said that FP is a good way to write concurrent programs, but only toy examples are given.<span class="Apple-converted-space">  </span>Trying to build full production systems results in a myriad of problems and overlooks the elephant in the room.<span class="Apple-converted-space">  </span>For example, it is more informative to draw a network on a whiteboard than it is to describe a network using only text (I show that it is possible to transpile diagrams to code). <span class="Apple-converted-space">  </span>Javascript's tortuous callback syntax is a result of this kind of stunted thinking (text-only, instead of using diagrams mixed with text). <span class="Apple-converted-space">  </span>CPS is just GOTOs on steroids.<span class="Apple-converted-space">  </span>Promises are based on threads, and threads are closures.</p>
+  <p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>SCL means Solution Centric Language.<span class="Apple-converted-space">  </span>Similar to a DSL, but more focussed on the problem-at-hand.</p>
+  <p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>This idea comes from the S/SL language. <span class="Apple-converted-space">  </span>See References on my blog https://guitarvydas.github.io/2021/01/14/References.html.</p>
+  <p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>SCL mean Solution Centric Language.</p>
+  <p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>Don't worry if this doesn't make sense yet.<span class="Apple-converted-space">  </span>"Running" refers to the idea that there is a distinguished Dispatcher() meting out bits of control-flow time to closures.<span class="Apple-converted-space">  </span>I will discuss this elsewhere.</p>
+</div>
+</body>
+</html>
