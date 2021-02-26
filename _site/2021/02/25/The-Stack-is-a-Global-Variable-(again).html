@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>The Stack is a Global Variable (again)</title>
+  <meta name="CreationTime" content="2021-02-25T23:53:17Z">
+  <meta name="ModificationTime" content="2021-02-25T23:53:17Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    ol.ol1 {list-style-type: decimal}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<p class="p1">The Stack is a global variable.</p>
+<p class="p2"><br></p>
+<p class="p1">The reason that programmers feel that "multitasking is hard" is due to the accidental complexity caused by using an implicit global variable.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Causes of Accidental Complexity</b></h2>
+<p class="p1">This feeling that "multitasking is hard" has at least two causes:</p>
+<ol class="ol1">
+  <li class="li4"><span class="s1">Not making <i>everything</i> explicit.</span><span class="Apple-converted-space">  </span>In the case of CALL/RETURN-based programs (e.g. just about every program today), the <i>stack</i> is implicit and hidden under the covers by most PLs (programming languages).<span class="Apple-converted-space">  </span>To make matters worse, hardware supports and encourages the use of the <i>stack</i> as a global variable.</li>
+  <li class="li4"><span class="s1">Using the wrong paradigm.</span><span class="Apple-converted-space">  </span>Most PLs encourage the use of the <i>synchronous</i> paradigm (e.g. CALL/RETURN using an implicit stack).<span class="Apple-converted-space">  </span>Memory sharing is encouraged in the synchronous paradigm.<span class="Apple-converted-space">  </span>Multitasking, though, is inherently <i>asynchronous</i>.<span class="Apple-converted-space">  </span>Building multitasking in a <i>synchronous</i> paradigm is possible, but leads to accidental complexity, e.g. <i>thread safety </i>concerns arise only due to the sharing of memory, CALL/RETURN uses a global variable, etc.<span class="Apple-converted-space">  </span>The <i>synchronous</i> paradigm is useful for building <i>calculators</i> - functions with exactly one set of synchronous inputs and exactly one set of synchronous outputs.<span class="Apple-converted-space">  </span>Calculators are functions that expunge the notion of <i>time</i>.<span class="Apple-converted-space">  </span>On the other hand, <i>asynchronous</i> computation, e.g. the internet, involves functions of <i>time</i> (aka <i>history</i>) and, generally, does not share memory.<span class="Apple-converted-space">  </span>In the <i>asynchronous</i> paradigm, inputs and outputs are not synchronized and may be delivered at different points in time.<span class="Apple-converted-space">  </span>Additionally, one set of inputs does not guarantee only one set of outputs - <i>asynchronous</i> components might produce 0, 1, or more outputs for every input.<span class="Apple-converted-space">  </span>Timeouts must be made explicit, lest they appear to generate outputs when there have been 0 inputs.</li>
+</ol>
+</div>
+</body>
+</html>

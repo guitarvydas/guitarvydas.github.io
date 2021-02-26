@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>statecharts (again)</title>
+  <meta name="CreationTime" content="2021-02-25T23:56:09Z">
+  <meta name="ModificationTime" content="2021-02-25T23:56:09Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<ol class="ol1">
+  <li class="li1">I was taught about state machines in EE school, but, they said, you couldn't make practical use of SM's because of the "state explosion" problem (Fig. 20 of Harel's paper shows a very simple example of "state explosion").</li>
+  <li class="li1">Harel's notation conquers the "state explosion" problem.</li>
+  <li class="li1">Harel's notation then goes one step too far and winds concurrency into the notation ("orthogonal states").</li>
+</ol>
+<p class="p2"><br></p>
+<p class="p3">(2) is explicit - you draw lines (curvy arrows) to show transitions</p>
+<p class="p3">(3) is implicit - you have to read the code to see who-depends-on-what.</p>
+<p class="p2"><br></p>
+<p class="p3">Remove (3) and you have a wonderful notation that I call HSM's (Hierarchical State Machines).</p>
+<p class="p2"><br></p>
+<p class="p3">Move (3) into its own notation and you get "network diagrams" (aka "box and arrow diagrams"), and the FBP-like stuff that I build (currently called "Arrowgrams", formerly known as "bmfbp" (for Bare Metal FBP)).</p>
+<p class="p2"><br></p>
+<p class="p3">(2) and (3) are, both, simple notations. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">When you try to combine the two notations, you get accidental complexity. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">Harel wrote a follow-on paper about the micro-semantics of his notation and told us that everything must work in a lock-step manner. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">Arrowgrams gives you concurrency in a simple form ("multitasking is easy" :-)). <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">HSMs give you anti-state-explosion.</p>
+<p class="p2"><br></p>
+<p class="p3">I built a full Harel Statechart textual language (some 8 passes, iirc), then backed off and simplified ((2) hierarchical state machines and (3) a message-passing kernel).<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p2"><br></p>
+<p class="p3">If you think in terms of communicating-state-machines, you brush up against Actors-like thinking.</p>
+<p class="p2"><br></p>
+<p class="p3">[<i>further: YACC dealt with the "state explosion" problem, too, but, over-specified (IMO) and didn't allow users to control the explosion handling in an explicit manner]</i></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>The kernel is simple.<span class="Apple-converted-space">  </span>The current implementation is in JavaScript (this is a way to show just how simple this can be - if you can do it in JS, you can do it in any language :-).<span class="Apple-converted-space">  </span>I, also, have done it in HTML+JS).<span class="Apple-converted-space">  </span>See, also https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html and https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html.</p>
+</div>
+</body>
+</html>
