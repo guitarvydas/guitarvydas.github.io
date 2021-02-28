@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>DSL in a Day</title>
+  <meta name="CreationTime" content="2021-02-28T16:35:44Z">
+  <meta name="ModificationTime" content="2021-02-28T16:35:44Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo}
+    p.p14 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo; min-height: 10.0px}
+    p.p15 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I show how to create a small language rapidly (in about one day).</p>
+<p class="p2">Normal programming skills are required.<span class="Apple-converted-space">  </span>One doesn't need to know compiler theory to build little languages in this way.</p>
+<p class="p2">I believe that this method can be used to enable a new class of small languages that I call SCLs — Solution Centric Languages.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How - Overview</b></h2>
+<p class="p2">I use a PEG<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> parser — Ohm-JS.</p>
+<p class="p2">I create an example program using the small language.</p>
+<p class="p2">I transpile the example program into JavaScript.<span class="Apple-converted-space">  </span>I expect that the transpiler could be tweaked to emit code in just about any current PL (Programming Language).</p>
+<p class="p2">I defer many details, in the hopes of clarifying the underlying methods.</p>
+<p class="p2">I defer most checking (type checking, etc.) to the underlying language (in this case JavaScript), although checking could be performed by adding small amounts of effort and code.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Github</b></h2>
+<p class="p2">The code for this example can be found at <a href="https://github.com/guitarvydas/sm/tree/master">https://github.com/guitarvydas/sm/tree/master</a>.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Other References</b></h2>
+<p class="p2">I created other documents and videos as I built this particular transpiler.</p>
+<p class="p3"><br></p>
+<p class="p2">For a summary of the method, see:</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/02/26/State-Machines-to-JavaScript.html">https://guitarvydas.github.io/2021/02/26/State-Machines-to-JavaScript.html</a></p>
+<p class="p2"><a href="https://youtu.be/uk90Sc6XZrw">https://youtu.be/uk90Sc6XZrw</a></p>
+<p class="p3"><br></p>
+<p class="p2">For a screencast record of the actual development process (including mistakes and backtracking), see</p>
+<p class="p2"><a href="https://youtu.be/zaj-xO3rhRA">https://youtu.be/zaj-xO3rhRA</a></p>
+<p class="p2"><a href="https://youtu.be/7u0SxpS1Alc">https://youtu.be/7u0SxpS1Alc</a></p>
+<p class="p2"><a href="https://youtu.be/4_R6cuvkHos">https://youtu.be/4_R6cuvkHos</a></p>
+<p class="p2"><a href="https://youtu.be/4Ecft5yrMvE">https://youtu.be/4Ecft5yrMvE</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax</b></h2>
+<p class="p2">IMO there is no reason to restrict oneself to using only textual representations for creating languages and little languages (SCLs).</p>
+<p class="p3"><br></p>
+<p class="p2">Diagrams express networks better than text.</p>
+<p class="p2">Diagrams express composition better than text.</p>
+<p class="p2">Text expresses mathematical functions better than diagrams.</p>
+<p class="p2">Text expresses mathematical operations better than diagrams.</p>
+<p class="p2">Diagrams express certain kinds of control flow better than text.</p>
+<p class="p2">Text expresses one-in-one-out functions well.</p>
+<p class="p2">Diagrams express one-in-many-out functions better than text.</p>
+<p class="p2">Text does not express M-in-zero-out or zero-in-N-out functionality well.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Future</b></h2>
+<p class="p2">I expect to show:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li4">how to build a stack-based<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> small language for building a transpiler and to show how it fits in with PEG parsing and Ohm-JS</li>
+  <li class="li4">how to transpile an SVG diagram to JavaScript (<i>the SVG source is treated as a little language that transpiles to a state machine little language that transpiles to JavaScript</i>).</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Need to Know - Defer, Defer, Defer</b></h2>
+<p class="p2">I argue that details are the bane of PLs.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Most PLs (Programming Languages) require too many details and elide very little.</p>
+<p class="p3"><br></p>
+<p class="p2">I do not advocate removing details, but I do advocate eliding details. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Which details need to be elided depends on the problem-at-hand and cannot be generalized.</p>
+<p class="p3"><br></p>
+<p class="p2">I advocate building software in layers, like the acetates used to make cartoons at Disney.</p>
+<p class="p3"><br></p>
+<p class="p2">Each layer of software does only <i>one</i> thing.</p>
+<p class="p3"><br></p>
+<p class="p2">This attitude can be seen in the design of this little language — SCL.<span class="Apple-converted-space">  </span>This little language deals with transpiling state machines into control flow, e.g. <span class="s1">switch statements</span> — and leaves all other details, like type-checking to other software layers.</p>
+<p class="p3"><br></p>
+<p class="p2">Most current PLs provide only a single layer — and drown the user / reader in a sea of details. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">If the language you use provides, say, a "+" operator, then it requires too much detail.</p>
+<p class="p3"><br></p>
+<p class="p2">I advocate making the DI (Design Intent) clear to the reader.<span class="Apple-converted-space">  </span>My thoughts<span class="Apple-converted-space">  </span>on DI can be found in my essays at <a href="https://guitarvydas.github.io/">https://guitarvydas.github.io/</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">To achieve my recommended level of layering, one should try to defer as much as possible.<span class="Apple-converted-space">  </span>Each layer should be built on the <i>need to know</i> principle, i.e. if the information is not needed at a certain layer, then leave that information aside and use the minimum little language that allows you to express the DI at that layer.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Steps for Creating a Little Language</b></h2>
+<ul class="ul1">
+  <li class="li4">Mock up the language</li>
+  <li class="li4">Write a grammar</li>
+  <li class="li4">Test the grammar</li>
+  <li class="li4">Run the grammar</li>
+  <li class="li4">Emit JS code (semantics)</li>
+  <li class="li4">Run the transpiler</li>
+  <li class="li4">Iterate</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Realization</b></h2>
+<ul class="ul1">
+  <li class="li4">Mock up the language</li>
+  <li class="li4">Write a grammar</li>
+  <li class="li4">Test the grammar</li>
+  <li class="li4">Run the grammar</li>
+  <li class="li4">Emit JS code (semantics)</li>
+  <li class="li4">Run the transpiler</li>
+  <li class="li4">Iterate</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Mock up the SCL</b></h2>
+<p class="p2">[<i>I show how to create the SCL in </i><a href="https://guitarvydas.github.io/2021/02/26/State-Machines-to-JavaScript.html"><i>https://guitarvydas.github.io/2021/02/26/State-Machines-to-JavaScript.html</i></a>]</p>
+<p class="p3"><br></p>
+<p class="p2">The mockup emulates <span class="s2">Fig. 1.</span></p>
+<p class="p5"><br></p>
+<p class="p2"><img src="/assets/2021-02-28-16-35-44-Images/Components-ToggleSM.png" width="300px" height="146px" alt="Image"></p>
+<p class="p6">Fig. 1 Simple 2-state State Machine</p>
+<p class="p7"><br></p>
+<p class="p6">The corresponding text version of this diagram is:</p>
+<p class="p7"><br></p>
+<p class="p8">name:</p>
+<p class="p8"><span class="Apple-converted-space">  </span>Toggle</p>
+<p class="p8">inputs:</p>
+<p class="p8"><span class="Apple-converted-space">  </span>_in</p>
+<p class="p8">outputs:</p>
+<p class="p8"><span class="Apple-converted-space">  </span>_no</p>
+<p class="p8"><span class="Apple-converted-space">  </span>_yes</p>
+<p class="p9"><br></p>
+<p class="p8">machine Toggle:</p>
+<p class="p8"><span class="Apple-converted-space">  </span>state _off:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>entry: "fire (_no, true);"</p>
+<p class="p8"><span class="Apple-converted-space">    </span>on _in : next _on</p>
+<p class="p8"><span class="Apple-converted-space">  </span>state _on:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>entry: "fire (_yes, true);"</p>
+<p class="p8"><span class="Apple-converted-space">    </span>on _in : next _off</p>
+<p class="p8"><span class="Apple-converted-space">  </span>default: _off</p>
+<p class="p8">end machine</p>
+<p class="p9"><br></p>
+<p class="p6">Of note is the fact that the SCL does not attempt to express <i>everything</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">StateChart diagrams are good for expressing control-flow, whereas textual code is good for expressing details such as function calls.</p>
+<p class="p7"><br></p>
+<p class="p6">Specifically, the <span class="s1">entry</span> code represents <i>deferred code </i>as a string of characters.<span class="Apple-converted-space">  </span>These characters are not processed by the SCL transpiler and are simply output to the final result.</p>
+<p class="p7"><br></p>
+<p class="p6">The SCL creates only ten (10) keywords, namely:</p>
+<p class="p7"><br></p>
+<ul class="ul1">
+  <li class="li6">machine</li>
+  <li class="li6">name</li>
+  <li class="li6">inputs</li>
+  <li class="li6">outputs</li>
+  <li class="li6">end</li>
+  <li class="li6">state</li>
+  <li class="li6">entry</li>
+  <li class="li6">on</li>
+  <li class="li6">next</li>
+  <li class="li6">default.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p6">Everything else is left up to the base language.<span class="Apple-converted-space">  </span>In this case, I will be using Javascript as the base language.<span class="Apple-converted-space">  </span>It should be possible transpile to most PLs (Programming Languages). <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">In fact, if one were to design a separate SCL layer for expressing entry, exit and transition code, then the transpiler could be made to be language-independent.</p>
+<p class="p7"><br></p>
+<p class="p6">In the above, the underscore "_" character is in no way special — it is simply a valid character for naming identifiers.<span class="Apple-converted-space">  </span>I have used "_" as a way of distinguishing significant identifiers, such as state names, inputs and outputs.</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Write a Grammar</b></h2>
+<p class="p2">I used the Ohm Editor to help write and test the grammar.</p>
+<p class="p3"><br></p>
+<p class="p2">The Ohm Editor is found at <a href="https://ohmlang.github.io/editor/">https://ohmlang.github.io/editor/</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">The grammar is</p>
+<p class="p3"><br></p>
+<p class="p10">SM {</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>Main = StateMachine</p>
+<p class="p10"><span class="Apple-converted-space">  </span>StateMachine = NameSection InputSection OutputSection MachineSection</p>
+<p class="p10"><span class="Apple-converted-space">  </span>NameSection = "name" ":" Name</p>
+<p class="p10"><span class="Apple-converted-space">  </span>InputSection = "inputs" ":" InputPinNames</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutputSection = "outputs" ":" OutputPinNames</p>
+<p class="p11"><span class="Apple-converted-space">  </span></p>
+<p class="p10"><span class="Apple-converted-space">  </span>MachineSection = Header State+ Default Trailer</p>
+<p class="p10"><span class="Apple-converted-space">  </span>Header = "machine" MachineName ":"</p>
+<p class="p10"><span class="Apple-converted-space">  </span>Trailer = "end" "machine"</p>
+<p class="p10"><span class="Apple-converted-space">  </span>Default = "default" ":" Name</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>State = "state" StateName ":" EntrySection Transition*</p>
+<p class="p10"><span class="Apple-converted-space">  </span>EntrySection = "entry" ":" string</p>
+<p class="p10"><span class="Apple-converted-space">  </span>Transition = "on" Name ":" "next" Name</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>keyword = "machine" | "name" | "inputs" | "outputs" | "end" | "state" | "entry" | "on" | "next" | "default"</p>
+<p class="p10"><span class="Apple-converted-space">  </span>InputPinNames = nameList</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutputPinNames = nameList</p>
+<p class="p10"><span class="Apple-converted-space">  </span>MachineName = Name</p>
+<p class="p10"><span class="Apple-converted-space">  </span>StateName = Name</p>
+<p class="p10"><span class="Apple-converted-space">  </span>InputPinReference = Name</p>
+<p class="p10"><span class="Apple-converted-space">  </span>StateReference = Name</p>
+<p class="p10"><span class="Apple-converted-space">  </span>Name = ~keyword id</p>
+<p class="p10"><span class="Apple-converted-space">  </span>nameList = (~keyword id delim)+</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>id = firstId followId*</p>
+<p class="p10"><span class="Apple-converted-space">  </span>firstId = "A".."Z" | "a".."z" | "_"</p>
+<p class="p10"><span class="Apple-converted-space">  </span>followId = firstId</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>string = "\"" stringChar* "\""</p>
+<p class="p10"><span class="Apple-converted-space">  </span>stringChar =</p>
+<p class="p10"><span class="Apple-converted-space">        </span>escapedChar <span class="Apple-converted-space">                               </span></p>
+<p class="p10"><span class="Apple-converted-space">     </span>|<span class="Apple-converted-space">  </span>anyStringChar</p>
+<p class="p10"><span class="Apple-converted-space">  </span>escapedChar = "\\" any</p>
+<p class="p10"><span class="Apple-converted-space">  </span>anyStringChar = ~"\"" any</p>
+<p class="p11"><span class="Apple-converted-space"> </span></p>
+<p class="p10"><span class="Apple-converted-space">  </span>delim = (" " | "\t" | "\n")+</p>
+<p class="p10">}</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm Editor Usage</b></h2>
+<p class="p2">The Ohm Editor is found at <a href="https://ohmlang.github.io/editor/">https://ohmlang.github.io/editor/</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">It consists of three (3) windows (divs):</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li4">grammar (top left)</li>
+  <li class="li4">examples (top right)</li>
+  <li class="li4">parse (bottom) - consisting of a single line (the test code) and a larger div showing the resulting parse tree.</li>
+</ul>
+<p class="p12"><br></p>
+<p class="p4">Enter the grammar in the grammar window.</p>
+<p class="p12"><br></p>
+<p class="p4">Enter test cases in the examples window.<span class="Apple-converted-space">  </span>Each test snippet appears as a single line, at first.<span class="Apple-converted-space">  </span>Double-click on a test case to open a pop-up window that shows all of the details of the test case.</p>
+<p class="p12"><br></p>
+<p class="p4">The result of parsing is shown in the parse window.<span class="Apple-converted-space">  </span>If the parse is successful, the results are shown in gray color.<span class="Apple-converted-space">  </span>Unsuccessful partial parses are shown in red.<span class="Apple-converted-space">  </span>Hovering over a parse entity highlights the grammar rule and highlights the part of the test text that is constitutes the parsed entity.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Test the Grammar</b></h2>
+<p class="p2">Enter partial tests in the top-right window by clicking "Add".</p>
+<p class="p3"><br></p>
+<p class="p2">Note that the parser defaults to using the first grammar rule as the top-level target.<span class="Apple-converted-space">  </span>Parsing will fail if the top rule does not match the test case — in small test cases it might be necessary to insert sub-rule names as the first line of the grammar.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Run the Grammar / Parser</b></h2>
+<p class="p2">Ohm-JS creates a parser in Javascript.</p>
+<p class="p3"><br></p>
+<p class="p2">To use the created parser, one needs to have access to the ohm library (e.g. via <span class="s1">npm</span>).</p>
+<p class="p3"><br></p>
+<p class="p2">The Ohm-JS documentation explains how to use the parser in a web page or at the command line.</p>
+<p class="p3"><br></p>
+<p class="p2">I choose to use the command line, via <span class="s1">node.js</span>, but Ohm-JS is certainly not restricted to being used in this manner.</p>
+<p class="p3"><br></p>
+<p class="p2">My code for a full parser is:</p>
+<p class="p3"><br></p>
+<p class="p13">// npm install ohm-js</p>
+<p class="p13">const grammar = `</p>
+<p class="p13">SM {</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>Main = StateMachine</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateMachine = NameSection InputSection OutputSection MachineSection</p>
+<p class="p13"><span class="Apple-converted-space">  </span>NameSection = "name" ":" Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputSection = "inputs" ":" InputPinNames</p>
+<p class="p13"><span class="Apple-converted-space">  </span>OutputSection = "outputs" ":" OutputPinNames</p>
+<p class="p14"><span class="Apple-converted-space">  </span></p>
+<p class="p13"><span class="Apple-converted-space">  </span>MachineSection = Header State+ Default Trailer</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Header = "machine" MachineName ":"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Trailer = "end" "machine"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Default = "default" ":" Name</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>State = "state" StateName ":" EntrySection Transition*</p>
+<p class="p13"><span class="Apple-converted-space">  </span>EntrySection = "entry" ":" string</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Transition = "on" Name ":" "next" Name</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>keyword = "machine" | "name" | "inputs" | "outputs" | "end" | "state" | "entry" | "on" | "next" | "default"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputPinNames = nameList</p>
+<p class="p13"><span class="Apple-converted-space">  </span>OutputPinNames = nameList</p>
+<p class="p13"><span class="Apple-converted-space">  </span>MachineName = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateName = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputPinReference = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateReference = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Name = ~keyword id</p>
+<p class="p13"><span class="Apple-converted-space">  </span>nameList = (~keyword id delim)+</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>id = firstId followId*</p>
+<p class="p13"><span class="Apple-converted-space">  </span>firstId = "A".."Z" | "a".."z" | "_"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>followId = firstId</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>string = "\\"" stringChar* "\\""</p>
+<p class="p13"><span class="Apple-converted-space">  </span>stringChar =</p>
+<p class="p13"><span class="Apple-converted-space">        </span>escapedChar <span class="Apple-converted-space">                               </span></p>
+<p class="p13"><span class="Apple-converted-space">     </span>|<span class="Apple-converted-space">  </span>anyStringChar</p>
+<p class="p13"><span class="Apple-converted-space">  </span>escapedChar = "\\\\" any</p>
+<p class="p13"><span class="Apple-converted-space">  </span>anyStringChar = ~"\\"" any</p>
+<p class="p14"><span class="Apple-converted-space"> </span></p>
+<p class="p13"><span class="Apple-converted-space">  </span>delim = (" " | "\\t" | "\\n")+</p>
+<p class="p14"><span class="Apple-converted-space">  </span></p>
+<p class="p13">}</p>
+<p class="p13">`;</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13">function parse (text) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var ohm = require ('ohm-js');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var parser = ohm.grammar (grammar);</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var cst = parser.match (text);</p>
+<p class="p13"><span class="Apple-converted-space">    </span>if (cst.succeeded ()) {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return {parser: parser, tree: cst};</p>
+<p class="p13"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>console.log (parser.trace (text).toString ());</p>
+<p class="p13"><span class="Apple-tab-span">	</span>throw "Ohm matching failed";</p>
+<p class="p13"><span class="Apple-converted-space">    </span>}</p>
+<p class="p13">}</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13">var fs = require ('fs');</p>
+<p class="p14"><br></p>
+<p class="p13">function getNamedFile (fname) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>if (fname === undefined || fname === null || fname === "-") {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return fs.readFileSync (0, 'utf-8');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return fs.readFileSync (fname, 'utf-8');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>}<span class="Apple-tab-span">	</span></p>
+<p class="p13">}</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13">var text = getNamedFile("-");</p>
+<p class="p13">var {parser, tree} = parse (text);</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p2">Running the parser consists of invoking it and supplying it with code to be parsed.<span class="Apple-converted-space">  </span>I saved my test code in <span class="s1">toggle.scl</span>.<span class="Apple-converted-space">  </span>I saved the the above parser code in <span class="s1">sm.js</span>.<span class="Apple-converted-space">  </span>I invoked the parser using node at the command line:</p>
+<p class="p3"><br></p>
+<p class="p8">&gt; node sm &lt;toggle.scl</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Wirte the Code Emitter</b></h2>
+<p class="p2">When run, the Ohm parser parses the source code and returns a data structure — a CST (concrete syntax tree — a tree representing the actual source code that was parsed<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>).</p>
+<p class="p3"><br></p>
+<p class="p2">One writes a set of rules — in Javascript, if using Ohm-JS — to transpile the CST into final output.<span class="Apple-converted-space">  </span>The Ohm-JS documentation calls this "the semantics".</p>
+<p class="p3"><br></p>
+<p class="p2">One creates a "semantics" object, names it, then adds transpilation rules to it.</p>
+<p class="p3"><br></p>
+<p class="p2">You can add more than one set of rules to a semantics object.<span class="Apple-converted-space">  </span>For example, one set of rules might check the types and declarations of all of the incoming source code, whereas another set of rules might be used transpile the (checked) CST into final code.</p>
+<p class="p3"><br></p>
+<p class="p2">For purposes of this example, I show only the transpiler rules and leave out checking rules.<span class="Apple-converted-space">  </span>I avoid such details to make this example simpler to comprehend.</p>
+<p class="p3"><br></p>
+<p class="p2">The set of transpilation rules are included in the code base.<span class="Apple-converted-space">  </span>I chose to call the transpilation rules "js()".<span class="Apple-converted-space">  </span>The final code for the parser and transpiler is:</p>
+<p class="p3"><br></p>
+<p class="p9"><br></p>
+<p class="p2">Ohm-JS creates a parser in Javascript.</p>
+<p class="p3"><br></p>
+<p class="p2">To use the created parser, one needs to have access to the ohm library (e.g. via <span class="s1">npm</span>).</p>
+<p class="p3"><br></p>
+<p class="p2">The Ohm-JS documentation explains how to use the parser in a web page or at the command line.</p>
+<p class="p3"><br></p>
+<p class="p2">I choose to use the command line, via <span class="s1">node.js</span>, but Ohm-JS is certainly not restricted to being used in this manner.</p>
+<p class="p3"><br></p>
+<p class="p2">My code for a full parser is:</p>
+<p class="p3"><br></p>
+<p class="p13">// npm install ohm-js</p>
+<p class="p13">const grammar = `</p>
+<p class="p13">SM {</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>Main = StateMachine</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateMachine = NameSection InputSection OutputSection MachineSection</p>
+<p class="p13"><span class="Apple-converted-space">  </span>NameSection = "name" ":" Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputSection = "inputs" ":" InputPinNames</p>
+<p class="p13"><span class="Apple-converted-space">  </span>OutputSection = "outputs" ":" OutputPinNames</p>
+<p class="p14"><span class="Apple-converted-space">  </span></p>
+<p class="p13"><span class="Apple-converted-space">  </span>MachineSection = Header State+ Default Trailer</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Header = "machine" MachineName ":"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Trailer = "end" "machine"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Default = "default" ":" Name</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>State = "state" StateName ":" EntrySection Transition*</p>
+<p class="p13"><span class="Apple-converted-space">  </span>EntrySection = "entry" ":" string</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Transition = "on" Name ":" "next" Name</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>keyword = "machine" | "name" | "inputs" | "outputs" | "end" | "state" | "entry" | "on" | "next" | "default"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputPinNames = nameList</p>
+<p class="p13"><span class="Apple-converted-space">  </span>OutputPinNames = nameList</p>
+<p class="p13"><span class="Apple-converted-space">  </span>MachineName = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateName = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>InputPinReference = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>StateReference = Name</p>
+<p class="p13"><span class="Apple-converted-space">  </span>Name = ~keyword id</p>
+<p class="p13"><span class="Apple-converted-space">  </span>nameList = (~keyword id delim)+</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>id = firstId followId*</p>
+<p class="p13"><span class="Apple-converted-space">  </span>firstId = "A".."Z" | "a".."z" | "_"</p>
+<p class="p13"><span class="Apple-converted-space">  </span>followId = firstId</p>
+<p class="p14"><br></p>
+<p class="p13"><span class="Apple-converted-space">  </span>string = "\\"" stringChar* "\\""</p>
+<p class="p13"><span class="Apple-converted-space">  </span>stringChar =</p>
+<p class="p13"><span class="Apple-converted-space">        </span>escapedChar <span class="Apple-converted-space">                               </span></p>
+<p class="p13"><span class="Apple-converted-space">     </span>|<span class="Apple-converted-space">  </span>anyStringChar</p>
+<p class="p13"><span class="Apple-converted-space">  </span>escapedChar = "\\\\" any</p>
+<p class="p13"><span class="Apple-converted-space">  </span>anyStringChar = ~"\\"" any</p>
+<p class="p14"><span class="Apple-converted-space"> </span></p>
+<p class="p13"><span class="Apple-converted-space">  </span>delim = (" " | "\\t" | "\\n")+</p>
+<p class="p14"><span class="Apple-converted-space">  </span></p>
+<p class="p13">}</p>
+<p class="p13">`;</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13">function parse (text) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var ohm = require ('ohm-js');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var parser = ohm.grammar (grammar);</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var cst = parser.match (text);</p>
+<p class="p13"><span class="Apple-converted-space">    </span>if (cst.succeeded ()) {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return {parser: parser, tree: cst};</p>
+<p class="p13"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>console.log (parser.trace (text).toString ());</p>
+<p class="p13"><span class="Apple-tab-span">	</span>throw "Ohm matching failed";</p>
+<p class="p13"><span class="Apple-converted-space">    </span>}</p>
+<p class="p13">}</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p13">var fs = require ('fs');</p>
+<p class="p14"><br></p>
+<p class="p13">function getNamedFile (fname) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>if (fname === undefined || fname === null || fname === "-") {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return fs.readFileSync (0, 'utf-8');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>return fs.readFileSync (fname, 'utf-8');</p>
+<p class="p13"><span class="Apple-converted-space">    </span>}<span class="Apple-tab-span">	</span></p>
+<p class="p13">}</p>
+<p class="p14"><br></p>
+<p class="p13">//////////// transpiler ////////</p>
+<p class="p14"><br></p>
+<p class="p13">var nameCounter;</p>
+<p class="p14"><br></p>
+<p class="p13">function createTranspiler (parser) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>var semantics = parser.createSemantics ();</p>
+<p class="p13"><span class="Apple-converted-space">    </span>nameCounter = 0;</p>
+<p class="p13"><span class="Apple-converted-space">    </span>semantics.addOperation (</p>
+<p class="p13"><span class="Apple-tab-span">	</span>"js",</p>
+<p class="p13"><span class="Apple-tab-span">	</span>{</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Main : function (_1) { return _1.js (); }, // StateMachine</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>StateMachine : function (_1, _2, _3, _4) { // NameSection InputSection OutputSection MachineSection</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var nameSection = _1.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var inputSection = _2.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var outputSection = _3.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var machineSection = _4.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return `</p>
+<p class="p13">${inputSection}</p>
+<p class="p13">${outputSection}</p>
+<p class="p13">${machineSection}</p>
+<p class="p13">`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>NameSection : function (_1, _2, _3) { return _3.js ().name; }, // "name" ":" Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>InputSection : function (_1, _2, _3) { return _3.js (); }, // "inputs" ":" InputPinNames</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>OutputSection : function (_1, _2, _3) { return _3.js (); }, // "outputs" ":" OutputPinNames</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>MachineSection : function (_1, _2s, _3, _4) { // Header State+ Default Trailer</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var machineName = _1.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var snippets = _2s.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var defaultState = _3.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var preamble = snippets.map (snippet =&gt; { return snippet.preamble; }).join ('\n');</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var stateCode = snippets.map (snippet =&gt; { return snippet.step; }).join ('\n');</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var entryCode = snippets.map (snippet =&gt; { return snippet.entry; }).join ('\n');<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var smCode = `</p>
+<p class="p13">${preamble}</p>
+<p class="p13">function ${machineName} () {</p>
+<p class="p13"><span class="Apple-converted-space">  </span>this.state = ${defaultState};</p>
+<p class="p13"><span class="Apple-converted-space">  </span>this.enter = function (next_state) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>switch (next_state) {</p>
+<p class="p13"><span class="Apple-converted-space">      </span>${entryCode}</p>
+<p class="p13"><span class="Apple-converted-space">    </span>}</p>
+<p class="p13"><span class="Apple-converted-space">  </span>}</p>
+<p class="p13"><span class="Apple-converted-space">  </span>this.step = function (event) {</p>
+<p class="p13"><span class="Apple-converted-space">    </span>switch (this.state) {</p>
+<p class="p13"><span class="Apple-converted-space">      </span>${stateCode}</p>
+<p class="p13"><span class="Apple-converted-space">    </span>};</p>
+<p class="p13"><span class="Apple-converted-space"> </span>}</p>
+<p class="p13">}</p>
+<p class="p13">`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return smCode;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Header : function (_1, _2, _3) { return _2.js (); }, // "machine" MachineName ":"</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Trailer : function (_1, _2) {return "";}, // "end" "machine"</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>State : function (_1, _2, _3, _4, _5s) {<span class="Apple-converted-space">  </span>// "state" StateName ":" EntrySection Transition*</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var pair = _2.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var name = pair.name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var preamble = pair.preamble;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var entry = _4.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transitions = _5s.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var stepcode = `</p>
+<p class="p13"><span class="Apple-converted-space">      </span>case ${name}:</p>
+<p class="p13"><span class="Apple-tab-span">	</span>switch (event.tag) {</p>
+<p class="p13"><span class="Apple-tab-span">	</span>${transitions}</p>
+<p class="p13"><span class="Apple-tab-span">	</span>};</p>
+<p class="p13"><span class="Apple-converted-space">      </span>break;</p>
+<p class="p13">`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var entrycode = `</p>
+<p class="p13">case ${name}:</p>
+<p class="p13">${entry}</p>
+<p class="p13">this.state = ${name};</p>
+<p class="p13">break;`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return { preamble: preamble, step: stepcode, entry: entrycode, defaultState: "" };</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>EntrySection : function (_1, _2, _3) {return _3.js ()}, // "entry" ":" string</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Transition : function (_1, _2, _3, _4, _5) { // "on" Name ":" "next" Name</p>
+<p class="p13"><span class="Apple-converted-space">                </span>var tagName = _2.js ().name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var nextStateName = _5.js ().name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transitionCode = `</p>
+<p class="p13"><span class="Apple-converted-space">      </span>case ${tagName}:<span class="Apple-converted-space"> </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span>this.enter (${nextStateName});</p>
+<p class="p13"><span class="Apple-tab-span">	</span>break;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return transitionCode;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Default : function (_1 ,_2, _3) { // "default" ":" Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var name = _3.js ().name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>keyword : function (_1) {return _1.js ()}, // "machine" | "name" | "inputs" | "outputs" | "end" | "state" | "entry" | "on" | "next" | "default"</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>InputPinNames : function (_1) {return _1.js ()}, // nameList</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>OutputPinNames : function (_1) {return _1.js ()}, // nameList</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>MachineName : function (_1) {return _1.js ().name}, // Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>StateName : function (_1) {return _1.js ()}, // Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>InputPinReference : function (_1) {return _1.js ().name}, // Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>StateReference : function (_1) {return _1.js ().name}, // Name</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>Name : function (_1) { // ~keyword id</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var name = _1.js ();</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nameCounter += 1;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var constant = `const ${name} = ${nameCounter};`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return { preamble: constant, name: name };</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>nameList : function (_1s, _2s) { // (~keyword id delim)+</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var consts = _1s.js ().map (name =&gt; {</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>nameCounter += 1;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `const ${name} = ${nameCounter};`;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return consts.join ('\n');</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>id : function (_1, _2s) {<span class="Apple-converted-space">  </span>// firstId followId*</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var name = `${_1.js ()}${_2s.js ().join ('')}` ;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return name;</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>firstId : function (_1) {return _1.js ()}, // "A".."Z" | "a".."z" | "_"</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>followId : function (_1) {return _1.js ()}, // firstId</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>string : function (_1, _2s, _3) { return `${_2s.js ().join ('')}`; }, // "\\"" stringChar* "\\""</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>escapedChar : function (_1, _2) { return _2.js (); }, // "\\\\" any</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>anyStringChar : function (_1) {return _1.js ();}, // ~"\\"" any</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>delim : function (_1s) {return _1s.js ().join (''); }, // (" " | "\\t" | "\\n")+</p>
+<p class="p14"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>_terminal: function () { return this.primitiveValue; }</p>
+<p class="p13"><span class="Apple-tab-span">	</span>});</p>
+<p class="p13"><span class="Apple-converted-space">    </span>return semantics;</p>
+<p class="p13">}</p>
+<p class="p13">////////////</p>
+<p class="p14"><br></p>
+<p class="p13">var text = getNamedFile("-");</p>
+<p class="p13">var {parser, tree} = parse (text);</p>
+<p class="p13">var transpiler = createTranspiler (parser);</p>
+<p class="p13">console.log (transpiler (tree).js ());</p>
+<p class="p14"><br></p>
+<p class="p13">// boilerplate</p>
+<p class="p13">console.log (`</p>
+<p class="p13"><span class="Apple-converted-space"> </span>function fire (output, value) {</p>
+<p class="p13"><span class="Apple-converted-space">  </span>console.log ("Fire called: " + this.toString () + " output:" + output.toString () + " value:" + value.toString ());</p>
+<p class="p13"><span class="Apple-converted-space"> </span>}</p>
+<p class="p13"><span class="Apple-converted-space"> </span>function send (component, tag, value) {</p>
+<p class="p13"><span class="Apple-converted-space">  </span>component.step ( {tag, value} );</p>
+<p class="p13"><span class="Apple-converted-space"> </span>}</p>
+<p class="p13"><span class="Apple-converted-space"> </span>function inject (component, event) {</p>
+<p class="p13"><span class="Apple-converted-space">  </span>component.step (event);</p>
+<p class="p13"><span class="Apple-converted-space"> </span>}</p>
+<p class="p13"><span class="Apple-converted-space"> </span>var top = new Toggle ();</p>
+<p class="p13"><span class="Apple-converted-space"> </span>inject (top, {tag: _in, value: true});</p>
+<p class="p13"><span class="Apple-converted-space"> </span>inject (top, {tag: _in, value: true});</p>
+<p class="p13"><span class="Apple-converted-space"> </span>inject (top, {tag: _in, value: true});</p>
+<p class="p13">`);</p>
+<p class="p14"><br></p>
+<p class="p2">Note that I added some boilerplate code at the end.<span class="Apple-converted-space">  </span>This code is needed to make this simple example run.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Run the Transpiler</b></h2>
+<p class="p2">The transpiler is built at the command line using:</p>
+<p class="p3"><br></p>
+<p class="p8">&gt; node sm &lt;toggle.scl &gt;out.js</p>
+<p class="p9"><br></p>
+<p class="p2">To run the transpiler, one needs to invoke the node interpreter:</p>
+<p class="p3"><br></p>
+<p class="p8">&gt; node out</p>
+<p class="p9"><br></p>
+<p class="p2"><span class="Apple-converted-space"> </span>As mentioned earlier, Ohm-JS is not restricted to being run from the command line and can run inside a web page. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Refer to the Ohm-JS documentation <a href="https://github.com/harc/ohm">https://github.com/harc/ohm</a> or to my essay <a href="https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf">https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf</a>.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Iterate</b></h2>
+<p class="p2">Once the SCL has been built for the test sample code, embellish the transpiler with more language constructs, recompile and re-run.</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>PEG means Parsing Expression Grammars.<span class="Apple-converted-space">  </span>PEGs are IMO, better than REGEXPs, and are just as accessible to programmers without any need for compiler theory.<span class="Apple-converted-space">  </span>PEG libraries are available for many languages.<span class="Apple-converted-space">  </span>The original PEG thesis can be found at https://bford.info/pub/lang/peg/</p>
+<p class="p15"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>Stack-based languages, are currently called "concatenative" languages.<span class="Apple-converted-space">  </span>An early stack-based language is Forth.<span class="Apple-converted-space">  </span>I first saw compiler technology using a stack-based language in S/SL and PT Pascal (see my list of References).</p>
+<p class="p15"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>PL means Programming Language.</p>
+<p class="p6"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>An AST — Abstract Syntax Tree — is a tree of the possible parses of all sources.<span class="Apple-converted-space">  </span>The CST is a subset of all possible parses.<span class="Apple-converted-space">  </span>We use the CST.</p>
+</div>
+</body>
+</html>
