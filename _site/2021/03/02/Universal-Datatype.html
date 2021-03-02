@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Universal Datatype</title>
+  <meta name="CreationTime" content="2021-03-02T07:21:50Z">
+  <meta name="ModificationTime" content="2021-03-02T07:21:50Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Universal Datatype</b></h2>
+<p class="p2">The Universal Datatype is a <i>relation</i>, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">relation(subject,object)</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Triples</b></h2>
+<p class="p2">Relations are also called a <i>triple</i>s.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Assembler</b></h2>
+<p class="p4">MOV R0,R1</p>
+<p class="p2">is a triple. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Relation, Subject, Object.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Normalization</b></h2>
+<p class="p2">Data / Code represented as relations is <i>normalized</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Normalization is the most-atomic form of representation.</p>
+<p class="p3"><br></p>
+<p class="p2">Example:</p>
+<p class="p3"><br></p>
+<p class="p4">rectangle (5, 10, 20, 30)</p>
+<p class="p3"><br></p>
+<p class="p2">can be further atomized — normalized — as</p>
+<p class="p3"><br></p>
+<p class="p4">rectangle (R1)</p>
+<p class="p4">x (R1, 5)</p>
+<p class="p4">y (R1, 10)</p>
+<p class="p4">width (R1, 20)</p>
+<p class="p4">height (R1, 30)</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Yes, normalization wastes space and CPU power, but, we have lots of each today.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p2">I often use the term <i>fact</i> and put <i>facts</i> into a <i>factbase</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compilers</b></h2>
+<p class="p2">Compilers like triples, e.g. <span class="s1">MOV R0,R1</span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Optimization</b></h2>
+<p class="p2">Optimization is easier when target code/data has been normalized.</p>
+<p class="p3"><br></p>
+<p class="p2">Peephole optimization is easy to do with even simple tools like <span class="s1">awk</span> when code / data has been normalized into triples.</p>
+<p class="p3"><br></p>
+<p class="p2">Fraser/Davidson wrote a landmark paper<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> on peepholing which formed the basis of Gnu's <span class="s1">gcc</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">Normalizing code and optimizing it is not just for compilers.<span class="Apple-converted-space">  </span>The techniques could be ratcheted up a notch to cover higher levels of software Architectures.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anecdote - Y2K and COBOL</b></h2>
+<p class="p2">We analyzed banking source code for Y2K problems.</p>
+<p class="p3"><br></p>
+<p class="p2">We used TXL to convert all source code into factbases, then ran backtracking pattern-matching rules over the normalized code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Pattern Matching Factbases</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Backtracking</b></h2>
+<p class="p2">Exhaustive matching can be done with simple algorithms — backtracking.</p>
+<p class="p3"><br></p>
+<p class="p2">Backtracking is easier when the data is normalized.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>That's why compiler writers aim at assembler when writing optimizers.<span class="Apple-converted-space">  </span>Today, trees are used, but trees get in the way.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PROLOG</b></h2>
+<p class="p2">PROLOG is one of the earliest attempts at backtracking.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>I have built a PROLOG in JavaScript.<span class="Apple-converted-space">  </span>See </i><a href="https://guitarvydas.github.io/"><i>https://guitarvydas.github.io/</i></a>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>TXL</b></h2>
+<p class="p2">TXL is a functional, backtracking, parser language.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="http://www.txl.ca/">http://www.txl.ca/</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>MiniKanren</b></h2>
+<p class="p2">MiniKanren appears to be the successor to PROLOG-like languages.</p>
+<p class="p3"><br></p>
+<p class="p2">MiniKanren can do seemingly-magical things <a href="https://www.youtube.com/watch?v=er_lLvkklsk">https://www.youtube.com/watch?v=er_lLvkklsk</a> (and <a href="https://github.com/webyrd/Barliman">https://github.com/webyrd/Barliman</a>).</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>One has to wonder what the child of MiniKanren and AI might turn out like.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Programming Language Design</b></h2>
+<p class="p2">Imagine if all code were normalized to triples.</p>
+<p class="p3"><br></p>
+<p class="p2">We'd be programming in assembler, or in the mostly-syntaxless Lisp.</p>
+<p class="p3"><br></p>
+<p class="p2">Successive programming language designs have tried to remedy the problems of working in triples, for human consumption.</p>
+<p class="p3"><br></p>
+<p class="p2">Programming languages have taken years to design and to perfect.</p>
+<p class="p3"><br></p>
+<p class="p2">Now, using PEG parsers, we can build languages in a day<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We can tune a language for a specific problem. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I call these SCLs — Solution Centric Languages.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEG vs. YACC</b></h2>
+<p class="p2">YACC embodies LR(k) theory.</p>
+<p class="p3"><br></p>
+<p class="p2">YACC builds languages from the ground up.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG builds parsers.</p>
+<p class="p3"><br></p>
+<p class="p2">Programmers can understand PEG.<span class="Apple-converted-space">  </span>Compiler-writers understand (mostly) YACC.</p>
+<p class="p3"><br></p>
+<p class="p2">PEGs are easier to use than YACC.</p>
+<p class="p3"><br></p>
+<p class="p2">YACC needs a scanner, e.g. LEX.</p>
+<p class="p3"><br></p>
+<p class="p2">PEGs are all-in-one - scanner and parser, utilizing familiar REGEXP-like syntax.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEG vs. REGEXP</b></h2>
+<p class="p2">PEG is like REGEXP, only better.</p>
+<p class="p3"><br></p>
+<p class="p2">If you use REGEXPs, stop. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Use PEGs instead.</p>
+<p class="p3"><br></p>
+<p class="p2">PEGs make it easy to match sequences that REGEXPs have a hard time with.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Automation</b></h2>
+<p class="p2">Normalization leads to automation.</p>
+<p class="p3"><br></p>
+<p class="p2">First, make it repetitive and boring.</p>
+<p class="p3"><br></p>
+<p class="p2">Then automate.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Programming</b></h2>
+<p class="p2">Programming consists of two basic activities:</p>
+<ol class="ol1">
+  <li class="li6">breathe in — pattern match</li>
+  <li class="li6">breathe out — rearrange and emit.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></li>
+</ol>
+<p class="p7"><br></p>
+<p class="p6">[<i>If (2) occurs before (1) is finished, we get problems.<span class="Apple-converted-space">  </span>FP is an attempt to fix such problems by throwing the baby out with the bathwater.<span class="Apple-converted-space">  </span>State is not the problem — unscoped use of State is the problem</i>].<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p8"><br></p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>https://dl.acm.org/doi/10.1145/357094.357098</p>
+<p class="p9"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Especially if we cheat.</p>
+<p class="p9"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>The difference lies in the fact that PEGs use a stack and allow you to easily write pattern-matching subroutines.</p>
+<p class="p10"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>(2) might also involve actions</p>
+<p class="p10"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Isolation.html.<span class="Apple-converted-space">  </span>See, also, Structured Programming, StateCharts, etc.</p>
+</div>
+</body>
+</html>

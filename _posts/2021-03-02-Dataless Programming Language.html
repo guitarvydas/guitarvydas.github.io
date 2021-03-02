@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Dataless Programming Language</title>
+  <meta name="CreationTime" content="2021-03-02T07:25:15Z">
+  <meta name="ModificationTime" content="2021-03-02T07:25:15Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bizarre</b></h2>
+<p class="p2">This idea — a dataless programming language — at first, sounded bizarre to me.</p>
+<p class="p3"><br></p>
+<p class="p2">A programming language that had no data?</p>
+<p class="p3"><br></p>
+<p class="p2">Now, I find the idea more useful than Javascript, C, or, dare-I-say Common Lisp.<span class="Apple-converted-space">  </span>I don't even bother with Python or Rust or …</p>
+<p class="p3"><br></p>
+<p class="p2">I first learned the technique in 1980 in a compiler course using S/SL (Syntax / Semantic Language, not Secure Socket Layer).</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>essence</i> of S/SL goes far beyond compiler-building.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Software Design in Layers</b></h2>
+<p class="p2">It seem "obvious" that we want to build software in layers.</p>
+<p class="p3"><br></p>
+<p class="p2">Build-and-forget.</p>
+<p class="p3"><br></p>
+<p class="p2">We just can't seem to do it, though.</p>
+<p class="p3"><br></p>
+<p class="p2">Dependencies trickle throughout our code when using standard software techniques.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">To build layered software</span>:</p>
+<ul class="ul1">
+  <li class="li4">we must remove dependencies.</li>
+  <li class="li4"></li>
+  <li class="li4">To learn how to remove dependencies, throw away all crutches. <span class="Apple-converted-space"> </span></li>
+  <li class="li4">Don't use <span class="s2">npm</span>, <span class="s2">make</span>, <span class="s2">asdf</span>, etc.<span class="Apple-converted-space"> </span></li>
+  <li class="li4">Don't use any language that provides a + operator (or <span class="s2">cons</span>, or …).<span class="Apple-converted-space"> </span></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Gulp.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Function Calls, Handles, Control Flow</b></h2>
+<p class="p4">Use <i>only</i> function calls, internal and external (aka foreign, aka deferred) function calls, and use the least amount of control-flow possible. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Handles to Data</b></h2>
+<p class="p4">Refer to data, but don't manipulate it directly.</p>
+<p class="p5"><br></p>
+<p class="p4">This used to be called <i>handles</i>.</p>
+<p class="p5"><br></p>
+<p class="p4">If you need to increment a variable, call a function.</p>
+<p class="p5"><br></p>
+<p class="p4">For example, replace</p>
+<p class="p6">a = b + c</p>
+<p class="p4">with</p>
+<p class="p6">assign (aHandle, plus (bHandle, cHandle)).</p>
+<p class="p5"><br></p>
+<p class="p4">Compilers have become better. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Compilers can do function inlining. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Don't waste brain-power doing what compilers can do for you.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Loop</b></h2>
+<p class="p2">What is the simplest form of <i>loop</i>?</p>
+<p class="p3"><br></p>
+<p class="p2">Not <i>for.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">Not <i>while.</i></p>
+<p class="p3"><br></p>
+<p class="p2">It's:</p>
+<p class="p3"><br></p>
+<p class="p6">loop</p>
+<p class="p6"><span class="Apple-converted-space">  </span>…</p>
+<p class="p6"><span class="Apple-converted-space">  </span>exit when …</p>
+<p class="p6"><span class="Apple-converted-space">  </span>…</p>
+<p class="p6">end loop</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p2">Recursion is <i>loop</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">How do you write the above recursively?</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DRY</b></h2>
+<p class="p2">Don't waste brain-power doing DRY (Don't Repeat Yourself).</p>
+<p class="p3"><br></p>
+<p class="p2">Have the computer/compiler do it for you.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Git</span>, <span class="s2">diff</span> and friends know how to recognize code commonality.<span class="Apple-converted-space">  </span>It's time to lift up the game a notch, and to get <span class="s2">git</span>/<span class="s2">diff</span>/etc. to do DRY for you.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space">  </span>The Dragon Book<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> shows how.</p>
+<p class="p3"><br></p>
+<p class="p2">Software Architecture needs RY, not DRY.<span class="Apple-converted-space">  </span>Cut/Copy/Paste.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Maintenance Engineering needs DRY.<span class="Apple-converted-space">  </span>Maintenance Engineering is not Software Architecture.</i>]</p>
+<p class="p3"><i></i><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>S/SL</b></h2>
+<p class="p2"><a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/">https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/</a></p>
+<p class="p8"><br></p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>Is Cordy and Roy's NiCad this kind of thing?<span class="Apple-converted-space">  </span>I haven't read up on it enough.<span class="Apple-converted-space">  </span>https://research.cs.queensu.ca/home/cordy/software.html#NICAD</p>
+<p class="p9"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools</p>
+</div>
+</body>
+</html>

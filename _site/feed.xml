@@ -1,4 +1,394 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-01T15:22:41-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Fractal design</title><link href="https://computingsimplicity.neocities.org/2021/03/01/Fractal-Design.html" rel="alternate" type="text/html" title="Fractal design" /><published>2021-03-01T00:00:00-05:00</published><updated>2021-03-01T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/03/01/Fractal%20Design</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/01/Fractal-Design.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-02T07:26:09-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Programming language design</title><link href="https://computingsimplicity.neocities.org/2021/03/02/Programming-Language-Design.html" rel="alternate" type="text/html" title="Programming language design" /><published>2021-03-02T00:00:00-05:00</published><updated>2021-03-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/03/02/Programming%20Language%20Design</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/02/Programming-Language-Design.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Programming Language Design&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-02T07:19:20Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-02T07:19:20Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; color: #000000; -webkit-text-stroke: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font-kerning: none}
+    span.s4 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: lower-alpha}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Problem With Today's Programming Languages&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The problem with today's programming languages is that they are too general.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, Guido van Rossum's&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; language was designed to solve Guido van Rossum's problems, not yours.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Rhetorical question: if I were to write software to control a robot, would I use a language built for designing banking apps?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Only if I didn't have the freedom to choose.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SCLs not DSLs not PLs&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Given that we can now create SCLs — PLs and DSLs — in one day, we can rearrange our workflow.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;Analyze the problem-at-hand.&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Create a notation to describe the problem-at-hand&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Create a solution to the problem-at-hand using the same notation&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Build an SCL for a single use — only for this single problem, without needing to generalize&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Build, test, release the solution.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The tools we need are:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;A PEG parser (e.g. Ohm-JS)&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;A flexible base language (Lisp and Javascript are places to start).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The base language should:&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;Provide dynamic typing&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; instead of static typing&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Provide 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt;-class functions&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Treat everything as an expression&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Not require code ordering, e.g. use before declaration&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Not require syntactic sugar, e.g. commas, needing &lt;span class=&quot;s2&quot;&gt;return&lt;/span&gt; for expression values, etc.&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Provide good debuggers / single-steppers&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Provide ways to incorporate position information in the code (e.g. #file and #line pragmas used in C preprocessors).&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Lisp — Common Lisp — has many of the above features.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In particular, code and data are stored as lists.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Lists can be treated as relations&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Many of the high-falutin' languages were originally built in Lisp.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Lisp is a good toolbox&lt;a id=&quot;fnlink8&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn8&quot;&gt;&lt;sup&gt;[8]&lt;/sup&gt;&lt;/a&gt; for automators&lt;a id=&quot;fnlink9&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn9&quot;&gt;&lt;sup&gt;[9]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Layered Software Design&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Eliding Error Handling&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;People often omit error handling because it clogs up the readability of the original Architecture.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Error handling is a bag on the side of most programs. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;That is because most languages don't allow one to design software in a layered manner. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;If you think that libraries and github give you layered software, think again.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Ask yourself, for example, how to extract and examine the error layers — only — in this kind of software.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Ask yourself how to extract and examine the Happy Path (Architecture w/o error handling nasties) — only — in this kind of software.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If you think that theorem provers help you build better software, try building a robot controller or a music sequencer (see if knowing the nitty-gritties of Natural Numbers is useful in such domains —programming language design is about how to hide and elide the details when solving a particular problem&lt;a id=&quot;fnlink10&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn10&quot;&gt;&lt;sup&gt;[10]&lt;/sup&gt;&lt;/a&gt;&lt;i&gt;).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Etc.]&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Error-handling — non-linear control flow — is difficult to express in a text-only language.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It has been done, but the results&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;aren't natural.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Other forms of non-linear control flow have pushed the text-only paradigm beyond its natural limitations (e.g. Javascript callbacks, multitasking, etc.).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One of the oldest notations for non-linear and parallel control flow is music notation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Humans understand and express parallelism (e.g. music chords, cooking recipes) — only programmers find this concept hard to express.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Theory Is Not PL Design&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Programming language theory defines the Universe of programming languages.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This is &lt;i&gt;not &lt;/i&gt;the same as designing a &lt;i&gt;useful&lt;/i&gt; programming language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A useful programming language:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;picks-and-chooses from the Universe of possibilities&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;creates a zig-zag through the Universe of possibilities and presents a notation for a given problem in a readable manner.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Architect's Responsilibity&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;s3&quot;&gt;It is the Architect's responsibility to make a design clear and understandable to other readers.&lt;/span&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;RY vs. DRY&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The goals of Architecture are not the same as the goals of Maintenance Engineering, Test Engineering, etc.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In particular, the Architect must be able to Copy/Paste designs — this is call RY (Repeat Yourself).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;RY, though, is anathema to Maintenance Engineering.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;From a maintenance perspective, DRY (Don't Repeat Yourself) is desirable.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;With current techniques, DRY is generally not automated and programmers are expected to expend brain-power to achieve DRY, instead of using RY.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;I'm not picking on Guido, just using his name as a concrete example of a more general problem.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;I can't think of any language, except assembler, that has all of these features, yet, one can write SCLs that emit other languages (For example, I've successfully emitted Lisp and Javascript)&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;If static typing is important to the solution, build static typing into the SCL&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;1st class functions are even possible in Assembler and C.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some so-called HLLs snip this avenue off.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[Note that 1st class functions are GOTOs on steroids].&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Declaration-before-use is a&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;high-level-language feature that helps programmers spot typos.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is an anti-feature for base languages used in automation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Programmer-oriented features hinder automation.&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Note that I don't champion the idea of using C and Lisp macros.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;PEGs provide a much richer environment for rewriting code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Lisp macros were an attempt to build runtime syntax modification.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One could, simply build-in a PEG parser for this same purpose.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I have successfully used ESRAP (a PEG parser) in CL for a project (compiling diagrams to code).&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Lisp lists can represent a larger number of possibilities than just triples.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Avoid using this ability.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn8&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink8&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[8]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule#:~:text=Greenspun's%20tenth%20rule%20of%20programming,of%20half%20of%20Common%20Lisp.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn9&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink9&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[9]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;I argue that Lisp should be used for the basis of projectional editors.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn10&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink10&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[10]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Especially when you can't expunge &lt;i&gt;time&lt;/i&gt; from the equation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Language Design</summary></entry><entry><title type="html">Universal datatype</title><link href="https://computingsimplicity.neocities.org/2021/03/02/Universal-Datatype.html" rel="alternate" type="text/html" title="Universal datatype" /><published>2021-03-02T00:00:00-05:00</published><updated>2021-03-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/03/02/Universal%20Datatype</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/02/Universal-Datatype.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Universal Datatype&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-02T07:21:50Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-02T07:21:50Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Universal Datatype&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The Universal Datatype is a &lt;i&gt;relation&lt;/i&gt;, e.g.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;relation(subject,object)&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Triples&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Relations are also called a &lt;i&gt;triple&lt;/i&gt;s.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Assembler&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;MOV R0,R1&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;is a triple. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Relation, Subject, Object.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Normalization&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Data / Code represented as relations is &lt;i&gt;normalized&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Normalization is the most-atomic form of representation.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Example:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle (5, 10, 20, 30)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;can be further atomized — normalized — as&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle (R1)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x (R1, 5)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y (R1, 10)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width (R1, 20)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height (R1, 30)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Yes, normalization wastes space and CPU power, but, we have lots of each today.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Factbase&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I often use the term &lt;i&gt;fact&lt;/i&gt; and put &lt;i&gt;facts&lt;/i&gt; into a &lt;i&gt;factbase&lt;/i&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Compilers&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Compilers like triples, e.g. &lt;span class=&quot;s1&quot;&gt;MOV R0,R1&lt;/span&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Optimization&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Optimization is easier when target code/data has been normalized.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Peephole optimization is easy to do with even simple tools like &lt;span class=&quot;s1&quot;&gt;awk&lt;/span&gt; when code / data has been normalized into triples.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Fraser/Davidson wrote a landmark paper&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; on peepholing which formed the basis of Gnu's &lt;span class=&quot;s1&quot;&gt;gcc&lt;/span&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Normalizing code and optimizing it is not just for compilers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The techniques could be ratcheted up a notch to cover higher levels of software Architectures.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Anecdote - Y2K and COBOL&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;We analyzed banking source code for Y2K problems.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We used TXL to convert all source code into factbases, then ran backtracking pattern-matching rules over the normalized code.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Pattern Matching Factbases&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Backtracking&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Exhaustive matching can be done with simple algorithms — backtracking.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Backtracking is easier when the data is normalized.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;That's why compiler writers aim at assembler when writing optimizers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Today, trees are used, but trees get in the way.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PROLOG&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG is one of the earliest attempts at backtracking.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;I have built a PROLOG in JavaScript.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See &lt;/i&gt;&lt;a href=&quot;https://guitarvydas.github.io/&quot;&gt;&lt;i&gt;https://guitarvydas.github.io/&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;TXL&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;TXL is a functional, backtracking, parser language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;http://www.txl.ca/&quot;&gt;http://www.txl.ca/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;MiniKanren&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;MiniKanren appears to be the successor to PROLOG-like languages.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;MiniKanren can do seemingly-magical things &lt;a href=&quot;https://www.youtube.com/watch?v=er_lLvkklsk&quot;&gt;https://www.youtube.com/watch?v=er_lLvkklsk&lt;/a&gt; (and &lt;a href=&quot;https://github.com/webyrd/Barliman&quot;&gt;https://github.com/webyrd/Barliman&lt;/a&gt;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;One has to wonder what the child of MiniKanren and AI might turn out like.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Programming Language Design&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Imagine if all code were normalized to triples.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We'd be programming in assembler, or in the mostly-syntaxless Lisp.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Successive programming language designs have tried to remedy the problems of working in triples, for human consumption.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Programming languages have taken years to design and to perfect.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Now, using PEG parsers, we can build languages in a day&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We can tune a language for a specific problem. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I call these SCLs — Solution Centric Languages.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PEG vs. YACC&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;YACC embodies LR(k) theory.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;YACC builds languages from the ground up.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PEG builds parsers.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Programmers can understand PEG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compiler-writers understand (mostly) YACC.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PEGs are easier to use than YACC.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;YACC needs a scanner, e.g. LEX.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PEGs are all-in-one - scanner and parser, utilizing familiar REGEXP-like syntax.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PEG vs. REGEXP&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;PEG is like REGEXP, only better.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;If you use REGEXPs, stop. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Use PEGs instead.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PEGs make it easy to match sequences that REGEXPs have a hard time with.&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automation&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Normalization leads to automation.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;First, make it repetitive and boring.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Then automate.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Programming&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Programming consists of two basic activities:&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;breathe in — pattern match&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;breathe out — rearrange and emit.&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;If (2) occurs before (1) is finished, we get problems.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FP is an attempt to fix such problems by throwing the baby out with the bathwater.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;State is not the problem — unscoped use of State is the problem&lt;/i&gt;].&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;https://dl.acm.org/doi/10.1145/357094.357098&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Especially if we cheat.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;The difference lies in the fact that PEGs use a stack and allow you to easily write pattern-matching subroutines.&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;(2) might also involve actions&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;https://guitarvydas.github.io/2020/12/09/Isolation.html.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See, also, Structured Programming, StateCharts, etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Universal Datatype</summary></entry><entry><title type="html">Dataless programming language</title><link href="https://computingsimplicity.neocities.org/2021/03/02/Dataless-Programming-Language.html" rel="alternate" type="text/html" title="Dataless programming language" /><published>2021-03-02T00:00:00-05:00</published><updated>2021-03-02T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/03/02/Dataless%20Programming%20Language</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/02/Dataless-Programming-Language.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Dataless Programming Language&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-02T07:25:15Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-02T07:25:15Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bizarre&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;This idea — a dataless programming language — at first, sounded bizarre to me.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A programming language that had no data?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Now, I find the idea more useful than Javascript, C, or, dare-I-say Common Lisp.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I don't even bother with Python or Rust or …&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I first learned the technique in 1980 in a compiler course using S/SL (Syntax / Semantic Language, not Secure Socket Layer).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;essence&lt;/i&gt; of S/SL goes far beyond compiler-building.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Software Design in Layers&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;It seem &quot;obvious&quot; that we want to build software in layers.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Build-and-forget.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We just can't seem to do it, though.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Dependencies trickle throughout our code when using standard software techniques.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;To build layered software&lt;/span&gt;:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;we must remove dependencies.&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;To learn how to remove dependencies, throw away all crutches. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Don't use &lt;span class=&quot;s2&quot;&gt;npm&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;make&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;asdf&lt;/span&gt;, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Don't use any language that provides a + operator (or &lt;span class=&quot;s2&quot;&gt;cons&lt;/span&gt;, or …).&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Gulp.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Function Calls, Handles, Control Flow&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;Use &lt;i&gt;only&lt;/i&gt; function calls, internal and external (aka foreign, aka deferred) function calls, and use the least amount of control-flow possible. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Handles to Data&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;Refer to data, but don't manipulate it directly.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;This used to be called &lt;i&gt;handles&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;If you need to increment a variable, call a function.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;For example, replace&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;a = b + c&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;with&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;assign (aHandle, plus (bHandle, cHandle)).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Compilers have become better. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Compilers can do function inlining. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Don't waste brain-power doing what compilers can do for you.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Loop&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;What is the simplest form of &lt;i&gt;loop&lt;/i&gt;?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Not &lt;i&gt;for.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Not &lt;i&gt;while.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;It's:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;loop&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;…&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;exit when …&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;…&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;end loop&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Recursion is &lt;i&gt;loop&lt;/i&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;How do you write the above recursively?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;DRY&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Don't waste brain-power doing DRY (Don't Repeat Yourself).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Have the computer/compiler do it for you.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Git&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;diff&lt;/span&gt; and friends know how to recognize code commonality.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It's time to lift up the game a notch, and to get &lt;span class=&quot;s2&quot;&gt;git&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;diff&lt;/span&gt;/etc. to do DRY for you.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Dragon Book&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; shows how.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Software Architecture needs RY, not DRY.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Cut/Copy/Paste.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Maintenance Engineering needs DRY.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Maintenance Engineering is not Software Architecture.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;S/SL&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/&quot;&gt;https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Is Cordy and Roy's NiCad this kind of thing?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I haven't read up on it enough.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;https://research.cs.queensu.ca/home/cordy/software.html#NICAD&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Dataless Programming Language</summary></entry><entry><title type="html">Fractal design</title><link href="https://computingsimplicity.neocities.org/2021/03/01/Fractal-Design.html" rel="alternate" type="text/html" title="Fractal design" /><published>2021-03-01T00:00:00-05:00</published><updated>2021-03-01T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/03/01/Fractal%20Design</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/01/Fractal-Design.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1114,7 +1504,61 @@
   &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Don't worry if this doesn't make sense yet.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;Running&quot; refers to the idea that there is a distinguished Dispatcher() meting out bits of control-flow time to closures.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will discuss this elsewhere.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Untitled</summary></entry><entry><title type="html">The stack is a global variable (again)</title><link href="https://computingsimplicity.neocities.org/2021/02/25/The-Stack-is-a-Global-Variable-(again).html" rel="alternate" type="text/html" title="The stack is a global variable (again)" /><published>2021-02-25T00:00:00-05:00</published><updated>2021-02-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/02/25/The%20Stack%20is%20a%20Global%20Variable%20(again)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/02/25/The-Stack-is-a-Global-Variable-(again).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Untitled</summary></entry><entry><title type="html">Statecharts (again)</title><link href="https://computingsimplicity.neocities.org/2021/02/25/statecharts-(again).html" rel="alternate" type="text/html" title="Statecharts (again)" /><published>2021-02-25T00:00:00-05:00</published><updated>2021-02-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/02/25/statecharts%20(again)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/02/25/statecharts-(again).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;statecharts (again)&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-02-25T23:56:09Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-02-25T23:56:09Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li1&quot;&gt;I was taught about state machines in EE school, but, they said, you couldn't make practical use of SM's because of the &quot;state explosion&quot; problem (Fig. 20 of Harel's paper shows a very simple example of &quot;state explosion&quot;).&lt;/li&gt;
+  &lt;li class=&quot;li1&quot;&gt;Harel's notation conquers the &quot;state explosion&quot; problem.&lt;/li&gt;
+  &lt;li class=&quot;li1&quot;&gt;Harel's notation then goes one step too far and winds concurrency into the notation (&quot;orthogonal states&quot;).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;(2) is explicit - you draw lines (curvy arrows) to show transitions&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;(3) is implicit - you have to read the code to see who-depends-on-what.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Remove (3) and you have a wonderful notation that I call HSM's (Hierarchical State Machines).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Move (3) into its own notation and you get &quot;network diagrams&quot; (aka &quot;box and arrow diagrams&quot;), and the FBP-like stuff that I build (currently called &quot;Arrowgrams&quot;, formerly known as &quot;bmfbp&quot; (for Bare Metal FBP)).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;(2) and (3) are, both, simple notations. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;When you try to combine the two notations, you get accidental complexity. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Harel wrote a follow-on paper about the micro-semantics of his notation and told us that everything must work in a lock-step manner. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Arrowgrams gives you concurrency in a simple form (&quot;multitasking is easy&quot; :-)). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;HSMs give you anti-state-explosion.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;I built a full Harel Statechart textual language (some 8 passes, iirc), then backed off and simplified ((2) hierarchical state machines and (3) a message-passing kernel).&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;If you think in terms of communicating-state-machines, you brush up against Actors-like thinking.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;further: YACC dealt with the &quot;state explosion&quot; problem, too, but, over-specified (IMO) and didn't allow users to control the explosion handling in an explicit manner]&lt;/i&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;The kernel is simple.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The current implementation is in JavaScript (this is a way to show just how simple this can be - if you can do it in JS, you can do it in any language :-).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I, also, have done it in HTML+JS).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See, also https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html and https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">statecharts (again)</summary></entry><entry><title type="html">The stack is a global variable (again)</title><link href="https://computingsimplicity.neocities.org/2021/02/25/The-Stack-is-a-Global-Variable-(again).html" rel="alternate" type="text/html" title="The stack is a global variable (again)" /><published>2021-02-25T00:00:00-05:00</published><updated>2021-02-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/02/25/The%20Stack%20is%20a%20Global%20Variable%20(again)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/02/25/The-Stack-is-a-Global-Variable-(again).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1173,318 +1617,4 @@
 &lt;p class=&quot;p1&quot;&gt;Dig deep into the operating system's documentation and you will, inevitably, find a state diagram.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Processes Are State Machines</summary></entry><entry><title type="html">Statecharts (again)</title><link href="https://computingsimplicity.neocities.org/2021/02/25/statecharts-(again).html" rel="alternate" type="text/html" title="Statecharts (again)" /><published>2021-02-25T00:00:00-05:00</published><updated>2021-02-25T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/02/25/statecharts%20(again)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/02/25/statecharts-(again).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;statecharts (again)&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-02-25T23:56:09Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-02-25T23:56:09Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 13.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li1&quot;&gt;I was taught about state machines in EE school, but, they said, you couldn't make practical use of SM's because of the &quot;state explosion&quot; problem (Fig. 20 of Harel's paper shows a very simple example of &quot;state explosion&quot;).&lt;/li&gt;
-  &lt;li class=&quot;li1&quot;&gt;Harel's notation conquers the &quot;state explosion&quot; problem.&lt;/li&gt;
-  &lt;li class=&quot;li1&quot;&gt;Harel's notation then goes one step too far and winds concurrency into the notation (&quot;orthogonal states&quot;).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;(2) is explicit - you draw lines (curvy arrows) to show transitions&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;(3) is implicit - you have to read the code to see who-depends-on-what.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Remove (3) and you have a wonderful notation that I call HSM's (Hierarchical State Machines).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Move (3) into its own notation and you get &quot;network diagrams&quot; (aka &quot;box and arrow diagrams&quot;), and the FBP-like stuff that I build (currently called &quot;Arrowgrams&quot;, formerly known as &quot;bmfbp&quot; (for Bare Metal FBP)).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;(2) and (3) are, both, simple notations. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;When you try to combine the two notations, you get accidental complexity. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Harel wrote a follow-on paper about the micro-semantics of his notation and told us that everything must work in a lock-step manner. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Arrowgrams gives you concurrency in a simple form (&quot;multitasking is easy&quot; :-)). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;HSMs give you anti-state-explosion.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;I built a full Harel Statechart textual language (some 8 passes, iirc), then backed off and simplified ((2) hierarchical state machines and (3) a message-passing kernel).&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;If you think in terms of communicating-state-machines, you brush up against Actors-like thinking.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;[&lt;i&gt;further: YACC dealt with the &quot;state explosion&quot; problem, too, but, over-specified (IMO) and didn't allow users to control the explosion handling in an explicit manner]&lt;/i&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;The kernel is simple.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The current implementation is in JavaScript (this is a way to show just how simple this can be - if you can do it in JS, you can do it in any language :-).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I, also, have done it in HTML+JS).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See, also https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html and https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">statecharts (again)</summary></entry><entry><title type="html">Compiling diagrams 2</title><link href="https://computingsimplicity.neocities.org/2021/01/24/Compiling-Diagrams-2.html" rel="alternate" type="text/html" title="Compiling diagrams 2" /><published>2021-01-24T00:00:00-05:00</published><updated>2021-01-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/24/Compiling%20Diagrams%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/24/Compiling-Diagrams-2.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Compiling Diagrams 2&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-24T12:20:30Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-24T12:20:30Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Diagram&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-01-24-12-20-30-Images/Time sharing.png&quot; width=&quot;400px&quot; height=&quot;108px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Fig. 1 Hello World (Diagram)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;JSON&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;name&quot; : &quot;HELLOWORLD-HELLOWORLD-BOOTSTRAP&quot;,&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;inputs&quot; : [&quot;START&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;outputs&quot; : [&quot;RESULT&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;parts&quot; :&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;{ &quot;partName&quot; : &quot;STRING-JOIN&quot;, &quot;kindName&quot; : &quot;STRING-JOIN&quot;},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;{ &quot;partName&quot; : &quot;WORLD&quot;, &quot;kindName&quot; : &quot;WORLD&quot;},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;{ &quot;partName&quot; : &quot;HELLO&quot;, &quot;kindName&quot; : &quot;HELLO&quot;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;wiring&quot; :&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;[&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;{&quot;wire-index&quot; : 0, &quot;sources&quot; : [{&quot;part&quot; : &quot;HELLO&quot;, &quot;pin&quot; : &quot;S&quot;}], &quot;receivers&quot; : [{&quot;part&quot; : &quot;STRING-JOIN&quot;, &quot;pin&quot; : &quot;A&quot;}]},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;{&quot;wire-index&quot; : 1, &quot;sources&quot; : [{&quot;part&quot; : &quot;WORLD&quot;, &quot;pin&quot; : &quot;S&quot;}], &quot;receivers&quot; : [{&quot;part&quot; : &quot;STRING-JOIN&quot;, &quot;pin&quot; : &quot;B&quot;}]},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;{&quot;wire-index&quot; : 2, &quot;sources&quot; : [{&quot;part&quot; : &quot;STRING-JOIN&quot;, &quot;pin&quot; : &quot;C&quot;}], &quot;receivers&quot; : [{&quot;part&quot; : &quot;SELF&quot;, &quot;pin&quot; : &quot;RESULT&quot;}]},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;{&quot;wire-index&quot; : 3, &quot;sources&quot; : [{&quot;part&quot; : &quot;SELF&quot;, &quot;pin&quot; : &quot;START&quot;}], &quot;receivers&quot; : [{&quot;part&quot; : &quot;WORLD&quot;, &quot;pin&quot; : &quot;START&quot;},{&quot;part&quot; : &quot;HELLO&quot;, &quot;pin&quot; : &quot;START&quot;}]}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;N.B. Bootstrap version upcases all strings.&lt;/i&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Manifests (Two)&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Expected Manifest&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;uses :&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;[&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;kind : &quot;STRING-JOIN&quot;,&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;inputs: [&quot;A&quot;, &quot;B&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;outputs: [&quot;C&quot;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;kind: &quot;WORLD&quot;,&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;inputs: [&quot;START&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;outputs: [&quot;S&quot;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;},&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;kind: &quot;HELLO&quot;,&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;inputs: [&quot;START&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;            &lt;/span&gt;outputs: [&quot;S&quot;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Provided Manifest&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p5&quot;&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;implements:&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;{&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;kind : &quot;HELLOWORLD-HELLOWORLD-BOOTSTRAP&quot;,&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;inputs : [&quot;START&quot;],&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;outputs : [&quot;RESULT&quot;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;}&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Compiling Diagrams 2</summary></entry><entry><title type="html">Superposition 2</title><link href="https://computingsimplicity.neocities.org/2021/01/24/superposition-2.html" rel="alternate" type="text/html" title="Superposition 2" /><published>2021-01-24T00:00:00-05:00</published><updated>2021-01-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/24/superposition%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/24/superposition-2.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;superposition&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-24T08:31:18Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-24T08:31:18Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    span.s1 {font: 12.0px Helvetica}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Superposition is a fancy word for something that everyone understands by intuition.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I will try to show a simple example of a system, then show how one intuitively understands the system.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I will discuss why superposition is important, later.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Superposition&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Superposition is used in many fields.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, electronics, quantum physics, geology, Engineering, etc.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The big question is &quot;can superposition be used in Software Design?&quot;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;See also &lt;/i&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/superposition.html&quot;&gt;&lt;i&gt;https://guitarvydas.github.io/2021/01/22/superposition.html&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;See, also, &lt;/i&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Superposition_principle&quot;&gt;&lt;i&gt;https://en.wikipedia.org/wiki/Superposition_principle&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example - Hello World&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A simple example of a Hello World software system is shown in &lt;span class=&quot;s1&quot;&gt;Fig. 1&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;img src=&quot;/assets/2021-01-24-08-31-18-Images/superposition-superposition 0.png&quot; width=&quot;250px&quot; height=&quot;126px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Fig. 1 Hello World Diagram&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Superposition 1&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;One intuitively understands the simple Hello World example in two steps. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Step 1 is shown in &lt;span class=&quot;s1&quot;&gt;Fig. 2.&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;img src=&quot;/assets/2021-01-24-08-31-18-Images/superposition-superposition 1.png&quot; width=&quot;300px&quot; height=&quot;69px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;Fig. 2 Superposition Step 1&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Superposition 2&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;And, the second step in understanding Hello World is in &lt;span class=&quot;s1&quot;&gt;Fig. 3.&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;img src=&quot;/assets/2021-01-24-08-31-18-Images/superposition-superposition 2.png&quot; width=&quot;300px&quot; height=&quot;70px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;Fig. 3 Superposition Step 2&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Conclusion&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;That's it!&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Superposition is a fancy word for something that everyone understands intuitively.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;I will discuss later why superposition is important.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Basically, the question becomes &quot;does our technology match with our intuitive understanding?&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If it doesn't match up with our intuition, we get bugs that are hard to understand and hard to predict.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Software professionals call that &quot;accidental complexity&quot;.&lt;/i&gt;]&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">superposition</summary></entry><entry><title type="html">Blocking</title><link href="https://computingsimplicity.neocities.org/2021/01/23/blocking.html" rel="alternate" type="text/html" title="Blocking" /><published>2021-01-23T00:00:00-05:00</published><updated>2021-01-23T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/01/23/blocking</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/01/23/blocking.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;blocking&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-01-23T12:49:08Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-01-23T12:49:08Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Helvetica}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    span.s1 {font: 12.0px Helvetica}
-    span.s2 {font: 13.0px Palatino}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Blocking&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Operating Systems simulate parallel systems by time-sharing the CPU between processes.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Each process &lt;i&gt;appears&lt;/i&gt; to have its own cpu, its own memory space and its own stack, but these are just slices of the main CPU and the main memory.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have tried to diagram the situation in &lt;span class=&quot;s1&quot;&gt;Fig. 1 and Fig. 2.&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-01-23-12-49-08-Images/Time sharing.png&quot; width=&quot;200px&quot; height=&quot;288px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;Fig. 1 Stylized view of Multi-Processing&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;img src=&quot;/assets/2021-01-23-12-49-08-Images/Time sharing1.png&quot; width=&quot;400px&quot; height=&quot;256px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;Fig. 2 Stylized view of Multi-Processing Including Time-Sharing Operating System&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;A process &quot;blocks&quot; when:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li9&quot;&gt;it's allotted time is up&lt;/li&gt;
-  &lt;li class=&quot;li9&quot;&gt;it tries to perform some off-cpu operation (e.g. I/O) allowing the CPU to be used by other processes.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p9&quot;&gt;The operating runs some software to switch to a new process (e.g. reload MMU registers, change the timer setting, grab pages from disk, etc.).&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;This is also called &quot;context switching&quot;.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;Context switching and hardware support are used to isolate processes from one another.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Time-sharing&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Time-sharing&quot;&gt;https://en.wikipedia.org/wiki/Time-sharing&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Yield&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&quot;Yield&quot; is another term for blocking.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Loops / Recursion&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Time-slicing a CPU is necessary only because PLs (Programming Languages) allow programs to contain long-running loops and deep recursion.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Time-slicing would not be necessary if PLs prohibited the use of long-running loops and deep recursion.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;N.B. This would be possible, if compilers compiled loop-ends into &quot;yields&quot; with a feedback-message-send that would signal the need for another pass through the loop&lt;/i&gt;].&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Loops and recursion are the &lt;i&gt;exception&lt;/i&gt; not the rule. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We incur accidental complexity because we encourage the use of loops and recursion.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Loops / recursion makes sense in a language that is meant to be used &lt;i&gt;inside&lt;/i&gt; a network node - iPL (inner PL).&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Loops / recursion do not make sense in a language that is meant to be used to describe a &lt;i&gt;network&lt;/i&gt; of nodes - oPL (outer PL).&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;1950's&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Time-sharing was invented in the 1950's.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;At that time, CPUs were very expensive.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;At that time, memory was very expensive.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Time-sharing is an optimization that allows for the use of one computer to simulate many computers.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;2020's&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;CPUs are no longer expensive&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Memory is no longer expensive.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Yet, we continue to use the time-sharing optimization.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Distributed Programming&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;In distributed programming, we use CPUs like candy - each app gets its own CPU and memory.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A piece of software, in distributed programming, runs at its own speed and never blocks. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bit Spinning&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;In a distributed environment, where CPUs are like candy, a piece of software waits for input by &lt;i&gt;bit-spinning&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In a time-shared environment, bit-spinning is discouraged because it wastes CPU power that could be used by other processes.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Efficiency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Adding the overhead of using an Operating System (which is just a library) &lt;i&gt;adds&lt;/i&gt; overhead and degrades the efficiency of the software.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The use of an Operating System improves efficiency of a system only if most apps (processes) access much-slower I/O devices that would require the use of &lt;i&gt;bit-spinning&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Calculator software (one-in-one-out, functional) would be more efficient without the addition of an operating system.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;IoT devices would be more efficient (aka &quot;cheaper&quot;) without the use of operating systems.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;IMO, what we really want is to be able to plug together software components to build the least amount of software-plus-operating-system possible to solve any one problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;With current programming languages, this is not easy to do, because they are, mostly, iPLs and not oPLs that encourage structured design of distributed computing. (See &lt;/i&gt;Loops / Recursion &lt;i&gt;for the definition of iPLs and oPLs).&lt;/i&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Blockchain and Sybil Attacks&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p9&quot;&gt;Blockchain developers mention Sybil Attacks. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;Sybil Attacks are the idea of using one CPU to simulate many computers, i.e to give one computer multiple personalities like the Sybil character in the movie.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/span&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;Slicing a computer up into multiple personalities makes it look like there are more participants on a blockchain than there really are. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;If the multiple personalities collude to sway votes about who should receive $'s, then this is called a Sybil attack. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;The counter-measure to such Sybil attacks is to insist that all participants solve a puzzle before casting a vote.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The puzzle is chosen to be so onerous that a single computer must work on it full time.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If a computer is sliced up into multiple personalities, the probability of getting the right answer to the puzzle in any of the personalities is very low and only single-personality computers can solve the puzzle and can get to vote.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Bit-spinning is a &quot;technical&quot; term for spinning in a tight loop waiting for input.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;https://en.wikipedia.org/wiki/Sybil_(1976_film)&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">blocking</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Processes Are State Machines</summary></entry></feed>

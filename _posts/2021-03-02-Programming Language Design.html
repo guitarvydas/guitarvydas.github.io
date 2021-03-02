@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Programming Language Design</title>
+  <meta name="CreationTime" content="2021-03-02T07:19:20Z">
+  <meta name="ModificationTime" content="2021-03-02T07:19:20Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; color: #000000; -webkit-text-stroke: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font-kerning: none}
+    span.s4 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: lower-alpha}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Problem With Today's Programming Languages</b></h2>
+<p class="p2">The problem with today's programming languages is that they are too general.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, Guido van Rossum's<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> language was designed to solve Guido van Rossum's problems, not yours.</p>
+<p class="p3"><br></p>
+<p class="p2">Rhetorical question: if I were to write software to control a robot, would I use a language built for designing banking apps?<span class="Apple-converted-space">  </span>Only if I didn't have the freedom to choose.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCLs not DSLs not PLs</b></h2>
+<p class="p2">Given that we can now create SCLs — PLs and DSLs — in one day, we can rearrange our workflow.</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li4">Analyze the problem-at-hand.</li>
+  <li class="li4">Create a notation to describe the problem-at-hand</li>
+  <li class="li4">Create a solution to the problem-at-hand using the same notation</li>
+  <li class="li4">Build an SCL for a single use — only for this single problem, without needing to generalize</li>
+  <li class="li4">Build, test, release the solution.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">The tools we need are:</p>
+<ul class="ul1">
+  <li class="li4">A PEG parser (e.g. Ohm-JS)</li>
+  <li class="li4">A flexible base language (Lisp and Javascript are places to start).</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">The base language should:<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<ul class="ul1">
+  <li class="li4">Provide dynamic typing<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> instead of static typing</li>
+  <li class="li4">Provide 1<span class="s1"><sup>st</sup></span>-class functions<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></li>
+  <li class="li4">Treat everything as an expression</li>
+  <li class="li4">Not require code ordering, e.g. use before declaration<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></li>
+  <li class="li4">Not require syntactic sugar, e.g. commas, needing <span class="s2">return</span> for expression values, etc.</li>
+  <li class="li4">Provide good debuggers / single-steppers</li>
+  <li class="li4">Provide ways to incorporate position information in the code (e.g. #file and #line pragmas used in C preprocessors).<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Lisp — Common Lisp — has many of the above features.<span class="Apple-converted-space">  </span>In particular, code and data are stored as lists.<span class="Apple-converted-space">  </span>Lists can be treated as relations<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a>.<span class="Apple-converted-space">  </span>Many of the high-falutin' languages were originally built in Lisp.<span class="Apple-converted-space">  </span>Lisp is a good toolbox<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a> for automators<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a>.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Layered Software Design</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Eliding Error Handling</b></h2>
+<p class="p2">People often omit error handling because it clogs up the readability of the original Architecture.</p>
+<p class="p3"><br></p>
+<p class="p2">Error handling is a bag on the side of most programs. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">That is because most languages don't allow one to design software in a layered manner. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>If you think that libraries and github give you layered software, think again.<span class="Apple-converted-space">  </span>Ask yourself, for example, how to extract and examine the error layers — only — in this kind of software.<span class="Apple-converted-space">  </span>Ask yourself how to extract and examine the Happy Path (Architecture w/o error handling nasties) — only — in this kind of software.<span class="Apple-converted-space">  </span>If you think that theorem provers help you build better software, try building a robot controller or a music sequencer (see if knowing the nitty-gritties of Natural Numbers is useful in such domains —programming language design is about how to hide and elide the details when solving a particular problem<a id="fnlink10"></a></i><a href="#fn10"><sup>[10]</sup></a><i>).<span class="Apple-converted-space">  </span>Etc.]</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">Error-handling — non-linear control flow — is difficult to express in a text-only language.<span class="Apple-converted-space">  </span>It has been done, but the results<span class="Apple-converted-space">  </span>aren't natural.<span class="Apple-converted-space">  </span>Other forms of non-linear control flow have pushed the text-only paradigm beyond its natural limitations (e.g. Javascript callbacks, multitasking, etc.).<span class="Apple-converted-space">  </span>One of the oldest notations for non-linear and parallel control flow is music notation.<span class="Apple-converted-space">  </span>Humans understand and express parallelism (e.g. music chords, cooking recipes) — only programmers find this concept hard to express.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Theory Is Not PL Design</b></h2>
+<p class="p2">Programming language theory defines the Universe of programming languages.</p>
+<p class="p3"><br></p>
+<p class="p2">This is <i>not </i>the same as designing a <i>useful</i> programming language.</p>
+<p class="p3"><br></p>
+<p class="p2">A useful programming language:</p>
+<ul class="ul1">
+  <li class="li4">picks-and-chooses from the Universe of possibilities</li>
+  <li class="li4">creates a zig-zag through the Universe of possibilities and presents a notation for a given problem in a readable manner.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Architect's Responsilibity</b></h2>
+<p class="p6"><span class="s3">It is the Architect's responsibility to make a design clear and understandable to other readers.</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>RY vs. DRY</b></h2>
+<p class="p2">The goals of Architecture are not the same as the goals of Maintenance Engineering, Test Engineering, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">In particular, the Architect must be able to Copy/Paste designs — this is call RY (Repeat Yourself).</p>
+<p class="p3"><br></p>
+<p class="p2">RY, though, is anathema to Maintenance Engineering.<span class="Apple-converted-space">  </span>From a maintenance perspective, DRY (Don't Repeat Yourself) is desirable.</p>
+<p class="p3"><br></p>
+<p class="p2">With current techniques, DRY is generally not automated and programmers are expected to expend brain-power to achieve DRY, instead of using RY.</p>
+<hr>
+<p class="p7"><a id="fn1"></a><a href="#fnlink1"><span class="s4">[1]</span></a><span class="s4"> </span>I'm not picking on Guido, just using his name as a concrete example of a more general problem.</p>
+<p class="p7"><a id="fn2"></a><a href="#fnlink2"><span class="s4">[2]</span></a><span class="s4"> </span>I can't think of any language, except assembler, that has all of these features, yet, one can write SCLs that emit other languages (For example, I've successfully emitted Lisp and Javascript)</p>
+<p class="p8"><a id="fn3"></a><a href="#fnlink3"><span class="s4">[3]</span></a><span class="s4"> </span>If static typing is important to the solution, build static typing into the SCL</p>
+<p class="p8"><a id="fn4"></a><a href="#fnlink4"><span class="s4">[4]</span></a><span class="s4"> </span>1st class functions are even possible in Assembler and C.<span class="Apple-converted-space">  </span>Some so-called HLLs snip this avenue off.<span class="Apple-converted-space">  </span>[Note that 1st class functions are GOTOs on steroids].</p>
+<p class="p8"><a id="fn5"></a><a href="#fnlink5"><span class="s4">[5]</span></a><span class="s4"> </span>Declaration-before-use is a<span class="Apple-converted-space">  </span>high-level-language feature that helps programmers spot typos.<span class="Apple-converted-space">  </span>This is an anti-feature for base languages used in automation.<span class="Apple-converted-space">  </span>Programmer-oriented features hinder automation.</p>
+<p class="p8"><a id="fn6"></a><a href="#fnlink6"><span class="s4">[6]</span></a><span class="s4"> </span>Note that I don't champion the idea of using C and Lisp macros.<span class="Apple-converted-space">  </span>PEGs provide a much richer environment for rewriting code.<span class="Apple-converted-space">  </span>Lisp macros were an attempt to build runtime syntax modification.<span class="Apple-converted-space">  </span>One could, simply build-in a PEG parser for this same purpose.<span class="Apple-converted-space">  </span>I have successfully used ESRAP (a PEG parser) in CL for a project (compiling diagrams to code).</p>
+<p class="p8"><a id="fn7"></a><a href="#fnlink7"><span class="s4">[7]</span></a><span class="s4"> </span>Lisp lists can represent a larger number of possibilities than just triples.<span class="Apple-converted-space">  </span>Avoid using this ability.</p>
+<p class="p7"><a id="fn8"></a><a href="#fnlink8"><span class="s4">[8]</span></a><span class="s4"> </span>https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule#:~:text=Greenspun's%20tenth%20rule%20of%20programming,of%20half%20of%20Common%20Lisp.</p>
+<p class="p7"><a id="fn9"></a><a href="#fnlink9"><span class="s4">[9]</span></a><span class="s4"> </span>I argue that Lisp should be used for the basis of projectional editors.</p>
+<p class="p7"><a id="fn10"></a><a href="#fnlink10"><span class="s4">[10]</span></a><span class="s4"> </span>Especially when you can't expunge <i>time</i> from the equation.</p>
+</div>
+</body>
+</html>
