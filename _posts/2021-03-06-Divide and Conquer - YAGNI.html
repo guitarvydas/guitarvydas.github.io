@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Divide and Conquer - YAGNI</title>
+  <meta name="CreationTime" content="2021-03-06T13:00:44Z">
+  <meta name="ModificationTime" content="2021-03-06T13:00:44Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: lower-alpha}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>YAGNI</b></h2>
+<p class="p2">One of the other "tricks" to using Divide and Conquer is that YAGNI principle — You Ain't Gonna Need It.</p>
+<p class="p3"><br></p>
+<p class="p2">Don't do more than is required.</p>
+<p class="p3"><br></p>
+<p class="p2">You can<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li4">Build a full-blown DSL (not YAGNI), or,</li>
+  <li class="li4">You can build just as much of a DSL as is required to solve a specific problem.<span class="Apple-converted-space">  </span>This is YAGNI.<span class="Apple-converted-space">  </span>This is building an SCL (Solution Centric Language).</li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reasons to Hate DSLs</b></h2>
+<p class="p2">Management hated DSLs, because they were<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">hard to predict and schedule</li>
+  <li class="li4">took enormous amounts of time and effort — more effort than would be saved in a specific project.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">REGEXPs used to be that way. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">REGEXPs are DSLs.</p>
+<p class="p3"><br></p>
+<p class="p2">The canonical reference for building REGEXPs is The Dragon Book.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Theory -- REGEXPs</b></h2>
+<p class="p2">REGEXP theory is hard to use and hard to understand.<span class="Apple-converted-space">  </span>Building a REGEXP compiler/interpreter takes a long time.</p>
+<p class="p3"><br></p>
+<p class="p2">Yet, REGEXPs are found even in lowly JavaScript.</p>
+<p class="p3"><br></p>
+<p class="p2">If one ignores the theory of REGEXPs and just <i>uses</i> them, they can be quite simple.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Theory -- PEGs</b></h2>
+<p class="p2">PEG - Parsing Expression Grammars - make it simple to build parsers using familiar REGEXP-like syntax.</p>
+<p class="p3"><br></p>
+<p class="p2">It is possible to <i>just use</i> PEGs to build little languages — little pattern matchers that are intended for a single use.</p>
+<p class="p3"><br></p>
+<p class="p2">I have written essays about creating DSLs in just one day.</p>
+<p class="p3"><br></p>
+<p class="p2">That's the break-through that PEG brings, it makes parsing as easy-to-use as REGEXPing.<span class="Apple-converted-space">  </span>PEG parses things that REGEXP can't parse.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Punt</b></h2>
+<p class="p2">Building full-blown type-checking is hard.</p>
+<p class="p3"><br></p>
+<p class="p2">Punt.</p>
+<p class="p3"><br></p>
+<p class="p2">Build little languages that transpile code into other base languages.<span class="Apple-converted-space">  </span>Let the base languages carry out the type checking.</p>
+<p class="p3"><br></p>
+<p class="p2">This kind of punting was originally explored in the C preprocessor.</p>
+<p class="p3"><br></p>
+<p class="p2">This kind of punting is most helpful if one can insert pragmas into the transpiled code.<span class="Apple-converted-space">  </span>Pragmas, like "#line" and "#file" allow the base language to reports errors that reference the original little-language code.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Incremental Change</b></h2>
+<p class="p2">YAGNI implies <i>layers</i> and <i>incremental change</i> laid over existing languages.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Choke Down on Details</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Numbers</b></h2>
+<p class="p2">In a small language, all numbers are just numbers.</p>
+<p class="p3"><br></p>
+<p class="p2">A small language does not ask the programmer to differentiate between integer, floats, double-floats, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">Leave that kind of differentiation to Optimization Engineers.</p>
+<p class="p3"><br></p>
+<p class="p2">Languages like BASIC tried to do this,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> but got it wrong.<span class="Apple-converted-space">  </span>BASIC allowed conversion from strings to numbers, depending on context.<span class="Apple-converted-space">  </span>BASIC tried to hide this kind of detail from programmers.<span class="Apple-converted-space">  </span>Many programmers loved the freedom.<span class="Apple-converted-space">  </span>Many programmers got into trouble, later.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp, also, tried this, by introducing bignums.<span class="Apple-converted-space">  </span>The result overcame some of the pitfalls of BASIC, but did not allow fine-enough control to programmers.<span class="Apple-converted-space">  </span>It was essentially impossible to know what kind of code would be emitted by the Lisp compiler.<span class="Apple-converted-space">  </span>Lisp tried to remedy this problem by adding bandaids, like type pragmas (DECLARE).</p>
+<p class="p3"><br></p>
+<p class="p2">What the above approaches lacked is <i>layering</i> — the ability to defer decisions about details, while still keeping the details (albeit at lower layers).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Collections</b></h2>
+<p class="p2">For programming everything but details, it is enough to have <i>items</i> and <i>collections</i> of such <i>items</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">In most cases, one doesn't even need to know the details of how <i>items</i> are structured.</p>
+<p class="p3"><br></p>
+<p class="p2">S/SL (Syntax / Semantic Language, see below) is a <i>dataless</i> language.<span class="Apple-converted-space">  </span>A programmer can declare the existence of <i>items</i> but cannot show their implementation (i.e. S/SL does not have any data-oriented operators, such as<span class="Apple-converted-space">  </span><span class="s1">+</span> and <span class="s1">cons</span>()).<span class="Apple-converted-space">  </span>Programmers need to implement <i>items</i> in some other — toolbox — language.</p>
+<p class="p3"><br></p>
+<p class="p2">[I write more about S/SL in https://guitarvydas.github.io/2021/03/02/Dataless-Programming-Language.html]</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax</b></h2>
+<p class="p2">Syntax is sugar.</p>
+<p class="p3"><br></p>
+<p class="p2">Languages are <i>skins</i>.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Languages are <i>layers</i> on top of toolbox languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Syntax can be automatically checked. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Simple up-front checking guards against a certain class of errors (e.g. typos, naming inconsistencies, nesting inconsistencies).</p>
+<p class="p3"><br></p>
+<p class="p2">At present, PLs (Programming Languages) contain syntax that allows for syntax checking, or, avoid such simple syntax and syntax-checking altogether.<span class="Apple-converted-space">  </span>There seems to be no choice available to the programmer.</p>
+<p class="p3"><br></p>
+<p class="p2">The principle of YAGNI implies that programs should be built in <i>layers</i>.<span class="Apple-converted-space">  </span>Very simple layers.<span class="Apple-converted-space">  </span>For example, the top layer could check for syntax mistakes.<span class="Apple-converted-space">  </span>Once that check has been completed, the rest of the layers do not impose the same kinds of syntactic constraints and check only for bigger-picture errors (e.g. type checking).<span class="Apple-converted-space">  </span>In my opinion, Pascal-derived languages favour syntax checking, whereas Lisp-derived languages skip over the syntax checking preliminaries and deal with other kinds of issues.<span class="Apple-converted-space">  </span>Pascal-derived languages use "end" constructs that clearly constrain the syntactic boundaries of code, whereas Lisp uses the same terminator — ")" — to mark the end of all "syntactic" constructs,</p>
+<p class="p3"><br></p>
+<p class="p2">YAGNI implies that a language has more than one layer of syntax.<span class="Apple-converted-space">  </span>Each layer is simple on its own.<span class="Apple-converted-space">  </span>For example, a top layer can check for typos, and then "gets out of the way".</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Smart editors could switch between language syntaxes,<a id="fnlink3"></a></i><a href="#fn3"><sup>[3]</sup></a><i> eliding constructs that pass the syntax checker, but clutter the DI of a program.<span class="Apple-converted-space">  </span>A compiler might consist of a syntax checker pass (YAGNI), followed by a de-sugarer, followed by a type-checker, etc.<span class="Apple-converted-space">  </span>Smart editors could present programmers with the ability to view code as sub-constructs at each of these layers (eliding not done on the line-level but at a structural level)</i>].<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">We — the programming community — know how to check syntax.<span class="Apple-converted-space">  </span>Syntax checking should be included in every language, albeit elide-able.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Macros</b></h2>
+<p class="p2">Macros constitute an attempt to add layers to languages.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lisp Macros</b></h2>
+<p class="p2">Lisp macros provide ways to restructure the syntax of the language.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp represents programs as lists.<span class="Apple-converted-space">  </span>Lisp is a language for list-processing.<span class="Apple-converted-space">   </span></p>
+<p class="p3"><br></p>
+<p class="p2">The easiest way to manipulate lisp programs is to use lisp list-manipulation to edit lists which make up programs.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp macros allow programmers to use all of lisp at compile time to edit and restructure programs.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp macros work on lists and atoms — not characters.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Character-Oriented Macros</b></h2>
+<p class="p2">Most programming languages are written as characters.<span class="Apple-converted-space">  </span>For such languages to have the flexibility of Lisp, would require building Scanners and Parsers into their compilers. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">For examples, see PEG, REBOL, S/SL, TXL, etc.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>M4</b></h2>
+<p class="p2">M4 is a full-featured macro processor, but is a language unto itself.<span class="Apple-converted-space">  </span>M4 can be used with most textual languages (for example, I've used M4 to build Javascript projects).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hygenic Macros</b></h2>
+<p class="p2">Scheme defines "hygenic macros".<span class="Apple-converted-space">  </span>This complication would not have been needed if Scheme were used to form YAGNI layers instead of attempting to allow macros and the runtime to co-exist.<span class="Apple-converted-space">  </span>(Likewise, Lisp macros would not be needed if YAGNI layers had been used.<span class="Apple-converted-space">  </span>Scheme attempts to fix an accidental complexity — lisp macro variable capture — instead of addressing the elephant in the room (flattening of layered compilation/interpretation &amp; YAGNI)).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>C Macros</b></h2>
+<p class="p2">C macros, on the other hand, fall far, far short of lisp macros.<span class="Apple-converted-space">  </span>The C macro processor is a small language unto itself (it was YAGNI when designed) and does not give the full power of C to programmers at compile time.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Toolbox Language</b></h2>
+<p class="p2">A base language that supports building SCLs easily would impose few restrictions on the transpiler.</p>
+<p class="p3"><br></p>
+<p class="p2">Anything that is performed solely at compile-time<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> is usually a restriction.<span class="Apple-converted-space">  </span>Anything with the word <i>static</i> in front of it.</p>
+<p class="p3"><br></p>
+<p class="p2">Additionally, syntactic sugar and syntax rules makes transpilation more difficult.</p>
+<p class="p3"><br></p>
+<p class="p2">The toolbox — the base language — doesn't need to be a "good" language to program in, it simply needs to be a good language to transpile into.</p>
+<p class="p3"><br></p>
+<p class="p2">Automation can handle all of the "static" stuff.</p>
+<p class="p3"><br></p>
+<p class="p2">Solution-specific syntax sugar can be added back in by automation (SCLs, little languages).</p>
+<p class="p3"><br></p>
+<p class="p2">I discuss Toolbox languages in my essay<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> "Toolbox Languages".</p>
+<p class="p3"><br></p>
+<p class="p2">Issues that relate to toolbox languages include:</p>
+<ul class="ul1">
+  <li class="li4">first-class functions</li>
+  <li class="li4">expression languages</li>
+  <li class="li4">static typing vs. dynamic typing</li>
+  <li class="li4">syntax</li>
+  <li class="li4">lisp</li>
+  <li class="li4">javascript</li>
+  <li class="li4">debuggers</li>
+  <li class="li4">pragmas</li>
+  <li class="li4">restarts</li>
+  <li class="li4">packages</li>
+  <li class="li4">paradigms</li>
+  <li class="li4">type checking</li>
+  <li class="li4">garbage collection.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Lisp pioneered<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a> many of these ideas, but ultimately failed because it tried to apply the ideas in a flat manner<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a> instead of in a layered manner.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Successful Models of YAGNI</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>S/SL</b></h2>
+<p class="p2">S/SL<span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://archive.org/details/technicalreportc118univ">https://archive.org/details/technicalreportc118univ</a></p>
+<p class="p2"><a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/">https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">S/SL is a dataless language. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">As such, it is one of the best examples of YAGNI and SCL-design.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PT Pascal</b></h2>
+<p class="p2">PT Pascal is a full-featured Pascal compiler built in S/SL.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">PT Pascal is an example of how much can be expressed in a dataless language.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>And, PT is an example of the use of concatenative languages</i>.]</p>
+<p class="p3"><br></p>
+<p class="p2">https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>REBOL Parse</b></h2>
+<p class="p2">REBOL is a small language that has devoted admirers.<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Instead of installing capabilities <i>into</i> the language, REBOL provides a <i>parse</i> function that allows the definition and use of many small languages - tailored to specific purposes.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>TXL</b></h2>
+<p class="p2"><a href="http://www.txl.ca/">http://www.txl.ca/</a></p>
+<p class="p3"><br></p>
+<p class="p2">TXL is a functional, backtracking parsing language that was originally meant for experimentation with new language syntaxes.</p>
+<p class="p3"><br></p>
+<p class="p2">As such, TXL makes it easier to build incremental SCLs on top of existing languages.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>YAGNI vs. Denotational Semantics</b></h2>
+<p class="p2">At its earliest inception, Denotational Semantics was a way to define new languages.</p>
+<p class="p3"><br></p>
+<p class="p2">It defines semantics of languages in a purely functional manner.</p>
+<p class="p3"><br></p>
+<p class="p2">Denotational Semantics tended to create huge language compilers that were mostly impractical for production work.</p>
+<p class="p3"><br></p>
+<p class="p2">Advances in FP mechanics and Peter Lee's work make Denotational Semantics worth another look for SCL building.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Peter Lee</b></h2>
+<p class="p2"><a href="https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417">https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417</a></p>
+<p class="p3"><br></p>
+<p class="p2">Peter Lee tamed the concept of Denotational Semantics by adding layers (passes).</p>
+<p class="p3"><br></p>
+<p class="p2">Denotational Semantics attempts to define the Universe of Possibilities for language design.<span class="Apple-converted-space">  </span>Practical work, like Peter Lee's, cut a swath within the Universe of Possibilites and created practical implementations of languages for everyday programming.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>UNIX® Pipelines</b></h2>
+<p class="p2">The UNIX® pipeline mentality is YAGNI at its core — every component does only one thing.</p>
+<p class="p3"><br></p>
+<p class="p2">UNIX® pipelines enable Components and YAGNI.<span class="Apple-converted-space">  </span>Components are completely isolated<a id="fnlink10"></a><a href="#fn10"><sup>[10]</sup></a> from one another.</p>
+<p class="p3"><br></p>
+<p class="p2">Isolated Components can be "built and forgotten".<span class="Apple-converted-space">  </span>Isolated Components do not change their behavior when new components are added to a system.<span class="Apple-converted-space">  </span>[<i>Note that libraries do not do this - they impose hidden dependencies on the systems that use them</i>].</p>
+<p class="p3"><br></p>
+<p class="p2">UNIX® piped systems can be built in layers.<a id="fnlink11"></a><a href="#fn11"><sup>[11]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Emitters</b></h2>
+<p class="p2">Code emitters were designed as back ends for compilers.</p>
+<p class="p3"><br></p>
+<p class="p2">Code emission technology can be used to create little languages, not just full-blown compilers.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>OCG</b></h2>
+<p class="p2">The OCG — Orthogonal Code Generator — showed how to build code emitters in a declarative (and small) manner:</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://books.google.ca/books?id=X0OaMQEACAAJ&amp;dq=bibliogroup:%22University+of+Toronto+Computer+Systems+Research+Institute+Technical+Report+CSRI%22&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwig1Legm8bqAhWvlHIEHYzzBYEQ6AEwBHoECAEQAQs">https://books.google.ca/books?id=X0OaMQEACAAJ&amp;dq=bibliogroup:%22University+of+Toronto+Computer+Systems+Research+Institute+Technical+Report+CSRI%22&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwig1Legm8bqAhWvlHIEHYzzBYEQ6AEwBHoECAEQAQs</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>RTL</b></h2>
+<p class="p2"><a href="https://www.researchgate.net/publication/220404697_The_Design_and_Application_of_a_Retargetable_Peephole_Optimizer">https://www.researchgate.net/publication/220404697_The_Design_and_Application_of_a_Retargetable_Peephole_Optimizer</a></p>
+<p class="p3"><br></p>
+<p class="p2">Fraser and Davidson create the <i>register transfer language</i> — RTL — as a way of adding layers to the concepts of code emission.</p>
+<p class="p3"><br></p>
+<p class="p2">Gnu's GCC uses RTL at its core.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Data Descriptors</b></h2>
+<p class="p2"><a href="https://dl.acm.org/doi/abs/10.1145/24039.24051">https://dl.acm.org/doi/abs/10.1145/24039.24051</a></p>
+<p class="p3"><br></p>
+<p class="p2">Data descriptors are a way to generalize the location of all compiled variables. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">One description fits all variants of data.</p>
+<p class="p3"><br></p>
+<p class="p2">The data descriptor concept enables YAGNI by eliding details (data allocation) - allowing upper layers to talk <i>about</i> data without actually supplying the final implementation (location) of the data.</p>
+<p class="p3"><br></p>
+<p class="p2">Data Descriptors enable portability.</p>
+<p class="p3"><br></p>
+<p class="p2">Data Descriptors enabled technologies, such as the OCG.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Structured Architecture</b></h2>
+<p class="p2">It is the Architect's responsibility to make a design readable and understandable to others.</p>
+<p class="p3"><br></p>
+<p class="p2">As such, Architecture embodies the virtues of YAGNI.<span class="Apple-converted-space">  </span>A "good" architecture shows only the important aspects of a system and elides all<i> </i>other details.</p>
+<p class="p3"><br></p>
+<p class="p2">At present, we lack popular languages aimed at Architecture and Engineering. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Our current languages are targeted at Implementation and Research/Theorem-proving.<span class="Apple-converted-space">  </span>There are few languages that target YAGNI, Architecture and Engineering</i>]<a id="fnlink12"></a><a href="#fn12"><sup>[12]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DI - Design Intent</b></h2>
+<p class="p2">S/SL (Syntax / Semantic Language, see below) is a <i>dataless</i> language.<span class="Apple-converted-space">  </span>A programmer can declare the existence of <i>items</i> but cannot show their implementation (i.e. S/SL does not have any data-oriented operators, such as<span class="Apple-converted-space">  </span><span class="s1">+</span> and <span class="s1">cons</span>()).<span class="Apple-converted-space">  </span>Programmers need to implement <i>items</i> in some other — toolbox — language.</p>
+<p class="p3"><br></p>
+<p class="p2">OO tries to separate definition from implementation, but most OO languages allow too much detail — detail tarpits that programmers tend to fall into.</p>
+<p class="p3"><br></p>
+<p class="p2">Most languages — including assembly language — <i>allow </i>programmers to defer details, but, most programs tend towards being walls of detail that have little to do the actual Architecture.</p>
+<p class="p3"><br></p>
+<p class="p2">Programmers need languages that impose DI (Design Intent).<span class="Apple-converted-space">  </span>We discovered, and re-discovered, this fact in switching from assembler to Structured Programming, from imperative programming to OO and to FP, etc.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Portability</b></h2>
+<p class="p2">At present, most portable code is created by hacking existing code and inserting conditional compilation directives.</p>
+<p class="p3"><br></p>
+<p class="p2">Portability is a chimera. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Portability applies incremental fixes to a problem space and ignores the elephant in the room.</p>
+<p class="p3"><br></p>
+<p class="p2">What is needed is a way to tune applications for specific purposes while creating a maintainable result.</p>
+<p class="p3"><br></p>
+<p class="p2">YAGNI.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Frames</b></h2>
+<p class="p2"><a href="https://www.amazon.ca/Framing-Software-Reuse-Lessons-World/dp/013327859X">https://www.amazon.ca/Framing-Software-Reuse-Lessons-World/dp/013327859X</a></p>
+<p class="p3"><br></p>
+<p class="p2">Paul Bassett's Frame technology is a completely different approach to portability and OO.</p>
+<p class="p3"><br></p>
+<p class="p2">[I imagine that M4 could be used to implement frame technology].</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anti-YAGNI</b></h2>
+<p class="p2">Portability is generalization.</p>
+<p class="p3"><br></p>
+<p class="p2">Generalization is the antithesis of YAGNI.</p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Unify all numbers under one umbrella.</p>
+<p class="p5"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html</p>
+<p class="p5"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Two-Syntaxes-For-Every-Language.html</p>
+<p class="p5"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>This sounds like what projectional editors can be used for.</p>
+<p class="p5"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/27/Compile-Time-and-Runtime.html</p>
+<p class="p5"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>https://guitarvydas.github.io/</p>
+<p class="p5"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>Exercise: what are the most-atomic features of Lisp that make for a good toolbox language?<span class="Apple-converted-space">  </span>Was this set of features documented in https://mitpress.mit.edu/books/lisp-15-programmers-manual?</p>
+<p class="p5"><a id="fn8"></a><a href="#fnlink8"><span class="s2">[8]</span></a><span class="s2"> </span>all-in-one</p>
+<p class="p5"><a id="fn9"></a><a href="#fnlink9"><span class="s2">[9]</span></a><span class="s2"> </span>Who seem to hold up version 2.7 as the standard.</p>
+<p class="p5"><a id="fn10"></a><a href="#fnlink10"><span class="s2">[10]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Isolation.html</p>
+<p class="p5"><a id="fn11"></a><a href="#fnlink11"><span class="s2">[11]</span></a><span class="s2"> </span>Sh can call sh components and can pipeline components together.<span class="Apple-converted-space">  </span>Bash and zsh are descendants of sh.</p>
+<p class="p5"><a id="fn12"></a><a href="#fnlink12"><span class="s2">[12]</span></a><span class="s2"> </span>Engineering is not coding.<span class="Apple-converted-space">  </span>See https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html for a discussion of the software development roles, as I see them.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Toolbox Languages</title>
+  <meta name="CreationTime" content="2021-03-06T13:00:15Z">
+  <meta name="ModificationTime" content="2021-03-06T13:00:15Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 9.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">This essay enumerates and discusses various issues related to SCL<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> transpiler development.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Toolbox Language</b></h2>
+<p class="p2">A base language that supports building SCLs easily would impose few restrictions on the transpiler.</p>
+<p class="p3"><br></p>
+<p class="p2">Restrictions are usually anything that is done solely at compile-time.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a><span class="Apple-converted-space">  </span>Anything with the words <i>static</i> or <i>final </i>in front of it.</p>
+<p class="p3"><br></p>
+<p class="p2">Additionally, syntactic sugar and syntax rules makes transpilation more difficult.</p>
+<p class="p3"><br></p>
+<p class="p2">The toolbox — the base language — doesn't need to be a "good" language to program in, it simply needs to be a good language to transpile into.</p>
+<p class="p3"><br></p>
+<p class="p2">Automation can handle all of the "static" stuff.</p>
+<p class="p3"><br></p>
+<p class="p2">Solution-specific syntax sugar can be added back in by automation (SCLs, little languages).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>First-Class Functions</b></h2>
+<p class="p2">It is "nice to have" a toolbox language that supports first-class functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Assembler supports first-class functions, so, one <i>could</i> use Assembler directly.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that first-class functions are just GOTOs in sheeps' clothing.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Denotational Semantics uses the GOTO-ness of first-class functions directly, since denotational semantics concerns itself with specifying control flow.</p>
+<p class="p3"><br></p>
+<p class="p2">In all other cases (e.g. CPS, closures, callbacks, etc.), first-class functions must be used with extreme care.<span class="Apple-converted-space">  </span>All of the proverbs in "GOTO Considered Harmful" apply to first-class functions. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">FP is an attempt to "structure" the use of first-class gotos by applying a strict policy of one-in-causes-one-out nesting.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a><span class="Apple-converted-space">  </span>Any other kind of use that falls outside of these strict guidelines runs into accidental complexity and problems — eg. callbacks, multitasking, etc.<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Expression Language</b></h2>
+<p class="p2">Expression languages — where everything is an expression and everything returns a value (there are no statements) — make SCLs easier to write.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Static Typing vs. Dynamic Typing</b></h2>
+<p class="p2">A toolbox language — a base language — is a set of programming constructs that make transpilation easier.</p>
+<p class="p3"><br></p>
+<p class="p2">A toolbox language is different from a "good" programmer-level language.</p>
+<p class="p3"><br></p>
+<p class="p2">A toolbox language is like Assembler.<span class="Apple-converted-space">  </span>It offers almost no constraints and allows the programmer (the SCL builder) to "shoot oneself in the foot".</p>
+<p class="p3"><br></p>
+<p class="p2">Human programmers hate programming directly in toolbox languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Transpiler-writers like using toolbox languages. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The transpiler adds-in the programmer-level checking - syntax and type checking.<span class="Apple-converted-space">  </span>The toolbox language does not stand in the way.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax</b></h2>
+<p class="p2">A good toolbox language has little syntax.</p>
+<p class="p3"><br></p>
+<p class="p2">Syntactic sugar in the toolbox language makes transpilation to it more difficult.</p>
+<p class="p3"><br></p>
+<p class="p2">Syntactic sugar is often an afterthought that is applied to a toolbox language in order to make it more usable for direct use by programmers.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lisp - Why Some People Love It and Others Hate It</b></h2>
+<p class="p2">Lisp is a "good" toolbox language.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp support 1<span class="s1"><sup>st</sup></span>-class functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp has little syntax (I argue that lisp has <i>no </i>syntax).</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp is an expression language</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp is dynamically-typed out-of-the-box.<span class="Apple-converted-space">  </span>[<i>Dynamically-typing is not the same as no-typing.<span class="Apple-converted-space">  </span>Types are checked, albeit at "runtime"].</i></p>
+<p class="p3"><br></p>
+<p class="p2">Lisp is not strictly functional, e.g. it allows side-effects. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Lisp does not lock programmers into a single paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2">All of the above make Lisp a good toolbox language (this may sound counter-intuitive, at first).<span class="Apple-converted-space">  </span>Restrictions of any form (syntax, static typing, etc.) stand in the way of building SCLs easily.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Javascript</b></h2>
+<p class="p2">Javascript exhibits most of the toolbox characteristics of Lisp.</p>
+<p class="p3"><br></p>
+<p class="p2">The biggest exception is the fact that Javascript has syntax and is not an expression language.<span class="Apple-converted-space">  </span>These "features" make it harder to use Javascript as a toolbox language than Lisp, but, Javascript is still easier to use for building transpilers than most languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Javascript supports first-class functions and anonymous functions.<span class="Apple-converted-space">  </span>These features make Javascript a good toolbox language.</p>
+<p class="p3"><br></p>
+<p class="p2">Programmers have tried to write programs in Javascript directly, much like assembler programmers did before C became popular. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">To make Javascript more usable for direct programming, various tweaks have been added to Javascript and various dialects of JS (e.g. Typescript) have been invented, and, many frameworks have been created.<span class="Apple-converted-space">  </span>Most of these changes and additions could have been avoided through the use of SCLs as layers on top of Javascript.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rhetorical Question</b></h2>
+<p class="p2"><i>Are all dynamically-typed languages just toolbox languages in disguise?<span class="Apple-converted-space">  </span>C and Pascal overtook Assembler programming, yet, both C and Pascal compile to assembler.</i></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Debuggers</b></h2>
+<p class="p2">Debuggers have several uses:</p>
+<p class="p3"><br></p>
+<p class="p2">a) Finding bizarre problems, e.g. ones caused by typos and insufficient design.</p>
+<p class="p2">b) Bench-testing architectures.</p>
+<p class="p2">c) Architectural Archaeology — understanding designs created by other people (e.g. when the code contains too much detail and hides the Architecture and original design).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Pragmas</b></h2>
+<p class="p2">Few languages support positional pragmas (e.g. like <span class="s2">#line</span> and <span class="s2">#file</span>).<span class="Apple-converted-space">  </span>This means that type errors are shown relative to the toolbox language instead of being relative to the SCL source code.</p>
+<p class="p3"><br></p>
+<p class="p2">The fact that debuggers can single-step through the source<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> means that positional information is created and exists.<span class="Apple-converted-space">  </span>In most cases, such positional information has not been made into first-class entities.</p>
+<p class="p3"><br></p>
+<p class="p2">Pragmas should allow making correspondences between source code position and control flow points.</p>
+<p class="p3"><br></p>
+<p class="p2">Additionally, pragmas should make correspondences between environments and individual variables and the originating SCLs.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Restarts</b></h2>
+<p class="p2">Does a program simply fail when it hits a bug, or, does it offer a menu of possible ways to continue running?</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp pioneered the concept of restarts.</p>
+<p class="p3"><br></p>
+<p class="p2">In my opinion, restarts constitue a layer used at the debugger-level.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Packages</b></h2>
+<p class="p2">Common Lisp goes further than most languages in terms of scoping — also called packaging.</p>
+<p class="p3"><br></p>
+<p class="p2">CL (Common Lisp) variables, function names, etc. — symbols — can be qualified to be within named packages.</p>
+<p class="p3"><br></p>
+<p class="p2">Unfortunately, the CL <span class="s2">read</span> function makes it difficult to transpile code using SCLs (it reads new symbols into the runtime package instead of the compile-time package — there is a disconnect between how source code is written and how it can be generated).<span class="Apple-converted-space">  </span>Again, I argue that packages should have been lifted into a separate layer (YAGNI) instead of being embedded inside of CL.</p>
+<p class="p3"><br></p>
+<p class="p2">C, despite its many faults, professed a very simple — and usable<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> — scoping system.<span class="Apple-converted-space">  </span>Variables and functions could be scoped <span class="s2">static</span> or <span class="s2">extern</span>, giving control of visibility to the user (and SCL transpiler builder).<span class="Apple-converted-space">  </span>Furthermore, C variables could be scoped to be local or global orthogonally to the <span class="s2">static</span> and <span class="s2">extern</span> declarations.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Closures provide a way to wrap and hide variables.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Paradigms</b></h2>
+<p class="p2">A good toolbox language does not lock one into a certain paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2">Examples of poor toolbox languages are Smalltalk, Haskell, Erlang, PROLOG, and most other languages. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">These languages emphasize single paradigms and make it difficult to use other paradigms.<span class="Apple-converted-space">  </span>In my opinion, such paradigms should have been layered on top of a more general toolbox language.</p>
+<p class="p3"><br></p>
+<p class="p2">It is no accident that Lisp has been used for the implementation of early versions of other languages, such as GHC.</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp is mostly paradigm agnostic.</p>
+<p class="p3"><br></p>
+<p class="p2">Javascript provides a way to build classes (using prototypes) without restricting the paradigm to class-based only.</p>
+<p class="p3"><br></p>
+<p class="p2">Assembler supports all programming paradigms.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Checking</b></h2>
+<p class="p2">A good toolbox language provides primitive operations for type-checking, thus, alleviating the SCL-builder from implementing type checking in the SCL (DSL).</p>
+<p class="p3"><br></p>
+<p class="p2">Lisp and Javascript are "good" toolbox languages with respect to type checking.</p>
+<p class="p3"><br></p>
+<p class="p2">Assembler, although being a good toolbox language in other respects, does not provide any form of type checking.<span class="Apple-converted-space">  </span>This leaves too much work to the SCL builder.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Garbage Collection</b></h2>
+<p class="p2">A good toolbox language elides memory allocation and freeing.</p>
+<p class="p3"><br></p>
+<p class="p2">GC (garbage collection) is a generally accepted form of this kind of facility.</p>
+<p class="p3"><br></p>
+<p class="p2">All other forms of allocation (e.g. malloc/free, Rust ownership) are optimizations of the general problem (of allocating memory during runtime).</p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>Solution-Centric Language - like DSLs.</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>https://guitarvydas.github.io/2020/12/27/Compile-Time-and-Runtime.html</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>See my essay "How Many Inputs How Many Outputs" https://guitarvydas.github.io/</p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>E.g the Lispworks debugger can track correspondences between source code and single-stepping.<span class="Apple-converted-space">  </span>Slime and SBCL also provide a means to connect source code to program counter position.<span class="Apple-converted-space">  </span>Most modern debuggers have this ability.</p>
+<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>in the toolbox sense</p>
+</div>
+</body>
+</html>

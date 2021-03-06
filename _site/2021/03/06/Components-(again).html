@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Components (again)</title>
+  <meta name="CreationTime" content="2021-03-06T13:00:31Z">
+  <meta name="ModificationTime" content="2021-03-06T13:00:31Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components - Four Details</b></h2>
+<p class="p2">Components can be described by four pieces of information:</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li4">A name</li>
+  <li class="li4">A set of inputs</li>
+  <li class="li4">A set of outputs</li>
+  <li class="li4">A set of other components used (declared recursively).</li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Elephant in the Room</b></h2>
+<p class="p2">We are well-accustomed to discussing Input APIs of functions.</p>
+<p class="p3"><br></p>
+<p class="p2">We are well-accustomed to discussing Names of functions (and components).</p>
+<p class="p3"><br></p>
+<p class="p2">But, we do not talk about <span class="s1">Output APIs</span> nor <span class="s1">Usage</span>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Run Forever</b></h2>
+<p class="p2">Components run forever.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Components do not blink in and out of a system.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bandaids</b></h2>
+<p class="p2">We paper-over deficiencies in our notations and our understanding of Software Components.</p>
+<p class="p3"><br></p>
+<p class="p2">This avoidance of issues makes it less likely that we can build layered software. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Structured Architecture.<span class="Apple-converted-space">  </span>Design Intent.<span class="Apple-converted-space">  </span>Layered Design.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Make, NPM, Package Managers</b></h2>
+<p class="p2">In my opinion, using <i>make</i>, <i>npm</i> and other package managers detracts from our ability to recognize the inherent simplicity of software construction.</p>
+<p class="p3"><br></p>
+<p class="p2">Stop using <i>make, npm, etc.</i> and — suddenly — the fundamental issues become more clear.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DLLs</b></h2>
+<p class="p2">DLLs are the way that we currently implement Output APIs.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Multitasking</b></h2>
+<p class="p2">We currently implement software components — calculator-only components — by wrapping the code inside of envelopes that we call <i>threads </i>in <i>multitasking.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">Each <i>thread</i> has exactly one stack (a global variable, btw).</p>
+<p class="p3"><br></p>
+<p class="p2">We see that this paradigm is hitting the wall.<span class="Apple-converted-space">  </span>Some of the <i>tells </i>are:</p>
+<ul class="ul1">
+  <li class="li4">Hardware is designed to have multiple cores.<span class="Apple-converted-space">  </span>This is but a half-way measure towards building truly distributed computing.<span class="Apple-converted-space">  </span>I would rather have a CPU with 1,000 6809's (8-bit processors) on it than one CPU with multiple, more-complicated, cores on it.</li>
+  <li class="li4">Javascript callbacks</li>
+  <li class="li4">HTML (it has grown into a coordination language for client/server distributed programming).</li>
+  <li class="li4">Linux (and other operating systems) have been hacked to use multiple cores (but not truly distributed computers).<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></li>
+  <li class="li4">We run Linux on rPis.<span class="Apple-converted-space">  </span>This is a very inefficient use of limited computing resources.<span class="Apple-converted-space">  </span>Most IoT devices don't need all of Linux.<span class="Apple-converted-space">  </span>[<i>We do this because we don't know how to intelligently architect layered software.</i>]</li>
+  <li class="li4">Blockchain uses full-blown Operating Systems (such as Linux) instead of only the bits (e.g. p2p) that it needs.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagrams vs. Text</b></h2>
+<p class="p2">We <i>can </i>write structured programs in assembler, but we tend not to.</p>
+<p class="p3"><br></p>
+<p class="p2">We have learned that lesson.<span class="Apple-converted-space">  </span>Notation limits our thinking.</p>
+<p class="p3"><br></p>
+<p class="p2">Structured Programming raised the bar about what we could think about.</p>
+<p class="p3"><br></p>
+<p class="p2">We<i> can</i> write nested software using text, but, diagrams show nesting better than text can.</p>
+<p class="p3"><br></p>
+<p class="p2">What prevents us from using diagrams instead of text in programming languages? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Fear. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We don't have YACC for diagrams.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We continue thinking that we need to optimize using 1950's concepts of computing, e.g. parsers based on backtracking are still <i>verboten</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Structured Architecture (DI)</b></h2>
+<p class="p2">Structured Programming brought better structuring to code.</p>
+<p class="p3"><br></p>
+<p class="p2">I argue that Structured Architecture can be understood by going back to the basics and avoiding all bandaids, such as package managers and dependency managers.</p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p2">The main issue is DI:<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html">https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">We need to think in terms of isolation:</p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">https://guitarvydas.github.io/2020/12/09/Isolation.html</a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Practicality - Keeping What We Already Have</b></h2>
+<p class="p2">I recognize the we can't simply throw out what we already have.</p>
+<p class="p3"><br></p>
+<p class="p2">DI and Componentization would make Photoshop better, but only incrementally so.</p>
+<p class="p3"><br></p>
+<p class="p2">DI and Componentization will make <i>future</i> software better and enable completely new ideas.</p>
+<p class="p3"><br></p>
+<p class="p2">Can DI co-exist with existing software?</p>
+<p class="p3"><br></p>
+<p class="p2">Can we keep PhotoShop and switch to using DI and Components?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Keeping Linux, Keeping Operating Systems</b></h2>
+<p class="p2">The way to keep PhotoShop<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> is to keep Linux.</p>
+<p class="p3"><br></p>
+<p class="p2">The way to build new software is:</p>
+<ul class="ul1">
+  <li class="li4">Build new apps on top of Linux — inside of Linux envelopes (threads).</li>
+  <li class="li4">Build new apps as <i>drivers</i> that sit beside (underneath) Linux.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">I argue that the concept of operating systems is hitting a wall.<span class="Apple-converted-space">  </span>So, I would argue that the only way to go around the wall is to write new concepts as operating system drivers.<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components as Driver Software</b></h2>
+<p class="p4">Drivers have, traditionally, been hard to build because they are thought to be low-level and unstructured in nature. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Most drivers have been written in C and assembler.</p>
+<p class="p5"><br></p>
+<p class="p4">StateCharts are a way to structure such lower-level code.<span class="Apple-converted-space">  </span>It <i>is</i> possible to write new components that sit beside/underneath existing operating systems.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p5"><br></p>
+<p class="p4">Components are a way to structure such lower-level code.</p>
+<p class="p5"><br></p>
+<p class="p4">PEG is a way to build layers above C and assembler, while maintaining the inherent efficiencies of these languages.</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>What we really need is a new kind of O/S aimed at distributed computing.<span class="Apple-converted-space">  </span>I argue that we don't need O/Ss at all.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Actually, we do have PROLOG, PEG and SVG.<span class="Apple-converted-space">  </span>These can be used for parsing diagrams to code, but, we don't recognize this abilities yet.</p>
+<p class="p7"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Design Intent</p>
+<p class="p7"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>I use PhotoShop and Linux as specific examples of apps and operating systems that we need to keep.<span class="Apple-converted-space">  </span>There are many apps and many operating systems - my comments apply to all of them.</p>
+<p class="p7"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>https://github.com/guitarvydas/papers/blob/master/DEBS2007-paper63.pdf</p>
+</div>
+</body>
+</html>
