@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>SVG grammar</title>
+  <meta name="CreationTime" content="2021-03-15T22:54:17Z">
+  <meta name="ModificationTime" content="2021-03-15T22:54:17Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 7.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I show a simple grammar for SVG files.</p>
+<p class="p3"><br></p>
+<p class="p2">A grammar is a "pattern matcher".</p>
+<p class="p3"><br></p>
+<p class="p2">PEG is as easy to use as REGEXP.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG is more powerful (it allows nesting, whereas raw REGEXP does not).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>github</b></h2>
+<p class="p2"><a href="https://github.com/guitarvydas/glue">https://github.com/guitarvydas/glue</a></p>
+<p class="p3"><br></p>
+<p class="p2">repo: glue</p>
+<p class="p2">branch: dev0</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Grammar</b></h2>
+<p class="p4">SVGSwitchAndForeign {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p4"><span class="Apple-converted-space">  </span>XMLHeader = "&lt;?" stuff* "?&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>DOCTypeHeader = "&lt;!DOCTYPE" stuff* "&gt;" <span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>SvgElement = "&lt;svg" attribute* "&gt;" EmptyDefs Element+ "&lt;/svg&gt;"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>EmptyDefs = "&lt;defs/&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>Element = ElementWithSwitch | ElementWithForeign | ElementWithElements | ElementWithoutElements</p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithSwitch =<span class="Apple-converted-space">  </span>"&lt;switch&gt;" Element Element "&lt;/switch&gt;"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithForeign = "&lt;foreignObject" attribute* "&gt;" Element "&lt;/foreignObject&gt;"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithElements = "&lt;" name stuff* "&gt;" (Element+ | text*) "&lt;/" name "&gt;"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithoutElements = "&lt;" name stuff* "/&gt;"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>stuff = ~"&gt;" ~"/&gt;" ~"&lt;" ~"?&gt;" any</p>
+<p class="p4"><span class="Apple-converted-space">  </span>text = stuff</p>
+<p class="p4"><span class="Apple-converted-space">  </span>attribute = stuff</p>
+<p class="p4"><span class="Apple-converted-space">  </span>name = name1st nameFollow*</p>
+<p class="p4"><span class="Apple-converted-space">  </span>name1st = "a" .. "z" | "A" .. "Z"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>nameFollow = "0" .. "9" | name1st</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Grammar Syntax</b></h2>
+<p class="p2">I am using Ohm-js.<span class="Apple-converted-space">  </span>It is a PEG grammar processor.</p>
+<p class="p3"><br></p>
+<p class="p2">In Ohm, you need to surround the grammar with a name, and brace brackets.</p>
+<p class="p3"><br></p>
+<p class="p2">I've named this grammar "SVGSwitchAndForeign<span class="s1">".<span class="Apple-converted-space">  </span></span>I intend to use this grammar for a larger project (but not very large) and this will require breaking out <span class="s1">switches</span> and <span class="s1">foreignObjects</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">The grammar is compose of <i>rule</i>s. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Rules are free-form (spaces don't matter).</p>
+<p class="p3"><br></p>
+<p class="p2">There happen to be 16 rules in this grammar.</p>
+<p class="p3"><br></p>
+<p class="p2">Ohm special-cases rules that have names beginning with capital letters.</p>
+<p class="p3"><br></p>
+<p class="p2">The first rule is<span class="Apple-converted-space"> </span><span class="s1"> <span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><br></p>
+<p class="p7">Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p6"><br></p>
+<p class="p2">This rule is called "Svg" and is composed of calls to 3 other rules <span class="s1">XMLHeader, DOCTypeHeader </span>and <span class="s1">SvgElement.</span></p>
+<p class="p6"><br></p>
+<p class="p7">Items in double-quotes are <i>constants </i>and are parsed literally, for example "&lt;svg" parses 4 letters "&lt;", "s", "v" and "g".</p>
+<p class="p6"><br></p>
+<p class="p7">Rules and literals can be suffixed with syntax similar to REGEXP, i.e.</p>
+<ul class="ul1">
+  <li class="li8">+ means one-or—more-of</li>
+  <li class="li8">* means zero-or-more-of</li>
+  <li class="li8">? means optional (0 or 1 of).</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p8">Alternation is written with "|" (in the original PEG thesis, "/" was used).</p>
+<p class="p9"><br></p>
+<p class="p8">Negative matching is specified as "~" (whereas in the original PEG thesis "!" was used).</p>
+<p class="p9"><br></p>
+<p class="p8"><i>Any</i> single character is specified with the keyword "any".<span class="Apple-converted-space">  </span>In REGEXP, this is "." and is also "." in many other PEG libraries.</p>
+<p class="p9"><br></p>
+<p class="p8">Character classes are formed with two constants separated by ellipsis, i.e. "A" .. "Z" means capital-A through capital-Z.<span class="Apple-converted-space">  </span>This is often written as [A-Z] in REGEXP syntax (and some other PEG libraries).</p>
+<p class="p9"><br></p>
+<p class="p8">Ohm-js separates match-variables from the grammar.<span class="Apple-converted-space">  </span>In Ohm-js, each match has a corresponding variable, i.e. the rule</p>
+<p class="p9"><br></p>
+<p class="p7">Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p9"><br></p>
+<p class="p8">needs a corresponding Javascript function declared as:</p>
+<p class="p9"><br></p>
+<p class="p8">svg = function (xmlHeader, docTypeHeader, svgElement) { … }</p>
+<p class="p9"><br></p>
+<p class="p8">(where the parameter names are arbitrary — I tend to use _1, _2, and _3 as parameter names).</p>
+<p class="p9"><br></p>
+<p class="p8">In other PEG parsers, matches are labelled explicitly, e.g.</p>
+<p class="p9"><br></p>
+<p class="p7">Svg = xmlHeader:XMLHeader docTypeHeader:DOCTypeHeader svgElement:SvgElement</p>
+<p class="p9"><br></p>
+<p class="p2">(I favour Ohm-js' choice - it leaves the grammar unadorned and more readable (IMO).<span class="Apple-converted-space">  </span>This is helpful when one is — as I am — concerned with DI (Design Intent, aka Architecture.<span class="Apple-converted-space">  </span>I intend to use PEG as a way to design SCLs (Solution Centric Languages - DSLs, but tighter) — clarity matters to me).</p>
+<p class="p9"><br></p>
+<p class="p2">In Ohm-js, if a rule begins with a capital letter, the rule skips all whitespace.<span class="Apple-converted-space">  </span>The builtin rule <span class="s1">space</span> is used.<span class="Apple-converted-space">  </span>One can augment the <span class="s1">space</span> rule (see the Ohm documentation).<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Rules can be in any order, except that Ohm-js takes the <i>first</i> rule as the main rule and starts<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> with it. <span class="Apple-converted-space">  </span>In other PEG parsing libraries, the main rule is specified in the call to the parser. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Lookahead matching is specified with "&amp;", e.g. "&amp;rule".<span class="Apple-converted-space">  </span>Lookahead succeeds only if the match succeeds, but lookahead does not consume input characters.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Multiple Matches</b></h2>
+<p class="p2">Ohm-js returns a Javascript array of matches when ?/*/+ are used.</p>
+<p class="p3"><br></p>
+<p class="p2">The array has 0 length if there were 0 matches.</p>
+<p class="p3"><br></p>
+<p class="p2">A simple call to a rule, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">rule+</p>
+<p class="p3"><br></p>
+<p class="p2">returns an array of matches as specified by the rule <span class="s1">rule</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">In parenthesized matches, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">(rule1 rule2)*</p>
+<p class="p3"><br></p>
+<p class="p2">An array is returned for <i>each </i>sub-rule.<span class="Apple-converted-space">  </span>For example, the above would return two arrays — one for rule1 and the other for rule2.</p>
+<p class="p3"><br></p>
+<p class="p2">Constant matches follow the above convention, for example:</p>
+<p class="p3"><br></p>
+<p class="p4">("abc" "def")*</p>
+<p class="p3"><br></p>
+<p class="p2">returns two arrays (the first with a bunch of matches for "abc" and the second for "def").</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Negative Lookahead Match</b></h2>
+<p class="p2">Negative lookahead is specified by "~", for example "~rule".</p>
+<p class="p3"><br></p>
+<p class="p2">Example: to match any character that is not an @, we would write:</p>
+<p class="p3"><br></p>
+<p class="p4">~"@" any</p>
+<p class="p3"><br></p>
+<p class="p2">Negative lookahead does not consume input, but, <i>any</i> consumes one character.<span class="Apple-converted-space">  </span>The end result of this pattern is that we consume one character if it is not @.</p>
+<p class="p3"><br></p>
+<p class="p2">The ~rule parse tree does not appear in the CST.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lookahead Match</b></h2>
+<p class="p2">Lookahead matching is specified with "&amp;", e.g. "&amp;rule".<span class="Apple-converted-space">  </span>Lookahead succeeds only if the match succeeds, but lookahead does not consume input characters.</p>
+<p class="p3"><br></p>
+<p class="p2">Example: to match any character that is preceded by an @, we would write:</p>
+<p class="p3"><br></p>
+<p class="p4">&amp;"@" any</p>
+<p class="p5"><br></p>
+<p class="p2">(the <i>any </i>keyword consumes one character, but &amp;"@" consumes no characters).</p>
+<p class="p3"><br></p>
+<p class="p2">The &amp;rule creates a parse tree, although it consumes none of the characters.<span class="Apple-converted-space">  </span>The &amp;rule tree appears in the CST.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rule Order</b></h2>
+<p class="p2">PEG — and Ohm-js — matches rules in order of appearance.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, the two similar rules:</p>
+<p class="p3"><br></p>
+<p class="p4">Rule = A B C</p>
+<p class="p5"><br></p>
+<p class="p4">Rule = B C A</p>
+<p class="p3"><br></p>
+<p class="p2">might match differently depending on the input. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">PEG creates <i>parsers</i>.<span class="Apple-converted-space">  </span>If you desire theoretical detail, see LR(1) theory and YACC.<span class="Apple-converted-space">  </span>In fact, some people have been known to "test" their grammar by running YACC on it, then building a TDPL<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> parser.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code Generation</b></h2>
+<p class="p2">The Ohm-js parser generator inputs a grammar and produces a tree — CST (Concrete Syntax Tree — often conflated with AST). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">After a successful parse, the tree can be further annotated with Javascript code.<span class="Apple-converted-space">  </span>This code is called the "semantics".</p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Arity Checking</b></h2>
+<p class="p2">The Ohm-js parser generator checks that the <i>semantics</i> object contains a set of functions that correspond to the grammar.<span class="Apple-converted-space">  </span>See the Ohm documentation for further detail and exceptions.</p>
+<p class="p3"><br></p>
+<p class="p2">Ohm-js checks the number of parameters — called the <i>arity — </i>of each javascript function to ensure that each function matches the grammar.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Grammar Reading (Detailed Description)</b></h2>
+<p class="p5"><br></p>
+<p class="p2">Below, I explain every line of the grammar:</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the first rule called "Svg".<span class="Apple-converted-space">  </span>It consists of calls to 3 other rules.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>XMLHeader = "&lt;?" stuff* "?&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "XMLHeader".<span class="Apple-converted-space">  </span>It matches "&lt;" then "?" then calls the rule<i> </i><span class="s1">stuff</span> for zero-or-more matches, then matches "?" then "&gt;". <span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>DOCTypeHeader = "&lt;!DOCTYPE" stuff* "&gt;" <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "DOCTypeHeader".<span class="Apple-converted-space">  </span>It matches the string "&lt;!DOCTYPE", followed by a call to the rule <span class="s1">stuff</span> (for 0-or-more matches) then matches the string "&gt;".</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>SvgElement = "&lt;svg" attribute* "&gt;" EmptyDefs Element+ "&lt;/svg&gt;"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "SvgElement".<span class="Apple-converted-space">  </span>This rule has 6 sub-matches (<span class="s1">"&lt;svg", attribute*, "&gt;", EmptyDefs, Element+, "&lt;/svg&gt;"</span>).<span class="Apple-converted-space">  </span>Matches #2 and #5 return arrays of matches (<span class="s1">attribute*</span> and <span class="s1">Element+</span>, resp.)</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>EmptyDefs = "&lt;defs/&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "EmptyDefs".<span class="Apple-converted-space">  </span>It matches one string "&lt;defs/&gt;".<span class="Apple-converted-space">  </span>We might wish to expand this rule in future projects, but I believe in the YAGNI<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> principle and don't need more than this for my current project.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>Element = ElementWithSwitch | ElementWithForeign | ElementWithElements | ElementWithoutElements</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "Element".<span class="Apple-converted-space">  </span>This is an alternation rule that returns one result.<span class="Apple-converted-space">  </span>It has 4 possibilities, but matches only one of the possibilities.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithSwitch =<span class="Apple-converted-space">  </span>"&lt;switch&gt;" Element Element "&lt;/switch&gt;"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "ElementWithSwitch" that has 4 sub-matches.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithForeign = "&lt;foreignObject" attribute* "&gt;" Element "&lt;/foreignObject&gt;"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "ElementWithForeign" that has 5 sub-matches.<span class="Apple-converted-space">  </span>Match #2 returns an array.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithElements = "&lt;" name stuff* "&gt;" (Element+ | text*) "&lt;/" name "&gt;"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "ElementWithElements" that has 8 sub-matches (<span class="s1">"&lt;", name, stuff*, "&gt;", (…), "&lt;/", name, "&gt;"</span>).</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>ElementWithoutElements = "&lt;" name stuff* "/&gt;"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "ElementWithoutElements" that has 4 sub-matches.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>stuff = ~"&gt;" ~"/&gt;" ~"&lt;" ~"?&gt;" any</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the first rule called "stuff".<span class="Apple-converted-space">  </span>The rule begins with a lower-case letter ("stuff" not "Stuff") which tells Ohm to read every character instead of skipping over spaces.<span class="Apple-converted-space">  </span>This rule has 4 negative matches and consumes only one character.<span class="Apple-converted-space">  </span>It matches any character unless the character is "&gt;" or "&lt;".<span class="Apple-converted-space">  </span>It also checks for negative matches for the two strings "/&gt;" and "&gt;?".<span class="Apple-converted-space">  </span>The built-in rule <i>any</i> consumes one character, if all of the negative matches succeed.<span class="Apple-converted-space">  </span>The rule, basically, says "if the next character is not '&gt;' and if the next two characters are not '/&gt;' and if the next character is not '&lt;' and if the next two characters are not '?&gt;', then consume one character.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>text = stuff</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the first rule called "text" (lower-case, space-skipping disabled).<span class="Apple-converted-space">  </span>This rule calls one other rule stuff and then returns the result.<span class="Apple-converted-space">  </span>[<i>This is a useful trick — rules that do nothing but call another rule allow the semantics code to see what context the match occurred in.<span class="Apple-converted-space">  </span>For example, "stuff" is a generic rule, but "stuff" where text is expected might generate different code.</i>]<i><span class="Apple-converted-space"> </span></i></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>attribute = stuff</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the first rule called "attribute".<span class="Apple-converted-space">  </span>Again, we see the use of the pattern matching trick of<span class="Apple-converted-space">  </span>calling a more generic rule in a specific context.<span class="Apple-converted-space">  </span>In this context, the parser is matching SVG elements.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>name = name1st nameFollow*</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "name".<span class="Apple-converted-space">  </span>It consumes a first character followed by zero-or-more follow characters.<span class="Apple-converted-space">  </span>In most PLs, a name must begin with a letter, but the rest of the name might contain digits.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>name1st = "a" .. "z" | "A" .. "Z"</p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "name1st".<span class="Apple-converted-space">  </span>It matches one character, either a lower-case letter (between "a" and "z") or an upper-case letter.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>nameFollow = "0" .. "9" | name1<span class="s2"><sup>st</sup></span></p>
+<p class="p5"><br></p>
+<p class="p2">Creates the rule called "nameFollow".<span class="Apple-converted-space">  </span>It says that following characters in a name can contain digits, or any character allowed at the front of a name.<span class="Apple-converted-space">  </span>[<i>As I'm writing this, I see that I probably wanted to include underscores.<span class="Apple-converted-space">  </span>I can fix this later — getting something to work is the most important activity at this early-stage of this project — divide and conquer.</i>]<i><span class="Apple-converted-space"> </span></i></p>
+<hr>
+<p class="p10"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>https://github.com/harc/ohm</p>
+<p class="p10"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>See the Ohm documentation for how to change this assumption.</p>
+<p class="p10"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>TDPL means Top Down Parsing Language - recursive descent parsing.</p>
+<p class="p10"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>YAGNI means "You aren't going to need it".</p>
+<p class="p10"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>Again, due to the use of YAGNI, this rule doesn't perform a very thorough match of attributes.<span class="Apple-converted-space">  </span>I named this rule to leave room for future detailing.<span class="Apple-converted-space">  </span>This kind of detail is not needed in this project (hence, I don't waste human intellect on getting it "right").<span class="Apple-converted-space">  </span>PEG parsers let me cut such corners.<span class="Apple-converted-space">  </span>The result is the ability to build parsers fairly quickly without having to dot all of the i's and cross all of the t's.<span class="Apple-converted-space">  </span>The grammar is not wrong, but it skips over uninteresting stuff.</p>
+</div>
+</body>
+</html>
