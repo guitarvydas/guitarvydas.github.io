@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>PEG vs. Other Pattern Matchers</title>
+  <meta name="CreationTime" content="2021-03-17T10:20:59Z">
+  <meta name="ModificationTime" content="2021-03-17T10:20:59Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 9.0px Palatino}
+    span.s3 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I discuss why you should use PEG (instead of, say, REGEXP).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEG</b></h2>
+<p class="p2">PEG is a breakthrough technology.</p>
+<p class="p3"><br></p>
+<p class="p2">It lets you write pattern-matchers as easily as you would write REGEXPs.</p>
+<p class="p3"><br></p>
+<p class="p2">The difference between PEG and REGEXP is that PEG lets you write nested matches, which are much harder (if not impossible) to write as REGEXPs.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG can match programming language constructs, like "{ … }".</p>
+<p class="p3"><br></p>
+<p class="p2">PEG can match such patterns to any depth, e.g. "{ … { … { … } … } … }".</p>
+<p class="p3"><br></p>
+<p class="p2">PEG can rearrange the matches any way you would like, then spit out new code.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG can be used to write <i>transpilers</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Parser technology used to be reserved only for compiler-writers.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG changes that. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Now, "normal" programmers can use nested pattern-matching as easily as they use REGEXP.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm-JS</b></h2>
+<p class="p2">I happen to use Ohm-JS.</p>
+<p class="p3"><br></p>
+<p class="p2">It is a PEG grammar tool that works with JavaScript.</p>
+<p class="p3"><br></p>
+<p class="p2">There are PEG libraries for many different languages, for example ESRAP for Common Lisp, "#lang peg" for Racket. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In some cases there are multiple PEG libraries for a single PL.<span class="Apple-converted-space">  </span>I had to choose between Ohm-JS and peg-js, for JavaScript.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What to Look For</b></h2>
+<p class="p2">A <i>grammar</i> is a DSL for pattern-matching.</p>
+<p class="p3"><br></p>
+<p class="p2">REGEXP is a DSL for pattern-matching, but it doesn't (easily) allow nesting, whereas PEG does allow nesting.</p>
+<p class="p3"><br></p>
+<p class="p2">My opinion is that you want to have as little noise in the <i>grammar</i> as possible. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">PEG can match patterns, but it leaves the "what to do with the matches" up to you and your language.</p>
+<p class="p3"><br></p>
+<p class="p2">Most PEG libraries include <span class="s1">extra</span> syntax to assign matches to variables.</p>
+<p class="p3"><br></p>
+<p class="p2">Ohm-JS<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> doesn't do this.<span class="Apple-converted-space">  </span>Ohm-JS leaves the grammar alone, to stand on its own.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">When you want to rearrange the patterns,<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">in Ohm-JS you have to look at another part of the code/script.<span class="Apple-converted-space">   </span></li>
+  <li class="li4">in other PEGs, you have to soil the grammar by adding such details<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> to the grammar.<span class="Apple-converted-space">  </span>Details kill readability.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scanning and Parsing</b></h2>
+<p class="p2">In previous technologies, one had to write a <i>scanner</i> and a <i>parser </i>separately.</p>
+<p class="p3"><br></p>
+<p class="p2">For example,<span class="Apple-converted-space">  </span>the YACC tool generates parsers, but it needs a scanner tool, usually LEX.</p>
+<p class="p3"><br></p>
+<p class="p2">LEX uses a different notation (REGEXP) than YACC.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG subsumes all of that into one notation - you can write the scanner <i>and</i> the parse in one go.<span class="Apple-converted-space">  </span>This seems like a small difference but it makes it possible to write SCLs (little languages) at will. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In fact, I argue that one <i>should </i>write many SCLs for any one project.<span class="Apple-converted-space">  </span>Any one project — if big and interesting enough — involves more than one paradigm.<span class="Apple-converted-space">  </span>Each paradigm should get its own SCL.<span class="Apple-converted-space">  </span>At present, we choose one 3<span class="s2"><sup>rd</sup></span>-generation language (like Python, JavaScript, Rust, etc.) and implement all paradigms in that one language.<span class="Apple-converted-space">  </span>The result is an unreadable mess.<span class="Apple-converted-space">  </span>Details kill readability.</p>
+<p class="p3"><br></p>
+<p class="p2">The YACC/LEX business kept me from building many little languages for each project.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG is opening my eyes to new ways of doing things.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scanning</b></h2>
+<p class="p2">REGEXP is a DSL for building scanners.</p>
+<p class="p3"><br></p>
+<p class="p2">REGEXP is built into many languages, including Perl and JavaScript.</p>
+<p class="p3"><br></p>
+<p class="p2">REGEXP is "flat".<span class="Apple-converted-space">  </span>It cannot (easily) match nested patterns.</p>
+<p class="p3"><br></p>
+<p class="p2">One of the original tools that used the REGEXP DSL syntax was LEX.</p>
+<p class="p3"><br></p>
+<p class="p2">The theory for converting REGEXPs to code can be found in The Dragon Book.<span class="Apple-converted-space">  </span>If you just want to <i>use</i> REGEXPs, don't read The Dragon Book.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parsing</b></h2>
+<p class="p2">Parsing is <i>pattern matching</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Most parser-generator tools require some sort of regular input that is more-than just characters, e.g. <i>tokens</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">The theory for building parsers is documented in The Dragon Book.<span class="Apple-converted-space">  </span>If you just want to <i>use</i> pattern matching, don't bother reading The Dragon Book.</p>
+<p class="p3"><br></p>
+<p class="p2">Pattern matching is becoming ubiquitous in FP (functional programming) languages.</p>
+<p class="p3"><br></p>
+<p class="p2">All that you really need is a way to match patterns and then emit code as <i>lambdas</i>.<span class="Apple-converted-space">  </span>JavaScript, for example, has a lot of this kind of stuff<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.<span class="Apple-converted-space">  </span>Most PLs have 1<span class="s2"><sup>st</sup></span>-class functions (aka lambdas) and pattern matching libraries (REGEXP and PEG and LR(k) and …).</p>
+<p class="p3"><br></p>
+<p class="p2">We want theorists to tell us what works and what doesn't, but we don't need to wait for theories before starting to use this stuff.</p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1">[1]</a> and ESRAP, in a sense</p>
+<p class="p5"><span class="s3"><a id="fn2"></a><a href="#fnlink2">[2]</a> </span>In ESRAP, the grammar is left alone and lambdas are tacked onto the end.<span class="Apple-converted-space">  </span>The problem with ESRAP is that it uses a Lisp syntax instead of a PEG syntax.<span class="Apple-converted-space">  </span>(This can be cured by writing a PEG in ESRAP that transpiles to ESRAP, but that's another essay).</p>
+<p class="p5"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>See my essay "Details Kill"</p>
+<p class="p5"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>JS has REGEXPs.<span class="Apple-converted-space">  </span>You can write TDPL parsers using REGEXPs in functions.<span class="Apple-converted-space">  </span>JS has lambdas, but calls them anonymous functions.</p>
+</div>
+</body>
+</html>
