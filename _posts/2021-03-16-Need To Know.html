@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Need To Know</title>
+  <meta name="CreationTime" content="2021-03-16T19:53:34Z">
+  <meta name="ModificationTime" content="2021-03-16T19:53:34Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 12.0px Helvetica}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I discuss the need-to-know principle.</p>
+<p class="p3"><br></p>
+<p class="p2">Many PLs<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> do not obey this principle.</p>
+<p class="p3"><br></p>
+<p class="p2">This idea — YAGNI applied to information — is central to creating layered software designs.</p>
+<p class="p3"><br></p>
+<p class="p2">I arrive at the conclusion that there are many linking-loaders, not just one.<span class="Apple-converted-space">  </span>Loading is a continuum of operations.<span class="Apple-converted-space">  </span>Likewise, I conclude that compilers should supply less information in .<span class="s1">o</span> files.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anecdote - Eiffel in Emacs Lisp</b></h2>
+<p class="p2">I used an early version of the Eiffel compiler.</p>
+<p class="p3"><br></p>
+<p class="p2">Build times became progressively longer as more classes were added.</p>
+<p class="p3"><br></p>
+<p class="p2">I concluded that the compiler<i> </i>was doing too much work — it scoured the file system trying to resolve all classes.</p>
+<p class="p3"><br></p>
+<p class="p2">I wrote an experimental Eiffel compiler in Emacs Lisp.<span class="Apple-converted-space">  </span>The compiler ran in linear time, regardless of the number of classes being used.<span class="Apple-converted-space">  </span>The main feature of this experiment was that type checking could be done in stages by successive "loader" invocations.<span class="Apple-converted-space">  </span>The compiler created <span class="s1">.o</span> files that contained a bare minimum of information — the compiler created code, but deferred multi-class type checking by leaving "holes" in the .o files.<span class="Apple-converted-space">  </span>The "loader" worked in stages — it did as much type checking as it could given the <span class="s1">.o</span> files that it was given, and deferred all other type checking for later.<span class="Apple-converted-space">  </span>A <span class="s1">.o</span> file with no remaining "holes" was executable (<span class="s1">.exe</span>).</p>
+<p class="p3"><br></p>
+<p class="p2">The UNIX® archive utility —<span class="Apple-converted-space">  </span><span class="s1">ar</span> — worked in a similar manner.<span class="Apple-converted-space">  </span>The archiver would patch as many holes as it could, but not more, before creating a library .<span class="s1">o</span> file.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">Ar</span> worked only with address "holes". <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The n2k<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> principle can be applied to:</p>
+<ul class="ul1">
+  <li class="li4">address resolution, and,</li>
+  <li class="li4">type checking.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Simple Component</b></h2>
+<p class="p5"><img src="/assets/2021-03-16-19-53-34-Images/component diagrams-component with 2 inputs port and 3 output ports.png" width="143px" height="121px" alt="Image"></p>
+<p class="p5">Fig. 1 Component with 2 Input Ports and 3 Output Ports</p>
+<p class="p6"><br></p>
+<p class="p5">In Fig. 1, there are some things (relationships) that we know, and there are some relationships that we do not need to know, for example:</p>
+<p class="p6"><br></p>
+<ul class="ul1">
+  <li class="li5">We know that the Component has kind "ty1"</li>
+  <li class="li5">We know that the Component has 2 inputs</li>
+  <li class="li5">We know that the Component has 3 outputs</li>
+  <li class="li5">We do not know the <i>types</i> of data that are required by the inputs</li>
+  <li class="li5">We do not know the <i>types</i> of data sent from the output pins</li>
+  <li class="li5">We do not know how the Component is implemented</li>
+  <li class="li5">We do not know whether the Component is a Composite or a Leaf</li>
+  <li class="li5">We do not know where the input data comes from</li>
+  <li class="li5">We do not know where the output data is going to be sent.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Events</b></h2>
+<p class="p5">Data arrives on input ports and is sent on output ports, carried by <i>events</i>.<span class="Apple-converted-space">  </span>Events are mostly data-agnostic.<span class="Apple-converted-space">  </span>Events consist of 2 details:</p>
+<ol class="ol1">
+  <li class="li5">A port name (a <i>tag</i>)</li>
+  <li class="li5">Any kind of data.<span class="Apple-converted-space"> </span></li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Layered Data</b></h2>
+<p class="p2"><i>Events</i> can carry layered data as well as scalar (non-layered) data.</p>
+<p class="p3"><br></p>
+<p class="p2">Data is packed and unpacked by successive layers of Components.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>APIs / Signatures</b></h2>
+<p class="p5">Fig. 1 shows us what the signature of a Component is, namely:</p>
+<p class="p6"><br></p>
+<ul class="ul1">
+  <li class="li5">A <i>kind</i></li>
+  <li class="li5">Inputs</li>
+  <li class="li5">Outputs.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Note that:</p>
+<ul class="ul1">
+  <li class="li5">We do not know how child components are implemented</li>
+  <li class="li5">We do not know how this component is implemented</li>
+  <li class="li5">We do not know the signatures of contained components (if any).</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p7">(That information is deferred and left as a "hole" to be filled in later).</p>
+<p class="p8"><br></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1">[1]</a> PL means programming language</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2">[2]</a> <span class="s2">n2k means "need to know"</span></p>
+</div>
+</body>
+</html>
