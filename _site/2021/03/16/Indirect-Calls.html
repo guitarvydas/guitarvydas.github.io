@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Parent Routes Events</title>
+  <meta name="CreationTime" content="2021-03-16T20:07:47Z">
+  <meta name="ModificationTime" content="2021-03-16T20:07:47Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p8 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Coupling</b></h2>
+<p class="p2">Most languages tightly couple the callee with the caller, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">fn(…);</p>
+<p class="p3"><br></p>
+<p class="p2">hard-codes "fn" into the caller's code, thereby, coupling the callee ("fn") to the caller.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Decoupling</b></h2>
+<p class="p2">I favour decoupling the callee from the caller.</p>
+<p class="p3"><br></p>
+<p class="p2">This allows architectural decoupling and rapid refactoring of architectures.</p>
+<p class="p3"><br></p>
+<p class="p2">This is done by adding a level of indirection to the call.</p>
+<p class="p3"><br></p>
+<p class="p2">Every callee contains a <i>parent</i> field and the <i>parent</i> object connects its children's outputs to its children's inputs, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">fn(…)</p>
+<p class="p3"><br></p>
+<p class="p2">becomes akin to:</p>
+<p class="p3"><br></p>
+<p class="p4">self.parent.routeCall ("fn", …args…);</p>
+<p class="p3"><br></p>
+<p class="p2">(parent looks up "fn", then calls it if found, and returns the result to the caller).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DLLs</b></h2>
+<p class="p2">DLLs do this, but only half-heartedly. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">All library calls are indirect through a lookup table.</p>
+<p class="p3"><br></p>
+<p class="p2">In DLLs, the <i>parent</i> is the <i>operating system</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">There is only one layer of indirection in a DLL - a CALL is either direct or indirect through an O/S-supplied table.</p>
+<p class="p3"><br></p>
+<p class="p2">This scheme of indirection allows the O/S to share DLLs between apps by mapping the same DLL code into the address space of every app.</p>
+<p class="p3"><br></p>
+<p class="p2">I suggest that this indirection be formalized, made two-way, and affect <i>all</i> CALLs, i.e. that every CALL be indirect <i>and</i> that every RETURN be indirect.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Note that DLLs perform the half-hearted version of indirection — indirection for the CALL, but RETURN sends a result(s) back directly.</i>]</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Why</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components</b></h2>
+<p class="p2">Decoupling — calling through a parent object — is a prerequisite for treating software as software components.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Architectural Flexibility</b></h2>
+<p class="p2">Decoupling, using indirection, makes it easy to change architecture during the implementation of a project.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anecdote</b></h2>
+<p class="p2">For example, when we worked on a smart meter project, the team had invested some 10 person-years (5 developers, 2 years) of effort to create a solution.</p>
+<p class="p3"><br></p>
+<p class="p2">At the 2-year point (elapsed time), management found a new potential, and very important, customer. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The customer's requirements, though, were different from the original requirements. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The project had been built to solve the original requirements.</p>
+<p class="p3"><br></p>
+<p class="p2">The project was built using software components and parent-routing indirection.</p>
+<p class="p3"><br></p>
+<p class="p2">It took only one week of elapsed time (one technical manager and one junior programmer) to refactor the architecture to meet the new requirements. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This would not have been possible without a near-total rewrite, if the code had been implemented in the usual manner.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Testability</b></h2>
+<p class="p2">Treating software modules as stand-alone components leads to easier testability.</p>
+<p class="p3"><br></p>
+<p class="p2">Testability ease comes from the fact that software modules are not dependent on each other.<span class="Apple-converted-space">  </span>Components' <i>parents</i> determine routing ; routing information (function calls) is not baked into the code.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that <i>libraries</i> (and, therefore <i>github</i>, etc.) do not provide this level of testability.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scalability</b></h2>
+<p class="p2">Scalability is only possible if software modules are decoupled.</p>
+<p class="p3"><br></p>
+<p class="p2">Parent-based routing supports decoupling, hence, provides better scalability.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dispatcher</b></h2>
+<p class="p2">Using a <i>Dispatcher</i> makes indirection easier.</p>
+<p class="p3"><br></p>
+<p class="p2">A <i>Dispatcher </i>is a "normal" function that invokes other routines using a table(s).</p>
+<p class="p3"><br></p>
+<p class="p2">Instead of making a CALL, a routine requests that the Dispatcher make the CALL on behalf of the caller.<span class="Apple-converted-space">  </span>The caller supplies its <i>parent</i> to the Dispatcher and the Dispatcher uses the routing table within the parent to make the call.<span class="Apple-converted-space">  </span>The <i>dispatcher</i> returns the result of the call to caller.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Indirect Calling is Not Good Enough</b></h2>
+<p class="p2">It is not good enough to call a routine indirectly through a table (the <i>parent's </i>routing table), the RETURN must also be indirect (through the <i>dispatcher</i>).</p>
+<p class="p3"><br></p>
+<p class="p2">Note that DLLs perform the half-hearted version of indirection — indirection for the CALL, but RETURN sends a result(s) back directly.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Other Benefits of Using a Dispatcher</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Software Components</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Distributed Computing (Concurrency)</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Operating System Dispatcher</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Closures</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Closures Are Threads</b></h2>
+<p class="p2">Closures are threads. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Closures contain all "local variables" for a function.<span class="Apple-converted-space">  </span>(In non-closure based software, threads perform this function).</p>
+<p class="p3"><br></p>
+<p class="p2">Operating system threads<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> are just inefficiently-large closures.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Operating system threads <i>could</i> have been implemented as closures, but weren't.<span class="Apple-converted-space">  </span>Early versions of operating systems were developed<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> in the C programming language (and in assembler) which doesn't directly support closures.<span class="Apple-converted-space">  </span>Closures<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> <i>were</i> available, though, as early as 1956 — in the Lisp programming language.<span class="Apple-converted-space">  </span>Operating system developers shunned Lisp because it was thought to be interpreted.<span class="Apple-converted-space">  </span>Ironically, C is also interpreted (by the underlying hardware).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components - 3 Views</b></h2>
+<p class="p2">A Component can be viewed in at least the following dimensions:</p>
+<ul class="ul1">
+  <li class="li5"><span class="s1">Static</span> - {name,inputs,outputs} description of the externals of a Component</li>
+  <li class="li5"><span class="s1">Implementation</span> - details that are only needed to describe the operation of the Component as it is loaded and instantiated.<span class="Apple-converted-space">  </span>Example of implementation details would be information such as "which language" the Component is implemented in (C, Python, Javascript, Statechart, Drakon, etc.).<span class="Apple-converted-space">  </span>Composite components contain a list of components that are <i>used</i>, along with the input and output signature of each component.<span class="Apple-converted-space">  </span>Composite components also contain a connection-list, which is a routing table.</li>
+  <li class="li5"><span class="s1">Dynamic</span> - adding fields needed to instantiate and run the component, e.g. input queue, output queue, parent, etc.<span class="Apple-converted-space">  </span>Note that one Component can be instantiated multiple times.<span class="Apple-converted-space">  </span>The <i>dynamic</i> instance of a component might <i>share</i> implementation details that do not need to be copied.<span class="Apple-converted-space">  </span>For example,
+  <ul class="ul2">
+    <li class="li5">code can be shared by all instances of the same Component</li>
+    <li class="li5">connection lists (or code) can be shared by all instances of the same Component</li>
+    <li class="li5">Component <i>name</i> (a type name) can be shared</li>
+    <li class="li5">input queues and output queues cannot be shared and are created on a per-instance basis</li>
+    <li class="li5">parent field cannot be shared and are created on a per-instance basis - the parent relationship is a <i>dynamic</i> relationship that is created as Components are instantiated.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Optimization</b></h2>
+<p class="p2">Some optimizations are possible.</p>
+<p class="p3"><br></p>
+<p class="p2">The most straight-forward optimization is that which affects 1:1 message routing (one sending component, one receiving component).</p>
+<p class="p3"><br></p>
+<p class="p2">Many:one, one:many, etc. connections, though, must be handled with care.<span class="Apple-converted-space">  </span>The <i>asynchronous</i> semantics of a component-based system can be compromised by eager optimization, especially on stack-based hardware architectures.</p>
+<p class="p3"><br></p>
+<p class="p2">In particular, note that <i>calling </i>a function is not the same as <i>sending a message</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">I have found it not necessary to optimize a system in most cases.<span class="Apple-converted-space">  </span>Most urges to optimize tend to be based on non-existent data and a over-anxious concern for low-level optimization (e.g. using C, Rust, etc.).</p>
+<p class="p3"><br></p>
+<p class="p2">Most of our "knowledge" about optimization comes from research in the late 1900's.<span class="Apple-converted-space">  </span>The ground rules have changed — CPU power was expensive and memory was scarce in the late 1900's, whereas computing power and memory sizes are abundant in today's world.</p>
+<p class="p3"><br></p>
+<p class="p2">I feel that it is better to get rid of the operating system (Linux, Windows, Mac) before attempting more detailed optimization strategies.<span class="Apple-converted-space">  </span>Context-switching, memory management, caching, etc. are first-order efficiency problems.<span class="Apple-converted-space">  </span>Measuring the efficiency of a program is less important than measuring response-time to human users.</p>
+<p class="p3"><br></p>
+<p class="p2">See also https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lisp</b></h2>
+<p class="p2">JIT<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> compilation was pioneered in the Lisp language.</p>
+<p class="p3"><br></p>
+<p class="p2">Early Lisp compilers performed linker-like fixups at runtime.<span class="Apple-converted-space">  </span>I believe that this mechanism was called <i>fast calls</i>.<span class="Apple-converted-space">  </span>Running lisp programs would rewrite branch addresses after the first lookup-and-call to a subroutine.</p>
+<p class="p3"><br></p>
+<p class="p2">Smalltalk used a cache of most-recently used methods to alleviate efficiency concerns with duck-typing.</p>
+<p class="p3"><br></p>
+<p class="p2">Both of the above techniques — address rewriting and caching — are similar to<span class="Apple-converted-space">  </span>what linking-loaders do with DLLs in operating systems.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>JIT</b></h2>
+<p class="p2"><a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">https://en.wikipedia.org/wiki/Just-in-time_compilation</a></p>
+<p class="p3"><br></p>
+<p class="p2">Like Lisp fast-calling.<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Composite Components</b></h2>
+<p class="p2">Composite components are — from the outside — just components with {<i>name, inputs, outputs</i>} fields.</p>
+<p class="p3"><br></p>
+<p class="p2">Composite components act as <i>parents </i>to <i>child components</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Composite components contain:</p>
+<ul class="ul1">
+  <li class="li5">A collection of child components</li>
+  <li class="li5">Routing information.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Composite components route requests between their children.</p>
+<p class="p6"><br></p>
+<p class="p5">Composite components route responses back to the appropriate children.</p>
+<p class="p6"><br></p>
+<p class="p5">A<span class="Apple-converted-space"> </span><i> child</i> component can only invoke — send a request to — its peers by requesting that the parent route the request/response.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Child Components</b></h2>
+<p class="p2">Child components are — from the outside — just components with a signature consisting of {<i>name, inputs, outputs</i>}.</p>
+<p class="p3"><br></p>
+<p class="p2">Children can be implemented in a number of ways:</p>
+<ul class="ul1">
+  <li class="li5">children can be Composite components (recursively composed of other components)</li>
+  <li class="li5">children can be Leaf components
+  <ul class="ul2">
+    <li class="li5">implemented as pure code (e.g. Javascript, Python, etc.)</li>
+    <li class="li5">implemented as Statechart diagrams (which transpile to pure code)</li>
+    <li class="li5">implemented in some other way (Bash scripts, Drakon diagrams, etc.)</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Send</b></h2>
+<p class="p2">The Send() api function sends a request from a child to one of its peers (or to its parent's outputs).</p>
+<p class="p3"><br></p>
+<p class="p2">The dispatcher/parent performs the appropriate lookup and routes the data delivery.</p>
+<p class="p3"><br></p>
+<p class="p2">Send() can be optimized to be roughly equivalent to an indirect call method, i.e. it can be used to replace all CALLs in components.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Return</b></h2>
+<p class="p2">There is no <span class="s2">RETURN</span> function.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">RETURN</span> is replaced by Send ().</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Exception</b></h2>
+<p class="p2">There is no <span class="s2">Exception</span> function (or syntax).</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Exception</span> is replaced by Send ().</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Stack-Based CALLing and RETURNing</b></h2>
+<p class="p2">In current PLs<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a>, CALLs are made directly, but, the CALLing mechanism also modifies a <i>list</i> to leave a return-breadcrumb. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This <i>list </i>is called the <i>stack</i>.<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>The stack is a global variable, even in FP.<span class="Apple-converted-space">  </span>There is one global stack inside every thread.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>stack</i> records return-breadcrumbs in a <i>dynamic</i> manner, <i>even in compiled languages</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Originally, there was no stack.<span class="Apple-converted-space">  </span>The IBM 360 CPU did not support an automagic stack.<span class="Apple-converted-space">  </span>Programmers needed to use the <span class="s2">BALR</span> instruction and link return-breadcrumbs (and "local" data) together manually.</p>
+<p class="p3"><br></p>
+<p class="p2">The global stack was added to hardware and has never since been removed.</p>
+<p class="p3"><br></p>
+<p class="p2">Programmers rely on <i>operating systems</i> to sandbox their code and give them unique stacks (in <i>threads</i>).</p>
+<p class="p3"><br></p>
+<p class="p2">PLs have improved, but the old-fashioned concept of a global stack has not changed.</p>
+<p class="p3"><br></p>
+<p class="p2">Adding operating systems to the mix does not simplify software design, it only masks one of the elephants in the room, by hiding a global variable.<span class="Apple-converted-space">  </span>Note that thread-based software has caused numerous forms of accidental complexity<a id="fnlink10"></a><a href="#fn10"><sup>[10]</sup></a> — so much so that most programmers believe that multitasking is "hard".</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>State-of-the-Art</b></h2>
+<p class="p2">In current PLs, CALL/RETURN uses the Stack to form a dynamic call-chain.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Component-Based</b></h2>
+<p class="p2">In Component-based software, there is no need for a stack.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implementation on Stack-Based Hardware</b></h2>
+<p class="p2">When Components-based software is implemented on top of a stack-based hardware architecture, the Stack is used to CALL from the Dispatcher to a Component and to RETURN back to the Dispatcher — i.e. the Stack needs only be 1-level deep.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implementation on Stack-Based Operating Systems</b></h2>
+<p class="p2">When Components-based software is implemented on top of a stack-based operating systems (based on stack-based hardware architectures), the Stack is used to CALL from the Dispatcher to a Component and to RETURN back to the Dispatcher — i.e. the Stack needs only be 1-level deep.</p>
+<hr>
+<p class="p7"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>thread aka process</p>
+<p class="p7"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>We tend to draw an artificial dividing line between closures for data (called closures) and closures for return-breadcrumbs (called continuations).</p>
+<p class="p7"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>Greenspun's 10th Rule https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule#:~:text=Greenspun's%20tenth%20rule%20of%20programming,of%20half%20of%20Common%20Lisp.</p>
+<p class="p7"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>aka Lambdas</p>
+<p class="p8"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>Components can be instantiated recursively, staring with the top-most component downwards.<span class="Apple-converted-space">  </span>Each instance gets its own queues and record its own parent relationship.<span class="Apple-converted-space">  </span>Further: a single Component can be used in many different apps (what Bennett calls multiple-use, vs. reuse) - the parent/child relationships depend on the application and cannot be backed into the static version of the Component.<span class="Apple-converted-space">  </span>The chain of ancestry is created on a per-app basis and might be different than any other app.</p>
+<p class="p8"><a id="fn6"></a><a href="#fnlink6"><span class="s3">[6]</span></a><span class="s3"> </span>JIT means Just In Time.</p>
+<p class="p7"><a id="fn7"></a><a href="#fnlink7"><span class="s3">[7]</span></a><span class="s3"> </span>Greenspun's Tenth Rule, again.</p>
+<p class="p7"><a id="fn8"></a><a href="#fnlink8"><span class="s3">[8]</span></a><span class="s3"> </span>PL means Programming Language</p>
+<p class="p7"><a id="fn9"></a><a href="#fnlink9"><span class="s3">[9]</span></a><span class="s3"> </span>The stack is usually optimized to use contiguous storage locations.<span class="Apple-converted-space">  </span>Further optimizations are based on knowledge of the last-in-first-out nature of the list.<span class="Apple-converted-space">  </span>See also https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</p>
+<p class="p7"><a id="fn10"></a><a href="#fnlink10"><span class="s3">[10]</span></a><span class="s3"> </span>I can think of only one real "race condition" - two events arriving so quickly that the hardware/software cannot tell which one came first.<span class="Apple-converted-space">  </span>All other "race conditions" are just accidental complexities caused by the use of a global stack - e.g. thread safety, full preemption, etc.</p>
+</div>
+</body>
+</html>
