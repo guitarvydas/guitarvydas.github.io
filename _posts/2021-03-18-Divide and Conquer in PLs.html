@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Divide and Conquer in PLs</title>
+  <meta name="CreationTime" content="2021-03-18T08:46:04Z">
+  <meta name="ModificationTime" content="2021-03-18T08:46:04Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Divide and Conquer</b></h2>
+<p class="p2">I think that the current crop of PLs — e.g. Python, JavaScript, etc. — show a distinct lack of divide-and-conquer mentality. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">IMO, everything should be a function call until the termination case is encountered in the recursive design. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">It should not be possible to use operators other than function calls except at the leaf levels. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">For example, "+" should not appear in any code except the very lowest-level code. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Likewise, "cons" and array operations. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Compilers can optimize-away function calls by making them into inline (macro) calls. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">AFAICT, most PLs allow unrestricted use of low-level operations (like "+", cons, arrays) at any level of the design.</p>
+<p class="p3"><br></p>
+<p class="p2">Low-level operations are like GOTOs — they should be avoided and <i>structured</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>See Also</b></h2>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/17/Details-Kill.html">https://guitarvydas.github.io/2021/03/17/Details-Kill.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">https://guitarvydas.github.io/2021/01/17/Factbases.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/16/Triples.html">https://guitarvydas.github.io/2021/03/16/Triples.html</a></p>
+<p class="p3"><br></p>
+</div>
+</body>
+</html>

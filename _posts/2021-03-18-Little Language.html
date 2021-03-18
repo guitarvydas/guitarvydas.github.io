@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Little Language</title>
+  <meta name="CreationTime" content="2021-03-18T09:41:28Z">
+  <meta name="ModificationTime" content="2021-03-18T09:41:28Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: lower-alpha}
+    ol.ol2 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">In this essay, I develop a little language (SCL)<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> in about 1 day.</p>
+<p class="p3"><br></p>
+<p class="p2">Then I use the little language (SCL) to filter SVG files to help me build another essay.</p>
+<p class="p3"><br></p>
+<p class="p2">This SCL was built in <i>layers</i>.<span class="Apple-converted-space">  </span>The <i>glue</i> SCL layer reads a spec, then generates code that can be used in a lower layer.<span class="Apple-converted-space">  </span>Both layers happen to use Ohm-JS.<span class="Apple-converted-space">  </span>This example is very simple, hence it contains only 2 layers.<span class="Apple-converted-space">  </span>Ideally, all SCLs should be this simple.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Github</b></h2>
+<p class="p2">The code associated with this essay can be found at</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://github.com/guitarvydas/glue/tree/master">https://github.com/guitarvydas/glue/tree/master</a></p>
+<p class="p3"><br></p>
+<p class="p2">The various branches — dev0, dev1, dev2, and dev3 — show the project at different stages (described below).</p>
+<p class="p3"><br></p>
+<p class="p2">The final test is in branch foreignFilter.</p>
+<p class="p3"><br></p>
+<p class="p2">All branches have been collapsed into branch master.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Quick</b></h2>
+<p class="p2">The <i>glue</i> language and tool was developed in less than one day.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Goal</b></h2>
+<p class="p2">The goal of this SCL is to help me write PEG grammars and associated code.</p>
+<p class="p3"><br></p>
+<p class="p2">I want to use parsers the way the most people use REGEXPs.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that REGEXPs are not "type checked" in most languages and editors.<span class="Apple-converted-space">  </span>Likewise, pattern matching in this SCL is not "type checked".<span class="Apple-converted-space">  </span>The programmer is responsible for writing the code correctly.</p>
+<p class="p3"><br></p>
+<p class="p2">Note that pattern-matching is already a kind of type check (pattern matching is use in FP languages), so, the lack of type-checking is not as big a problem here as it might be in general purpose programming languages.</p>
+<p class="p3"><br></p>
+<p class="p2">This is a fundamental principle of SCL design - YAGNI.<span class="Apple-converted-space">  </span>Save development time by skipping hoary operations, like type-checking.</p>
+<p class="p3"><br></p>
+<p class="p2">The goal is to create something that will generate useful code in less than a day of work (undercutting one of the principle reasons why DSLs are not used frequently).</p>
+<p class="p3"><br></p>
+<p class="p2">"Type checking" will come later, if this tool gets used frequently.</p>
+<p class="p3"><br></p>
+<p class="p2">I believe that it will be easier to type-check Glue programs than it would be to type-check REGEXPs.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Emitter</b></h2>
+<p class="p2">I want to write a little language — and SCL — that lets me pattern match a text file, then rearrange it and output it in some other way.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, I have the problem that I'm writing essays that include diagrams.<span class="Apple-converted-space">  </span>I use <a href="http://Draw.io">Draw.io</a> to create my diagrams.<span class="Apple-converted-space">  </span><a href="http://Draw.io">Draw.io</a> does not save in SVG format.<span class="Apple-converted-space">  </span>One must ask <a href="http://Draw.io">Draw.io</a> nicely to export the drawing in SVG format.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The exported SVG diagram contains a lot of noise.<span class="Apple-converted-space">  </span>I just want to see pure SVG, without the noise.</p>
+<p class="p3"><br></p>
+<p class="p2">The exported SVG file contains "&lt;switch&gt;…&lt;/switch&gt;" clauses that contain "&lt;foreignObject&gt;…&lt;/foreignObject&gt;".<span class="Apple-converted-space">  </span>This stuff overwhelms the .SVG file and I can't see the stuff that I really want to see (the rects, the ellipses, the paths, etc.).</p>
+<p class="p3"><br></p>
+<p class="p2">Can I write a <i>filter</i> to remove the noise? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">That is my goal.<span class="Apple-converted-space">  </span>Write a filter.<span class="Apple-converted-space">  </span>Delete the noise.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Divide and Conquer</b></h2>
+<p class="p3"><br></p>
+<p class="p2">Divide and conquer — on steroids — is recursive design.</p>
+<p class="p3"><br></p>
+<p class="p2">Chop every problem up into two pieces.</p>
+<p class="p3"><br></p>
+<p class="p2">Treat each piece separately.</p>
+<p class="p3"><br></p>
+<p class="p2">If you don't know how to solve a piece, chop it up into two pieces.</p>
+<p class="p3"><br></p>
+<p class="p2">Keep doing this until you know how to accomplish every piece.</p>
+<p class="p3"><br></p>
+<p class="p2">As you go, new ideas will pop up.<span class="Apple-converted-space">  </span>The new ideas can modify the problem at any level.</p>
+<p class="p3"><br></p>
+<p class="p2">My divide &amp; conquer for this (simple) problem went something like this:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li4">0<span class="Apple-converted-space">  </span>main problem / main goal - remove &lt;switch&gt; and &lt;foreignObject&gt; elements from the Drawio generated SVG files</li>
+  <li class="li4">This can't be done in REGEXP, so I decided to use something more powerful — a <i>parser </i>— which allowed me to use nesting<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>
+  <ul class="ul2">
+    <li class="li4">1<span class="Apple-converted-space">  </span><b>SVG grammar</b> — I know how to do this (PEG grammar in Ohm-JS)</li>
+    <li class="li4">2<span class="Apple-converted-space">  </span><b>other stuff</b> - I need to write the JavaScript to accompany the grammar</li>
+  </ul>
+  <ul class="ul2">
+    <ul class="ul2">
+      <li class="li4">2.0 <b>invent</b> a sub-language (I call it <i>glue</i>) to help me write the JavaScript</li>
+      <li class="li4">2.0 is simpler than the original problem</li>
+      <li class="li4"><b>chop</b> 2.0 into up 2 pieces</li>
+    </ul>
+    <ul class="ul2">
+      <ul class="ul2">
+        <li class="li4">2.1<span class="Apple-converted-space">  </span><b>invent</b> a helper grammar that works with Ohm-JS
+        <ul class="ul2">
+          <li class="li4">2.1.1<span class="Apple-converted-space">  </span><b>implement</b> that helper grammar
+          <ul class="ul2">
+            <li class="li4">the first cut is in branch dev1</li>
+            <li class="li4">implement glue.js that reads in the grammar, reads the helper language code</li>
+            <li class="li4">run the grammar parser and write "successful" or not (in which case, I use Ohm-JS's grammar tracer)</li>
+          </ul></li>
+          <li class="li4">2.1.2<span class="Apple-converted-space">  </span><b>write</b> the javascript support code for the helper language</li>
+        </ul>
+        <ul class="ul2">
+          <ul class="ul2">
+            <li class="li4">this is straight-forward, so I wrote the JS code directly (branch dev3)</li>
+            <li class="li4">2.1.2.0<span class="Apple-converted-space">  </span><b>feedback</b>: while building this, I realized that I could make the helper tool even simpler</li>
+          </ul>
+        </ul>
+        <ul class="ul2">
+          <ul class="ul2">
+            <li class="li4">2.1.2.1 <b>re-invent</b> the grammar for the helper tool, using the already-built grammar and JS code</li>
+          </ul>
+        </ul></li>
+      </ul>
+      <li class="li4">2.2 <b>decide</b> how to incorporate the generated helper code into the glue.js tool
+      <ul class="ul2">
+        <li class="li4">2.2.0 I decided to take the easiest route - I would simply COPY/PASTE the generated code into the Ohm-JS boilerplate<span class="Apple-converted-space"> </span></li>
+        <li class="li4">The resulting code is in branch dev3.</li>
+      </ul></li>
+    </ul>
+  </ul></li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">The above is recursive design.<span class="Apple-converted-space">  </span>Each step reduces the original problem until the termination case is encountered.<span class="Apple-converted-space">  </span>Recursive break-down is used (recursively) on each branch of the problem — there are many termination cases.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>I think that the current crop of PLs — e.g. Python, JavaScript, etc. — show a distinct lack of divide-and-conquer mentality.<span class="Apple-converted-space">  </span>IMO, everything should be a function call until the termination case is encountered in the recursive design.<span class="Apple-converted-space">  </span>It should not be possible to use operators other than function calls except at the leaf levels.<span class="Apple-converted-space">  </span>For example, "+" should not appear in any code except the very lowest-level code.<span class="Apple-converted-space">  </span>Likewise, "cons" and array operations.<span class="Apple-converted-space">  </span>Compilers can optimize-away function calls by making them into inline (macro) calls.<span class="Apple-converted-space">  </span>AFAICT, most PLs allow unrestricted use of low-level operations (like "+", cons, arrays) at any level of the design.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The SVG Grammar</b></h2>
+<p class="p2">I wrote a first cut of the grammar in <a href="https://github.com/guitarvydas/glue">https://github.com/guitarvydas/glue</a> (branch: dev0).</p>
+<p class="p3"><br></p>
+<p class="p2">I got it running.<span class="Apple-converted-space">  </span>That was a "major" hurdle, since it required me to understand how to use Ohm-JS, how to read a file in JS, etc., etc.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>The "hurdle" decreases every time I use Ohm-JS and JavaScript, but I didn't need to wait to go down the respective learning curves.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">I started to <i>use</i> Ohm-JS and JavaScript right away.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Ohm-JS knows how to do its magic in HTML scripts.<span class="Apple-converted-space">  </span>I've explored that possibility in </i><a href="https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf"><i>https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf</i></a><i>.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Then, I refined my ideas and re-cut the SVG grammar.<span class="Apple-converted-space">  </span>Branch: dev3.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Final SVG Grammar</b></h2>
+<p class="p5"><br></p>
+<p class="p6">SVGSwitchAndForeign {</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p6"><span class="Apple-converted-space">  </span>XMLHeader = "&lt;?" stuff* "?&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>DOCTypeHeader = "&lt;!DOCTYPE" stuff* "&gt;" <span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>SvgElement = "&lt;svg" attribute* "&gt;" EmptyDefs Element+ "&lt;/svg&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>EmptyDefs = "&lt;defs/&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>Element = ElementWithSwitch | ElementWithForeign | ElementWithElements | ElementWithoutElements</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithSwitch =<span class="Apple-converted-space">  </span>"&lt;switch&gt;" Element Element "&lt;/switch&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithForeign = "&lt;foreignObject" attribute* "&gt;" Element "&lt;/foreignObject&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithElements = "&lt;" name stuff* "&gt;" (Element+ | text*) "&lt;/" name "&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithoutElements = "&lt;" name stuff* "/&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>stuff = ~"&gt;" ~"/&gt;" ~"&lt;" ~"?&gt;" any</p>
+<p class="p6"><span class="Apple-converted-space">  </span>text = stuff</p>
+<p class="p6"><span class="Apple-converted-space">  </span>attribute = stuff</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name = name1st nameFollow*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name1st = "a" .. "z" | "A" .. "Z"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>nameFollow = "0" .. "9" | name1st</p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The glue Tool</b></h2>
+<p class="p4">Problem (2.1) is that of creating an <i>identity</i> grammar for SVG.</p>
+<p class="p3"><br></p>
+<p class="p4">I break this problem down into 2 parts</p>
+<ul class="ul1">
+  <li class="li4">match SVG and leave hooks</li>
+  <li class="li4">rearrange the matches.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p4">Using Ohm-JS, I need to</p>
+<ul class="ul1">
+  <li class="li4">write a grammar (for SVG)</li>
+  <li class="li4">write so-called "semantics" code to do the rearranging.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p4">I want a tool which makes it easy to pattern-match SVG and to re-arrange the matched bits.</p>
+<p class="p7"><br></p>
+<p class="p4">[<i>In Ohm-JS, you write a grammar to do the pattern-matching, and you write some JavaScript code to do the re-arranging.<span class="Apple-converted-space">  </span>There is one JavaScript function for each rule in the grammar.<span class="Apple-converted-space">  </span>The matches are passed in as function parameters.</i>]</p>
+<p class="p7"><br></p>
+<p class="p4">Roughly, I want a tool that does something like:</p>
+<p class="p6">pattern matcher —&gt; javascript code<a id="fnlink3"></a><a href="#fn3"><span class="s1"><sup>[3]</sup></span></a>.</p>
+<p class="p7"><br></p>
+<p class="p4">The pattern matcher portion is handled by Ohm-JS.<span class="Apple-converted-space">  </span>It's called the <i>grammar.</i> The syntax is well-documented in <a href="https://github.com/harc/ohm">https://github.com/harc/ohm</a>.</p>
+<p class="p7"><br></p>
+<p class="p4">The javascript re-arranging code is just a mess of JavaScript code.<span class="Apple-converted-space">  </span>This is called the <i>semantics</i> in Ohm-JS documentation.</p>
+<p class="p7"><br></p>
+<p class="p4">I've done this before.<span class="Apple-converted-space">  </span>Writing the semantics code can be very repetitive and boring.<span class="Apple-converted-space">  </span>In fact, all that I need is some way to tie grammar rules to JavaScript `…${v}…` strings.</p>
+<p class="p7"><br></p>
+<p class="p4">I want:</p>
+<p class="p7"><br></p>
+<p class="p6">.SVG —&gt; Ohm-JS grammar —&gt; string-language —&gt; same .SVG</p>
+<p class="p7"><br></p>
+<p class="p4">Actually, I would be happy if the string-language was simply the same as JavaScript `…${v}…` strings.<span class="Apple-converted-space">  </span>So, I would settle for:</p>
+<p class="p5"><br></p>
+<p class="p6">.SVG —&gt; Ohm-JS grammar —&gt; JavaScript `…` strings —&gt; same .SVG</p>
+<p class="p3"><br></p>
+<p class="p2">OK, so I want to write a grammar in Ohm-JS, then I want a mini-language that lets me rewrite pattern matches using JavaScript strings.<span class="Apple-converted-space">  </span>I <i>could </i>have done this in raw JavaScript, but I didn't want to write details when I could automate<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.</p>
+<p class="p2">Ohm-JS gives me each match (in some internal format)<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> as function parameters.</p>
+<p class="p2">Now, what I want is:</p>
+<p class="p3"><br></p>
+<p class="p6">.SVG —&gt; Ohm-JS grammar —&gt; JavaScript variables —&gt; JavaScript `…` strings —&gt; same as original .SVG</p>
+<p class="p7"><br></p>
+<p class="p4">So, my requirements boil down to:</p>
+<ol class="ol1">
+  <li class="li4">use Ohm-JS to write a grammar for SVG (YAGNI, I don't need to handle <i>all </i>of SVG, just enough for my current problem, I can get away with 95% of SVG.<span class="Apple-converted-space">  </span>The last 5% is a killer, usually.<span class="Apple-converted-space">  </span>So avoid it.)</li>
+  <li class="li4">use another tool to build my JavaScript re-arranger code</li>
+  <li class="li4">run Ohm-JS+JS-rearranger-code to input a .SVG and spit it back out unchanged (but leaving me hooks for later).</li>
+</ol>
+<p class="p7"><br></p>
+<p class="p4">I need to write a tool in Ohm-JS to spit out code that could be used with Ohm-JS to eat and spit out .SVG files.</p>
+<p class="p7"><br></p>
+<p class="p4">My tool syntax is something like:</p>
+<p class="p7"><br></p>
+<p class="p6">grammarRuleName variables —&gt; javascript</p>
+<p class="p7"><br></p>
+<p class="p4">One more complication: some of the grammar rules match one thing, but some grammar rules match multiple-things.<span class="Apple-converted-space">  </span>The +/*/? operators in the grammar match multiple things. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">In Ohm-JS, single matches are returned as JavaScript variables, and multiple matches are returned as JavaScript arrays (see the appendix).<span class="Apple-converted-space">  </span>So, for this mini-language, I need to differentiate between the two kinds of things and generate different code for each kind of thing (single vs. multiple).</p>
+<p class="p7"><br></p>
+<p class="p4">If the grammar has +/*/? in it, then we need more JavaScript code.<span class="Apple-converted-space">  </span>If there is no +/*/?, then we still need JavaScript code, but less of it.</p>
+<p class="p7"><br></p>
+<p class="p4">If we choose to use strings, then JavaScript has the .join('') operator, which makes handling of arrays of strings particularly easy.</p>
+<p class="p7"><br></p>
+<p class="p4">One grammar rule can have both types of matches (singles and arrays).</p>
+<p class="p7"><br></p>
+<p class="p4">So, for example, for the grammar rule:</p>
+<p class="p7"><br></p>
+<p class="p6">R = A B+ C</p>
+<p class="p7"><br></p>
+<p class="p4">we need to create a function like:</p>
+<p class="p7"><br></p>
+<p class="p6">R = function (a, bArray, c) { return a.semcode () + bArray.semcode (). join('') + c.semcode (); },</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p4">[<i>There are more details, but I'm going to skip over them for now.<span class="Apple-converted-space">  </span>See the final source code.<span class="Apple-converted-space">  </span>Details kill.</i>].</p>
+<p class="p7"><br></p>
+<p class="p4">[<i>Note that I like to leave spaces before parameter lists (it results in cleaner-looking code after you get used to it).<span class="Apple-converted-space">  </span>I write "</i><span class="s2"><i>fn(a,b)"</i></span><i> as "</i><span class="s2"><i>fn (a, b)"</i></span><i>.<span class="Apple-converted-space">  </span>Compressing whitespace is so 1950's.</i>]</p>
+<p class="p7"><br></p>
+<p class="p4">My first cut at the SCL (mini language) was to imagine a language where statements like:</p>
+<p class="p7"><br></p>
+<p class="p6">XMLHeader [1 2s 3] = $1 @2s $3</p>
+<p class="p7"><br></p>
+<p class="p4">would generate JavaScript, like:</p>
+<p class="p5"><br></p>
+<p class="p6">XMLHeader = function (p1, p2s, p3) { return p1.glue () + p2s.glue.join('') + p3.glue () };</p>
+<p class="p3"><br></p>
+<p class="p4">I generated a prototype and made it run.<span class="Apple-converted-space">  </span>Branches "dev0" and "dev1"</p>
+<p class="p7"><br></p>
+<p class="p4">[<i>Why did I use brackets instead of parentheses for the parameter lists?<span class="Apple-converted-space">  </span>To remind me that this isn't JavaScript — and — to remind me that I was trying to create an SCL that was declarative — i.e. I was allowed to put "operators" in the left-hand side as well as on the right-hand side.</i>]</p>
+<p class="p7"><br></p>
+<p class="p4">While tinkering with the details, I realized that I could reduce this language to something with statements like:</p>
+<p class="p7"><br></p>
+<p class="p6">XMLHeader [x @y z] = abc${x}def${y}ghi${z}jkl</p>
+<p class="p7"><br></p>
+<p class="p4">that would generate (JavaScript) code like:<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p6">XMLHeader = function (_x, _y, _z) {</p>
+<p class="p6"><span class="Apple-converted-space">  </span>var x = _x.glue ();</p>
+<p class="p6"><span class="Apple-converted-space">  </span>var y = _y.glue.join('');</p>
+<p class="p6"><span class="Apple-converted-space">  </span>var z = _z.glue ();</p>
+<p class="p6"><span class="Apple-converted-space">  </span>return `abc${x}def${y}ghi${z}jkl`</p>
+<p class="p6">}</p>
+<p class="p8"><br></p>
+<p class="p4">[<i>In JavaScript, "_" is just a normal character.<span class="Apple-converted-space">  </span>It is a convention to use "_" as a prefix for untouchable data (unexported).</i>]</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Final glue Tool Grammar</b></h2>
+<p class="p5"><br></p>
+<p class="p6">SemanticsSCL {</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Semantics = SemanticsStatement+</p>
+<p class="p6"><span class="Apple-converted-space">  </span>SemanticsStatement = RuleName "[" Parameters "]" "=" Rewrites</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>RuleName = letter1 letterRest*</p>
+<p class="p5"><span class="Apple-converted-space">  </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>Parameters = Parameter+</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Parameter = treeparameter | flatparameter</p>
+<p class="p6"><span class="Apple-converted-space">  </span>flatparameter = fpws | fpd</p>
+<p class="p6"><span class="Apple-converted-space">  </span>fpws = pname ws+</p>
+<p class="p6"><span class="Apple-converted-space">  </span>fpd = pname delimiter</p>
+<p class="p6"><span class="Apple-converted-space">  </span>treeparameter = "@" tflatparameter</p>
+<p class="p6"><span class="Apple-converted-space">  </span>tflatparameter = tfpws | tfpd</p>
+<p class="p6"><span class="Apple-converted-space">  </span>tfpws = pname ws+</p>
+<p class="p6"><span class="Apple-converted-space">  </span>tfpd = pname delimiter</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>pname = letterRest letterRest*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Rewrites = rwstring</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>letter1 = "_" | "a" .. "z" | "A" .. "Z"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>letterRest = "0" .. "9" | letter1</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>ws = "\n" | " " | "\t" | ","<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>delimiter = &amp;"]" | &amp;"="</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>rwstring = stringchar*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>stringchar = ~"\n" any</p>
+<p class="p5"><br></p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Emitter</b></h2>
+<p class="p2">branch: dev3</p>
+<p class="p3"><br></p>
+<p class="p2">I wrote code that is very repetitive, on purpose.<span class="Apple-converted-space">  </span>For example, in <span class="s2">SemanticsStatement </span>I evaluated each match, although only 1, 3 and 6 are used.</p>
+<p class="p3"><br></p>
+<p class="p2">I name each parameter <span class="s2">_n</span>.<span class="Apple-converted-space">  </span>(Underscore is not special — it is just another character).</p>
+<p class="p3"><br></p>
+<p class="p2">I name each local (temporary) variable as <span class="s2">__n</span>.<span class="Apple-converted-space">  </span>(Two underscores and a digit).</p>
+<p class="p3"><br></p>
+<p class="p2">To "walk the tree" — evaluate the CST by applying semantics functions, I needed to call the function <span class="s2">_glue ()</span> on each match.</p>
+<p class="p3"><br></p>
+<p class="p2">I chose to make every function return a string.<span class="Apple-converted-space">  </span>I use JavaScript `…` strings to build the results.</p>
+<p class="p3"><br></p>
+<p class="p2">In places where Ohm-JS returns an array, I also call the .join ('') function.<span class="Apple-converted-space">  </span>For example, in <span class="s2">RuleName</span>, the second parameter is an array.<span class="Apple-converted-space">  </span>I collapse it with the following code:</p>
+<p class="p3"><br></p>
+<p class="p6">var __2s = _2s._glue ().join ('')</p>
+<p class="p8"><br></p>
+<p class="p2">Use <span class="s2">run.bash</span> to run the GLUE language.</p>
+<p class="p8"><br></p>
+<p class="p2">The final JavaScript code is:</p>
+<p class="p8"><br></p>
+<p class="p5"><br></p>
+<p class="p6">// npm install ohm-js</p>
+<p class="p5"><br></p>
+<p class="p6">function ohm_parse (grammar, text) {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var ohm = require ('ohm-js');</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var parser = ohm.grammar (grammar);</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var cst = parser.match (text);</p>
+<p class="p6"><span class="Apple-converted-space">    </span>if (cst.succeeded ()) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>return { parser: parser, cst: cst };</p>
+<p class="p6"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>console.log (parser.trace (text).toString ());</p>
+<p class="p6"><span class="Apple-tab-span">	</span>throw "Ohm matching failed";</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p6">function getNamedFile (fname) {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var fs = require ('fs');</p>
+<p class="p6"><span class="Apple-converted-space">    </span>if (fname === undefined || fname === null || fname === "-") {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>return fs.readFileSync (0, 'utf-8');</p>
+<p class="p6"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>return fs.readFileSync (fname, 'utf-8');</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}<span class="Apple-tab-span">	</span></p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p6">var varNameStack = [];</p>
+<p class="p5"><br></p>
+<p class="p6">function addSemantics (sem) {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>sem.addOperation ('_glue', {</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Semantics: function (_1s) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1s._glue ().join ('');<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `sem.addOperation ('_glue', {${__1}});`;<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>SemanticsStatement: function (_1, _2, _3, _4, _5, _6) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>varNameStack = [];</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __2 = _2._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __3 = _3._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __4 = _4._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __5 = _5._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __6 = _6._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `</p>
+<p class="p6"><span class="Apple-converted-space">               </span>${__1} : function (${__3}) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">                          </span>${varNameStack.join ('\n')}</p>
+<p class="p6"><span class="Apple-converted-space">                          </span>return \`${__6}\`;<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p6"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>RuleName: function (_1, _2s) { var __1 = _1._glue (); var __2s = _2s._glue ().join (''); return __1 + __2s; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Parameters: function (_1s) {<span class="Apple-converted-space">  </span>var __1s = _1s._glue ().join (','); return __1s; },</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Parameter: function (_1) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1._glue ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `${__1}`;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>flatparameter: function (_1) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1._glue ();<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>varNameStack.push (`var ${__1} = _${__1}._glue ();`);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `_${__1}`;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>fpws: function (_1, _2s) { var __1 = _1._glue (); var __2s = _2s._glue ().join (''); return __1; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>fpd: function (_1, _2) { var __1 = _1._glue (); var __2 = _2._glue (); return __1; },</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>treeparameter: function (_1, _2) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1._glue ();<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __2 = _2._glue ();<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>varNameStack.push (`var ${__2} = _${__2}._glue ().join ('');`);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `_${__2}`;<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>tflatparameter: function (_1) {<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>var __1 = _1._glue ();<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>return `${__1}`;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>tfpws: function (_1, _2s) { var __1 = _1._glue (); var __2s = _2s._glue ().join (''); return __1; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>tfpd: function (_1, _2) { var __1 = _1._glue (); var __2 = _2._glue (); return __1; },</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>pname: function (_1, _2s) { var __1 = _1._glue (); var __2s = _2s._glue ().join (''); return __1 + __2s;},</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Rewrites: function (_1) { var __1 = _1._glue (); return __1; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>letter1: function (_1) { var __1 = _1._glue (); return __1; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>letterRest: function (_1) { var __1 = _1._glue (); return __1; },</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>ws: function (_1) { var __1 = _1._glue (); return __1; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>delimiter: function (_1) { return ""; },</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>rwstring: function (_1s) { var __1s = _1s._glue ().join (''); return __1s; },</p>
+<p class="p6"><span class="Apple-tab-span">	</span>stringchar: function (_1) { var __1 = _1._glue (); return __1; },</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>_terminal: function () { return this.primitiveValue; }</p>
+<p class="p6"><span class="Apple-converted-space">    </span>});</p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p6">function main () {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>// usage: node glue &lt;file</p>
+<p class="p6"><span class="Apple-converted-space">    </span>// reads grammar from "glue.ohm"<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">    </span>var text = getNamedFile ("-");</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var grammar = getNamedFile ("glue.ohm");</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var { parser, cst } = ohm_parse (grammar, text);</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var sem = {};</p>
+<p class="p6"><span class="Apple-converted-space">    </span>var outputString = "";</p>
+<p class="p6"><span class="Apple-converted-space">    </span>if (cst.succeeded ()) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>sem = parser.createSemantics ();</p>
+<p class="p6"><span class="Apple-tab-span">	</span>addSemantics (sem);</p>
+<p class="p6"><span class="Apple-tab-span">	</span>outputString = sem (cst)._glue ();</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6"><span class="Apple-converted-space">    </span>return { cst: cst, semantics: sem, resultString: outputString };</p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6">var { cst, semantics, resultString } = main ();</p>
+<p class="p6">console.log(resultString);</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Brainstorming</b></h2>
+<p class="p4">It is better to <i>do</i> <i>something</i> rather than just sitting around and <i>thinking</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">It is OK to throw intermediate results away. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">Sometimes the intermediate results generate new ideas. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">This is called <i>brainstorming</i> in songwriting and is such a reliable technique that several teachers teach you to do this before creating every song. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">The <i>brainstorming</i> techniques in songwriting get you to think outside of the box and to fill-in the story with more detail.</p>
+<p class="p7"><br></p>
+<p class="p4">In software development, brainstorming helped me make the <i>glue</i> SCL even more simple. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">Tinkering with code produces results similar to "shower time".<span class="Apple-converted-space">  </span>Menial tasks move the project forward while allowing time for deeper thought.<span class="Apple-converted-space">  </span>Deeper thought, applied to bits of the working project, resulted in out-of-the-box thoughts that would not have occurred to me if I hadn't made the base levels work.<span class="Apple-converted-space">  </span>Thinking works better when it has "something to latch onto".<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Test</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Test Use Case</b></h2>
+<p class="p2">I used the <i>glue</i> tool to remove &lt;switch&gt; and &lt;foreignObject…&gt; from a sample SVG file (generated by Drawio).</p>
+<p class="p3"><br></p>
+<ol class="ol2">
+  <li class="li4">I used the SVG grammar "as is".</li>
+  <li class="li4">I wrote a <i>glue</i> script to generate the extra JavaScript "semantics" code.</li>
+  <li class="li4">I ran the <i>glue </i>tool and pasted the result into my boilerplate.</li>
+  <li class="li4">I ran frun.bash.<span class="Apple-converted-space">  </span>(This ran the <i>glue </i>tool using <span class="s2">semantics.glue</span>, then ran the result using input file <span class="s2">test.svg</span>).</li>
+</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Transpiler Spec</b></h2>
+<p class="p2">My final spec is:</p>
+<p class="p3"><br></p>
+<p class="p6">SVGSwitchAndForeign {</p>
+<p class="p6"><span class="Apple-converted-space">  </span>svg = xmlHeader docTypeHeader svgElement</p>
+<p class="p6"><span class="Apple-converted-space">  </span>xmlHeader = "&lt;?" stuff* "?&gt;" ws*<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>docTypeHeader = "&lt;!DOCTYPE" stuff* "&gt;" ws*<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>svgElement = "&lt;svg" attribute* "&gt;" ws* emptyDefs element+ "&lt;/svg&gt;" ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>emptyDefs = "&lt;defs/&gt;" ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>element = (elementWithSwitch | elementWithForeign | elementWithelements | elementWithoutelements) ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>elementWithSwitch =<span class="Apple-converted-space">  </span>"&lt;switch&gt;" ws* element element "&lt;/switch&gt;" ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>elementWithForeign = "&lt;foreignObject" attribute* "&gt;" ws* element "&lt;/foreignObject&gt;" ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>elementWithelements = "&lt;" name stuff* "&gt;" ws* (element+ | text*) "&lt;/" name "&gt;" ws*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>elementWithoutelements = "&lt;" name stuff* "/&gt;"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>stuff = ~"&gt;" ~"/&gt;" ~"&lt;" ~"?&gt;" any</p>
+<p class="p6"><span class="Apple-converted-space">  </span>text = stuff</p>
+<p class="p6"><span class="Apple-converted-space">  </span>attribute = stuff</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name = name1st nameFollow*</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name1st = "a" .. "z" | "A" .. "Z"</p>
+<p class="p6"><span class="Apple-converted-space">  </span>nameFollow = "0" .. "9" | name1st</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>ws = " " | "\n" | "\t"</p>
+<p class="p6">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>Svg [a b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>XMLHeader [a @b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>DOCTypeHeader [a @b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>SvgElement [a @b c d @e f] = ${a}${b}${c}${d}${e}${f}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>EmptyDefs [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Element [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithSwitch [a b c d] = ${a}${b}${c}${d}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithForeign [a @b c d e] = ${a}${b}${c}${d}${e}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithElements [a b @c d @e f g h] = ${a}${b}${c}${d}${e}${f}${g}${h}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithoutElements [a b @c d] = ${a}${b}${c}${d}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>stuff [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>text [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>attribute [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name [a @b] = ${a}${b}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name1st [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>nameFollow [a] = ${a}</p>
+<p class="p5"><br></p>
+<p class="p3"><br></p>
+<p class="p2">Which is a lot less code<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> than what is written in raw JavaScript.</p>
+<p class="p3"><br></p>
+<p class="p2">This code chops — divide and conquer — up the problem into two obvious parts:</p>
+<p class="p3"><br></p>
+<ol class="ol2">
+  <li class="li4">breathe in — pattern match the .SVG</li>
+  <li class="li4">breathe out — rearrange the matched code and spit it out.</li>
+</ol>
+<p class="p7"><br></p>
+<p class="p4">Each part does one thing only — the first part does pattern matching, the second part does rearranging.<span class="Apple-converted-space">  </span>Each part is described by its own SCL (DSL).<span class="Apple-converted-space">  </span>Pattern matching is best described as a <span class="s3">grammar</span>, while rearranging is best described as <span class="s3">JavaScript `…` syntax</span>.</p>
+<p class="p7"><br></p>
+<p class="p4">[<i>I don't try to force-fit everything into one paradigm.<span class="Apple-converted-space">  </span>Pattern matchers don't make for good code rearrangers, JavaScript strings don't make for good pattern matchers.<span class="Apple-converted-space">  </span>General purpose languages don't make for good anything.<span class="Apple-converted-space">  </span>Except details.<span class="Apple-converted-space">  </span>Details kill.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Test glue Code</b></h2>
+<p class="p2">The <i>glue</i> code that corresponds to the SVG grammar is:</p>
+<p class="p3"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>Svg [a b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>XMLHeader [a @b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>DOCTypeHeader [a @b c] = ${a}${b}${c}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>SvgElement [a @b c d @e f] = ${a}${b}${c}${d}${e}${f}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>EmptyDefs [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Element [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithSwitch [a b c d] = ${a}${b}${c}${d}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithForeign [a @b c d e] = ${a}${b}${c}${d}${e}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithElements [a b @c d @e f g h] = ${a}${b}${c}${d}${e}${f}${g}${h}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>ElementWithoutElements [a b @c d] = ${a}${b}${c}${d}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>stuff [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>text [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>attribute [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name [a @b] = ${a}${b}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>name1st [a] = ${a}</p>
+<p class="p6"><span class="Apple-converted-space">  </span>nameFollow [a] = ${a}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p2">This says:</p>
+<p class="p3"><br></p>
+<p class="p2">Svg is a grammar rule. <span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>Svg = XMLHeader DOCTypeHeader SvgElement</p>
+<p class="p2">When<span class="Apple-converted-space">  </span>the Svg grammar rule is matched, the matches are provided (as CSTs) in parameters a, b, and c.<span class="Apple-converted-space">    </span>Combine the three parameters using JavaScript `…` string syntax and return that string result.</p>
+<p class="p3"><br></p>
+<p class="p2">XMLHeader is another grammar rule.<span class="Apple-converted-space">  </span>The grammar rule is<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space"> </span>XMLHeader = "&lt;?" stuff* "?&gt;"<span class="Apple-converted-space"> </span></p>
+<p class="p2">In this case, the grammar matches 3 items ("&lt;?", stuff* and "?&gt;").<span class="Apple-converted-space">  </span>The second item, though, has a zero-or-more operator (*), which means that the grammar returns an array (for zero items, the array has length 0).<span class="Apple-converted-space">  </span>The fact that the second item — b — is non-scalar (an array) is denoted by writing <span class="s2">@b </span>on the left-hand side of the GLUE statement.<span class="Apple-converted-space">  </span>The right-hand side uses simple JavaScript `…` notation where the tool has collapsed the second item into the final variable called <span class="s2">b</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">The programmer is responsible for writing the LHS's correctly.</p>
+<p class="p3"><br></p>
+<p class="p2">There is no "type checking".<span class="Apple-converted-space">  </span>This tool language is more like an editor operation than a DSL.<span class="Apple-converted-space">  </span>Comparison: REGEXPs are not type-checked (yet) in languages that use them.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Details About Matching</b></h2>
+<p class="p4">In Ohm-JS, each grammar rule returns <i>&lt;something&gt;</i> after it is finished. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">If the rule is something like:</p>
+<p class="p7"><br></p>
+<p class="p6">R = A B C</p>
+<p class="p7"><br></p>
+<p class="p4">then the grammar rule called "R" returns a single thing — a combination of the return values from A and B and C. <span class="Apple-converted-space">  </span>In this case A maps to a JS variable and B maps to a JS variable and C maps to a JS variable.<span class="Apple-converted-space">  </span>Each variable contains one <i>&lt;thing&gt;<a id="fnlink7"></a></i><a href="#fn7"><sup>[7]</sup></a><i>.</i></p>
+<p class="p7"><i></i><br></p>
+<p class="p4">But, if the rule is something like:</p>
+<p class="p7"><br></p>
+<p class="p6">R = A B* C</p>
+<p class="p7"><br></p>
+<p class="p4">then the B maps to an <i>array </i>of <i>&lt;something&gt;</i>s.<span class="Apple-converted-space">  </span>This is easy to handle in JavaScript, but you — the programmer — need to know when to expect a single thing or an array of things.</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Notation Affects Thinking</b></h2>
+<p class="p4">A side-note on how notation affects thinking… In ESRAP, B* returns a list (a tree). <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">It took me a while to reconcile what I expected (coming from Lisp to JS).<span class="Apple-converted-space">  </span>JS wants you to express details in arrays, whereas Lisp makes it easy to think in terms of trees (aka lists).</p>
+<p class="p7"><br></p>
+<p class="p4">Ohm-JS could have returned JS objects, but it returned arrays instead.<span class="Apple-converted-space">  </span>The creator(s) of Ohm-JS was influenced by JS to use arrays instead of Objects. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">The creator of ESRAP was influenced by Lisp to return lists.<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p4">The difference is made more clear in something like</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-converted-space"> </span>(A* B* C*)</p>
+<p class="p7"><br></p>
+<p class="p4">where ESRAP returns one list and Ohm-JS returns three arrays.</p>
+<p class="p7"><br></p>
+<p class="p4">[<i>Note that ESRAP rewrites this as (and (* A) (* B) (* C)) which is less clear, if you are thinking in terms of pattern matching.<span class="Apple-converted-space">  </span>This is yet another orthogonal<span class="Apple-converted-space">  </span>conversation — see my essay </i><a href="https://guitarvydas.github.io/2021/03/16/Triples.html"><i>https://guitarvydas.github.io/2021/03/16/Triples.html</i></a>]</p>
+<p class="p9"><br></p>
+<hr>
+<p class="p10"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>SCL means Solution Specific Language.<span class="Apple-converted-space">  </span>Like the original idea behind DSLs.</p>
+<p class="p11"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>I've written parsers many times before.<span class="Apple-converted-space">  </span>Each time I learned something new.<span class="Apple-converted-space">  </span>This time, I can apply a subset of what I learned, with cofidence.</p>
+<p class="p11"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>The JavaScript code that hangs off of the grammar is called "semantics" in Ohm-JS.<span class="Apple-converted-space">  </span>This term comes from compiler technology, but you don't really need to know about this stuff to simply use it.</p>
+<p class="p10"><a id="fn4"></a><a href="#fnlink4"><span class="s1">[4]</span></a><span class="s1"> </span>See my essay "Details Kill"</p>
+<p class="p10"><a id="fn5"></a><a href="#fnlink5"><span class="s1">[5]</span></a><span class="s1"> </span>The format is a CST - a concrete syntax tree.<span class="Apple-converted-space">  </span>CSTs are often conflated with ASTs, but there is nothing "abstract" about CSTs.<span class="Apple-converted-space">  </span>ASTs define the universe of possibilities, but CSTs represent the <span class="s3">actual</span> incoming code.</p>
+<p class="p10"><a id="fn6"></a><a href="#fnlink6"><span class="s1">[6]</span></a><span class="s1"> </span>and less detail - details kill</p>
+<p class="p10"><a id="fn7"></a><a href="#fnlink7"><span class="s1">[7]</span></a><span class="s1"> </span>A CST, to be exact.<span class="Apple-converted-space">  </span>A CST is represented as an Object with certain format (see Ohm-JS source code for exact details).</p>
+<p class="p10"><a id="fn8"></a><a href="#fnlink8"><span class="s1">[8]</span></a><span class="s1"> </span>One could argue that arrays are just optimized lists, but that's beside the point.</p>
+</div>
+</body>
+</html>
