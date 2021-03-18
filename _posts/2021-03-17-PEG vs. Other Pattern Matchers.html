@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>PEG vs. Other Pattern Matchers</title>
-  <meta name="CreationTime" content="2021-03-17T10:20:59Z">
-  <meta name="ModificationTime" content="2021-03-17T10:20:59Z">
+  <meta name="CreationTime" content="2021-03-17T23:38:11Z">
+  <meta name="ModificationTime" content="2021-03-17T23:38:11Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -73,17 +73,19 @@
   <li class="li4">in other PEGs, you have to soil the grammar by adding such details<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> to the grammar.<span class="Apple-converted-space">  </span>Details kill readability.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a></li>
 </ul>
 <h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scanning and Parsing</b></h2>
+<p class="p2">[<i>Skip this section if you just want to use PEG]</i></p>
+<p class="p3"><i></i><br></p>
 <p class="p2">In previous technologies, one had to write a <i>scanner</i> and a <i>parser </i>separately.</p>
 <p class="p3"><br></p>
 <p class="p2">For example,<span class="Apple-converted-space">  </span>the YACC tool generates parsers, but it needs a scanner tool, usually LEX.</p>
 <p class="p3"><br></p>
 <p class="p2">LEX uses a different notation (REGEXP) than YACC.</p>
 <p class="p3"><br></p>
-<p class="p2">PEG subsumes all of that into one notation - you can write the scanner <i>and</i> the parse in one go.<span class="Apple-converted-space">  </span>This seems like a small difference but it makes it possible to write SCLs (little languages) at will. <span class="Apple-converted-space"> </span></p>
+<p class="p2">PEG subsumes all of that into one notation - you can write the scanner <i>and</i> the parser in one go.<span class="Apple-converted-space">  </span>This seems like a small difference but it makes it possible to write SCLs (little languages) at will. <span class="Apple-converted-space"> </span></p>
 <p class="p3"><br></p>
 <p class="p2">In fact, I argue that one <i>should </i>write many SCLs for any one project.<span class="Apple-converted-space">  </span>Any one project — if big and interesting enough — involves more than one paradigm.<span class="Apple-converted-space">  </span>Each paradigm should get its own SCL.<span class="Apple-converted-space">  </span>At present, we choose one 3<span class="s2"><sup>rd</sup></span>-generation language (like Python, JavaScript, Rust, etc.) and implement all paradigms in that one language.<span class="Apple-converted-space">  </span>The result is an unreadable mess.<span class="Apple-converted-space">  </span>Details kill readability.</p>
 <p class="p3"><br></p>
-<p class="p2">The YACC/LEX business kept me from building many little languages for each project.</p>
+<p class="p2">The YACC/LEX dichotomy kept me from building many little languages for each project.</p>
 <p class="p3"><br></p>
 <p class="p2">PEG is opening my eyes to new ways of doing things.</p>
 <p class="p3"><br></p>
