@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>TOE for Software Development</title>
+  <meta name="CreationTime" content="2021-03-18T00:23:50Z">
+  <meta name="ModificationTime" content="2021-03-18T00:23:50Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>TOE</b></h2>
+<p class="p2">TOE means Theory of Everything.</p>
+<p class="p3"><br></p>
+<p class="p2">I don't have the answers, but I have some observations…</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Code</b></h2>
+<p class="p2">Code boils down to two operations:</p>
+<ol class="ol1">
+  <li class="li4">breathe in</li>
+  <li class="li4">breathe out.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">Breath in usually involves pattern matching.</p>
+<p class="p5"><br></p>
+<p class="p4">Breathing out usually means rearranging the stuff that got breathed in.</p>
+<p class="p5"><br></p>
+<p class="p4">Pattern matching: use PEG. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">PEG is "better" than REGEXPs in that PEG can match nested patterns.</p>
+<p class="p5"><br></p>
+<p class="p4">The theoretical name for pattern matching is <i>parser, </i>and PDFA.<span class="Apple-converted-space">  </span>Theory gave us YACC.<span class="Apple-converted-space">  </span>PEG is not YACC.<span class="Apple-converted-space">  </span>PEG is easier than YACC.</p>
+<p class="p5"><br></p>
+<p class="p4">REGEXP theory is called <i>scanners</i>.<span class="Apple-converted-space">  </span>Theory gave us LEX.<span class="Apple-converted-space">  </span>PEG makes LEX obsolete.</p>
+<p class="p5"><br></p>
+<p class="p4">FP languages use pattern matching.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Data</b></h2>
+<p class="p2">Data boils down to one universal data structure - the <i>triple.</i></p>
+<p class="p3"><br></p>
+<p class="p2">All other data structures are ways to rearrange and optimize triples. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In 1950's-thinking, it was a good idea to optimize data structures. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I'm not so sure that it's a good idea to optimize data structures in the 202x's.<span class="Apple-converted-space">  </span>Certainly not during "compile time".</p>
+<p class="p3"><br></p>
+<p class="p2">We used to believe that optimizing memory and CPU usage was critical.</p>
+<p class="p3"><br></p>
+<p class="p2">I believe that optimizing human-thought-effort is more critical, now.</p>
+<p class="p3"><br></p>
+<p class="p2">My further thoughts on this subject are:</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">https://guitarvydas.github.io/2021/01/17/Factbases.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/16/Triples.html">https://guitarvydas.github.io/2021/03/16/Triples.html</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Boring - The Essential Ingredient</b></h2>
+<p class="p2">Optimizations thwart efforts to automate processes. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We saw this problem happen in the early days of C and Pascal.<span class="Apple-converted-space">  </span>Assembler programmers thought that they could optimize better than compilers could.<span class="Apple-converted-space">  </span>Then GCC came along.<span class="Apple-converted-space">  </span>Now, we all use HLL's and don't imagine writing code in assembler.</p>
+<p class="p3"><br></p>
+<p class="p2">Make it boring. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Make it repetitive. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Then write code that automates and optimizes the boring and repetitive parts.<span class="Apple-converted-space">  </span>We already know how to do that, e.g. peephole optimizers, compiler technologies, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">How do you make data boring?<span class="Apple-converted-space">  </span>Deconstruct it into triples.</p>
+<p class="p3"><br></p>
+<p class="p2">How do you make code boring?<span class="Apple-converted-space">  </span>Deconstruct it into triples. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p6">MOV R0,R1<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p2">is a triple.<span class="Apple-converted-space">  </span>And<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p6">function(subject,object)</p>
+<p class="p8"><br></p>
+<p class="p2"><span class="Apple-converted-space"> </span>is a triple</p>
+<p class="p3"><br></p>
+<p class="p2">and PROLOG can write triples</p>
+<p class="p3"><br></p>
+<p class="p6">father(justin,paul).</p>
+<p class="p3"><br></p>
+<p class="p2">is a triple.</p>
+<p class="p3"><br></p>
+<p class="p2">Boring.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">But,</p>
+<p class="p3"><br></p>
+<p class="p6">parents(justin,paul,ilona).</p>
+<p class="p3"><br></p>
+<p class="p2">is <i>not </i>a triple.</p>
+<p class="p3"><br></p>
+<p class="p2">Don't use triples if you think that your optimizer needs more edge-cases.</p>
+<p class="p3"><br></p>
+</div>
+</body>
+</html>
