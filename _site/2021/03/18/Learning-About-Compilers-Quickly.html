@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Learning About Compilers Quickly</title>
+  <meta name="CreationTime" content="2021-03-18T12:39:37Z">
+  <meta name="ModificationTime" content="2021-03-18T12:39:37Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 12.0px Helvetica}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Smallc</b></h2>
+<p class="p2">I learned just about everything I needed to know about compilers in only a few hours at CSRI<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">I subscribed to Dr. Dobb's Journal of Computer Calisthenics &amp; Orthodontia.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">In it was published the source code to Small C (Ron Cain).<span class="Apple-converted-space">  </span>This was before open source existed.<span class="Apple-converted-space">  </span>Finding the source code to <i>anything</i> was a delight.</p>
+<p class="p3"><br></p>
+<p class="p2">My friend<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> was an MSc student and I was but a lowly undergrad.<span class="Apple-converted-space">  </span>My friend invited me to CSRI for the evening and we typed in <i>all </i>of the source code for the C compiler into the Unix V7 system.</p>
+<p class="p3"><br></p>
+<p class="p2">Around 2am in the morning, we were finished and I typed in my first line of C code.</p>
+<p class="p3"><br></p>
+<p class="p2">I knew 8080 (nee Z80) assembler at the time.</p>
+<p class="p3"><br></p>
+<p class="p2">I typed something like:</p>
+<p class="p3"><br></p>
+<p class="p4">a = b + c;</p>
+<p class="p3"><br></p>
+<p class="p2">and SmallC responded with something like:<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">; a = b + c;</p>
+<p class="p2">MOV L,(name of b)</p>
+<p class="p2">CLR H</p>
+<p class="p2">MOV C,(name of c)</p>
+<p class="p2">CLR B</p>
+<p class="p2">DAD B</p>
+<p class="p2">MOV (name of a),L</p>
+<p class="p2">MOV (name of a + 1),H</p>
+<p class="p3"><br></p>
+<p class="p2">from this, I could see what "a = b + c" compiled into.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">This basically says:</p>
+<ul class="ul1">
+  <li class="li5">Load one byte into register L</li>
+  <li class="li5">Clear the H register (which is paired with L to make at 16-bit quantity HL)</li>
+  <li class="li5">Load one byte into register C</li>
+  <li class="li5">Clear the B register (BC is paired, as above for HL)</li>
+  <li class="li5">DAD B — 16bit add HL = HL + BC</li>
+  <li class="li5">Move the lower byte from L into memory (at a)</li>
+  <li class="li5">Move the higher byte from H into memory (at a+1).</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">(and, it says, to do the steps in the given sequence (not, say, in parallel)).</p>
+<p class="p3"><br></p>
+<p class="p2">The code above is quite simple — it is raw 8080 code.<span class="Apple-converted-space">  </span>It avoids all details, such as startup and shutdown,</p>
+<p class="p3"><br></p>
+<p class="p2">It was easy to see what the compiler was doing for me.</p>
+<p class="p3"><br></p>
+<p class="p2">Basically, the compiler was like an editor macro.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Smoke Test</b></h2>
+<p class="p2">I went on to do a 6-month project for one of my courses.</p>
+<p class="p3"><br></p>
+<p class="p2">I was intending to install a better parser<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a>, but I ended up rewriting the whole thing.</p>
+<p class="p3"><br></p>
+<p class="p2">At the end of the course, my compiler was running, but needed testing.</p>
+<p class="p3"><br></p>
+<p class="p2">I, carefully, applied one test after another.</p>
+<p class="p3"><br></p>
+<p class="p2">My friend asked me to send him the source code.<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a><span class="Apple-converted-space">  </span>On Friday, before the weekend.</p>
+<p class="p3"><br></p>
+<p class="p2">On Sunday, he sent me a list of about 100 bugs.</p>
+<p class="p3"><br></p>
+<p class="p2">I was astounded.<span class="Apple-converted-space">  </span>I fixed the bugs and the compiler quickly took shape.</p>
+<p class="p3"><br></p>
+<p class="p2">I asked my friend how he found so many bugs in only 2 days.</p>
+<p class="p3"><br></p>
+<p class="p2">He replied that he simply poured the compiler source code into itself.</p>
+<p class="p3"><br></p>
+<p class="p2">In EE, this is called a "smoke test".<span class="Apple-converted-space">  </span>You build the alpha version of a circuit, turn on the power and watch for smoke.</p>
+<p class="p3"><br></p>
+<p class="p2">If there's no smoke, you do more careful testing.</p>
+<p class="p3"><br></p>
+<p class="p2">Software testing could benefit from using this same technique for divide-and-conquer:</p>
+<ol class="ol1">
+  <li class="li5">smoke test</li>
+  <li class="li5">careful (unit) testing.</li>
+</ol>
+<p class="p6"><br></p>
+<p class="p5">The smoke test — a lot of tests all at once — can be used to find blunders and typos.<span class="Apple-converted-space">  </span>It is not worth running unit tests until the blunders have been cleared away.</p>
+<p class="p3"><br></p>
+<p class="p7"><br></p>
+<hr>
+<p class="p8"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Computing Systems Research Facility at the University of Toronto</p>
+<p class="p8"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>https://en.wikipedia.org/wiki/Dr._Dobb%27s_Journal</p>
+<p class="p8"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>Chris Lewis</p>
+<p class="p8"><a id="fn4"></a><a href="#fnlink4"><span class="s1">[4]</span></a><span class="s1"> </span>My memory is hazy.<span class="Apple-converted-space">  </span>Someone will correct me…</p>
+<p class="p5"><span class="s2"><a id="fn5"></a><a href="#fnlink5"><span class="s1">[5]</span></a></span> Note that K&amp;R was more forgiving at the time — I didn't need to declare a, b, and c before asking the compiler to give me code.</p>
+<p class="p6"><br></p>
+<p class="p5">Note that the 8080 was little-endian, the low-byte ended up in the lower (numerically) address and the high byte ended up in the address+1.</p>
+<p class="p5"><a id="fn6"></a><a href="#fnlink6">[6]</a> <span class="s2">twot-threet</span></p>
+<p class="p8"><a id="fn7"></a><a href="#fnlink7"><span class="s1">[7]</span></a><span class="s1"> </span>The compiler was written in C for Unix V7 running on a PDP-11.<span class="Apple-converted-space">  </span>My compiler emitted code for the 8080, running CP/M</p>
+</div>
+</body>
+</html>
