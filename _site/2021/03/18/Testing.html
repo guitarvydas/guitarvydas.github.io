@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Testing</title>
+  <meta name="CreationTime" content="2021-03-18T17:28:06Z">
+  <meta name="ModificationTime" content="2021-03-18T17:28:06Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 13.0px Palatino}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I describe some of the testing techniques I encountered.</p>
+<p class="p3"><br></p>
+<p class="p2">Some of these techniques were for hardware testing, but might give ideas for software testing.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Back to Back Testing</b></h2>
+<p class="p2">Mitel built PBXs.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">At the very end of testing, we took two "finished" PBXs and pointed them at each other. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The PBXs would self-test by calling each other many times.</p>
+<p class="p3"><br></p>
+<p class="p2">One should be able to do this with a class.<span class="Apple-converted-space">  </span>Make two instances, then have the instances talk to one another.</p>
+<p class="p3"><br></p>
+<p class="p2">If this sounds hard and undoable, your organization needs a Test Engineer.<span class="Apple-converted-space">  </span>Someone whose job it is to kibitz designers on how to make their classes more testable.</p>
+<p class="p3"><br></p>
+<p class="p2">If this becomes a UX issue, look at sikulix, <a href="http://sikulix.com/">http://sikulix.com/</a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Regression Testing (HP Trace Analyzer)</b></h2>
+<p class="p2">We used regression testing on hardware.</p>
+<p class="p3"><br></p>
+<p class="p2">CI tools do this now.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">For hardware, we took a "golden" known-to-be-working board and used an HP Trace Analyzer on it.<span class="Apple-converted-space">  </span>It recorded repeatable signatures (collapsed down to some kind of hash value) for certain input streams.</p>
+<p class="p3"><br></p>
+<p class="p2">Boards/circuits-under-test were deemed "good" if they generated the same signatures (for the same inputs).<span class="Apple-converted-space">  </span>If the signatures were wrong, the circuit-under-test would be put aside for further testing.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Coverage Testing</b></h2>
+<p class="p2">When alpha-testing software, we used <i>coverage testing</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">We created an input dataset that hit every piece of code at least once.</p>
+<p class="p3"><br></p>
+<p class="p2">This got rid of blunders and typos.<span class="Apple-converted-space">  </span>Designers also discovered dead code with this test.<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a><span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Using SCLs makes this option particularly attractive.<span class="Apple-converted-space">  </span>Since the code is generated, we could modify the transpilers to insert anything into the generated code and have it automagically appear.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>NorTel</b></h2>
+<p class="p2">NorTel used to have a policy about bug fixes.</p>
+<p class="p3"><br></p>
+<p class="p2">Bug fixes did not remove code, they just added edge-cases that were specialized to find and shunt only the conditions that made the bugs appear.<span class="Apple-converted-space">  </span>The fixes went into the shunt.<span class="Apple-converted-space">  </span>The original code was mostly left alone.</p>
+<p class="p3"><br></p>
+<p class="p2">Telecoms, like NorTel, Mitel and Bell used to pride themselves on <i>four nines </i>guarantees.<span class="Apple-converted-space">  </span>They guaranteed that their systems would have uptimes of 99.99%.<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Banking Y2K</b></h2>
+<p class="p2">We worked on the Y2K problem at some big banks.</p>
+<p class="p3"><br></p>
+<p class="p2">They had a policy that they would not test during the work week.</p>
+<p class="p3"><br></p>
+<p class="p2">Testing could only be done on Saturdays, leaving Sundays for reverting back to the previous code if problems occurred.</p>
+<p class="p3"><br></p>
+<p class="p2">Furthermore, one weekend was reserved for month-end consolidation.</p>
+<p class="p3"><br></p>
+<p class="p2">Another weekend was reserved for "maintenance" upgrades.</p>
+<p class="p3"><br></p>
+<p class="p2">I forget what the third weekend was reserved for, but we were left with one day every month (1 Saturday for new code, 1 Sunday for reverting if needed).</p>
+<p class="p3"><br></p>
+<p class="p2">Then, there was year-end.</p>
+<p class="p3"><br></p>
+<p class="p2">Data spread was uneven, because month-ends came at different times.<span class="Apple-converted-space">  </span>We couldn't just generate fake data in a repetitive manner, we had to fake the calendar and all month-ends.</p>
+<p class="p3"><br></p>
+<p class="p2">Generating the fake data needed as much compute-power as was used for live banking.</p>
+<p class="p3"><br></p>
+<p class="p2">Starting in, say 1996, the Banks needed to generate 4 years worth of fake data but could only test it on one day of every month. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most of the code was written in COBOL.<span class="Apple-converted-space">  </span>Some in assembler.<span class="Apple-converted-space">  </span>Not all source code could be found.</p>
+<p class="p3"><br></p>
+<p class="p2">Some of the "date" affected code had names like "Nancy", "Jane", etc.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">The Banks were set up to touch maybe 5% of their code per year.<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">The Y2K problem affected something like 30% of the code.</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>testing</i> problem turned out to be harder than the actual <i>fixing</i> problem.</p>
+<p class="p3"><br></p>
+<p class="p2">We started by trying to auto-fix the code.<span class="Apple-converted-space">  </span>This affected too much of the code.<span class="Apple-converted-space">  </span>In the end, we just generated reports and let the maintainers fix the code.<span class="Apple-converted-space">  </span>Their wetware made the effort possible — they could tell which things really needed to be fixed and which were red herrings.</p>
+<p class="p3"><br></p>
+<p class="p4"><br></p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1">[1]</a> Fancy computer-controlled telephone switches.<span class="Apple-converted-space">  </span>Telephone lines were mostly analogue at the time.</p>
+<p class="p5"><a id="fn2"></a><a href="#fnlink2">[2]</a> <span class="s1">This is not a new idea.</span></p>
+<p class="p5"><span class="s1"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a></span> Testers would come back to designers and ask how to push the code so that it hit certain routines.<span class="Apple-converted-space">  </span>After scratching their heads, designers would - sometimes - realize that certain code was unreachable and would lance such unreachable code from the codebase.<span class="Apple-converted-space">  </span>It was always a surprise when dead code was found - it looked useful, but couldn't be reached and the compilers couldn't detect the problem.</p>
+<p class="p6"><span class="s2"><a id="fn4"></a><a href="#fnlink4">[4]</a> </span>The original programmer's female dates.<span class="Apple-converted-space">  </span>Names that were suggestive enough to raise the eyebrows of the auto-detection software.</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Only about 200 programmers were allocated to the job of fixing bugs.</p>
+</div>
+</body>
+</html>

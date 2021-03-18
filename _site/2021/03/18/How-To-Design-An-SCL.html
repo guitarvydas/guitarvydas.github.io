@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>How To Design An SCL</title>
+  <meta name="CreationTime" content="2021-03-18T16:36:43Z">
+  <meta name="ModificationTime" content="2021-03-18T16:36:43Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How to Design a Good SCL</b></h2>
+<p class="p2">Q: How do you design a good SCL?</p>
+<p class="p3"><br></p>
+<p class="p2">A:<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">find a good toolbox language <a href="https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html">https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html</a></li>
+  <li class="li4">learn PEG</li>
+  <li class="li4">practice (How does a musician get to Carnegie Hall?<span class="Apple-converted-space">  </span>Practice)</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">It used to take years to write one language, even a DSL.</p>
+<p class="p5"><br></p>
+<p class="p4">With PEG, you can crank out an SCL in about one day.</p>
+<p class="p5"><br></p>
+<p class="p4">The more iterations you make, the better you will become.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ice Wine</b></h2>
+<p class="p4">Germany invented Ice Wine, but Canada makes better Ice Wine. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Why?</p>
+<p class="p5"><br></p>
+<p class="p4">You need 3 days of -8C weather before picking Ice Wine grapes.</p>
+<p class="p5"><br></p>
+<p class="p4">In Germany, they get this kind of cold spell about twice per decade.</p>
+<p class="p5"><br></p>
+<p class="p4">In southern Ontario, Canada, they get this kind of cold spell every year.<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Canadian wineries make Ice Wine 5X more often than German wineries.</p>
+<p class="p5"><br></p>
+<p class="p4">You learn through making mistakes. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Canadians get to make mistakes more frequently than Germans.</p>
+<p class="p5"><br></p>
+<p class="p4">Hence, Canadians came down the learning curve in less elapsed time.</p>
+<p class="p5"><br></p>
+<p class="p4">Hence, Canadian Ice Wine is better.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Eschew Dependencies</b></h2>
+<p class="p2">Dependencies are bad.</p>
+<p class="p3"><br></p>
+<p class="p2">Learn how to build SCL's that don't have dependencies.</p>
+<p class="p3"><br></p>
+<p class="p2">Use the n2k principle <a href="https://guitarvydas.github.io/2021/03/16/Need-To-Know.html">https://guitarvydas.github.io/2021/03/16/Need-To-Know.html</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">If you build a little language that wants to do type-checking across files, don't.<span class="Apple-converted-space">  </span>Build a transpiler that does what it can with what it's got (i.e. only one file).<span class="Apple-converted-space">  </span>Defer the type check.<span class="Apple-converted-space">  </span>Build another SCL that joins two files and does the type checking.<span class="Apple-converted-space">  </span>Both SCLs will be simpler.</p>
+<p class="p3"><br></p>
+<p class="p2">If you want to "practice" eschewing dependencies, try not using <i>make, npm, </i>or any of the other bandaids.<span class="Apple-converted-space">  </span>See how your thinking changes.<span class="Apple-converted-space">  </span>Write SCLs that defer dependency checking.</p>
+<p class="p3"><br></p>
+<p class="p2">How about the call stack?<span class="Apple-converted-space">  </span>It makes dynamic, global, data structure to track dependencies at run time.<span class="Apple-converted-space">  </span>How can you not use the call stack?<span class="Apple-converted-space">  </span>Or, use it less?</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html">https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Layers</b></h2>
+<p class="p2">You can't<span class="Apple-converted-space">  </span>build a flexible system if it's not layered.<span class="Apple-converted-space">  </span>All of the details sink to the bottom and the user — who wants the flexibility to modify — is faced with a wall of detail</p>
+<p class="p3"><br></p>
+<p class="p2">Emacs is like that.<span class="Apple-converted-space">  </span>I bought a hard copy of the emacs manual some 3 decades ago.<span class="Apple-converted-space">  </span>It was only 600 pages back then.<span class="Apple-converted-space">  </span>TL;DR.<span class="Apple-converted-space">  </span>Emacs is totally customizable, but it's hard to know where to start.<span class="Apple-converted-space">  </span>You learn emacs looking over someone else's shoulder — YAGNI.<span class="Apple-converted-space">  </span>I know only enough emacs commands to get me through, and you can bet that I won't bother switching editors, lest I get another steep learning curve.</p>
+<p class="p3"><br></p>
+<p class="p2">Common Lisp is a wall of detail.<span class="Apple-converted-space">  </span>Common Lisp does everything.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a><span class="Apple-converted-space">  </span>And everything is standardized and documented.<span class="Apple-converted-space">  </span>You have to love reading legalese, though.<span class="Apple-converted-space">  </span>I know only enough Common Lisp to get me through.<span class="Apple-converted-space">  </span>I lean on the CLHS a lot, even after a couple of decades of use.<span class="Apple-converted-space">  </span>You'd think that I would be an expert now, but I learn something new every time I talk to another lisper.</p>
+<p class="p3"><br></p>
+<p class="p2">The <i>open source</i> movement is a wall of detail.<span class="Apple-converted-space">  </span>Sure, I can download just about everything from github, but, fixing any of it is a serious commitment.</p>
+<p class="p3"><br></p>
+<p class="p2">The UNIX® manuals were <i>not </i>like that.<span class="Apple-converted-space">  </span>1 or 2 pages each.<span class="Apple-converted-space">  </span>Just enough to get you started.<span class="Apple-converted-space">  </span>Books and more details on request.</p>
+<p class="p3"><br></p>
+<p class="p2">It <i>is</i> possible to use layers.<span class="Apple-converted-space">  </span>Structured Programming gave us layers over GOTO-full programming.<span class="Apple-converted-space">  </span>Global variables fell to locally-scoped variables.<span class="Apple-converted-space">  </span>OO gave us modular design.<span class="Apple-converted-space">  </span>FP hides state.</p>
+<p class="p3"><br></p>
+<p class="p2">What about types?<span class="Apple-converted-space">  </span>How do you hierarchicalize types?</p>
+<p class="p3"><br></p>
+<p class="p2">What about message-passing?<span class="Apple-converted-space">  </span>I use diagrams and composition (instead of inheritance) to make hierarchical message-based systems.<span class="Apple-converted-space">  </span>OSI told us to build layered messages.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Pipes - Isolation</b></h2>
+<p class="p2">One of the ideas the UNIX® pipes brought is elusively simple — isolation.</p>
+<p class="p3"><br></p>
+<p class="p2">You can't convert a shell script to a &lt;pick-your-language&gt; program.</p>
+<p class="p3"><br></p>
+<p class="p2">Why?</p>
+<p class="p3"><br></p>
+<p class="p2">Because most languages use the stack.<span class="Apple-converted-space">  </span>The stack is a global variable and there's only one stack.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Thread Safety is an accidental complexity caused by trying to use the calculator paradigm to solve a non-calculator problem (e.g. sequencing).</p>
+<p class="p3"><br></p>
+<p class="p2">Bash has ugly syntax, and suffers from feature-itis.<span class="Apple-converted-space">  </span>Strip all of the gunk away, until you are left only with pipes — no variables, no string concatenation, no conditionals, no environment variables.</p>
+<p class="p3"><br></p>
+<p class="p2">Bash, also, makes multi-tasking harder to use, than necessary, because of its insistence on the rendezvous model and textual code.</p>
+<p class="p3"><br></p>
+<p class="p2">You can draw a diagram on a whiteboard of a network.<span class="Apple-converted-space">  </span>You can't draw a diagram of a bash script on a whiteboard.</p>
+<p class="p3"><br></p>
+<p class="p2">Strip everything away and build only an SCL that gives you pipes.<span class="Apple-converted-space">  </span>If you want variables, build another SCL at another level.<span class="Apple-converted-space">  </span>If you want environment variables, build another SCL at another level.<span class="Apple-converted-space">  </span>Don't slam the kitchen sink into the SCL.<span class="Apple-converted-space">  </span>Make it do only one thing.</p>
+<p class="p3"><br></p>
+<p class="p2">Start by build an SCL which is a like a shell that gives you multiple processes (threads) and lets you join them up with pipes.<span class="Apple-converted-space">  </span>Use a diagram as your syntax.<span class="Apple-converted-space">  </span>(You are allowed to hand compile the diagram, but it is easy enough to compile diagrams to code).<span class="Apple-converted-space">  </span>Note that "+" and "cons" and "arrays" don't figure in such a simple whiteboard-SCL.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Design the SCL ; Don't Use Existing Languages</b></h2>
+<p class="p2">Write your target problem out in its minimal form.</p>
+<p class="p3"><br></p>
+<p class="p2">You are not allowed to use Python, JavaScript or any other programming language.</p>
+<p class="p3"><br></p>
+<p class="p2">The problem with DSLs is that they are too general.</p>
+<p class="p3"><br></p>
+<p class="p2">An SCL is meant to be one-time.<span class="Apple-converted-space">  </span>One problem, one SCL.<span class="Apple-converted-space">  </span>Not a DSL</p>
+<p class="p3"><br></p>
+<p class="p2">Your target problem does not include a general solution for something, e.g. how to use A.I, how to use a database, etc.</p>
+<p class="p3"><br></p>
+<p class="p2">Your target problem is "what does the user want and how will you solve it?".<span class="Apple-converted-space">  </span>Part of the target problem is a UX - that's one SCL.<span class="Apple-converted-space">  </span>Part of the target problem is how you will store the information - that's another SCL.<span class="Apple-converted-space">  </span>Part of the target problem is how you are going to process the information to produce a useful (to your user) result.<span class="Apple-converted-space">  </span>That's at least one SCL, if not more than one SCL.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Happy Path</b></h2>
+<p class="p2">Most PL creators want to make it "simple" to express the <i>happy path</i> while eliding details such as error conditions.</p>
+<p class="p3"><br></p>
+<p class="p2">A good starting point for this kind of thinking is the set of rules for creating Drakon diagrams.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://drakonhub.com/files/drakon_part1_eng.pdf">https://drakonhub.com/files/drakon_part1_eng.pdf</a></p>
+<p class="p2"><a href="https://drakonhub.com/files/drakon_part2_eng.pdf">https://drakonhub.com/files/drakon_part2_eng.pdf</a></p>
+<p class="p2"><a href="https://drakonhub.com/files/drakon_part3_eng.pdf">https://drakonhub.com/files/drakon_part3_eng.pdf</a></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>I favour a different notation, but Drakon is a good place to start to widen one's horizons</i>].</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Multiple Possiblities</b></h2>
+<p class="p2">Textual notation is good for one-in-one-out operations, like functions.</p>
+<p class="p3"><br></p>
+<p class="p2">Everything else isn't handled well with textual notation.</p>
+<p class="p3"><br></p>
+<p class="p2">Structured Programming prescribed one input and one output.<span class="Apple-converted-space">  </span>This rule was broken by languages that support syntax for exceptions (one in, two outs).</p>
+<p class="p3"><br></p>
+<p class="p2">Note that bash syntax flatlines at one-in, two-out (stdin, stdout, stderr).</p>
+<p class="p3"><br></p>
+<p class="p2">Real life operations don't follow the above rules.<span class="Apple-converted-space">  </span>For example, lowly JavaScript has this very problem.<span class="Apple-converted-space">  </span>JavaScript defines a FileReader object with <i>six</i> possible outcomes<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> (called events) <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader">https://developer.mozilla.org/en-US/docs/Web/API/FileReader</a>.</p>
+<p class="p3"><br></p>
+<p class="p2">The textual code for handling these events is a mess.</p>
+<p class="p3"><br></p>
+<p class="p2">But, it is easy to draw a diagram of this object…</p>
+<p class="p3"><br></p>
+<p class="p6"><img src="/assets/2021-03-18-16-36-43-Images/FileReader.png" width="100px" height="119px" alt="Image"></p>
+<p class="p3"><br></p>
+<p class="p2">Just the act of drawing it out got me to reduce the API down to 4 useful outcomes.</p>
+<p class="p3"><br></p>
+<p class="p2">The happy path is <span class="s1">req—&gt;resp</span> (request, response).</p>
+<p class="p3"><br></p>
+<p class="p2">If the user hits CANCEL, we get an ABORT event.</p>
+<p class="p3"><br></p>
+<p class="p2">If there is some internal error (e.g. file not found), we get an ERR event.</p>
+<p class="p3"><br></p>
+<p class="p2">If the network times out, we get a TIMEOUT event.</p>
+<p class="p3"><br></p>
+<p class="p2">I posit that this is easier to understand than the textual version.</p>
+<p class="p3"><br></p>
+<p class="p2">Can you use this <i>right now</i>?<span class="Apple-converted-space">  </span>Yes, just draw it on a whiteboard.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">Can we build SCLs like this?<span class="Apple-converted-space">  </span>Yes.<span class="Apple-converted-space">  </span>I will show how to compile SVG to code in an upcoming essay.<span class="Apple-converted-space">  </span>It is actually easier if you don't already know how to build compilers.<span class="Apple-converted-space">  </span>Drakon was built using Tcl/Tk.<span class="Apple-converted-space">  </span>I suggest something even simpler.</p>
+<hr>
+<p class="p7"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>and so does assembler</p>
+<p class="p7"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>One stack per CPU, one stack per CPU</p>
+<p class="p7"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Not to mention the other 3 properties.</p>
+<p class="p7"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>This paradigm does not map easily onto CALL/RETURN paradigms.<span class="Apple-converted-space">  </span>Having a Dispatcher will make things easier.<span class="Apple-converted-space">  </span>See https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html.<span class="Apple-converted-space">  </span>You can map this onto bash using "&amp;" syntax.<span class="Apple-converted-space">  </span>Most other languages need the use of thread libraries to make this work.<span class="Apple-converted-space">  </span>Trying to build components using CALL/RETURN languages (just about every language) will end up in accidental complexity (CALL/RETURN uses the stack, the stack is a global variable built into the hardware, going this route is possible, but runs into issues like thread safety (because of the global variable)).<span class="Apple-converted-space">  </span>This can also be implemented using closures (anonymous functions with state).</p>
+</div>
+</body>
+</html>
