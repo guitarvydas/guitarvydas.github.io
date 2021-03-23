@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Everything is a Fractal</title>
+  <meta name="CreationTime" content="2021-03-23T14:31:57Z">
+  <meta name="ModificationTime" content="2021-03-23T14:31:57Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Everything is a Fractal</b></h2>
+<p class="p2"><br></p>
+<p class="p3">In my mind, every problem can be subdivided. <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">I call such problems <i>fractals.</i></p>
+<p class="p2"><i></i><br></p>
+<p class="p3">Every sub-division of a problem can be further sub-divided. <span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Composite and Leaf Nodes</b></h2>
+<p class="p2"><br></p>
+<p class="p3">I see a solution-to-a-problem as a tree, branching downards.</p>
+<p class="p2"><br></p>
+<p class="p3">A <i>composite</i> is a fractal.</p>
+<p class="p2"><br></p>
+<p class="p3">A <i>composite</i> represents something that is sub-divided.</p>
+<p class="p2"><br></p>
+<p class="p3">A <i>leaf</i> represents something that doesn't need to be sub-divided further.</p>
+<p class="p2"><br></p>
+<p class="p3">Most current PLs<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> do not encourage fractal-thinking.<span class="Apple-converted-space">  </span>There is a <i>problem</i> and a lump of <i>code</i>.<i> <span class="Apple-converted-space"> </span></i> There is no tree of sub-divisions.</p>
+<p class="p2"><br></p>
+<p class="p3">It is <i>possible</i> to write code in just about any PL by sub-dividing it, but, most PLs do not <i>encourage</i> this style.<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">Likewise, note that it is <i>possible</i> to write FP<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> code in assembler, but assembler does not <i>encourage </i>the FP style.</p>
+<p class="p2"><br></p>
+<p class="p3">Most PLs attempt to achieve fractal-thinking by using <i>libraries</i> of code, but this hasn't worked out so well.<span class="Apple-converted-space">  </span>Libraries are rife with dependencies (see below).</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Layers are Fractal Thinking</b></h2>
+<p class="p2"><br></p>
+<p class="p3">Fractal thinking leads to <i>layered</i> design.</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Programming Code Should Be a Fractal</b></h2>
+<p class="p3">Compilers know how to inline function calls.</p>
+<p class="p2"><br></p>
+<p class="p3">Nothing more than function calls and collections are needed at any <i>composite </i>level.</p>
+<p class="p2"><br></p>
+<p class="p3">Low-level operations, like, "+", "cons", <i>arrays</i>, etc., are only needed at the leaf level.</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Documentation Should Be a Fractal</b></h2>
+<p class="p3">Documentation should be arranged in a layered — need to know<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> — manner.</p>
+<p class="p2"><br></p>
+<p class="p3">Today, we have UNIX man pages + source code, or, 200-page documents like the gnu-make manual.<span class="Apple-converted-space">  </span>These provide the top layers and bottom layers of documentation, but, nothing in between.</p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>YAGNI Means Fractal</b></h2>
+<p class="p2"><br></p>
+<p class="p3">YAGNI means "you aren't going to need it".</p>
+<p class="p2"><br></p>
+<p class="p3">YAGNI implies deferring work (operations).</p>
+<p class="p2"><br></p>
+<p class="p3">YAGNI all the way down.</p>
+<p class="p2"><br></p>
+<p class="p3">YAGNI at every layer.</p>
+<p class="p2"><br></p>
+<p class="p3">Humans are bad at YAGNI layering.<span class="Apple-converted-space">  </span>They need languages / notations that encourage layering.</p>
+<p class="p2"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Dependencies are Anti-Fractal</b></h2>
+<p class="p2"><br></p>
+<p class="p3">Layers that depend on one-another are invisibly "at the same level". <span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3">They are not layers.</p>
+<p class="p2"><br></p>
+<p class="p3">Fractal-thinking requires <i>lack of dependencies</i>, <i>isolation </i>and <i>superposition</i>.</p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/24/superposition-2.html">https://guitarvydas.github.io/2021/01/24/superposition-2.html</a></p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/22/superposition.html">https://guitarvydas.github.io/2021/01/22/superposition.html</a></p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/16/Superposition.html">https://guitarvydas.github.io/2021/01/16/Superposition.html</a></p>
+<p class="p3"><a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">https://guitarvydas.github.io/2020/12/09/Isolation.html</a></p>
+<p class="p2"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Scalability</b></h2>
+<p class="p2"><br></p>
+<p class="p3">Scalability can be achieved only through the lack of dependencies.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Examples</b></h2>
+<ul class="ul1">
+  <li class="li4">UNIX Man Pages - top level layer 1-2 pages, but no fractals beneath (refer to source code)</li>
+  <li class="li4">Tabbed Views - <i>across </i>but no <i>in</i></li>
+  <li class="li4">Cascading Menus — fractal wannabes, with lousy UX</li>
+  <li class="li4">Hierarchical File Systems — assembler for fractals</li>
+  <li class="li4">Tree Widgets — fractals screaming to get out ; text-based solution to a problem which is not fundamentally text-based</li>
+  <li class="li4">Code Libraries — failed fractals</li>
+  <li class="li4">Theorem Provers — tends towards anti-fractal — all rules tend to be described at a single level without layering (it could be argued that each rule is a layer unto itself, but the result is a big lump of rules with no appreciable funnelling/choke points -- See Peter Lee for example of nesting)</li>
+  <li class="li4">Peter Lee "Realistic Compiler Generator" — shows fractal design applied to Denotational Semantics — sub-divides domains into multiple layers</li>
+  <li class="li4">Functions and Inlining — optimizations that <i>should</i> lead to more layering</li>
+  <li class="li4">Macros — attempt to manipulate syntax skins in a language (see PEG) — too "flat" — macros constitute another bag of operations added to the "flat" operations provided by the language(s) ; macros <i>could</i> alleviate efficiency concerns for layered designs</li>
+  <li class="li4">PEG — a way to make skins (SCLs) for facts</li>
+  <li class="li4">Elm — flat message structure</li>
+  <li class="li4">PLs — too many operators all at one level, only one syntax per language</li>
+  <li class="li4">Scripts — bash supports isolation (&amp;) and layering but only at a low level</li>
+  <li class="li4">Backtraces — core dumps under a new name ; a way to escape having to provide good error messages</li>
+  <li class="li4">Data Structures — premature optimization<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> ; implementation details<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a></li>
+  <li class="li4">Relational Programming — PROLOG, miniKanren, etc.<span class="Apple-converted-space">  </span>— a step in the right direction, but only a step</li>
+  <li class="li4">O(n) Analysis — avoids the real issue (human UX is most important, emphasis on computer run-time is less important (or, is a component of UX analysis, necessary but not sufficient))</li>
+  <li class="li4">GNU-anything — kitchen-sink approach, not layered</li>
+  <li class="li4">open-source — not fractal, maintenance of code is a chore</li>
+  <li class="li4">ORG-charts — business attempt at fractal-thinking</li>
+  <li class="li4">OO — attempt at layering — unfortunately uses global stack for so-called "message passing"</li>
+  <li class="li4">Structured Programming — attempt at layering ; attacks GOTOs but not design in general (GOTOs are not a problem, but <i>unstructured </i>use of GOTOs is the problem ; CPS is GOTOs-on-steroids (very useful for denotational semantics)).</li>
+  <li class="li4">Global Variables — tamed by layering (scoped local variables instead of globals - again, the problem is not variables, but the unstructured use of variables)</li>
+  <li class="li4">Packages — attempt at layering, attacking symptoms but not the underlying problem (the problem is how to layer DI,<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> not how to cope with dependencies)</li>
+  <li class="li4">Visual Programming — One doesn't need to think about pixels, except at the lowest level</li>
+  <li class="li4">PDF — too low level ; only 2 layers - (1) text and (2) Forth (aka PostScript)</li>
+  <li class="li4">DAWs — multiple tracks are only 1-level deep ; addition of <i>buses</i> supplies a 2<span class="s1"><sup>nd</sup></span> level — but that's not enough</li>
+  <li class="li4">S/SL — demonstration of layering to build non-toy code (e.g. how to build a Pascal compiler in '80s)</li>
+  <li class="li4">HTML — low-level operations for layering ; HTML (XML) is but an assembler for layering</li>
+  <li class="li4">Integers — not fractal</li>
+  <li class="li4">Real Numbers — fractal ; floats (doubles) are just an approximation</li>
+  <li class="li4">Measuring Tape and Rulers — fractal — every mark on a ruler can be further sub-divided</li>
+</ul>
+<p class="p5"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Bottom Level</b></h2>
+<p class="p5"><br></p>
+<p class="p4">If your code uses "+", "cons", <i>arrays</i>, etc., it is at the bottom level (a <i>leaf</i> node).<span class="Apple-converted-space">  </span>It is <i>flat</i> and non-structured.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>See also</b></h2>
+<p class="p6"><span class="s2">need to know (n2k)<span class="Apple-converted-space"> </span></span> <a href="https://guitarvydas.github.io/2021/03/16/Need-To-Know.html">https://guitarvydas.github.io/2021/03/16/Need-To-Know.html</a></p>
+<p class="p7"><br></p>
+<p class="p6">superposition</p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/24/superposition-2.html">https://guitarvydas.github.io/2021/01/24/superposition-2.html</a></p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/22/superposition.html">https://guitarvydas.github.io/2021/01/22/superposition.html</a></p>
+<p class="p3"><a href="https://guitarvydas.github.io/2021/01/16/Superposition.html">https://guitarvydas.github.io/2021/01/16/Superposition.html</a></p>
+<p class="p2"><br></p>
+<p class="p3">isolation</p>
+<p class="p3"><a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">https://guitarvydas.github.io/2020/12/09/Isolation.html</a></p>
+<p class="p2"><br></p>
+<p class="p3">S/SL</p>
+<p class="p3"><a href="https://archive.org/details/technicalreportc118univ">https://archive.org/details/technicalreportc118univ</a></p>
+<p class="p3"><a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl">https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl</a></p>
+<p class="p2"><br></p>
+<p class="p3">Peter Lee</p>
+<p class="p3"><a href="https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417">https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417</a></p>
+<p class="p2"><br></p>
+<p class="p6">see also</p>
+<p class="p6"><a href="https://guitarvydas.github.io/2021/01/14/References.html">https://guitarvydas.github.io/2021/01/14/References.html</a></p>
+<p class="p7"><br></p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>E.g. Python, JavaScript, C, etc.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Feel free to substitute your favourite paradigm here, instead of FP.<span class="Apple-converted-space">  </span>OO, Structured Programming, etc.</p>
+<p class="p6"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2021/03/16/Need-To-Know.html</p>
+<p class="p8"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Data structures should be built only at runtime.<span class="Apple-converted-space">  </span>Computing power is "cheap".</p>
+<p class="p8"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Data structures should only appear at the leaf level, everything else should only <i>refer</i> to data.</p>
+<p class="p8"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>DI means Design Intent</p>
+</div>
+</body>
+</html>
