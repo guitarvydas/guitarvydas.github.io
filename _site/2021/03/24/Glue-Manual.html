@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title>Glue Manual</title>
-  <meta name="CreationTime" content="2021-03-24T08:24:36Z">
-  <meta name="ModificationTime" content="2021-03-24T08:24:36Z">
+  <meta name="CreationTime" content="2021-03-24T15:49:49Z">
+  <meta name="ModificationTime" content="2021-03-24T15:49:49Z">
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1894.6">
   <style type="text/css">
@@ -63,20 +63,20 @@
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>element [e] = ${e}</p>
 <p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
-<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">     </span></p>
 <p class="p4"><span class="Apple-converted-space">  </span>rectElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =</p>
-<p class="p4"><span class="Apple-converted-space">  </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>{{ var name = scopeGet ("path") + "_rect_" + gen (); scopeAdd ("path", name); }}</p>
 <p class="p4"><span class="Apple-converted-space">  </span>[[</p>
 <p class="p4"><span class="Apple-converted-space">     </span>rect(${name},"").</p>
 <p class="p4"><span class="Apple-converted-space">     </span>${attributes}</p>
 <p class="p4"><span class="Apple-converted-space">     </span>${elements} ]]</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>textElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =</p>
-<p class="p4"><span class="Apple-converted-space">  </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>{ var name = scopeGet ("path") + "_text_" + gen (); scopeAdd ("path", name); }}</p>
 <p class="p4"><span class="Apple-converted-space">    </span>[[<span class="Apple-converted-space"> </span></p>
 <p class="p4"><span class="Apple-converted-space">       </span>text(${name},"").</p>
 <p class="p4"><span class="Apple-converted-space">       </span>${attributes}</p>
@@ -174,22 +174,22 @@
 <p class="p2">Specification 8</p>
 <p class="p3"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
-<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
 <p class="p2">has the form</p>
 <p class="p3"><br></p>
-<p class="p4">ruleName [ parameters ] =  [[ formatting ]]</p>
+<p class="p4">ruleName [ parameters ] = {{ JavaScript code }} [[ formatting ]]</p>
 <p class="p3"><br></p>
 <p class="p2">In this case, the <span class="s1">format</span> specification is wrapped by double brackets [[ … ]] (whereas in most other lines, it does not need to be wrapped with double brackets).</p>
 <p class="p3"><br></p>
-<p class="p2">There is extra code wrapped in double-braces  on the RHS.<span class="Apple-converted-space">  </span>This code is copied verbatim to the transpiled output.<span class="Apple-converted-space">  </span>This code is meant to contain local variables, and, scoped variables (see separate section).</p>
+<p class="p2">There is extra code wrapped in double-braces {{ … }} on the RHS.<span class="Apple-converted-space">  </span>This code is copied verbatim to the transpiled output.<span class="Apple-converted-space">  </span>This code is meant to contain local variables, and, scoped variables (see separate section).</p>
 <p class="p3"><br></p>
 <p class="p2">Specification 8 says</p>
 <p class="p3"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
-<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
 <p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
