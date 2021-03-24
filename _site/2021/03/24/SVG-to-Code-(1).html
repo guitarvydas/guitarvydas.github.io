@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>SVG to Code (1)</title>
+  <meta name="CreationTime" content="2021-03-24T14:54:12Z">
+  <meta name="ModificationTime" content="2021-03-24T14:54:12Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {text-decoration: underline}
+    span.s3 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I describe the first four phases of converting an SVG diagram to code.</p>
+<p class="p3"><br></p>
+<p class="p2">This example is <i>very</i> simple, but the technique has been used on large problems.</p>
+<p class="p3"><br></p>
+<p class="p2">The example uses an SVG diagram containing one <i>rect </i>and two <i>text </i>elements.</p>
+<p class="p3"><br></p>
+<p class="p2">I convert the diagram to PROLOG rules, using PEG.<span class="Apple-converted-space">  </span>In this particular case I use a PEG to generate another PEG that forms a JavaScript program that outputs relations.</p>
+<p class="p3"><br></p>
+<p class="p2">I use SWIPL to perform inferencing over the relations to output various results.<span class="Apple-converted-space">  </span>One could use <i>any </i>language to do the inferencing<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">              </span>I hope to show relations in a very basic form that needs no knowledge of PROLOG.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Github</b></h2>
+<p class="p2">The code for this essay can be found in</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://github.com/guitarvydas/svgtranspile">https://github.com/guitarvydas/svgtranspile</a></p>
+<p class="p3"><br></p>
+<p class="p2">and the code for the PEG-&gt;PEG transpiler tool, called<i> glue</i>, is documented at:</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/18/Little-Language.html">https://guitarvydas.github.io/2021/03/18/Little-Language.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">(code for <i>glue: </i><a href="https://github.com/guitarvydas/glue">https://github.com/guitarvydas/glue</a>)</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG File</b></h2>
+<p class="p2">The SVG used in this essay is:</p>
+<p class="p3"><br></p>
+<p class="p4">&lt;!DOCTYPE html&gt;</p>
+<p class="p4">&lt;html&gt;</p>
+<p class="p4">&lt;body&gt;</p>
+<p class="p5"><br></p>
+<p class="p4">&lt;svg xmlns="http://www.w3.org/2000/svg" width="600" height="510"&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;rect width="200" height="100" fill="lightyellow" style="stroke-width:1;stroke:black" &gt;&lt;/rect&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;text x="100" y="55" fill="black"&gt;output&lt;/text&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;text x="300" y="55" fill="black"&gt;floating&lt;/text&gt;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>Sorry, your browser does not support inline SVG. <span class="Apple-converted-space"> </span></p>
+<p class="p4">&lt;/svg&gt;</p>
+<p class="p5"><span class="Apple-converted-space"> </span></p>
+<p class="p4">&lt;/body&gt;</p>
+<p class="p4">&lt;/html&gt;</p>
+<p class="p5"><br></p>
+<p class="p2">When viewed in a browser, the SVG shows one rectangle (lightyellow) and two text fragments ("output" and "floating").</p>
+<p class="p2">One text fragment — "output" — appears to be inside the rectangle.<span class="Apple-converted-space">  </span>The other text fragment is not enclosed by any rectangle.</p>
+<p class="p2"><img src="/assets/2021-03-24-14-54-12-Images/Screen Shot 2021-03-23 at 3.17.38 PM.png" width="200px" height="115px" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG to Factbase</b></h2>
+<p class="p2">The conversion from SVG to factbase format <a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">https://guitarvydas.github.io/2021/01/17/Factbases.html</a></p>
+<p class="p2">is performed by using the <i>glue </i>tool.</p>
+<p class="p3"><br></p>
+<p class="p2">This can be seen in <span class="s1">run.bash.</span></p>
+<p class="p6"><br></p>
+<p class="p2">The conversion is done in two steps (an arbitrary choice, but saves me time and maintains the DI<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>).</p>
+<p class="p3"><br></p>
+<p class="p2">The steps require:</p>
+<ol class="ol1">
+  <li class="li7">a pattern for SVG files</li>
+  <li class="li7">a specification of how to emit code for matches.</li>
+</ol>
+<p class="p3"><br></p>
+<p class="p2">The SVG pattern is found in the file <span class="s1">svg.ohm</span>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Typically, a pattern is fed into the Ohm-JS tool after which one writes JavaScript code<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> to <i>do</i> something with the resulting matches.</p>
+<p class="p3"><br></p>
+<p class="p2">I chose to write another SCL (aka DSL) instead of writing raw JavaScript code manually.<span class="Apple-converted-space">  </span>I let the SCL<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> write the JavaScript for me.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Basic Facts</b></h2>
+<p class="p2">The starting set of facts, gleaned from the SVG file, are:</p>
+<p class="p3"><br></p>
+<p class="p4">fill</p>
+<p class="p4">height_str</p>
+<p class="p4">rect</p>
+<p class="p4">svgbox</p>
+<p class="p4">string</p>
+<p class="p4">text</p>
+<p class="p4">width_str</p>
+<p class="p4">x_str</p>
+<p class="p4">y_str.</p>
+<p class="p8"><br></p>
+<p class="p2">The "…_str" facts remind me that values in the triples are strings, not numbers.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Strings to Numbers</b></h2>
+<p class="p2">As it stands, the factbase triples contain numeric data in the form of strings.</p>
+<p class="p3"><br></p>
+<p class="p2">The file <span class="s1">num.pl </span>converts these strings into numbers.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Anti-Abstraction</b></h2>
+<p class="p2">The pattern actually <i>over-specifies</i> the SVG pattern matching, for example <span class="s1">element</span> is broken down as four basic matches, where it could have specified with only one match.</p>
+<p class="p3"><br></p>
+<p class="p2">This is an idiom for using pattern-matchers — let the matcher supply the matching context.<span class="Apple-converted-space">  </span>This is exactly the opposite of <i>abstraction</i>.<span class="Apple-converted-space">  </span>I wrote redundant rules, letting the pattern matcher do more work for me.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Automation - Using Code to Write Code</b></h2>
+<p class="p2">You can create SCLs (DSLs) more easily if:</p>
+<ul class="ul1">
+  <li class="li7">You use PEG pattern matchers</li>
+  <li class="li7">You make the output code very repetitive.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Code that is "not repetitive" creates edge-cases that need to be handled.<span class="Apple-converted-space">  </span>Removing such edge-cases is vital to allowing quick construction of little languages — SCLs.</p>
+<p class="p3"><br></p>
+<p class="p2">Imagine using a REGEX library in your favourite PL.<span class="Apple-converted-space">  </span>REGEX is a DSL, but you rarely stop to think of it as a full-blown DSL, you just use it.<span class="Apple-converted-space">  </span>REGEX's work well for line-oriented data with few "edge cases". <span class="Apple-converted-space"> </span></p>
+<p class="p2">The ideal situation is to use pattern matchers like one uses REGEXs.<span class="Apple-converted-space">  </span>Compiler technologies and DSLs have been steeped in mysticism, taking many months to build.<span class="Apple-converted-space">  </span>PEG brings "compiler technology" into the realm of programming, taking only a day to build an SCL instead of taking months/years.<span class="Apple-converted-space">  </span>The "tricks" for getting such rapid turn-around are the same as for REGEXs — don't try do to type-checking, don't accomodate many edge-cases.<span class="Apple-converted-space">  </span>Let the underlying language handle type-checking.<span class="Apple-converted-space">  </span>Get rid of edge-cases by looking for highly repetitive code sequences<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">REGEX likes input that is arranged in lines of text.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG likes input that is arranged in nested blocks of text.</p>
+<p class="p3"><br></p>
+<p class="p2">Patterns in REGEX are called <i>REGEXs</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Patterns in PEG are called <i>grammars</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">I wrote a PEG pattern matcher for SVG and I wrote another PEG pattern matcher for my <i>glue</i> SCL. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The job of <i>glue</i> is straight-forward and has almost no edge-cases.<span class="Apple-converted-space">  </span>The idea is that Ohm-JS needs a block of JavaScript functions — one function for each <i>rule</i> in the grammar.<span class="Apple-converted-space">  </span>In this case, I needed code that would rearrange matching code bits and format them for output.<span class="Apple-converted-space">  </span>JavaScript back-tick strings (and C format strings, and <i>bash </i>strings, etc.) would be enough to do the job, so I wrote a simple tool that created <i>semantics</i> JavaScript code for me, using JavaScript back-tick strings.</p>
+<p class="p3"><br></p>
+<p class="p2">I have used Ohm-JS many times before.<span class="Apple-converted-space">  </span>I knew that I would encounter simple formatting problems like this again, so the 1-day development effort was deemed acceptable.<span class="Apple-converted-space">  </span>I would not have built this SCL if I knew that it would take some months or years.</p>
+<p class="p3"><br></p>
+<p class="p2">My thinking has changed since I realized that I could cut development time down by about a factor of 10.</p>
+<p class="p3"><br></p>
+<p class="p2">I cut corners — instead of automatically inserting the generated code into my Ohm-JS pattern matcher, I simply use my editor's COPY/PASTE function.<span class="Apple-converted-space">  </span>In fact, I used the command-line <i>cat</i> program to paste the code into the Ohm-JS pattern matcher.<span class="Apple-converted-space">  </span>If this was used very frequently, I would look at tools like <i>m4</i> to help with COPY/PASTING<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DI</b></h2>
+<p class="p2">If you look at the generated code generated by the <i>glue </i>tool, all of the simplicity, of simply formatting the output, is hidden in a sea of JavaScript coding details. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The ideal of DI<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a> is to show only what matters, eliding coding details.<span class="Apple-converted-space">  </span>The <i>specification</i> of mapping SVG matches into formatted output is captured in the file svg2p.glue, while the rest of the details - JavaScript code - are deferred (and in this case, generated by a small tool).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>svg2p</b></h2>
+<p class="p2">The specification for mapping SVG to formatted output is in file <span class="s1">svg2p.glue</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, the first line:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlsvg [@ws docH htmlH bodyH @elements bodyE htmlE] = ${elements}</p>
+<p class="p2">says that when an htmlsvg pattern is matched (see <span class="s1">svg.ohm</span>), it will have 7 sub-matches, named ws, docH, htmlH, bodyH, elements, bodyE and htmlE (resp.). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The spec says that <span class="s1">ws</span> and <span class="s1">elements</span> may contain multiple matches (i.e. these multiple-matches are returned by Ohm-JS in JavaScript arrays). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">After the pattern-matching is finished, the matches in <span class="s1">elements</span> are simply printed out and the rest of the matches are ignored. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The right-hand-side of the "=" is taken to be a JavaScript back-tick string, in this case <span class="s1">${elements}</span>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The whole right-hand-side is wrapped with back-ticks and emitted as a JavaScript string, e.g.<span class="Apple-converted-space"> </span></p>
+<p class="p4">return `${elements}`. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The <i>glue</i> tool also does some housekeeping for me and evaluates the sub-matches as required by Ohm-JS<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hand-Optimization Urge</b></h2>
+<p class="p2">The formatted code, output by my use of the <i>glue</i> tool, is very repetitive. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most programmers would <span class="s2">not</span> create such repetitive code and would feel compelled to "optimize" it, thereby, creating more edge-cases for formatting. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This urge-to-hand-optimize happened, also, during the transition from <i>assembler</i> programming to HLLs (like C and Pascal).<span class="Apple-converted-space">  </span>Assembler programmers could not resist the urge to write "better" code.<span class="Apple-converted-space">  </span>Compilers continued to emit very repetitive code, which was "worse" than that created by assembler programmers.<span class="Apple-converted-space">  </span>Then <i>gcc</i> came along.<span class="Apple-converted-space">  </span><i>Gcc</i> optimized the repetitive code sequences and bettered most hand-written assembler code (at worst, it matched the "best" hand-written code).<span class="Apple-converted-space">  </span>After that, few programmers bothered to write code in assembler any more¡.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>I view all current PLs as mere assembly languages and use PEG to build SCLs on top of them.<span class="Apple-converted-space">  </span>Some PLs make "better" targets for automation than others </i><a href="https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html"><i>https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html</i></a><i>.<span class="Apple-converted-space">  </span>It boils down to unnecessary edge-cases<a id="fnlink9"></a></i><a href="#fn9"><sup>[9]</sup></a><i> and unnecessary syntactic sugar.<span class="Apple-converted-space">  </span>In this essay, I treat JavaScript and PROLOG as assembler languages and automatically transpile code into their syntax.<span class="Apple-converted-space">  </span>IMO, paradigms, such as OO and FP and relations, are often conflated with syntactic sugar.<span class="Apple-converted-space">  </span>It is not possible to create a syntax that fits all use-cases.<span class="Apple-converted-space">  </span>Paradigms and syntax should be treated orthogonally.<span class="Apple-converted-space">  </span>Experimenting with paradigms is not the same as experimenting with syntax<a id="fnlink10"></a></i><a href="#fn10"><sup>[10]</sup></a> <a href="https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html"><i>https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html</i></a>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sorting</b></h2>
+<p class="p2">PROLOG requires that rules be clumped together.</p>
+<p class="p3"><br></p>
+<p class="p2">UNIX® <i>sort</i> is enough to produce this clumping.</p>
+<p class="p3"><br></p>
+<p class="p2">I leave the factbase unsorted for ease-of-reading.<span class="Apple-converted-space">  </span>I call <i>sort</i> to create factbases for use with PROLOG.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bounding Boxes</b></h2>
+<p class="p2">We want to "normalize" data so that it is easier to search.</p>
+<p class="p3"><br></p>
+<p class="p2">To this end, we want <i>all</i> shapes to have the same form.</p>
+<p class="p3"><br></p>
+<p class="p2">I have learned, through experience, that creating a bounding box for every shape is a useful normalization<a id="fnlink11"></a><a href="#fn11"><sup>[11]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">There are some shapes that do not fit the bounding-box model, notably lines.<span class="Apple-converted-space">  </span>We'll treat lines differently.<span class="Apple-converted-space">  </span>In this example, there are no lines at all, so — problem solved :-).</p>
+<p class="p3"><br></p>
+<p class="p2">SVG specifies <i>rect</i>s in (x,y,width,height) form.</p>
+<p class="p3"><br></p>
+<p class="p2">A bounding box for <i>rect</i>s would be (left,top,right,bottom) form,<span class="Apple-converted-space">  </span>which means that we need to expand width and height in some way.</p>
+<p class="p3"><br></p>
+<p class="p2">SVG <i>text</i> elements are specified only as (x,y).<span class="Apple-converted-space">  </span>We would need to know the font-size and the string size of each string to create bounding boxes for <i>text</i>.<span class="Apple-converted-space">  </span>This is not impossible to do, but we will avoid it in this example<a id="fnlink12"></a><a href="#fn12"><sup>[12]</sup></a>.<span class="Apple-converted-space">  </span>For now, we will not create bounding boxes for strings and will use only their (x,y) points.<span class="Apple-converted-space">  </span>Later, we can decide if this approximation causes us problems.</p>
+<p class="p3"><br></p>
+<p class="p2">So, we will create bounding boxes for <i>rect</i>s (only).<span class="Apple-converted-space">  </span>To do this, we are going to need to write code that converts (x,y,w,h) into (l,t,r,b), something like:</p>
+<p class="p3"><br></p>
+<p class="p4">left = x</p>
+<p class="p4">top = y</p>
+<p class="p4">right = x + width</p>
+<p class="p4">bottom = y + width</p>
+<p class="p3"><br></p>
+<p class="p2">So, for <i>every</i> <i>rect</i>, we will need to lookup its (x,y,w,h) and create a new bounding-box fact that contains (l,t,r,b).</p>
+<p class="p3"><br></p>
+<p class="p2">We store all information in normalized triple form, so we need to find all</p>
+<p class="p4">rect(R,"")</p>
+<p class="p4">x(R,X)</p>
+<p class="p4">y(R,Y)</p>
+<p class="p4">width(R,W)</p>
+<p class="p4">height(R,H)</p>
+<p class="p3"><br></p>
+<p class="p2">and convert this information into bounding box triples, such as</p>
+<p class="p4">bbleft(R,X)</p>
+<p class="p4">bbtop(R,Y)</p>
+<p class="p4">bbright(R,X+W)</p>
+<p class="p4">bbbottom(R,Y+H)</p>
+<p class="p3"><br></p>
+<p class="p2">Obviously, we could use a <i>loop</i> or <i>recursion</i> to perform such searches an insertions.<span class="Apple-converted-space">  </span>I have done this many times and have found that PROLOG gives me an easy way to write this kind of searching-and-inserting-code.<span class="Apple-converted-space">  </span>I will use PROLOG<a id="fnlink13"></a><a href="#fn13"><sup>[13]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Note: there is no need to optimize the contents of the factbase.<span class="Apple-converted-space">  </span>We can just keep adding facts to the factbase.<span class="Apple-converted-space">  </span>Defer optimization until later (I have done this many times and have never needed to optimize the factbase — a demonstration of the power of procrastination!).<span class="Apple-converted-space">  </span>The searching algorithms simply skip over unneeded facts.</p>
+<p class="p3"><br></p>
+<p class="p2">In fact, the above pseudo-code is almost PROLOG.<span class="Apple-converted-space">  </span>I need to add comma (instead of semi-colons as in some other language) to the end of phrases and, I need to check that PROLOG variables are written beginning with upper-case letters and everything else is written beginning with lower-case letters<a id="fnlink14"></a><a href="#fn14"><sup>[14]</sup></a>.<span class="Apple-converted-space">  </span>The end of each rule needs to end with a period (.).</p>
+<p class="p3"><br></p>
+<p class="p2">The resulting code can be seen in <span class="s1">bb.pl</span> and it is executed in <span class="s1">run.bash</span>.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Names for Rects</b></h2>
+<p class="p2">Next, we want to assign names to every <i>rect</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Every <i>text</i> element contains text and we will simply look for <i>text</i> (x,y)s that are <i>inside</i> rectangles.</p>
+<p class="p3"><br></p>
+<p class="p2">In my expected use-case for this kind of diagram, I will have big rectangles that represent software components and smaller rectangles that represent <i>port</i>s for the components (coloured palegreen for <i>input ports</i> and lightyellow for <i>output ports</i>).</p>
+<p class="p3"><br></p>
+<p class="p2">All <i>ports</i> and all <i>components</i> will have a name. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We will use a simple check to determine names for <i>rect</i>s — "is the (x,y) of the <i>text</i> enclosed in the (l,t,r,b) of the <i>rect?</i>".</p>
+<p class="p3"><br></p>
+<p class="p2">This simple check makes it possible that one <i>text</i> element will be inside <span class="s2">more than one</span> rectangle, e.g. a port name inside the <i>port</i> and inside the <i>component</i>.<span class="Apple-converted-space">  </span>To ensure that we don't map the same name to a <i>port</i> and its <i>component</i>, we will use the simple rule that a <i>text</i> matches with only the <i>smallest</i> <i>rect</i> that can be found.<span class="Apple-converted-space">  </span>This check might not be enough, but it will suffice for this example and will show the general gist of how to build PLs based on DaS<a id="fnlink15"></a><a href="#fn15"><sup>[15]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">The code for finding such matches is in <span class="s1">names.pl</span>.<span class="Apple-converted-space">  </span>See, also <span class="s1">run.bash</span>, for how to execute this code and append its output to the factbase.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Design Rule Check (Example)</b></h2>
+<p class="p2">At various points in the workflow, we will want to throw-in various design rule checks.</p>
+<p class="p3"><br></p>
+<p class="p2">Existing, text-based PLs, tend to do all of the checks at once. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This is called "type checking", "semantic analysis", etc.</p>
+<p class="p3"><br></p>
+<p class="p2">In our case, we are creating a workflow that is a pipeline of fact-creators that ends with code formatters.<span class="Apple-converted-space">  </span>We can add checks at any point in the workflow.</p>
+<p class="p3"><br></p>
+<p class="p2">As (only) one example of this kind of checking, I've built a filter that checks for floating <i>text</i> — text that is not enclosed in any <i>rect</i>.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The code for this one design rule checker is in <span class="s1">uncontainednames.pl</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">We would want to add more checks to create a more useful version of this example.</p>
+<p class="p3"><br></p>
+<p class="p2">Again, see <span class="s1">run.bash</span>, to see how I decided to run the checker.</p>
+<p class="p9"><br></p>
+<hr>
+<p class="p10"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>e.g. Scheme, JavaScript using loops-within-loops or with my js-prolog library https://github.com/guitarvydas/js-prolog, or any other language.</p>
+<p class="p10"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>DI means Design Intent (often called Architecture).</p>
+<p class="p10"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>Called the "semantics".</p>
+<p class="p10"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>I call the SCL tool "glue".</p>
+<p class="p10"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>This is what compiler-writers do.<span class="Apple-converted-space">  </span>They generate "some" code, then "optimize" it with other tools.</p>
+<p class="p10"><a id="fn6"></a><a href="#fnlink6"><span class="s3">[6]</span></a><span class="s3"> </span>In fact, m4 does a lot of what OO is meant for.<span class="Apple-converted-space">  </span>I haven't tried, but I think that m4 could be used to implement Bennett's Frames.</p>
+<p class="p10"><a id="fn7"></a><a href="#fnlink7"><span class="s3">[7]</span></a><span class="s3"> </span>DI is Design Intent.</p>
+<p class="p10"><a id="fn8"></a><a href="#fnlink8"><span class="s3">[8]</span></a><span class="s3"> </span>All of this emits JavaSCript code.</p>
+<p class="p10"><a id="fn9"></a><a href="#fnlink9"><span class="s3">[9]</span></a><span class="s3"> </span>e.g. declaration before use</p>
+<p class="p10"><a id="fn10"></a><a href="#fnlink10"><span class="s3">[10]</span></a><span class="s3"> </span>This is another instance of fractal-thinking.<span class="Apple-converted-space">  </span>What we generally consider to be PLs, can be broken down into two sub-components - paradigm and syntax.</p>
+<p class="p10"><a id="fn11"></a><a href="#fnlink11"><span class="s3">[11]</span></a><span class="s3"> </span>YMMV</p>
+<p class="p10"><a id="fn12"></a><a href="#fnlink12"><span class="s3">[12]</span></a><span class="s3"> </span>For example, a reasonable first approximation imight be to assume that all text is in 12-point font.<span class="Apple-converted-space">  </span>We won't deal with this problem in this example and will defer it to later.</p>
+<p class="p10"><a id="fn13"></a><a href="#fnlink13"><span class="s3">[13]</span></a><span class="s3"> </span>You don't have to use PROLOG, if you don't want to.</p>
+<p class="p10"><a id="fn14"></a><a href="#fnlink14"><span class="s3">[14]</span></a><span class="s3"> </span>The pseudo-code is already written that way.</p>
+<p class="p10"><a id="fn15"></a><a href="#fnlink15"><span class="s3">[15]</span></a><span class="s3"> </span>DaS means Disagrams as Syntax.</p>
+</div>
+</body>
+</html>
