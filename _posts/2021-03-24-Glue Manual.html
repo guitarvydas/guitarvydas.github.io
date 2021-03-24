@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Glue Manual</title>
+  <meta name="CreationTime" content="2021-03-24T08:01:06Z">
+  <meta name="ModificationTime" content="2021-03-24T08:01:06Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 9.0px Palatino}
+    span.s3 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2"><i>Glue</i> converts one language into another.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Glue </i>goes one step further than REGEXs and I believe that it is as easy to use as REGEXs.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Glue </i>is a tool for building <i>transpilers</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">As an example, in another essay,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> I use <i>glue </i>to convert SVG diagams into Bash programs.</p>
+<p class="p3"><br></p>
+<p class="p2">Technically, <i>glue </i>is a PEG<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> to help in writing PEGs.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Basics</b></h2>
+<p class="p2">The little language, that the I call <i>glue,</i> is used to generate JavaScript code to be used with transpilers constructed with Ohm-JS.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Glue</i> specifications consist of one "statement" for every matching Ohm-JS grammar <i>rule</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Each specification statement gives the expected Ohm-JS grammar plus variables that hold the sub-matches. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Each specification statement defines a mapping from sub-matches to output format.</p>
+<p class="p3"><br></p>
+<p class="p2">Each specification statement can include setup code and access to a dynamically scoped set of variables.<span class="Apple-converted-space">  </span><i>Glue </i>emits code to create variable frames for each each grammar rule at runtime.</p>
+<p class="p3"><br></p>
+<p class="p2">I discuss efficiency of this approach.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>This little language could use a better name.<span class="Apple-converted-space">  </span>At the time of creation "glue" had meaning (to me).<span class="Apple-converted-space">  </span>In retrospect, this little language has more to do with generating semantic code for Ohm-JS and might need to be renamed to something more appropriate.<span class="Apple-converted-space">  </span>OTOH, I would think that, if this little language were to be used frequently, it would be rolled into a single tool workflow and combined with Ohm-JS and that the rolled-together workflow would be given its own, unique, name.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Working Example</b></h2>
+<p class="p2">To ease discussion, we will consider an actual use-case<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> of <i>glue</i>:</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlsvg [@ws docH htmlH bodyH @elements bodyE htmlE] = ${elements}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlHeader [_ @ws] = ${_}${ws}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlEnd [_ @ws] = ${_}${ws}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>bodyHeader [_ @ws] = ${_}${ws}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>bodyEnd [_ @ws] = ${_}${ws}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>docTypeHeader [_1 @stuff _2 @ws] = ${_1}${stuff}${_2}${ws}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>element [e] = ${e}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">     </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>rectElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =</p>
+<p class="p4"><span class="Apple-converted-space">  </span>{{ var name = scopeGet ("path") + "_rect_" + gen (); scopeAdd ("path", name); }}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[[</p>
+<p class="p4"><span class="Apple-converted-space">     </span>rect(${name},"").</p>
+<p class="p4"><span class="Apple-converted-space">     </span>${attributes}</p>
+<p class="p4"><span class="Apple-converted-space">     </span>${elements} ]]</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>textElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =</p>
+<p class="p4"><span class="Apple-converted-space">  </span>{{ var name = scopeGet ("path") + "_text_" + gen (); scopeAdd ("path", name); }}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[[<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">       </span>text(${name},"").</p>
+<p class="p4"><span class="Apple-converted-space">       </span>${attributes}</p>
+<p class="p4"><span class="Apple-converted-space">       </span>${elements}</p>
+<p class="p4"><span class="Apple-converted-space">       </span>string(${name}, "${text}"). ]]</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>basicElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] = ${_1}${_2}${ws}${attributes}${_5}${_6}${elements}${text}${_9}${_10}${_11}${_12}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>attribute [a] = ${a}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>widthAttribute [_ _eq str @_ws] = [[width_str(${scopeGet ("path")},${str}).\n]]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>heightAttribute [_ _eq str @_ws] = [[height_str(${scopeGet ("path")},${str}).\n]]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>xAttribute [_ _eq str @_ws] = [[x_str(${scopeGet ("path")},${str}).\n]]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>yAttribute [_ _eq str @_ws] = [[y_str(${scopeGet ("path")},${str}).\n]]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>fillAttribute [_ _eq str @_ws] = [[fill(${scopeGet ("path")},${str}).\n]]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>genericAttribute [_ _eq str @_ws] = \n</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>text [x] = ${x}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>name [c @cs] = ${c}${cs}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>name1st [c] = ${c}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>nameFollow [c] = ${c}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>stuff [c] = ${c}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>string [_1 @cs _2] = "${cs}"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>notQ [c] = ${c}</p>
+<p class="p4"><span class="Apple-converted-space">  </span>ws [c] = ${c}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Formatted Strings</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><i>Glue</i> produces one formatted string for each grammar rule.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>LHS</b></h2>
+<p class="p2">Each statement corresponds to a <i>rule</i> in the accompanying Ohm-JS grammar.</p>
+<p class="p3"><br></p>
+<p class="p2">The first line of our example is</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlsvg [@ws docH htmlH bodyH @elements bodyE htmlE] = ${elements}</p>
+<p class="p5"><br></p>
+<p class="p2">which we will elide in phases:</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlsvg … = …</p>
+<p class="p3"><br></p>
+<p class="p2">The first line corresponds to an Ohm-JS grammar <i>rule</i> named "htmlsvg".</p>
+<p class="p3"><br></p>
+<p class="p2">The grammar parses<span class="Apple-converted-space">  </span>7 sub-matches, given in our specification inside brackets:</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>… [@ws docH htmlH bodyH @elements bodyE htmlE] = …</p>
+<p class="p5"><br></p>
+<p class="p2">Here, we have defined 7 JavaScript variables (parameters, actually) — ws, docH, htmlH, bodyH, elements, bodyE and htmlE.</p>
+<p class="p3"><br></p>
+<p class="p2">All variables prefixed with "@" are multiple-match items generated by the Ohm-JS grammar.<span class="Apple-converted-space">  </span>In this case, <span class="s1">ws</span> and <span class="s1">elements</span> are the multiple-match items.<span class="Apple-converted-space">  </span>Multiple-match items correspond to the use of "?", "*" and "+" operations in the grammar.</p>
+<p class="p3"><br></p>
+<p class="p2">The LHS creates, roughly, a JavaScript function, eg.</p>
+<p class="p3"><br></p>
+<p class="p4">function htmlsvg (ws, docH, htmlH, bodyH, elements, bodyE, htmlE) {<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>…<span class="Apple-converted-space"> </span></p>
+<p class="p4">}</p>
+<p class="p3"><br></p>
+<p class="p2">The parameters are evaluated in the body of the function, as required by Ohm-JS.</p>
+<p class="p3"><br></p>
+<p class="p2">Multiple-match items are evaluated one step further in the body of the function (multiple-matches return an array of CSTs<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>, and evaluation consists of flattening the arrays into single strings using the .join('') operator of JavaScript).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>RHS</b></h2>
+<p class="p2">The right-hand-side is a block of characters that are combined into JavaScript back-tick strings.</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>… = ${elements}</p>
+<p class="p3"><br></p>
+<p class="p2">This RHS results in JavaScript code<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p4">`${elements}`</p>
+<p class="p3"><br></p>
+<p class="p2">If we look at the whole 1<span class="s2"><sup>st</sup></span> statement:</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlsvg [@ws docH htmlH bodyH @elements bodyE htmlE] = ${elements}</p>
+<p class="p3"><br></p>
+<p class="p2">we see that the specification says to flatten and format the <span class="s1">elements</span> parameter and discard the other 6 parameters.</p>
+<p class="p3"><br></p>
+<p class="p2">The second line of the example,</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>htmlHeader [_ @ws] = ${_}${ws}</p>
+<p class="p6"><br></p>
+<p class="p2">says that when an htmlHeader grammar rule is matched, it should be mapped to a string containing the first<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> ("_") and second ("ws") parameters. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most of the <i>glue </i>specifications have this form</p>
+<p class="p3"><br></p>
+<p class="p4">match, format. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The exceptions are specifications 8, 9 and 10.</p>
+<p class="p3"><br></p>
+<p class="p2">Specification 8</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
+<p class="p2">has the form</p>
+<p class="p3"><br></p>
+<p class="p4">ruleName [ parameters ] = {{ JavaScript code }} [[ formatting ]]</p>
+<p class="p3"><br></p>
+<p class="p2">In this case, the <span class="s1">format</span> specification is wrapped by double brackets [[ … ]] (whereas in most other lines, it does not need to be wrapped with double brackets).</p>
+<p class="p3"><br></p>
+<p class="p2">There is extra code wrapped in double-braces {{ … }} on the RHS.<span class="Apple-converted-space">  </span>This code is copied verbatim to the transpiled output.<span class="Apple-converted-space">  </span>This code is meant to contain local variables, and, scoped variables (see separate section).</p>
+<p class="p3"><br></p>
+<p class="p2">Specification 8 says</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>svgElement [_1 _2 @ws @attributes _5 @_6 @elements @text _9 _10 _11 @_12] =<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>     </span>{{ var name = "svg"; scopeAdd ("path", name); scopeAdd ("counter", 0); }}<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>[[ svgbox(${name},"").</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${attributes}</p>
+<p class="p4"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>${elements}]]</p>
+<p class="p3"><br></p>
+<p class="p2">to create a JavaScript variable "name" and to add two scoped variables to the scope stack ("path" and "counter"). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Then, the usual formatting occurs.<span class="Apple-converted-space">  </span>Everything inside the double-brackets is wrapped in a JavaScript back-tick string, e.g. `<span class="s1">svgbox(${name},"")…</span>`.<span class="Apple-converted-space">  </span>JavaScript variables and scoped variables can be included in the format back-string.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scoped Variables</b></h2>
+<p class="p3"><br></p>
+<p class="p2">Currently, the <i>glue</i> transpiler inserts code at all rule entry and exit points</p>
+<p class="p3"><br></p>
+<p class="p4">_ruleEnter ("rule name");</p>
+<p class="p4">_ruleExit ("rule name");</p>
+<p class="p3"><br></p>
+<p class="p2">These enter/exit functions push and pop stack frames for dynamically scoped variables.<span class="Apple-converted-space">  </span>The rule names are passed in as strings, if debugging code is added to the enter/exit functions.</p>
+<p class="p3"><br></p>
+<p class="p2">As it stands, the mainline function must call</p>
+<p class="p3"><br></p>
+<p class="p4">_ruleInit ();</p>
+<p class="p3"><br></p>
+<p class="p2">to initialize the dynamic variable scope stack.</p>
+<p class="p3"><br></p>
+<p class="p2">Dynamic variables act somewhat like inheritance in graphical systems, e.g. when a variable is pushed onto the stack (scopeAdd()), it shadows all other variables with that same name, when a variable is dereferenced (scopeGet()), the top-most value is returned.</p>
+<p class="p3"><br></p>
+<p class="p2">The API for dynamic variables is:</p>
+<ul class="ul1">
+  <li class="li7">scopeAdd ("name", value)
+  <ul class="ul1">
+    <li class="li7">pushes <i>value</i> onto the stack under the name <i>name</i></li>
+  </ul></li>
+  <li class="li7">scopeGet ("name")
+  <ul class="ul1">
+    <li class="li7">returns the top-most value on the stack with the given name</li>
+  </ul></li>
+  <li class="li7">scopeModify ("name", value)
+  <ul class="ul1">
+    <li class="li7">outlier for special cases - modifies the top-most variable of the given name</li>
+    <li class="li7">in the example code, this is used to create a "global" counter used for creating unique formatted variable names</li>
+  </ul></li>
+  <li class="li7">_ruleInit ()
+  <ul class="ul1">
+    <li class="li7">must be called once before parsing</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Foreign Functions</b></h2>
+<p class="p2">In this example, I've place all "outside" functions into a file called <span class="s1">foreign.js</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">This is a form of fractal eliding.<span class="Apple-converted-space">  </span>The code is needed to satisfy the JavaScript compiler, but its implementation is uninteresting at the DI layer.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>It is the Architect's responsibility to make the design clear and understandable to readers.</b></h2>
+<p class="p3"><br></p>
+<p class="p2">In this example, there is but one foreign function — <span class="s1">gen()</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">I chose to put the <span class="s1">gen()</span> function into a separate file and to call it from the <i>glue</i> specification.<span class="Apple-converted-space">  </span>Other Architects might choose to do this differently.</p>
+<p class="p3"><br></p>
+<p class="p2">IMO, the <span class="s1">gen() </span>function contains implementation details and, IMO, such details must be pushed out of the specification and elided.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Efficiency</b></h2>
+<p class="p2">The <i>glue </i>tool is used only by the grammar programmer. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">As such, <i>glue</i> is used infrequently in the programmer's workflow.</p>
+<p class="p3"><br></p>
+<p class="p2">As such, efficiency of <i>glue</i> is not a major issue.<span class="Apple-converted-space">  </span>The only "rule" is "is it fast enough for use?".</p>
+<p class="p3"><br></p>
+<p class="p2">I suspect, but haven't even bothered to measure, that the implementation of scoped dynamic variables would be considered "inefficient".<span class="Apple-converted-space">  </span>I stick to the YAGNI principle — the <i>glue</i> tool works "fast enough" on my laptop (there is no perceived time taken by the <i>glue</i> tool — it appears to operate instantly with no delay — that is "good enough" and no time has been spent making it faster).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Error Handling</b></h2>
+<p class="p2"><i>Glue</i> does not check for any errors and leaves all error handling to the support language — JavaScript and Ohm-JS, in this case.</p>
+<p class="p3"><br></p>
+<p class="p2">Ohm-JS does sufficient error checking (more than JavaScript).</p>
+<p class="p3"><br></p>
+<p class="p2">One needs to "know" how Ohm-JS works to use the <i>glue</i> tool, in its present form.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Postscript - Architectural Reuse</b></h2>
+<p class="p2">The goal was to build something "as quickly as" building an editor macro instead of building a full-blown DSL or building a full-blown PL.</p>
+<p class="p3"><br></p>
+<p class="p2">This tool would not have been built if its construction was estimated to take longer than a few hours.</p>
+<p class="p3"><br></p>
+<p class="p2">SCLs based on PEG are meant to be one-use-only DSLs, like REGEXPs are in other existing languages.</p>
+<p class="p3"><br></p>
+<p class="p2">The semantics of <i>glue</i> are quite uncomplicated.<span class="Apple-converted-space">  </span>There was just enough work put in "to get the job done".<span class="Apple-converted-space">  </span>I can throw <i>glue</i> away and build something bigger and more complicated if the situation arises. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I would retain the experience from building this tool and use this experience when building the next one.<span class="Apple-converted-space">  </span>A case of Architectural Reuse instead of plain code reuse.</p>
+<p class="p3"><br></p>
+<p class="p2">Using fractal-design principles, I would keep chopping a problem down into sub-components until I could implement it in whatever way I choose (using <i>glue</i> or ignoring <i>glue</i>).</p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s3">[1]</span></a><span class="s3"> </span>See "SVG to Code (1)".</p>
+<p class="p9"><a id="fn2"></a><a href="#fnlink2"><span class="s3">[2]</span></a><span class="s3"> </span>Don't worry if you don't understand this statement or you don't know what a PEG is.</p>
+<p class="p9"><a id="fn3"></a><a href="#fnlink3"><span class="s3">[3]</span></a><span class="s3"> </span>See my essay "SVG to Code"</p>
+<p class="p9"><a id="fn4"></a><a href="#fnlink4"><span class="s3">[4]</span></a><span class="s3"> </span>CST means Concrete Syntax Tree — basically the AST (Abstract Syntax Tree) instantiated with actual matches.</p>
+<p class="p9"><a id="fn5"></a><a href="#fnlink5"><span class="s3">[5]</span></a><span class="s3"> </span>In JavaScript, underscore "_" is an ordinary character, hence, _ is a variable name that is one character long.</p>
+</div>
+</body>
+</html>
