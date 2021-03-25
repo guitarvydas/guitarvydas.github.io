@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Bootstrapping</title>
+  <meta name="CreationTime" content="2021-03-25T07:43:57Z">
+  <meta name="ModificationTime" content="2021-03-25T07:43:57Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bootstrapping</b></h2>
+<p class="p2">Bootstrapping is a technique used by language designers (including compiler writers).</p>
+<p class="p3"><br></p>
+<p class="p2">The idea is to "test" a language design by having it compile itself.</p>
+<p class="p3"><br></p>
+<p class="p2">This is a form of regression testing + agile-like testing.<span class="Apple-converted-space">  </span>Bootstrapping goes beyond just code testing, but also tests the basic concepts and UX of the language.</p>
+<p class="p3"><br></p>
+<p class="p2">Who is the customer?<span class="Apple-converted-space">  </span>In the case of a language, the customer is usually other programmers.<span class="Apple-converted-space">  </span>Bootstrapping tests the language design against a target customer (but only one such customer)</p>
+<p class="p3"><br></p>
+<p class="p2">What code tests can be performed?<span class="Apple-converted-space">  </span>The largest code base for a newly-minted language is, usually, the language implementation, itself.</p>
+<p class="p3"><br></p>
+<p class="p2">Bootstrapping can occur in two stages:</p>
+<ul class="ul1">
+  <li class="li4">test generated code against the manual implementation</li>
+  <li class="li4">use the generated code to generate code (again) and diff the generated code against the generated-generated code.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Language Evolution</b></h2>
+<p class="p2">Bootstrapping can show weak points in the language.</p>
+<p class="p3"><br></p>
+<p class="p2">The language design is tested and can evolve during bootstrapping.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implementation Evolution</b></h2>
+<p class="p2">Bootstrapping can show implementation gotchas and cause the implementation to evolve.</p>
+<p class="p3"><br></p>
+<p class="p2">Example: as I bootstrap the <i>glue</i> language, I find places wherein I optimized. A compiler would have generated more-normalized code.<span class="Apple-converted-space">  </span>In particular, I used Ohm-JS's capitalization rules and whitespace elimination. Explicit whitespace would have sufficed.</p>
+<p class="p3"><br></p>
+<p class="p2">The goal of producing an identity transform pointed this out.<span class="Apple-converted-space">  </span>Compiler writers never produce identity transforms — they optimize whitespace away early (during the lexing phase). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This simple change — striving for an identity transform — has made it possible to think "out of the box". <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Seeing it in this light, shows that the addition of capitalized-uncapitalized rule names in Ohm-JS is a bandaid optimization that does not help automation.<span class="Apple-converted-space">  </span>This change "sucks" users into using it and to not being able to see possibilities for automation (much like the existence of fast registers sucked assembler programmers into manually-writing assembler code instead of automating the process bu using stack variables instead of register variables).</p>
+</div>
+</body>
+</html>
