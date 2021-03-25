@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-25T09:40:59-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Cps considered to be a goto</title><link href="https://computingsimplicity.neocities.org/2021/03/25/CPS-Considered-to-be-a-GOTO.html" rel="alternate" type="text/html" title="Cps considered to be a goto" /><published>2021-03-25T00:00:00-04:00</published><updated>2021-03-25T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/25/CPS%20Considered%20to%20be%20a%20GOTO</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/25/CPS-Considered-to-be-a-GOTO.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-25T15:45:48-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Bootstrapping</title><link href="https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping.html" rel="alternate" type="text/html" title="Bootstrapping" /><published>2021-03-25T00:00:00-04:00</published><updated>2021-03-25T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Bootstrapping&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-25T07:43:57Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-25T07:43:57Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bootstrapping&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Bootstrapping is a technique used by language designers (including compiler writers).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The idea is to &quot;test&quot; a language design by having it compile itself.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This is a form of regression testing + agile-like testing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Bootstrapping goes beyond just code testing, but also tests the basic concepts and UX of the language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Who is the customer?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In the case of a language, the customer is usually other programmers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Bootstrapping tests the language design against a target customer (but only one such customer)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What code tests can be performed?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The largest code base for a newly-minted language is, usually, the language implementation, itself.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Bootstrapping can occur in two stages:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;test generated code against the manual implementation&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;use the generated code to generate code (again) and diff the generated code against the generated-generated code.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Language Evolution&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Bootstrapping can show weak points in the language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The language design is tested and can evolve during bootstrapping.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementation Evolution&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Bootstrapping can show implementation gotchas and cause the implementation to evolve.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Example: as I bootstrap the &lt;i&gt;glue&lt;/i&gt; language, I find places wherein I optimized. A compiler would have generated more-normalized code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In particular, I used Ohm-JS's capitalization rules and whitespace elimination. Explicit whitespace would have sufficed.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The goal of producing an identity transform pointed this out.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compiler writers never produce identity transforms — they optimize whitespace away early (during the lexing phase). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This simple change — striving for an identity transform — has made it possible to think &quot;out of the box&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Seeing it in this light, shows that the addition of capitalized-uncapitalized rule names in Ohm-JS is a bandaid optimization that does not help automation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This change &quot;sucks&quot; users into using it and to not being able to see possibilities for automation (much like the existence of fast registers sucked assembler programmers into manually-writing assembler code instead of automating the process bu using stack variables instead of register variables).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Bootstrapping</summary></entry><entry><title type="html">Cps considered to be a goto</title><link href="https://computingsimplicity.neocities.org/2021/03/25/CPS-Considered-to-be-a-GOTO.html" rel="alternate" type="text/html" title="Cps considered to be a goto" /><published>2021-03-25T00:00:00-04:00</published><updated>2021-03-25T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/25/CPS%20Considered%20to%20be%20a%20GOTO</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/25/CPS-Considered-to-be-a-GOTO.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -149,59 +201,72 @@
 &lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;https://guitarvydas.github.io/2020/12/09/Reuse.html&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">CPS Considered to be a GOTO</summary></entry><entry><title type="html">Bootstrapping</title><link href="https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping.html" rel="alternate" type="text/html" title="Bootstrapping" /><published>2021-03-25T00:00:00-04:00</published><updated>2021-03-25T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/25/Bootstrapping.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">CPS Considered to be a GOTO</summary></entry><entry><title type="html">Patterns</title><link href="https://computingsimplicity.neocities.org/2021/03/25/Patterns.html" rel="alternate" type="text/html" title="Patterns" /><published>2021-03-25T00:00:00-04:00</published><updated>2021-03-25T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/25/Patterns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/25/Patterns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Bootstrapping&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-25T07:43:57Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-25T07:43:57Z&quot;&gt;
+  &lt;title&gt;Patterns&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-25T15:45:38Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-25T15:45:38Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    ul.ul1 {list-style-type: disc}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bootstrapping&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Bootstrapping is a technique used by language designers (including compiler writers).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The idea is to &quot;test&quot; a language design by having it compile itself.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This is a form of regression testing + agile-like testing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Bootstrapping goes beyond just code testing, but also tests the basic concepts and UX of the language.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Who is the customer?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In the case of a language, the customer is usually other programmers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Bootstrapping tests the language design against a target customer (but only one such customer)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;What code tests can be performed?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The largest code base for a newly-minted language is, usually, the language implementation, itself.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Bootstrapping can occur in two stages:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;test generated code against the manual implementation&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;use the generated code to generate code (again) and diff the generated code against the generated-generated code.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Language Evolution&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Bootstrapping can show weak points in the language.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The language design is tested and can evolve during bootstrapping.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementation Evolution&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Bootstrapping can show implementation gotchas and cause the implementation to evolve.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Example: as I bootstrap the &lt;i&gt;glue&lt;/i&gt; language, I find places wherein I optimized. A compiler would have generated more-normalized code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In particular, I used Ohm-JS's capitalization rules and whitespace elimination. Explicit whitespace would have sufficed.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The goal of producing an identity transform pointed this out.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compiler writers never produce identity transforms — they optimize whitespace away early (during the lexing phase). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This simple change — striving for an identity transform — has made it possible to think &quot;out of the box&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Seeing it in this light, shows that the addition of capitalized-uncapitalized rule names in Ohm-JS is a bandaid optimization that does not help automation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This change &quot;sucks&quot; users into using it and to not being able to see possibilities for automation (much like the existence of fast registers sucked assembler programmers into manually-writing assembler code instead of automating the process bu using stack variables instead of register variables).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Patterns of Software Components&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Filter&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Filter.png&quot; width=&quot;100px&quot; height=&quot;56px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 1Filter&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Filter With Exceptions&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Filter with Exceptions.png&quot; width=&quot;100px&quot; height=&quot;56px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 2Filter With Exceptions&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Pipeline&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Pipeline.png&quot; width=&quot;303px&quot; height=&quot;25px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 3Pipeline&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;UNIX® Pipeline&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-UNIX pipeline.png&quot; width=&quot;300px&quot; height=&quot;68px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 4UNIX® Pipeline&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Feedback&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Feedback.png&quot; width=&quot;100px&quot; height=&quot;59px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 5Feedback&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Feedback With Feedforward&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Feedback With Feedforward.png&quot; width=&quot;150px&quot; height=&quot;38px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 6Feedback With Feedforward&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Client / Server&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Client Server.png&quot; width=&quot;200px&quot; height=&quot;74px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 7Client Server&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Client / Server With Router&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Client Server With Router.png&quot; width=&quot;300px&quot; height=&quot;225px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 8Client Server With Router&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Concentrator&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Concentrator.png&quot; width=&quot;300px&quot; height=&quot;157px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 9Concentrator&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Daisy Chain&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Daisy Chain.png&quot; width=&quot;300px&quot; height=&quot;111px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 10Daisy Chain&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(prioritized at the Architectural level)&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bus&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Bus Chain.png&quot; width=&quot;300px&quot; height=&quot;101px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 11Bus&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Pull&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Pull.png&quot; width=&quot;200px&quot; height=&quot;62px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 12Pull&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Push&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-03-25-15-45-38-Images/patterns-Push.png&quot; width=&quot;200px&quot; height=&quot;65px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 13Push&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Bootstrapping</summary></entry><entry><title type="html">Svg to code (1)</title><link href="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html" rel="alternate" type="text/html" title="Svg to code (1)" /><published>2021-03-24T00:00:00-04:00</published><updated>2021-03-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/24/SVG%20to%20Code%20(1)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Patterns</summary></entry><entry><title type="html">Svg to code (1)</title><link href="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html" rel="alternate" type="text/html" title="Svg to code (1)" /><published>2021-03-24T00:00:00-04:00</published><updated>2021-03-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/24/SVG%20to%20Code%20(1)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1620,125 +1685,4 @@
 &lt;p class=&quot;p7&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;REGEX probably can be made to match nested constructs, but requires more effort.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG</summary></entry><entry><title type="html">Learning about compilers quickly</title><link href="https://computingsimplicity.neocities.org/2021/03/18/Learning-About-Compilers-Quickly.html" rel="alternate" type="text/html" title="Learning about compilers quickly" /><published>2021-03-18T00:00:00-04:00</published><updated>2021-03-18T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/18/Learning%20About%20Compilers%20Quickly</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/18/Learning-About-Compilers-Quickly.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Learning About Compilers Quickly&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-18T12:39:37Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-18T12:39:37Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 13.0px Palatino}
-    span.s2 {font: 12.0px Helvetica}
-    ol.ol1 {list-style-type: decimal}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Smallc&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I learned just about everything I needed to know about compilers in only a few hours at CSRI&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I subscribed to Dr. Dobb's Journal of Computer Calisthenics &amp;amp; Orthodontia.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In it was published the source code to Small C (Ron Cain).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This was before open source existed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Finding the source code to &lt;i&gt;anything&lt;/i&gt; was a delight.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;My friend&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; was an MSc student and I was but a lowly undergrad.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;My friend invited me to CSRI for the evening and we typed in &lt;i&gt;all &lt;/i&gt;of the source code for the C compiler into the Unix V7 system.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Around 2am in the morning, we were finished and I typed in my first line of C code.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I knew 8080 (nee Z80) assembler at the time.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I typed something like:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;a = b + c;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;and SmallC responded with something like:&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;; a = b + c;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;MOV L,(name of b)&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;CLR H&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;MOV C,(name of c)&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;CLR B&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;DAD B&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;MOV (name of a),L&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;MOV (name of a + 1),H&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;from this, I could see what &quot;a = b + c&quot; compiled into.&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This basically says:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li5&quot;&gt;Load one byte into register L&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;Clear the H register (which is paired with L to make at 16-bit quantity HL)&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;Load one byte into register C&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;Clear the B register (BC is paired, as above for HL)&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;DAD B — 16bit add HL = HL + BC&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;Move the lower byte from L into memory (at a)&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;Move the higher byte from H into memory (at a+1).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;(and, it says, to do the steps in the given sequence (not, say, in parallel)).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The code above is quite simple — it is raw 8080 code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It avoids all details, such as startup and shutdown,&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It was easy to see what the compiler was doing for me.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Basically, the compiler was like an editor macro.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Smoke Test&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I went on to do a 6-month project for one of my courses.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I was intending to install a better parser&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt;, but I ended up rewriting the whole thing.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;At the end of the course, my compiler was running, but needed testing.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I, carefully, applied one test after another.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;My friend asked me to send him the source code.&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;On Friday, before the weekend.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;On Sunday, he sent me a list of about 100 bugs.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I was astounded.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I fixed the bugs and the compiler quickly took shape.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I asked my friend how he found so many bugs in only 2 days.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;He replied that he simply poured the compiler source code into itself.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In EE, this is called a &quot;smoke test&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;You build the alpha version of a circuit, turn on the power and watch for smoke.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;If there's no smoke, you do more careful testing.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Software testing could benefit from using this same technique for divide-and-conquer:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li5&quot;&gt;smoke test&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;careful (unit) testing.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;The smoke test — a lot of tests all at once — can be used to find blunders and typos.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is not worth running unit tests until the blunders have been cleared away.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Computing Systems Research Facility at the University of Toronto&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;https://en.wikipedia.org/wiki/Dr._Dobb%27s_Journal&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Chris Lewis&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;My memory is hazy.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Someone will correct me…&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; Note that K&amp;amp;R was more forgiving at the time — I didn't need to declare a, b, and c before asking the compiler to give me code.&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;Note that the 8080 was little-endian, the low-byte ended up in the lower (numerically) address and the high byte ended up in the address+1.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;[6]&lt;/a&gt; &lt;span class=&quot;s2&quot;&gt;twot-threet&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;The compiler was written in C for Unix V7 running on a PDP-11.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;My compiler emitted code for the 8080, running CP/M&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Learning About Compilers Quickly</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG</summary></entry></feed>
