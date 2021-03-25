@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>CPS Considered to be a GOTO</title>
+  <meta name="CreationTime" content="2021-03-25T09:40:51Z">
+  <meta name="ModificationTime" content="2021-03-25T09:40:51Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>GOTO</b></h2>
+<p class="p2">CPS — continuation passing style — is just a generalization of GOTO.</p>
+<p class="p3"><br></p>
+<p class="p2">First-class functions, too, are just generalizations of GOTOs.</p>
+<p class="p3"><br></p>
+<p class="p2">GOTO changes the program flow.</p>
+<p class="p3"><br></p>
+<p class="p2">First-class functions, hence, CPS, allow one to pass program flow around as first-class objects.</p>
+<p class="p3"><br></p>
+<p class="p2">One can call a first-class function object, hence invoke a continuation via CPS, at any point, well-away from its origin. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In FORTRAN, there was a construct called a "computed GOTO".<span class="Apple-converted-space">  </span>CPS is even more "powerful" than this FORTRAN concept.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Spaghetti Flow</b></h2>
+<p class="p2">CPS (and first-class functions) <i>can </i>lead to spaghetti coding, much like GOTO did.</p>
+<p class="p3"><br></p>
+<p class="p2">Self-disciplined assembler programmers produced well-structured code in assembler.</p>
+<p class="p3"><br></p>
+<p class="p2">Average programmers needed "help" from Structured Programming languages.</p>
+<p class="p3"><br></p>
+<p class="p2">Self-disciplined assembler programmers complained about Structured Programming languages.</p>
+<p class="p3"><br></p>
+<p class="p2">No one bothered to write code in assembler — structured or spaghetti — after the self-disciplined assembler programmers retired.</p>
+<p class="p3"><br></p>
+<p class="p2">Self-disciplined FP programmers can produce well-structured code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Uses for CPS</b></h2>
+<p class="p2">CPS is a low-level operation, like GOTO.</p>
+<p class="p3"><br></p>
+<p class="p2">As such, CPS is useful in building control-flow constructs.</p>
+<p class="p3"><br></p>
+<p class="p2">CPS is used in Denotational Semantics — which is a method for building languages and control-flow constructs.</p>
+<p class="p3"><br></p>
+<p class="p2">CPS should not be used for regular programming.</p>
+<p class="p3"><br></p>
+<p class="p2">Unstructured used of first-class functions should not be used for regular programming, either.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Threads</b></h2>
+<p class="p3"><br></p>
+<p class="p2">When FP breaks out of its sweet-spot, we have to resort to constructs like threads. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Threads are <i>envelopes</i> that allow the calculator-like paradigm to continue to be used — each calculator being wrapped in its own envelope VM.</p>
+<p class="p3"><br></p>
+<p class="p2">Threads are based on <i>state.</i><span class="Apple-converted-space">  </span>Thread envelopes hide this state, but do not eliminate state.</p>
+<p class="p3"><br></p>
+<p class="p2">In some use-cases,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> this kind of <i>state</i> is important enough that it should not be hidden from view.</p>
+<p class="p3"><br></p>
+<p class="p2">It is <i>possible</i> to extend the FP paradigm beyond its sweet-spot, but the question that needs to be asked is whether this is a good idea.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Questions</b></h2>
+<p class="p2">The questions to be asked are:</p>
+<ul class="ul1">
+  <li class="li4">What are we trying to accomplish?</li>
+  <li class="li4">Why do we need to extend our notation to include CPS?</li>
+  <li class="li4">What paradigm(s) is FP good for?</li>
+  <li class="li4">What paradigm(s) is FP not so good for?</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">[<i>The question is not: "how do we paper-over the FP paradigm, once we have found a fault in it?"</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Fix</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Structured Scaffolds</b></h2>
+<p class="p2">GOTOs were "fixed" by creating structured scaffolding around them.</p>
+<p class="p3"><br></p>
+<p class="p2">FP creates structured scaffolding around constructs using its strict one-in-one-out rule (function-call-and-function-return (I won't mention exceptions, which are based on a dynamic global variable<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>)).</p>
+<p class="p2">The FP paradigm is useful in one-in-one-out situations — e.g. fancy calculators<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>More Quesions</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>State</b></h2>
+<p class="p2">Is <i>state</i> The Problem?</p>
+<p class="p3"><br></p>
+<p class="p2">Or, is <i>unstructured use of state</i> a problem?</p>
+<p class="p3"><br></p>
+<p class="p2"><i>State </i>can be easily structured using StateCharts:</p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/02/25/statecharts-(again).html">https://guitarvydas.github.io/2021/02/25/statecharts-(again).html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/StateCharts.html">https://guitarvydas.github.io/2020/12/09/StateCharts.html</a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Global Variables</b></h2>
+<p class="p2">Were global variables The Problem?</p>
+<p class="p3"><br></p>
+<p class="p2">Or was <i>unstructured use of variables</i> a problem?</p>
+<p class="p3"><br></p>
+<p class="p2">The solution was to invent scoped variables, and, local variables.</p>
+<p class="p3"><br></p>
+<p class="p2">This implies that global variables were not actually the problem, but that unstructured use of variables was the problem.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Locality</b></h2>
+<p class="p2"><span class="Apple-converted-space"> </span>Lambda calculus gives us <i>free variables</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">At what point do <i>free variables</i> become <i>global variables</i>? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">When a closure fits on one line, the variables don't appear to be global.</p>
+<p class="p3"><br></p>
+<p class="p2">When a closure fits on one window, the variables don't appear to be global.</p>
+<p class="p3"><br></p>
+<p class="p2">When a closure is large and doesn't fit into one viewport of one window, the <i>free variables</i> appear to be like <i>global variables</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">It appears, to me, that <i>locality</i> is more important than global-ness.<span class="Apple-converted-space">  </span>I could use<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> a mini-language that had <span class="s1">no</span> local variables — and allowed only 26 variables at maximum.<span class="Apple-converted-space">  </span>As long as lumps of that kind of code were well-isolated<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a>, the global-ness of the variables did not bother me.</p>
+<p class="p3"><br></p>
+<p class="p2">Currently, <i>types</i> and <i>functions</i> are in a <i>flat space</i> and are not localized / structured. <i>Packaging </i>systems are bandaids for this broader problem (of locality).</p>
+<p class="p3"><br></p>
+<p class="p2">Q: How does one Structure the use of <i>types</i>?<span class="Apple-converted-space">  </span>How does one Structure the use of <i>functions</i>?<span class="Apple-converted-space">  </span>Without causing new/hidden dependencies?<span class="Apple-converted-space">  </span>Is <i>packaging</i> enough or is it a bandaid?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Inheritance</b></h2>
+<p class="p2"><i>Inheritance</i> breaks locality, much like CPS does.</p>
+<p class="p3"><br></p>
+<p class="p2">It is possible to invoke a method well-away from the original source point.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Inheritance </i>for structuring code leads to debugging problems.<span class="Apple-converted-space">  </span>One finds it hard to understand which methods can be overridden and where they are.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Composition</i> exhibits less of this kind of problem.</p>
+<p class="p3"><br></p>
+<p class="p2">Q: Can <i>inheritance</i> be cleaved into two pieces?<span class="Apple-converted-space">  </span>The "good" inheritance vs. the "bad" kind?</p>
+<p class="p3"><br></p>
+<p class="p2">Q: What is <i>code reuse</i>?<span class="Apple-converted-space">  </span>A: An implementation detail.</p>
+<p class="p3"><br></p>
+<p class="p2">Q: What is <i>architectural reuse</i>?<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculators and Desktops</b></h2>
+<p class="p2">Calculators are like desktops — old-fashioned concepts that act like bridges into new paradigms.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>It is my understanding that electric motors were first used to pump water uphill to create artificial streams that could power water wheels for mills and factories.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Multiple Paradigms for Each Solution</b></h2>
+<p class="p2">I believe that it is important to use paradigms that fit the problem.<span class="Apple-converted-space">  </span>I believe in using multiple paradigms to solve any one problem.<span class="Apple-converted-space">  </span>IMO, force-fitting the same paradigm onto all problems is old-fashioned thinking.<span class="Apple-converted-space">  </span>I believe that programming can break through its asymptote only through the development of muti-paradigm workflows.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>FYI - I, also, believe that diagrams should be raised to the same level of syntax as text.<span class="Apple-converted-space">  </span>Diagrams show nesting in ways that is harder-to-read in text.</i>]</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>e.g. sequencers, DAWs, machine control, robots</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</p>
+<p class="p6"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> e.g. ballistics calculations</span></p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4">[4]</a> <span class="s3">and, once, implemented</span></p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Isolation.html</p>
+<p class="p6"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2020/12/09/Reuse.html</p>
+</div>
+</body>
+</html>
