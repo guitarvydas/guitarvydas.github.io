@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Message Passing</title>
+  <meta name="CreationTime" content="2021-03-26T08:32:58Z">
+  <meta name="ModificationTime" content="2021-03-26T08:32:58Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Message Passing</b></h2>
+<p class="p2">In my opinion, the term "message passing" means "fire and forget".</p>
+<p class="p3"><br></p>
+<p class="p2">A single, atomic operation. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Send (). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Asynchronous.</p>
+<p class="p3"><br></p>
+<p class="p2">AFAICT, most current, so-called forms of message-passing consist of two atomic operations:</p>
+<ol class="ol1">
+  <li class="li4">Send ()</li>
+  <li class="li4">Wait ().</li>
+</ol>
+<p class="p4">which results in synchronous operation.<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Step 2. is usually implied by the use of CALL / RETURN.</p>
+<p class="p5"><br></p>
+<p class="p4">A gedanken test of true message-passing would be to convert <i>all</i> instances of <i>all</i> classes into separate threads (ignoring efficiency).<span class="Apple-converted-space">  </span>One will be forced to convert every "message send" into two atomic operations — Send (), Wait ().</p>
+<p class="p5"><br></p>
+<p class="p4">Synchrony is so pervasive that we have sought ways to force-fit synchrony into inherently asynchronous paradigms (e.g. by using envelopes called threads, by implementing synchronous RPC, etc.).</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Hardware Support Global Variable</b></h2>
+<p class="p4">It should be noted that our hardware, since The Stack was invented,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> implicitly supports the synchronous CALL / RETURN paradigm by making The Stack into a global variable that records the dynamic call-chain.</p>
+<p class="p5"><br></p>
+<p class="p4">CALL modifies The Stack.</p>
+<p class="p5"><br></p>
+<p class="p4">RETURN modifies The Stack. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Threads hide the fact The Stack is a global variable, by wrapping envelopes around it.</p>
+<p class="p5"><br></p>
+<p class="p4">See, also,<span class="Apple-converted-space"> </span></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</a></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html">https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</a></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Future</b></h2>
+<p class="p4">I believe that part of the future of computing lies in removing the redundant Wait ().</p>
+<p class="p5"><br></p>
+<p class="p4">We see it beginning to happen with distributed languages like HTML<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>.</p>
+<p class="p5"><br></p>
+<p class="p4">We see it beginning to happen with the exploration of languages based on relations, etc.</p>
+<p class="p5"><br></p>
+<p class="p4">We see the need for this arising in technologies like p2p and blockchain (which tend to be concerned with asynchronous operations and network protocols).</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Early IBM 360s did not have a Stack.<span class="Apple-converted-space">  </span>Programmers needed to use BALR instructions.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>See https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html for an idea on how to implement wait-less Send() on current hardware.</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>

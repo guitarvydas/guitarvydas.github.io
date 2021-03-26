@@ -12,6 +12,7 @@
 read filename </dev/fd/3
 read prefix </dev/fd/4
 read go </dev/fd/5
+./rewrite-with-comments "${filename}"
 if [ "${go}" == "go" ]
 then
     basename=`basename "${filename}"`
