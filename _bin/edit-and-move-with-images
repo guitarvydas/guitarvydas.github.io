@@ -25,9 +25,18 @@ if [ "${go}" == "go" ]
 then
     base=`basename "${filename}"`
     # edit to new file and move it to _posts
-    sed -e "s@<img src=\"Images@<img src=\"/assets/${fullprefix}-Images@g" <"${filename}/${base}" >"../_posts/${prefix}-${base}"
-    # move Images folder to ../assets/prefix-Images
-    mv "${filename}/Images" "../assets/${fullprefix}-Images"
+    cssStyle=`grep "img src=\"Images" <"${filename}/${base}"`
+    if [ "" == "${cssStyle}" ]
+       then
+	   echo === not cssstyle ===
+       else
+	   echo === yes cssstyle ===
+	   sed \
+	       -e "s@<img src=\"Images@<img src=\"/assets/${fullprefix}-Images@g" \
+	       <"${filename}/${base}" >"../_posts/${prefix}-${base}"
+	   # move Images folder to ../assets/prefix-Images
+	   mv "${filename}/Images" "../assets/${fullprefix}-Images"
+    fi
     # delete source(s), completing the mv (mv is not cp)
     rm -rf "${filename}"
 fi
