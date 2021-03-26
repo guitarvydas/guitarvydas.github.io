@@ -1,5 +1,4 @@
 #!/bin/bash
-set -v
 # usage: rewrite-with-comments $1
 # overwrites $1 with modified html
 # creates a tmp file in the process
@@ -11,5 +10,6 @@ sed -e 's@</body>@<script src="https://utteranc.es/client.js" \
         crossorigin="anonymous" \
         async> \
 </script> \
-</body>@' <"${1}" >$tmp
-cp $tmp "${1}"
+</body>@' <"${1}" >${tmp}
+cp ${tmp} "${1}"
+echo "with-comments" "${tmp}" '-->' "${1}"

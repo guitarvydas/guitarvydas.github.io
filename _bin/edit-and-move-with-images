@@ -20,9 +20,9 @@ read filename </dev/fd/3
 read prefix </dev/fd/4
 read go </dev/fd/5
 read fullprefix </dev/fd/6
-./rewrite-with-comments "${filename}/${base}"
 if [ "${go}" == "go" ]
 then
+    ./rewrite-with-comments "${filename}/${base}"
     base=`basename "${filename}"`
     # edit to new file and move it to _posts
     cssStyle=`grep "img src=\"Images" <"${filename}/${base}"`
