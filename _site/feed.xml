@@ -1,75 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-26T08:33:08-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Message passing</title><link href="https://computingsimplicity.neocities.org/2021/03/26/Message-Passing.html" rel="alternate" type="text/html" title="Message passing" /><published>2021-03-26T00:00:00-04:00</published><updated>2021-03-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/26/Message%20Passing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/26/Message-Passing.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-26T08:39:50-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Message passing</title><link href="https://computingsimplicity.neocities.org/2021/03/26/Message-Passing.html" rel="alternate" type="text/html" title="Message passing" /><published>2021-03-26T00:00:00-04:00</published><updated>2021-03-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/26/Message%20Passing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/26/Message-Passing.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Message Passing&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-26T08:32:58Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-26T08:32:58Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 13.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-  &lt;/style&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Message Passing&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Message Passing&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;In my opinion, the term &quot;message passing&quot; means &quot;fire and forget&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A single, atomic operation. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Send (). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Asynchronous.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;AFAICT, most current, so-called forms of message-passing consist of two atomic operations:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;Send ()&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;Wait ().&lt;/li&gt;
+&lt;h1 id=&quot;messagepassing&quot;&gt;Message Passing&lt;/h1&gt;
+
+&lt;p&gt;In my opinion, the term &amp;#8220;message passing&amp;#8221; means &amp;#8220;fire and forget&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;A single, atomic operation.&lt;/p&gt;
+
+&lt;p&gt;Send ().&lt;/p&gt;
+
+&lt;p&gt;Asynchronous.&lt;/p&gt;
+
+&lt;p&gt;AFAICT, most current, so-called forms of message-passing consist of two atomic operations:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Send ()&lt;/li&gt;
+&lt;li&gt;Wait ().&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p class=&quot;p4&quot;&gt;which results in synchronous operation.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Step 2. is usually implied by the use of CALL / RETURN.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;A gedanken test of true message-passing would be to convert &lt;i&gt;all&lt;/i&gt; instances of &lt;i&gt;all&lt;/i&gt; classes into separate threads (ignoring efficiency).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One will be forced to convert every &quot;message send&quot; into two atomic operations — Send (), Wait ().&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Synchrony is so pervasive that we have sought ways to force-fit synchrony into inherently asynchronous paradigms (e.g. by using envelopes called threads, by implementing synchronous RPC, etc.).&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Hardware Support Global Variable&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;It should be noted that our hardware, since The Stack was invented,&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; implicitly supports the synchronous CALL / RETURN paradigm by making The Stack into a global variable that records the dynamic call-chain.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;CALL modifies The Stack.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;RETURN modifies The Stack. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Threads hide the fact The Stack is a global variable, by wrapping envelopes around it.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;See, also,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html&quot;&gt;https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&quot;&gt;https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Future&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;I believe that part of the future of computing lies in removing the redundant Wait ().&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;We see it beginning to happen with distributed languages like HTML&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;We see it beginning to happen with the exploration of languages based on relations, etc.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;We see the need for this arising in technologies like p2p and blockchain (which tend to be concerned with asynchronous operations and network protocols).&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Early IBM 360s did not have a Stack.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Programmers needed to use BALR instructions.&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;See https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html for an idea on how to implement wait-less Send() on current hardware.&lt;/p&gt;
+
+&lt;p&gt;which results in synchronous operation.&lt;/p&gt;
+
+&lt;p&gt;Step 2. is usually implied by the use of CALL / RETURN.&lt;/p&gt;
+
+&lt;p&gt;A gedanken test of true message-passing would be to convert all instances of all classes into separate threads (ignoring efficiency). One will be forced to convert every &amp;#8220;message send&amp;#8221; into two atomic operations — Send (), Wait ().&lt;/p&gt;
+
+&lt;p&gt;Synchrony is so pervasive that we have sought ways to force-fit synchrony into inherently asynchronous paradigms (e.g. by using envelopes called threads, by implementing synchronous RPC, etc.).&lt;/p&gt;
+
+&lt;h1 id=&quot;hardwaresupportglobalvariable&quot;&gt;Hardware Support Global Variable&lt;/h1&gt;
+
+&lt;p&gt;It should be noted that our hardware, since The Stack was invented,&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; implicitly supports the synchronous CALL / RETURN paradigm by making The Stack into a global variable that records the dynamic call-chain.&lt;/p&gt;
+
+&lt;p&gt;CALL modifies The Stack.&lt;/p&gt;
+
+&lt;p&gt;RETURN modifies The Stack.&lt;/p&gt;
+
+&lt;p&gt;Threads hide the fact The Stack is a global variable, by wrapping envelopes around it.&lt;/p&gt;
+
+&lt;p&gt;See, also,
+https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html
+https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&lt;/p&gt;
+
+&lt;h1 id=&quot;future&quot;&gt;Future&lt;/h1&gt;
+
+&lt;p&gt;I believe that part of the future of computing lies in removing the redundant Wait ().&lt;/p&gt;
+
+&lt;p&gt;We see it beginning to happen with distributed languages like HTML&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We see it beginning to happen with the exploration of languages based on relations, etc.&lt;/p&gt;
+
+&lt;p&gt;We see the need for this arising in technologies like p2p and blockchain (which tend to be concerned with asynchronous operations and network protocols).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Early IBM 360s did not have a Stack. Programmers needed to use BALR instructions. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;See https://guitarvydas.github.io/2020/12/09/CALL&amp;#8211;RETURN&amp;#8211;Spaghetti.html for an idea on how to implement wait&amp;#8211;less Send() on current hardware. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
 &lt;/div&gt;
+
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
         issue-term=&quot;pathname&quot; 
