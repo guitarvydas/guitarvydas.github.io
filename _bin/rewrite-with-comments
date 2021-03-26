@@ -1,8 +1,9 @@
 #!/bin/bash
+set -v
 # usage: rewrite-with-comments $1
 # overwrites $1 with modified html
 # creates a tmp file in the process
-tmp=`mktemp`
+tmp=`mktemp /tmp/rewriteWithComments-XXXXXX`
 sed -e 's@</body>@<script src="https://utteranc.es/client.js" \
         repo="guitarvydas/guitarvydas.github.io" \
         issue-term="pathname" \
