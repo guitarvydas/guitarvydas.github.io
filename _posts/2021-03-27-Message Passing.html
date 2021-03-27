@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Message Passing</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="messagepassing">Message Passing</h1>
+
+<p>In my opinion, the term &#8220;message passing&#8221; means &#8220;fire and forget&#8221;.</p>
+
+<p>A single, atomic operation.</p>
+
+<p>Send ().</p>
+
+<p>Asynchronous.</p>
+
+<p>AFAICT, most current, so-called forms of message-passing consist of two atomic operations:</p>
+
+<ol>
+<li>Send ()</li>
+<li>Wait ().</li>
+</ol>
+
+<p>which results in synchronous operation.</p>
+
+<p>Step 2. is usually implied by the use of CALL / RETURN.</p>
+
+<p>A gedanken test of true message-passing would be to convert all instances of all classes into separate threads (ignoring efficiency). One will be forced to convert every &#8220;message send&#8221; into two atomic operations — Send (), Wait ().</p>
+
+<p>Synchrony is so pervasive that we have sought ways to force-fit synchrony into inherently asynchronous paradigms (e.g. by using envelopes called threads, by implementing synchronous RPC, etc.).</p>
+
+<h1 id="hardwaresupportglobalvariable">Hardware Support Global Variable</h1>
+
+<p>It should be noted that our hardware, since The Stack was invented,<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> implicitly supports the synchronous CALL / RETURN paradigm by making The Stack into a global variable that records the dynamic call-chain.</p>
+
+<p>CALL modifies The Stack.</p>
+
+<p>RETURN modifies The Stack.</p>
+
+<p>Threads hide the fact The Stack is a global variable, by wrapping envelopes around it.</p>
+
+<p>See, also,
+https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html
+https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</p>
+
+<h1 id="future">Future</h1>
+
+<p>I believe that part of the future of computing lies in removing the redundant Wait ().</p>
+
+<p>We see it beginning to happen with distributed languages like HTML<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a>.</p>
+
+<p>We see it beginning to happen with the exploration of languages based on relations, etc.</p>
+
+<p>We see the need for this arising in technologies like p2p and blockchain (which tend to be concerned with asynchronous operations and network protocols).</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Early IBM 360s did not have a Stack. Programmers needed to use the BALR instruction. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>See https://guitarvydas.github.io/2020/12/09/CALL&#8211;RETURN&#8211;Spaghetti.html for an idea on how to implement wait&#8211;less Send() on current hardware. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

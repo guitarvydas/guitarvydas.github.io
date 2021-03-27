@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>CPS Considered to be a GOTO</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="goto">GOTO</h1>
+
+<p>CPS — continuation passing style — is just a generalization of GOTO.</p>
+
+<p>First-class functions, too, are just generalizations of GOTOs.</p>
+
+<p>GOTO changes the program flow.</p>
+
+<p>First-class functions, hence, CPS, allow one to pass program flow around as first-class objects.</p>
+
+<p>One can call a first-class function object, hence invoke a continuation via CPS, at any point, well-away from its origin.</p>
+
+<p>In FORTRAN, there was a construct called a &#8220;computed GOTO&#8221;. CPS is even more &#8220;powerful&#8221; than this FORTRAN concept.</p>
+
+<h1 id="spaghettiflow">Spaghetti Flow</h1>
+
+<p>CPS (and first-class functions) can lead to spaghetti coding, much like GOTO did.</p>
+
+<p>Self-disciplined assembler programmers produced well-structured code in assembler.</p>
+
+<p>Average programmers needed &#8220;help&#8221; from Structured Programming languages.</p>
+
+<p>Self-disciplined assembler programmers complained about Structured Programming languages.</p>
+
+<p>No one bothered to write code in assembler — structured or spaghetti — after the self-disciplined assembler programmers retired.</p>
+
+<p>Self-disciplined FP programmers can produce well-structured code.</p>
+
+<h1 id="usesforcps">Uses for CPS</h1>
+
+<p>CPS is a low-level operation, like GOTO.</p>
+
+<p>As such, CPS is useful in building control-flow constructs.</p>
+
+<p>CPS is used in Denotational Semantics — which is a method for building languages and control-flow constructs.</p>
+
+<p>CPS should not be used for regular programming.</p>
+
+<p>Unstructured used of first-class functions should not be used for regular programming, either.</p>
+
+<h1 id="threads">Threads</h1>
+
+<p>When FP breaks out of its sweet-spot, we have to resort to constructs like threads.</p>
+
+<p>Threads are envelopes that allow the calculator-like paradigm to continue to be used — each calculator being wrapped in its own envelope VM.</p>
+
+<p>Threads are based on state. Thread envelopes hide this state, but do not eliminate state.</p>
+
+<p>In some use-cases,<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> this kind of state is important enough that it should not be hidden from view.</p>
+
+<p>It is possible to extend the FP paradigm beyond its sweet-spot, but the question that needs to be asked is whether this is a good idea.</p>
+
+<h1 id="thequestions">The Questions</h1>
+
+<p>The questions to be asked are:</p>
+
+<ul>
+<li>What are we trying to accomplish?</li>
+<li>Why do we need to extend our notation to include CPS?</li>
+<li>What paradigm(s) is FP good for?</li>
+<li>What paradigm(s) is FP not so good for?</li>
+</ul>
+
+<p>[The question is not: &#8220;how do we paper-over the FP paradigm, once we have found a fault in it?&#8221;]</p>
+
+<h1 id="thefix">The Fix</h1>
+
+<h2 id="structuredscaffolds">Structured Scaffolds</h2>
+
+<p>GOTOs were &#8220;fixed&#8221; by creating structured scaffolding around them.</p>
+
+<p>FP creates structured scaffolding around constructs using its strict one-in-one-out rule (function-call-and-function-return (I won&#8217;t mention exceptions, which are based on a dynamic global variable<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a>)).
+The FP paradigm is useful in one-in-one-out situations — e.g. fancy calculators<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a>.</p>
+
+<h2 id="morequesions">More Quesions</h2>
+
+<h3 id="state">State</h3>
+
+<p>Is state The Problem?</p>
+
+<p>Or, is unstructured use of state a problem?</p>
+
+<p>State can be easily structured using StateCharts:
+https://guitarvydas.github.io/2021/02/25/statecharts-(again).html
+https://guitarvydas.github.io/2020/12/09/StateCharts.html</p>
+
+<h3 id="globalvariables">Global Variables</h3>
+
+<p>Were global variables The Problem?</p>
+
+<p>Or was unstructured use of variables a problem?</p>
+
+<p>The solution was to invent scoped variables, and, local variables.</p>
+
+<p>This implies that global variables were not actually the problem, but that unstructured use of variables was the problem.</p>
+
+<h3 id="locality">Locality</h3>
+
+<p>Lambda calculus gives us free variables.</p>
+
+<p>At what point do free variables become global variables?</p>
+
+<p>When a closure fits on one line, the variables don&#8217;t appear to be global.</p>
+
+<p>When a closure fits on one window, the variables don&#8217;t appear to be global.</p>
+
+<p>When a closure is large and doesn&#8217;t fit into one viewport of one window, the free variables appear to be like global variables.</p>
+
+<p>It appears, to me, that locality is more important than global-ness. I could use<a href="#fn:4" id="fnref:4" title="see footnote" class="footnote"><sup>4</sup></a> a mini-language that had no local variables — and allowed only 26 variables at maximum. As long as lumps of that kind of code were well-isolated<a href="#fn:5" id="fnref:5" title="see footnote" class="footnote"><sup>5</sup></a>, the global-ness of the variables did not bother me.</p>
+
+<p>Currently, types and functions are in a flat space and are not localized / structured. Packaging systems are bandaids for this broader problem (of locality).</p>
+
+<p>Q: How does one Structure the use of types? How does one Structure the use of functions? Without causing new/hidden dependencies? Is packaging enough or is it a bandaid?</p>
+
+<h3 id="inheritance">Inheritance</h3>
+
+<p>Inheritance breaks locality, much like CPS does.</p>
+
+<p>It is possible to invoke a method well-away from the original source point.</p>
+
+<p>Inheritance for structuring code leads to debugging problems. One finds it hard to understand which methods can be overridden and where they are.</p>
+
+<p>Composition exhibits less of this kind of problem.</p>
+
+<p>Q: Can inheritance be cleaved into two pieces? The &#8220;good&#8221; inheritance vs. the &#8220;bad&#8221; kind?</p>
+
+<p>Q: What is code reuse? A: An implementation detail.</p>
+
+<p>Q: What is architectural reuse?<a href="#fn:6" id="fnref:6" title="see footnote" class="footnote"><sup>6</sup></a></p>
+
+<h2 id="calculatorsanddesktops">Calculators and Desktops</h2>
+
+<p>Calculators are like desktops — old-fashioned concepts that act like bridges into new paradigms.</p>
+
+<p>[It is my understanding that electric motors were first used to pump water uphill to create artificial streams that could power water wheels for mills and factories.]</p>
+
+<h2 id="multipleparadigmsforeachsolution">Multiple Paradigms for Each Solution</h2>
+
+<p>I believe that it is important to use paradigms that fit the problem. I believe in using multiple paradigms to solve any one problem. IMO, force-fitting the same paradigm onto all problems is old-fashioned thinking. I believe that programming can break through its asymptote only through the development of muti-paradigm workflows.</p>
+
+<p>[FYI - I, also, believe that diagrams should be raised to the same level of syntax as text. Diagrams show nesting in ways that is harder-to-read in text.]</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>e.g. sequencers, DAWs, machine control, robots <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>https://guitarvydas.github.io/2021/02/25/The&#8211;Stack&#8211;is&#8211;a&#8211;Global&#8211;Variable&#8211;(again).html <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>e.g. ballistics calculations <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:4">
+<p>and, once, implemented <a href="#fnref:4" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:5">
+<p>https://guitarvydas.github.io/2020/12/09/Isolation.html <a href="#fnref:5" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:6">
+<p>https://guitarvydas.github.io/2020/12/09/Reuse.html <a href="#fnref:6" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

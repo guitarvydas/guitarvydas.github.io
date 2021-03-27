@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Bootstrapping</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="bootstrapping">Bootstrapping</h1>
+
+<p>Bootstrapping is a technique used by language designers (including compiler writers).</p>
+
+<p>The idea is to &#8220;test&#8221; a language design by having it compile itself.</p>
+
+<p>This is a form of regression testing + agile-like testing. Bootstrapping goes beyond just code testing, but also tests the basic concepts and UX of the language.</p>
+
+<p>Who is the customer? In the case of a language, the customer is usually other programmers. Bootstrapping tests the language design against a target customer (but only one such customer)</p>
+
+<p>What code tests can be performed? The largest code base for a newly-minted language is, usually, the language implementation, itself.</p>
+
+<p>Bootstrapping can occur in two stages:</p>
+
+<ul>
+<li>test generated code against the manual implementation</li>
+<li>use the generated code to generate code (again) and diff the generated code against the generated-generated code.</li>
+</ul>
+
+<h1 id="languageevolution">Language Evolution</h1>
+
+<p>Bootstrapping can show weak points in the language.</p>
+
+<p>The language design is tested and can evolve during bootstrapping.</p>
+
+<h1 id="implementationevolution">Implementation Evolution</h1>
+
+<p>Bootstrapping can show implementation gotchas and cause the implementation to evolve.</p>
+
+<p>Example: as I bootstrap the glue language, I find places wherein I optimized. A compiler would have generated more-normalized code. In particular, I used Ohm-JS&#8217;s capitalization rules and whitespace elimination. Explicit whitespace would have sufficed.</p>
+
+<p>The goal of producing an identity transform pointed this out. Compiler writers never produce identity transforms — they optimize whitespace away early (during the lexing phase).</p>
+
+<p>This simple change — striving for an identity transform — has made it possible to think &#8220;out of the box&#8221;.</p>
+
+<p>Seeing it in this light, shows that the addition of capitalized-uncapitalized rule names in Ohm-JS is a bandaid optimization that does not help automation. This change &#8220;sucks&#8221; users into using it and to not being able to see possibilities for automation (much like the existence of fast registers sucked assembler programmers into manually-writing assembler code instead of automating the process bu using stack variables instead of register variables).</p>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
