@@ -25,7 +25,7 @@ then
 	fullprefix=`echo "${creation_time}" | sed -e 's/<meta name="CreationTime" content="\(202.-..-..\)T\(..\):\(..\):\(..\)Z">/\1-\2-\3-\4/'`
     else
 	dt=`date "+%Y-%m-%d"`
-	fdt=`date "+%Y-%m-%d-%H:%M:%S"`
+	fdt=`date "+%Y-%m-%d-%H-%M-%S"`
 	prefix=${dt}
 	fullprefix=${fdt}
     fi
