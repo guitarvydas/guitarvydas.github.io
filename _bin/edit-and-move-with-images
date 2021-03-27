@@ -30,10 +30,11 @@ then
        then
 	   echo === not cssstyle ===
 	   sed \
-	       -e "s@<img src=\"Images@<img src=\"/assets/${fullprefix}-Images@g" \
+	       -e "s@<img src=\"@<img src=\"/assets/${fullprefix}-Images/@g" \
 	       <"${filename}/${base}" >"../_posts/${prefix}-${base}"
 	   # move Images folder to ../assets/prefix-Images
-	   mv "${filename}/Images" "../assets/${fullprefix}-Images"
+	   ##rm "${filename}/${base}"
+	   mv "${filename}" "../assets/${fullprefix}-Images"
        else
 	   echo === yes cssstyle ===
 	   sed \
@@ -41,10 +42,10 @@ then
 	       <"${filename}/${base}" >"../_posts/${prefix}-${base}"
 	   # move Images folder to ../assets/prefix-Images
 	   mv "${filename}/Images" "../assets/${fullprefix}-Images"
+	   # delete source(s), completing the mv (mv is not cp)
+	   echo === not removing "${filename}"
+	   rm -rf "${filename}"
     fi
-    # delete source(s), completing the mv (mv is not cp)
-    echo === not removing "${filename}"
-    ##rm -rf "${filename}"
 fi
 ./debug-exit "[$1] $0"
 
