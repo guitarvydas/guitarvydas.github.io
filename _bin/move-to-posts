@@ -12,11 +12,10 @@
 read filename </dev/fd/3
 read prefix </dev/fd/4
 read go </dev/fd/5
-./rewrite-with-comments "${filename}"
-if [ "${go}" == "go" ]
+If [ "${go}" == "go" ]
 then
+    ./rewrite-with-comments "${filename}"
     basename=`basename "${filename}"`
-echo mv "${filename}" "../_posts/${prefix}-${basename}"
     mv "${filename}" "../_posts/${prefix}-${basename}"
 fi
 ./debug-exit "[$1] $0"

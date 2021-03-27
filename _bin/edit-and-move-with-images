@@ -22,27 +22,13 @@ read go </dev/fd/5
 read fullprefix </dev/fd/6
 if [ "${go}" == "go" ]
 then
-    ./rewrite-with-comments "${filename}/${base}"
     base=`basename "${filename}"`
+    ./rewrite-with-comments "${filename}/${base}"
     # edit to new file and move it to _posts
     cssStyle=`grep "img src=\"Images" <"${filename}/${base}"`
     if [ "" == "${cssStyle}" ]
        then
 	   echo === not cssstyle ===
-	   sed \
-	       -e "s@<img src=@<img src=\"/assets/${fullprefix}-Images/@g" \
-	       <"${filename}/${base}" >"../_posts/${prefix}-${base}"
-	   # move all *.png files in folder to ../assets/prefix-Images
-	   dir="../assets/${fullprefix}-Images/"
-	   echo
-	   echo ^^^ names ^^^
-	   echo ${base}
-	   echo ${dir}
-	   echo "${filename}"
-	   echo
-	   mkdir "${dir}"
-	   ls "${filename}"/*.png
-	   mv "${filename}"/*.png "${dir}"
        else
 	   echo === yes cssstyle ===
 	   sed \
@@ -52,7 +38,8 @@ then
 	   mv "${filename}/Images" "../assets/${fullprefix}-Images"
     fi
     # delete source(s), completing the mv (mv is not cp)
-    rm -rf "${filename}"
+    echo === not removing "${filename}"
+    ##rm -rf "${filename}"
 fi
 ./debug-exit "[$1] $0"
 

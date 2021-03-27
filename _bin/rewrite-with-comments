@@ -3,6 +3,9 @@
 # overwrites $1 with modified html
 # creates a tmp file in the process
 tmp=`mktemp /tmp/rewriteWithComments-XXXXXX`
+echo
+echo rewrite-with-comments 1=[$1] tmp=[${tmp}]
+echo
 sed -e 's@</body>@<script src="https://utteranc.es/client.js" \
         repo="guitarvydas/guitarvydas.github.io" \
         issue-term="pathname" \
@@ -12,4 +15,4 @@ sed -e 's@</body>@<script src="https://utteranc.es/client.js" \
 </script> \
 </body>@' <"${1}" >${tmp}
 cp ${tmp} "${1}"
-echo "with-comments" "${tmp}" '-->' "${1}"
+echo "end with-comments" "${tmp}" '-->' "${1}"
