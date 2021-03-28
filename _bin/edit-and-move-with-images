@@ -33,7 +33,7 @@ then
 	       -e "s@<img src=\"@<img src=\"/assets/${fullprefix}-Images/@g" \
 	       <"${filename}/${base}" >"../_posts/${prefix}-${base}"
 	   # move Images folder to ../assets/prefix-Images
-	   ##rm "${filename}/${base}"
+	   rm "${filename}/${base}"
 	   mv "${filename}" "../assets/${fullprefix}-Images"
        else
 	   echo === yes cssstyle ===
@@ -43,7 +43,6 @@ then
 	   # move Images folder to ../assets/prefix-Images
 	   mv "${filename}/Images" "../assets/${fullprefix}-Images"
 	   # delete source(s), completing the mv (mv is not cp)
-	   echo === not removing "${filename}"
 	   rm -rf "${filename}"
     fi
 fi
