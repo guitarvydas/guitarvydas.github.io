@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>State, Analysis of</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="stateandgoto">State and GOTO</h1>
+
+<p>In this essay, I examine some of the uses of State.</p>
+
+<p>State has been maligned in literature, in the same manner that GOTO has been maligned.</p>
+
+<p>GOTO is used in every programming language — under the hood. Structured Programming showed us how to hide GOTO and to isolate<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> its use.</p>
+
+<p>State is used in threads, among other things.</p>
+
+<p>The problem is not State, but isolation of State.</p>
+
+<p>Another problem with State (and GOTO and Variables and Message Passing, etc.) is lack of code localization. Spaghetti state can be helped by strict nesting<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a>, in some instances.</p>
+
+<p>Throwing away all state might not be necessary.</p>
+
+<h1 id="nuanceduseofcaseswitch">Nuanced Use of Case (Switch)</h1>
+
+<h2 id="casevs.types-oop">Case vs. Types - OOP</h2>
+
+<p>One form of state is querying of object types.</p>
+
+<p>This problem was lassoed by Object-Oriented Programming<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a>.</p>
+
+<h2 id="casevs.continuations-statecharts">Case vs. Continuations - StateCharts</h2>
+
+<p>CPS - Continuation Passing Style — is another form of GOTO. CPS is more powerful that GOTO.<a href="#fn:4" id="fnref:4" title="see footnote" class="footnote"><sup>4</sup></a></p>
+
+<p>CPS can become unruly when continuations are passed to regions of code that are not local to the origin of the continuation. JavaScript callbacks are an attempt to syntactically nest such uses, but callbacks failed to deliver enough benefits.</p>
+
+<p>Exceptions are another attempt at encapsulating CPS. Exceptions are flawed in that they are declared statically but operate dynamically. The dynamic call-chain determines the control-flow changes caused by exceptions.</p>
+
+<p>GOTO changes control-flow.</p>
+
+<p>OO bundles up data. (Closures also bundle up data).</p>
+
+<p>CPS bundles up and delivers, both, control-flow and data.</p>
+
+<p>StateCharts provide a way to describe non-linear changes to control-flow that retain code locality.</p>
+
+<p>I discuss the original StateCharts paper in
+https://guitarvydas.github.io/2020/12/09/StateCharts.html
+and
+https://guitarvydas.github.io/2021/02/25/statecharts-(again).html</p>
+
+<h2 id="patternmatching">Pattern Matching</h2>
+
+<p>Pattern matching consists of two parts:</p>
+
+<ul>
+<li>a pattern (a DSL)</li>
+<li>a matching engine.</li>
+</ul>
+
+<p>One can obviate the need for flags (and associated if…then…else…endif code) by writing patterns instead.</p>
+
+<p>Pattern matching was explored in compiler technologies and is called parsing in that literature.</p>
+
+<p>Pattern matching is used in function languages, as a way to remove the need for variables and for writing declarative specifications of code using overloaded functions. PatternParsing is a more general form of this kind of pattern matching.</p>
+
+<p>A common use of pattern matching is REGEX. Patterns are written in a DSL called a REGEX and the matching engine is hidden from view. For example, to match and &#8220;a&#8221; followed by a &#8220;b&#8221;, one would write a REGEX DSL snippet &#8220;/ab/&#8221;.</p>
+
+<p>An early form of a pattern-matching-and-engine language is PROLOG. One would write patterns and the PROLOG engine would use backtracking to return an exhaustive list of all matches.</p>
+
+<p>Early forms of pattern matching in compilers was embodied in tools such as LEX and YACC.</p>
+
+<p>The most recent form of pattern matching is PEG. PEG subsumes the capabilities of REGEX, LEX and YACC.</p>
+
+<p>PEG uses a backtracking engine and, thus, subsumes some of the uses of PROLOG (and other relational technologies).</p>
+
+<p>PEG might enable a new breed of programming, for example DSLs that write DSLs (I call these SCLs<a href="#fn:5" id="fnref:5" title="see footnote" class="footnote"><sup>5</sup></a>)</p>
+
+<p>PEG rules can be built in layers, hence, PEG could be used to match text and to match type information. This should allow PEG to be used instead of REGEX and Haskell.</p>
+
+<h2 id="conditionalcompilation-ifdef">Conditional Compilation - #IFDEF</h2>
+
+<p>Conditional compilation has been used as a way of creating &#8220;portable&#8221; programs by brute force.</p>
+
+<p>Conditional compilation is known as &#8220;#ifdef&#8221; in C-class languages and &#8220;#+&#8221; in Lisp-class languages.</p>
+
+<p>In &#8220;#ifdef&#8221; languages, a DSL is used to express conditional compilation. The DSL is usually distinct from the underlying language, e.g. the kind of expressions used in C #ifdef is a language unto itself and does not provide access to the full C language.</p>
+
+<p>In &#8220;#+&#8221; Lisp conditional compilation, the expression language is full Lisp itself — no extra DSL is created.</p>
+
+<p>Such conditional compilation is a small step towards the full generality of pattern matching. Little languages — SCLs and DSLs — built on top of these languages could provide the desired conditional compilation effects.</p>
+
+<p>Portability was explored in compiler technologies, for example the techniques developed for dealing with disparate target CPU architectures.</p>
+
+<p>Many of the successful techniques at portability used a two phase approach. The compiler would emit code for a generalized architecture (often called a VM, today) and a pattern-matcher would transform the generalized code into code specialized for a particular architecture.</p>
+
+<p>Some of the interesting technologies included:<a href="#fn:6" id="fnref:6" title="see footnote" class="footnote"><sup>6</sup></a></p>
+
+<ul>
+<li>Orthogonal Code Generator — a declarative specification that mapped abstract instructions into specific instructions</li>
+<li>RTL — the method used by gcc — the VM consisted of an &#8220;infinite&#8221; number of registers and the compiler would simply emit register-based code ; in the second pass a peephole optimizer would be used to convert the register-based code into code specialized for a specific CPU architecture</li>
+<li>Denotational Semantics — a method of defining a language in the functional domain, then mapping the functions into specialized code, Peter Lee defined the source language in phases (layers) and made the Denotational Semantics technique practical ; each phase was described as a function mapping a source language onto a simpler domain ; each target domain was simpler than the preceding domain until the final domain was some executable architecture (e.g. Scheme, 808x, etc.).</li>
+</ul>
+
+<p>[Note that all of the above techniques are based on Divide and Conquer. The transformations become easier as more layers are added.]</p>
+
+<h2 id="macros">Macros</h2>
+
+<p>Macros are DSLs for changing the behaviour of compilers (and interpreters).</p>
+
+<p>Macros can program the compiler.</p>
+
+<p>In the extreme case — e.g. Lisp macros — macros employ the full underlying language. For example one can write a Lisp program that is run at compile-time. This lisp program — called a macro — creates new source code that is fed to the compiler.</p>
+
+<p>In the other extreme, e.g. C macros, a separate macro-processor phase is run and its output is fed to the C compiler. Such macros work in two steps — preprocess, then compile. Obviously, the Lisp method is more powerful, but carries more potential risk.</p>
+
+<p>Inlining of functions is a formalization of macros. Inlining is an attempt to encapsulate one use-case of macros, e.g. optimization of programs defined in the function-only domain.</p>
+
+<p>Lisp macro processing work recursively. C-style macro preprocessing works in only two steps.</p>
+
+<p>The ideal extension would be to have an infinite number of preprocessing steps — a pipeline of preprocessors. [PEG might be one way to achieve this effect. PEG grammars that emit programs that are further processed by other PEG grammars, and so on.]</p>
+
+<h2 id="casevs.flags">Case vs. Flags</h2>
+
+<p>PL constructs like
+if … then … else … end if
+allow code to query state flags with little constraint on how the code is nested.</p>
+
+<p>It is possible to write clear code using such constructs, but such structuring tends to be rare.</p>
+
+<p>Likewise, note that it is possible to write clear code in assembly language, including all forms of 1st class functions, etc.</p>
+
+<p>Code in general, needs to be constrained with syntactic sugar.</p>
+
+<h1 id="functionsandfunctionalprogramming">Functions and Functional Programming</h1>
+
+<p>FP (functional programming) is but one way to structure code.</p>
+
+<p>FP limits the available paradigms to, mostly, a one-in and one-out style. Various extensions to FP include exceptions and full-blown use of CPS, e.g. in Denotational Semantics, but, the results are increasingly less readable.</p>
+
+<p>FP works by prohibiting changes of state — this creates isolation between functions and allows manipulation of the notation.</p>
+
+<p>It should be noted that UNIX® processes also create isolation between blocks of code — no data nor control-flow can escape the boundaries of a process.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Isolation is like encapsulation, but includes control&#8211;flow. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>As seen with the solutions for Global Variables, Structured Programming, etc. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>Bertrand Meyer pointed this out. <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:4">
+<p>And, therefore, CPS is more dangerous that GOTO. <a href="#fnref:4" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:5">
+<p>SCL mean Solution Centric Language. <a href="#fnref:5" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:6">
+<p>See https://guitarvydas.github.io/2021/01/14/References.html <a href="#fnref:6" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
