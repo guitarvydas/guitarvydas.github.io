@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-30T09:33:57-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-30T09:48:19-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -199,7 +199,7 @@ allow code to query state flags with little constraint on how the code is nested
 
 &lt;ul&gt;
 &lt;li&gt;a notation&lt;/li&gt;
-&lt;li&gt;a body of experience (e.g. in using the notation).&lt;/li&gt;
+&lt;li&gt;a body of experience (e.g. in using the notation).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;mathematicalnotation&quot;&gt;Mathematical Notation&lt;/h1&gt;
@@ -223,15 +223,15 @@ allow code to query state flags with little constraint on how the code is nested
 
 &lt;p&gt;Removing time variance from the notation is an approximation. It works only in domains where time is not a major factor.&lt;/p&gt;
 
-&lt;p&gt;[Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/p&gt;
+&lt;p&gt;[&lt;em&gt;Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/em&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
 
-&lt;p&gt;A layer is only as complicated as one wishes to make it.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;layer&lt;/em&gt; is only as complicated as one wishes to make it.&lt;/p&gt;
 
 &lt;p&gt;The complexity lies in the amount of detail required to express the inputs and outputs of the layer.&lt;/p&gt;
 
-&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass all variables in a single layer.&lt;/p&gt;
+&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass &lt;em&gt;all&lt;/em&gt; variables in a single layer.&lt;/p&gt;
 
 &lt;p&gt;Complexity is &amp;#8220;in the eye of the beholder&amp;#8221;. Mathematical notation appears complicated to some (most), but appears simple to those who have steeped themselves in the notation.&lt;/p&gt;
 
@@ -255,7 +255,7 @@ allow code to query state flags with little constraint on how the code is nested
 
 &lt;p&gt;Engineers map notation from one domain into another.&lt;/p&gt;
 
-&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Engineers filter out details.&lt;/p&gt;
 
@@ -264,7 +264,11 @@ allow code to query state flags with little constraint on how the code is nested
 &lt;ol&gt;
 
 &lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Actually, this can be subdivided even further. There is experience in using the notation and there is experience in thinking about problems (which are then mapped to this notation). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 
 &lt;/ol&gt;
