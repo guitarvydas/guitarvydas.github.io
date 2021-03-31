@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Simplicity vs Complexity</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="simplicity">Simplicity</h1>
+
+<p>A definition of <em>simplicity</em> is</p>
+
+<ul>
+<li>lack of nuance.</li>
+</ul>
+
+<h1 id="complexity">Complexity</h1>
+
+<p>Complexity is the opposite of simplicity.</p>
+
+<p>Complexity occurs in a system when there are too many variables to be juggled, at the same time, in a solution.</p>
+
+<h1 id="simplification">Simplification</h1>
+
+<p>To simplify something does not necessarily mean to delete variables from the system.</p>
+
+<p>One can simplify a problem by subdividing it. Divide and Conquer.</p>
+
+<p>I remember being told that humans can handle 7±2<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> items at a time.</p>
+
+<p>This would imply that one needs to apply Divide-and-Conquer until the number of variables in a subdivision is 7±2.</p>
+
+<p>The number of variables in a <em>system</em> might be more than 7±2, say 100, but no part (subdivision) of the system should have more than 7±2 variables in it.</p>
+
+<h2 id="physicists">Physicists</h2>
+
+<p>Physicists simplify problems using approximations.</p>
+
+<p>When the effect of a variable is much less than (≪) the effect of some other variable, physicists make <em>simplifying assumptions &#8212;</em> they drop (elide) the former variable from their equations, dealing only with the latter variable(s).</p>
+
+<p>This does not mean that one approximation is valid in every situation.</p>
+
+<p>For example, in his book &#8220;Order Out of Chaos&#8221;, Nobel Laureate Ilya Prigogene<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a> decries the misuse of approximations that are not valid in certain situations.</p>
+
+<p>Often, people over-use an approximation, or a notation, once it has worked in some domain.</p>
+
+<p>I see this happening in programming, where, often the question is &#8220;how do I re-cast this problem in a strongly-typed, functional manner?&#8221; instead of asking &#8220;what is the problem and how can it best be solved?&#8221; and &#8220;what approximations / notations are useful in this case?&#8221;.</p>
+
+<p>In programming, we see this played out in synchronous notation being misused to solve asynchronous problems (e.g. multitasking and the accidental complexities it brought along) and in &#8220;features&#8221; like JavaScript&#8217;s callbacks.</p>
+
+<h1 id="errors">Errors</h1>
+
+<p>Errors in one domain might not be errors in another domain.</p>
+
+<p>For example, a timeout is an error when building a ballistics calculator, but is an expected occurrence when building blockchain.</p>
+
+<h1 id="tells-approximationmisuse">Tells - Approximation Misuse</h1>
+
+<p>The &#8220;tells&#8221; of misuse of notations and approximations are:</p>
+
+<ul>
+<li>Increasing accidental complexity, e.g. mutexes, then thread safety, then priorities, etc.</li>
+<li>Deciding that something is &#8220;hard&#8221;, e.g. the generally agreed-upon notion that multitasking is just &#8220;hard&#8221;.<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a></li>
+</ul>
+
+<h1 id="divideandconquer">Divide and Conquer</h1>
+
+<p>Successful use of <em>divide and conquer</em> reduces not only the number of variables at the input of a subdivision, but, also, reduces the number of outputs.</p>
+
+<h2 id="fan-inandfan-out">Fan-in and Fan-out</h2>
+
+<p>To be able to apply divide-and-conquer in infinitely many subdivisions<a href="#fn:4" id="fnref:4" title="see footnote" class="footnote"><sup>4</sup></a> a notation <em>must</em> support reduction of the number of input ports and reduction of the number of output ports.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>See https://guitarvydas.github.io/2021/01/14/References.html <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>This indicates that the wrong approximations and notation are being used. <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:4">
+<p>see https://guitarvydas.github.io/2021/03/23/Everything&#8211;is&#8211;a&#8211;Fractal.html <a href="#fnref:4" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
