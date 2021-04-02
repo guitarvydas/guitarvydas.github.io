@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Recursive Design - Knowns and Unknowns</title>
+  <meta name="CreationTime" content="2021-04-02T10:07:46Z">
+  <meta name="ModificationTime" content="2021-04-02T10:07:46Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    table.t1 {border-collapse: collapse}
+    td.td1 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #000000 #000000 #000000 #000000; padding: 0.0px 5.0px 0.0px 5.0px}
+    td.td2 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #bfbfbf #bfbfbf #bfbfbf #bfbfbf; padding: 0.0px 5.0px 0.0px 5.0px}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Knowns and Unknowns</b></h2>
+<p class="p2">In this essay, I discuss <i>recursive design</i> — an extreme form of <i>divide and conquer </i>in terms of <i>knowns </i>and <i>unknowns</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">In my opinion, recursive design — divide and conquer — continues to iterate and never stops. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">At some point, the design becomes so stable that it can be <i>shipped</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">[<i>This is much like songwriting.<span class="Apple-converted-space">  </span>One never stops tweaking a song, although committing it to a recording tends to slow down the tweaking.<span class="Apple-converted-space">  </span>Performing songwriters often perform a song differently than it was recorded.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dissecting Knowns and Unknowns</b></h2>
+<table cellspacing="0" cellpadding="0" class="t1">
+  <tbody>
+    <tr>
+      <td valign="top" class="td1">
+        <p class="p4">unkown</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4">unknown</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4">brainstorm</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="td1">
+        <p class="p4">unknown</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4">known</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p5"><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td2">
+        <p class="p4">known</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">unknown</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">attack early</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td2">
+        <p class="p4">known</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">known</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">implement</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Unknown Unknown</b></h2>
+<p class="p2">You cannot know what you don't know (unknown unknown).</p>
+<p class="p3"><br></p>
+<p class="p2">Iterate and implement.</p>
+<p class="p3"><br></p>
+<p class="p2">As design proceeds, you might encounter new sub-problems.<span class="Apple-converted-space">  </span>Iterate.</p>
+<p class="p3"><br></p>
+<p class="p2">Keep iterating until all unknowns are broken down into knowns, or, the solution is complete.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Unknown Known</b></h2>
+<p class="p2">[<i>Break the problem down into the other 3 categories</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Known Unknown</b></h2>
+<p class="p2">High risk.</p>
+<p class="p3"><br></p>
+<p class="p2">Fail early.</p>
+<p class="p6"><br></p>
+<ul class="ul1">
+  <li class="li7">Mitigate the risk by trying to understand the risk.</li>
+  <li class="li7">If the risk becomes a problem that cannot be solved, you want know as early as possible (e.g. abort as soon as possible).
+  <ul class="ul2">
+    <li class="li7">Aborting might become a re-casting of the problem, in which case re-start iterations.</li>
+  </ul></li>
+  <li class="li7">If the risk can be handled, iterate and break it down further.</li>
+  <li class="li7">Use strong, static typing to flesh out a design (without writing implementation code) to convert unknowns into knowns.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Known Known</b></h2>
+<p class="p2">If you know how to solve a sub-problem:</p>
+<ul class="ul1">
+  <li class="li7"><span class="s1"><b>Defer</b></span>, don't implement if any unknowns still exist<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li7">attack unknowns first<span class="Apple-converted-space"> </span></li>
+    <li class="li7">see brainstorming, later
+    <ul class="ul2">
+      <li class="li7">sometimes it is beneficial to implement knowns and look for new unknowns</li>
+    </ul></li>
+  </ul></li>
+  <li class="li7"><span class="s1"><b>Implement</b></span>
+  <ul class="ul2">
+    <li class="li7">Look for new unknowns that surface (mixed in with the knowns)
+    <ul class="ul2">
+      <li class="li7">Scope creep — unknowns that surface during implementation that are not formally handled constitute <i>scope creep</i> <span class="Apple-converted-space"> </span>
+      <ul class="ul2">
+        <li class="li7">handling a new unknown should result in new iterations of the recursive design process</li>
+      </ul></li>
+    </ul></li>
+    <li class="li7">Implementation can be a form of brainstorming</li>
+    <li class="li7">Strong, static typing is a form of implementation (see later)</li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Brain Storming</b></h2>
+<p class="p2">Brainstorming is a technique of looking for new unknowns — and then iterating them.</p>
+<p class="p3"><br></p>
+<p class="p2">Brainstorming is most often associated with <i>the arts</i>, e.g. songwriting.</p>
+<p class="p3"><br></p>
+<p class="p2">Much of current programming is <i>art</i> — creativity that has not (can not) been formalized.</p>
+<p class="p3"><br></p>
+<p class="p2"><b>The more you know, the more creative you can be<a id="fnlink1"></a></b><a href="#fn1"><sup>[1]</sup></a><b>.</b></p>
+<p class="p3"><br></p>
+<p class="p2">Implementing is a way to know more about a specific domain.</p>
+<p class="p3"><br></p>
+<p class="p2">Static typing is a way to know more about a specific domain. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Thinking and Coding</b></h2>
+<p class="p7">Coding, currently, involves two activities:</p>
+<ul class="ul1">
+  <li class="li7">thinking</li>
+  <li class="li7">writing code.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Strong, Static Typing</b></h2>
+<p class="p7">Static typing is, actually, a form of implementation — coding up the types, without coding up the implementation<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>.</p>
+<p class="p6"><br></p>
+<p class="p7">Haskell, Agda, etc. break implementation down into two sub-components</p>
+<ul class="ul1">
+  <li class="li7">signatures</li>
+  <li class="li7">code.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p7">Some people have a <i>eureka</i> moment when using statically-typed languages — they code up the type system, and, when it passes automatic checking, they write code underneath the type system and "it just works". <span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p7">Coding, currently, involves two activities:</p>
+<ul class="ul1">
+  <li class="li7">thinking</li>
+  <li class="li7">writing code.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p7">Writing and checking types is the "thinking" part. <span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p7">Using type-checking to brainstorm the thinking part is just "divide and conquer".<span class="Apple-converted-space">  </span>Coding is <b>deferred</b> until the type system has been automatically checked.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>The Essence of Recursive Design</b></h2>
+<p class="p7">The <i>essence </i>of recursive design is to break problems down into smaller sub-problems. <span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p7">Each sub-problem is broken down — over and over — until all sub-problems can be easily understood and implemented.</p>
+<p class="p6"><br></p>
+<p class="p7">The <i>hard</i> part of a problem is the <i>thinking</i> part.<span class="Apple-converted-space">  </span>The <i>easy</i> part of a problem is writing code after the <i>thinking</i> has been completed.</p>
+<p class="p6"><br></p>
+<p class="p7">If a problem seems <i>hard</i>, the problem needs to be sub-divided.</p>
+<p class="p6"><br></p>
+<p class="p7">If a problem seems <i>hard</i>, one might be trying to use the wrong paradigm to solve it in.</p>
+<p class="p6"><br></p>
+<p class="p7">For example, we currently think that multi-tasking is <i>hard</i>, but most people (not programmers) already know how to deal with multitasking, e.g. music scores, cooking recipes, etc.<span class="Apple-converted-space">  </span>Are we using the wrong paradigm to think about multi-tasking?<span class="Apple-converted-space">  </span>The <i>functional </i>approach is useful for one-in-one-out problems<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.<span class="Apple-converted-space">  </span>Is multitasking a one-in-one-out style of problem?<span class="Apple-converted-space">  </span>I find that StateCharts<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> and asynchronous ideas, e.g. SonicPi,<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> FBP,<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> Arrowgrams,<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a> etc., make it easier to think about multitasking.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix - Links</b></h2>
+<p class="p4">FBP</p>
+<p class="p4"><a href="https://jpaulm.github.io/fbp/">https://jpaulm.github.io/fbp/</a></p>
+<p class="p5"><br></p>
+<p class="p4">Sonic Pi</p>
+<p class="p4"><a href="https://sonic-pi.net/">https://sonic-pi.net/</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">Arrowgrams / Components</p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2021/03/16/component-diagrams.html">https://guitarvydas.github.io/2021/03/16/component-diagrams.html</a></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2021/03/06/Components-(again).html">https://guitarvydas.github.io/2021/03/06/Components-(again).html</a></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html">https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html">https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html</a></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2020/12/09/HTML-Components-Arrowgrams.html">https://guitarvydas.github.io/2020/12/09/HTML-Components-Arrowgrams.html</a></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2020/12/09/HTML-Components-Handling-Callback-Logic-Explicitly.html">https://guitarvydas.github.io/2020/12/09/HTML-Components-Handling-Callback-Logic-Explicitly.html</a></p>
+<p class="p5"><br></p>
+<p class="p4"><a href="https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html">https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Pat Pattison</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Divide and Conquer, again.<span class="Apple-converted-space">  </span>Implementation can be broken down into 2 things - (1) type system, (2) code.</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>I call this class of problem a "calculator".</p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>https://guitarvydas.github.io/2021/02/25/statecharts-(again).html, https://guitarvydas.github.io/2020/12/09/StateCharts.html</p>
+<p class="p4"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>See appendix</p>
+<p class="p4"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>See appendix</p>
+<p class="p4"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>See appendix</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>

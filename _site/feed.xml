@@ -1,96 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T07:48:36-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Projectional Editing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;projectionaleditingintwosteps&quot;&gt;Projectional Editing in Two Steps&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Reduce all input to normal form.&lt;/li&gt;
-&lt;li&gt;Write rules against normal form. Rules &amp;#8212;&amp;gt; views.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;1.normalform&quot;&gt;1. Normal Form&lt;/h1&gt;
-
-&lt;p&gt;I favour a normal form consisting of &lt;em&gt;triples&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;2.rules&quot;&gt;2. Rules&lt;/h1&gt;
-
-&lt;p&gt;You want to perform exhaustive search over &lt;em&gt;all&lt;/em&gt; of the triples.&lt;/p&gt;
-
-&lt;p&gt;A &lt;em&gt;rule&lt;/em&gt; is just a group of related searches.&lt;/p&gt;
-
-&lt;p&gt;Such searching can be done manually, using loops within loops.&lt;/p&gt;
-
-&lt;p&gt;Or, one could use a tool &amp;#8212; a search engine &amp;#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.&lt;/p&gt;
-
-&lt;p&gt;PROLOG uses &lt;em&gt;backtracking&lt;/em&gt; to perform exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;PROLOG uses something called &lt;em&gt;logic&lt;/em&gt; &lt;em&gt;variables&lt;/em&gt; to hold the results of successful matches.&lt;/p&gt;
-
-&lt;p&gt;There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the &lt;em&gt;logic variables&lt;/em&gt; and presents you, the programmer, with a set of consistent matches (as one set of bound &lt;em&gt;logic variables&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;MiniKanren, on the other hand, does not use the above method and keeps a running list of &lt;em&gt;all&lt;/em&gt; possible matches, then presents you, the programmer, with a list of &lt;em&gt;all&lt;/em&gt; matches that consistently solve the set of given match constraints.&lt;/p&gt;
-
-&lt;h2 id=&quot;unification&quot;&gt;Unification&lt;/h2&gt;
-
-&lt;p&gt;PROLOG uses an algorithm, called &lt;em&gt;unification&lt;/em&gt;, to re-bind &lt;em&gt;logic variables&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;One set of bindings describes &lt;em&gt;one&lt;/em&gt; solution to all of the match constraints.&lt;/p&gt;
-
-&lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
-
-&lt;p&gt;I would suggest:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PEG for parsing and reducing&lt;/li&gt;
-&lt;li&gt;Factbases of triples as the normal form&lt;/li&gt;
-&lt;li&gt;PROLOG for creating rules, or PEG&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;factbases&quot;&gt;Factbases&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;prolog&quot;&gt;PROLOG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&quot;&gt;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T10:07:51-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -213,7 +121,334 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Recursive design knowns and unknowns</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html" rel="alternate" type="text/html" title="Recursive design knowns and unknowns" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Recursive%20Design%20-%20Knowns%20and%20Unknowns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Recursive Design - Knowns and Unknowns&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-02T10:07:46Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-02T10:07:46Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 13.0px Palatino}
+    table.t1 {border-collapse: collapse}
+    td.td1 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #000000 #000000 #000000 #000000; padding: 0.0px 5.0px 0.0px 5.0px}
+    td.td2 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #bfbfbf #bfbfbf #bfbfbf #bfbfbf; padding: 0.0px 5.0px 0.0px 5.0px}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Knowns and Unknowns&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In this essay, I discuss &lt;i&gt;recursive design&lt;/i&gt; — an extreme form of &lt;i&gt;divide and conquer &lt;/i&gt;in terms of &lt;i&gt;knowns &lt;/i&gt;and &lt;i&gt;unknowns&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In my opinion, recursive design — divide and conquer — continues to iterate and never stops. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;At some point, the design becomes so stable that it can be &lt;i&gt;shipped&lt;/i&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;This is much like songwriting.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One never stops tweaking a song, although committing it to a recording tends to slow down the tweaking.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Performing songwriters often perform a song differently than it was recorded.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Dissecting Knowns and Unknowns&lt;/b&gt;&lt;/h2&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;t1&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;unkown&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;unknown&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;brainstorm&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;unknown&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;known&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;top&quot; class=&quot;td1&quot;&gt;
+        &lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;known&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;unknown&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;attack early&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;known&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;known&lt;/p&gt;
+      &lt;/td&gt;
+      &lt;td valign=&quot;middle&quot; class=&quot;td2&quot;&gt;
+        &lt;p class=&quot;p4&quot;&gt;implement&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Unknown Unknown&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;You cannot know what you don't know (unknown unknown).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Iterate and implement.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;As design proceeds, you might encounter new sub-problems.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Iterate.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Keep iterating until all unknowns are broken down into knowns, or, the solution is complete.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Unknown Known&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Break the problem down into the other 3 categories&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Known Unknown&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;High risk.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Fail early.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;Mitigate the risk by trying to understand the risk.&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;If the risk becomes a problem that cannot be solved, you want know as early as possible (e.g. abort as soon as possible).
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li7&quot;&gt;Aborting might become a re-casting of the problem, in which case re-start iterations.&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;If the risk can be handled, iterate and break it down further.&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;Use strong, static typing to flesh out a design (without writing implementation code) to convert unknowns into knowns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Known Known&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;If you know how to solve a sub-problem:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;b&gt;Defer&lt;/b&gt;&lt;/span&gt;, don't implement if any unknowns still exist&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li7&quot;&gt;attack unknowns first&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;see brainstorming, later
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li7&quot;&gt;sometimes it is beneficial to implement knowns and look for new unknowns&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;b&gt;Implement&lt;/b&gt;&lt;/span&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li7&quot;&gt;Look for new unknowns that surface (mixed in with the knowns)
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li7&quot;&gt;Scope creep — unknowns that surface during implementation that are not formally handled constitute &lt;i&gt;scope creep&lt;/i&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li7&quot;&gt;handling a new unknown should result in new iterations of the recursive design process&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;Implementation can be a form of brainstorming&lt;/li&gt;
+    &lt;li class=&quot;li7&quot;&gt;Strong, static typing is a form of implementation (see later)&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Brain Storming&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Brainstorming is a technique of looking for new unknowns — and then iterating them.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Brainstorming is most often associated with &lt;i&gt;the arts&lt;/i&gt;, e.g. songwriting.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Much of current programming is &lt;i&gt;art&lt;/i&gt; — creativity that has not (can not) been formalized.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;The more you know, the more creative you can be&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;/b&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;b&gt;.&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Implementing is a way to know more about a specific domain.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Static typing is a way to know more about a specific domain. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Thinking and Coding&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p7&quot;&gt;Coding, currently, involves two activities:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;thinking&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;writing code.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Strong, Static Typing&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p7&quot;&gt;Static typing is, actually, a form of implementation — coding up the types, without coding up the implementation&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Haskell, Agda, etc. break implementation down into two sub-components&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;signatures&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;code.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Some people have a &lt;i&gt;eureka&lt;/i&gt; moment when using statically-typed languages — they code up the type system, and, when it passes automatic checking, they write code underneath the type system and &quot;it just works&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Coding, currently, involves two activities:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li7&quot;&gt;thinking&lt;/li&gt;
+  &lt;li class=&quot;li7&quot;&gt;writing code.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Writing and checking types is the &quot;thinking&quot; part. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Using type-checking to brainstorm the thinking part is just &quot;divide and conquer&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Coding is &lt;b&gt;deferred&lt;/b&gt; until the type system has been automatically checked.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Essence of Recursive Design&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p7&quot;&gt;The &lt;i&gt;essence &lt;/i&gt;of recursive design is to break problems down into smaller sub-problems. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;Each sub-problem is broken down — over and over — until all sub-problems can be easily understood and implemented.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;The &lt;i&gt;hard&lt;/i&gt; part of a problem is the &lt;i&gt;thinking&lt;/i&gt; part.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &lt;i&gt;easy&lt;/i&gt; part of a problem is writing code after the &lt;i&gt;thinking&lt;/i&gt; has been completed.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;If a problem seems &lt;i&gt;hard&lt;/i&gt;, the problem needs to be sub-divided.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;If a problem seems &lt;i&gt;hard&lt;/i&gt;, one might be trying to use the wrong paradigm to solve it in.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;For example, we currently think that multi-tasking is &lt;i&gt;hard&lt;/i&gt;, but most people (not programmers) already know how to deal with multitasking, e.g. music scores, cooking recipes, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Are we using the wrong paradigm to think about multi-tasking?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &lt;i&gt;functional &lt;/i&gt;approach is useful for one-in-one-out problems&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Is multitasking a one-in-one-out style of problem?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I find that StateCharts&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; and asynchronous ideas, e.g. SonicPi,&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt; FBP,&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; Arrowgrams,&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt; etc., make it easier to think about multitasking.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Links&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;FBP&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://jpaulm.github.io/fbp/&quot;&gt;https://jpaulm.github.io/fbp/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Sonic Pi&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://sonic-pi.net/&quot;&gt;https://sonic-pi.net/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Arrowgrams / Components&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/component-diagrams.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/component-diagrams.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/06/Components-(again).html&quot;&gt;https://guitarvydas.github.io/2021/03/06/Components-(again).html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html&quot;&gt;https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html&quot;&gt;https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/HTML-Components-Arrowgrams.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/HTML-Components-Arrowgrams.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/HTML-Components-Handling-Callback-Logic-Explicitly.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/HTML-Components-Handling-Callback-Logic-Explicitly.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Pat Pattison&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Divide and Conquer, again.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Implementation can be broken down into 2 things - (1) type system, (2) code.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;I call this class of problem a &quot;calculator&quot;.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;https://guitarvydas.github.io/2021/02/25/statecharts-(again).html, https://guitarvydas.github.io/2020/12/09/StateCharts.html&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See appendix&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See appendix&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See appendix&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design - Knowns and Unknowns</summary></entry><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Projectional Editing&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;projectionaleditingintwosteps&quot;&gt;Projectional Editing in Two Steps&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reduce all input to normal form.&lt;/li&gt;
+&lt;li&gt;Write rules against normal form. Rules &amp;#8212;&amp;gt; views.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;1.normalform&quot;&gt;1. Normal Form&lt;/h1&gt;
+
+&lt;p&gt;I favour a normal form consisting of &lt;em&gt;triples&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2.rules&quot;&gt;2. Rules&lt;/h1&gt;
+
+&lt;p&gt;You want to perform exhaustive search over &lt;em&gt;all&lt;/em&gt; of the triples.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;rule&lt;/em&gt; is just a group of related searches.&lt;/p&gt;
+
+&lt;p&gt;Such searching can be done manually, using loops within loops.&lt;/p&gt;
+
+&lt;p&gt;Or, one could use a tool &amp;#8212; a search engine &amp;#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses &lt;em&gt;backtracking&lt;/em&gt; to perform exhaustive search.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses something called &lt;em&gt;logic&lt;/em&gt; &lt;em&gt;variables&lt;/em&gt; to hold the results of successful matches.&lt;/p&gt;
+
+&lt;p&gt;There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the &lt;em&gt;logic variables&lt;/em&gt; and presents you, the programmer, with a set of consistent matches (as one set of bound &lt;em&gt;logic variables&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;MiniKanren, on the other hand, does not use the above method and keeps a running list of &lt;em&gt;all&lt;/em&gt; possible matches, then presents you, the programmer, with a list of &lt;em&gt;all&lt;/em&gt; matches that consistently solve the set of given match constraints.&lt;/p&gt;
+
+&lt;h2 id=&quot;unification&quot;&gt;Unification&lt;/h2&gt;
+
+&lt;p&gt;PROLOG uses an algorithm, called &lt;em&gt;unification&lt;/em&gt;, to re-bind &lt;em&gt;logic variables&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;One set of bindings describes &lt;em&gt;one&lt;/em&gt; solution to all of the match constraints.&lt;/p&gt;
+
+&lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
+
+&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
+
+&lt;p&gt;I would suggest:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PEG for parsing and reducing&lt;/li&gt;
+&lt;li&gt;Factbases of triples as the normal form&lt;/li&gt;
+&lt;li&gt;PROLOG for creating rules, or PEG&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;factbases&quot;&gt;Factbases&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prolog&quot;&gt;PROLOG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&quot;&gt;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -318,7 +553,28 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Programming Redux&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -602,28 +858,7 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Programming Redux&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -765,194 +1000,4 @@ https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Message Passing</summary></entry><entry><title type="html">Cps considered to be a goto</title><link href="https://computingsimplicity.neocities.org/2021/03/27/CPS-Considered-to-be-a-GOTO.html" rel="alternate" type="text/html" title="Cps considered to be a goto" /><published>2021-03-27T00:00:00-04:00</published><updated>2021-03-27T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/27/CPS%20Considered%20to%20be%20a%20GOTO</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/27/CPS-Considered-to-be-a-GOTO.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;CPS Considered to be a GOTO&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;goto&quot;&gt;GOTO&lt;/h1&gt;
-
-&lt;p&gt;CPS — continuation passing style — is just a generalization of GOTO.&lt;/p&gt;
-
-&lt;p&gt;First-class functions, too, are just generalizations of GOTOs.&lt;/p&gt;
-
-&lt;p&gt;GOTO changes the program flow.&lt;/p&gt;
-
-&lt;p&gt;First-class functions, hence, CPS, allow one to pass program flow around as first-class objects.&lt;/p&gt;
-
-&lt;p&gt;One can call a first-class function object, hence invoke a continuation via CPS, at any point, well-away from its origin.&lt;/p&gt;
-
-&lt;p&gt;In FORTRAN, there was a construct called a &amp;#8220;computed GOTO&amp;#8221;. CPS is even more &amp;#8220;powerful&amp;#8221; than this FORTRAN concept.&lt;/p&gt;
-
-&lt;h1 id=&quot;spaghettiflow&quot;&gt;Spaghetti Flow&lt;/h1&gt;
-
-&lt;p&gt;CPS (and first-class functions) can lead to spaghetti coding, much like GOTO did.&lt;/p&gt;
-
-&lt;p&gt;Self-disciplined assembler programmers produced well-structured code in assembler.&lt;/p&gt;
-
-&lt;p&gt;Average programmers needed &amp;#8220;help&amp;#8221; from Structured Programming languages.&lt;/p&gt;
-
-&lt;p&gt;Self-disciplined assembler programmers complained about Structured Programming languages.&lt;/p&gt;
-
-&lt;p&gt;No one bothered to write code in assembler — structured or spaghetti — after the self-disciplined assembler programmers retired.&lt;/p&gt;
-
-&lt;p&gt;Self-disciplined FP programmers can produce well-structured code.&lt;/p&gt;
-
-&lt;h1 id=&quot;usesforcps&quot;&gt;Uses for CPS&lt;/h1&gt;
-
-&lt;p&gt;CPS is a low-level operation, like GOTO.&lt;/p&gt;
-
-&lt;p&gt;As such, CPS is useful in building control-flow constructs.&lt;/p&gt;
-
-&lt;p&gt;CPS is used in Denotational Semantics — which is a method for building languages and control-flow constructs.&lt;/p&gt;
-
-&lt;p&gt;CPS should not be used for regular programming.&lt;/p&gt;
-
-&lt;p&gt;Unstructured used of first-class functions should not be used for regular programming, either.&lt;/p&gt;
-
-&lt;h1 id=&quot;threads&quot;&gt;Threads&lt;/h1&gt;
-
-&lt;p&gt;When FP breaks out of its sweet-spot, we have to resort to constructs like threads.&lt;/p&gt;
-
-&lt;p&gt;Threads are envelopes that allow the calculator-like paradigm to continue to be used — each calculator being wrapped in its own envelope VM.&lt;/p&gt;
-
-&lt;p&gt;Threads are based on state. Thread envelopes hide this state, but do not eliminate state.&lt;/p&gt;
-
-&lt;p&gt;In some use-cases,&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; this kind of state is important enough that it should not be hidden from view.&lt;/p&gt;
-
-&lt;p&gt;It is possible to extend the FP paradigm beyond its sweet-spot, but the question that needs to be asked is whether this is a good idea.&lt;/p&gt;
-
-&lt;h1 id=&quot;thequestions&quot;&gt;The Questions&lt;/h1&gt;
-
-&lt;p&gt;The questions to be asked are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;What are we trying to accomplish?&lt;/li&gt;
-&lt;li&gt;Why do we need to extend our notation to include CPS?&lt;/li&gt;
-&lt;li&gt;What paradigm(s) is FP good for?&lt;/li&gt;
-&lt;li&gt;What paradigm(s) is FP not so good for?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;[The question is not: &amp;#8220;how do we paper-over the FP paradigm, once we have found a fault in it?&amp;#8221;]&lt;/p&gt;
-
-&lt;h1 id=&quot;thefix&quot;&gt;The Fix&lt;/h1&gt;
-
-&lt;h2 id=&quot;structuredscaffolds&quot;&gt;Structured Scaffolds&lt;/h2&gt;
-
-&lt;p&gt;GOTOs were &amp;#8220;fixed&amp;#8221; by creating structured scaffolding around them.&lt;/p&gt;
-
-&lt;p&gt;FP creates structured scaffolding around constructs using its strict one-in-one-out rule (function-call-and-function-return (I won&amp;#8217;t mention exceptions, which are based on a dynamic global variable&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;)).
-The FP paradigm is useful in one-in-one-out situations — e.g. fancy calculators&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;morequesions&quot;&gt;More Quesions&lt;/h2&gt;
-
-&lt;h3 id=&quot;state&quot;&gt;State&lt;/h3&gt;
-
-&lt;p&gt;Is state The Problem?&lt;/p&gt;
-
-&lt;p&gt;Or, is unstructured use of state a problem?&lt;/p&gt;
-
-&lt;p&gt;State can be easily structured using StateCharts:
-https://guitarvydas.github.io/2021/02/25/statecharts-(again).html
-https://guitarvydas.github.io/2020/12/09/StateCharts.html&lt;/p&gt;
-
-&lt;h3 id=&quot;globalvariables&quot;&gt;Global Variables&lt;/h3&gt;
-
-&lt;p&gt;Were global variables The Problem?&lt;/p&gt;
-
-&lt;p&gt;Or was unstructured use of variables a problem?&lt;/p&gt;
-
-&lt;p&gt;The solution was to invent scoped variables, and, local variables.&lt;/p&gt;
-
-&lt;p&gt;This implies that global variables were not actually the problem, but that unstructured use of variables was the problem.&lt;/p&gt;
-
-&lt;h3 id=&quot;locality&quot;&gt;Locality&lt;/h3&gt;
-
-&lt;p&gt;Lambda calculus gives us free variables.&lt;/p&gt;
-
-&lt;p&gt;At what point do free variables become global variables?&lt;/p&gt;
-
-&lt;p&gt;When a closure fits on one line, the variables don&amp;#8217;t appear to be global.&lt;/p&gt;
-
-&lt;p&gt;When a closure fits on one window, the variables don&amp;#8217;t appear to be global.&lt;/p&gt;
-
-&lt;p&gt;When a closure is large and doesn&amp;#8217;t fit into one viewport of one window, the free variables appear to be like global variables.&lt;/p&gt;
-
-&lt;p&gt;It appears, to me, that locality is more important than global-ness. I could use&lt;a href=&quot;#fn:4&quot; id=&quot;fnref:4&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; a mini-language that had no local variables — and allowed only 26 variables at maximum. As long as lumps of that kind of code were well-isolated&lt;a href=&quot;#fn:5&quot; id=&quot;fnref:5&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;, the global-ness of the variables did not bother me.&lt;/p&gt;
-
-&lt;p&gt;Currently, types and functions are in a flat space and are not localized / structured. Packaging systems are bandaids for this broader problem (of locality).&lt;/p&gt;
-
-&lt;p&gt;Q: How does one Structure the use of types? How does one Structure the use of functions? Without causing new/hidden dependencies? Is packaging enough or is it a bandaid?&lt;/p&gt;
-
-&lt;h3 id=&quot;inheritance&quot;&gt;Inheritance&lt;/h3&gt;
-
-&lt;p&gt;Inheritance breaks locality, much like CPS does.&lt;/p&gt;
-
-&lt;p&gt;It is possible to invoke a method well-away from the original source point.&lt;/p&gt;
-
-&lt;p&gt;Inheritance for structuring code leads to debugging problems. One finds it hard to understand which methods can be overridden and where they are.&lt;/p&gt;
-
-&lt;p&gt;Composition exhibits less of this kind of problem.&lt;/p&gt;
-
-&lt;p&gt;Q: Can inheritance be cleaved into two pieces? The &amp;#8220;good&amp;#8221; inheritance vs. the &amp;#8220;bad&amp;#8221; kind?&lt;/p&gt;
-
-&lt;p&gt;Q: What is code reuse? A: An implementation detail.&lt;/p&gt;
-
-&lt;p&gt;Q: What is architectural reuse?&lt;a href=&quot;#fn:6&quot; id=&quot;fnref:6&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;calculatorsanddesktops&quot;&gt;Calculators and Desktops&lt;/h2&gt;
-
-&lt;p&gt;Calculators are like desktops — old-fashioned concepts that act like bridges into new paradigms.&lt;/p&gt;
-
-&lt;p&gt;[It is my understanding that electric motors were first used to pump water uphill to create artificial streams that could power water wheels for mills and factories.]&lt;/p&gt;
-
-&lt;h2 id=&quot;multipleparadigmsforeachsolution&quot;&gt;Multiple Paradigms for Each Solution&lt;/h2&gt;
-
-&lt;p&gt;I believe that it is important to use paradigms that fit the problem. I believe in using multiple paradigms to solve any one problem. IMO, force-fitting the same paradigm onto all problems is old-fashioned thinking. I believe that programming can break through its asymptote only through the development of muti-paradigm workflows.&lt;/p&gt;
-
-&lt;p&gt;[FYI - I, also, believe that diagrams should be raised to the same level of syntax as text. Diagrams show nesting in ways that is harder-to-read in text.]&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;e.g. sequencers, DAWs, machine control, robots &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/02/25/The&amp;#8211;Stack&amp;#8211;is&amp;#8211;a&amp;#8211;Global&amp;#8211;Variable&amp;#8211;(again).html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:3&quot;&gt;
-&lt;p&gt;e.g. ballistics calculations &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:4&quot;&gt;
-&lt;p&gt;and, once, implemented &lt;a href=&quot;#fnref:4&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:5&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2020/12/09/Isolation.html &lt;a href=&quot;#fnref:5&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:6&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2020/12/09/Reuse.html &lt;a href=&quot;#fnref:6&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">CPS Considered to be a GOTO</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Message Passing</summary></entry></feed>
