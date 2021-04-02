@@ -1,127 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T10:07:51-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;meta-programming&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;Meta-programming is very much like projectional editing.&lt;/p&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&quot;&gt;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">meta-programming</summary></entry><entry><title type="html">Crass simplifications</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html" rel="alternate" type="text/html" title="Crass simplifications" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Crass%20Simplifications</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;plfa&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 9.0px Palatino}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lambda Calculus&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Lambda Calculus means &quot;everything is an expression&quot; (or, &quot;everything is a function&quot;).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Example:&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In Common Lisp and Scheme, every function is a function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every &lt;i&gt;function&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt; returns a value.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Counter-example:&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In JavaScript, not everything is a function, for example&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;42;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;is different from&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return 42;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;(One could say that the former is a procedure, not a function).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;To make JavaScript work like Lisp, one would need to ensure that &lt;i&gt;every&lt;/i&gt; function returns a 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt; class value.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Free Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;free variable&lt;/i&gt; can be thought of as being a &lt;i&gt;global variable&lt;/i&gt;.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bound Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;bound variable&lt;/i&gt; can be thought of as being&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;a parameter&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;a local variable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;In fact, local variables are just syntactic sugar for nested lambdas, e.g.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;y = 41;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;is really&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;function (y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} (41);&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Free and Bound Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;There are two variables in the above function, &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;x &lt;/i&gt;is &lt;i&gt;bound&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;free&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;unbound&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In the example below, &lt;i&gt;both&lt;/i&gt; variables are bound, but &lt;i&gt;y&lt;/i&gt; is uninitialized (&lt;i&gt;undefined&lt;/i&gt; in JavaScript-speak).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Recursive design knowns and unknowns</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html" rel="alternate" type="text/html" title="Recursive design knowns and unknowns" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Recursive%20Design%20-%20Knowns%20and%20Unknowns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T19:18:20-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Recursive design knowns and unknowns</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html" rel="alternate" type="text/html" title="Recursive design knowns and unknowns" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Recursive%20Design%20-%20Knowns%20and%20Unknowns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -356,7 +233,222 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design - Knowns and Unknowns</summary></entry><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design - Knowns and Unknowns</summary></entry><entry><title type="html">Peg cheat sheet</title><link href="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html" rel="alternate" type="text/html" title="Peg cheat sheet" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/PEG%20Cheat%20Sheet</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;PEG Cheat Sheet&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;cheatsheet&quot;&gt;Cheat Sheet&lt;/h1&gt;
+
+&lt;p&gt;The PDF Cheat Sheet is:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&quot;&gt;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It is incomplete, but maybe enough to get started.&lt;/p&gt;
+
+&lt;h1 id=&quot;pegeditor&quot;&gt;PEG Editor&lt;/h1&gt;
+
+&lt;p&gt;I favour Ohm-JS.&lt;/p&gt;
+
+&lt;p&gt;The grammar editor for Ohm-JS is a time-saver. &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;https://ohmlang.github.io/editor/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The editor can be used for any PEG library, keeping in mind the syntactic variances.&lt;/p&gt;
+
+&lt;p&gt;Using any of the other libraries, the only way to debug a grammar is manually.&lt;/p&gt;
+
+&lt;p&gt;The Ohm Editor makes the process of debugging a grammar very quick. Maybe an order-of-magnitude faster than manual debugging.&lt;/p&gt;
+
+&lt;p&gt;In my experience, PEG (aka recursive descent parsers) are fairly easy to debug. The main point of failure is knowing where to include whitespace.&lt;/p&gt;
+
+&lt;p&gt;Debugging a PEG grammar takes about 1 day or so.&lt;/p&gt;
+
+&lt;p&gt;Debugging a PEG grammar using the Ohm Editor, takes 10&amp;#8217;s of minutes.&lt;/p&gt;
+
+&lt;p&gt;IMO, you should &lt;em&gt;always&lt;/em&gt; use the Ohm Editor, regardless of which PEG library&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; you are using.&lt;/p&gt;
+
+&lt;h1 id=&quot;parsercombinators&quot;&gt;Parser Combinators&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Parser_combinator&quot;&gt;https://en.wikipedia.org/wiki/Parser_combinator&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Parser combinators are functions that help build parsers in a functional manner.&lt;/p&gt;
+
+&lt;p&gt;I believe that PEG is a better choice than using combinators.&lt;/p&gt;
+
+&lt;p&gt;I believe that a &lt;em&gt;design&lt;/em&gt; should exhibit its intent - DI (Design Intent).&lt;/p&gt;
+
+&lt;p&gt;I do not subscribe to the idea that you should choose a language before expressing the solution to a problem.&lt;/p&gt;
+
+&lt;p&gt;I do not feel that FP is a one-size-fits-all solution to &lt;em&gt;all&lt;/em&gt; programming problems.&lt;/p&gt;
+
+&lt;p&gt;PEG expresses the DI of a grammar more clearly than programs written in any functional language.&lt;/p&gt;
+
+&lt;p&gt;You might create a PEG layer that emits parser combinators.&lt;/p&gt;
+
+&lt;p&gt;In such a case, I would use a less-restrictive language, like Common Lisp, as the toolbox language&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; and layer grammar constructs onto it using ESRAP, and, not bother with parser combinators.&lt;/p&gt;
+
+&lt;p&gt;Or, I would consider using Ohm-JS to generate Haskell code in parser-combinator form.&lt;/p&gt;
+
+&lt;h1 id=&quot;whitespace-ruleofthumb&quot;&gt;Whitespace - Rule of Thumb&lt;/h1&gt;
+
+&lt;p&gt;I have found that a consistent approach to parsing whitespace makes debugging easier.&lt;/p&gt;
+
+&lt;p&gt;I tend to put &amp;#8220;ws*&amp;#8221; at the &lt;em&gt;end&lt;/em&gt; of sub-rules.&lt;/p&gt;
+
+&lt;p&gt;And, I put a &amp;#8220;ws*&amp;#8221; after every terminal item (e.g. a constant string or a constant character).&lt;/p&gt;
+
+&lt;p&gt;Of course, one could write a PEG parser that generates another PEG parser and inserts whitespace parsing at the &amp;#8220;right&amp;#8221; places.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Or, if you are using parser combinators. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;https://guitarvydas.github.io/2021/03/16/Toolbox&amp;#8211;Languages.html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG Cheat Sheet</summary></entry><entry><title type="html">Crass simplifications</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html" rel="alternate" type="text/html" title="Crass simplifications" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Crass%20Simplifications</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;plfa&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lambda Calculus&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Lambda Calculus means &quot;everything is an expression&quot; (or, &quot;everything is a function&quot;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Example:&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In Common Lisp and Scheme, every function is a function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every &lt;i&gt;function&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt; returns a value.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Counter-example:&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In JavaScript, not everything is a function, for example&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;42;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;is different from&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return 42;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(One could say that the former is a procedure, not a function).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;To make JavaScript work like Lisp, one would need to ensure that &lt;i&gt;every&lt;/i&gt; function returns a 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt; class value.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Free Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;free variable&lt;/i&gt; can be thought of as being a &lt;i&gt;global variable&lt;/i&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bound Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;bound variable&lt;/i&gt; can be thought of as being&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;a parameter&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;a local variable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;In fact, local variables are just syntactic sugar for nested lambdas, e.g.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;y = 41;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;is really&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;function (y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} (41);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Free and Bound Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;There are two variables in the above function, &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;x &lt;/i&gt;is &lt;i&gt;bound&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;free&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;unbound&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In the example below, &lt;i&gt;both&lt;/i&gt; variables are bound, but &lt;i&gt;y&lt;/i&gt; is uninitialized (&lt;i&gt;undefined&lt;/i&gt; in JavaScript-speak).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;meta-programming&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;Meta-programming is very much like projectional editing.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&quot;&gt;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">meta-programming</summary></entry><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -448,231 +540,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Simplicity vs Complexity&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;simplicity&quot;&gt;Simplicity&lt;/h1&gt;
-
-&lt;p&gt;A definition of &lt;em&gt;simplicity&lt;/em&gt; is&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;lack of nuance.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
-
-&lt;p&gt;Complexity is the opposite of simplicity.&lt;/p&gt;
-
-&lt;p&gt;Complexity occurs in a system when there are too many variables to be juggled, at the same time, in a solution.&lt;/p&gt;
-
-&lt;h1 id=&quot;simplification&quot;&gt;Simplification&lt;/h1&gt;
-
-&lt;p&gt;To simplify something does not necessarily mean to delete variables from the system.&lt;/p&gt;
-
-&lt;p&gt;One can simplify a problem by subdividing it. Divide and Conquer.&lt;/p&gt;
-
-&lt;p&gt;I remember being told that humans can handle 7±2&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; items at a time.&lt;/p&gt;
-
-&lt;p&gt;This would imply that one needs to apply Divide-and-Conquer until the number of variables in a subdivision is 7±2.&lt;/p&gt;
-
-&lt;p&gt;The number of variables in a &lt;em&gt;system&lt;/em&gt; might be more than 7±2, say 100, but no part (subdivision) of the system should have more than 7±2 variables in it.&lt;/p&gt;
-
-&lt;h2 id=&quot;physicists&quot;&gt;Physicists&lt;/h2&gt;
-
-&lt;p&gt;Physicists simplify problems using approximations.&lt;/p&gt;
-
-&lt;p&gt;When the effect of a variable is much less than (≪) the effect of some other variable, physicists make &lt;em&gt;simplifying assumptions &amp;#8212;&lt;/em&gt; they drop (elide) the former variable from their equations, dealing only with the latter variable(s).&lt;/p&gt;
-
-&lt;p&gt;This does not mean that one approximation is valid in every situation.&lt;/p&gt;
-
-&lt;p&gt;For example, in his book &amp;#8220;Order Out of Chaos&amp;#8221;, Nobel Laureate Ilya Prigogene&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; decries the misuse of approximations that are not valid in certain situations.&lt;/p&gt;
-
-&lt;p&gt;Often, people over-use an approximation, or a notation, once it has worked in some domain.&lt;/p&gt;
-
-&lt;p&gt;I see this happening in programming, where, often the question is &amp;#8220;how do I re-cast this problem in a strongly-typed, functional manner?&amp;#8221; instead of asking &amp;#8220;what is the problem and how can it best be solved?&amp;#8221; and &amp;#8220;what approximations / notations are useful in this case?&amp;#8221;.&lt;/p&gt;
-
-&lt;p&gt;In programming, we see this played out in synchronous notation being misused to solve asynchronous problems (e.g. multitasking and the accidental complexities it brought along) and in &amp;#8220;features&amp;#8221; like JavaScript&amp;#8217;s callbacks.&lt;/p&gt;
-
-&lt;h1 id=&quot;errors&quot;&gt;Errors&lt;/h1&gt;
-
-&lt;p&gt;Errors in one domain might not be errors in another domain.&lt;/p&gt;
-
-&lt;p&gt;For example, a timeout is an error when building a ballistics calculator, but is an expected occurrence when building blockchain.&lt;/p&gt;
-
-&lt;h1 id=&quot;tells-approximationmisuse&quot;&gt;Tells - Approximation Misuse&lt;/h1&gt;
-
-&lt;p&gt;The &amp;#8220;tells&amp;#8221; of misuse of notations and approximations are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Increasing accidental complexity, e.g. mutexes, then thread safety, then priorities, etc.&lt;/li&gt;
-&lt;li&gt;Deciding that something is &amp;#8220;hard&amp;#8221;, e.g. the generally agreed-upon notion that multitasking is just &amp;#8220;hard&amp;#8221;.&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;divideandconquer&quot;&gt;Divide and Conquer&lt;/h1&gt;
-
-&lt;p&gt;Successful use of &lt;em&gt;divide and conquer&lt;/em&gt; reduces not only the number of variables at the input of a subdivision, but, also, reduces the number of outputs.&lt;/p&gt;
-
-&lt;h2 id=&quot;fan-inandfan-out&quot;&gt;Fan-in and Fan-out&lt;/h2&gt;
-
-&lt;p&gt;To be able to apply divide-and-conquer in infinitely many subdivisions&lt;a href=&quot;#fn:4&quot; id=&quot;fnref:4&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; a notation &lt;em&gt;must&lt;/em&gt; support reduction of the number of input ports and reduction of the number of output ports.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;See https://guitarvydas.github.io/2021/01/14/References.html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:3&quot;&gt;
-&lt;p&gt;This indicates that the wrong approximations and notation are being used. &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:4&quot;&gt;
-&lt;p&gt;see https://guitarvydas.github.io/2021/03/23/Everything&amp;#8211;is&amp;#8211;a&amp;#8211;Fractal.html &lt;a href=&quot;#fnref:4&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Programming Redux&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Mathematics Redux&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;twosubdivisionsofmathematics&quot;&gt;Two Subdivisions of Mathematics&lt;/h1&gt;
-
-&lt;p&gt;Mathematics can be subdivided as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;a notation&lt;/li&gt;
-&lt;li&gt;a body of experience (e.g. in using the notation).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;mathematicalnotation&quot;&gt;Mathematical Notation&lt;/h1&gt;
-
-&lt;p&gt;Mathematical notation can be subdivided as:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;expressing a problem in mathematical notation&lt;/li&gt;
-&lt;li&gt;manipulating the notation, reducing the expression of the problem.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;pencilandpaper&quot;&gt;Pencil and Paper&lt;/h2&gt;
-
-&lt;p&gt;Mathematical notation was invented for use with pencil and paper.&lt;/p&gt;
-
-&lt;p&gt;Mathematical notation is a 2D notation, not a 3D notation.&lt;/p&gt;
-
-&lt;h2 id=&quot;timevariance&quot;&gt;Time Variance&lt;/h2&gt;
-
-&lt;p&gt;Manipulation of mathematical notation works mostly because time-varying variables have been expunged from the notation (&amp;#8220;side-effect free&amp;#8221;).&lt;/p&gt;
-
-&lt;p&gt;Removing time variance from the notation is an approximation. It works only in domains where time is not a major factor.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
-
-&lt;p&gt;A &lt;em&gt;layer&lt;/em&gt; is only as complicated as one wishes to make it.&lt;/p&gt;
-
-&lt;p&gt;The complexity lies in the amount of detail required to express the inputs and outputs of the layer.&lt;/p&gt;
-
-&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass &lt;em&gt;all&lt;/em&gt; variables in a single layer.&lt;/p&gt;
-
-&lt;p&gt;Complexity is &amp;#8220;in the eye of the beholder&amp;#8221;. Mathematical notation appears complicated to some (most), but appears simple to those who have steeped themselves in the notation.&lt;/p&gt;
-
-&lt;h2 id=&quot;whoistheaudience&quot;&gt;Who is the Audience?&lt;/h2&gt;
-
-&lt;p&gt;Regarding mathematical notation, an interesting question to ask is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Who is the Intended Reader?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Is the notation meant to be used as communication between two mathematicians, or, between a mathematician and a non-mathematician (lawyer, graphics designer, construction worker, etc.)?&lt;/p&gt;
-
-&lt;h2 id=&quot;details&quot;&gt;Details&lt;/h2&gt;
-
-&lt;p&gt;Complexity comes from trying to address too many details at any one layer of a design.&lt;/p&gt;
-
-&lt;p&gt;Successful complexity-management is the art of finding a group of inter-related details and relegating them to a layer.&lt;/p&gt;
-
-&lt;h1 id=&quot;engineering&quot;&gt;Engineering&lt;/h1&gt;
-
-&lt;p&gt;Engineers map notation from one domain into another.&lt;/p&gt;
-
-&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Engineers filter out details.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;Actually, this can be subdivided even further. There is experience in using the notation and there is experience in thinking about problems (which are then mapped to this notation). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Mathematics Redux</summary></entry><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -858,7 +726,231 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Programming Redux&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Mathematics Redux&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;twosubdivisionsofmathematics&quot;&gt;Two Subdivisions of Mathematics&lt;/h1&gt;
+
+&lt;p&gt;Mathematics can be subdivided as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a notation&lt;/li&gt;
+&lt;li&gt;a body of experience (e.g. in using the notation).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;mathematicalnotation&quot;&gt;Mathematical Notation&lt;/h1&gt;
+
+&lt;p&gt;Mathematical notation can be subdivided as:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;expressing a problem in mathematical notation&lt;/li&gt;
+&lt;li&gt;manipulating the notation, reducing the expression of the problem.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;pencilandpaper&quot;&gt;Pencil and Paper&lt;/h2&gt;
+
+&lt;p&gt;Mathematical notation was invented for use with pencil and paper.&lt;/p&gt;
+
+&lt;p&gt;Mathematical notation is a 2D notation, not a 3D notation.&lt;/p&gt;
+
+&lt;h2 id=&quot;timevariance&quot;&gt;Time Variance&lt;/h2&gt;
+
+&lt;p&gt;Manipulation of mathematical notation works mostly because time-varying variables have been expunged from the notation (&amp;#8220;side-effect free&amp;#8221;).&lt;/p&gt;
+
+&lt;p&gt;Removing time variance from the notation is an approximation. It works only in domains where time is not a major factor.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
+
+&lt;p&gt;A &lt;em&gt;layer&lt;/em&gt; is only as complicated as one wishes to make it.&lt;/p&gt;
+
+&lt;p&gt;The complexity lies in the amount of detail required to express the inputs and outputs of the layer.&lt;/p&gt;
+
+&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass &lt;em&gt;all&lt;/em&gt; variables in a single layer.&lt;/p&gt;
+
+&lt;p&gt;Complexity is &amp;#8220;in the eye of the beholder&amp;#8221;. Mathematical notation appears complicated to some (most), but appears simple to those who have steeped themselves in the notation.&lt;/p&gt;
+
+&lt;h2 id=&quot;whoistheaudience&quot;&gt;Who is the Audience?&lt;/h2&gt;
+
+&lt;p&gt;Regarding mathematical notation, an interesting question to ask is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Who is the Intended Reader?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Is the notation meant to be used as communication between two mathematicians, or, between a mathematician and a non-mathematician (lawyer, graphics designer, construction worker, etc.)?&lt;/p&gt;
+
+&lt;h2 id=&quot;details&quot;&gt;Details&lt;/h2&gt;
+
+&lt;p&gt;Complexity comes from trying to address too many details at any one layer of a design.&lt;/p&gt;
+
+&lt;p&gt;Successful complexity-management is the art of finding a group of inter-related details and relegating them to a layer.&lt;/p&gt;
+
+&lt;h1 id=&quot;engineering&quot;&gt;Engineering&lt;/h1&gt;
+
+&lt;p&gt;Engineers map notation from one domain into another.&lt;/p&gt;
+
+&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Engineers filter out details.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Actually, this can be subdivided even further. There is experience in using the notation and there is experience in thinking about problems (which are then mapped to this notation). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Mathematics Redux</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Simplicity vs Complexity&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;simplicity&quot;&gt;Simplicity&lt;/h1&gt;
+
+&lt;p&gt;A definition of &lt;em&gt;simplicity&lt;/em&gt; is&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;lack of nuance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
+
+&lt;p&gt;Complexity is the opposite of simplicity.&lt;/p&gt;
+
+&lt;p&gt;Complexity occurs in a system when there are too many variables to be juggled, at the same time, in a solution.&lt;/p&gt;
+
+&lt;h1 id=&quot;simplification&quot;&gt;Simplification&lt;/h1&gt;
+
+&lt;p&gt;To simplify something does not necessarily mean to delete variables from the system.&lt;/p&gt;
+
+&lt;p&gt;One can simplify a problem by subdividing it. Divide and Conquer.&lt;/p&gt;
+
+&lt;p&gt;I remember being told that humans can handle 7±2&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; items at a time.&lt;/p&gt;
+
+&lt;p&gt;This would imply that one needs to apply Divide-and-Conquer until the number of variables in a subdivision is 7±2.&lt;/p&gt;
+
+&lt;p&gt;The number of variables in a &lt;em&gt;system&lt;/em&gt; might be more than 7±2, say 100, but no part (subdivision) of the system should have more than 7±2 variables in it.&lt;/p&gt;
+
+&lt;h2 id=&quot;physicists&quot;&gt;Physicists&lt;/h2&gt;
+
+&lt;p&gt;Physicists simplify problems using approximations.&lt;/p&gt;
+
+&lt;p&gt;When the effect of a variable is much less than (≪) the effect of some other variable, physicists make &lt;em&gt;simplifying assumptions &amp;#8212;&lt;/em&gt; they drop (elide) the former variable from their equations, dealing only with the latter variable(s).&lt;/p&gt;
+
+&lt;p&gt;This does not mean that one approximation is valid in every situation.&lt;/p&gt;
+
+&lt;p&gt;For example, in his book &amp;#8220;Order Out of Chaos&amp;#8221;, Nobel Laureate Ilya Prigogene&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; decries the misuse of approximations that are not valid in certain situations.&lt;/p&gt;
+
+&lt;p&gt;Often, people over-use an approximation, or a notation, once it has worked in some domain.&lt;/p&gt;
+
+&lt;p&gt;I see this happening in programming, where, often the question is &amp;#8220;how do I re-cast this problem in a strongly-typed, functional manner?&amp;#8221; instead of asking &amp;#8220;what is the problem and how can it best be solved?&amp;#8221; and &amp;#8220;what approximations / notations are useful in this case?&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;In programming, we see this played out in synchronous notation being misused to solve asynchronous problems (e.g. multitasking and the accidental complexities it brought along) and in &amp;#8220;features&amp;#8221; like JavaScript&amp;#8217;s callbacks.&lt;/p&gt;
+
+&lt;h1 id=&quot;errors&quot;&gt;Errors&lt;/h1&gt;
+
+&lt;p&gt;Errors in one domain might not be errors in another domain.&lt;/p&gt;
+
+&lt;p&gt;For example, a timeout is an error when building a ballistics calculator, but is an expected occurrence when building blockchain.&lt;/p&gt;
+
+&lt;h1 id=&quot;tells-approximationmisuse&quot;&gt;Tells - Approximation Misuse&lt;/h1&gt;
+
+&lt;p&gt;The &amp;#8220;tells&amp;#8221; of misuse of notations and approximations are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Increasing accidental complexity, e.g. mutexes, then thread safety, then priorities, etc.&lt;/li&gt;
+&lt;li&gt;Deciding that something is &amp;#8220;hard&amp;#8221;, e.g. the generally agreed-upon notion that multitasking is just &amp;#8220;hard&amp;#8221;.&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;divideandconquer&quot;&gt;Divide and Conquer&lt;/h1&gt;
+
+&lt;p&gt;Successful use of &lt;em&gt;divide and conquer&lt;/em&gt; reduces not only the number of variables at the input of a subdivision, but, also, reduces the number of outputs.&lt;/p&gt;
+
+&lt;h2 id=&quot;fan-inandfan-out&quot;&gt;Fan-in and Fan-out&lt;/h2&gt;
+
+&lt;p&gt;To be able to apply divide-and-conquer in infinitely many subdivisions&lt;a href=&quot;#fn:4&quot; id=&quot;fnref:4&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; a notation &lt;em&gt;must&lt;/em&gt; support reduction of the number of input ports and reduction of the number of output ports.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;See https://guitarvydas.github.io/2021/01/14/References.html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:3&quot;&gt;
+&lt;p&gt;This indicates that the wrong approximations and notation are being used. &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:4&quot;&gt;
+&lt;p&gt;see https://guitarvydas.github.io/2021/03/23/Everything&amp;#8211;is&amp;#8211;a&amp;#8211;Fractal.html &lt;a href=&quot;#fnref:4&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -919,85 +1011,4 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">LItlle Languages Playlist</summary></entry><entry><title type="html">Message passing</title><link href="https://computingsimplicity.neocities.org/2021/03/27/Message-Passing.html" rel="alternate" type="text/html" title="Message passing" /><published>2021-03-27T00:00:00-04:00</published><updated>2021-03-27T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/27/Message%20Passing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/27/Message-Passing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Message Passing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;messagepassing&quot;&gt;Message Passing&lt;/h1&gt;
-
-&lt;p&gt;In my opinion, the term &amp;#8220;message passing&amp;#8221; means &amp;#8220;fire and forget&amp;#8221;.&lt;/p&gt;
-
-&lt;p&gt;A single, atomic operation.&lt;/p&gt;
-
-&lt;p&gt;Send ().&lt;/p&gt;
-
-&lt;p&gt;Asynchronous.&lt;/p&gt;
-
-&lt;p&gt;AFAICT, most current, so-called forms of message-passing consist of two atomic operations:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Send ()&lt;/li&gt;
-&lt;li&gt;Wait ().&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;which results in synchronous operation.&lt;/p&gt;
-
-&lt;p&gt;Step 2. is usually implied by the use of CALL / RETURN.&lt;/p&gt;
-
-&lt;p&gt;A gedanken test of true message-passing would be to convert all instances of all classes into separate threads (ignoring efficiency). One will be forced to convert every &amp;#8220;message send&amp;#8221; into two atomic operations — Send (), Wait ().&lt;/p&gt;
-
-&lt;p&gt;Synchrony is so pervasive that we have sought ways to force-fit synchrony into inherently asynchronous paradigms (e.g. by using envelopes called threads, by implementing synchronous RPC, etc.).&lt;/p&gt;
-
-&lt;h1 id=&quot;hardwaresupportglobalvariable&quot;&gt;Hardware Support Global Variable&lt;/h1&gt;
-
-&lt;p&gt;It should be noted that our hardware, since The Stack was invented,&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; implicitly supports the synchronous CALL / RETURN paradigm by making The Stack into a global variable that records the dynamic call-chain.&lt;/p&gt;
-
-&lt;p&gt;CALL modifies The Stack.&lt;/p&gt;
-
-&lt;p&gt;RETURN modifies The Stack.&lt;/p&gt;
-
-&lt;p&gt;Threads hide the fact The Stack is a global variable, by wrapping envelopes around it.&lt;/p&gt;
-
-&lt;p&gt;See, also,
-https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html
-https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&lt;/p&gt;
-
-&lt;h1 id=&quot;future&quot;&gt;Future&lt;/h1&gt;
-
-&lt;p&gt;I believe that part of the future of computing lies in removing the redundant Wait ().&lt;/p&gt;
-
-&lt;p&gt;We see it beginning to happen with distributed languages like HTML&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;We see it beginning to happen with the exploration of languages based on relations, etc.&lt;/p&gt;
-
-&lt;p&gt;We see the need for this arising in technologies like p2p and blockchain (which tend to be concerned with asynchronous operations and network protocols).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;Early IBM 360s did not have a Stack. Programmers needed to use the BALR instruction. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;See https://guitarvydas.github.io/2020/12/09/CALL&amp;#8211;RETURN&amp;#8211;Spaghetti.html for an idea on how to implement wait&amp;#8211;less Send() on current hardware. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Message Passing</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">LItlle Languages Playlist</summary></entry></feed>

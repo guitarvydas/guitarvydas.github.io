@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>PEG Cheat Sheet</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="cheatsheet">Cheat Sheet</h1>
+
+<p>The PDF Cheat Sheet is:</p>
+
+<p><a href="https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf">https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf</a></p>
+
+<p>It is incomplete, but maybe enough to get started.</p>
+
+<h1 id="pegeditor">PEG Editor</h1>
+
+<p>I favour Ohm-JS.</p>
+
+<p>The grammar editor for Ohm-JS is a time-saver. <a href="https://ohmlang.github.io/editor/">https://ohmlang.github.io/editor/</a></p>
+
+<p>The editor can be used for any PEG library, keeping in mind the syntactic variances.</p>
+
+<p>Using any of the other libraries, the only way to debug a grammar is manually.</p>
+
+<p>The Ohm Editor makes the process of debugging a grammar very quick. Maybe an order-of-magnitude faster than manual debugging.</p>
+
+<p>In my experience, PEG (aka recursive descent parsers) are fairly easy to debug. The main point of failure is knowing where to include whitespace.</p>
+
+<p>Debugging a PEG grammar takes about 1 day or so.</p>
+
+<p>Debugging a PEG grammar using the Ohm Editor, takes 10&#8217;s of minutes.</p>
+
+<p>IMO, you should <em>always</em> use the Ohm Editor, regardless of which PEG library<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> you are using.</p>
+
+<h1 id="parsercombinators">Parser Combinators</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Parser_combinator">https://en.wikipedia.org/wiki/Parser_combinator</a></p>
+
+<p>Parser combinators are functions that help build parsers in a functional manner.</p>
+
+<p>I believe that PEG is a better choice than using combinators.</p>
+
+<p>I believe that a <em>design</em> should exhibit its intent - DI (Design Intent).</p>
+
+<p>I do not subscribe to the idea that you should choose a language before expressing the solution to a problem.</p>
+
+<p>I do not feel that FP is a one-size-fits-all solution to <em>all</em> programming problems.</p>
+
+<p>PEG expresses the DI of a grammar more clearly than programs written in any functional language.</p>
+
+<p>You might create a PEG layer that emits parser combinators.</p>
+
+<p>In such a case, I would use a less-restrictive language, like Common Lisp, as the toolbox language<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a> and layer grammar constructs onto it using ESRAP, and, not bother with parser combinators.</p>
+
+<p>Or, I would consider using Ohm-JS to generate Haskell code in parser-combinator form.</p>
+
+<h1 id="whitespace-ruleofthumb">Whitespace - Rule of Thumb</h1>
+
+<p>I have found that a consistent approach to parsing whitespace makes debugging easier.</p>
+
+<p>I tend to put &#8220;ws*&#8221; at the <em>end</em> of sub-rules.</p>
+
+<p>And, I put a &#8220;ws*&#8221; after every terminal item (e.g. a constant string or a constant character).</p>
+
+<p>Of course, one could write a PEG parser that generates another PEG parser and inserts whitespace parsing at the &#8220;right&#8221; places.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Or, if you are using parser combinators. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>https://guitarvydas.github.io/2021/03/16/Toolbox&#8211;Languages.html <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
