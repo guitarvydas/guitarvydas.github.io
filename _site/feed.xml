@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T07:19:13-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T07:45:52-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -47,6 +47,40 @@
 &lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
 
 &lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
+
+&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
+
+&lt;p&gt;I would suggest:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PEG for parsing and reducing&lt;/li&gt;
+&lt;li&gt;Factbases of triples as the normal form&lt;/li&gt;
+&lt;li&gt;PROLOG for creating rules, or PEG&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;factbases&quot;&gt;Factbases&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prolog&quot;&gt;PROLOG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&quot;&gt;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
