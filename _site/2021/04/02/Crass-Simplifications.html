@@ -1,107 +1,97 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-	<meta charset="utf-8"/>
-	<title>plfa</title>
-	<meta name="author" content=""/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>plfa</title>
+  <meta name="CreationTime" content="2021-04-02T07:19:04Z">
+  <meta name="ModificationTime" content="2021-04-02T07:19:04Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
 </head>
 <body>
+<div style="width: 600px; margin: 0 auto">
 
-<h1 id="introduction">Introduction</h1>
-
-<p>I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.</p>
-
-<h1 id="lambdacalculus">Lambda Calculus</h1>
-
-<p>Lambda Calculus means &#8220;everything is a function&#8221;.</p>
-
-<p><strong>Example:</strong></p>
-
-<p>In Common Lisp and Scheme, every function is a function. Every <em>function</em> returns a value.</p>
-
-<p><strong>Counter-example:</strong></p>
-
-<p>In JavaScript, not everything is a function, for example</p>
-
-<p>function fn (x, y) {</p>
-
-<p>42;</p>
-
-<p>}</p>
-
-<p>is different from</p>
-
-<p>function fn (x, y) {</p>
-
-<p>return 42;</p>
-
-<p>}</p>
-
-<p>(One could say that the former is a procedure, not a function).</p>
-
-<p>To make JavaScript work like Lisp, one would need to ensure that <em>every</em> function returns a 1<sup>st</sup> class value. This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.</p>
-
-<h1 id="freevariables">Free Variables</h1>
-
-<p>A <em>free variable</em> can be thought of as being a <em>global variable</em>.</p>
-
-<h1 id="boundvariables">Bound Variables</h1>
-
-<p>A <em>bound variable</em> can be thought of as being</p>
-
-<ul>
-<li>a parameter</li>
-<li>a local variable.</li>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lambda Calculus</b></h2>
+<p class="p2">Lambda Calculus means "everything is a function".</p>
+<p class="p3"><br></p>
+<p class="p2"><b>Example:</b></p>
+<p class="p2">In Common Lisp and Scheme, every function is a function.<span class="Apple-converted-space">  </span>Every <i>function<span class="Apple-converted-space"> </span></i> returns a value.</p>
+<p class="p3"><br></p>
+<p class="p2"><b>Counter-example:</b></p>
+<p class="p2">In JavaScript, not everything is a function, for example</p>
+<p class="p3"><br></p>
+<p class="p4">function fn (x, y) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>42;</p>
+<p class="p4">}</p>
+<p class="p3"><br></p>
+<p class="p2">is different from</p>
+<p class="p3"><br></p>
+<p class="p4">function fn (x, y) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>return 42;</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p2">(One could say that the former is a procedure, not a function).</p>
+<p class="p3"><br></p>
+<p class="p2">To make JavaScript work like Lisp, one would need to ensure that <i>every</i> function returns a 1<span class="s1"><sup>st</sup></span> class value.<span class="Apple-converted-space">  </span>This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Free Variables</b></h2>
+<p class="p2">A <i>free variable</i> can be thought of as being a <i>global variable</i>.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bound Variables</b></h2>
+<p class="p2">A <i>bound variable</i> can be thought of as being</p>
+<ul class="ul1">
+  <li class="li6">a parameter</li>
+  <li class="li6">a local variable.</li>
 </ul>
-
-<p>In fact, local variables are just syntactic sugar for nested lambdas, e.g.</p>
-
-<p>function (x) {</p>
-
-<p>var y;</p>
-
-<p>y = 41;</p>
-
-<p>return x + y;</p>
-
-<p>}</p>
-
-<p>is really</p>
-
-<p>function (x) {</p>
-
-<p>function (y) {</p>
-
-<p>return x + y;</p>
-
-<p>} (41);</p>
-
-<p>}</p>
-
-<h1 id="examplefreeandboundvariables">Example Free and Bound Variables</h1>
-
-<p>function (x) {</p>
-
-<p>return x + y;</p>
-
-<p>}</p>
-
-<p>There are two variables in the above function, <em>x</em> and <em>y</em>.</p>
-
-<p>Variable <em>x</em> is <em>bound</em>.</p>
-
-<p>Variable <em>y</em> is <em>free</em>. Variable <em>y</em> is <em>unbound</em>.</p>
-
-<p>In the example below, <em>both</em> variables are bound, but <em>y</em> is uninitialized (<em>undefined</em> in JavaScript-speak).</p>
-
-<p>function (x) {</p>
-
-<p>var y;</p>
-
-<p>return x + y;</p>
-
-<p>}</p>
-
+<p class="p7"><br></p>
+<p class="p6">In fact, local variables are just syntactic sugar for nested lambdas, e.g.</p>
+<p class="p7"><br></p>
+<p class="p4">function (x) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>var y;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>y = 41;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>return x + y;</p>
+<p class="p4">}</p>
+<p class="p7"><br></p>
+<p class="p6">is really</p>
+<p class="p7"><br></p>
+<p class="p4">function (x) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>function (y) {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return x + y;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>} (41);</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example Free and Bound Variables</b></h2>
+<p class="p4">function (x) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>return x + y;</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p2">There are two variables in the above function, <i>x</i> and <i>y</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Variable <i>x </i>is <i>bound</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Variable <i>y </i>is <i>free</i>.<span class="Apple-converted-space">  </span>Variable <i>y </i>is <i>unbound</i>.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">In the example below, <i>both</i> variables are bound, but <i>y</i> is uninitialized (<i>undefined</i> in JavaScript-speak).</p>
+<p class="p3"><br></p>
+<p class="p4">function (x) {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>var y;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>return x + y;</p>
+<p class="p4">}</p>
+</div>
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
@@ -111,4 +101,3 @@
 </script> 
 </body>
 </html>
-
