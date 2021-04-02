@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Projectional Editing</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="projectionaleditingintwosteps">Projectional Editing in Two Steps</h1>
+
+<ul>
+<li>Reduce all input to normal form.</li>
+<li>Write rules against normal form. Rules &#8212;&gt; views.</li>
+</ul>
+
+<h1 id="1.normalform">1. Normal Form</h1>
+
+<p>I favour a normal form consisting of <em>triples</em>.</p>
+
+<p>See <a href="https://guitarvydas.github.io/2021/03/16/Triples.html">https://guitarvydas.github.io/2021/03/16/Triples.html</a></p>
+
+<h1 id="2.rules">2. Rules</h1>
+
+<p>You want to perform exhaustive search over <em>all</em> of the triples.</p>
+
+<p>A <em>rule</em> is just a group of related searches.</p>
+
+<p>Such searching can be done manually, using loops within loops.</p>
+
+<p>Or, one could use a tool &#8212; a search engine &#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.</p>
+
+<p>PROLOG uses <em>backtracking</em> to perform exhaustive search.</p>
+
+<p>PROLOG uses something called <em>logic</em> <em>variables</em> to hold the results of successful matches.</p>
+
+<p>There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the <em>logic variables</em> and presents you, the programmer, with a set of consistent matches (as one set of bound <em>logic variables</em>).</p>
+
+<p>MiniKanren, on the other hand, does not use the above method and keeps a running list of <em>all</em> possible matches, then presents you, the programmer, with a list of <em>all</em> matches that consistently solve the set of given match constraints.</p>
+
+<h2 id="unification">Unification</h2>
+
+<p>PROLOG uses an algorithm, called <em>unification</em>, to re-bind <em>logic variables</em>.</p>
+
+<p>One set of bindings describes <em>one</em> solution to all of the match constraints.</p>
+
+<p>In essence, PROLOG <em>clears</em> its <em>logic variables</em> before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.</p>
+
+<p>[<em>Note, that this does not mean that duplicate solutions cannot be displayed &#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).</em>]</p>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

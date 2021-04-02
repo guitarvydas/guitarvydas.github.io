@@ -1,4 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-03-30T23:31:53-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T07:11:02-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Projectional Editing&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;projectionaleditingintwosteps&quot;&gt;Projectional Editing in Two Steps&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reduce all input to normal form.&lt;/li&gt;
+&lt;li&gt;Write rules against normal form. Rules &amp;#8212;&amp;gt; views.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;1.normalform&quot;&gt;1. Normal Form&lt;/h1&gt;
+
+&lt;p&gt;I favour a normal form consisting of &lt;em&gt;triples&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2.rules&quot;&gt;2. Rules&lt;/h1&gt;
+
+&lt;p&gt;You want to perform exhaustive search over &lt;em&gt;all&lt;/em&gt; of the triples.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;rule&lt;/em&gt; is just a group of related searches.&lt;/p&gt;
+
+&lt;p&gt;Such searching can be done manually, using loops within loops.&lt;/p&gt;
+
+&lt;p&gt;Or, one could use a tool &amp;#8212; a search engine &amp;#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses &lt;em&gt;backtracking&lt;/em&gt; to perform exhaustive search.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses something called &lt;em&gt;logic&lt;/em&gt; &lt;em&gt;variables&lt;/em&gt; to hold the results of successful matches.&lt;/p&gt;
+
+&lt;p&gt;There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the &lt;em&gt;logic variables&lt;/em&gt; and presents you, the programmer, with a set of consistent matches (as one set of bound &lt;em&gt;logic variables&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;MiniKanren, on the other hand, does not use the above method and keeps a running list of &lt;em&gt;all&lt;/em&gt; possible matches, then presents you, the programmer, with a list of &lt;em&gt;all&lt;/em&gt; matches that consistently solve the set of given match constraints.&lt;/p&gt;
+
+&lt;h2 id=&quot;unification&quot;&gt;Unification&lt;/h2&gt;
+
+&lt;p&gt;PROLOG uses an algorithm, called &lt;em&gt;unification&lt;/em&gt;, to re-bind &lt;em&gt;logic variables&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;One set of bindings describes &lt;em&gt;one&lt;/em&gt; solution to all of the match constraints.&lt;/p&gt;
+
+&lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">Crass simplifications</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html" rel="alternate" type="text/html" title="Crass simplifications" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Crass%20Simplifications</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;plfa&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.&lt;/p&gt;
+
+&lt;h1 id=&quot;lambdacalculus&quot;&gt;Lambda Calculus&lt;/h1&gt;
+
+&lt;p&gt;Lambda Calculus means &amp;#8220;everything is a function&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In Common Lisp and Scheme, every function is a function. Every &lt;em&gt;function&lt;/em&gt; returns a value.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Counter-example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In JavaScript, not everything is a function, for example&lt;/p&gt;
+
+&lt;p&gt;function fn (x, y) {&lt;/p&gt;
+
+&lt;p&gt;42;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;is different from&lt;/p&gt;
+
+&lt;p&gt;function fn (x, y) {&lt;/p&gt;
+
+&lt;p&gt;return 42;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;(One could say that the former is a procedure, not a function).&lt;/p&gt;
+
+&lt;p&gt;To make JavaScript work like Lisp, one would need to ensure that &lt;em&gt;every&lt;/em&gt; function returns a 1&lt;sup&gt;st&lt;/sup&gt; class value. This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.&lt;/p&gt;
+
+&lt;h1 id=&quot;freevariables&quot;&gt;Free Variables&lt;/h1&gt;
+
+&lt;p&gt;A &lt;em&gt;free variable&lt;/em&gt; can be thought of as being a &lt;em&gt;global variable&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;boundvariables&quot;&gt;Bound Variables&lt;/h1&gt;
+
+&lt;p&gt;A &lt;em&gt;bound variable&lt;/em&gt; can be thought of as being&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a parameter&lt;/li&gt;
+&lt;li&gt;a local variable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In fact, local variables are just syntactic sugar for nested lambdas, e.g.&lt;/p&gt;
+
+&lt;p&gt;function (x) {&lt;/p&gt;
+
+&lt;p&gt;var y;&lt;/p&gt;
+
+&lt;p&gt;y = 41;&lt;/p&gt;
+
+&lt;p&gt;return x + y;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;is really&lt;/p&gt;
+
+&lt;p&gt;function (x) {&lt;/p&gt;
+
+&lt;p&gt;function (y) {&lt;/p&gt;
+
+&lt;p&gt;return x + y;&lt;/p&gt;
+
+&lt;p&gt;} (41);&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;h1 id=&quot;examplefreeandboundvariables&quot;&gt;Example Free and Bound Variables&lt;/h1&gt;
+
+&lt;p&gt;function (x) {&lt;/p&gt;
+
+&lt;p&gt;return x + y;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;There are two variables in the above function, &lt;em&gt;x&lt;/em&gt; and &lt;em&gt;y&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Variable &lt;em&gt;x&lt;/em&gt; is &lt;em&gt;bound&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Variable &lt;em&gt;y&lt;/em&gt; is &lt;em&gt;free&lt;/em&gt;. Variable &lt;em&gt;y&lt;/em&gt; is &lt;em&gt;unbound&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the example below, &lt;em&gt;both&lt;/em&gt; variables are bound, but &lt;em&gt;y&lt;/em&gt; is uninitialized (&lt;em&gt;undefined&lt;/em&gt; in JavaScript-speak).&lt;/p&gt;
+
+&lt;p&gt;function (x) {&lt;/p&gt;
+
+&lt;p&gt;var y;&lt;/p&gt;
+
+&lt;p&gt;return x + y;&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -184,7 +354,126 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">State, Analysis of</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Programming Redux&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Mathematics Redux&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;twosubdivisionsofmathematics&quot;&gt;Two Subdivisions of Mathematics&lt;/h1&gt;
+
+&lt;p&gt;Mathematics can be subdivided as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a notation&lt;/li&gt;
+&lt;li&gt;a body of experience (e.g. in using the notation).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;mathematicalnotation&quot;&gt;Mathematical Notation&lt;/h1&gt;
+
+&lt;p&gt;Mathematical notation can be subdivided as:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;expressing a problem in mathematical notation&lt;/li&gt;
+&lt;li&gt;manipulating the notation, reducing the expression of the problem.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;pencilandpaper&quot;&gt;Pencil and Paper&lt;/h2&gt;
+
+&lt;p&gt;Mathematical notation was invented for use with pencil and paper.&lt;/p&gt;
+
+&lt;p&gt;Mathematical notation is a 2D notation, not a 3D notation.&lt;/p&gt;
+
+&lt;h2 id=&quot;timevariance&quot;&gt;Time Variance&lt;/h2&gt;
+
+&lt;p&gt;Manipulation of mathematical notation works mostly because time-varying variables have been expunged from the notation (&amp;#8220;side-effect free&amp;#8221;).&lt;/p&gt;
+
+&lt;p&gt;Removing time variance from the notation is an approximation. It works only in domains where time is not a major factor.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
+
+&lt;p&gt;A &lt;em&gt;layer&lt;/em&gt; is only as complicated as one wishes to make it.&lt;/p&gt;
+
+&lt;p&gt;The complexity lies in the amount of detail required to express the inputs and outputs of the layer.&lt;/p&gt;
+
+&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass &lt;em&gt;all&lt;/em&gt; variables in a single layer.&lt;/p&gt;
+
+&lt;p&gt;Complexity is &amp;#8220;in the eye of the beholder&amp;#8221;. Mathematical notation appears complicated to some (most), but appears simple to those who have steeped themselves in the notation.&lt;/p&gt;
+
+&lt;h2 id=&quot;whoistheaudience&quot;&gt;Who is the Audience?&lt;/h2&gt;
+
+&lt;p&gt;Regarding mathematical notation, an interesting question to ask is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Who is the Intended Reader?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Is the notation meant to be used as communication between two mathematicians, or, between a mathematician and a non-mathematician (lawyer, graphics designer, construction worker, etc.)?&lt;/p&gt;
+
+&lt;h2 id=&quot;details&quot;&gt;Details&lt;/h2&gt;
+
+&lt;p&gt;Complexity comes from trying to address too many details at any one layer of a design.&lt;/p&gt;
+
+&lt;p&gt;Successful complexity-management is the art of finding a group of inter-related details and relegating them to a layer.&lt;/p&gt;
+
+&lt;h1 id=&quot;engineering&quot;&gt;Engineering&lt;/h1&gt;
+
+&lt;p&gt;Engineers map notation from one domain into another.&lt;/p&gt;
+
+&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Engineers filter out details.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Actually, this can be subdivided even further. There is experience in using the notation and there is experience in thinking about problems (which are then mapped to this notation). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Mathematics Redux</summary></entry><entry><title type="html">Simplicity vs complexity</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html" rel="alternate" type="text/html" title="Simplicity vs complexity" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Simplicity%20vs%20Complexity</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Simplicity-vs-Complexity.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -289,126 +578,7 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Mathematics redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html" rel="alternate" type="text/html" title="Mathematics redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Mathematics%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Mathematics-Redux.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Mathematics Redux&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;twosubdivisionsofmathematics&quot;&gt;Two Subdivisions of Mathematics&lt;/h1&gt;
-
-&lt;p&gt;Mathematics can be subdivided as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;a notation&lt;/li&gt;
-&lt;li&gt;a body of experience (e.g. in using the notation).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;mathematicalnotation&quot;&gt;Mathematical Notation&lt;/h1&gt;
-
-&lt;p&gt;Mathematical notation can be subdivided as:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;expressing a problem in mathematical notation&lt;/li&gt;
-&lt;li&gt;manipulating the notation, reducing the expression of the problem.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;pencilandpaper&quot;&gt;Pencil and Paper&lt;/h2&gt;
-
-&lt;p&gt;Mathematical notation was invented for use with pencil and paper.&lt;/p&gt;
-
-&lt;p&gt;Mathematical notation is a 2D notation, not a 3D notation.&lt;/p&gt;
-
-&lt;h2 id=&quot;timevariance&quot;&gt;Time Variance&lt;/h2&gt;
-
-&lt;p&gt;Manipulation of mathematical notation works mostly because time-varying variables have been expunged from the notation (&amp;#8220;side-effect free&amp;#8221;).&lt;/p&gt;
-
-&lt;p&gt;Removing time variance from the notation is an approximation. It works only in domains where time is not a major factor.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Note that other approximations, like finite-element analysis, can give more accurate results in specific domains that have time variance.]&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;complexity&quot;&gt;Complexity&lt;/h1&gt;
-
-&lt;p&gt;A &lt;em&gt;layer&lt;/em&gt; is only as complicated as one wishes to make it.&lt;/p&gt;
-
-&lt;p&gt;The complexity lies in the amount of detail required to express the inputs and outputs of the layer.&lt;/p&gt;
-
-&lt;p&gt;One can tune the complexity of each layer by using different notations and approximations in each layer, instead of trying to encompass &lt;em&gt;all&lt;/em&gt; variables in a single layer.&lt;/p&gt;
-
-&lt;p&gt;Complexity is &amp;#8220;in the eye of the beholder&amp;#8221;. Mathematical notation appears complicated to some (most), but appears simple to those who have steeped themselves in the notation.&lt;/p&gt;
-
-&lt;h2 id=&quot;whoistheaudience&quot;&gt;Who is the Audience?&lt;/h2&gt;
-
-&lt;p&gt;Regarding mathematical notation, an interesting question to ask is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Who is the Intended Reader?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Is the notation meant to be used as communication between two mathematicians, or, between a mathematician and a non-mathematician (lawyer, graphics designer, construction worker, etc.)?&lt;/p&gt;
-
-&lt;h2 id=&quot;details&quot;&gt;Details&lt;/h2&gt;
-
-&lt;p&gt;Complexity comes from trying to address too many details at any one layer of a design.&lt;/p&gt;
-
-&lt;p&gt;Successful complexity-management is the art of finding a group of inter-related details and relegating them to a layer.&lt;/p&gt;
-
-&lt;h1 id=&quot;engineering&quot;&gt;Engineering&lt;/h1&gt;
-
-&lt;p&gt;Engineers map notation from one domain into another.&lt;/p&gt;
-
-&lt;p&gt;For example, in construction, Engineers use mathematics (from the Architects, from textbooks, etc.) and produce blueprints that are understood by construction workers.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Engineers filter out details.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;Actually, this can be subdivided even further. There is experience in using the notation and there is experience in thinking about problems (which are then mapped to this notation). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;One doesn't usually find Engineers performing actual construction work. Engineering is usually done before the construction begins. On&amp;#8211;site Engineers oversee that the work follows the specifications. Engineers might alter the specifications to better match reality as work progresses. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Mathematics Redux</summary></entry><entry><title type="html">Programming redux</title><link href="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html" rel="alternate" type="text/html" title="Programming redux" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/Programming%20Redux</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/Programming-Redux.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Programming Redux&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Replace all references to &lt;em&gt;mathematics&lt;/em&gt; by &lt;em&gt;PL&lt;/em&gt;s (Programming Languages).&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming Redux</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -794,377 +964,4 @@ https://guitarvydas.github.io/2020/12/09/StateCharts.html&lt;/p&gt;
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Bootstrapping</summary></entry><entry><title type="html">Patterns</title><link href="https://computingsimplicity.neocities.org/2021/03/27/Patterns.html" rel="alternate" type="text/html" title="Patterns" /><published>2021-03-27T00:00:00-04:00</published><updated>2021-03-27T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/27/Patterns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/27/Patterns.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Patterns&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;patternsofsoftwarecomponents&quot;&gt;Patterns of Software Components&lt;/h1&gt;
-
-&lt;h2 id=&quot;filter&quot;&gt;Filter&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Filter.png&quot; alt=&quot;&quot; id=&quot;patterns-filter&quot; width=&quot;100&quot; height=&quot;57&quot; /&gt;
-Fig. 1 Filter&lt;/p&gt;
-
-&lt;h2 id=&quot;filterwithexceptions&quot;&gt;Filter With Exceptions&lt;/h2&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-FilterwithExceptions.png&quot; alt=&quot;&quot; id=&quot;patterns-filterwithexceptions&quot; width=&quot;100&quot; height=&quot;57&quot; /&gt;
-&lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Fig. 2 Filter With Exceptions&lt;/p&gt;
-
-&lt;h2 id=&quot;pipeline&quot;&gt;Pipeline&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Pipeline.png&quot; alt=&quot;&quot; id=&quot;patterns-pipeline&quot; width=&quot;303&quot; height=&quot;25&quot; /&gt;
-Fig. 3 Pipeline&lt;/p&gt;
-
-&lt;h2 id=&quot;unix®pipeline&quot;&gt;UNIX® Pipeline&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-UNIXpipeline.png&quot; alt=&quot;&quot; id=&quot;patterns-unixpipeline&quot; width=&quot;300&quot; height=&quot;68&quot; /&gt;
-Fig. 4 UNIX® Pipeline&lt;/p&gt;
-
-&lt;h2 id=&quot;feedback&quot;&gt;Feedback&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Feedback.png&quot; alt=&quot;&quot; id=&quot;patterns-feedback&quot; width=&quot;100&quot; height=&quot;59&quot; /&gt;
-Fig. 5 Feedback&lt;/p&gt;
-
-&lt;h2 id=&quot;feedbackwithfeedforward&quot;&gt;Feedback With Feedforward&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-FeedbackWithFeedforward.png&quot; alt=&quot;&quot; id=&quot;patterns-feedbackwithfeedforward&quot; width=&quot;150&quot; height=&quot;38&quot; /&gt;
-Fig. 6 Feedback With Feedforward&lt;/p&gt;
-
-&lt;h2 id=&quot;clientserver&quot;&gt;Client / Server&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-ClientServer.png&quot; alt=&quot;&quot; id=&quot;patterns-clientserver&quot; width=&quot;200&quot; height=&quot;74&quot; /&gt;
-Fig. 7 Client Server&lt;/p&gt;
-
-&lt;h2 id=&quot;clientserverwithrouter&quot;&gt;Client / Server With Router&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-ClientServerWithRouter.png&quot; alt=&quot;&quot; id=&quot;patterns-clientserverwithrouter&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;
-Fig. 8 Client Server With Router&lt;/p&gt;
-
-&lt;h2 id=&quot;concentrator&quot;&gt;Concentrator&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Concentrator.png&quot; alt=&quot;&quot; id=&quot;patterns-concentrator&quot; width=&quot;300&quot; height=&quot;157&quot; /&gt;
-Fig. 9 Concentrator&lt;/p&gt;
-
-&lt;h2 id=&quot;daisychain&quot;&gt;Daisy Chain&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-DaisyChain.png&quot; alt=&quot;&quot; id=&quot;patterns-daisychain&quot; width=&quot;300&quot; height=&quot;111&quot; /&gt;
-Fig. 10 Daisy Chain
-(prioritized at the Architectural level)&lt;/p&gt;
-
-&lt;h2 id=&quot;bus&quot;&gt;Bus&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-BusChain.png&quot; alt=&quot;&quot; id=&quot;patterns-buschain&quot; width=&quot;300&quot; height=&quot;101&quot; /&gt;
-Fig. 11 Bus&lt;/p&gt;
-
-&lt;h2 id=&quot;pull&quot;&gt;Pull&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Pull.png&quot; alt=&quot;&quot; id=&quot;patterns-pull&quot; width=&quot;200&quot; height=&quot;62&quot; /&gt;
-Fig. 12 Pull&lt;/p&gt;
-
-&lt;h2 id=&quot;push&quot;&gt;Push&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2021-03-27-08-53-41-Images/patterns-Push.png&quot; alt=&quot;&quot; id=&quot;patterns-push&quot; width=&quot;200&quot; height=&quot;65&quot; /&gt;
-Fig. 13 Push&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Patterns</summary></entry><entry><title type="html">Svg to code (1)</title><link href="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html" rel="alternate" type="text/html" title="Svg to code (1)" /><published>2021-03-24T00:00:00-04:00</published><updated>2021-03-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/24/SVG%20to%20Code%20(1)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/24/SVG-to-Code-(1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;SVG to Code (1)&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-03-24T14:54:12Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-03-24T14:54:12Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 11.0px Menlo}
-    span.s2 {text-decoration: underline}
-    span.s3 {font: 13.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I describe the first four phases of converting an SVG diagram to code.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This example is &lt;i&gt;very&lt;/i&gt; simple, but the technique has been used on large problems.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The example uses an SVG diagram containing one &lt;i&gt;rect &lt;/i&gt;and two &lt;i&gt;text &lt;/i&gt;elements.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I convert the diagram to PROLOG rules, using PEG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this particular case I use a PEG to generate another PEG that forms a JavaScript program that outputs relations.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I use SWIPL to perform inferencing over the relations to output various results.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One could use &lt;i&gt;any &lt;/i&gt;language to do the inferencing&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;              &lt;/span&gt;I hope to show relations in a very basic form that needs no knowledge of PROLOG.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The code for this essay can be found in&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://github.com/guitarvydas/svgtranspile&quot;&gt;https://github.com/guitarvydas/svgtranspile&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;and the code for the PEG-&amp;gt;PEG transpiler tool, called&lt;i&gt; glue&lt;/i&gt;, is documented at:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Little-Language.html&quot;&gt;https://guitarvydas.github.io/2021/03/18/Little-Language.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;(code for &lt;i&gt;glue: &lt;/i&gt;&lt;a href=&quot;https://github.com/guitarvydas/glue&quot;&gt;https://github.com/guitarvydas/glue&lt;/a&gt;)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SVG File&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The SVG used in this essay is:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;html&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;body&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;600&quot; height=&quot;510&quot;&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&amp;lt;rect width=&quot;200&quot; height=&quot;100&quot; fill=&quot;lightyellow&quot; style=&quot;stroke-width:1;stroke:black&quot; &amp;gt;&amp;lt;/rect&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&amp;lt;text x=&quot;100&quot; y=&quot;55&quot; fill=&quot;black&quot;&amp;gt;output&amp;lt;/text&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&amp;lt;text x=&quot;300&quot; y=&quot;55&quot; fill=&quot;black&quot;&amp;gt;floating&amp;lt;/text&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Sorry, your browser does not support inline SVG. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;/svg&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;/body&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&amp;lt;/html&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;When viewed in a browser, the SVG shows one rectangle (lightyellow) and two text fragments (&quot;output&quot; and &quot;floating&quot;).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;One text fragment — &quot;output&quot; — appears to be inside the rectangle.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The other text fragment is not enclosed by any rectangle.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-03-24-14-54-12-Images/Screen Shot 2021-03-23 at 3.17.38 PM.png&quot; width=&quot;200px&quot; height=&quot;115px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SVG to Factbase&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The conversion from SVG to factbase format &lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;is performed by using the &lt;i&gt;glue &lt;/i&gt;tool.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This can be seen in &lt;span class=&quot;s1&quot;&gt;run.bash.&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The conversion is done in two steps (an arbitrary choice, but saves me time and maintains the DI&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The steps require:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;a pattern for SVG files&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;a specification of how to emit code for matches.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The SVG pattern is found in the file &lt;span class=&quot;s1&quot;&gt;svg.ohm&lt;/span&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Typically, a pattern is fed into the Ohm-JS tool after which one writes JavaScript code&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; to &lt;i&gt;do&lt;/i&gt; something with the resulting matches.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I chose to write another SCL (aka DSL) instead of writing raw JavaScript code manually.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I let the SCL&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; write the JavaScript for me.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Basic Facts&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The starting set of facts, gleaned from the SVG file, are:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;fill&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;height_str&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;rect&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;svgbox&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;string&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;text&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;width_str&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;x_str&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;y_str.&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The &quot;…_str&quot; facts remind me that values in the triples are strings, not numbers.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Strings to Numbers&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;As it stands, the factbase triples contain numeric data in the form of strings.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The file &lt;span class=&quot;s1&quot;&gt;num.pl &lt;/span&gt;converts these strings into numbers.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Anti-Abstraction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The pattern actually &lt;i&gt;over-specifies&lt;/i&gt; the SVG pattern matching, for example &lt;span class=&quot;s1&quot;&gt;element&lt;/span&gt; is broken down as four basic matches, where it could have specified with only one match.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This is an idiom for using pattern-matchers — let the matcher supply the matching context.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is exactly the opposite of &lt;i&gt;abstraction&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I wrote redundant rules, letting the pattern matcher do more work for me.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automation - Using Code to Write Code&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;You can create SCLs (DSLs) more easily if:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li7&quot;&gt;You use PEG pattern matchers&lt;/li&gt;
-  &lt;li class=&quot;li7&quot;&gt;You make the output code very repetitive.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Code that is &quot;not repetitive&quot; creates edge-cases that need to be handled.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Removing such edge-cases is vital to allowing quick construction of little languages — SCLs.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Imagine using a REGEX library in your favourite PL.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;REGEX is a DSL, but you rarely stop to think of it as a full-blown DSL, you just use it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;REGEX's work well for line-oriented data with few &quot;edge cases&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The ideal situation is to use pattern matchers like one uses REGEXs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compiler technologies and DSLs have been steeped in mysticism, taking many months to build.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;PEG brings &quot;compiler technology&quot; into the realm of programming, taking only a day to build an SCL instead of taking months/years.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &quot;tricks&quot; for getting such rapid turn-around are the same as for REGEXs — don't try do to type-checking, don't accomodate many edge-cases.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Let the underlying language handle type-checking.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of edge-cases by looking for highly repetitive code sequences&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;REGEX likes input that is arranged in lines of text.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;PEG likes input that is arranged in nested blocks of text.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Patterns in REGEX are called &lt;i&gt;REGEXs&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Patterns in PEG are called &lt;i&gt;grammars&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I wrote a PEG pattern matcher for SVG and I wrote another PEG pattern matcher for my &lt;i&gt;glue&lt;/i&gt; SCL. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The job of &lt;i&gt;glue&lt;/i&gt; is straight-forward and has almost no edge-cases.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The idea is that Ohm-JS needs a block of JavaScript functions — one function for each &lt;i&gt;rule&lt;/i&gt; in the grammar.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this case, I needed code that would rearrange matching code bits and format them for output.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;JavaScript back-tick strings (and C format strings, and &lt;i&gt;bash &lt;/i&gt;strings, etc.) would be enough to do the job, so I wrote a simple tool that created &lt;i&gt;semantics&lt;/i&gt; JavaScript code for me, using JavaScript back-tick strings.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have used Ohm-JS many times before.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I knew that I would encounter simple formatting problems like this again, so the 1-day development effort was deemed acceptable.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I would not have built this SCL if I knew that it would take some months or years.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;My thinking has changed since I realized that I could cut development time down by about a factor of 10.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I cut corners — instead of automatically inserting the generated code into my Ohm-JS pattern matcher, I simply use my editor's COPY/PASTE function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In fact, I used the command-line &lt;i&gt;cat&lt;/i&gt; program to paste the code into the Ohm-JS pattern matcher.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If this was used very frequently, I would look at tools like &lt;i&gt;m4&lt;/i&gt; to help with COPY/PASTING&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;DI&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;If you look at the generated code generated by the &lt;i&gt;glue &lt;/i&gt;tool, all of the simplicity, of simply formatting the output, is hidden in a sea of JavaScript coding details. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The ideal of DI&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt; is to show only what matters, eliding coding details.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &lt;i&gt;specification&lt;/i&gt; of mapping SVG matches into formatted output is captured in the file svg2p.glue, while the rest of the details - JavaScript code - are deferred (and in this case, generated by a small tool).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;svg2p&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The specification for mapping SVG to formatted output is in file &lt;span class=&quot;s1&quot;&gt;svg2p.glue&lt;/span&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;For example, the first line:&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;htmlsvg [@ws docH htmlH bodyH @elements bodyE htmlE] = ${elements}&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;says that when an htmlsvg pattern is matched (see &lt;span class=&quot;s1&quot;&gt;svg.ohm&lt;/span&gt;), it will have 7 sub-matches, named ws, docH, htmlH, bodyH, elements, bodyE and htmlE (resp.). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The spec says that &lt;span class=&quot;s1&quot;&gt;ws&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;elements&lt;/span&gt; may contain multiple matches (i.e. these multiple-matches are returned by Ohm-JS in JavaScript arrays). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;After the pattern-matching is finished, the matches in &lt;span class=&quot;s1&quot;&gt;elements&lt;/span&gt; are simply printed out and the rest of the matches are ignored. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The right-hand-side of the &quot;=&quot; is taken to be a JavaScript back-tick string, in this case &lt;span class=&quot;s1&quot;&gt;${elements}&lt;/span&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The whole right-hand-side is wrapped with back-ticks and emitted as a JavaScript string, e.g.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;return `${elements}`. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;glue&lt;/i&gt; tool also does some housekeeping for me and evaluates the sub-matches as required by Ohm-JS&lt;a id=&quot;fnlink8&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn8&quot;&gt;&lt;sup&gt;[8]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Hand-Optimization Urge&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The formatted code, output by my use of the &lt;i&gt;glue&lt;/i&gt; tool, is very repetitive. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Most programmers would &lt;span class=&quot;s2&quot;&gt;not&lt;/span&gt; create such repetitive code and would feel compelled to &quot;optimize&quot; it, thereby, creating more edge-cases for formatting. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This urge-to-hand-optimize happened, also, during the transition from &lt;i&gt;assembler&lt;/i&gt; programming to HLLs (like C and Pascal).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Assembler programmers could not resist the urge to write &quot;better&quot; code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compilers continued to emit very repetitive code, which was &quot;worse&quot; than that created by assembler programmers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Then &lt;i&gt;gcc&lt;/i&gt; came along.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;Gcc&lt;/i&gt; optimized the repetitive code sequences and bettered most hand-written assembler code (at worst, it matched the &quot;best&quot; hand-written code).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;After that, few programmers bothered to write code in assembler any more¡.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;I view all current PLs as mere assembly languages and use PEG to build SCLs on top of them.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some PLs make &quot;better&quot; targets for automation than others &lt;/i&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&quot;&gt;&lt;i&gt;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&lt;/i&gt;&lt;/a&gt;&lt;i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It boils down to unnecessary edge-cases&lt;a id=&quot;fnlink9&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn9&quot;&gt;&lt;sup&gt;[9]&lt;/sup&gt;&lt;/a&gt;&lt;i&gt; and unnecessary syntactic sugar.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this essay, I treat JavaScript and PROLOG as assembler languages and automatically transpile code into their syntax.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;IMO, paradigms, such as OO and FP and relations, are often conflated with syntactic sugar.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is not possible to create a syntax that fits all use-cases.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Paradigms and syntax should be treated orthogonally.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Experimenting with paradigms is not the same as experimenting with syntax&lt;a id=&quot;fnlink10&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn10&quot;&gt;&lt;sup&gt;[10]&lt;/sup&gt;&lt;/a&gt; &lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html&quot;&gt;&lt;i&gt;https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html&lt;/i&gt;&lt;/a&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Sorting&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;PROLOG requires that rules be clumped together.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;UNIX® &lt;i&gt;sort&lt;/i&gt; is enough to produce this clumping.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I leave the factbase unsorted for ease-of-reading.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I call &lt;i&gt;sort&lt;/i&gt; to create factbases for use with PROLOG.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bounding Boxes&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;We want to &quot;normalize&quot; data so that it is easier to search.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;To this end, we want &lt;i&gt;all&lt;/i&gt; shapes to have the same form.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have learned, through experience, that creating a bounding box for every shape is a useful normalization&lt;a id=&quot;fnlink11&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn11&quot;&gt;&lt;sup&gt;[11]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;There are some shapes that do not fit the bounding-box model, notably lines.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We'll treat lines differently.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this example, there are no lines at all, so — problem solved :-).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;SVG specifies &lt;i&gt;rect&lt;/i&gt;s in (x,y,width,height) form.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A bounding box for &lt;i&gt;rect&lt;/i&gt;s would be (left,top,right,bottom) form,&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;which means that we need to expand width and height in some way.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;SVG &lt;i&gt;text&lt;/i&gt; elements are specified only as (x,y).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We would need to know the font-size and the string size of each string to create bounding boxes for &lt;i&gt;text&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is not impossible to do, but we will avoid it in this example&lt;a id=&quot;fnlink12&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn12&quot;&gt;&lt;sup&gt;[12]&lt;/sup&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For now, we will not create bounding boxes for strings and will use only their (x,y) points.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Later, we can decide if this approximation causes us problems.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;So, we will create bounding boxes for &lt;i&gt;rect&lt;/i&gt;s (only).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;To do this, we are going to need to write code that converts (x,y,w,h) into (l,t,r,b), something like:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;left = x&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;top = y&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;right = x + width&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;bottom = y + width&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;So, for &lt;i&gt;every&lt;/i&gt; &lt;i&gt;rect&lt;/i&gt;, we will need to lookup its (x,y,w,h) and create a new bounding-box fact that contains (l,t,r,b).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We store all information in normalized triple form, so we need to find all&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;rect(R,&quot;&quot;)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;x(R,X)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;y(R,Y)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;width(R,W)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;height(R,H)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;and convert this information into bounding box triples, such as&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;bbleft(R,X)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;bbtop(R,Y)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;bbright(R,X+W)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;bbbottom(R,Y+H)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Obviously, we could use a &lt;i&gt;loop&lt;/i&gt; or &lt;i&gt;recursion&lt;/i&gt; to perform such searches an insertions.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I have done this many times and have found that PROLOG gives me an easy way to write this kind of searching-and-inserting-code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will use PROLOG&lt;a id=&quot;fnlink13&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn13&quot;&gt;&lt;sup&gt;[13]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Note: there is no need to optimize the contents of the factbase.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We can just keep adding facts to the factbase.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Defer optimization until later (I have done this many times and have never needed to optimize the factbase — a demonstration of the power of procrastination!).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The searching algorithms simply skip over unneeded facts.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In fact, the above pseudo-code is almost PROLOG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I need to add comma (instead of semi-colons as in some other language) to the end of phrases and, I need to check that PROLOG variables are written beginning with upper-case letters and everything else is written beginning with lower-case letters&lt;a id=&quot;fnlink14&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn14&quot;&gt;&lt;sup&gt;[14]&lt;/sup&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The end of each rule needs to end with a period (.).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The resulting code can be seen in &lt;span class=&quot;s1&quot;&gt;bb.pl&lt;/span&gt; and it is executed in &lt;span class=&quot;s1&quot;&gt;run.bash&lt;/span&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Names for Rects&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Next, we want to assign names to every &lt;i&gt;rect&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Every &lt;i&gt;text&lt;/i&gt; element contains text and we will simply look for &lt;i&gt;text&lt;/i&gt; (x,y)s that are &lt;i&gt;inside&lt;/i&gt; rectangles.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In my expected use-case for this kind of diagram, I will have big rectangles that represent software components and smaller rectangles that represent &lt;i&gt;port&lt;/i&gt;s for the components (coloured palegreen for &lt;i&gt;input ports&lt;/i&gt; and lightyellow for &lt;i&gt;output ports&lt;/i&gt;).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;All &lt;i&gt;ports&lt;/i&gt; and all &lt;i&gt;components&lt;/i&gt; will have a name. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We will use a simple check to determine names for &lt;i&gt;rect&lt;/i&gt;s — &quot;is the (x,y) of the &lt;i&gt;text&lt;/i&gt; enclosed in the (l,t,r,b) of the &lt;i&gt;rect?&lt;/i&gt;&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This simple check makes it possible that one &lt;i&gt;text&lt;/i&gt; element will be inside &lt;span class=&quot;s2&quot;&gt;more than one&lt;/span&gt; rectangle, e.g. a port name inside the &lt;i&gt;port&lt;/i&gt; and inside the &lt;i&gt;component&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;To ensure that we don't map the same name to a &lt;i&gt;port&lt;/i&gt; and its &lt;i&gt;component&lt;/i&gt;, we will use the simple rule that a &lt;i&gt;text&lt;/i&gt; matches with only the &lt;i&gt;smallest&lt;/i&gt; &lt;i&gt;rect&lt;/i&gt; that can be found.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This check might not be enough, but it will suffice for this example and will show the general gist of how to build PLs based on DaS&lt;a id=&quot;fnlink15&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn15&quot;&gt;&lt;sup&gt;[15]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The code for finding such matches is in &lt;span class=&quot;s1&quot;&gt;names.pl&lt;/span&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See, also &lt;span class=&quot;s1&quot;&gt;run.bash&lt;/span&gt;, for how to execute this code and append its output to the factbase.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Design Rule Check (Example)&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;At various points in the workflow, we will want to throw-in various design rule checks.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Existing, text-based PLs, tend to do all of the checks at once. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This is called &quot;type checking&quot;, &quot;semantic analysis&quot;, etc.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In our case, we are creating a workflow that is a pipeline of fact-creators that ends with code formatters.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We can add checks at any point in the workflow.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;As (only) one example of this kind of checking, I've built a filter that checks for floating &lt;i&gt;text&lt;/i&gt; — text that is not enclosed in any &lt;i&gt;rect&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The code for this one design rule checker is in &lt;span class=&quot;s1&quot;&gt;uncontainednames.pl&lt;/span&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We would want to add more checks to create a more useful version of this example.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Again, see &lt;span class=&quot;s1&quot;&gt;run.bash&lt;/span&gt;, to see how I decided to run the checker.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;e.g. Scheme, JavaScript using loops-within-loops or with my js-prolog library https://github.com/guitarvydas/js-prolog, or any other language.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;DI means Design Intent (often called Architecture).&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Called the &quot;semantics&quot;.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;I call the SCL tool &quot;glue&quot;.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;This is what compiler-writers do.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They generate &quot;some&quot; code, then &quot;optimize&quot; it with other tools.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;In fact, m4 does a lot of what OO is meant for.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I haven't tried, but I think that m4 could be used to implement Bennett's Frames.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;DI is Design Intent.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn8&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink8&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[8]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;All of this emits JavaSCript code.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn9&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink9&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[9]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;e.g. declaration before use&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn10&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink10&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[10]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;This is another instance of fractal-thinking.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What we generally consider to be PLs, can be broken down into two sub-components - paradigm and syntax.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn11&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink11&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[11]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;YMMV&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn12&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink12&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[12]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;For example, a reasonable first approximation imight be to assume that all text is in 12-point font.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We won't deal with this problem in this example and will defer it to later.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn13&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink13&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[13]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;You don't have to use PROLOG, if you don't want to.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn14&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink14&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[14]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;The pseudo-code is already written that way.&lt;/p&gt;
-&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn15&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink15&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[15]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;DaS means Disagrams as Syntax.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">SVG to Code (1)</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Bootstrapping</summary></entry></feed>

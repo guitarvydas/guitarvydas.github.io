@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>plfa</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.</p>
+
+<h1 id="lambdacalculus">Lambda Calculus</h1>
+
+<p>Lambda Calculus means &#8220;everything is a function&#8221;.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>In Common Lisp and Scheme, every function is a function. Every <em>function</em> returns a value.</p>
+
+<p><strong>Counter-example:</strong></p>
+
+<p>In JavaScript, not everything is a function, for example</p>
+
+<p>function fn (x, y) {</p>
+
+<p>42;</p>
+
+<p>}</p>
+
+<p>is different from</p>
+
+<p>function fn (x, y) {</p>
+
+<p>return 42;</p>
+
+<p>}</p>
+
+<p>(One could say that the former is a procedure, not a function).</p>
+
+<p>To make JavaScript work like Lisp, one would need to ensure that <em>every</em> function returns a 1<sup>st</sup> class value. This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.</p>
+
+<h1 id="freevariables">Free Variables</h1>
+
+<p>A <em>free variable</em> can be thought of as being a <em>global variable</em>.</p>
+
+<h1 id="boundvariables">Bound Variables</h1>
+
+<p>A <em>bound variable</em> can be thought of as being</p>
+
+<ul>
+<li>a parameter</li>
+<li>a local variable.</li>
+</ul>
+
+<p>In fact, local variables are just syntactic sugar for nested lambdas, e.g.</p>
+
+<p>function (x) {</p>
+
+<p>var y;</p>
+
+<p>y = 41;</p>
+
+<p>return x + y;</p>
+
+<p>}</p>
+
+<p>is really</p>
+
+<p>function (x) {</p>
+
+<p>function (y) {</p>
+
+<p>return x + y;</p>
+
+<p>} (41);</p>
+
+<p>}</p>
+
+<h1 id="examplefreeandboundvariables">Example Free and Bound Variables</h1>
+
+<p>function (x) {</p>
+
+<p>return x + y;</p>
+
+<p>}</p>
+
+<p>There are two variables in the above function, <em>x</em> and <em>y</em>.</p>
+
+<p>Variable <em>x</em> is <em>bound</em>.</p>
+
+<p>Variable <em>y</em> is <em>free</em>. Variable <em>y</em> is <em>unbound</em>.</p>
+
+<p>In the example below, <em>both</em> variables are bound, but <em>y</em> is uninitialized (<em>undefined</em> in JavaScript-speak).</p>
+
+<p>function (x) {</p>
+
+<p>var y;</p>
+
+<p>return x + y;</p>
+
+<p>}</p>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
