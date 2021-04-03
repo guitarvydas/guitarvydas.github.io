@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Kill Math</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="programmingisthenewmath">Programming is the New Math</h1>
+
+<p>Programming is the <em>new math</em>.</p>
+
+<p>Mathematics was invented as a notation for the pencil and paper realm.</p>
+
+<p>Computers allow 3D and 4D, but we cling to mathematics (at best 2D).</p>
+
+<p>PLs are constrained by syntactic conventions</p>
+
+<ul>
+<li>grid of non-overlapping cells</li>
+<li><em>all</em> PLs based on line/offset of cells</li>
+<li>&#8230; instead of (x,y) positions of overlapping elements.</li>
+</ul>
+
+<p>Bret Victor espouses &#8220;kill math&#8221;<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> but jumps from text-only notation to full-blown graphical notation.</p>
+
+<p>There is a simple notation in between text-only and full-blown graphics.</p>
+
+<h1 id="syntaxevolution">Syntax Evolution</h1>
+
+<ul>
+<li>text</li>
+<li>text, rects, ellipses, lines (arrows)</li>
+<li>bitmap and vector graphics</li>
+</ul>
+
+<h1 id="calculators">Calculators</h1>
+
+<p>Most PLs describe calculators</p>
+
+<ul>
+<li>one-in, one-out</li>
+<li>synchronous.</li>
+</ul>
+
+<p>Originally, it was thought that computers were useful <em>only</em> for ballistics calculations (fancy calculators).</p>
+
+<p>Computers have outgrown the calculator-only paradigm.</p>
+
+<h1 id="asynchronousvs.synchronous">Asynchronous vs. Synchronous</h1>
+
+<p>Text-only thinking leads to synchronous designs.</p>
+
+<p>But, the world is asynchronous.</p>
+
+<p>Example: human body&#8217;s autonomous system. Self 1 and Self 2.<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a> Consciousness is only a small portion of how a body functions. A body consists mostly of asynchronous processes.</p>
+
+<p>Example: cooking recipes. &#8220;&#8230; while the potatoes cook, &#8230;&#8221;</p>
+
+<p>Example: music notation &#8212; real-time, asynchronous (polyphonic), SonicPi<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a>.</p>
+
+<p>Example: driving an automobile and listening to the radio.</p>
+
+<p>Example: riding a bicycle.</p>
+
+<p>Example: walking.</p>
+
+<p>Example: opening a door.</p>
+
+<h1 id="boxandarrowdiagrams">Box and Arrow Diagrams</h1>
+
+<p>Box and arrow diagrams work well if they deal with asynchronous components.</p>
+
+<p>Box and arrow diagrams are a &#8220;hard problem&#8221; if built using synchronous PLs.</p>
+
+<h1 id="concurrency">Concurrency</h1>
+
+<p>Distributed programming is the newer reality.</p>
+
+<ul>
+<li>blockchain</li>
+<li>p2p</li>
+<li>HTML, internet, etc.</li>
+<li>Concurrency is Not Parallelism &#8212; <a href="https://www.youtube.com/watch?v=oV9rvDllKEg">https://www.youtube.com/watch?v=oV9rvDllKEg</a></li>
+</ul>
+
+<p>Concurrency is easy, but text is not a good notation for concurrency.</p>
+
+<h2 id="assemblylanguageforconcurrency">Assembly Language for Concurrency</h2>
+
+<p>At best, we have <em>assembler</em> components for concurrency, but lack a popular PL for concurrency (HTML+JavaScript?)</p>
+
+<h2 id="stateoftheart">State of the Art</h2>
+
+<p>Current state of the art for concurrency:</p>
+
+<ul>
+<li>many stand-alone calculators</li>
+<li>dropped into envelopes to shield them from each other (threads)</li>
+<li>lots of accidental complexity due to use of text-only notation</li>
+<li>time-sharing</li>
+<li>memory-sharing</li>
+</ul>
+
+<h3 id="accidentalcomplexity">Accidental Complexity</h3>
+
+<p>Examples of accidental complexity due to text-only thinking:</p>
+
+<ul>
+<li>thread safety</li>
+<li>priorities, priority inversion (<a href="https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft">https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft</a>)</li>
+<li>mutexes</li>
+<li>etc.</li>
+</ul>
+
+<h3 id="timesharing">Time Sharing</h3>
+
+<p>Time-sharing is an old-fashioned idea.</p>
+
+<p>Meant to optimize CPU usage (CPUs were expensive in the 1950&#8217;s).</p>
+
+<p>CPUs are cheap, now.</p>
+
+<p>No need to optimize CPU time.</p>
+
+<p>Programmer time is more important than CPU time.</p>
+
+<h3 id="memorysharing">Memory Sharing</h3>
+
+<p>Memory-sharing is an old-fashioned idea.</p>
+
+<p>Meant to optimize memory usage (memory was expensive in the 1950&#8217;s).</p>
+
+<p>Memory is cheap, now.</p>
+
+<p>No need to optimize memory.</p>
+
+<p>Programmer time is more important than wasted memory.</p>
+
+<h1 id="newerreality">Newer Reality</h1>
+
+<p>Newer reality: <strong>distributed</strong>.</p>
+
+<ul>
+<li>many computers</li>
+<li>thin wires (low bandwidth) connections</li>
+<li>uptime not guaranteed to be high.</li>
+</ul>
+
+<h1 id="efficiency">Efficiency</h1>
+
+<h2 id="rust">Rust</h2>
+
+<p>Main efficiency gains will come from optimizing distributed computers.</p>
+
+<p>Rust can only optimize calculators.</p>
+
+<p>Incorrect emphasis.</p>
+
+<h2 id="wasm">WASM</h2>
+
+<p>Main efficiency gains will come from optimizing distributed computers.</p>
+
+<p>WASM can only optimize browsers (client computers).</p>
+
+<p>Incorrect emphasis.</p>
+
+<h2 id="bigo">Big O</h2>
+
+<p>Important: UX &#8212; what the user experiences.</p>
+
+<p>Not Important: CPU usage.</p>
+
+<p>Big-O only analyzes CPU usage.</p>
+
+<p>Incorrect emphasis.</p>
+
+<p>Main efficiency gains will come from optimizing distributed computers, then, optimizing UX.</p>
+
+<p>Example: A good spec defines user experience (response time). A good spec does not define CPU usage.</p>
+
+<p>Analysis of CPU usage is Production Engineering. Cost reduction. This is not a 1<sup>st</sup> order effect. Make it work first, then optimize second.</p>
+
+<p>Big-O made more sense when CPUs were expensive.</p>
+
+<h2 id="delusion">Delusion</h2>
+
+<p>Delusion: Measurement makes right.</p>
+
+<p>Just because we can measure something does not mean that &#8220;that is all there is&#8221;.</p>
+
+<p>Example: we think of sound as a 2D plot on an oscilloscope, but sound is actually a 3D spherical wavefront that expands over time (4D).</p>
+
+<p>Example: we think of Earth orbiting the Sun in an elliptical orbit, but in reality, Earth transcribes a helix (the Sun is moving, Earth is following).</p>
+
+<p>The 2D oscilloscope plot and elliptical orbits are only <em>useful approximations</em>.</p>
+
+<p>Everything is a fractal. Every problem can be subdivided further.</p>
+
+<p>(further discussion: <a href="https://guitarvydas.github.io/2021/03/23/Everything-is-a-Fractal.html">https://guitarvydas.github.io/2021/03/23/Everything-is-a-Fractal.html</a>)</p>
+
+<h1 id="thestack">The Stack</h1>
+
+<p>Current CPUs <em>encourage</em> the calculator paradigm.</p>
+
+<p>The Stack used by CALL/RETURN is a global variable that tracks dynamic dependencies (<a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html">https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html</a>)</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>http://worrydream.com/KillMath/ <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>https://www.amazon.ca/Inner&#8211;Game&#8211;Tennis&#8211;Classic&#8211;Performance/dp/0679778314 <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>https://sonic&#8211;pi.net/ <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

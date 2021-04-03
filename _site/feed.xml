@@ -1,4 +1,548 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-02T19:18:20-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Recursive design knowns and unknowns</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html" rel="alternate" type="text/html" title="Recursive design knowns and unknowns" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Recursive%20Design%20-%20Knowns%20and%20Unknowns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-03T07:51:16-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.  Until I get comments working on this blog, please email me.</subtitle><entry><title type="html">Kill math</title><link href="https://computingsimplicity.neocities.org/2021/04/03/Kill-Math.html" rel="alternate" type="text/html" title="Kill math" /><published>2021-04-03T00:00:00-04:00</published><updated>2021-04-03T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/03/Kill%20Math</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/03/Kill-Math.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Kill Math&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;programmingisthenewmath&quot;&gt;Programming is the New Math&lt;/h1&gt;
+
+&lt;p&gt;Programming is the &lt;em&gt;new math&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Mathematics was invented as a notation for the pencil and paper realm.&lt;/p&gt;
+
+&lt;p&gt;Computers allow 3D and 4D, but we cling to mathematics (at best 2D).&lt;/p&gt;
+
+&lt;p&gt;PLs are constrained by syntactic conventions&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;grid of non-overlapping cells&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;all&lt;/em&gt; PLs based on line/offset of cells&lt;/li&gt;
+&lt;li&gt;&amp;#8230; instead of (x,y) positions of overlapping elements.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bret Victor espouses &amp;#8220;kill math&amp;#8221;&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; but jumps from text-only notation to full-blown graphical notation.&lt;/p&gt;
+
+&lt;p&gt;There is a simple notation in between text-only and full-blown graphics.&lt;/p&gt;
+
+&lt;h1 id=&quot;syntaxevolution&quot;&gt;Syntax Evolution&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;text&lt;/li&gt;
+&lt;li&gt;text, rects, ellipses, lines (arrows)&lt;/li&gt;
+&lt;li&gt;bitmap and vector graphics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;calculators&quot;&gt;Calculators&lt;/h1&gt;
+
+&lt;p&gt;Most PLs describe calculators&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;one-in, one-out&lt;/li&gt;
+&lt;li&gt;synchronous.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Originally, it was thought that computers were useful &lt;em&gt;only&lt;/em&gt; for ballistics calculations (fancy calculators).&lt;/p&gt;
+
+&lt;p&gt;Computers have outgrown the calculator-only paradigm.&lt;/p&gt;
+
+&lt;h1 id=&quot;asynchronousvs.synchronous&quot;&gt;Asynchronous vs. Synchronous&lt;/h1&gt;
+
+&lt;p&gt;Text-only thinking leads to synchronous designs.&lt;/p&gt;
+
+&lt;p&gt;But, the world is asynchronous.&lt;/p&gt;
+
+&lt;p&gt;Example: human body&amp;#8217;s autonomous system. Self 1 and Self 2.&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; Consciousness is only a small portion of how a body functions. A body consists mostly of asynchronous processes.&lt;/p&gt;
+
+&lt;p&gt;Example: cooking recipes. &amp;#8220;&amp;#8230; while the potatoes cook, &amp;#8230;&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;Example: music notation &amp;#8212; real-time, asynchronous (polyphonic), SonicPi&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example: driving an automobile and listening to the radio.&lt;/p&gt;
+
+&lt;p&gt;Example: riding a bicycle.&lt;/p&gt;
+
+&lt;p&gt;Example: walking.&lt;/p&gt;
+
+&lt;p&gt;Example: opening a door.&lt;/p&gt;
+
+&lt;h1 id=&quot;boxandarrowdiagrams&quot;&gt;Box and Arrow Diagrams&lt;/h1&gt;
+
+&lt;p&gt;Box and arrow diagrams work well if they deal with asynchronous components.&lt;/p&gt;
+
+&lt;p&gt;Box and arrow diagrams are a &amp;#8220;hard problem&amp;#8221; if built using synchronous PLs.&lt;/p&gt;
+
+&lt;h1 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h1&gt;
+
+&lt;p&gt;Distributed programming is the newer reality.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;blockchain&lt;/li&gt;
+&lt;li&gt;p2p&lt;/li&gt;
+&lt;li&gt;HTML, internet, etc.&lt;/li&gt;
+&lt;li&gt;Concurrency is Not Parallelism &amp;#8212; &lt;a href=&quot;https://www.youtube.com/watch?v=oV9rvDllKEg&quot;&gt;https://www.youtube.com/watch?v=oV9rvDllKEg&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Concurrency is easy, but text is not a good notation for concurrency.&lt;/p&gt;
+
+&lt;h2 id=&quot;assemblylanguageforconcurrency&quot;&gt;Assembly Language for Concurrency&lt;/h2&gt;
+
+&lt;p&gt;At best, we have &lt;em&gt;assembler&lt;/em&gt; components for concurrency, but lack a popular PL for concurrency (HTML+JavaScript?)&lt;/p&gt;
+
+&lt;h2 id=&quot;stateoftheart&quot;&gt;State of the Art&lt;/h2&gt;
+
+&lt;p&gt;Current state of the art for concurrency:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;many stand-alone calculators&lt;/li&gt;
+&lt;li&gt;dropped into envelopes to shield them from each other (threads)&lt;/li&gt;
+&lt;li&gt;lots of accidental complexity due to use of text-only notation&lt;/li&gt;
+&lt;li&gt;time-sharing&lt;/li&gt;
+&lt;li&gt;memory-sharing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;accidentalcomplexity&quot;&gt;Accidental Complexity&lt;/h3&gt;
+
+&lt;p&gt;Examples of accidental complexity due to text-only thinking:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;thread safety&lt;/li&gt;
+&lt;li&gt;priorities, priority inversion (&lt;a href=&quot;https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft&quot;&gt;https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;mutexes&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;timesharing&quot;&gt;Time Sharing&lt;/h3&gt;
+
+&lt;p&gt;Time-sharing is an old-fashioned idea.&lt;/p&gt;
+
+&lt;p&gt;Meant to optimize CPU usage (CPUs were expensive in the 1950&amp;#8217;s).&lt;/p&gt;
+
+&lt;p&gt;CPUs are cheap, now.&lt;/p&gt;
+
+&lt;p&gt;No need to optimize CPU time.&lt;/p&gt;
+
+&lt;p&gt;Programmer time is more important than CPU time.&lt;/p&gt;
+
+&lt;h3 id=&quot;memorysharing&quot;&gt;Memory Sharing&lt;/h3&gt;
+
+&lt;p&gt;Memory-sharing is an old-fashioned idea.&lt;/p&gt;
+
+&lt;p&gt;Meant to optimize memory usage (memory was expensive in the 1950&amp;#8217;s).&lt;/p&gt;
+
+&lt;p&gt;Memory is cheap, now.&lt;/p&gt;
+
+&lt;p&gt;No need to optimize memory.&lt;/p&gt;
+
+&lt;p&gt;Programmer time is more important than wasted memory.&lt;/p&gt;
+
+&lt;h1 id=&quot;newerreality&quot;&gt;Newer Reality&lt;/h1&gt;
+
+&lt;p&gt;Newer reality: &lt;strong&gt;distributed&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;many computers&lt;/li&gt;
+&lt;li&gt;thin wires (low bandwidth) connections&lt;/li&gt;
+&lt;li&gt;uptime not guaranteed to be high.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;efficiency&quot;&gt;Efficiency&lt;/h1&gt;
+
+&lt;h2 id=&quot;rust&quot;&gt;Rust&lt;/h2&gt;
+
+&lt;p&gt;Main efficiency gains will come from optimizing distributed computers.&lt;/p&gt;
+
+&lt;p&gt;Rust can only optimize calculators.&lt;/p&gt;
+
+&lt;p&gt;Incorrect emphasis.&lt;/p&gt;
+
+&lt;h2 id=&quot;wasm&quot;&gt;WASM&lt;/h2&gt;
+
+&lt;p&gt;Main efficiency gains will come from optimizing distributed computers.&lt;/p&gt;
+
+&lt;p&gt;WASM can only optimize browsers (client computers).&lt;/p&gt;
+
+&lt;p&gt;Incorrect emphasis.&lt;/p&gt;
+
+&lt;h2 id=&quot;bigo&quot;&gt;Big O&lt;/h2&gt;
+
+&lt;p&gt;Important: UX &amp;#8212; what the user experiences.&lt;/p&gt;
+
+&lt;p&gt;Not Important: CPU usage.&lt;/p&gt;
+
+&lt;p&gt;Big-O only analyzes CPU usage.&lt;/p&gt;
+
+&lt;p&gt;Incorrect emphasis.&lt;/p&gt;
+
+&lt;p&gt;Main efficiency gains will come from optimizing distributed computers, then, optimizing UX.&lt;/p&gt;
+
+&lt;p&gt;Example: A good spec defines user experience (response time). A good spec does not define CPU usage.&lt;/p&gt;
+
+&lt;p&gt;Analysis of CPU usage is Production Engineering. Cost reduction. This is not a 1&lt;sup&gt;st&lt;/sup&gt; order effect. Make it work first, then optimize second.&lt;/p&gt;
+
+&lt;p&gt;Big-O made more sense when CPUs were expensive.&lt;/p&gt;
+
+&lt;h2 id=&quot;delusion&quot;&gt;Delusion&lt;/h2&gt;
+
+&lt;p&gt;Delusion: Measurement makes right.&lt;/p&gt;
+
+&lt;p&gt;Just because we can measure something does not mean that &amp;#8220;that is all there is&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;Example: we think of sound as a 2D plot on an oscilloscope, but sound is actually a 3D spherical wavefront that expands over time (4D).&lt;/p&gt;
+
+&lt;p&gt;Example: we think of Earth orbiting the Sun in an elliptical orbit, but in reality, Earth transcribes a helix (the Sun is moving, Earth is following).&lt;/p&gt;
+
+&lt;p&gt;The 2D oscilloscope plot and elliptical orbits are only &lt;em&gt;useful approximations&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Everything is a fractal. Every problem can be subdivided further.&lt;/p&gt;
+
+&lt;p&gt;(further discussion: &lt;a href=&quot;https://guitarvydas.github.io/2021/03/23/Everything-is-a-Fractal.html&quot;&gt;https://guitarvydas.github.io/2021/03/23/Everything-is-a-Fractal.html&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h1 id=&quot;thestack&quot;&gt;The Stack&lt;/h1&gt;
+
+&lt;p&gt;Current CPUs &lt;em&gt;encourage&lt;/em&gt; the calculator paradigm.&lt;/p&gt;
+
+&lt;p&gt;The Stack used by CALL/RETURN is a global variable that tracks dynamic dependencies (&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html&quot;&gt;https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&quot;&gt;https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&lt;/a&gt;)&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;http://worrydream.com/KillMath/ &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;https://www.amazon.ca/Inner&amp;#8211;Game&amp;#8211;Tennis&amp;#8211;Classic&amp;#8211;Performance/dp/0679778314 &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:3&quot;&gt;
+&lt;p&gt;https://sonic&amp;#8211;pi.net/ &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Kill Math</summary></entry><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Projectional Editing&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;projectionaleditingintwosteps&quot;&gt;Projectional Editing in Two Steps&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reduce all input to normal form.&lt;/li&gt;
+&lt;li&gt;Write rules against normal form. Rules &amp;#8212;&amp;gt; views.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;1.normalform&quot;&gt;1. Normal Form&lt;/h1&gt;
+
+&lt;p&gt;I favour a normal form consisting of &lt;em&gt;triples&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2.rules&quot;&gt;2. Rules&lt;/h1&gt;
+
+&lt;p&gt;You want to perform exhaustive search over &lt;em&gt;all&lt;/em&gt; of the triples.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;rule&lt;/em&gt; is just a group of related searches.&lt;/p&gt;
+
+&lt;p&gt;Such searching can be done manually, using loops within loops.&lt;/p&gt;
+
+&lt;p&gt;Or, one could use a tool &amp;#8212; a search engine &amp;#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses &lt;em&gt;backtracking&lt;/em&gt; to perform exhaustive search.&lt;/p&gt;
+
+&lt;p&gt;PROLOG uses something called &lt;em&gt;logic&lt;/em&gt; &lt;em&gt;variables&lt;/em&gt; to hold the results of successful matches.&lt;/p&gt;
+
+&lt;p&gt;There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the &lt;em&gt;logic variables&lt;/em&gt; and presents you, the programmer, with a set of consistent matches (as one set of bound &lt;em&gt;logic variables&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;MiniKanren, on the other hand, does not use the above method and keeps a running list of &lt;em&gt;all&lt;/em&gt; possible matches, then presents you, the programmer, with a list of &lt;em&gt;all&lt;/em&gt; matches that consistently solve the set of given match constraints.&lt;/p&gt;
+
+&lt;h2 id=&quot;unification&quot;&gt;Unification&lt;/h2&gt;
+
+&lt;p&gt;PROLOG uses an algorithm, called &lt;em&gt;unification&lt;/em&gt;, to re-bind &lt;em&gt;logic variables&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;One set of bindings describes &lt;em&gt;one&lt;/em&gt; solution to all of the match constraints.&lt;/p&gt;
+
+&lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
+
+&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
+
+&lt;p&gt;I would suggest:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PEG for parsing and reducing&lt;/li&gt;
+&lt;li&gt;Factbases of triples as the normal form&lt;/li&gt;
+&lt;li&gt;PROLOG for creating rules, or PEG&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;factbases&quot;&gt;Factbases&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prolog&quot;&gt;PROLOG&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&quot;&gt;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;meta-programming&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;Meta-programming is very much like projectional editing.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&quot;&gt;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">meta-programming</summary></entry><entry><title type="html">Peg cheat sheet</title><link href="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html" rel="alternate" type="text/html" title="Peg cheat sheet" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/PEG%20Cheat%20Sheet</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;PEG Cheat Sheet&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;cheatsheet&quot;&gt;Cheat Sheet&lt;/h1&gt;
+
+&lt;p&gt;The PDF Cheat Sheet is:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&quot;&gt;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It is incomplete, but maybe enough to get started.&lt;/p&gt;
+
+&lt;h1 id=&quot;pegeditor&quot;&gt;PEG Editor&lt;/h1&gt;
+
+&lt;p&gt;I favour Ohm-JS.&lt;/p&gt;
+
+&lt;p&gt;The grammar editor for Ohm-JS is a time-saver. &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;https://ohmlang.github.io/editor/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The editor can be used for any PEG library, keeping in mind the syntactic variances.&lt;/p&gt;
+
+&lt;p&gt;Using any of the other libraries, the only way to debug a grammar is manually.&lt;/p&gt;
+
+&lt;p&gt;The Ohm Editor makes the process of debugging a grammar very quick. Maybe an order-of-magnitude faster than manual debugging.&lt;/p&gt;
+
+&lt;p&gt;In my experience, PEG (aka recursive descent parsers) are fairly easy to debug. The main point of failure is knowing where to include whitespace.&lt;/p&gt;
+
+&lt;p&gt;Debugging a PEG grammar takes about 1 day or so.&lt;/p&gt;
+
+&lt;p&gt;Debugging a PEG grammar using the Ohm Editor, takes 10&amp;#8217;s of minutes.&lt;/p&gt;
+
+&lt;p&gt;IMO, you should &lt;em&gt;always&lt;/em&gt; use the Ohm Editor, regardless of which PEG library&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; you are using.&lt;/p&gt;
+
+&lt;h1 id=&quot;parsercombinators&quot;&gt;Parser Combinators&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Parser_combinator&quot;&gt;https://en.wikipedia.org/wiki/Parser_combinator&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Parser combinators are functions that help build parsers in a functional manner.&lt;/p&gt;
+
+&lt;p&gt;I believe that PEG is a better choice than using combinators.&lt;/p&gt;
+
+&lt;p&gt;I believe that a &lt;em&gt;design&lt;/em&gt; should exhibit its intent - DI (Design Intent).&lt;/p&gt;
+
+&lt;p&gt;I do not subscribe to the idea that you should choose a language before expressing the solution to a problem.&lt;/p&gt;
+
+&lt;p&gt;I do not feel that FP is a one-size-fits-all solution to &lt;em&gt;all&lt;/em&gt; programming problems.&lt;/p&gt;
+
+&lt;p&gt;PEG expresses the DI of a grammar more clearly than programs written in any functional language.&lt;/p&gt;
+
+&lt;p&gt;You might create a PEG layer that emits parser combinators.&lt;/p&gt;
+
+&lt;p&gt;In such a case, I would use a less-restrictive language, like Common Lisp, as the toolbox language&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; and layer grammar constructs onto it using ESRAP, and, not bother with parser combinators.&lt;/p&gt;
+
+&lt;p&gt;Or, I would consider using Ohm-JS to generate Haskell code in parser-combinator form.&lt;/p&gt;
+
+&lt;h1 id=&quot;whitespace-ruleofthumb&quot;&gt;Whitespace - Rule of Thumb&lt;/h1&gt;
+
+&lt;p&gt;I have found that a consistent approach to parsing whitespace makes debugging easier.&lt;/p&gt;
+
+&lt;p&gt;I tend to put &amp;#8220;ws*&amp;#8221; at the &lt;em&gt;end&lt;/em&gt; of sub-rules.&lt;/p&gt;
+
+&lt;p&gt;And, I put a &amp;#8220;ws*&amp;#8221; after every terminal item (e.g. a constant string or a constant character).&lt;/p&gt;
+
+&lt;p&gt;Of course, one could write a PEG parser that generates another PEG parser and inserts whitespace parsing at the &amp;#8220;right&amp;#8221; places.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Or, if you are using parser combinators. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;https://guitarvydas.github.io/2021/03/16/Toolbox&amp;#8211;Languages.html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG Cheat Sheet</summary></entry><entry><title type="html">Crass simplifications</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html" rel="alternate" type="text/html" title="Crass simplifications" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Crass%20Simplifications</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;plfa&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lambda Calculus&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Lambda Calculus means &quot;everything is an expression&quot; (or, &quot;everything is a function&quot;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Example:&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In Common Lisp and Scheme, every function is a function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every &lt;i&gt;function&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt; returns a value.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Counter-example:&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In JavaScript, not everything is a function, for example&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;42;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;is different from&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return 42;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(One could say that the former is a procedure, not a function).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;To make JavaScript work like Lisp, one would need to ensure that &lt;i&gt;every&lt;/i&gt; function returns a 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt; class value.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Free Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;free variable&lt;/i&gt; can be thought of as being a &lt;i&gt;global variable&lt;/i&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bound Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;bound variable&lt;/i&gt; can be thought of as being&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;a parameter&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;a local variable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;In fact, local variables are just syntactic sugar for nested lambdas, e.g.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;y = 41;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;is really&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;function (y) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} (41);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Free and Bound Variables&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;There are two variables in the above function, &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;x &lt;/i&gt;is &lt;i&gt;bound&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;free&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;unbound&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In the example below, &lt;i&gt;both&lt;/i&gt; variables are bound, but &lt;i&gt;y&lt;/i&gt; is uninitialized (&lt;i&gt;undefined&lt;/i&gt; in JavaScript-speak).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Recursive design knowns and unknowns</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html" rel="alternate" type="text/html" title="Recursive design knowns and unknowns" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Recursive%20Design%20-%20Knowns%20and%20Unknowns</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -233,314 +777,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design - Knowns and Unknowns</summary></entry><entry><title type="html">Peg cheat sheet</title><link href="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html" rel="alternate" type="text/html" title="Peg cheat sheet" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/PEG%20Cheat%20Sheet</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/PEG-Cheat-Sheet.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;PEG Cheat Sheet&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;cheatsheet&quot;&gt;Cheat Sheet&lt;/h1&gt;
-
-&lt;p&gt;The PDF Cheat Sheet is:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&quot;&gt;https://computingsimplicity.neocities.org/2021/PEG%20Cheat%20Sheet.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;It is incomplete, but maybe enough to get started.&lt;/p&gt;
-
-&lt;h1 id=&quot;pegeditor&quot;&gt;PEG Editor&lt;/h1&gt;
-
-&lt;p&gt;I favour Ohm-JS.&lt;/p&gt;
-
-&lt;p&gt;The grammar editor for Ohm-JS is a time-saver. &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;https://ohmlang.github.io/editor/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The editor can be used for any PEG library, keeping in mind the syntactic variances.&lt;/p&gt;
-
-&lt;p&gt;Using any of the other libraries, the only way to debug a grammar is manually.&lt;/p&gt;
-
-&lt;p&gt;The Ohm Editor makes the process of debugging a grammar very quick. Maybe an order-of-magnitude faster than manual debugging.&lt;/p&gt;
-
-&lt;p&gt;In my experience, PEG (aka recursive descent parsers) are fairly easy to debug. The main point of failure is knowing where to include whitespace.&lt;/p&gt;
-
-&lt;p&gt;Debugging a PEG grammar takes about 1 day or so.&lt;/p&gt;
-
-&lt;p&gt;Debugging a PEG grammar using the Ohm Editor, takes 10&amp;#8217;s of minutes.&lt;/p&gt;
-
-&lt;p&gt;IMO, you should &lt;em&gt;always&lt;/em&gt; use the Ohm Editor, regardless of which PEG library&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; you are using.&lt;/p&gt;
-
-&lt;h1 id=&quot;parsercombinators&quot;&gt;Parser Combinators&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Parser_combinator&quot;&gt;https://en.wikipedia.org/wiki/Parser_combinator&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Parser combinators are functions that help build parsers in a functional manner.&lt;/p&gt;
-
-&lt;p&gt;I believe that PEG is a better choice than using combinators.&lt;/p&gt;
-
-&lt;p&gt;I believe that a &lt;em&gt;design&lt;/em&gt; should exhibit its intent - DI (Design Intent).&lt;/p&gt;
-
-&lt;p&gt;I do not subscribe to the idea that you should choose a language before expressing the solution to a problem.&lt;/p&gt;
-
-&lt;p&gt;I do not feel that FP is a one-size-fits-all solution to &lt;em&gt;all&lt;/em&gt; programming problems.&lt;/p&gt;
-
-&lt;p&gt;PEG expresses the DI of a grammar more clearly than programs written in any functional language.&lt;/p&gt;
-
-&lt;p&gt;You might create a PEG layer that emits parser combinators.&lt;/p&gt;
-
-&lt;p&gt;In such a case, I would use a less-restrictive language, like Common Lisp, as the toolbox language&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; and layer grammar constructs onto it using ESRAP, and, not bother with parser combinators.&lt;/p&gt;
-
-&lt;p&gt;Or, I would consider using Ohm-JS to generate Haskell code in parser-combinator form.&lt;/p&gt;
-
-&lt;h1 id=&quot;whitespace-ruleofthumb&quot;&gt;Whitespace - Rule of Thumb&lt;/h1&gt;
-
-&lt;p&gt;I have found that a consistent approach to parsing whitespace makes debugging easier.&lt;/p&gt;
-
-&lt;p&gt;I tend to put &amp;#8220;ws*&amp;#8221; at the &lt;em&gt;end&lt;/em&gt; of sub-rules.&lt;/p&gt;
-
-&lt;p&gt;And, I put a &amp;#8220;ws*&amp;#8221; after every terminal item (e.g. a constant string or a constant character).&lt;/p&gt;
-
-&lt;p&gt;Of course, one could write a PEG parser that generates another PEG parser and inserts whitespace parsing at the &amp;#8220;right&amp;#8221; places.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;Or, if you are using parser combinators. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/03/16/Toolbox&amp;#8211;Languages.html &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">PEG Cheat Sheet</summary></entry><entry><title type="html">Crass simplifications</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html" rel="alternate" type="text/html" title="Crass simplifications" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Crass%20Simplifications</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Crass-Simplifications.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;plfa&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-02T07:48:31Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 9.0px Palatino}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I describe crass simplifications, which are not fully accurate, that I use to think about haughtier concepts, such as lambda calculus, free and bound variables.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lambda Calculus&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Lambda Calculus means &quot;everything is an expression&quot; (or, &quot;everything is a function&quot;).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Example:&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In Common Lisp and Scheme, every function is a function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Every &lt;i&gt;function&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt; returns a value.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Counter-example:&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In JavaScript, not everything is a function, for example&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;42;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;is different from&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function fn (x, y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return 42;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;(One could say that the former is a procedure, not a function).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;To make JavaScript work like Lisp, one would need to ensure that &lt;i&gt;every&lt;/i&gt; function returns a 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt; class value.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This can be done, but is boring to do, is error-prone, and results in unreadable (to humans) code.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Free Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;free variable&lt;/i&gt; can be thought of as being a &lt;i&gt;global variable&lt;/i&gt;.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bound Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A &lt;i&gt;bound variable&lt;/i&gt; can be thought of as being&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;a parameter&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;a local variable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;In fact, local variables are just syntactic sugar for nested lambdas, e.g.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;y = 41;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;is really&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;function (y) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} (41);&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example Free and Bound Variables&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;There are two variables in the above function, &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;x &lt;/i&gt;is &lt;i&gt;bound&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;free&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Variable &lt;i&gt;y &lt;/i&gt;is &lt;i&gt;unbound&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In the example below, &lt;i&gt;both&lt;/i&gt; variables are bound, but &lt;i&gt;y&lt;/i&gt; is uninitialized (&lt;i&gt;undefined&lt;/i&gt; in JavaScript-speak).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;function (x) {&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;var y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;return x + y;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">plfa</summary></entry><entry><title type="html">Meta Programming</title><link href="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html" rel="alternate" type="text/html" title="Meta Programming" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/meta-programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/meta-programming.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;meta-programming&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;Meta-programming is very much like projectional editing.&lt;/p&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&quot;&gt;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">meta-programming</summary></entry><entry><title type="html">Projectional editing</title><link href="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html" rel="alternate" type="text/html" title="Projectional editing" /><published>2021-04-02T00:00:00-04:00</published><updated>2021-04-02T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/02/Projectional%20Editing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/02/Projectional-Editing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Projectional Editing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;projectionaleditingintwosteps&quot;&gt;Projectional Editing in Two Steps&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Reduce all input to normal form.&lt;/li&gt;
-&lt;li&gt;Write rules against normal form. Rules &amp;#8212;&amp;gt; views.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;1.normalform&quot;&gt;1. Normal Form&lt;/h1&gt;
-
-&lt;p&gt;I favour a normal form consisting of &lt;em&gt;triples&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;2.rules&quot;&gt;2. Rules&lt;/h1&gt;
-
-&lt;p&gt;You want to perform exhaustive search over &lt;em&gt;all&lt;/em&gt; of the triples.&lt;/p&gt;
-
-&lt;p&gt;A &lt;em&gt;rule&lt;/em&gt; is just a group of related searches.&lt;/p&gt;
-
-&lt;p&gt;Such searching can be done manually, using loops within loops.&lt;/p&gt;
-
-&lt;p&gt;Or, one could use a tool &amp;#8212; a search engine &amp;#8212; to do the searching. One such search engine is PROLOG. Another engine might be miniKanren.&lt;/p&gt;
-
-&lt;p&gt;PROLOG uses &lt;em&gt;backtracking&lt;/em&gt; to perform exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;PROLOG uses something called &lt;em&gt;logic&lt;/em&gt; &lt;em&gt;variables&lt;/em&gt; to hold the results of successful matches.&lt;/p&gt;
-
-&lt;p&gt;There might be more than one match that succeeds in satisfying all of the search constraints. In such cases, PROLOG re-binds the values of the &lt;em&gt;logic variables&lt;/em&gt; and presents you, the programmer, with a set of consistent matches (as one set of bound &lt;em&gt;logic variables&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;MiniKanren, on the other hand, does not use the above method and keeps a running list of &lt;em&gt;all&lt;/em&gt; possible matches, then presents you, the programmer, with a list of &lt;em&gt;all&lt;/em&gt; matches that consistently solve the set of given match constraints.&lt;/p&gt;
-
-&lt;h2 id=&quot;unification&quot;&gt;Unification&lt;/h2&gt;
-
-&lt;p&gt;PROLOG uses an algorithm, called &lt;em&gt;unification&lt;/em&gt;, to re-bind &lt;em&gt;logic variables&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;One set of bindings describes &lt;em&gt;one&lt;/em&gt; solution to all of the match constraints.&lt;/p&gt;
-
-&lt;p&gt;In essence, PROLOG &lt;em&gt;clears&lt;/em&gt; its &lt;em&gt;logic variables&lt;/em&gt; before calculating another solution. In essence, PROLOG memorizes previous solutions and does not present already-seen solutions again.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Note, that this does not mean that duplicate solutions cannot be displayed &amp;#8212; PROLOG remembers the route that it used to find a solution, if it finds a different route which results in the same set of bindings, PROLOG will be happy to show you that solution as a possibility (much to the chagrin of PROLOG newbies).&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
-
-&lt;p&gt;I would suggest:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PEG for parsing and reducing&lt;/li&gt;
-&lt;li&gt;Factbases of triples as the normal form&lt;/li&gt;
-&lt;li&gt;PROLOG for creating rules, or PEG&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;factbases&quot;&gt;Factbases&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;prolog&quot;&gt;PROLOG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&quot;&gt;https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=3s&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Projectional Editing</summary></entry><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design - Knowns and Unknowns</summary></entry><entry><title type="html">State, analysis of</title><link href="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html" rel="alternate" type="text/html" title="State, analysis of" /><published>2021-03-30T00:00:00-04:00</published><updated>2021-03-30T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/30/State,%20Analysis%20of</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/30/State,-Analysis-of.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -950,65 +1187,4 @@ allow code to query state flags with little constraint on how the code is nested
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry><entry><title type="html">Scls little languages playlist</title><link href="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html" rel="alternate" type="text/html" title="Scls little languages playlist" /><published>2021-03-29T00:00:00-04:00</published><updated>2021-03-29T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/03/29/SCLs%20Little%20Languages%20Playlist</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/03/29/SCLs-Little-Languages-Playlist.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;LItlle Languages Playlist&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;p&gt;(brief, rough, overview of Ohm, PEG, pattern matching, SCLs)&lt;/p&gt;
-
-&lt;p&gt;Use the Ohm Editor (good for any PEG grammar) &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;https://ohmlang.github.io/editor/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;peg&quot;&gt;PEG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;https://guitarvydas.github.io/2020/12/27/PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;pegvs.otherpatternmatchers&quot;&gt;PEG vs. Other Pattern Matchers&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;littlelanguagedevelopment&quot;&gt;Little Language Development&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ohminsmallsteps&quot;&gt;Ohm in Small Steps&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;racketpeg&quot;&gt;Racket Peg&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;schemetojavascript&quot;&gt;Scheme to JavaScript&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/01/Scheme-to-Javascript.html&quot;&gt;https://guitarvydas.github.io/2021/03/01/Scheme-to-Javascript.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;svggrammar&quot;&gt;SVG Grammar&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/15/SVG-grammar.html&quot;&gt;https://guitarvydas.github.io/2021/03/15/SVG-grammar.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;gluemanual&quot;&gt;GLUE manual&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/Glue-Manual.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/Glue-Manual.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;regexvspeg&quot;&gt;REGEX vs PEG&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;svgtocode&quot;&gt;SVG to Code&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/SVG-to-Code-(1).html&quot;&gt;https://guitarvydas.github.io/2021/03/24/SVG-to-Code-(1).html&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">LItlle Languages Playlist</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Simplicity vs Complexity</summary></entry></feed>
