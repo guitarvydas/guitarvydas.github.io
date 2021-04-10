@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to My Blog!"
+title:  "Test 3!"
 ---
 
 # Welcome
