@@ -1,13 +1,7 @@
 ---
 layout: post
-title:  "Test 4!"
+title:  "Two Syntaxes For Every Programming Language"
 ---
 
-# Welcome
-
-**Hello world**, this is md post 4.
-
-I hope you like it!
-
-test keynote 
+# Two Syntaxes For Every Programming Language
 [relative reference to keynote generated file](https://guitarvydas.github.io/assets/2021-04-10-Two/index.html)
