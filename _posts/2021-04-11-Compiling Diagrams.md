@@ -2,10 +2,10 @@
 layout: post
 title:  "Compiling Diagrams"
 ---
- 
-Compiling diagrams - overview in Syntax Primitives
 
-[Compiling Diagrams](https://guitarvydas.github.io/assets/2021-04-11-Syntax Primitives/index.html)
+(Same as Syntax Primitives)
+
+[Compiling Diagrams](https://guitarvydas.github.io/assets/2021-04-10-Syntax Primitives/index.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
