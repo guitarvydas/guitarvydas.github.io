@@ -9,4 +9,4 @@ S/SL
 
 Syntax (and diagrams)
 
-[Random Anecdotes](https://guitarvydas.github.io/assets/2021-04-11-Random Anecdotes/index.html)
+[Random Anecdotes](https://guitarvydas.github.io/assets/2021-04-10-Random Anecdotes/index.html)
