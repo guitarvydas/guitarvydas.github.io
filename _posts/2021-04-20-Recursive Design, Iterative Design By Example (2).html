@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Recursive Design, Iterative Design By Example (2)</title>
+  <meta name="CreationTime" content="2021-04-20T07:33:29Z">
+  <meta name="ModificationTime" content="2021-04-20T07:33:29Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 9.0px Palatino}
+    span.s2 {text-decoration: underline}
+    span.s3 {font: 11.0px Menlo}
+    span.s4 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: lower-alpha}
+    ol.ol2 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Part 2</b></h2>
+<p class="p2">[<i>This is a follow-on to part 1 of "Recursive Design, Iterative Design By Example".]</i></p>
+<p class="p3"><br></p>
+<p class="p2">Goal: transpile a file of ASON text to Lisp items.</p>
+<p class="p3"><br></p>
+<p class="p2">Sub-goal: instead of trying to implement ASON and Rebol, I start by converting ASON text into tokens.<span class="Apple-converted-space">  </span>I will see, later,<span class="Apple-converted-space">  </span>how to progress from there…</p>
+<p class="p3"><br></p>
+<p class="p2">In general, the parser inputs a stream of text and outputs a stream of ASON tokens.</p>
+<p class="p3"><br></p>
+<p class="p2">Specifically, when emitting a stream of Lisp tokens, the ASON tokens will appear as<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">Lisp atoms when there is a direct relationship between ASON and Lisp, e.g. strings, integers, floats, etc.</li>
+  <li class="li4">or, Lisp function calls,<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li4">e.g. (ason-array <i>items</i>)</li>
+    <li class="li4">e.g. (yymmdd <i>int int int</i>)</li>
+    <li class="li4">etc.</li>
+    <li class="li4">(see "Lisp Emitter Sample" and <a href="https://github.com/guitarvydas/ason/blob/master/emitter-lisp.grasem">https://github.com/guitarvydas/ason/blob/master/emitter-lisp.grasem</a>).</li>
+  </ul></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">[<i>I am trying to capture my design thoughts as they occur, kind of like a live-stream video.<span class="Apple-converted-space">  </span>This is not a paper, nor a YouTube video nor a Twitch live-stream.<span class="Apple-converted-space">  </span>The result is probably uneven - I will continue to experiment with various thought-capture methodologies.</i>]</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Discovery</b></h2>
+<p class="p2">Discovery / Observation; the 7<span class="s1"><sup>th</sup></span> pass - called blocks - is unnecessary.</p>
+<p class="p3"><br></p>
+<p class="p2">The block tokens [], {}, () simply emit<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">lisp function calls, e.g. "(ason-array-block", "(ason-object-block" and "(ason-expression-block"</li>
+  <li class="li4">end of call ")" (in all 3 cases)</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">The grammar does not need to parse compound blocks, since emitting Lisp lists (function calls) is sufficient.<span class="Apple-converted-space">  </span>Lisp will read the emitted compound blocks into its internal (list) format.</p>
+<p class="p5"><br></p>
+<p class="p4">The Lisp REPL applies different semantics to lists than the Rebol REPL / compiler.<span class="Apple-converted-space">  </span>I will deal with interpretation of the stream later. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">For now, I just want to tokenize the input.</p>
+<p class="p5"><br></p>
+<p class="p4">ASON has many basic data types and I want to experiment with tokenizing them using PEG.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Restructuring Token Layers</b></h2>
+<p class="p2">The grammar has become a tokenizer consisting of 2 layers:</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">very basic tokens</span></p>
+<ul class="ul1">
+  <li class="li4">string</li>
+  <li class="li4">delimiter</li>
+  <li class="li4">integer</li>
+  <li class="li4">namedMonth</li>
+  <li class="li4">hex</li>
+  <li class="li4">ws</li>
+  <li class="li4">unknown</li>
+  <li class="li4">ident</li>
+</ul>
+<p class="p2"><span class="s2">compound tokens</span></p>
+<ul class="ul1">
+  <li class="li4">pair</li>
+  <li class="li4">range</li>
+  <li class="li4">tuple</li>
+  <li class="li4">currency<span class="Apple-converted-space"> </span></li>
+  <li class="li4">yyyymmddhhmmsstz</li>
+  <li class="li4"> yyyymmddhhmmss</li>
+  <li class="li4">yyyymmdd</li>
+  <li class="li4">mmdd</li>
+  <li class="li4">hhmmss</li>
+  <li class="li4">binaryBase64</li>
+  <li class="li4">email</li>
+  <li class="li4">url</li>
+  <li class="li4">path</li>
+  <li class="li4">hypertextTag</li>
+  <li class="li4">getUnevalField</li>
+  <li class="li4">setfield</li>
+  <li class="li4">selectField</li>
+  <li class="li4">pathRefinement</li>
+  <li class="li4">literal</li>
+  <li class="li4">symbol</li>
+  <li class="li4">refinement</li>
+  <li class="li4">selector</li>
+  <li class="li4">getword</li>
+  <li class="li4">defineword</li>
+  <li class="li4">useword</li>
+  <li class="li4">lbracket</li>
+  <li class="li4">rbracket</li>
+  <li class="li4">lbrace</li>
+  <li class="li4">rbrace</li>
+  <li class="li4">lpar</li>
+  <li class="li4">rpar</li>
+  <li class="li4">float</li>
+  <li class="li4">eufloat</li>
+  <li class="li4">namedMonth.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">The 3<span class="s1"><sup>rd</sup></span> layer is the emitter.</p>
+<p class="p5"><br></p>
+<p class="p4">I built a generic emitter and tested it.</p>
+<p class="p5"><br></p>
+<p class="p4">Then, I built a Lisp emitter and tested it.<span class="Apple-converted-space">  </span>I RY'ed the generic emitter to create the lisp emitter.</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lisp Emitter Sample</b></h2>
+<p class="p2">The sample input code:</p>
+<p class="p6"><span class="Apple-converted-space">     </span>{ year: 2021</p>
+<p class="p6"><span class="Apple-converted-space">       </span>tx: [</p>
+<p class="p6"><span class="Apple-converted-space">         </span>[ jul-23 ??? -333.53 pppppp ]</p>
+<p class="p6"><span class="Apple-converted-space">       </span>]</p>
+<p class="p6"><span class="Apple-converted-space">     </span>}</p>
+<p class="p2">is converted into the token stream:</p>
+<p class="p6">D{ {</p>
+<p class="p6">e! year</p>
+<p class="p6">I 2021</p>
+<p class="p6">e! tx</p>
+<p class="p6">D[ [</p>
+<p class="p6">D[ [</p>
+<p class="p6">cP july 23</p>
+<p class="p6">U</p>
+<p class="p6">D- -</p>
+<p class="p6">bF 333 53<span class="Apple-converted-space"> </span></p>
+<p class="p6">e? pppppp</p>
+<p class="p6">D] ]</p>
+<p class="p6">D] ]</p>
+<p class="p6">D} }</p>
+<p class="p2">which is then converted into Lisp code</p>
+<p class="p6">((ason-object-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word year)<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>2021<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word tx)<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">   </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">    </span>(mmdd july 23)<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">    </span>???</p>
+<p class="p6"><span class="Apple-converted-space">    </span>#\-</p>
+<p class="p6"><span class="Apple-converted-space">    </span>333.53</p>
+<p class="p6"><span class="Apple-converted-space">    </span>(use-word pppppp)))))</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Next Step</b></h2>
+<p class="p2">I want to have "define-word" be a function of 2 arguments, e.g. the stream should be</p>
+<p class="p6">((ason-object-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word year 2021)</p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word tx</p>
+<p class="p6"><span class="Apple-converted-space">      </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">       </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>(mmdd july 23)<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>???</p>
+<p class="p6"><span class="Apple-tab-span">	</span>#\-</p>
+<p class="p6"><span class="Apple-tab-span">	</span>333.53</p>
+<p class="p6"><span class="Apple-tab-span">	</span>(use-word pppppp))))))</p>
+<p class="p7"><br></p>
+<p class="p2">This could be done in<span class="Apple-converted-space"> </span></p>
+<ol class="ol1">
+  <li class="li4">Lisp, or,</li>
+  <li class="li4">the Grammar.</li>
+</ol>
+<p class="p3"><br></p>
+<p class="p2">I haven't decided, yet, how to do this.</p>
+<p class="p3"><br></p>
+<p class="p2">Step (a) would need to change to grammar.<span class="Apple-converted-space">  </span>Lisp would simply read the list of tokens and consume tokens that are needed.</p>
+<p class="p3"><br></p>
+<p class="p2">Step (b) would require a change to the grammar, but would make the Lisp code simpler.</p>
+<p class="p3"><br></p>
+<p class="p2">This looks like a simple pattern match, which is the domain of the grammar/parser.<span class="Apple-converted-space">  </span>I will start there.</p>
+<p class="p3"><br></p>
+<p class="p2">Currently, the tokenizer emits something like</p>
+<p class="p6">((ason-object-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word year) 2021</p>
+<p class="p6"><span class="Apple-converted-space">  </span>(define-word tx)</p>
+<p class="p6"><span class="Apple-converted-space">  </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">     </span>(ason-array-block<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>(mmdd july 23)<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>???</p>
+<p class="p6"><span class="Apple-tab-span">	</span>#\-</p>
+<p class="p6"><span class="Apple-tab-span">	</span>333.53</p>
+<p class="p6"><span class="Apple-tab-span">	</span>(use-word pppppp))))))</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bug</b></h2>
+<p class="p2">PEG allows one to write grammars that are "forgiving".</p>
+<p class="p3"><br></p>
+<p class="p2">I am choosing to write grammars explicitly, to<span class="Apple-converted-space"> </span></p>
+<ol class="ol2">
+  <li class="li4">make the explanations of what is going on more clear, and,</li>
+  <li class="li4">to double-check the data in the pipeline (the grammar can be loosened up after most of the passes are working).</li>
+</ol>
+<p class="p3"><br></p>
+<p class="p2">At the moment, some of the passes are failing on parse errors, due to an extra blank character inserted into some of the tokens.<span class="Apple-converted-space">  </span>Unfortunately, the error is caused by an invisible character, which has made it harder to detect the nature of the failure.</p>
+<p class="p3"><br></p>
+<p class="p2">It seems that the token</p>
+<p class="p3"><br></p>
+<p class="p6">bF 333 53<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p2">has an extra space appended to it (bF is a floating point token containing the two integer parts of a float value).</p>
+<p class="p3"><br></p>
+<p class="p2">I currently save the output of each pass in a temp file (<span class="s3">_temp[0-9]</span>).<span class="Apple-converted-space">  </span>This is, of course, inefficient, but helps me debug the current problem.<span class="Apple-converted-space">  </span>I see that <span class="s3">_temp3</span> does not contain the extra space, but <span class="s3">_temp4</span> does.<span class="Apple-converted-space">  </span>Looking at run.bash, I see that the pass <span class="s3">date.grasem</span> inputs _temp3 and outputs <span class="s3">_temp4</span>.<span class="Apple-converted-space">  </span>This pass needs to be examined more closely.</p>
+<p class="p3"><br></p>
+<p class="p2">The first step in debugging is to grab the grammar (only) from <span class="s3">date.grasem</span> and the file <span class="s3">_temp3</span> and put them into Ohm-editor<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>, for a sanity check. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Debugging question #1</span>: is the token being parsed correctly?</p>
+<p class="p3"><br></p>
+<p class="p2">It is immediately obvious that the token is being parsed by the rule <span class="s3">numericalToken</span>, but with only one text field.<span class="Apple-converted-space">  </span>The definition of the rule probably allows spaces in the first text field — something I don't intend to allow.</p>
+<p class="p3"><br></p>
+<p class="p2">Indeed the rule says</p>
+<p class="p3"><br></p>
+<p class="p6"><span class="Apple-converted-space"> </span>numericalToken = ntag nsubtag whiteSpace text text? eol</p>
+<p class="p6">…</p>
+<p class="p6"><span class="Apple-converted-space">  </span>text = whiteSpace *textChar+</p>
+<p class="p6"><span class="Apple-converted-space">  </span>textChar = ~eol any</p>
+<p class="p7"><br></p>
+<p class="p2"><span class="s3">TextChar</span> accepts any character except newline.<span class="Apple-converted-space">  </span>I need to tighten this up to exclude whitespace.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Note to self: check if other passes use this same code snippet.<span class="Apple-converted-space">  </span>Fix it, if so.<a id="fnlink2"></a></i><a href="#fn2"><sup>[2]</sup></a>]</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s2">Debugging question #2</span>: does the code emission for rule numericalToken look OK?<span class="Apple-converted-space">  </span>(<i>A: Yes.<span class="Apple-converted-space">  </span>Maybe the extra space was a result of mis-parsing.<span class="Apple-converted-space">  </span>Try the test, again.</i>)</p>
+<p class="p3"><br></p>
+<p class="p2">Fixing that parse has made the problem go away.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Groups</b></h2>
+<p class="p2">Design Upgrade / Change:</p>
+<p class="p3"><br></p>
+<p class="p2">While working on this, I see a simplification.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">It is not necessary to emit ASON blocks as separate tokens.</p>
+<p class="p3"><br></p>
+<p class="p2">I use "G <i>ident</i>" to denote the beginning of a block.<span class="Apple-converted-space">  </span>The <i>ident</i> supplies information about the block type.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I have <i>ason-arrays, ason-objects </i>and <i>ason-expressions</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">To this, I add <i>define-word.<span class="Apple-converted-space">  </span></i>This addition makes it easier to parse <i>define-word</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">The parser now emits:</p>
+<ul class="ul1">
+  <li class="li4">(asonArray nil …)</li>
+  <li class="li4">(asonObject nil …)</li>
+  <li class="li4">(asonExpression nil …)</li>
+  <li class="li4">(define-word <i>name </i>…)</li>
+  <li class="li5"><br></li>
+  <li class="li4">[see <a href="https://github.com/guitarvydas/ason/blob/master/expr.grasem">https://github.com/guitarvydas/ason/blob/master/expr.grasem</a>]</li>
+  <li class="li5"><span class="Apple-tab-span">	</span></li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Negative Integer</b></h2>
+<p class="p2">I found that simple integers are not enough — not a surprise, but I didn't catch this requirement earlier.</p>
+<p class="p3"><br></p>
+<p class="p2">Fixing this problem is simple — I need to add another pass.</p>
+<p class="p3"><br></p>
+<p class="p2">The only tricky part of this problem is that several ASON types require dashes between integers (e.g. dates).</p>
+<p class="p3"><br></p>
+<p class="p2">I want to leave the earlier parser passes alone (they are meant to be <i>isolated</i>) and insert a new pass near the end of the pipeline.</p>
+<p class="p3"><br></p>
+<p class="p2">[see <a href="https://github.com/guitarvydas/ason/blob/master/negativenum.grasem">https://github.com/guitarvydas/ason/blob/master/negativenum.grasem</a>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Bug 2</b></h2>
+<p class="p2">I added the line</p>
+<p class="p6"><span class="Apple-converted-space">      </span>balance : 1234.56</p>
+<p class="p2">to the small test.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This is causing me to flip-flop on what the correct solution is.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>The grammar as-it-stands — expects no pairs after the list of transactions.<span class="Apple-converted-space">  </span>The above simple addition violates this original assumption.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">I am learning something new about the problem.</p>
+<p class="p3"><br></p>
+<p class="p2">The line causes a pair of tokens to be passed to the emitter</p>
+<p class="p6">e! balance</p>
+<p class="p6">bF 1234 56</p>
+<p class="p7"><br></p>
+<ol class="ol2">
+  <li class="li4">At first, I thought that e! should be weeded out by the expr pass (which immediately precedes the emitter pass),</li>
+  <li class="li4">Then, I thought that this sequence of tokens is legal.</li>
+  <li class="li4">Then, I thought that this sequence of tokens is illegal and should be weeded out by the expr pass before being passed to the emitter passes.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">I am going back-and-forth in understanding the details of this problem.</p>
+<p class="p5"><br></p>
+<p class="p4">This is "nothing special". <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">I did not understand all of the details of the problem when I started.</p>
+<p class="p5"><br></p>
+<p class="p4">The deeper understanding of the problem does not wreck my earlier design and code.</p>
+<p class="p5"><br></p>
+<p class="p4">Layering some of the details — and eliding details — has made it possible for me to see more nuance in the problem.</p>
+<p class="p5"><br></p>
+<p class="p4">At first, I thought of setting variables occurring at the beginning of object blocks.<span class="Apple-converted-space">  </span>This new addition shows that it is reasonable to have setting of variables occur.</p>
+<p class="p5"><br></p>
+<p class="p4">Now that I see this, I wonder "how could I have missed this?".<span class="Apple-converted-space">  </span>Layering — and moving forward with the easy stuff — has revealed more nuance to me.</p>
+<p class="p5"><br></p>
+<p class="p4">I've seen such revelations happen in work that took 2 years to build.<span class="Apple-converted-space">  </span>At the point that the revelation was made, the design had been calcified and the new revelation(s) could not be taking into account in the existing code. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">The idea of scripting and generating code, makes it easy to incorporate such new revelations into the code base.</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Break Down of Bug 2</b></h2>
+<p class="p4">The problem now becomes "why didn't the expr pass capture and rewrite this line and its two tokens?".</p>
+<p class="p5"><br></p>
+<p class="p4">Theories:</p>
+<ol class="ol1">
+  <li class="li4">the grammar did not catch the pair of tokens that form the defineWord sequence</li>
+  <li class="li4">a blunder</li>
+  <li class="li4">something else.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">Theory (a) might indicate that the rule <span class="s3">ident</span> is picking off <span class="s3">tags</span>, preventing rule <span class="s3">defineWord</span> group from succeeding.</p>
+<p class="p5"><br></p>
+<p class="p4">This leads to an examination of the rules <span class="s3">tag</span> and <span class="s3">ident</span>.</p>
+<p class="p5"><br></p>
+<p class="p4">In anticipation of needing to tighten up <span class="s3">tag</span> vs. <span class="s3">ident</span> matching in all passes, I have split some of the code (from <span class="s3">expr</span>) into a boilerplate.<span class="Apple-converted-space">  </span>I include this boilerplate into the <span class="s3">expr</span> pass using the <span class="s3">m4<a id="fnlink3"></a><a href="#fn3"><span class="s4"><sup>[3]</sup></span></a></span> tool.</p>
+<p class="p5"><br></p>
+<p class="p4">First, I test the file split and the use of <span class="s3">m4</span> to see that I get the same result (the result, at this point, is an error message).</p>
+<p class="p5"><br></p>
+<p class="p4">Indeed — the two tokens are being parsed as two separate tokens and the defineWordGroup rule is not matching.</p>
+<p class="p5"><br></p>
+<p class="p4">The rule defineWordToken is defined as</p>
+<p class="p6"><span class="Apple-converted-space">  </span>defineWordGroup = defineWordToken expr expr</p>
+<p class="p4">whereas it should be</p>
+<p class="p6"><span class="Apple-converted-space">  </span>defineWordGroup = defineWordToken expr</p>
+<p class="p4">(There are one too many expr's in the rule).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Layering Solutions</b></h2>
+<p class="p4">One needs to roll the problem around in one's mind to fully understand it. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Some people "see" the details of the problem more rapidly than others, but, at some point this "seeing" is overwhelmed by masses of detail. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">I theorize that this <i>always</i> happens, but at different degrees of detail for different people.</p>
+<p class="p5"><br></p>
+<p class="p4">At some point, the details overwhelm one's ability to reason about a problem.</p>
+<p class="p5"><br></p>
+<p class="p4">The point of Recursive Design and FDD<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> is to create layers for details and to make it possible to reason about larger-and-larger problems, regardless of one's ability to cut through details at any level. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">I may need more layers, whereas others may need fewer layers for the same problem. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">The goal is to allow anyone to chunk a problem into layers and to address more interesting problems. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">In the hands of those who require fewer layers, further chunking and layering should make it possible to address more-and-more interesting problems.</p>
+<p class="p8"><br></p>
+<hr>
+<p class="p9"><a id="fn1"></a><a href="#fnlink1"><span class="s4">[1]</span></a><span class="s4"> </span>https://ohmlang.github.io/editor/</p>
+<p class="p9"><a id="fn2"></a><a href="#fnlink2"><span class="s4">[2]</span></a><span class="s4"> </span>Same code found in stringsAndBinary.grasem and words.grasem.</p>
+<p class="p9"><a id="fn3"></a><a href="#fnlink3"><span class="s4">[3]</span></a><span class="s4"> </span>A standard UNIX® command-line tool.</p>
+<p class="p9"><a id="fn4"></a><a href="#fnlink4"><span class="s4">[4]</span></a><span class="s4"> </span>Failure-Driven Design</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
