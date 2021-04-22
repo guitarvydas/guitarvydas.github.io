@@ -1,4 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-20T18:25:48-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Recursive design, iterative design by example (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (2)" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-22T10:55:13-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Variable names are not good enough</title><link href="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html" rel="alternate" type="text/html" title="Variable names are not good enough" /><published>2021-04-22T00:00:00-04:00</published><updated>2021-04-22T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/22/Variable%20Names%20Are%20Not%20Good%20Enough</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Variable Names Are Not Good Enough&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-22T10:55:04Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-22T10:55:04Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Variable Names Are Not Good Enough&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Variable names are a notational convenience.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;As such, one should be able to explore variable names recursively.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, in the formula:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y = mx + b&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;what is &quot;m&quot; and what is &quot;b&quot;?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;If we rewrite the formula as:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y = slope * x + intercept&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;the equation becomes less readable (at least, for &quot;experts&quot;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Hierarchical Names&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Our editors should allow us to explore — expand — variable names.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, in the above formula, we should be able to click on &quot;m&quot; and ask for a lengthier name. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;From there, we should be able to push down and get even more detail, e.g. and explanation of the term &quot;slope&quot;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;m —&amp;gt; slope —&amp;gt; description of &lt;i&gt;slope&lt;/i&gt; —&amp;gt; etc.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Tooltips are Not Enough&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Tooltips, as they currently exist — hover over an item to get a longer phrase — are not &quot;enough&quot;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We need tooltips for tooltips.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We need tooltips for tooltips for tooltips for …&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Variable Names Are Not Good Enough</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;REGEX&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;p class=&quot;p1&quot;&gt;REGEX is a production version of The Dragon Book DFA's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Actually, regex goes even further back, but I regress). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Henry Spencer&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p1&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Git Could Do More&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github, Git, Diff, etc.&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I consider &quot;github&quot; to be a whole gamut of technologies based on &quot;diff&quot;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;githhub
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;git
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;diff (a UNIX tool)&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&quot;Github&quot; is a production version of &quot;diff&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automated DRY&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Github could use &quot;diff&quot; in a bigger way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Instead of diff'ing lines of code, it should diff layers of design.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Which might be blocks of code).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Our PLs&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;are just glorified text editors.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A lot of what we think about and build into PLs is DRY.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;RY&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; is what we want, but we waste brain power on DRY.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Machines could detect DRY for us.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;And refactor the code/design/etc. for us automagically.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Github could include technology to figure out DRY.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Git-based Editors&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Our editors could figure out repeated lumps of text and make a golden copy for us.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The editor could show repeated lumps of source in gray and automagically update the golden copy when we edit the gray parts.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; PL means Programming Language&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;[2]&lt;/a&gt; DRY means Don’t Repeat Yourself&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;[3]&lt;/a&gt; &lt;span class=&quot;s1&quot;&gt;RY means Repeat Yourself&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry><entry><title type="html">Recursive design, iterative design by example (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (2)" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -376,116 +548,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design, Iterative Design By Example (2)</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Git Could Do More&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 12.0px Helvetica}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: hyphen}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github, Git, Diff, etc.&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I consider &quot;github&quot; to be a whole gamut of technologies based on &quot;diff&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;githhub
-  &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li4&quot;&gt;git
-    &lt;ul class=&quot;ul2&quot;&gt;
-      &lt;li class=&quot;li4&quot;&gt;diff (a UNIX tool)&lt;/li&gt;
-    &lt;/ul&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&quot;Github&quot; is a production version of &quot;diff&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automated DRY&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Github could use &quot;diff&quot; in a bigger way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Instead of diff'ing lines of code, it should diff layers of design.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Which might be blocks of code).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Our PLs&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;are just glorified text editors.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A lot of what we think about and build into PLs is DRY.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;RY&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; is what we want, but we waste brain power on DRY.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Machines could detect DRY for us.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;And refactor the code/design/etc. for us automagically.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Github could include technology to figure out DRY.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Git-based Editors&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Our editors could figure out repeated lumps of text and make a golden copy for us.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The editor could show repeated lumps of source in gray and automagically update the golden copy when we edit the gray parts.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; PL means Programming Language&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;[2]&lt;/a&gt; DRY means Don’t Repeat Yourself&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;[3]&lt;/a&gt; &lt;span class=&quot;s1&quot;&gt;RY means Repeat Yourself&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;REGEX&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;p class=&quot;p1&quot;&gt;REGEX is a production version of The Dragon Book DFA's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Actually, regex goes even further back, but I regress). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Henry Spencer&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p1&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Scoping static vs dynamic</title><link href="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html" rel="alternate" type="text/html" title="Scoping static vs dynamic" /><published>2021-04-16T00:00:00-04:00</published><updated>2021-04-16T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/16/Scoping%20Static%20vs%20Dynamic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design, Iterative Design By Example (2)</summary></entry><entry><title type="html">Scoping static vs dynamic</title><link href="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html" rel="alternate" type="text/html" title="Scoping static vs dynamic" /><published>2021-04-16T00:00:00-04:00</published><updated>2021-04-16T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/16/Scoping%20Static%20vs%20Dynamic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -568,11 +631,4 @@
 &lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/assets/2021-04-10-Syntax Primitives/index.html&quot;&gt;Compiling Diagrams&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">(Same as Syntax Primitives)</summary></entry><entry><title type="html">Grasem Tool</title><link href="https://computingsimplicity.neocities.org/2021/04/11/Grasem.html" rel="alternate" type="text/html" title="Grasem Tool" /><published>2021-04-11T00:00:00-04:00</published><updated>2021-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/11/Grasem</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/11/Grasem.html">&lt;p&gt;Glue Tool&lt;/p&gt;
-
-&lt;p&gt;A PEG for generating Ohm-JS (a PEG)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/assets/2021-04-11-Grasem/index.html&quot;&gt;Grasem Tool&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Glue Tool</summary></entry></feed>
+&lt;/script&gt;</content><author><name></name></author><summary type="html">(Same as Syntax Primitives)</summary></entry></feed>
