@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-23T23:50:04-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-23T23:53:10-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -13,27 +13,27 @@
 
 &lt;p&gt;but,&lt;/p&gt;
 
-&lt;p&gt;The question is not &amp;#8220;what scoping does Rebol employ?&amp;#8221;, but, &amp;#8220;when is a Rebol scoping determined, when is a Rebol program compiled?&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;The question is not &amp;#8220;&lt;em&gt;what&lt;/em&gt; scoping does Rebol employ?&amp;#8221;, but, &amp;#8220;&lt;em&gt;when&lt;/em&gt; is a Rebol scoping determined, &lt;em&gt;when&lt;/em&gt; is a Rebol program compiled?&amp;#8221;.&lt;/p&gt;
 
 &lt;h1 id=&quot;rebol-statictypingdynamiccompilation&quot;&gt;Rebol - Static Typing, Dynamic Compilation&lt;/h1&gt;
 
 &lt;p&gt;Rebol has static typing, but dynamic compilation.&lt;/p&gt;
 
-&lt;p&gt;We are accustomed to there being one compilation time and one runtime.&lt;/p&gt;
+&lt;p&gt;We are accustomed to there being &lt;em&gt;one&lt;/em&gt; compilation time and &lt;em&gt;one&lt;/em&gt; runtime.&lt;/p&gt;
 
-&lt;p&gt;Rebol has multiple compilation times.&lt;/p&gt;
+&lt;p&gt;Rebol has &lt;em&gt;multiple&lt;/em&gt; compilation times.&lt;/p&gt;
 
-&lt;p&gt;The compilation of Rebol code depends on the context that exists at the time of compilation.&lt;/p&gt;
+&lt;p&gt;The compilation of Rebol code depends on the &lt;em&gt;context&lt;/em&gt; that exists at the time of compilation.&lt;/p&gt;
 
 &lt;p&gt;Rebol code is compiled at different times, within different contexts. This means that Rebol functions might be compiled differently at different times.&lt;/p&gt;
 
 &lt;h1 id=&quot;appendix-rebolscoping&quot;&gt;Appendix - REBOL Scoping&lt;/h1&gt;
 
-&lt;p&gt;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&quot;&gt;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;http://blog.hostilefork.com/rebol-vs-lisp-macros/&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/rebol-vs-lisp-macros/&quot;&gt;http://blog.hostilefork.com/rebol-vs-lisp-macros/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&quot;&gt;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -716,7 +716,34 @@
 &lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/assets/2021-04-23-FDD/index.html&quot;&gt;FDD&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Failure Driven Design</summary></entry><entry><title type="html">Variable names are not good enough</title><link href="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html" rel="alternate" type="text/html" title="Variable names are not good enough" /><published>2021-04-22T00:00:00-04:00</published><updated>2021-04-22T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/22/Variable%20Names%20Are%20Not%20Good%20Enough</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Failure Driven Design</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/23/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/REGEX.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;REGEX&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;REGEX is a production version of The Dragon Book DFA&amp;#8217;s. (Actually, regex goes even further back, but I regress).&lt;/p&gt;
+
+&lt;p&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC).&lt;/p&gt;
+
+&lt;p&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
+
+&lt;h1 id=&quot;appendix-henryspencer&quot;&gt;Appendix - Henry Spencer&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Variable names are not good enough</title><link href="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html" rel="alternate" type="text/html" title="Variable names are not good enough" /><published>2021-04-22T00:00:00-04:00</published><updated>2021-04-22T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/22/Variable%20Names%20Are%20Not%20Good%20Enough</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -779,42 +806,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Variable Names Are Not Good Enough</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;REGEX&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:20:12Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;p class=&quot;p1&quot;&gt;REGEX is a production version of The Dragon Book DFA's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Actually, regex goes even further back, but I regress). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Henry Spencer&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p1&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Variable Names Are Not Good Enough</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
