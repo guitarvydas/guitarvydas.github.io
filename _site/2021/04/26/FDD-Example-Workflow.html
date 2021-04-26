@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>FDD Example Workflow</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In this essay, I discuss a simple problem and its FDD workflow and tools.</p>
+
+<p>The problem is that of gathering bank/credit card/expense statements and producing a single trial balance in .CSV format.</p>
+
+<h1 id="twopartsofprogramming">Two Parts of Programming</h1>
+
+<p>Programming breaks down, broadly, into two phases:</p>
+
+<ol>
+<li>gathering information</li>
+<li>outputting information.</li>
+</ol>
+
+<p>I will discuss this breakdown in more detail.</p>
+
+<p>[<em>In another essay, I call these two phases &#8220;breathe in&#8221; and &#8220;breathe out&#8221;</em> <em><a href="https://guitarvydas.github.io/2021/03/18/TOE-for-Software-Development.html">https://guitarvydas.github.io/2021/03/18/TOE-for-Software-Development.html</a></em>]</p>
+
+<h2 id="gather">Gather</h2>
+
+<p>In the <em>gather</em> phase, we collect and parse information.</p>
+
+<p>Ideally, we want to gather information and convert it into a single format.</p>
+
+<p>I.E. we want to <em>normalize</em> the data.</p>
+
+<p>We want to capture information in small phrases.</p>
+
+<h2 id="output">Output</h2>
+
+<p>In the output phase, we want to re-arrange captured data and surround it by extra text as appropriate.</p>
+
+<p>Some of the output will be in <em>textual</em> form and some will be in the form of <em>control</em> information<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>An overview of the system is found in Fig. 1.</p>
+
+<figure>
+<img src="/assets/2021-04-26-18-23-56-Images/FDDWorkflow-Overview.png" alt="" id="fddworkflow-overview" width="200" height="127" />
+<figcaption></figcaption>
+</figure>
+
+<p>Fig. 1 Overview</p>
+
+<p>We have three input files (yellow) and generate an output file (red) in spreadsheet format.</p>
+
+<h1 id="simplicityallthewaydown">Simplicity All The Way Down</h1>
+
+<p>The overview is fairly simple.</p>
+
+<p>That is the intention.</p>
+
+<p>Goal: Simplicity all-the-way-down, if possible.</p>
+
+<p>This goal is kept in mind and drives choices in the design process.</p>
+
+<p>The &#8220;API&#8221; for the input files is: structured text.</p>
+
+<p>The &#8220;API&#8221; for the output file is: spreadsheet format (.CSV text file).</p>
+
+<p>Details are deferred to lower layers. The sub-goal is to maintain simplicity at all levels of the design &#8212; using automation, but automating processing of very simple formats. Building up type information using layers instead of using a one-fell-swoop-style type-checker commonly found in most PLs.<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a></p>
+
+<p>[<em>A key point to notice is that we do not assume a 1&#8211;2 breakdown &#8212; input format vs. typed API format. We will use multiple layers and try to keep each layer &#8220;simple&#8221;</em><a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a> (yet fully typed).]</p>
+
+<h2 id="layeredtypechecking">Layered Type Checking</h2>
+
+<p>IMO, typing is over-rated.</p>
+
+<p>The real measure is ease-of-understanding.</p>
+
+<p>Complex type systems are needed in languages that do not allow all solution code to fit in one small window.</p>
+
+<p>An answer to this problem is to create <em>layers</em> of code. Each layer is made to be simple enough and to be stand-alone and to fit in one screen.</p>
+
+<p>This may seem to be facile solution, but, it is not easy to devise a way to layer code so that each layer remains simple.</p>
+
+<p>In a layered system, where each layer is understandable in a stand-alone manner, automated typing becomes less of an issue.</p>
+
+<p>BASIC, et al, tried to use relaxed typing, but failed when programs became too large to fit in a small window.</p>
+
+<p>Layering allows us to create simple-enough layers while making the typing &#8220;obvious&#8221; (or easily checked by automation).</p>
+
+<h3 id="incrementalloadingandtypechecking">Incremental Loading and Typechecking</h3>
+
+<p>One might think of type-checkers as part of the incremental loaders.</p>
+
+<p>Each invocation of a loader type-checks the layer-in-question, but no more.</p>
+
+<p>One might think of type-checking and loading as a recursive process - each step in the process whittles the problem down, and leaves &#8220;the rest&#8221; to other incremental loaders and incremental type-checkers in the pipeline.</p>
+
+<p>[<em>Actually, the pipeline is not a 1-D chain, but a tree of layers, each incrementally checkable</em>. <em>The most-final loader simply bolts together incrementally-type-checked pieces and finishes the left-over type-checking.</em>]</p>
+
+<h1 id="gathering">Gathering</h1>
+
+<h2 id="ref1">Gather</h2>
+
+<p>In the <em>gather</em> phase, we collect and parse information.</p>
+
+<p>Ideally, we want to gather information and convert it into a single format.</p>
+
+<p>I.E. we want to <em>normalize</em> the data.</p>
+
+<p>As a first attempt at normalization, I would suggest the use of factbases. <a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">https://guitarvydas.github.io/2021/01/17/Factbases.html</a> and <a href="https://guitarvydas.github.io/2021/04/26/Factbases-101.html">https://guitarvydas.github.io/2021/04/26/Factbases-101.html</a></p>
+
+<h3 id="normalization">Normalization</h3>
+
+<p>Normalizing data means to convert <em>all</em> data into a common format.</p>
+
+<h4 id="factbases">Factbases</h4>
+
+<p>I favour the use of <em>factbases</em><a href="#fn:4" id="fnref:4" title="see footnote" class="footnote"><sup>4</sup></a> for normalization.</p>
+
+<p>Further discussion of <em>factbases</em> can be found at https://guitarvydas.github.io/2021/01/17/Factbases.html.</p>
+
+<h4 id="text">Text</h4>
+
+<p>Another simple normalized data format is <em>text</em>.</p>
+
+<p>The UNIX® tools achieved much of their utility from the fact that all input and output consisted of <em>lines of text</em>.</p>
+
+<p>The UNIX® tools worked with <em>lines of text</em> but became hard-to-use when the text was structured in some manner (e.g. scoped programming languages).</p>
+
+<p>Parsing technologies, such as PEG parsing, are a way to parse lightly-structured text.</p>
+
+<p>Note that <em>lines of text</em> and PEG-parsable <em>text</em> are very simple in format &#8212; i.e. they have little semantic content.</p>
+
+<p>Type-checking and other forms of checking for semantic content is missing from the lowest levels of UNIX® tools.</p>
+
+<p>Type checking can be added incrementally by inserting <em>filters</em> into the text-to-text pipelines.</p>
+
+<p>Type-checking can be done on an as-needed basis, by cascading a number of <em>filters</em> between the source and the destination ports of components.</p>
+
+<p>Software based on APIs is hard to bolt-together because APIs contain too much detail. This information is not discarded but is elided and deferred to <em>filters.</em></p>
+
+<h4 id="spreadsheetcells">Spreadsheet Cells</h4>
+
+<p>In this simple example, we want to convert general ledgers (GLs) from text format to spreadsheet format.</p>
+
+<p>Our intended output format is <em>anything</em> that fits in a spreadsheet cell, e.g. numbers, currency, dates, strings, booleans, etc.</p>
+
+<h1 id="outputting">Outputting</h1>
+
+<p>Outputting can be quite simple.</p>
+
+<p>I would suggest the use of Javascript back-tick syntax (which appears to have been inspired by /bin/sh, etc.).</p>
+
+<p>The utility of using <em>only</em> back-tick syntax can be seen in the Glue tool <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">https://guitarvydas.github.io/2021/04/11/Glue-Tool.html</a> (and the follow-on Grasem tool <a href="https://guitarvydas.github.io/2021/04/11/Grasem.html">https://guitarvydas.github.io/2021/04/11/Grasem.html</a>).</p>
+
+<p>I show an example of using the back-tick notation to perform real work, in 3 essays: <a href="https://guitarvydas.github.io/2021/04/12/Recursive-Iterative-Design-By-Example.html">https://guitarvydas.github.io/2021/04/12/Recursive-Iterative-Design-By-Example.html</a> and <a href="https://guitarvydas.github.io/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">https://guitarvydas.github.io/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html</a> and <a href="https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html)">https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html)</a>.</p>
+
+<p>Javascript&#8217;s back-tick notation is capable of calling functions and other complicated behaviours. It appears that the majority of use-cases simply need the text substitution capabilities of back-tick notation.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>E.G. to control a machine, a robot, a device, etc. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>PL means Programming Language. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>E.G. simple format is (1) factbases, or, (2) flat text, or, (3) structured text which is parsable using automation (e.g. with PEG). <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:4">
+<p>Further discussion at https://guitarvydas.github.io/2021/01/17/Factbases.html. <a href="#fnref:4" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
