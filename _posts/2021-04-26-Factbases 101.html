@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Factbases 101</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In this essay, I show two very simple factbases and their implementation in JavaScript, PROLOG and Lisp.</p>
+
+<p>Incidentally, the discussion shows how to begin compiling diagrams.</p>
+
+<h1 id="factbase">Factbase</h1>
+
+<p>id1 is a rectangle.</p>
+
+<p>id1 is at (x,y) position (20,10).</p>
+
+<p>id1 has width 120.</p>
+
+<p>id1 has height 80.</p>
+
+<h1 id="diagram">Diagram</h1>
+
+<figure>
+<img src="/assets/2021-04-26-12-07-59-Images/Rectangles-OneRectangle.png" alt="" id="rectangles-onerectangle" />
+<figcaption></figcaption>
+</figure>
+
+<h1 id="triples">Triples</h1>
+
+<p>A triple is</p>
+
+<p>relation (subject, object)</p>
+
+<p>no noise format:</p>
+
+<p>rectangle id1 null</p>
+
+<p>x id1 20</p>
+
+<p>y id1 10</p>
+
+<p>width id1 120</p>
+
+<p>height id1 80</p>
+
+<h1 id="javascript">JavaScript</h1>
+
+<p>var id1 = {kind: &#8220;rect&#8221;, x: 20, y: 10, width: 120, height: 80};</p>
+
+<p>or</p>
+
+<p>var fb = [{id: &#8220;id1&#8221;, kind: &#8220;rect&#8221;, x: 20, y: 10, width: 120, height: 80}];</p>
+
+<p>or</p>
+
+<p>var fb = [</p>
+
+<p>{relation: &#8220;rect&#8221;, subject: &#8220;id1&#8221;, object: null},</p>
+
+<p>{relation: &#8220;x&#8221;, subject: &#8220;id1&#8221;, object: 20},</p>
+
+<p>{relation: &#8220;y&#8221;, subject: &#8220;id1&#8221;, object: 10},</p>
+
+<p>{relation: &#8220;width&#8221;, subject: &#8220;id1&#8221;, object: 120},</p>
+
+<p>{relation: &#8220;height&#8221;, subject: &#8220;id1&#8221;, object: 80}</p>
+
+<p>];</p>
+
+<h1 id="prolog">PROLOG</h1>
+
+<p>rectangle(id1,nil).</p>
+
+<p>x(id1,10).</p>
+
+<p>y(id1,10).</p>
+
+<p>width(id1,15).</p>
+
+<p>height(id1,15).</p>
+
+<h1 id="lisp">Lisp</h1>
+
+<p>(rectangle id1 nil)</p>
+
+<p>(x id1 10)</p>
+
+<p>(y id1 10)</p>
+
+<p>(width id1 15)</p>
+
+<p>(height id1 15)</p>
+
+<h1 id="factbasewith2rectangles">Factbase With 2 Rectangles</h1>
+
+<p>id1 is a rectangle.</p>
+
+<p>id1 is at (x,y) position (10,10).</p>
+
+<p>id1 has width 15.</p>
+
+<p>id1 has height 15.</p>
+
+<p>id2 is a rectangle.</p>
+
+<p>id2 is at (x,y) position (9,15).</p>
+
+<p>id2 has width 2.</p>
+
+<p>id2 has height 2.</p>
+
+<h1 id="ref1">Diagram</h1>
+
+<figure>
+<img src="/assets/2021-04-26-12-07-59-Images/Rectangles-TwoRectangles.png" alt="" id="rectangles-tworectangles" />
+<figcaption></figcaption>
+</figure>
+
+<h1 id="tripleswith2rectangles">Triples With 2 Rectangles</h1>
+
+<p>rectangle id1 null</p>
+
+<p>x id1 10</p>
+
+<p>y id1 10</p>
+
+<p>width id1 15</p>
+
+<p>height id1 15</p>
+
+<p>rectangle id2 null</p>
+
+<p>x id2 9</p>
+
+<p>y id2 15</p>
+
+<p>width id2 2</p>
+
+<p>height id2 2</p>
+
+<h1 id="javascriptwith2rectangles">JavaScript With 2 Rectangles</h1>
+
+<p>var id1 = {kind: &#8220;rect&#8221;, x: 10, y: 10, width: 15, height: 15};</p>
+
+<p>var id2 = {kind: &#8220;rect&#8221;, x: 9, y: 15, width: 2, height: 2};</p>
+
+<p>or</p>
+
+<p>var fb = [</p>
+
+<p>{id: &#8220;id1&#8221;, kind: &#8220;rect&#8221;, x: 10, y: 10, width: 15, height: 15},</p>
+
+<p>{id: &#8220;id2&#8221;, kind: &#8220;rect&#8221;, x: 9, y: 15, width: 2, height: 2},</p>
+
+<p>];</p>
+
+<p>or</p>
+
+<p>var fb = [</p>
+
+<p>{relation: &#8220;rect&#8221;, subject: &#8220;id1&#8221;, object: null},</p>
+
+<p>{relation: &#8220;x&#8221;, subject: &#8220;id1&#8221;, object: 10},</p>
+
+<p>{relation: &#8220;y&#8221;, subject: &#8220;id1&#8221;, object: 10},</p>
+
+<p>{relation: &#8220;width&#8221;, subject: &#8220;id1&#8221;, object: 15},</p>
+
+<p>{relation: &#8220;height&#8221;, subject: &#8220;id1&#8221;, object: 15}</p>
+
+<p>{relation: &#8220;rect&#8221;, subject: &#8220;id2&#8221;, object: null},</p>
+
+<p>{relation: &#8220;x&#8221;, subject: &#8220;id2&#8221;, object: 9},</p>
+
+<p>{relation: &#8220;y&#8221;, subject: &#8220;id2&#8221;, object: 15},</p>
+
+<p>{relation: &#8220;width&#8221;, subject: &#8220;id2&#8221;, object: 2},</p>
+
+<p>{relation: &#8220;height&#8221;, subject: &#8220;id2&#8221;, object: 2}</p>
+
+<p>];</p>
+
+<h1 id="prologwith2rectangles">PROLOG With 2 Rectangles</h1>
+
+<p>rectangle(id1,nil).</p>
+
+<p>rectangle(id2,nil).</p>
+
+<p>x(id1,20).</p>
+
+<p>x(id2,10).</p>
+
+<p>y(id1,10).</p>
+
+<p>y(id2,40).</p>
+
+<p>width(id1,120).</p>
+
+<p>width(id2,20).</p>
+
+<p>height(id1,80).</p>
+
+<p>height(id2,20).</p>
+
+<p>In PROLOG, &#8220;or&#8221; relationships are most often written as multiple versions of a rule (PROLOG also has semi-colon syntax, but I won&#8217;t discuss it here).</p>
+
+<p>PROLOG wants all rules with the same name, bunched together.</p>
+
+<p>UNIX® <em>sort</em> can be used to group rules together.</p>
+
+<p>The above factbase is sorted, e.g. all rectangle rules appear sequentially, all width rules appear sequentially, etc.</p>
+
+<p>There is no requirement about the order in which rules must appear (e.g width rules could appear before rectangle rules, and so on). In the above example, sort has put rules in strict alphabetic order &#8212; this is not necessary, but is convenient (sort ensures that all rules are grouped together (required) <em>and</em> sort ensures that groups appear in alphabetic order (not required, but there is no harm in accepting what sort does)).</p>
+
+<h1 id="lispwith2rectangles">Lisp With 2 Rectangles</h1>
+
+<p>(rectangle id1 nil)</p>
+
+<p>(x id1 10)</p>
+
+<p>(y id1 10)</p>
+
+<p>(width id1 15)</p>
+
+<p>(height id1 15)</p>
+
+<p>(rectangle id2 nil)</p>
+
+<p>(x id2 9)</p>
+
+<p>(y id2 12)</p>
+
+<p>(width id2 2)</p>
+
+<p>(height id2 2)</p>
+
+<h1 id="obervations">Obervations</h1>
+
+<p>All forms encode the same information.</p>
+
+<p>JavaScript form 1 is human readable.</p>
+
+<p>The factbase form is less human readable (aka <em>ugly</em>). E.G. JavaScript form 1 is more human-readable than JavaScript form 3.</p>
+
+<p>Q: which forms are easier to automate? (aka to <em>script</em>)</p>
+
+<p>sub-Q: which forms are more machine-readable?</p>
+
+<p>[<em>Keep these questions in mind as we look at some queries</em>]</p>
+
+<h1 id="queries">Queries</h1>
+
+<p>[<em>We will deal only with the 2-rectangle factbases.</em>]</p>
+
+<p>Layer 0 queries:</p>
+
+<ol>
+<li>What id&#8217;s are rectangles?</li>
+<li>Is rectangle id1 bigger than rectangle id2?</li>
+<li>Is rectangle id2 bigger than rectangle id1?</li>
+<li>Does id1 intersect id2?</li>
+<li>Does id2 intersect id1?</li>
+</ol>
+
+<p>Answers:</p>
+
+<ol>
+<li>id1, id2</li>
+<li>yes</li>
+<li>no</li>
+<li>yes</li>
+<li>yes</li>
+</ol>
+
+<h1 id="sub-query-boundingboxes">Sub-Query - Bounding Boxes</h1>
+
+<p>Answering query (d) and (e) is easier if we create a bounding box for all rectangles first.</p>
+
+<p>A bounding box is</p>
+
+<ul>
+<li>left x</li>
+<li>top y</li>
+<li>right x</li>
+<li>bottom y.</li>
+</ul>
+
+<h1 id="javascriptqueries">JavaScript Queries</h1>
+
+<p>var id1 = {kind: &#8220;rect&#8221;, x: 10, y: 10, width: 15, height: 15};</p>
+
+<p>var id2 = {kind: &#8220;rect&#8221;, x: 9, y: 15, width: 2, height: 2};</p>
+
+<p>answerA = [];</p>
+
+<p>if (id1.kind === &#8220;rect&#8221;) {</p>
+
+<p>answerA.push (id1);</p>
+
+<p>}</p>
+
+<p>if (id2.kind === &#8220;rect&#8221;) {</p>
+
+<p>answerA.push (id2);</p>
+
+<p>}</p>
+
+<p>//console.log (answerA);</p>
+
+<p>/////</p>
+
+<p>var id1 = {id: &#8220;id1&#8221;, kind: &#8220;rect&#8221;, x: 10, y: 10, width: 15, height: 15};</p>
+
+<p>var id2 = {id: &#8220;id2&#8221;, kind: &#8220;rect&#8221;, x: 9, y: 15, width: 2, height: 2};</p>
+
+<p>answerAprimed = [];</p>
+
+<p>if (id1.kind === &#8220;rect&#8221;) {</p>
+
+<p>answerAprimed.push (id1);</p>
+
+<p>}</p>
+
+<p>if (id2.kind === &#8220;rect&#8221;) {</p>
+
+<p>answerAprimed.push (id2);</p>
+
+<p>}</p>
+
+<p>console.log (answerAprimed);</p>
+
+<p>for (r of answerAprimed) {</p>
+
+<p>console.log (r.id);</p>
+
+<p>}</p>
+
+<p>///////</p>
+
+<p>var fb = [</p>
+
+<p>{id: &#8220;id1&#8221;, kind: &#8220;rect&#8221;, x: 10, y: 10, width: 15, height: 15},</p>
+
+<p>{id: &#8220;id2&#8221;, kind: &#8220;rect&#8221;, x: 9, y: 15, width: 2, height: 2},</p>
+
+<p>];</p>
+
+<p>for (obj of fb) {</p>
+
+<p>if (obj.kind === &#8220;rect&#8221;) {</p>
+
+<p>console.log (obj.id);</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>/// query b ///</p>
+
+<p>/// is rectangle id1 bigger than rectangle id2? ///</p>
+
+<p>function area (obj) {</p>
+
+<p>var width = obj.width;</p>
+
+<p>var height = obj.height;</p>
+
+<p>return width * height;</p>
+
+<p>}</p>
+
+<p>function bigger (obj1, obj2) {</p>
+
+<p>var area1 = area (obj1);</p>
+
+<p>var area2 = area (obj2);</p>
+
+<p>return (area1 &gt; area2);</p>
+
+<p>}</p>
+
+<p>function fetch (id) {</p>
+
+<p>return fb.find (obj =&gt; id === obj.id);</p>
+
+<p>}</p>
+
+<p>console.log ();</p>
+
+<p>console.log (`(b) id1 is bigger than id1: ${bigger(fetch (&#8220;id1&#8221;), fetch (&#8220;id2&#8221;))}`);</p>
+
+<p>/// query (c)</p>
+
+<p>console.log (`(c) id2 is bigger than id1: ${bigger(fetch (&#8220;id2&#8221;), fetch (&#8220;id1&#8221;))}`);</p>
+
+<p>//////// sub-query - bounding boxes //////////</p>
+
+<p>for (obj of fb) {</p>
+
+<p>if (obj.kind === &#8220;rect&#8221;) {</p>
+
+<p>obj.bounding_box_left = obj.x;</p>
+
+<p>obj.bounding_box_top = obj.y;</p>
+
+<p>obj.bounding_box_right = obj.x + obj.width;</p>
+
+<p>obj.bounding_box_bottom = obj.y + obj.height;</p>
+
+<p>}</p>
+
+<p>//console.log (obj);</p>
+
+<p>}</p>
+
+<p>function intersects (subject, object) {</p>
+
+<p>// left side</p>
+
+<p>if (subject.bounding_box_left &lt;= object.bounding_box_left) {</p>
+
+<p>if (subject.bounding_box_right &gt;= object.bounding_box_left) {</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>};</p>
+
+<p>// right side</p>
+
+<p>if (subject.bounding_box_left &lt;= object.bounding_box_right) {</p>
+
+<p>if (subject.bounding_box_right &gt;= object.bounding_box_right) {</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>};</p>
+
+<p>// top</p>
+
+<p>if (subject.bounding_box_top &lt;= object.bounding_box_top) {</p>
+
+<p>if (subject.bounding_box_bottom &gt;= object.bounding_box_top) {</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>};</p>
+
+<p>// bottom</p>
+
+<p>if (subject.bounding_box_top &lt;= object.bounding_box_bottom) {</p>
+
+<p>if (subject.bounding_box_bottom &gt;= object.bounding_box_bottom) {</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>};</p>
+
+<p>return false;</p>
+
+<p>}</p>
+
+<p>console.log (`(d) id1 intersects id2: ${intersects (fetch (&#8220;id1&#8221;), fetch (&#8220;id2&#8221;))}`);</p>
+
+<p>console.log (`(e) id1 intersects id2: ${intersects (fetch (&#8220;id2&#8221;), fetch (&#8220;id1&#8221;))}`);</p>
+
+<h1 id="prologqueries">PROLOG Queries</h1>
+
+<p>rectangle(id1,nil).</p>
+
+<p>rectangle(id2,nil).</p>
+
+<p>x(id1,20).</p>
+
+<p>x(id2,10).</p>
+
+<p>y(id1,10).</p>
+
+<p>y(id2,40).</p>
+
+<p>width(id1,120).</p>
+
+<p>width(id2,20).</p>
+
+<p>height(id1,80).</p>
+
+<p>height(id2,20).</p>
+
+<p>main(Intersections) :-</p>
+
+<p>setof([IDa,IDb],intersects(IDa,IDb),Intersections).</p>
+
+<p>area(Subject,A) :-</p>
+
+<p>width(Subject,W),</p>
+
+<p>height(Subject,H),</p>
+
+<p>A is H * W.</p>
+
+<p>bigger(Subject, Object) :-</p>
+
+<p>area(Subject,As),</p>
+
+<p>area(Object,Os),</p>
+
+<p>As &gt; Os.</p>
+
+<p>left(R,X1) :- x(R,X1).</p>
+
+<p>top(R,Y1) :- y(R,Y1).</p>
+
+<p>right(R,X2) :- x(R,X1),width(R,W),X2 is X1 + W.</p>
+
+<p>bottom(R,Y2) :- y(R,Y1),height(R,H),Y2 is Y1 + H.</p>
+
+<p>% left side</p>
+
+<p>intersects(Subject,Object) :-</p>
+
+<p>dif(Subject,Object),</p>
+
+<p>left(Subject,SubjX1),</p>
+
+<p>left(Object,ObjX1),</p>
+
+<p>SubjX1 =&lt; ObjX1,</p>
+
+<p>right(Subject,SubjX2),</p>
+
+<p>SubjX2 &gt;= ObjX1.</p>
+
+<p>% right side</p>
+
+<p>intersects(Subject,Object) :-</p>
+
+<p>dif(Subject,Object),</p>
+
+<p>left(Subject,SubjX1),</p>
+
+<p>right(Object,ObjX2),</p>
+
+<p>SubjX1 =&lt; ObjX2,</p>
+
+<p>right(Subject,SubjX2),</p>
+
+<p>SubjX2 &gt;= ObjX2.</p>
+
+<p>% top</p>
+
+<p>intersects(Subject,Object) :-</p>
+
+<p>dif(Subject,Object),</p>
+
+<p>top(Subject,SubjY1),</p>
+
+<p>top(Object,ObjY1),</p>
+
+<p>SubjY1 =&lt; ObjY1,</p>
+
+<p>bottom(Subject,SubjY2),</p>
+
+<p>SubjY2 =&lt; ObjY1.</p>
+
+<p>% bottom</p>
+
+<p>intersects(Subject,Object) :-</p>
+
+<p>dif(Subject,Object),</p>
+
+<p>top(Subject,SubjY1),</p>
+
+<p>bottom(Object,ObjY2),</p>
+
+<p>SubjY1 =&lt; ObjY2,</p>
+
+<p>bottom(Subject,SubjY2),</p>
+
+<p>SubjY2 =&lt; ObjY2.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h2 id="prologbasics-capitalization">PROLOG Basics - Capitalization</h2>
+
+<p>PROLOG uses capitalization to differentiate between Logic Variables and everything else. Logic Variables begin with capital letters, and everything else begins with lower-case letters.</p>
+
+<p>A Logic Variable is much like a variable in most languages, but, Logic Variables take on possibly many different values during exhaustive search.</p>
+
+<p>Logic Variables capture snapshots during matching. A single logic variable can hold only one value at a time, but that value might change during each wave of pattern matching (see below).</p>
+
+<h2 id="prologbasics-exhaustivesearch">PROLOG Basics - Exhaustive Search</h2>
+
+<p>PROLOG matches patterns in waves.</p>
+
+<p>Each wave matches one specific instance of the pattern.</p>
+
+<p>Each wave sets Logic Variables to single specific values, but the values might be different in each wave.</p>
+
+<p>For example, let us consider the query</p>
+
+<p>x(ID,Value).</p>
+
+<p>The first pattern-matching wave returns X=id1 and Value = 20.</p>
+
+<p>The second pattern-matching wave returns X=id2 and Value = 10.</p>
+
+<p>[<em>At the REPL, we can ask to see successive waves using a semi-colon.</em>]</p>
+
+<h2 id="prologbasics-rules">PROLOG Basics - Rules</h2>
+
+<p>PROLOG programs consist of <em>rules</em> of the form</p>
+
+<p>head(&#8230;) :- body(&#8230;).</p>
+
+<p>Rules are almost like <em>functions</em> in other languages, except that <em>low-level</em> <em>operations</em> can appear in the left-hand side as well as in the right-hand side.</p>
+
+<p>Rules specify assertions about the problem space and allow the PROLOG engine to decide how to implement the details. Assertions are <em>declarative</em>.</p>
+
+<p>For example, the definition of the <em>member</em> rule in PROLOG might be</p>
+
+<p>member(X, [X|_]).</p>
+
+<p>member(X, [_|Rest]) :- member(X, Rest).</p>
+
+<p>Here, we assert that there are two OR&#8217;ed-together rules that define list membership. The first rule says that X is a member of a list if X is the head of a list. Otherwise, recur using the second rule. The second rule says that X is a member of a list, if X is the member of the smaller list &#8220;Rest&#8221; (the head is peeled off leaving a smaller list).</p>
+
+<h2 id="prologbasics-and">PROLOG Basics - AND</h2>
+
+<p>In PROLOG, the AND of two rules is signified by a comma (,).</p>
+
+<h2 id="prologbasics-or">PROLOG Basics - OR</h2>
+
+<p>In PROLOG, the OR of two rules is signified by repetition of the rule with slightly different body code.</p>
+
+<h2 id="prologbasics-ruleclustering">PROLOG Basics - Rule Clustering</h2>
+
+<p>In PROLOG, all rules that have the same name must be clustered together.</p>
+
+<h2 id="prologbasics-arity">PROLOG Basics - Arity</h2>
+
+<p>In PROLOG, rules are denoted by the number of arguments they take. The number of arguments is call <em>arity</em>. Internally, rules are denoted as name/N, where N is the <em>arity.</em></p>
+
+<p>For example, in the above member rules, the rules are internally called member/2.</p>
+
+<p>Because rules are name-mangled to include their arity, it is possible to have rules that look the same in the source code, but have different arities.</p>
+
+<h2 id="prologbasics-two-wayevaluation">PROLOG Basics - Two-Way Evaluation</h2>
+
+<p>Because PROLOG rules<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> cannot specify implementation, PROLOG rules can run in two directions.</p>
+
+<p>This seems unusual, at first, to programmers who are accustomed to using popular languages like Python, Javascript, /bin/sh, etc.</p>
+
+<p>An extreme form of the use of relational two-way evaluation can be seen in the Barliman project<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a>.</p>
+
+<p>A less-extreme version is the ability to create various queries at the PROLOG REPL. For example, we could write</p>
+
+<p>rectangle(ID,_).</p>
+
+<p>and get two results (ID=id1 and ID=id2) at the REPL<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a>.</p>
+
+<h2 id="reading">Reading</h2>
+
+<h2 id="declarations">Declarations</h2>
+
+<p>The first 10 lines define the facts. Each fact is of the form relation(Subject,Object).</p>
+
+<p>rectangle(id1,nil).</p>
+
+<p>rectangle(id2,nil).</p>
+
+<p>x(id1,20).</p>
+
+<p>x(id2,10).</p>
+
+<p>y(id1,10).</p>
+
+<p>y(id2,40).</p>
+
+<p>width(id1,120).</p>
+
+<p>width(id2,20).</p>
+
+<p>height(id1,80).</p>
+
+<p>height(id2,20).</p>
+
+<p>The rectangle facts declare the existence of two rectangles, id1 and id2. The <em>object</em> is nil in these cases &#8212; no further data is supplied in the declarations.</p>
+
+<p>The x(), y(), width() and height() facts associate an integer with each of the dimensions of the rectangles.</p>
+
+<p>In imperative languages, we might have written<a href="#fn:4" id="fnref:4" title="see footnote" class="footnote"><sup>4</sup></a>:</p>
+
+<p>var id1 : rectangle;</p>
+
+<p>id1.x = 20;</p>
+
+<p>id1.y = 10;</p>
+
+<p>id1.width = 120;</p>
+
+<p>id1.height = 80;</p>
+
+<p>but, that would have been too structured for my liking. (PROLOG lets one express these relationships more succinctly, but I desire a machine-readable normal form, and like with assembler, human-readability is secondary).</p>
+
+<p>Note that the ID (id1 and id2) in a factbase acts like an <em>object-pointer</em> in other languages. Using <em>object+attributes</em> makes sense from a <em>human</em>-readability perspective, but normalizing <em>everything</em> makes more sense from a <em>machine</em>-readability perspective. In this case, the <em>pointer</em> is the <em>Subject</em> of most facts, and, everything is expressed in relation(Subject,Object) form. There is no concept of <em>pointers</em> vs. <em>attributes</em> in the <em>machine</em>-readable version<a href="#fn:5" id="fnref:5" title="see footnote" class="footnote"><sup>5</sup></a>.</p>
+
+<h2 id="boundingboxes">Bounding Boxes</h2>
+
+<p>The rules <em>left, top, right</em> and <em>bottom</em> define the rules for bounding boxes for rectangles (we might need to embellish these rules if we were to add ellipses and other kinds of shapes).</p>
+
+<h2 id="area">Area</h2>
+
+<p>The rule <em>area</em> defines a way to calculate the area of a rectangle.</p>
+
+<h2 id="bigger">Bigger</h2>
+
+<p>The rule <em>bigger</em> shows one way<a href="#fn:6" id="fnref:6" title="see footnote" class="footnote"><sup>6</sup></a> to determine if one rectangle is bigger than another.</p>
+
+<h2 id="intersects">Intersects</h2>
+
+<p>The <em>intersects</em> rule is defined in 4 variants.</p>
+
+<p>The first variant fires and succeeds if:</p>
+
+<ul>
+<li>Subject and Object are not the same rectangle (dif())</li>
+<li>subject.x1 &lt;= object.x1, and,</li>
+<li>subject.x2 &gt;= object.x1.</li>
+</ul>
+
+<p>The other variants are similar.</p>
+
+<p>[<em>Again, the rules are, intentionally, over-simplifications. See my further essay(s) on this subject for a more detailed description of the calculation and design rules for intersection.</em>]</p>
+
+<h2 id="runningtheprologquery">Running the PROLOG Query</h2>
+
+<p>To run the PROLOG factbase queries:</p>
+
+<p>&gt; swipl</p>
+
+<p>?- consult(fb).</p>
+
+<p>?- main(X).</p>
+
+<h2 id="exhaustivesearchisastrangebeast">Exhaustive Search is a Strange Beast</h2>
+
+<p>Exhaustive search can provide some surprises to mortal programmers.</p>
+
+<p>For example, if we change main to:</p>
+
+<p>main(Intersections) :-</p>
+
+<p>bagof([IDa,IDb],intersects(IDa,IDb),Intersections).</p>
+
+<p>we get</p>
+
+<p>Intersections = [[id2, id1], [id1, id2], [id2, id1]].</p>
+
+<p>noting that [id2, id1] appears twice in the result. [<em>We changed</em> setof <em>to</em> bagof, <em>that&#8217;s all.]</em></p>
+
+<p>Why does [id2,id1] appear twice? Id2 intersects id1 with id2&#8217;s top and id2&#8217;s bottom. Exhaustive search gives us <em>all</em> of the possible answers.</p>
+
+<p>The <em>setof</em> call sorts and unique-ifies the answer set. We could also have used PROLOG <em>cut</em> (see PROLOG documentation) to stop matching after the first successful result.</p>
+
+<p>BTW, we could have just written a query at the REPL:</p>
+
+<p>intersects(IDa,IDb).</p>
+
+<p>(and ask for multiple results by hitting the semi-colon key, until there are no more results).</p>
+
+<p>[<em>FYI - the Haskell language and friends, riff on this idea of pattern matching and exhaustive search. Compiler technology &#8212; parsing in particular &#8212; riffed on the ideas of pattern matching decades ago. PEG is pattern matching with backtracking.</em>]</p>
+
+<h1 id="engineering">Engineering</h1>
+
+<p>Engineers must consider details that are glossed-over by Architects.</p>
+
+<p>(This is not a bad thing. Architects need to elide details to be able to think about the designs. Engineers dot the I&#8217;s and cross the T&#8217;s. This same kind of elision happens in other fields, for example mathematics &#8212; math equations are usually kept terse (using single-letter names) to allow thinking about the bigger picture.).</p>
+
+<p>For example, engineers must consider&#8230;</p>
+
+<p>What if either rectangle is a point?</p>
+
+<p>What if any line is a point?</p>
+
+<p>What if lines are parallel?</p>
+
+<ul>
+<li>Top and Bottom should be parallel.</li>
+<li>Left and Right should be parallel.</li>
+<li>What if Top is parallel to Left?</li>
+<li>Etc.</li>
+</ul>
+
+<p>[<em>Side note: Currently, programmers do all of the tasks, Architecture, Engineering, Implementation, Testing. Some people are better at Architecture. Some are better at Engineering. Some are better at Implementation. Some are better (more evil) at testing. Currently, we pay programmers at a high rate to consider all of the tasks &#8220;at once&#8221;. This could be cost-reduced by introducing stratification and layering to the organizations. An example would be the stratification that has evolved in building construction.</em>]</p>
+
+<h2 id="optimizationengineering">Optimization Engineering</h2>
+
+<p>What about efficiency?</p>
+
+<p>Rearrange lines to give better performance?</p>
+
+<p>Use cut? (Cut is considered to be impure).</p>
+
+<h1 id="meta-question">Meta-Question</h1>
+
+<p>The answers to the above queries are &#8220;obvious&#8221; &#8212; we just eye-ball the factbase &#8212; but, how can we write code such that the computer can derive these answers for us?</p>
+
+<p>When we get into production level factbases, we might have lots of rectangles and we might miss eye-balling some relationships and queries.<a href="#fn:7" id="fnref:7" title="see footnote" class="footnote"><sup>7</sup></a></p>
+
+<p>Humans are notoriously bad at repetitive tasks such as this. Computers are great at doing repetitive tasks.</p>
+
+<p>How can we write programs that will answer these repetitive queries, so we don&#8217;t have to do the work ourselves?</p>
+
+<p>Answer: automate, write scripts, write pipelines.</p>
+
+<p>Use automation stacked upon other automation stacked upon other automation and so on. Layers and layers of automation.</p>
+
+<p>So, the meta-meta-question becomes &#8212; what makes it easy to write automation scripts?</p>
+
+<p>We are lazy &#8212; what is the easiest way to stack scripts?</p>
+
+<p>[<em>Side note: whatever we are doing now doesn&#8217;t stack very well, and we are hitting a wall. APIs are just too complicated to stack effectively.</em><a href="#fn:8" id="fnref:8" title="see footnote" class="footnote"><sup>8</sup></a> <em>We&#8217;ve tried structuring data to make it understandable, but that has its limits, too. The more that the data is structured, the less machine-readable it becomes, hence, the harder it becomes to write scripts. Edge-cases kill opportunities for automation.</em>]</p>
+
+<p>Compiler-writers have been figuring this stuff out, but they are interested in job security and want to make it look too complicated for use by mere mortals.<a href="#fn:9" id="fnref:9" title="see footnote" class="footnote"><sup>9</sup></a></p>
+
+<p>Someone released REGEX from its compiler-writers' cage and it is useful.</p>
+
+<p>What&#8217;s next?</p>
+
+<h1 id="queries-components">Queries - Components</h1>
+
+<h2 id="gedankenexperiment:">Gedanken experiment:</h2>
+
+<p>Let us <em>adopt</em> the <em>convention</em> that only the biggest rectangles represent software components.</p>
+
+<p>Queries:</p>
+
+<ol>
+<li>What are the ids of all of the software components?</li>
+</ol>
+
+<p>Answers</p>
+
+<ol>
+<li>id1.</li>
+</ol>
+
+<p>How did we arrive at this answer?</p>
+
+<p>Sub-queries:</p>
+
+<p>A rectangle is big if it has no<a href="#fn:10" id="fnref:10" title="see footnote" class="footnote"><sup>10</sup></a> other rectangles bigger than it.</p>
+
+<p>forall rectangles R</p>
+
+<p>forall rectangles X, <em>different</em> from R</p>
+
+<p>if isBigger(X,R) then</p>
+
+<p>R is definitely not a Component, and,</p>
+
+<p>X might be a Component</p>
+
+<p>then, forall rectangles Y</p>
+
+<p>if mightBeAComponent(Y) then</p>
+
+<p>Y is a Component</p>
+
+<p>[<em>FYI - exhaustive search of the first set of foralls guarantees that all left-overs must be Components</em>]</p>
+
+<p><em>meta-question</em>: can you do the above queries without using flags?</p>
+
+<p><em>answer</em>: no, you have to use flags, but, maybe you can elide the flags (different wording: maybe the computer can set the flags for you, because humans are bad at this sort of thing)</p>
+
+<p>[<em>spoiler: PROLOG does this kind of exhaustive search and sets bookmarks, but you don&#8217;t have to worry about the bookmarking, PROLOG does it for you</em>. <em>MiniKanren (core.logic) does bookmarking, too. [PROLOG and miniKanren create bookmarks in different ways, but you don&#8217;t need to worry about this kind of detail. [Lisp (&#8230;/cc, &#8220;On Lisp&#8221;, etc.) gives you the raw materials for creating bookmarks, but you still have to write the code. Assembler gives you the raw materials, too, but you have to write even more code.]]</em>]</p>
+
+<h1 id="queries-ports">Queries - Ports</h1>
+
+<h2 id="gedankenexperimentcontinued:">Gedanken experiment (continued):</h2>
+
+<p>Let us <em>adopt</em> the <em>convention</em> that only smaller rectangles are ports.</p>
+
+<p>(N.B. port-ness is still inconclusive &#8212; we will want to know whether a port is <em>input</em> or <em>output</em>, but I regress).</p>
+
+<p>Queries:</p>
+
+<ol>
+<li>What are the ids of all of the ports?</li>
+<li>Who &#8220;owns&#8221; which ports?</li>
+</ol>
+
+<p>Answers</p>
+
+<ol>
+<li>id2.</li>
+<li>id2 is a port of id1. In other words: id1 owns port id2.</li>
+</ol>
+
+<p>How did we arrive at this answer?</p>
+
+<p>In PROLOG, we can write</p>
+
+<p>port(Port,Owner) :-</p>
+
+<p>rectangle(Port,_),</p>
+
+<p>rectangle(Owner,_),</p>
+
+<p>bigger(Owner,Port).</p>
+
+<p>and use the query</p>
+
+<p>port(P,O).</p>
+
+<p>to find all ports and their owners.</p>
+
+<h1 id="appendix-searching">Appendix - Searching</h1>
+
+<p>miniKanren: <a href="http://minikanren.org">http://minikanren.org</a></p>
+
+<p>Scheme - miniKanren</p>
+
+<p>Scheme - a simple version of PROLOG is available at <a href="https://www.t3x.org/bits/prolog6.html">https://www.t3x.org/bits/prolog6.html</a></p>
+
+<p>JavaScript - <a href="https://github.com/guitarvydas/js-match">https://github.com/guitarvydas/js-match</a></p>
+
+<p>Clojure - core.logic</p>
+
+<p>PROLOG - <a href="https://www.swi-prolog.org/">https://www.swi-prolog.org/</a></p>
+
+<p>Getting started with PROLOG pattern matching - https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;t=195s</p>
+
+<h1 id="appendix-githubcode">Appendix - Github Code</h1>
+
+<p><a href="https://github.com/guitarvydas/factbases-101">https://github.com/guitarvydas/factbases-101</a></p>
+
+<h1 id="appendix-compilingdiagrams">Appendix - Compiling Diagrams</h1>
+
+<p>Compiling diagrams consists of 2 steps:</p>
+
+<ol>
+<li>normalize the diagram to a factbase</li>
+<li>query the factbase, recursively, to create more-and-more-interesting facts.</li>
+</ol>
+
+<p>In the above, I have shown how to represent rectangles in a factbase.</p>
+
+<p>Let us assume that we are using a notation that needs only:</p>
+
+<ul>
+<li>rectangles</li>
+<li>lines</li>
+<li>text.</li>
+</ul>
+
+<p>FYI &#8212; I have found this simple combination enough to express concurrency&#8230;</p>
+
+<ul>
+<li>rectangles represent concurrent Software Components</li>
+<li>lines represent messages<a href="#fn:11" id="fnref:11" title="see footnote" class="footnote"><sup>11</sup></a> (data flow) between Software Components</li>
+<li>text represents code and comments.</li>
+</ul>
+
+<p>[<em>N.B. Software Components are not implemented using CALL / RETURN only. See my other essay <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a>]</em></p>
+
+<p>Questions:</p>
+
+<ul>
+<li>How to internally represent rectangles (see <em>bounding boxes</em> above)?</li>
+<li>How to internally represent lines? (We only care about the start points of lines and the end points of lines ; do we create bounding boxes for lines or use special edge-case code for lines?]</li>
+<li>How to internally represent code (code is not automatically sequential, blocks of code are found at various (x,y) points, what does <em>that</em> mean?).</li>
+</ul>
+
+<p>We can compile diagrams in successive layers:</p>
+
+<ol>
+<li>layer 0 is the actual drawing converted to FB (factbase) form</li>
+<li>layer 1 infers bounding boxes and augments the FB with this information</li>
+<li>layer 2 infers which rectangles are Software Components and augments the FB with this information</li>
+<li>layer 3 infers which rectangles are Ports and augments the FB</li>
+<li>layer 4 infers the Owner for each Port</li>
+<li>layer 5 visits every Port and infers whether the port is <em>input</em> or <em>output</em>. Q: What is the convention for this? The shape of the port (e.g. circles for inputs, squares for outputs) or, maybe the colour (green for inputs, yellow for outputs) and so on.</li>
+<li>&#8230;</li>
+</ol>
+
+<p>Q: How much information must be in the FB before we can emit code using information in the FB?</p>
+
+<p>Q: Is this information language-specific? E.G. if we know that we are going to emit code in Lisp, do we need more/less information than if we are going to emit code in, say, Python?</p>
+
+<p>Q: Do we grow the FB knowledge-base over time or design it in one-fell-swoop at the beginning of the project(s)?</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Rules specify only the result (the assertions). <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>https://www.youtube.com/watch?v=er_lLvkklsk <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>In SWIPL, one needs to enter the semi&#8211;colon to receive successive match waves and to see the various results of each wave. <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:4">
+<p>pseudo&#8211;code <a href="#fnref:4" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:5">
+<p>If we wanted to look at objects + attributes, we could just write an SCN that gave us that view (aka skin) on the data. <a href="#fnref:5" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:6">
+<p>Again, I am simplifying in an attempt to maintain readability. A production version of the rules in this essay would need to handle more edge&#8211;cases and shapes. <a href="#fnref:6" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:7">
+<p>Furthermore, we might choose to include other kinds of objects, e.g. ellipses. <a href="#fnref:7" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:8">
+<p>meta&#8211;meta&#8211;observation: we solve complicated problems by adding complication. <a href="#fnref:8" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:9">
+<p>meta&#8211;meta&#8211;question: Why do we do DRY by hand? Why can't git detect code clones for us? Beginners like RY &#8211; they want to copy/paste cookbook code. <a href="#fnref:9" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:10">
+<p>Notice that our convention is that diagrams of components cannot contain other diagrams in&#8211;place. We need to switch to other diagrams to show deep&#8211;ness. In this notation, every diagram has 2 layers: (1) the top level and (2) an inner level. There is never an inner&#8211;inner level (such a thing can exist but cannot be shown on the same diagram &#8211; the editor should allow us to dive into and out&#8211;of diagram layers &#8211; much like the BACK button on browsers). <a href="#fnref:10" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:11">
+<p>Dynamically changing data flow is a bad thing IMO. Dynamic &lt;anything&gt; leads to trouble (esp. maintenance and debugging). https://guitarvydas.github.io/2021/03/06/Dynamic&#8211;Anything&#8211;is&#8211;Bad.html. IMO, data flows must be represented explicitly, for example, as arrows. <a href="#fnref:11" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
