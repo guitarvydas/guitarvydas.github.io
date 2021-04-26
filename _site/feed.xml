@@ -1,1058 +1,755 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T12:08:00-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T12:11:51-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
 &lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Factbases 101&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Factbases 101&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-26T12:11:30Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-26T12:11:30Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {text-decoration: underline}
+    span.s3 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ol.ol1 {list-style-type: lower-alpha}
+    ol.ol2 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-
-&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;In this essay, I show two very simple factbases and their implementation in JavaScript, PROLOG and Lisp.&lt;/p&gt;
-
-&lt;p&gt;Incidentally, the discussion shows how to begin compiling diagrams.&lt;/p&gt;
-
-&lt;h1 id=&quot;factbase&quot;&gt;Factbase&lt;/h1&gt;
-
-&lt;p&gt;id1 is a rectangle.&lt;/p&gt;
-
-&lt;p&gt;id1 is at (x,y) position (20,10).&lt;/p&gt;
-
-&lt;p&gt;id1 has width 120.&lt;/p&gt;
-
-&lt;p&gt;id1 has height 80.&lt;/p&gt;
-
-&lt;h1 id=&quot;diagram&quot;&gt;Diagram&lt;/h1&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;/assets/2021-04-26-12-07-59-Images/Rectangles-OneRectangle.png&quot; alt=&quot;&quot; id=&quot;rectangles-onerectangle&quot; /&gt;
-&lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h1 id=&quot;triples&quot;&gt;Triples&lt;/h1&gt;
-
-&lt;p&gt;A triple is&lt;/p&gt;
-
-&lt;p&gt;relation (subject, object)&lt;/p&gt;
-
-&lt;p&gt;no noise format:&lt;/p&gt;
-
-&lt;p&gt;rectangle id1 null&lt;/p&gt;
-
-&lt;p&gt;x id1 20&lt;/p&gt;
-
-&lt;p&gt;y id1 10&lt;/p&gt;
-
-&lt;p&gt;width id1 120&lt;/p&gt;
-
-&lt;p&gt;height id1 80&lt;/p&gt;
-
-&lt;h1 id=&quot;javascript&quot;&gt;JavaScript&lt;/h1&gt;
-
-&lt;p&gt;var id1 = {kind: &amp;#8220;rect&amp;#8221;, x: 20, y: 10, width: 120, height: 80};&lt;/p&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;p&gt;var fb = [{id: &amp;#8220;id1&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 20, y: 10, width: 120, height: 80}];&lt;/p&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;p&gt;var fb = [&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;rect&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: null},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;x&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 20},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;y&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 10},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;width&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 120},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;height&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 80}&lt;/p&gt;
-
-&lt;p&gt;];&lt;/p&gt;
-
-&lt;h1 id=&quot;prolog&quot;&gt;PROLOG&lt;/h1&gt;
-
-&lt;p&gt;rectangle(id1,nil).&lt;/p&gt;
-
-&lt;p&gt;x(id1,10).&lt;/p&gt;
-
-&lt;p&gt;y(id1,10).&lt;/p&gt;
-
-&lt;p&gt;width(id1,15).&lt;/p&gt;
-
-&lt;p&gt;height(id1,15).&lt;/p&gt;
-
-&lt;h1 id=&quot;lisp&quot;&gt;Lisp&lt;/h1&gt;
-
-&lt;p&gt;(rectangle id1 nil)&lt;/p&gt;
-
-&lt;p&gt;(x id1 10)&lt;/p&gt;
-
-&lt;p&gt;(y id1 10)&lt;/p&gt;
-
-&lt;p&gt;(width id1 15)&lt;/p&gt;
-
-&lt;p&gt;(height id1 15)&lt;/p&gt;
-
-&lt;h1 id=&quot;factbasewith2rectangles&quot;&gt;Factbase With 2 Rectangles&lt;/h1&gt;
-
-&lt;p&gt;id1 is a rectangle.&lt;/p&gt;
-
-&lt;p&gt;id1 is at (x,y) position (10,10).&lt;/p&gt;
-
-&lt;p&gt;id1 has width 15.&lt;/p&gt;
-
-&lt;p&gt;id1 has height 15.&lt;/p&gt;
-
-&lt;p&gt;id2 is a rectangle.&lt;/p&gt;
-
-&lt;p&gt;id2 is at (x,y) position (9,15).&lt;/p&gt;
-
-&lt;p&gt;id2 has width 2.&lt;/p&gt;
-
-&lt;p&gt;id2 has height 2.&lt;/p&gt;
-
-&lt;h1 id=&quot;ref1&quot;&gt;Diagram&lt;/h1&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;/assets/2021-04-26-12-07-59-Images/Rectangles-TwoRectangles.png&quot; alt=&quot;&quot; id=&quot;rectangles-tworectangles&quot; /&gt;
-&lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h1 id=&quot;tripleswith2rectangles&quot;&gt;Triples With 2 Rectangles&lt;/h1&gt;
-
-&lt;p&gt;rectangle id1 null&lt;/p&gt;
-
-&lt;p&gt;x id1 10&lt;/p&gt;
-
-&lt;p&gt;y id1 10&lt;/p&gt;
-
-&lt;p&gt;width id1 15&lt;/p&gt;
-
-&lt;p&gt;height id1 15&lt;/p&gt;
-
-&lt;p&gt;rectangle id2 null&lt;/p&gt;
-
-&lt;p&gt;x id2 9&lt;/p&gt;
-
-&lt;p&gt;y id2 15&lt;/p&gt;
-
-&lt;p&gt;width id2 2&lt;/p&gt;
-
-&lt;p&gt;height id2 2&lt;/p&gt;
-
-&lt;h1 id=&quot;javascriptwith2rectangles&quot;&gt;JavaScript With 2 Rectangles&lt;/h1&gt;
-
-&lt;p&gt;var id1 = {kind: &amp;#8220;rect&amp;#8221;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
-
-&lt;p&gt;var id2 = {kind: &amp;#8220;rect&amp;#8221;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;p&gt;var fb = [&lt;/p&gt;
-
-&lt;p&gt;{id: &amp;#8220;id1&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 10, y: 10, width: 15, height: 15},&lt;/p&gt;
-
-&lt;p&gt;{id: &amp;#8220;id2&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 9, y: 15, width: 2, height: 2},&lt;/p&gt;
-
-&lt;p&gt;];&lt;/p&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;p&gt;var fb = [&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;rect&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: null},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;x&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 10},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;y&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 10},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;width&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 15},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;height&amp;#8221;, subject: &amp;#8220;id1&amp;#8221;, object: 15}&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;rect&amp;#8221;, subject: &amp;#8220;id2&amp;#8221;, object: null},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;x&amp;#8221;, subject: &amp;#8220;id2&amp;#8221;, object: 9},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;y&amp;#8221;, subject: &amp;#8220;id2&amp;#8221;, object: 15},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;width&amp;#8221;, subject: &amp;#8220;id2&amp;#8221;, object: 2},&lt;/p&gt;
-
-&lt;p&gt;{relation: &amp;#8220;height&amp;#8221;, subject: &amp;#8220;id2&amp;#8221;, object: 2}&lt;/p&gt;
-
-&lt;p&gt;];&lt;/p&gt;
-
-&lt;h1 id=&quot;prologwith2rectangles&quot;&gt;PROLOG With 2 Rectangles&lt;/h1&gt;
-
-&lt;p&gt;rectangle(id1,nil).&lt;/p&gt;
-
-&lt;p&gt;rectangle(id2,nil).&lt;/p&gt;
-
-&lt;p&gt;x(id1,20).&lt;/p&gt;
-
-&lt;p&gt;x(id2,10).&lt;/p&gt;
-
-&lt;p&gt;y(id1,10).&lt;/p&gt;
-
-&lt;p&gt;y(id2,40).&lt;/p&gt;
-
-&lt;p&gt;width(id1,120).&lt;/p&gt;
-
-&lt;p&gt;width(id2,20).&lt;/p&gt;
-
-&lt;p&gt;height(id1,80).&lt;/p&gt;
-
-&lt;p&gt;height(id2,20).&lt;/p&gt;
-
-&lt;p&gt;In PROLOG, &amp;#8220;or&amp;#8221; relationships are most often written as multiple versions of a rule (PROLOG also has semi-colon syntax, but I won&amp;#8217;t discuss it here).&lt;/p&gt;
-
-&lt;p&gt;PROLOG wants all rules with the same name, bunched together.&lt;/p&gt;
-
-&lt;p&gt;UNIX® &lt;em&gt;sort&lt;/em&gt; can be used to group rules together.&lt;/p&gt;
-
-&lt;p&gt;The above factbase is sorted, e.g. all rectangle rules appear sequentially, all width rules appear sequentially, etc.&lt;/p&gt;
-
-&lt;p&gt;There is no requirement about the order in which rules must appear (e.g width rules could appear before rectangle rules, and so on). In the above example, sort has put rules in strict alphabetic order &amp;#8212; this is not necessary, but is convenient (sort ensures that all rules are grouped together (required) &lt;em&gt;and&lt;/em&gt; sort ensures that groups appear in alphabetic order (not required, but there is no harm in accepting what sort does)).&lt;/p&gt;
-
-&lt;h1 id=&quot;lispwith2rectangles&quot;&gt;Lisp With 2 Rectangles&lt;/h1&gt;
-
-&lt;p&gt;(rectangle id1 nil)&lt;/p&gt;
-
-&lt;p&gt;(x id1 10)&lt;/p&gt;
-
-&lt;p&gt;(y id1 10)&lt;/p&gt;
-
-&lt;p&gt;(width id1 15)&lt;/p&gt;
-
-&lt;p&gt;(height id1 15)&lt;/p&gt;
-
-&lt;p&gt;(rectangle id2 nil)&lt;/p&gt;
-
-&lt;p&gt;(x id2 9)&lt;/p&gt;
-
-&lt;p&gt;(y id2 12)&lt;/p&gt;
-
-&lt;p&gt;(width id2 2)&lt;/p&gt;
-
-&lt;p&gt;(height id2 2)&lt;/p&gt;
-
-&lt;h1 id=&quot;obervations&quot;&gt;Obervations&lt;/h1&gt;
-
-&lt;p&gt;All forms encode the same information.&lt;/p&gt;
-
-&lt;p&gt;JavaScript form 1 is human readable.&lt;/p&gt;
-
-&lt;p&gt;The factbase form is less human readable (aka &lt;em&gt;ugly&lt;/em&gt;). E.G. JavaScript form 1 is more human-readable than JavaScript form 3.&lt;/p&gt;
-
-&lt;p&gt;Q: which forms are easier to automate? (aka to &lt;em&gt;script&lt;/em&gt;)&lt;/p&gt;
-
-&lt;p&gt;sub-Q: which forms are more machine-readable?&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Keep these questions in mind as we look at some queries&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h1 id=&quot;queries&quot;&gt;Queries&lt;/h1&gt;
-
-&lt;p&gt;[&lt;em&gt;We will deal only with the 2-rectangle factbases.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Layer 0 queries:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;What id&amp;#8217;s are rectangles?&lt;/li&gt;
-&lt;li&gt;Is rectangle id1 bigger than rectangle id2?&lt;/li&gt;
-&lt;li&gt;Is rectangle id2 bigger than rectangle id1?&lt;/li&gt;
-&lt;li&gt;Does id1 intersect id2?&lt;/li&gt;
-&lt;li&gt;Does id2 intersect id1?&lt;/li&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In this essay, I show two very simple factbases and their implementation in JavaScript, PROLOG and Lisp.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Incidentally, the discussion shows how to begin compiling diagrams.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Factbase&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 is a rectangle.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 is at (x,y) position (20,10).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 has width 120.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 has height 80.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Diagram&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-04-26-12-11-30-Images/Rectangles-OneRectangle.png&quot; width=&quot;121px&quot; height=&quot;81px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Triples&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A triple is&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;relation (subject, object)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;no noise format:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle id1 null&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x id1 20&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y id1 10&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width id1 120&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height id1 80&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;JavaScript&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;var id1 = {kind: &quot;rect&quot;, x: 20, y: 10, width: 120, height: 80};&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;or&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var fb = [{id: &quot;id1&quot;, kind: &quot;rect&quot;, x: 20, y: 10, width: 120, height: 80}];&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;or&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var fb = [&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;rect&quot;, subject: &quot;id1&quot;, object: null},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;x&quot;, subject: &quot;id1&quot;, object: 20},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;y&quot;, subject: &quot;id1&quot;, object: 10},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;width&quot;, subject: &quot;id1&quot;, object: 120},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;height&quot;, subject: &quot;id1&quot;, object: 80}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;];&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PROLOG&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id1,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id1,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id1,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id1,15).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id1,15).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lisp&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;(rectangle id1 nil)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(x id1 10)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(y id1 10)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(width id1 15)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(height id1 15)&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Factbase With 2 Rectangles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 is a rectangle.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 is at (x,y) position (10,10).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 has width 15.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id1 has height 15.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id2 is a rectangle.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id2 is at (x,y) position (9,15).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id2 has width 2.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;id2 has height 2.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Diagram&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-04-26-12-11-30-Images/Rectangles-TwoRectangles.png&quot; width=&quot;131px&quot; height=&quot;81px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Triples With 2 Rectangles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle id1 null&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x id1 10&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y id1 10&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width id1 15&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height id1 15&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle id2 null&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x id2 9&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y id2 15&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width id2 2&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height id2 2&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;JavaScript With 2 Rectangles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;var id1 = {kind: &quot;rect&quot;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id2 = {kind: &quot;rect&quot;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;or&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var fb = [&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{id: &quot;id1&quot;, kind: &quot;rect&quot;, x: 10, y: 10, width: 15, height: 15},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{id: &quot;id2&quot;, kind: &quot;rect&quot;, x: 9, y: 15, width: 2, height: 2},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;];&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;or&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var fb = [&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;rect&quot;, subject: &quot;id1&quot;, object: null},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;x&quot;, subject: &quot;id1&quot;, object: 10},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;y&quot;, subject: &quot;id1&quot;, object: 10},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;width&quot;, subject: &quot;id1&quot;, object: 15},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;height&quot;, subject: &quot;id1&quot;, object: 15}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;rect&quot;, subject: &quot;id2&quot;, object: null},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;x&quot;, subject: &quot;id2&quot;, object: 9},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;y&quot;, subject: &quot;id2&quot;, object: 15},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;width&quot;, subject: &quot;id2&quot;, object: 2},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{relation: &quot;height&quot;, subject: &quot;id2&quot;, object: 2}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;];&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PROLOG With 2 Rectangles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id1,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id2,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id1,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id2,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id1,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id2,40).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id1,120).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id1,80).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In PROLOG, &quot;or&quot; relationships are most often written as multiple versions of a rule (PROLOG also has semi-colon syntax, but I won't discuss it here).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG wants all rules with the same name, bunched together.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;UNIX® &lt;i&gt;sort&lt;/i&gt; can be used to group rules together.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The above factbase is sorted, e.g. all &lt;span class=&quot;s1&quot;&gt;rectangle&lt;/span&gt; rules appear sequentially, all &lt;span class=&quot;s1&quot;&gt;width&lt;/span&gt; rules appear sequentially, etc. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;There is no requirement about the order in which rules must appear (e.g &lt;span class=&quot;s1&quot;&gt;width&lt;/span&gt; rules could appear before &lt;span class=&quot;s1&quot;&gt;rectangle&lt;/span&gt; rules, and so on).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In the above example, sort has put rules in strict alphabetic order — this is not necessary, but is convenient (&lt;span class=&quot;s1&quot;&gt;sort&lt;/span&gt; ensures that all rules are grouped together (required) &lt;i&gt;and &lt;/i&gt;&lt;span class=&quot;s1&quot;&gt;sort&lt;/span&gt; ensures that groups appear in alphabetic order (not required, but there is no harm in accepting what &lt;span class=&quot;s1&quot;&gt;sort&lt;/span&gt; does)).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lisp With 2 Rectangles&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;(rectangle id1 nil)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(x id1 10)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(y id1 10)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(width id1 15)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(height id1 15)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(rectangle id2 nil)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(x id2 9)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(y id2 12)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(width id2 2)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;(height id2 2)&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Obervations&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;All forms encode the same information.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;JavaScript form 1 is human readable.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The factbase form is less human readable (aka &lt;i&gt;ugly&lt;/i&gt;).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;E.G. JavaScript form 1 is more human-readable than JavaScript form 3.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Q: which forms are easier to automate? (aka to &lt;i&gt;script&lt;/i&gt;)&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;sub-Q: which forms are more machine-readable?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Keep these questions in mind as we look at some queries&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Queries&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;We will deal only with the 2-rectangle factbases.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Layer 0 queries:&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;What id's are rectangles?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Is rectangle id1 bigger than rectangle id2?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Is rectangle id2 bigger than rectangle id1?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Does id1 intersect id2?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Does id2 intersect id1?&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Answers:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;id1, id2&lt;/li&gt;
-&lt;li&gt;yes&lt;/li&gt;
-&lt;li&gt;no&lt;/li&gt;
-&lt;li&gt;yes&lt;/li&gt;
-&lt;li&gt;yes&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Answers:&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;id1, id2&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;yes&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;no&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;yes&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;yes&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;h1 id=&quot;sub-query-boundingboxes&quot;&gt;Sub-Query - Bounding Boxes&lt;/h1&gt;
-
-&lt;p&gt;Answering query (d) and (e) is easier if we create a bounding box for all rectangles first.&lt;/p&gt;
-
-&lt;p&gt;A bounding box is&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;left x&lt;/li&gt;
-&lt;li&gt;top y&lt;/li&gt;
-&lt;li&gt;right x&lt;/li&gt;
-&lt;li&gt;bottom y.&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Sub-Query - Bounding Boxes&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Answering query (d) and (e) is easier if we create a bounding box for all rectangles first.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A bounding box is&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;left x&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;top y&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;right x&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;bottom y.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&quot;javascriptqueries&quot;&gt;JavaScript Queries&lt;/h1&gt;
-
-&lt;p&gt;var id1 = {kind: &amp;#8220;rect&amp;#8221;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
-
-&lt;p&gt;var id2 = {kind: &amp;#8220;rect&amp;#8221;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
-
-&lt;p&gt;answerA = [];&lt;/p&gt;
-
-&lt;p&gt;if (id1.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;answerA.push (id1);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;if (id2.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;answerA.push (id2);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;//console.log (answerA);&lt;/p&gt;
-
-&lt;p&gt;/////&lt;/p&gt;
-
-&lt;p&gt;var id1 = {id: &amp;#8220;id1&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
-
-&lt;p&gt;var id2 = {id: &amp;#8220;id2&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
-
-&lt;p&gt;answerAprimed = [];&lt;/p&gt;
-
-&lt;p&gt;if (id1.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;answerAprimed.push (id1);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;if (id2.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;answerAprimed.push (id2);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;console.log (answerAprimed);&lt;/p&gt;
-
-&lt;p&gt;for (r of answerAprimed) {&lt;/p&gt;
-
-&lt;p&gt;console.log (r.id);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;///////&lt;/p&gt;
-
-&lt;p&gt;var fb = [&lt;/p&gt;
-
-&lt;p&gt;{id: &amp;#8220;id1&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 10, y: 10, width: 15, height: 15},&lt;/p&gt;
-
-&lt;p&gt;{id: &amp;#8220;id2&amp;#8221;, kind: &amp;#8220;rect&amp;#8221;, x: 9, y: 15, width: 2, height: 2},&lt;/p&gt;
-
-&lt;p&gt;];&lt;/p&gt;
-
-&lt;p&gt;for (obj of fb) {&lt;/p&gt;
-
-&lt;p&gt;if (obj.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;console.log (obj.id);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;/// query b ///&lt;/p&gt;
-
-&lt;p&gt;/// is rectangle id1 bigger than rectangle id2? ///&lt;/p&gt;
-
-&lt;p&gt;function area (obj) {&lt;/p&gt;
-
-&lt;p&gt;var width = obj.width;&lt;/p&gt;
-
-&lt;p&gt;var height = obj.height;&lt;/p&gt;
-
-&lt;p&gt;return width * height;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;function bigger (obj1, obj2) {&lt;/p&gt;
-
-&lt;p&gt;var area1 = area (obj1);&lt;/p&gt;
-
-&lt;p&gt;var area2 = area (obj2);&lt;/p&gt;
-
-&lt;p&gt;return (area1 &amp;gt; area2);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;function fetch (id) {&lt;/p&gt;
-
-&lt;p&gt;return fb.find (obj =&amp;gt; id === obj.id);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;console.log ();&lt;/p&gt;
-
-&lt;p&gt;console.log (`(b) id1 is bigger than id1: ${bigger(fetch (&amp;#8220;id1&amp;#8221;), fetch (&amp;#8220;id2&amp;#8221;))}`);&lt;/p&gt;
-
-&lt;p&gt;/// query (c)&lt;/p&gt;
-
-&lt;p&gt;console.log (`(c) id2 is bigger than id1: ${bigger(fetch (&amp;#8220;id2&amp;#8221;), fetch (&amp;#8220;id1&amp;#8221;))}`);&lt;/p&gt;
-
-&lt;p&gt;//////// sub-query - bounding boxes //////////&lt;/p&gt;
-
-&lt;p&gt;for (obj of fb) {&lt;/p&gt;
-
-&lt;p&gt;if (obj.kind === &amp;#8220;rect&amp;#8221;) {&lt;/p&gt;
-
-&lt;p&gt;obj.bounding_box_left = obj.x;&lt;/p&gt;
-
-&lt;p&gt;obj.bounding_box_top = obj.y;&lt;/p&gt;
-
-&lt;p&gt;obj.bounding_box_right = obj.x + obj.width;&lt;/p&gt;
-
-&lt;p&gt;obj.bounding_box_bottom = obj.y + obj.height;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;//console.log (obj);&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;function intersects (subject, object) {&lt;/p&gt;
-
-&lt;p&gt;// left side&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_left &amp;lt;= object.bounding_box_left) {&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_right &amp;gt;= object.bounding_box_left) {&lt;/p&gt;
-
-&lt;p&gt;return true;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;};&lt;/p&gt;
-
-&lt;p&gt;// right side&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_left &amp;lt;= object.bounding_box_right) {&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_right &amp;gt;= object.bounding_box_right) {&lt;/p&gt;
-
-&lt;p&gt;return true;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;};&lt;/p&gt;
-
-&lt;p&gt;// top&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_top &amp;lt;= object.bounding_box_top) {&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_bottom &amp;gt;= object.bounding_box_top) {&lt;/p&gt;
-
-&lt;p&gt;return true;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;};&lt;/p&gt;
-
-&lt;p&gt;// bottom&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_top &amp;lt;= object.bounding_box_bottom) {&lt;/p&gt;
-
-&lt;p&gt;if (subject.bounding_box_bottom &amp;gt;= object.bounding_box_bottom) {&lt;/p&gt;
-
-&lt;p&gt;return true;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;};&lt;/p&gt;
-
-&lt;p&gt;return false;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;console.log (`(d) id1 intersects id2: ${intersects (fetch (&amp;#8220;id1&amp;#8221;), fetch (&amp;#8220;id2&amp;#8221;))}`);&lt;/p&gt;
-
-&lt;p&gt;console.log (`(e) id1 intersects id2: ${intersects (fetch (&amp;#8220;id2&amp;#8221;), fetch (&amp;#8220;id1&amp;#8221;))}`);&lt;/p&gt;
-
-&lt;h1 id=&quot;prologqueries&quot;&gt;PROLOG Queries&lt;/h1&gt;
-
-&lt;p&gt;rectangle(id1,nil).&lt;/p&gt;
-
-&lt;p&gt;rectangle(id2,nil).&lt;/p&gt;
-
-&lt;p&gt;x(id1,20).&lt;/p&gt;
-
-&lt;p&gt;x(id2,10).&lt;/p&gt;
-
-&lt;p&gt;y(id1,10).&lt;/p&gt;
-
-&lt;p&gt;y(id2,40).&lt;/p&gt;
-
-&lt;p&gt;width(id1,120).&lt;/p&gt;
-
-&lt;p&gt;width(id2,20).&lt;/p&gt;
-
-&lt;p&gt;height(id1,80).&lt;/p&gt;
-
-&lt;p&gt;height(id2,20).&lt;/p&gt;
-
-&lt;p&gt;main(Intersections) :-&lt;/p&gt;
-
-&lt;p&gt;setof([IDa,IDb],intersects(IDa,IDb),Intersections).&lt;/p&gt;
-
-&lt;p&gt;area(Subject,A) :-&lt;/p&gt;
-
-&lt;p&gt;width(Subject,W),&lt;/p&gt;
-
-&lt;p&gt;height(Subject,H),&lt;/p&gt;
-
-&lt;p&gt;A is H * W.&lt;/p&gt;
-
-&lt;p&gt;bigger(Subject, Object) :-&lt;/p&gt;
-
-&lt;p&gt;area(Subject,As),&lt;/p&gt;
-
-&lt;p&gt;area(Object,Os),&lt;/p&gt;
-
-&lt;p&gt;As &amp;gt; Os.&lt;/p&gt;
-
-&lt;p&gt;left(R,X1) :- x(R,X1).&lt;/p&gt;
-
-&lt;p&gt;top(R,Y1) :- y(R,Y1).&lt;/p&gt;
-
-&lt;p&gt;right(R,X2) :- x(R,X1),width(R,W),X2 is X1 + W.&lt;/p&gt;
-
-&lt;p&gt;bottom(R,Y2) :- y(R,Y1),height(R,H),Y2 is Y1 + H.&lt;/p&gt;
-
-&lt;p&gt;% left side&lt;/p&gt;
-
-&lt;p&gt;intersects(Subject,Object) :-&lt;/p&gt;
-
-&lt;p&gt;dif(Subject,Object),&lt;/p&gt;
-
-&lt;p&gt;left(Subject,SubjX1),&lt;/p&gt;
-
-&lt;p&gt;left(Object,ObjX1),&lt;/p&gt;
-
-&lt;p&gt;SubjX1 =&amp;lt; ObjX1,&lt;/p&gt;
-
-&lt;p&gt;right(Subject,SubjX2),&lt;/p&gt;
-
-&lt;p&gt;SubjX2 &amp;gt;= ObjX1.&lt;/p&gt;
-
-&lt;p&gt;% right side&lt;/p&gt;
-
-&lt;p&gt;intersects(Subject,Object) :-&lt;/p&gt;
-
-&lt;p&gt;dif(Subject,Object),&lt;/p&gt;
-
-&lt;p&gt;left(Subject,SubjX1),&lt;/p&gt;
-
-&lt;p&gt;right(Object,ObjX2),&lt;/p&gt;
-
-&lt;p&gt;SubjX1 =&amp;lt; ObjX2,&lt;/p&gt;
-
-&lt;p&gt;right(Subject,SubjX2),&lt;/p&gt;
-
-&lt;p&gt;SubjX2 &amp;gt;= ObjX2.&lt;/p&gt;
-
-&lt;p&gt;% top&lt;/p&gt;
-
-&lt;p&gt;intersects(Subject,Object) :-&lt;/p&gt;
-
-&lt;p&gt;dif(Subject,Object),&lt;/p&gt;
-
-&lt;p&gt;top(Subject,SubjY1),&lt;/p&gt;
-
-&lt;p&gt;top(Object,ObjY1),&lt;/p&gt;
-
-&lt;p&gt;SubjY1 =&amp;lt; ObjY1,&lt;/p&gt;
-
-&lt;p&gt;bottom(Subject,SubjY2),&lt;/p&gt;
-
-&lt;p&gt;SubjY2 =&amp;lt; ObjY1.&lt;/p&gt;
-
-&lt;p&gt;% bottom&lt;/p&gt;
-
-&lt;p&gt;intersects(Subject,Object) :-&lt;/p&gt;
-
-&lt;p&gt;dif(Subject,Object),&lt;/p&gt;
-
-&lt;p&gt;top(Subject,SubjY1),&lt;/p&gt;
-
-&lt;p&gt;bottom(Object,ObjY2),&lt;/p&gt;
-
-&lt;p&gt;SubjY1 =&amp;lt; ObjY2,&lt;/p&gt;
-
-&lt;p&gt;bottom(Subject,SubjY2),&lt;/p&gt;
-
-&lt;p&gt;SubjY2 =&amp;lt; ObjY2.&lt;/p&gt;
-
-&lt;h2 id=&quot;basics&quot;&gt;Basics&lt;/h2&gt;
-
-&lt;h2 id=&quot;prologbasics-capitalization&quot;&gt;PROLOG Basics - Capitalization&lt;/h2&gt;
-
-&lt;p&gt;PROLOG uses capitalization to differentiate between Logic Variables and everything else. Logic Variables begin with capital letters, and everything else begins with lower-case letters.&lt;/p&gt;
-
-&lt;p&gt;A Logic Variable is much like a variable in most languages, but, Logic Variables take on possibly many different values during exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;Logic Variables capture snapshots during matching. A single logic variable can hold only one value at a time, but that value might change during each wave of pattern matching (see below).&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-exhaustivesearch&quot;&gt;PROLOG Basics - Exhaustive Search&lt;/h2&gt;
-
-&lt;p&gt;PROLOG matches patterns in waves.&lt;/p&gt;
-
-&lt;p&gt;Each wave matches one specific instance of the pattern.&lt;/p&gt;
-
-&lt;p&gt;Each wave sets Logic Variables to single specific values, but the values might be different in each wave.&lt;/p&gt;
-
-&lt;p&gt;For example, let us consider the query&lt;/p&gt;
-
-&lt;p&gt;x(ID,Value).&lt;/p&gt;
-
-&lt;p&gt;The first pattern-matching wave returns X=id1 and Value = 20.&lt;/p&gt;
-
-&lt;p&gt;The second pattern-matching wave returns X=id2 and Value = 10.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;At the REPL, we can ask to see successive waves using a semi-colon.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-rules&quot;&gt;PROLOG Basics - Rules&lt;/h2&gt;
-
-&lt;p&gt;PROLOG programs consist of &lt;em&gt;rules&lt;/em&gt; of the form&lt;/p&gt;
-
-&lt;p&gt;head(&amp;#8230;) :- body(&amp;#8230;).&lt;/p&gt;
-
-&lt;p&gt;Rules are almost like &lt;em&gt;functions&lt;/em&gt; in other languages, except that &lt;em&gt;low-level&lt;/em&gt; &lt;em&gt;operations&lt;/em&gt; can appear in the left-hand side as well as in the right-hand side.&lt;/p&gt;
-
-&lt;p&gt;Rules specify assertions about the problem space and allow the PROLOG engine to decide how to implement the details. Assertions are &lt;em&gt;declarative&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, the definition of the &lt;em&gt;member&lt;/em&gt; rule in PROLOG might be&lt;/p&gt;
-
-&lt;p&gt;member(X, [X|_]).&lt;/p&gt;
-
-&lt;p&gt;member(X, [_|Rest]) :- member(X, Rest).&lt;/p&gt;
-
-&lt;p&gt;Here, we assert that there are two OR&amp;#8217;ed-together rules that define list membership. The first rule says that X is a member of a list if X is the head of a list. Otherwise, recur using the second rule. The second rule says that X is a member of a list, if X is the member of the smaller list &amp;#8220;Rest&amp;#8221; (the head is peeled off leaving a smaller list).&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-and&quot;&gt;PROLOG Basics - AND&lt;/h2&gt;
-
-&lt;p&gt;In PROLOG, the AND of two rules is signified by a comma (,).&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-or&quot;&gt;PROLOG Basics - OR&lt;/h2&gt;
-
-&lt;p&gt;In PROLOG, the OR of two rules is signified by repetition of the rule with slightly different body code.&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-ruleclustering&quot;&gt;PROLOG Basics - Rule Clustering&lt;/h2&gt;
-
-&lt;p&gt;In PROLOG, all rules that have the same name must be clustered together.&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-arity&quot;&gt;PROLOG Basics - Arity&lt;/h2&gt;
-
-&lt;p&gt;In PROLOG, rules are denoted by the number of arguments they take. The number of arguments is call &lt;em&gt;arity&lt;/em&gt;. Internally, rules are denoted as name/N, where N is the &lt;em&gt;arity.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;For example, in the above member rules, the rules are internally called member/2.&lt;/p&gt;
-
-&lt;p&gt;Because rules are name-mangled to include their arity, it is possible to have rules that look the same in the source code, but have different arities.&lt;/p&gt;
-
-&lt;h2 id=&quot;prologbasics-two-wayevaluation&quot;&gt;PROLOG Basics - Two-Way Evaluation&lt;/h2&gt;
-
-&lt;p&gt;Because PROLOG rules&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; cannot specify implementation, PROLOG rules can run in two directions.&lt;/p&gt;
-
-&lt;p&gt;This seems unusual, at first, to programmers who are accustomed to using popular languages like Python, Javascript, /bin/sh, etc.&lt;/p&gt;
-
-&lt;p&gt;An extreme form of the use of relational two-way evaluation can be seen in the Barliman project&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A less-extreme version is the ability to create various queries at the PROLOG REPL. For example, we could write&lt;/p&gt;
-
-&lt;p&gt;rectangle(ID,_).&lt;/p&gt;
-
-&lt;p&gt;and get two results (ID=id1 and ID=id2) at the REPL&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;reading&quot;&gt;Reading&lt;/h2&gt;
-
-&lt;h2 id=&quot;declarations&quot;&gt;Declarations&lt;/h2&gt;
-
-&lt;p&gt;The first 10 lines define the facts. Each fact is of the form relation(Subject,Object).&lt;/p&gt;
-
-&lt;p&gt;rectangle(id1,nil).&lt;/p&gt;
-
-&lt;p&gt;rectangle(id2,nil).&lt;/p&gt;
-
-&lt;p&gt;x(id1,20).&lt;/p&gt;
-
-&lt;p&gt;x(id2,10).&lt;/p&gt;
-
-&lt;p&gt;y(id1,10).&lt;/p&gt;
-
-&lt;p&gt;y(id2,40).&lt;/p&gt;
-
-&lt;p&gt;width(id1,120).&lt;/p&gt;
-
-&lt;p&gt;width(id2,20).&lt;/p&gt;
-
-&lt;p&gt;height(id1,80).&lt;/p&gt;
-
-&lt;p&gt;height(id2,20).&lt;/p&gt;
-
-&lt;p&gt;The rectangle facts declare the existence of two rectangles, id1 and id2. The &lt;em&gt;object&lt;/em&gt; is nil in these cases &amp;#8212; no further data is supplied in the declarations.&lt;/p&gt;
-
-&lt;p&gt;The x(), y(), width() and height() facts associate an integer with each of the dimensions of the rectangles.&lt;/p&gt;
-
-&lt;p&gt;In imperative languages, we might have written&lt;a href=&quot;#fn:4&quot; id=&quot;fnref:4&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;var id1 : rectangle;&lt;/p&gt;
-
-&lt;p&gt;id1.x = 20;&lt;/p&gt;
-
-&lt;p&gt;id1.y = 10;&lt;/p&gt;
-
-&lt;p&gt;id1.width = 120;&lt;/p&gt;
-
-&lt;p&gt;id1.height = 80;&lt;/p&gt;
-
-&lt;p&gt;but, that would have been too structured for my liking. (PROLOG lets one express these relationships more succinctly, but I desire a machine-readable normal form, and like with assembler, human-readability is secondary).&lt;/p&gt;
-
-&lt;p&gt;Note that the ID (id1 and id2) in a factbase acts like an &lt;em&gt;object-pointer&lt;/em&gt; in other languages. Using &lt;em&gt;object+attributes&lt;/em&gt; makes sense from a &lt;em&gt;human&lt;/em&gt;-readability perspective, but normalizing &lt;em&gt;everything&lt;/em&gt; makes more sense from a &lt;em&gt;machine&lt;/em&gt;-readability perspective. In this case, the &lt;em&gt;pointer&lt;/em&gt; is the &lt;em&gt;Subject&lt;/em&gt; of most facts, and, everything is expressed in relation(Subject,Object) form. There is no concept of &lt;em&gt;pointers&lt;/em&gt; vs. &lt;em&gt;attributes&lt;/em&gt; in the &lt;em&gt;machine&lt;/em&gt;-readable version&lt;a href=&quot;#fn:5&quot; id=&quot;fnref:5&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;boundingboxes&quot;&gt;Bounding Boxes&lt;/h2&gt;
-
-&lt;p&gt;The rules &lt;em&gt;left, top, right&lt;/em&gt; and &lt;em&gt;bottom&lt;/em&gt; define the rules for bounding boxes for rectangles (we might need to embellish these rules if we were to add ellipses and other kinds of shapes).&lt;/p&gt;
-
-&lt;h2 id=&quot;area&quot;&gt;Area&lt;/h2&gt;
-
-&lt;p&gt;The rule &lt;em&gt;area&lt;/em&gt; defines a way to calculate the area of a rectangle.&lt;/p&gt;
-
-&lt;h2 id=&quot;bigger&quot;&gt;Bigger&lt;/h2&gt;
-
-&lt;p&gt;The rule &lt;em&gt;bigger&lt;/em&gt; shows one way&lt;a href=&quot;#fn:6&quot; id=&quot;fnref:6&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt; to determine if one rectangle is bigger than another.&lt;/p&gt;
-
-&lt;h2 id=&quot;intersects&quot;&gt;Intersects&lt;/h2&gt;
-
-&lt;p&gt;The &lt;em&gt;intersects&lt;/em&gt; rule is defined in 4 variants.&lt;/p&gt;
-
-&lt;p&gt;The first variant fires and succeeds if:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Subject and Object are not the same rectangle (dif())&lt;/li&gt;
-&lt;li&gt;subject.x1 &amp;lt;= object.x1, and,&lt;/li&gt;
-&lt;li&gt;subject.x2 &amp;gt;= object.x1.&lt;/li&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;JavaScript Queries&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id1 = {kind: &quot;rect&quot;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id2 = {kind: &quot;rect&quot;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;answerA = [];&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;if (id1.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;answerA.push (id1);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;if (id2.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;answerA.push (id2);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;//console.log (answerA);&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;/////&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id1 = {id: &quot;id1&quot;, kind: &quot;rect&quot;, x: 10, y: 10, width: 15, height: 15};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id2 = {id: &quot;id2&quot;, kind: &quot;rect&quot;, x: 9, y: 15, width: 2, height: 2};&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;answerAprimed = [];&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;if (id1.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;answerAprimed.push (id1);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;if (id2.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;answerAprimed.push (id2);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log (answerAprimed);&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;for (r of answerAprimed) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;console.log (r.id);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;///////&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var fb = [&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{id: &quot;id1&quot;, kind: &quot;rect&quot;, x: 10, y: 10, width: 15, height: 15},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;{id: &quot;id2&quot;, kind: &quot;rect&quot;, x: 9, y: 15, width: 2, height: 2},&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;];&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;for (obj of fb) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (obj.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;console.log (obj.id);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;/// query b ///&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;/// is rectangle id1 bigger than rectangle id2? ///&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function area (obj) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;var width = obj.width;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;var height = obj.height;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return width * height;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function bigger (obj1, obj2) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;var area1 = area (obj1);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;var area2 = area (obj2);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return (area1 &amp;gt; area2);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function fetch (id) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return fb.find (obj =&amp;gt; id === obj.id);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log ();&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log (`(b) id1 is bigger than id1: ${bigger(fetch (&quot;id1&quot;), fetch (&quot;id2&quot;))}`);&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;/// query (c)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log (`(c) id2 is bigger than id1: ${bigger(fetch (&quot;id2&quot;), fetch (&quot;id1&quot;))}`);&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;//////// sub-query - bounding boxes //////////&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;for (obj of fb) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (obj.kind === &quot;rect&quot;) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;obj.bounding_box_left = obj.x;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;obj.bounding_box_top = obj.y;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;obj.bounding_box_right = obj.x + obj.width;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;obj.bounding_box_bottom = obj.y + obj.height;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;//console.log (obj);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;function intersects (subject, object) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;// left side&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (subject.bounding_box_left &amp;lt;= object.bounding_box_left) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;if (subject.bounding_box_right &amp;gt;= object.bounding_box_left) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return true;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;// right side&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (subject.bounding_box_left &amp;lt;= object.bounding_box_right) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;if (subject.bounding_box_right &amp;gt;= object.bounding_box_right) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return true;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;// top&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (subject.bounding_box_top &amp;lt;= object.bounding_box_top) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;if (subject.bounding_box_bottom &amp;gt;= object.bounding_box_top) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return true;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;// bottom&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if (subject.bounding_box_top &amp;lt;= object.bounding_box_bottom) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;if (subject.bounding_box_bottom &amp;gt;= object.bounding_box_bottom) {&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return true;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;};&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;return false;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;}&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log (`(d) id1 intersects id2: ${intersects (fetch (&quot;id1&quot;), fetch (&quot;id2&quot;))}`);&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;console.log (`(e) id1 intersects id2: ${intersects (fetch (&quot;id2&quot;), fetch (&quot;id1&quot;))}`);&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;PROLOG Queries&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id1,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id2,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id1,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id2,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id1,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id2,40).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id1,120).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id1,80).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;main(Intersections) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;setof([IDa,IDb],intersects(IDa,IDb),Intersections).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;area(Subject,A) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;width(Subject,W),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;height(Subject,H),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;A is H * W.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;bigger(Subject, Object) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;area(Subject,As),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;area(Object,Os),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;As &amp;gt; Os.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;left(R,X1) :- x(R,X1).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;top(R,Y1) :- y(R,Y1).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;right(R,X2) :- x(R,X1),width(R,W),X2 is X1 + W.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;bottom(R,Y2) :- y(R,Y1),height(R,H),Y2 is Y1 + H.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;% left side&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;intersects(Subject,Object) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;dif(Subject,Object),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;left(Subject,SubjX1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;left(Object,ObjX1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjX1 =&amp;lt; ObjX1,&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;right(Subject,SubjX2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjX2 &amp;gt;= ObjX1.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;% right side&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;intersects(Subject,Object) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;dif(Subject,Object),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;left(Subject,SubjX1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;right(Object,ObjX2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjX1 =&amp;lt; ObjX2,&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;right(Subject,SubjX2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjX2 &amp;gt;= ObjX2.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;% top&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;intersects(Subject,Object) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;dif(Subject,Object),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;top(Subject,SubjY1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;top(Object,ObjY1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjY1 =&amp;lt; ObjY1,&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;bottom(Subject,SubjY2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjY2 =&amp;lt; ObjY1.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;% bottom&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;intersects(Subject,Object) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;dif(Subject,Object),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;top(Subject,SubjY1),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;bottom(Object,ObjY2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjY1 =&amp;lt; ObjY2,&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;bottom(Subject,SubjY2),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;SubjY2 =&amp;lt; ObjY2.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Basics&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Capitalization&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG uses capitalization to differentiate between Logic Variables and everything else.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Logic Variables begin with capital letters, and everything else begins with lower-case letters.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A Logic Variable is much like a variable in most languages, but, Logic Variables take on possibly many different values during exhaustive search.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Logic Variables capture snapshots during matching.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A single logic variable can hold only one value at a time, but that value might change during each wave of pattern matching (see below).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Exhaustive Search&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG matches patterns in waves.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Each wave matches one specific instance of the pattern.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Each wave sets Logic Variables to single specific values, but the values might be different in each wave.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, let us consider the query&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(ID,Value).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The first pattern-matching wave returns X=id1 and Value = 20.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The second pattern-matching wave returns X=id2 and Value = 10.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;At the REPL, we can ask to see successive waves using a semi-colon.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Rules&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG programs consist of &lt;i&gt;rules&lt;/i&gt; of the form&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;head(…) :- body(…).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Rules are almost like &lt;i&gt;functions&lt;/i&gt; in other languages, except that &lt;i&gt;low-level&lt;/i&gt; &lt;i&gt;operations&lt;/i&gt; can appear in the left-hand side as well as in the right-hand side.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Rules specify assertions about the problem space and allow the PROLOG engine to decide how to implement the details.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Assertions are &lt;i&gt;declarative&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, the definition of the &lt;i&gt;member&lt;/i&gt; rule in PROLOG might be&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;member(X, [X|_]).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;member(X, [_|Rest]) :- member(X, Rest).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Here, we assert that there are two OR'ed-together rules that define list membership.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The first rule says that X is a member of a list if X is the head of a list.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Otherwise, recur using the second rule.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The second rule says that X is a member of a list, if X is the member of the smaller list &quot;Rest&quot; (the head is peeled off leaving a smaller list).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - AND&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In PROLOG, the AND of two rules is signified by a comma (,).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - OR&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In PROLOG, the OR of two rules is signified by repetition of the rule with slightly different body code.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Rule Clustering&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In PROLOG, all rules that have the same name must be clustered together.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Arity&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;In PROLOG, rules are denoted by the number of arguments they take.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The number of arguments is call &lt;i&gt;arity&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Internally, rules are denoted as name/N, where N is the &lt;i&gt;arity.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, in the above member rules, the rules are internally called &lt;span class=&quot;s1&quot;&gt;member/2&lt;/span&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Because rules are name-mangled to include their arity, it is possible to have rules that look the same in the source code, but have different arities.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;PROLOG Basics - Two-Way Evaluation&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Because PROLOG rules&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; cannot specify implementation, PROLOG rules can run in two directions.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This seems unusual, at first, to programmers who are accustomed to using popular languages like Python, Javascript, /bin/sh, etc.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;An extreme form of the use of relational two-way evaluation can be seen in the Barliman project&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A less-extreme version is the ability to create various queries at the PROLOG REPL.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, we could write&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(ID,_).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;and get two results (ID=id1 and ID=id2) at the REPL&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Reading&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Declarations&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The first 10 lines define the facts.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Each fact is of the form &lt;span class=&quot;s1&quot;&gt;relation(Subject,Object)&lt;/span&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id1,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;rectangle(id2,nil).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id1,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;x(id2,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id1,10).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;y(id2,40).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id1,120).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;width(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id1,80).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;height(id2,20).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;span class=&quot;s1&quot;&gt;rectangle&lt;/span&gt; facts declare the existence of two rectangles, &lt;span class=&quot;s1&quot;&gt;id1&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;id2&lt;/span&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &lt;i&gt;object&lt;/i&gt; is &lt;span class=&quot;s1&quot;&gt;nil&lt;/span&gt; in these cases — no further data is supplied in the declarations.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The x(), y(), width() and height() facts associate an integer with each of the dimensions of the rectangles.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In imperative languages, we might have written&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;var id1 : rectangle;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;id1.x = 20;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;id1.y = 10;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;id1.width = 120;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;id1.height = 80;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;but, that would have been too structured for my liking.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(PROLOG lets one express these relationships more succinctly, but I desire a machine-readable normal form, and like with assembler, human-readability is secondary).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Note that the ID (id1 and id2) in a factbase acts like an&lt;i&gt; object-pointer&lt;/i&gt; in other languages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Using &lt;i&gt;object+attributes&lt;/i&gt; makes sense from a &lt;i&gt;human&lt;/i&gt;-readability perspective, but normalizing &lt;i&gt;everything&lt;/i&gt; makes more sense from a &lt;i&gt;machine&lt;/i&gt;-readability perspective.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this case, the &lt;i&gt;pointer&lt;/i&gt; is the &lt;i&gt;Subject&lt;/i&gt; of most facts, and, everything is expressed in &lt;span class=&quot;s1&quot;&gt;relation(Subject,Object)&lt;/span&gt; form.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is no concept of &lt;i&gt;pointers&lt;/i&gt; vs. &lt;i&gt;attributes&lt;/i&gt; in the &lt;i&gt;machine&lt;/i&gt;-readable version&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Bounding Boxes&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The rules &lt;i&gt;left, top, right&lt;/i&gt; and &lt;i&gt;bottom&lt;/i&gt; define the rules for bounding boxes for rectangles (we might need to embellish these rules if we were to add ellipses and other kinds of shapes).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Area&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The rule &lt;i&gt;area&lt;/i&gt; defines a way to calculate the area of a rectangle.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Bigger&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The rule &lt;i&gt;bigger&lt;/i&gt; shows one way&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; to determine if one rectangle is bigger than another.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Intersects&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;intersects&lt;/i&gt; rule is defined in 4 variants.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The first variant fires and succeeds if:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;Subject and Object are not the same rectangle (dif())&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;subject.x1 &amp;lt;= object.x1, and,&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;subject.x2 &amp;gt;= object.x1.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;The other variants are similar.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Again, the rules are, intentionally, over-simplifications. See my further essay(s) on this subject for a more detailed description of the calculation and design rules for intersection.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h2 id=&quot;runningtheprologquery&quot;&gt;Running the PROLOG Query&lt;/h2&gt;
-
-&lt;p&gt;To run the PROLOG factbase queries:&lt;/p&gt;
-
-&lt;p&gt;&amp;gt; swipl&lt;/p&gt;
-
-&lt;p&gt;?- consult(fb).&lt;/p&gt;
-
-&lt;p&gt;?- main(X).&lt;/p&gt;
-
-&lt;h2 id=&quot;exhaustivesearchisastrangebeast&quot;&gt;Exhaustive Search is a Strange Beast&lt;/h2&gt;
-
-&lt;p&gt;Exhaustive search can provide some surprises to mortal programmers.&lt;/p&gt;
-
-&lt;p&gt;For example, if we change main to:&lt;/p&gt;
-
-&lt;p&gt;main(Intersections) :-&lt;/p&gt;
-
-&lt;p&gt;bagof([IDa,IDb],intersects(IDa,IDb),Intersections).&lt;/p&gt;
-
-&lt;p&gt;we get&lt;/p&gt;
-
-&lt;p&gt;Intersections = [[id2, id1], [id1, id2], [id2, id1]].&lt;/p&gt;
-
-&lt;p&gt;noting that [id2, id1] appears twice in the result. [&lt;em&gt;We changed&lt;/em&gt; setof &lt;em&gt;to&lt;/em&gt; bagof, &lt;em&gt;that&amp;#8217;s all.]&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Why does [id2,id1] appear twice? Id2 intersects id1 with id2&amp;#8217;s top and id2&amp;#8217;s bottom. Exhaustive search gives us &lt;em&gt;all&lt;/em&gt; of the possible answers.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;setof&lt;/em&gt; call sorts and unique-ifies the answer set. We could also have used PROLOG &lt;em&gt;cut&lt;/em&gt; (see PROLOG documentation) to stop matching after the first successful result.&lt;/p&gt;
-
-&lt;p&gt;BTW, we could have just written a query at the REPL:&lt;/p&gt;
-
-&lt;p&gt;intersects(IDa,IDb).&lt;/p&gt;
-
-&lt;p&gt;(and ask for multiple results by hitting the semi-colon key, until there are no more results).&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;FYI - the Haskell language and friends, riff on this idea of pattern matching and exhaustive search. Compiler technology &amp;#8212; parsing in particular &amp;#8212; riffed on the ideas of pattern matching decades ago. PEG is pattern matching with backtracking.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h1 id=&quot;engineering&quot;&gt;Engineering&lt;/h1&gt;
-
-&lt;p&gt;Engineers must consider details that are glossed-over by Architects.&lt;/p&gt;
-
-&lt;p&gt;(This is not a bad thing. Architects need to elide details to be able to think about the designs. Engineers dot the I&amp;#8217;s and cross the T&amp;#8217;s. This same kind of elision happens in other fields, for example mathematics &amp;#8212; math equations are usually kept terse (using single-letter names) to allow thinking about the bigger picture.).&lt;/p&gt;
-
-&lt;p&gt;For example, engineers must consider&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;What if either rectangle is a point?&lt;/p&gt;
-
-&lt;p&gt;What if any line is a point?&lt;/p&gt;
-
-&lt;p&gt;What if lines are parallel?&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Top and Bottom should be parallel.&lt;/li&gt;
-&lt;li&gt;Left and Right should be parallel.&lt;/li&gt;
-&lt;li&gt;What if Top is parallel to Left?&lt;/li&gt;
-&lt;li&gt;Etc.&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The other variants are similar.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;Again, the rules are, intentionally, over-simplifications.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See my further essay(s) on this subject for a more detailed description of the calculation and design rules for intersection.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Running the PROLOG Query&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;To run the PROLOG factbase queries:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&amp;gt; swipl&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;?- consult(fb).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;?- main(X).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Exhaustive Search is a Strange Beast&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Exhaustive search can provide some surprises to mortal programmers.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, if we change main to:&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;main(Intersections) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;bagof([IDa,IDb],intersects(IDa,IDb),Intersections).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;we get&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Intersections = [[id2, id1], [id1, id2], [id2, id1]].&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;noting that [id2, id1] appears twice in the result.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;We changed &lt;/i&gt;&lt;span class=&quot;s1&quot;&gt;setof&lt;/span&gt;&lt;i&gt; to &lt;/i&gt;&lt;span class=&quot;s1&quot;&gt;bagof&lt;/span&gt;&lt;i&gt;, that's all.]&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Why does [id2,id1] appear twice?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Id2 intersects id1 with id2's top and id2's bottom.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Exhaustive search gives us &lt;i&gt;all&lt;/i&gt; of the possible answers.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;setof&lt;/i&gt; call sorts and unique-ifies the answer set.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We could also have used PROLOG &lt;i&gt;cut&lt;/i&gt; (see PROLOG documentation) to stop matching after the first successful result.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;BTW, we could have just written a query at the REPL:&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;intersects(IDa,IDb).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(and ask for multiple results by hitting the semi-colon key, until there are no more results).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;FYI - the Haskell language and friends, riff on this idea of pattern matching and exhaustive search.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Compiler technology — parsing in particular — riffed on the ideas of pattern matching decades ago.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;PEG is pattern matching with backtracking.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Engineering&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Engineers must consider details that are glossed-over by Architects.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(This is not a bad thing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Architects need to elide details to be able to think about the designs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Engineers dot the I's and cross the T's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This same kind of elision happens in other fields, for example mathematics — math equations are usually kept terse (using single-letter names) to allow thinking about the bigger picture.).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, engineers must consider…&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What if either rectangle is a point? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What if any line is a point?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What if lines are parallel? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;Top and Bottom should be parallel. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Left and Right should be parallel. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;What if Top is parallel to Left? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Etc.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;[&lt;em&gt;Side note: Currently, programmers do all of the tasks, Architecture, Engineering, Implementation, Testing. Some people are better at Architecture. Some are better at Engineering. Some are better at Implementation. Some are better (more evil) at testing. Currently, we pay programmers at a high rate to consider all of the tasks &amp;#8220;at once&amp;#8221;. This could be cost-reduced by introducing stratification and layering to the organizations. An example would be the stratification that has evolved in building construction.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h2 id=&quot;optimizationengineering&quot;&gt;Optimization Engineering&lt;/h2&gt;
-
-&lt;p&gt;What about efficiency?&lt;/p&gt;
-
-&lt;p&gt;Rearrange lines to give better performance?&lt;/p&gt;
-
-&lt;p&gt;Use cut? (Cut is considered to be impure).&lt;/p&gt;
-
-&lt;h1 id=&quot;meta-question&quot;&gt;Meta-Question&lt;/h1&gt;
-
-&lt;p&gt;The answers to the above queries are &amp;#8220;obvious&amp;#8221; &amp;#8212; we just eye-ball the factbase &amp;#8212; but, how can we write code such that the computer can derive these answers for us?&lt;/p&gt;
-
-&lt;p&gt;When we get into production level factbases, we might have lots of rectangles and we might miss eye-balling some relationships and queries.&lt;a href=&quot;#fn:7&quot; id=&quot;fnref:7&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;7&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Humans are notoriously bad at repetitive tasks such as this. Computers are great at doing repetitive tasks.&lt;/p&gt;
-
-&lt;p&gt;How can we write programs that will answer these repetitive queries, so we don&amp;#8217;t have to do the work ourselves?&lt;/p&gt;
-
-&lt;p&gt;Answer: automate, write scripts, write pipelines.&lt;/p&gt;
-
-&lt;p&gt;Use automation stacked upon other automation stacked upon other automation and so on. Layers and layers of automation.&lt;/p&gt;
-
-&lt;p&gt;So, the meta-meta-question becomes &amp;#8212; what makes it easy to write automation scripts?&lt;/p&gt;
-
-&lt;p&gt;We are lazy &amp;#8212; what is the easiest way to stack scripts?&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;Side note: whatever we are doing now doesn&amp;#8217;t stack very well, and we are hitting a wall. APIs are just too complicated to stack effectively.&lt;/em&gt;&lt;a href=&quot;#fn:8&quot; id=&quot;fnref:8&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;8&lt;/sup&gt;&lt;/a&gt; &lt;em&gt;We&amp;#8217;ve tried structuring data to make it understandable, but that has its limits, too. The more that the data is structured, the less machine-readable it becomes, hence, the harder it becomes to write scripts. Edge-cases kill opportunities for automation.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Compiler-writers have been figuring this stuff out, but they are interested in job security and want to make it look too complicated for use by mere mortals.&lt;a href=&quot;#fn:9&quot; id=&quot;fnref:9&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;9&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Someone released REGEX from its compiler-writers' cage and it is useful.&lt;/p&gt;
-
-&lt;p&gt;What&amp;#8217;s next?&lt;/p&gt;
-
-&lt;h1 id=&quot;queries-components&quot;&gt;Queries - Components&lt;/h1&gt;
-
-&lt;h2 id=&quot;gedankenexperiment:&quot;&gt;Gedanken experiment:&lt;/h2&gt;
-
-&lt;p&gt;Let us &lt;em&gt;adopt&lt;/em&gt; the &lt;em&gt;convention&lt;/em&gt; that only the biggest rectangles represent software components.&lt;/p&gt;
-
-&lt;p&gt;Queries:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;What are the ids of all of the software components?&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;Side note: Currently, programmers do all of the tasks, Architecture, Engineering, Implementation, Testing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some people are better at Architecture.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some are better at Engineering. Some are better at Implementation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some are better (more evil) at testing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Currently, we pay programmers at a high rate to consider all of the tasks &quot;at once&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This could be cost-reduced by introducing stratification and layering to the organizations.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;An example would be the stratification that has evolved in building construction.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Optimization Engineering&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;What about efficiency? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Rearrange lines to give better performance? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Use cut?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Cut is considered to be impure).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Meta-Question&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The answers to the above queries are &quot;obvious&quot; — we just eye-ball the factbase — but, how can we write code such that the computer can derive these answers for us? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When we get into production level factbases, we might have lots of rectangles and we might miss eye-balling some relationships and queries.&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Humans are notoriously bad at repetitive tasks such as this.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Computers are great at doing repetitive tasks. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;How can we write programs that will answer these repetitive queries, so we don't have to do the work ourselves? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Answer: automate, write scripts, write pipelines.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Use automation stacked upon other automation stacked upon other automation and so on.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Layers and layers of automation. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;So, the meta-meta-question becomes — what makes it easy to write automation scripts? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We are lazy — what is the easiest way to stack scripts?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Side note: whatever we are doing now doesn't stack very well, and we are hitting a wall.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;APIs are just too complicated to stack effectively.&lt;a id=&quot;fnlink8&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn8&quot;&gt;&lt;sup&gt;[8]&lt;/sup&gt;&lt;/a&gt;&lt;i&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We've tried structuring data to make it understandable, but that has its limits, too. The more that the data is structured, the less machine-readable it becomes, hence, the harder it becomes to write scripts.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Edge-cases kill opportunities for automation.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Compiler-writers have been figuring this stuff out, but they are interested in job security and want to make it look too complicated for use by mere mortals.&lt;a id=&quot;fnlink9&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn9&quot;&gt;&lt;sup&gt;[9]&lt;/sup&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Someone released REGEX from its compiler-writers' cage and it is useful. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What's next?&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Queries - Components&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Gedanken experiment:&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Let us &lt;i&gt;adopt&lt;/i&gt; the &lt;i&gt;convention&lt;/i&gt; that only the biggest rectangles represent software components.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Queries:&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;What are the ids of all of the software components?&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Answers&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;id1.&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Answers&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;id1.&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;How did we arrive at this answer?&lt;/p&gt;
-
-&lt;p&gt;Sub-queries:&lt;/p&gt;
-
-&lt;p&gt;A rectangle is big if it has no&lt;a href=&quot;#fn:10&quot; id=&quot;fnref:10&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;10&lt;/sup&gt;&lt;/a&gt; other rectangles bigger than it.&lt;/p&gt;
-
-&lt;p&gt;forall rectangles R&lt;/p&gt;
-
-&lt;p&gt;forall rectangles X, &lt;em&gt;different&lt;/em&gt; from R&lt;/p&gt;
-
-&lt;p&gt;if isBigger(X,R) then&lt;/p&gt;
-
-&lt;p&gt;R is definitely not a Component, and,&lt;/p&gt;
-
-&lt;p&gt;X might be a Component&lt;/p&gt;
-
-&lt;p&gt;then, forall rectangles Y&lt;/p&gt;
-
-&lt;p&gt;if mightBeAComponent(Y) then&lt;/p&gt;
-
-&lt;p&gt;Y is a Component&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;FYI - exhaustive search of the first set of foralls guarantees that all left-overs must be Components&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;meta-question&lt;/em&gt;: can you do the above queries without using flags?&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;answer&lt;/em&gt;: no, you have to use flags, but, maybe you can elide the flags (different wording: maybe the computer can set the flags for you, because humans are bad at this sort of thing)&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;spoiler: PROLOG does this kind of exhaustive search and sets bookmarks, but you don&amp;#8217;t have to worry about the bookmarking, PROLOG does it for you&lt;/em&gt;. &lt;em&gt;MiniKanren (core.logic) does bookmarking, too. [PROLOG and miniKanren create bookmarks in different ways, but you don&amp;#8217;t need to worry about this kind of detail. [Lisp (&amp;#8230;/cc, &amp;#8220;On Lisp&amp;#8221;, etc.) gives you the raw materials for creating bookmarks, but you still have to write the code. Assembler gives you the raw materials, too, but you have to write even more code.]]&lt;/em&gt;]&lt;/p&gt;
-
-&lt;h1 id=&quot;queries-ports&quot;&gt;Queries - Ports&lt;/h1&gt;
-
-&lt;h2 id=&quot;gedankenexperimentcontinued:&quot;&gt;Gedanken experiment (continued):&lt;/h2&gt;
-
-&lt;p&gt;Let us &lt;em&gt;adopt&lt;/em&gt; the &lt;em&gt;convention&lt;/em&gt; that only smaller rectangles are ports.&lt;/p&gt;
-
-&lt;p&gt;(N.B. port-ness is still inconclusive &amp;#8212; we will want to know whether a port is &lt;em&gt;input&lt;/em&gt; or &lt;em&gt;output&lt;/em&gt;, but I regress).&lt;/p&gt;
-
-&lt;p&gt;Queries:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;What are the ids of all of the ports?&lt;/li&gt;
-&lt;li&gt;Who &amp;#8220;owns&amp;#8221; which ports?&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;How did we arrive at this answer?&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Sub-queries:&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;A rectangle is big if it has no&lt;a id=&quot;fnlink10&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn10&quot;&gt;&lt;sup&gt;[10]&lt;/sup&gt;&lt;/a&gt; other rectangles bigger than it.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;forall rectangles R&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;forall rectangles X, &lt;i&gt;different&lt;/i&gt; from R&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;if isBigger(X,R) then&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;R is definitely not a Component, and,&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;X might be a Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;then, forall rectangles Y&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;if mightBeAComponent(Y) then&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;     &lt;/span&gt;Y is a Component&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;FYI - exhaustive search of the first set of foralls guarantees that all left-overs must be Components&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;i&gt;meta-question&lt;/i&gt;: can you do the above queries without using flags? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;i&gt;answer&lt;/i&gt;: no, you &lt;span class=&quot;s2&quot;&gt;have&lt;/span&gt; to use flags, but, maybe you can &lt;span class=&quot;s2&quot;&gt;elide&lt;/span&gt; the flags (different wording: maybe the computer can set the flags for you, because humans are bad at this sort of thing)&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;spoiler: PROLOG does this kind of exhaustive search and sets bookmarks, but you don't have to worry about the bookmarking, PROLOG does it for you&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;MiniKanren (core.logic) does bookmarking, too.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[PROLOG and miniKanren create bookmarks in different ways, but you don't need to worry about this kind of detail. [Lisp (…/cc, &quot;On Lisp&quot;, etc.) gives you the raw materials for creating bookmarks, but you still have to write the code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Assembler gives you the raw materials, too, but you have to write even more code.]]&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Queries - Ports&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino&quot;&gt;&lt;b&gt;Gedanken experiment (continued):&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Let us &lt;i&gt;adopt&lt;/i&gt; the &lt;i&gt;convention&lt;/i&gt; that only smaller rectangles are ports. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(N.B. port-ness is still inconclusive — we will want to know whether a port is &lt;i&gt;input &lt;/i&gt;or &lt;i&gt;output&lt;/i&gt;, but I regress).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Queries:&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;What are the ids of all of the ports?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;Who &quot;owns&quot; which ports?&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Answers&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;id2.&lt;/li&gt;
-&lt;li&gt;id2 is a port of id1. In other words: id1 owns port id2.&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Answers&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;id2.&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;id2 is a port of id1.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In other words: id1 owns port id2.&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;How did we arrive at this answer?&lt;/p&gt;
-
-&lt;p&gt;In PROLOG, we can write&lt;/p&gt;
-
-&lt;p&gt;port(Port,Owner) :-&lt;/p&gt;
-
-&lt;p&gt;rectangle(Port,_),&lt;/p&gt;
-
-&lt;p&gt;rectangle(Owner,_),&lt;/p&gt;
-
-&lt;p&gt;bigger(Owner,Port).&lt;/p&gt;
-
-&lt;p&gt;and use the query&lt;/p&gt;
-
-&lt;p&gt;port(P,O).&lt;/p&gt;
-
-&lt;p&gt;to find all ports and their owners.&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-searching&quot;&gt;Appendix - Searching&lt;/h1&gt;
-
-&lt;p&gt;miniKanren: &lt;a href=&quot;http://minikanren.org&quot;&gt;http://minikanren.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Scheme - miniKanren&lt;/p&gt;
-
-&lt;p&gt;Scheme - a simple version of PROLOG is available at &lt;a href=&quot;https://www.t3x.org/bits/prolog6.html&quot;&gt;https://www.t3x.org/bits/prolog6.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;JavaScript - &lt;a href=&quot;https://github.com/guitarvydas/js-match&quot;&gt;https://github.com/guitarvydas/js-match&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Clojure - core.logic&lt;/p&gt;
-
-&lt;p&gt;PROLOG - &lt;a href=&quot;https://www.swi-prolog.org/&quot;&gt;https://www.swi-prolog.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Getting started with PROLOG pattern matching - https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=195s&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-githubcode&quot;&gt;Appendix - Github Code&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/factbases-101&quot;&gt;https://github.com/guitarvydas/factbases-101&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-compilingdiagrams&quot;&gt;Appendix - Compiling Diagrams&lt;/h1&gt;
-
-&lt;p&gt;Compiling diagrams consists of 2 steps:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;normalize the diagram to a factbase&lt;/li&gt;
-&lt;li&gt;query the factbase, recursively, to create more-and-more-interesting facts.&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;How did we arrive at this answer?&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;In PROLOG, we can write&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;port(Port,Owner) :-&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;rectangle(Port,_),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;rectangle(Owner,_),&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;bigger(Owner,Port).&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;and use the query&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;port(P,O).&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;to find all ports and their owners.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Searching&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;miniKanren: &lt;a href=&quot;http://minikanren.org&quot;&gt;http://minikanren.org&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Scheme - miniKanren&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Scheme - a simple version of PROLOG is available at &lt;a href=&quot;https://www.t3x.org/bits/prolog6.html&quot;&gt;https://www.t3x.org/bits/prolog6.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;JavaScript - &lt;a href=&quot;https://github.com/guitarvydas/js-match&quot;&gt;https://github.com/guitarvydas/js-match&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Clojure - core.logic&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;PROLOG - &lt;a href=&quot;https://www.swi-prolog.org/&quot;&gt;https://www.swi-prolog.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Getting started with PROLOG pattern matching - https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;amp;t=195s&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Github Code&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://github.com/guitarvydas/factbases-101&quot;&gt;https://github.com/guitarvydas/factbases-101&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Compiling Diagrams&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Compiling diagrams consists of 2 steps:&lt;/p&gt;
+&lt;ol class=&quot;ol2&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;normalize the diagram to a factbase&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;query the factbase, recursively, to create more-and-more-interesting facts.&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;In the above, I have shown how to represent rectangles in a factbase.&lt;/p&gt;
-
-&lt;p&gt;Let us assume that we are using a notation that needs only:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;rectangles&lt;/li&gt;
-&lt;li&gt;lines&lt;/li&gt;
-&lt;li&gt;text.&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In the above, I have shown how to represent rectangles in a factbase.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Let us assume that we are using a notation that needs only:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;rectangles&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;lines&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;text.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;FYI &amp;#8212; I have found this simple combination enough to express concurrency&amp;#8230;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;rectangles represent concurrent Software Components&lt;/li&gt;
-&lt;li&gt;lines represent messages&lt;a href=&quot;#fn:11&quot; id=&quot;fnref:11&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;11&lt;/sup&gt;&lt;/a&gt; (data flow) between Software Components&lt;/li&gt;
-&lt;li&gt;text represents code and comments.&lt;/li&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;FYI — I have found this simple combination enough to express concurrency…&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;rectangles represent concurrent Software Components&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;lines represent messages&lt;a id=&quot;fnlink11&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn11&quot;&gt;&lt;sup&gt;[11]&lt;/sup&gt;&lt;/a&gt; (data flow) between Software Components&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;text represents code and comments.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;[&lt;em&gt;N.B. Software Components are not implemented using CALL / RETURN only. See my other essay &lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Questions:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How to internally represent rectangles (see &lt;em&gt;bounding boxes&lt;/em&gt; above)?&lt;/li&gt;
-&lt;li&gt;How to internally represent lines? (We only care about the start points of lines and the end points of lines ; do we create bounding boxes for lines or use special edge-case code for lines?]&lt;/li&gt;
-&lt;li&gt;How to internally represent code (code is not automatically sequential, blocks of code are found at various (x,y) points, what does &lt;em&gt;that&lt;/em&gt; mean?).&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;N.B. Software Components are not implemented using CALL / RETURN only.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See my other essay &lt;/i&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;&lt;i&gt;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&lt;/i&gt;&lt;/a&gt;&lt;i&gt;]&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Questions:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;How to internally represent rectangles (see &lt;i&gt;bounding boxes&lt;/i&gt; above)?&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;How to internally represent lines?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(We only care about the start points of lines and the end points of lines ; do we create bounding boxes for lines or use special edge-case code for lines?]&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;How to internally represent code (code is not automatically sequential, blocks of code are found at various (x,y) points, what does &lt;i&gt;that&lt;/i&gt; mean?).&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;We can compile diagrams in successive layers:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;layer 0 is the actual drawing converted to FB (factbase) form&lt;/li&gt;
-&lt;li&gt;layer 1 infers bounding boxes and augments the FB with this information&lt;/li&gt;
-&lt;li&gt;layer 2 infers which rectangles are Software Components and augments the FB with this information&lt;/li&gt;
-&lt;li&gt;layer 3 infers which rectangles are Ports and augments the FB&lt;/li&gt;
-&lt;li&gt;layer 4 infers the Owner for each Port&lt;/li&gt;
-&lt;li&gt;layer 5 visits every Port and infers whether the port is &lt;em&gt;input&lt;/em&gt; or &lt;em&gt;output&lt;/em&gt;. Q: What is the convention for this? The shape of the port (e.g. circles for inputs, squares for outputs) or, maybe the colour (green for inputs, yellow for outputs) and so on.&lt;/li&gt;
-&lt;li&gt;&amp;#8230;&lt;/li&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;We can compile diagrams in successive layers:&lt;/p&gt;
+&lt;ol class=&quot;ol2&quot;&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 0 is the actual drawing converted to FB (factbase) form&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 1 infers bounding boxes and augments the FB with this information&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 2 infers which rectangles are Software Components and augments the FB with this information&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 3 infers which rectangles are Ports and augments the FB&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 4 infers the Owner for each Port&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;layer 5 visits every Port and infers whether the port is &lt;i&gt;input&lt;/i&gt; or &lt;i&gt;output&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Q: What is the convention for this?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The shape of the port (e.g. circles for inputs, squares for outputs) or, maybe the colour (green for inputs, yellow for outputs) and so on.&lt;/li&gt;
+  &lt;li class=&quot;li6&quot;&gt;…&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Q: How much information must be in the FB before we can emit code using information in the FB?&lt;/p&gt;
-
-&lt;p&gt;Q: Is this information language-specific? E.G. if we know that we are going to emit code in Lisp, do we need more/less information than if we are going to emit code in, say, Python?&lt;/p&gt;
-
-&lt;p&gt;Q: Do we grow the FB knowledge-base over time or design it in one-fell-swoop at the beginning of the project(s)?&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;Rules specify only the result (the assertions). &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;https://www.youtube.com/watch?v=er_lLvkklsk &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:3&quot;&gt;
-&lt;p&gt;In SWIPL, one needs to enter the semi&amp;#8211;colon to receive successive match waves and to see the various results of each wave. &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:4&quot;&gt;
-&lt;p&gt;pseudo&amp;#8211;code &lt;a href=&quot;#fnref:4&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:5&quot;&gt;
-&lt;p&gt;If we wanted to look at objects + attributes, we could just write an SCN that gave us that view (aka skin) on the data. &lt;a href=&quot;#fnref:5&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:6&quot;&gt;
-&lt;p&gt;Again, I am simplifying in an attempt to maintain readability. A production version of the rules in this essay would need to handle more edge&amp;#8211;cases and shapes. &lt;a href=&quot;#fnref:6&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:7&quot;&gt;
-&lt;p&gt;Furthermore, we might choose to include other kinds of objects, e.g. ellipses. &lt;a href=&quot;#fnref:7&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:8&quot;&gt;
-&lt;p&gt;meta&amp;#8211;meta&amp;#8211;observation: we solve complicated problems by adding complication. &lt;a href=&quot;#fnref:8&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:9&quot;&gt;
-&lt;p&gt;meta&amp;#8211;meta&amp;#8211;question: Why do we do DRY by hand? Why can't git detect code clones for us? Beginners like RY &amp;#8211; they want to copy/paste cookbook code. &lt;a href=&quot;#fnref:9&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:10&quot;&gt;
-&lt;p&gt;Notice that our convention is that diagrams of components cannot contain other diagrams in&amp;#8211;place. We need to switch to other diagrams to show deep&amp;#8211;ness. In this notation, every diagram has 2 layers: (1) the top level and (2) an inner level. There is never an inner&amp;#8211;inner level (such a thing can exist but cannot be shown on the same diagram &amp;#8211; the editor should allow us to dive into and out&amp;#8211;of diagram layers &amp;#8211; much like the BACK button on browsers). &lt;a href=&quot;#fnref:10&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:11&quot;&gt;
-&lt;p&gt;Dynamically changing data flow is a bad thing IMO. Dynamic &amp;lt;anything&amp;gt; leads to trouble (esp. maintenance and debugging). https://guitarvydas.github.io/2021/03/06/Dynamic&amp;#8211;Anything&amp;#8211;is&amp;#8211;Bad.html. IMO, data flows must be represented explicitly, for example, as arrows. &lt;a href=&quot;#fnref:11&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Q: How much information must be in the FB before we can emit code using information in the FB?&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Q: Is this information language-specific?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;E.G. if we know that we are going to emit code in Lisp, do we need more/less information than if we are going to emit code in, say, Python? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Q: Do we grow the FB knowledge-base over time or design it in one-fell-swoop at the beginning of the project(s)?&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; Rules specify only the result (the assertions).&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;span class=&quot;s3&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;[2]&lt;/a&gt; &lt;/span&gt;https://www.youtube.com/watch?v=er_lLvkklsk&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;In SWIPL, one needs to enter the semi-colon to receive successive match waves and to see the various results of each wave.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;pseudo-code&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;If we wanted to look at objects + attributes, we could just write an SCN that gave us that view (aka skin) on the data.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Again, I am simplifying in an attempt to maintain readability.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A production version of the rules in this essay would need to handle more edge-cases and shapes.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Furthermore, we might choose to include other kinds of objects, e.g. ellipses.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn8&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink8&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[8]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;meta-meta-observation: we solve complicated problems by adding complication.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn9&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink9&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[9]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;meta-meta-question: Why do we do DRY by hand?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Why can't git detect code clones for us?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Beginners like RY - they want to copy/paste cookbook code.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn10&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink10&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[10]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Notice that our convention is that diagrams of components cannot contain other diagrams in-place.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We need to switch to other diagrams to show deep-ness.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this notation, every diagram has 2 layers: (1) the top level and (2) an inner level.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is never an inner-inner level (such a thing can exist but cannot be shown on the same diagram - the editor should allow us to dive into and out-of diagram layers - much like the BACK button on browsers).&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn11&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink11&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[11]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Dynamically changing data flow is a bad thing IMO.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Dynamic &amp;lt;anything&amp;gt; leads to trouble (esp. maintenance and debugging). https://guitarvydas.github.io/2021/03/06/Dynamic-Anything-is-Bad.html.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;IMO, data flows must be represented explicitly, for example, as arrows.&lt;/p&gt;
 &lt;/div&gt;
-
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
         issue-term=&quot;pathname&quot; 
