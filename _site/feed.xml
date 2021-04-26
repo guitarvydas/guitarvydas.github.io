@@ -1,4 +1,360 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T12:14:17-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T18:08:08-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">What if making a compiler was easy?</title><link href="https://computingsimplicity.neocities.org/2021/04/26/What-If-Making-A-Compiler-Was-Easy.html" rel="alternate" type="text/html" title="What if making a compiler was easy?" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/What%20If%20Making%20A%20Compiler%20Was%20Easy</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/What-If-Making-A-Compiler-Was-Easy.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;What If Compilers Were Easy?&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-26T18:07:09Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-26T18:07:09Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;What If?&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;What if it was easy to create compilers and languages?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Say, 10 minutes instead of several years?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;How would your approach to programming change?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Does your favourite programming language have REGEX built in?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Or, does it have a REGEX library?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What if writing a new language, a new DSL, were as easy as writing a REGEX?&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Paradigms, Not Languages&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Paradigms, e.g. OO, FP, message-passing, etc. would still be important.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Languages and syntax would no longer be important, if you could build languages as easily as writing REGEXs.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;You could easily wrap a language around &lt;i&gt;any&lt;/i&gt; given paradigm.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;If you didn't like a particular language, you would throw it away and build a new one to suit your needs (10 minutes, not years) .&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;A Language for Every Problem&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;If languages were cheap to build, you could build a new language every time you started a project.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This would be different, even, from creating DSLs.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Normally, we think of DSLs as being tied to particular technologies, like SQL is a DSL for database queries.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Instead, we could just invent a DSL for &lt;i&gt;every&lt;/i&gt; project.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, if we used a database for Project XYZ, we could have a XYZ-DSL for the project.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It would generate SQL queries based on what the Project XYZ needed.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;XYZ-DSL would not be general.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It would be specific &lt;i&gt;only&lt;/i&gt; to project XYZ.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We already do that, when we build code in a programming language, but we don't separate the code details from the architectural needs of the project. &lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The code to solve a problem is like a custom-fitted DSL for solving the problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;From a maintenance perspective, it is just as &quot;hard&quot; to learn what the code is doing as it is to learn a DSL geared for the problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Actually, it might be easier to understand a solution if only the meat was shown, less all of the nitty-gritty details of how the details were force-fitted into a chosen language (or DSL).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We use a language, and a DSL, which is sufficiently general, then we write code in that language until we solve the XYZ problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;By using an existing language, we use a &lt;i&gt;notation&lt;/i&gt; that is specific to some &lt;i&gt;other&lt;/i&gt; problem — not the problem-at-hand.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Sometimes, we don't need all to use all of the fancy features of a language. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Sometimes, the details (is this a list?, is this an array?, is this an int?, is this a double?, etc.) obscure the real meat of the solution.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;REGEX&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;REGEX is a simple DSL.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;REGEX was, originally, compiler technology.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Today, it is possible for non-specialists to use REGEX.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What can REGEX do? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;It can match strings.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What can't REGEX do?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;It can't match nested strings. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;It can't match across lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Is there something that can do what REGEX can do &lt;i&gt;and&lt;/i&gt; what REGEX can't do?&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Yes.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;PEG.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Is it built into other languages?&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;No,&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; not yet.&lt;/li&gt;
+  &lt;li class=&quot;li5&quot;&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;SCNs - Little DSLs&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I use the mnemonic SCN — Solution Centric Notation — to mean little DSLs that are specific to a solution.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Pipelines Instead of Hacking&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;What if we could &lt;i&gt;just leave well-enough alone&lt;/i&gt;? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What if, when a piece of software works, we leave it alone?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When we hack on a piece of already-working software, we often get unintended consequences. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Hidden dependencies cause unintended consequences.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;FP&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; attempts to alleviate unintended consequences.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;But, we already had this problem licked in the 1970's without all of the restrictions imposed by FP.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What we really want is called &lt;i&gt;isolation&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;UNIX®, for one, gave us &lt;i&gt;isolation&lt;/i&gt; (in the form of processes and pipes).&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Running FP on top of Linux is over-kill, from the above perspective.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Management Hates DSLs&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Management hates DSLs because of the feeling that DSLs take a long time to build (years instead of 10's of minutes).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Management doesn't notice that it takes a long time to understand a production program. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This time would be reduced (or, worst case, be the same) if the program were well-documented. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Documentation Doesn't Work&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Documentation &quot;doesn't work&quot;, because it goes out of date, because it is not automatically tied to the final code.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Can we repair this problem?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Efficiency&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;If N=10, O(N) is 10, O(N**2) is 100 and O(N**3) is 1000.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;So what?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A human perceives a keystroke to be sluggish if it takes more than 20msec. to register. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The human user doesn't care about O(_) performance.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The human user only cares that it takes less than 20msec. per keystroke.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;How many CPU cycles are needed for 20msec?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What is N?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;It depends.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The answer is different on a cheap rPi than on a modern MacBook.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Hardware Engineers perform &lt;i&gt;worst-case analysis&lt;/i&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Programmers perform O(N) calculations. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Most programmers don't even know what the latency of Linux is on the target hardware (nor on their own development system).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Using Rust isn't going to speed up Linux context switches.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;How many context switches happen when a customer pushes a key or clicks a mouse button? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What is the cost of using a thread? &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What is the cost of a function call?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Data Structures&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;There is only one data structure: the triple.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Everything else can be reconstructed from triples.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Building data structures at compile-time is an optimization, developed at a time when CPUs and Memory were expensive.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;https://guitarvydas.github.io/2021/01/17/Factbases.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Triples.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Many apps run on modern hardware, where CPUs don't need to be time-shared and we are not allowed to think of memory sharing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Data structure building at compile-time is but an optimization. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Do we need such optimizations?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Should we pay for such optimizations with time spent in development?&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The answer to these questions depends on what the final hardware will be.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Developing such optimizations in an app should be performed by Software Optimization Engineers, not Software Architects.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Are we paying for such optimizations?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Yes — these optimizations bring baggage that we call &quot;thread safety&quot;, &quot;full preemption&quot;, etc. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Do we need these optimizations in every app?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Only a few apps need to worry about time-sharing, e.g. Linux, Windows, MacOS, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Running Linux on rPis means that we are putting these optimizations into &lt;i&gt;every&lt;/i&gt; app that we run on the rPi, regardless of whether we actually need time-sharing and memory sharing in the app.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Could we approach apps differently and do away with the above accidental complexities?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Anonymous functions (aka closures) do a lot of what operating systems do, but at a much lower cost.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;How To Improve Programmer Efficiency&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Improving &lt;i&gt;programmer &lt;/i&gt;efficiency is different from improving &lt;i&gt;program &lt;/i&gt;efficiency.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Early Lisps were geared towards improving &lt;i&gt;programmer&lt;/i&gt; efficiency, with concepts like the &lt;i&gt;REPL&lt;/i&gt;, built-in debugging,&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; debuggers&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some of this programmer-efficiency attitude was lost when CL was standardized (CL includes features that make Lisp easier to compile[sic], which tend towards eroding debugability).&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We know that &lt;i&gt;comments&lt;/i&gt; don't work, because they go out of date, because they are not automatically connected to the code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When the code changes, one has to remember to change the comments.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When delivery deadlines loom, comment improvement suffers.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The solution is to automatically tie comments to code and to make comments &quot;write the code&quot; — no change to the system can be made without changing the comments.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(N.B. this also means prohibiting round-trip — the comments must be the &lt;i&gt;only&lt;/i&gt; way to change the code).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Can this be done?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I think that SCNs&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; can serve in this capacity at almost no increase in cost.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Capture the thinking in an SCN, have the SCN generate executable code. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Rebol programmers love Rebol because of its similarity in this regard — Rebol &lt;i&gt;dialects&lt;/i&gt; capture thinking as SCNs that hide details from dialect users.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Rebol users see pure utility, containing very little noise.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Ohm Editor&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I debugged a lot of grammars manually.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most of them were recursive-descent grammars (often written in S/SL).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Grammars made hard problems easier to solve.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Debugging grammars generally took about a day or two.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The Ohm Editor — &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;https://ohmlang.github.io/editor/&lt;/a&gt; — is an IDE for debugging grammars.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Grammar debugging is about an order of magnitude faster with the Ohm Editor (compared to debugging grammars manually, using generate-compile-edit-test cycles).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The Ohm Editor is useful for any PEG, although it has slight syntactic differences.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I believe that using the Ohm Editor for developing a non-Ohm PEG grammar is faster than trying to develop the grammar in the usual way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The major difference between Ohm and other PEGs, is Ohm's treatment of upper-case vs. lower-case grammar names.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This difference can be easily overcome by using lower-case names for all PEG rules.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(There are, then, minor syntactic differences, but they are minor, e.g. &quot;=&quot; instead of &quot;:&quot; for rule definition, and so on) .&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ohm Editor Introduction&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A screenshot of the Ohm Editor is show in &lt;span class=&quot;s1&quot;&gt;Fig. 1.&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-04-26-18-07-09-Images/Screen Shot 2021-04-26 at 5.48.37 PM.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 1 Ohm Editor screenshot.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The screen is divided into 4 sections — upper left, upper right, the middle and the bottom.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The upper left section holds the grammar under development. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The upper right section hold various test cases.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Test cases can be add using the &quot;+Add&quot; button or by double-clicking on a specific case.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The middle section (here showing &quot;2 * * 4 2 - 1 ) / 9&quot;) shows the string being parsed.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The bottom section shows the resulting CST&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/span&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The CST is gray when the parse is successful and red when the parse fails.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Hovering over a node in the parse tree highlights the corresponding grammar rule.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The most common problem encountered when debugging a PEG grammar is the that of incorrect parsing of whitespace.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Ohm Editor lets you see what the parser is doing and can give you hints as to where the parse is failing.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Thoughts About PEG in Editors&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;REGEX is found in many editors, namely Vim and Emacs.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Q: How could we wire PEG into editors?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The main difference between PEG and REGEX is in the number of lines for a specification.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;REGEXs are usually one line long and PEG specifications are usually many lines long.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;Awk&lt;/i&gt; faced this same issue when compared with &lt;i&gt;grep &lt;/i&gt;and &lt;i&gt;sed.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Ohm-JS works inside of HTML.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(See the Ohm documentation for further details)&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Other Languages with PEG&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Racket&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://racket-lang.org/&quot;&gt;https://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;#lang peg&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;or&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;(require peg)&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;REBOL&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;REBOL's &lt;i&gt;parse&lt;/i&gt; is PEG or very much like PEG.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Rebol&quot;&gt;https://en.wikipedia.org/wiki/Rebol&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lisp Macros&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Lisp macros are not PEG, but they show what can be done if you build a language that is machine-readable (vs. human-readable).&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Actually, other parser technologies like ANTRL do this.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;PEG feels more &quot;light weight&quot; to me.&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;There is Rebol and its Parse function.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is #lang peg in Racket.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There seems to be no Perl for PEG, though.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;REGEXs are built-into JS and Python. &lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Can PEG be built into those languages?&lt;/p&gt;
+&lt;p class=&quot;p10&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;FP is Functional Programming&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;For example, CL defines BREAK as part of the language, etc.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Lispworks has a better debugger than emacs (e.g. emacs+SBCL, etc.).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They both appear to have the same features, but debugging flows more smoothly in LW.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;and PEG&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;A CST is often called an AST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When fractalized, a grammar breaks down into two parts - the AST and the CST (abstract syntax tree and concrete syntax tree, resp.).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The AST shows what&lt;i&gt; can &lt;/i&gt;parsed, which the CST shows what &lt;i&gt;was&lt;/i&gt; parsed (in concrete terms).&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">What If Compilers Were Easy?</summary></entry><entry><title type="html">Recursive design, iterative design by example (3)</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (3)" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(3)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;RecursiveDesign, Iterative Design By Example (3)&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;leftovers&quot;&gt;Left Overs&lt;/h1&gt;
+
+&lt;h2 id=&quot;openingbalance&quot;&gt;Opening Balance&lt;/h2&gt;
+
+&lt;p&gt;I need a line for opening balance.&lt;/p&gt;
+
+&lt;p&gt;It should be input as:&lt;/p&gt;
+
+&lt;p&gt;{ opening: date balance }&lt;/p&gt;
+
+&lt;p&gt;I will skip this for now — until the tools are better — and will enter it directly into the spreadsheet.&lt;/p&gt;
+
+&lt;p&gt;This puts me into the manual work mode and the work that I do now will be unrecoverable and will need to be re-done every time I generate new data.&lt;/p&gt;
+
+&lt;p&gt;This is, also, a maintenance problem — I need to remember to re-do all of the manual work.&lt;/p&gt;
+
+&lt;p&gt;For now, I choose to do manual work and hope that I will remember what to re-do.&lt;/p&gt;
+
+&lt;p&gt;When the amount of re-doing reaches some critical mass, I will re-cast this work in automatable form. What is the &amp;#8220;critical mass&amp;#8221;? I have no hard definition for it — probably a factor of my boredom when re-doing work.&lt;/p&gt;
+
+&lt;h2 id=&quot;m4&quot;&gt;M4&lt;/h2&gt;
+
+&lt;p&gt;I need to include files.&lt;/p&gt;
+
+&lt;p&gt;I want to to create an output format for each parsed Transaction, and, I want these to be slightly different for the Transaction types (two). I want to use an editor to mass edit these output formats. (I ended up using a spreadsheet as the editor)l.&lt;/p&gt;
+
+&lt;p&gt;The SCN I&amp;#8217;m using doesn&amp;#8217;t have an include statement built into (i.e. there is no grammar rule for include)&lt;/p&gt;
+
+&lt;p&gt;Instead of extending the grammar with an include statement, I consider two simpler options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;use cat from the command line (and create file snippets that can be combined)&lt;/li&gt;
+&lt;li&gt;use a macro processor tool, such as M4.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I choose to use M4 for this solution. I think of using an include statement to include the output-gl*.inc files into their corresponding grasem files. M4 supports an include statement (M4 has many other features, all of which I can ignore in this solution).&lt;/p&gt;
+
+&lt;h2 id=&quot;usingaspreadsheetforroughformat&quot;&gt;Using a Spreadsheet For Rough Format&lt;/h2&gt;
+
+&lt;p&gt;I used LibreOffice calc to rough-in the output formats for the parser.&lt;/p&gt;
+
+&lt;p&gt;I ended up with two files — output-gl.inc and output-glcsv.inc — due to the (slight) differences between the way that my financial institution provides statements to me.&lt;/p&gt;
+
+&lt;h2 id=&quot;negativeamounts&quot;&gt;Negative Amounts&lt;/h2&gt;
+
+&lt;p&gt;My financial institution delivers account statements with negative amounts — in some cases, but not others.&lt;/p&gt;
+
+&lt;p&gt;I haven&amp;#8217;t figured out what the pattern is, yet.&lt;/p&gt;
+
+&lt;p&gt;For now, I will fix this directly in output-glcsv.inc. All accounts will grow in the +ve direction.&lt;/p&gt;
+
+&lt;p&gt;Maybe I need to figure out — again — the difference between credit and debit and liability accounts and asset accounts. For now, I will continue to use + and -.&lt;/p&gt;
+
+&lt;h1 id=&quot;parserruleduplication&quot;&gt;Parser Rule Duplication&lt;/h1&gt;
+
+&lt;p&gt;It should be noted that I used parse rule duplication (RY).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; I let the computer do more work instead of trying to abstract my work and save computer time.&lt;/p&gt;
+
+&lt;p&gt;Parser Rule Duplication is the idea of using the same parse under multiple different names.&lt;/p&gt;
+
+&lt;p&gt;The name tells me what the parser parsed and dictates the final format of the output.&lt;/p&gt;
+
+&lt;p&gt;In this case, see where ${amt} appears. It appears in slightly different places depending on the transaction account (e.g. &amp;#8220;rbc&amp;#8221; &amp;#8220;lit&amp;#8221; vs. &amp;#8220;rbc&amp;#8221; &amp;#8220;pro&amp;#8221;). In typical programming languages, one would be encouraged to write complex if-then-else-code to figure out in which field the ${amt} data fits, but, using a pattern-matcher, it is easier (for me, the human) to duplicate the parser rule and make a slight change to the output format.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;RY means Repeat Yourself. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">RecursiveDesign, Iterative Design By Example (3)</summary></entry><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -758,133 +1114,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Factbases 101</summary></entry><entry><title type="html">Recursive design, iterative design by example (3)</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (3)" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(3)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;RecursiveDesign, Iterative Design By Example (3)&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;leftovers&quot;&gt;Left Overs&lt;/h1&gt;
-
-&lt;h2 id=&quot;openingbalance&quot;&gt;Opening Balance&lt;/h2&gt;
-
-&lt;p&gt;I need a line for opening balance.&lt;/p&gt;
-
-&lt;p&gt;It should be input as:&lt;/p&gt;
-
-&lt;p&gt;{ opening: date balance }&lt;/p&gt;
-
-&lt;p&gt;I will skip this for now — until the tools are better — and will enter it directly into the spreadsheet.&lt;/p&gt;
-
-&lt;p&gt;This puts me into the manual work mode and the work that I do now will be unrecoverable and will need to be re-done every time I generate new data.&lt;/p&gt;
-
-&lt;p&gt;This is, also, a maintenance problem — I need to remember to re-do all of the manual work.&lt;/p&gt;
-
-&lt;p&gt;For now, I choose to do manual work and hope that I will remember what to re-do.&lt;/p&gt;
-
-&lt;p&gt;When the amount of re-doing reaches some critical mass, I will re-cast this work in automatable form. What is the &amp;#8220;critical mass&amp;#8221;? I have no hard definition for it — probably a factor of my boredom when re-doing work.&lt;/p&gt;
-
-&lt;h2 id=&quot;m4&quot;&gt;M4&lt;/h2&gt;
-
-&lt;p&gt;I need to include files.&lt;/p&gt;
-
-&lt;p&gt;I want to to create an output format for each parsed Transaction, and, I want these to be slightly different for the Transaction types (two). I want to use an editor to mass edit these output formats. (I ended up using a spreadsheet as the editor)l.&lt;/p&gt;
-
-&lt;p&gt;The SCN I&amp;#8217;m using doesn&amp;#8217;t have an include statement built into (i.e. there is no grammar rule for include)&lt;/p&gt;
-
-&lt;p&gt;Instead of extending the grammar with an include statement, I consider two simpler options:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;use cat from the command line (and create file snippets that can be combined)&lt;/li&gt;
-&lt;li&gt;use a macro processor tool, such as M4.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I choose to use M4 for this solution. I think of using an include statement to include the output-gl*.inc files into their corresponding grasem files. M4 supports an include statement (M4 has many other features, all of which I can ignore in this solution).&lt;/p&gt;
-
-&lt;h2 id=&quot;usingaspreadsheetforroughformat&quot;&gt;Using a Spreadsheet For Rough Format&lt;/h2&gt;
-
-&lt;p&gt;I used LibreOffice calc to rough-in the output formats for the parser.&lt;/p&gt;
-
-&lt;p&gt;I ended up with two files — output-gl.inc and output-glcsv.inc — due to the (slight) differences between the way that my financial institution provides statements to me.&lt;/p&gt;
-
-&lt;h2 id=&quot;negativeamounts&quot;&gt;Negative Amounts&lt;/h2&gt;
-
-&lt;p&gt;My financial institution delivers account statements with negative amounts — in some cases, but not others.&lt;/p&gt;
-
-&lt;p&gt;I haven&amp;#8217;t figured out what the pattern is, yet.&lt;/p&gt;
-
-&lt;p&gt;For now, I will fix this directly in output-glcsv.inc. All accounts will grow in the +ve direction.&lt;/p&gt;
-
-&lt;p&gt;Maybe I need to figure out — again — the difference between credit and debit and liability accounts and asset accounts. For now, I will continue to use + and -.&lt;/p&gt;
-
-&lt;h1 id=&quot;parserruleduplication&quot;&gt;Parser Rule Duplication&lt;/h1&gt;
-
-&lt;p&gt;It should be noted that I used parse rule duplication (RY).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; I let the computer do more work instead of trying to abstract my work and save computer time.&lt;/p&gt;
-
-&lt;p&gt;Parser Rule Duplication is the idea of using the same parse under multiple different names.&lt;/p&gt;
-
-&lt;p&gt;The name tells me what the parser parsed and dictates the final format of the output.&lt;/p&gt;
-
-&lt;p&gt;In this case, see where ${amt} appears. It appears in slightly different places depending on the transaction account (e.g. &amp;#8220;rbc&amp;#8221; &amp;#8220;lit&amp;#8221; vs. &amp;#8220;rbc&amp;#8221; &amp;#8220;pro&amp;#8221;). In typical programming languages, one would be encouraged to write complex if-then-else-code to figure out in which field the ${amt} data fits, but, using a pattern-matcher, it is easier (for me, the human) to duplicate the parser rule and make a slight change to the output format.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;RY means Repeat Yourself. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">RecursiveDesign, Iterative Design By Example (3)</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;REGEX&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-24T06:28:55Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-24T06:28:55Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;p class=&quot;p1&quot;&gt;REGEX is a production version of The Dragon Book DFA's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Actually, regex goes even further back, but I regress). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Henry Spencer&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p1&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Incompleteness</title><link href="https://computingsimplicity.neocities.org/2021/04/24/Incompleteness.html" rel="alternate" type="text/html" title="Incompleteness" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/Incompleteness</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/Incompleteness.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Factbases 101</summary></entry><entry><title type="html">Incompleteness</title><link href="https://computingsimplicity.neocities.org/2021/04/24/Incompleteness.html" rel="alternate" type="text/html" title="Incompleteness" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/Incompleteness</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/Incompleteness.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -926,7 +1156,42 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Imcompleteness</summary></entry><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Imcompleteness</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;REGEX&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-24T06:28:55Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-24T06:28:55Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;p class=&quot;p1&quot;&gt;REGEX is a production version of The Dragon Book DFA's.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Actually, regex goes even further back, but I regress). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;Henry Spencer wrote regex.c (while working in the Biology building at UofT, IIRC). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;Kleene opened our eyes to REGEX principles.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Henry Spencer&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p1&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Spencer&quot;&gt;https://en.wikipedia.org/wiki/Henry_Spencer&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">REGEX</summary></entry><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -1781,382 +2046,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry><entry><title type="html">Recursive design, iterative design by example (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (2)" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Recursive Design, Iterative Design By Example (2)&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T07:33:29Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T07:33:29Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    span.s1 {font: 9.0px Palatino}
-    span.s2 {text-decoration: underline}
-    span.s3 {font: 11.0px Menlo}
-    span.s4 {font: 13.0px Palatino}
-    span.Apple-tab-span {white-space:pre}
-    ol.ol1 {list-style-type: lower-alpha}
-    ol.ol2 {list-style-type: decimal}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: hyphen}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Part 2&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;This is a follow-on to part 1 of &quot;Recursive Design, Iterative Design By Example&quot;.]&lt;/i&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Goal: transpile a file of ASON text to Lisp items.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Sub-goal: instead of trying to implement ASON and Rebol, I start by converting ASON text into tokens.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will see, later,&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;how to progress from there…&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In general, the parser inputs a stream of text and outputs a stream of ASON tokens.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Specifically, when emitting a stream of Lisp tokens, the ASON tokens will appear as&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;Lisp atoms when there is a direct relationship between ASON and Lisp, e.g. strings, integers, floats, etc.&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;or, Lisp function calls,&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
-  &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li4&quot;&gt;e.g. (ason-array &lt;i&gt;items&lt;/i&gt;)&lt;/li&gt;
-    &lt;li class=&quot;li4&quot;&gt;e.g. (yymmdd &lt;i&gt;int int int&lt;/i&gt;)&lt;/li&gt;
-    &lt;li class=&quot;li4&quot;&gt;etc.&lt;/li&gt;
-    &lt;li class=&quot;li4&quot;&gt;(see &quot;Lisp Emitter Sample&quot; and &lt;a href=&quot;https://github.com/guitarvydas/ason/blob/master/emitter-lisp.grasem&quot;&gt;https://github.com/guitarvydas/ason/blob/master/emitter-lisp.grasem&lt;/a&gt;).&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;[&lt;i&gt;I am trying to capture my design thoughts as they occur, kind of like a live-stream video.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is not a paper, nor a YouTube video nor a Twitch live-stream.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The result is probably uneven - I will continue to experiment with various thought-capture methodologies.&lt;/i&gt;]&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Discovery&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Discovery / Observation; the 7&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; pass - called blocks - is unnecessary.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The block tokens [], {}, () simply emit&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;lisp function calls, e.g. &quot;(ason-array-block&quot;, &quot;(ason-object-block&quot; and &quot;(ason-expression-block&quot;&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;end of call &quot;)&quot; (in all 3 cases)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The grammar does not need to parse compound blocks, since emitting Lisp lists (function calls) is sufficient.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Lisp will read the emitted compound blocks into its internal (list) format.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The Lisp REPL applies different semantics to lists than the Rebol REPL / compiler.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will deal with interpretation of the stream later. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;For now, I just want to tokenize the input.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;ASON has many basic data types and I want to experiment with tokenizing them using PEG.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Restructuring Token Layers&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The grammar has become a tokenizer consisting of 2 layers:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;very basic tokens&lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;string&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;delimiter&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;integer&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;namedMonth&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;hex&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;ws&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;unknown&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;ident&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;compound tokens&lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;pair&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;range&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;tuple&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;currency&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;yyyymmddhhmmsstz&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt; yyyymmddhhmmss&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;yyyymmdd&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;mmdd&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;hhmmss&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;binaryBase64&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;email&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;url&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;path&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;hypertextTag&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;getUnevalField&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;setfield&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;selectField&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;pathRefinement&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;literal&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;symbol&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;refinement&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;selector&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;getword&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;defineword&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;useword&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;lbracket&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;rbracket&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;lbrace&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;rbrace&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;lpar&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;rpar&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;float&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;eufloat&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;namedMonth.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The 3&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;rd&lt;/sup&gt;&lt;/span&gt; layer is the emitter.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I built a generic emitter and tested it.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Then, I built a Lisp emitter and tested it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I RY'ed the generic emitter to create the lisp emitter.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Lisp Emitter Sample&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The sample input code:&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;     &lt;/span&gt;{ year: 2021&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;       &lt;/span&gt;tx: [&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;         &lt;/span&gt;[ jul-23 ??? -333.53 pppppp ]&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;       &lt;/span&gt;]&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;     &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;is converted into the token stream:&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D{ {&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;e! year&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;I 2021&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;e! tx&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D[ [&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D[ [&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;cP july 23&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;U&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D- -&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;bF 333 53&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;e? pppppp&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D] ]&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D] ]&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;D} }&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;which is then converted into Lisp code&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;((ason-object-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word year)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;2021&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word tx)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;(mmdd july 23)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;???&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;#\-&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;333.53&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;(use-word pppppp)))))&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Next Step&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I want to have &quot;define-word&quot; be a function of 2 arguments, e.g. the stream should be&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;((ason-object-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word year 2021)&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word tx&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;       &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;(mmdd july 23)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;???&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;#\-&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;333.53&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;(use-word pppppp))))))&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This could be done in&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;Lisp, or,&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;the Grammar.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I haven't decided, yet, how to do this.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Step (a) would need to change to grammar.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Lisp would simply read the list of tokens and consume tokens that are needed.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Step (b) would require a change to the grammar, but would make the Lisp code simpler.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This looks like a simple pattern match, which is the domain of the grammar/parser.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will start there.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Currently, the tokenizer emits something like&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;((ason-object-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word year) 2021&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(define-word tx)&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;     &lt;/span&gt;(ason-array-block&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;(mmdd july 23)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;???&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;#\-&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;333.53&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;(use-word pppppp))))))&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bug&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;PEG allows one to write grammars that are &quot;forgiving&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I am choosing to write grammars explicitly, to&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;ol class=&quot;ol2&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;make the explanations of what is going on more clear, and,&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;to double-check the data in the pipeline (the grammar can be loosened up after most of the passes are working).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;At the moment, some of the passes are failing on parse errors, due to an extra blank character inserted into some of the tokens.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Unfortunately, the error is caused by an invisible character, which has made it harder to detect the nature of the failure.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It seems that the token&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;bF 333 53&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;has an extra space appended to it (bF is a floating point token containing the two integer parts of a float value).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I currently save the output of each pass in a temp file (&lt;span class=&quot;s3&quot;&gt;_temp[0-9]&lt;/span&gt;).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is, of course, inefficient, but helps me debug the current problem.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I see that &lt;span class=&quot;s3&quot;&gt;_temp3&lt;/span&gt; does not contain the extra space, but &lt;span class=&quot;s3&quot;&gt;_temp4&lt;/span&gt; does.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Looking at run.bash, I see that the pass &lt;span class=&quot;s3&quot;&gt;date.grasem&lt;/span&gt; inputs _temp3 and outputs &lt;span class=&quot;s3&quot;&gt;_temp4&lt;/span&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This pass needs to be examined more closely.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The first step in debugging is to grab the grammar (only) from &lt;span class=&quot;s3&quot;&gt;date.grasem&lt;/span&gt; and the file &lt;span class=&quot;s3&quot;&gt;_temp3&lt;/span&gt; and put them into Ohm-editor&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;, for a sanity check. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Debugging question #1&lt;/span&gt;: is the token being parsed correctly?&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is immediately obvious that the token is being parsed by the rule &lt;span class=&quot;s3&quot;&gt;numericalToken&lt;/span&gt;, but with only one text field.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The definition of the rule probably allows spaces in the first text field — something I don't intend to allow.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Indeed the rule says&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;numericalToken = ntag nsubtag whiteSpace text text? eol&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;…&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;text = whiteSpace *textChar+&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;textChar = ~eol any&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;TextChar&lt;/span&gt; accepts any character except newline.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I need to tighten this up to exclude whitespace.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Note to self: check if other passes use this same code snippet.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Fix it, if so.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;]&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Debugging question #2&lt;/span&gt;: does the code emission for rule numericalToken look OK?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(&lt;i&gt;A: Yes.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Maybe the extra space was a result of mis-parsing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Try the test, again.&lt;/i&gt;)&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Fixing that parse has made the problem go away.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Groups&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Design Upgrade / Change:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;While working on this, I see a simplification.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is not necessary to emit ASON blocks as separate tokens.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I use &quot;G &lt;i&gt;ident&lt;/i&gt;&quot; to denote the beginning of a block.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The &lt;i&gt;ident&lt;/i&gt; supplies information about the block type.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have &lt;i&gt;ason-arrays, ason-objects &lt;/i&gt;and &lt;i&gt;ason-expressions&lt;/i&gt;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;To this, I add &lt;i&gt;define-word.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/i&gt;This addition makes it easier to parse &lt;i&gt;define-word&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The parser now emits:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;(asonArray nil …)&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;(asonObject nil …)&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;(asonExpression nil …)&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;(define-word &lt;i&gt;name &lt;/i&gt;…)&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;&lt;br&gt;&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;[see &lt;a href=&quot;https://github.com/guitarvydas/ason/blob/master/expr.grasem&quot;&gt;https://github.com/guitarvydas/ason/blob/master/expr.grasem&lt;/a&gt;]&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li5&quot;&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Negative Integer&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I found that simple integers are not enough — not a surprise, but I didn't catch this requirement earlier.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Fixing this problem is simple — I need to add another pass.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The only tricky part of this problem is that several ASON types require dashes between integers (e.g. dates).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I want to leave the earlier parser passes alone (they are meant to be &lt;i&gt;isolated&lt;/i&gt;) and insert a new pass near the end of the pipeline.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[see &lt;a href=&quot;https://github.com/guitarvydas/ason/blob/master/negativenum.grasem&quot;&gt;https://github.com/guitarvydas/ason/blob/master/negativenum.grasem&lt;/a&gt;]&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Bug 2&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I added the line&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;      &lt;/span&gt;balance : 1234.56&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;to the small test.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This is causing me to flip-flop on what the correct solution is.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;The grammar as-it-stands — expects no pairs after the list of transactions.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The above simple addition violates this original assumption.&lt;/i&gt;]&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I am learning something new about the problem.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The line causes a pair of tokens to be passed to the emitter&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;e! balance&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;bF 1234 56&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ol class=&quot;ol2&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;At first, I thought that e! should be weeded out by the expr pass (which immediately precedes the emitter pass),&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;Then, I thought that this sequence of tokens is legal.&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;Then, I thought that this sequence of tokens is illegal and should be weeded out by the expr pass before being passed to the emitter passes.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I am going back-and-forth in understanding the details of this problem.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;This is &quot;nothing special&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I did not understand all of the details of the problem when I started.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The deeper understanding of the problem does not wreck my earlier design and code.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Layering some of the details — and eliding details — has made it possible for me to see more nuance in the problem.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;At first, I thought of setting variables occurring at the beginning of object blocks.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This new addition shows that it is reasonable to have setting of variables occur.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Now that I see this, I wonder &quot;how could I have missed this?&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Layering — and moving forward with the easy stuff — has revealed more nuance to me.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I've seen such revelations happen in work that took 2 years to build.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;At the point that the revelation was made, the design had been calcified and the new revelation(s) could not be taking into account in the existing code. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The idea of scripting and generating code, makes it easy to incorporate such new revelations into the code base.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Break Down of Bug 2&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;The problem now becomes &quot;why didn't the expr pass capture and rewrite this line and its two tokens?&quot;.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Theories:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;the grammar did not catch the pair of tokens that form the defineWord sequence&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;a blunder&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;something else.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Theory (a) might indicate that the rule &lt;span class=&quot;s3&quot;&gt;ident&lt;/span&gt; is picking off &lt;span class=&quot;s3&quot;&gt;tags&lt;/span&gt;, preventing rule &lt;span class=&quot;s3&quot;&gt;defineWord&lt;/span&gt; group from succeeding.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;This leads to an examination of the rules &lt;span class=&quot;s3&quot;&gt;tag&lt;/span&gt; and &lt;span class=&quot;s3&quot;&gt;ident&lt;/span&gt;.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;In anticipation of needing to tighten up &lt;span class=&quot;s3&quot;&gt;tag&lt;/span&gt; vs. &lt;span class=&quot;s3&quot;&gt;ident&lt;/span&gt; matching in all passes, I have split some of the code (from &lt;span class=&quot;s3&quot;&gt;expr&lt;/span&gt;) into a boilerplate.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I include this boilerplate into the &lt;span class=&quot;s3&quot;&gt;expr&lt;/span&gt; pass using the &lt;span class=&quot;s3&quot;&gt;m4&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;span class=&quot;s4&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; tool.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;First, I test the file split and the use of &lt;span class=&quot;s3&quot;&gt;m4&lt;/span&gt; to see that I get the same result (the result, at this point, is an error message).&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Indeed — the two tokens are being parsed as two separate tokens and the defineWordGroup rule is not matching.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The rule defineWordToken is defined as&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;defineWordGroup = defineWordToken expr expr&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;whereas it should be&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;defineWordGroup = defineWordToken expr&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;(There are one too many expr's in the rule).&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Layering Solutions&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p4&quot;&gt;One needs to roll the problem around in one's mind to fully understand it. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Some people &quot;see&quot; the details of the problem more rapidly than others, but, at some point this &quot;seeing&quot; is overwhelmed by masses of detail. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I theorize that this &lt;i&gt;always&lt;/i&gt; happens, but at different degrees of detail for different people.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;At some point, the details overwhelm one's ability to reason about a problem.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The point of Recursive Design and FDD&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; is to create layers for details and to make it possible to reason about larger-and-larger problems, regardless of one's ability to cut through details at any level. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I may need more layers, whereas others may need fewer layers for the same problem. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The goal is to allow anyone to chunk a problem into layers and to address more interesting problems. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;In the hands of those who require fewer layers, further chunking and layering should make it possible to address more-and-more interesting problems.&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;https://ohmlang.github.io/editor/&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Same code found in stringsAndBinary.grasem and words.grasem.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;A standard UNIX® command-line tool.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s4&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s4&quot;&gt; &lt;/span&gt;Failure-Driven Design&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design, Iterative Design By Example (2)</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry></feed>

@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>What If Compilers Were Easy?</title>
+  <meta name="CreationTime" content="2021-04-26T18:07:09Z">
+  <meta name="ModificationTime" content="2021-04-26T18:07:09Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What If?</b></h2>
+<p class="p2">What if it was easy to create compilers and languages?</p>
+<p class="p3"><br></p>
+<p class="p2">Say, 10 minutes instead of several years?</p>
+<p class="p3"><br></p>
+<p class="p2">How would your approach to programming change?</p>
+<p class="p3"><br></p>
+<p class="p2">Does your favourite programming language have REGEX built in?<span class="Apple-converted-space">  </span>Or, does it have a REGEX library?</p>
+<p class="p3"><br></p>
+<p class="p2">What if writing a new language, a new DSL, were as easy as writing a REGEX?</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Paradigms, Not Languages</b></h2>
+<p class="p2">Paradigms, e.g. OO, FP, message-passing, etc. would still be important.</p>
+<p class="p3"><br></p>
+<p class="p2">Languages and syntax would no longer be important, if you could build languages as easily as writing REGEXs.</p>
+<p class="p3"><br></p>
+<p class="p2">You could easily wrap a language around <i>any</i> given paradigm.</p>
+<p class="p3"><br></p>
+<p class="p2">If you didn't like a particular language, you would throw it away and build a new one to suit your needs (10 minutes, not years) .</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>A Language for Every Problem</b></h2>
+<p class="p2">If languages were cheap to build, you could build a new language every time you started a project.</p>
+<p class="p3"><br></p>
+<p class="p2">This would be different, even, from creating DSLs.</p>
+<p class="p3"><br></p>
+<p class="p2">Normally, we think of DSLs as being tied to particular technologies, like SQL is a DSL for database queries.</p>
+<p class="p3"><br></p>
+<p class="p2">Instead, we could just invent a DSL for <i>every</i> project.<span class="Apple-converted-space">  </span>For example, if we used a database for Project XYZ, we could have a XYZ-DSL for the project.<span class="Apple-converted-space">  </span>It would generate SQL queries based on what the Project XYZ needed.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">XYZ-DSL would not be general.<span class="Apple-converted-space">  </span>It would be specific <i>only</i> to project XYZ.</p>
+<p class="p3"><br></p>
+<p class="p2">We already do that, when we build code in a programming language, but we don't separate the code details from the architectural needs of the project. <span class="Apple-converted-space">   </span></p>
+<p class="p3"><br></p>
+<p class="p2">The code to solve a problem is like a custom-fitted DSL for solving the problem.<span class="Apple-converted-space">  </span>From a maintenance perspective, it is just as "hard" to learn what the code is doing as it is to learn a DSL geared for the problem.<span class="Apple-converted-space">  </span>Actually, it might be easier to understand a solution if only the meat was shown, less all of the nitty-gritty details of how the details were force-fitted into a chosen language (or DSL).</p>
+<p class="p3"><br></p>
+<p class="p2">We use a language, and a DSL, which is sufficiently general, then we write code in that language until we solve the XYZ problem.<span class="Apple-converted-space">  </span>By using an existing language, we use a <i>notation</i> that is specific to some <i>other</i> problem — not the problem-at-hand.</p>
+<p class="p3"><br></p>
+<p class="p2">Sometimes, we don't need all to use all of the fancy features of a language. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Sometimes, the details (is this a list?, is this an array?, is this an int?, is this a double?, etc.) obscure the real meat of the solution.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>REGEX</b></h2>
+<p class="p2">REGEX is a simple DSL.</p>
+<p class="p3"><br></p>
+<p class="p2">REGEX was, originally, compiler technology.</p>
+<p class="p3"><br></p>
+<p class="p2">Today, it is possible for non-specialists to use REGEX.</p>
+<p class="p3"><br></p>
+<p class="p2">What can REGEX do? <span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">It can match strings.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">What can't REGEX do?<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">It can't match nested strings. <span class="Apple-converted-space"> </span></li>
+  <li class="li4">It can't match across lines.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Is there something that can do what REGEX can do <i>and</i> what REGEX can't do?</p>
+<p class="p5"><br></p>
+<p class="p4">Yes.</p>
+<p class="p5"><br></p>
+<p class="p4">PEG.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p5"><br></p>
+<p class="p4">Is it built into other languages?</p>
+<ul class="ul1">
+  <li class="li4">No,<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> not yet.</li>
+  <li class="li5"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCNs - Little DSLs</b></h2>
+<p class="p2">I use the mnemonic SCN — Solution Centric Notation — to mean little DSLs that are specific to a solution.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Pipelines Instead of Hacking</b></h2>
+<p class="p2">What if we could <i>just leave well-enough alone</i>? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">What if, when a piece of software works, we leave it alone?</p>
+<p class="p3"><br></p>
+<p class="p2">When we hack on a piece of already-working software, we often get unintended consequences. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Hidden dependencies cause unintended consequences.</p>
+<p class="p3"><br></p>
+<p class="p2">FP<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> attempts to alleviate unintended consequences.</p>
+<p class="p3"><br></p>
+<p class="p2">But, we already had this problem licked in the 1970's without all of the restrictions imposed by FP.</p>
+<p class="p3"><br></p>
+<p class="p2">What we really want is called <i>isolation</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">UNIX®, for one, gave us <i>isolation</i> (in the form of processes and pipes).<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Running FP on top of Linux is over-kill, from the above perspective.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Management Hates DSLs</b></h2>
+<p class="p2">Management hates DSLs because of the feeling that DSLs take a long time to build (years instead of 10's of minutes).</p>
+<p class="p3"><br></p>
+<p class="p2">Management doesn't notice that it takes a long time to understand a production program. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This time would be reduced (or, worst case, be the same) if the program were well-documented. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Documentation Doesn't Work</b></h2>
+<p class="p2">Documentation "doesn't work", because it goes out of date, because it is not automatically tied to the final code.</p>
+<p class="p3"><br></p>
+<p class="p2">Can we repair this problem?</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Efficiency</b></h2>
+<p class="p2">If N=10, O(N) is 10, O(N**2) is 100 and O(N**3) is 1000.</p>
+<p class="p3"><br></p>
+<p class="p2">So what?</p>
+<p class="p3"><br></p>
+<p class="p2">A human perceives a keystroke to be sluggish if it takes more than 20msec. to register. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The human user doesn't care about O(_) performance.</p>
+<p class="p3"><br></p>
+<p class="p2">The human user only cares that it takes less than 20msec. per keystroke.</p>
+<p class="p3"><br></p>
+<p class="p2">How many CPU cycles are needed for 20msec?<span class="Apple-converted-space">  </span>What is N?</p>
+<p class="p3"><br></p>
+<p class="p2">It depends.</p>
+<p class="p3"><br></p>
+<p class="p2">The answer is different on a cheap rPi than on a modern MacBook.</p>
+<p class="p3"><br></p>
+<p class="p2">Hardware Engineers perform <i>worst-case analysis</i>. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Programmers perform O(N) calculations. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most programmers don't even know what the latency of Linux is on the target hardware (nor on their own development system).</p>
+<p class="p3"><br></p>
+<p class="p2">Using Rust isn't going to speed up Linux context switches.</p>
+<p class="p3"><br></p>
+<p class="p2">How many context switches happen when a customer pushes a key or clicks a mouse button? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">What is the cost of using a thread? <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">What is the cost of a function call?</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Data Structures</b></h2>
+<p class="p2">There is only one data structure: the triple.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Everything else can be reconstructed from triples.</p>
+<p class="p3"><br></p>
+<p class="p2">Building data structures at compile-time is an optimization, developed at a time when CPUs and Memory were expensive.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">https://guitarvydas.github.io/2021/01/17/Factbases.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/16/Triples.html">https://guitarvydas.github.io/2021/03/16/Triples.html</a></p>
+<p class="p3"><br></p>
+<p class="p2">Many apps run on modern hardware, where CPUs don't need to be time-shared and we are not allowed to think of memory sharing.</p>
+<p class="p3"><br></p>
+<p class="p2">Data structure building at compile-time is but an optimization. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Do we need such optimizations?<span class="Apple-converted-space">  </span>Should we pay for such optimizations with time spent in development?</p>
+<p class="p3"><br></p>
+<p class="p2">The answer to these questions depends on what the final hardware will be.<span class="Apple-converted-space">  </span>Developing such optimizations in an app should be performed by Software Optimization Engineers, not Software Architects.</p>
+<p class="p3"><br></p>
+<p class="p2">Are we paying for such optimizations?<span class="Apple-converted-space">  </span>Yes — these optimizations bring baggage that we call "thread safety", "full preemption", etc. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Do we need these optimizations in every app?<span class="Apple-converted-space">  </span>Only a few apps need to worry about time-sharing, e.g. Linux, Windows, MacOS, etc.<span class="Apple-converted-space">  </span>Running Linux on rPis means that we are putting these optimizations into <i>every</i> app that we run on the rPi, regardless of whether we actually need time-sharing and memory sharing in the app.</p>
+<p class="p3"><br></p>
+<p class="p2">Could we approach apps differently and do away with the above accidental complexities?<span class="Apple-converted-space">  </span>Anonymous functions (aka closures) do a lot of what operating systems do, but at a much lower cost.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How To Improve Programmer Efficiency</b></h2>
+<p class="p2">Improving <i>programmer </i>efficiency is different from improving <i>program </i>efficiency.</p>
+<p class="p3"><br></p>
+<p class="p2">Early Lisps were geared towards improving <i>programmer</i> efficiency, with concepts like the <i>REPL</i>, built-in debugging,<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> debuggers<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a>, etc.<span class="Apple-converted-space">  </span>Some of this programmer-efficiency attitude was lost when CL was standardized (CL includes features that make Lisp easier to compile[sic], which tend towards eroding debugability).<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">We know that <i>comments</i> don't work, because they go out of date, because they are not automatically connected to the code.<span class="Apple-converted-space">  </span>When the code changes, one has to remember to change the comments.<span class="Apple-converted-space">  </span>When delivery deadlines loom, comment improvement suffers.</p>
+<p class="p3"><br></p>
+<p class="p2">The solution is to automatically tie comments to code and to make comments "write the code" — no change to the system can be made without changing the comments.<span class="Apple-converted-space">  </span>(N.B. this also means prohibiting round-trip — the comments must be the <i>only</i> way to change the code).</p>
+<p class="p3"><br></p>
+<p class="p2">Can this be done?<span class="Apple-converted-space">  </span>I think that SCNs<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> can serve in this capacity at almost no increase in cost.<span class="Apple-converted-space">  </span>Capture the thinking in an SCN, have the SCN generate executable code. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Rebol programmers love Rebol because of its similarity in this regard — Rebol <i>dialects</i> capture thinking as SCNs that hide details from dialect users.<span class="Apple-converted-space">  </span>Rebol users see pure utility, containing very little noise.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix - Ohm Editor</b></h2>
+<p class="p2">I debugged a lot of grammars manually.<span class="Apple-converted-space">  </span>Most of them were recursive-descent grammars (often written in S/SL).</p>
+<p class="p3"><br></p>
+<p class="p2">Grammars made hard problems easier to solve.</p>
+<p class="p3"><br></p>
+<p class="p2">Debugging grammars generally took about a day or two.</p>
+<p class="p3"><br></p>
+<p class="p2">The Ohm Editor — <a href="https://ohmlang.github.io/editor/">https://ohmlang.github.io/editor/</a> — is an IDE for debugging grammars.<span class="Apple-converted-space">  </span>Grammar debugging is about an order of magnitude faster with the Ohm Editor (compared to debugging grammars manually, using generate-compile-edit-test cycles).</p>
+<p class="p3"><br></p>
+<p class="p2">The Ohm Editor is useful for any PEG, although it has slight syntactic differences.<span class="Apple-converted-space">  </span>I believe that using the Ohm Editor for developing a non-Ohm PEG grammar is faster than trying to develop the grammar in the usual way.<span class="Apple-converted-space">  </span>The major difference between Ohm and other PEGs, is Ohm's treatment of upper-case vs. lower-case grammar names.<span class="Apple-converted-space">  </span>This difference can be easily overcome by using lower-case names for all PEG rules.<span class="Apple-converted-space">  </span>(There are, then, minor syntactic differences, but they are minor, e.g. "=" instead of ":" for rule definition, and so on) .</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm Editor Introduction</b></h2>
+<p class="p2">A screenshot of the Ohm Editor is show in <span class="s1">Fig. 1.</span></p>
+<p class="p2"><img src="/assets/2021-04-26-18-07-09-Images/Screen Shot 2021-04-26 at 5.48.37 PM.png" width="100%" alt="Image"></p>
+<p class="p6">Fig. 1 Ohm Editor screenshot.</p>
+<p class="p7"><br></p>
+<p class="p6">The screen is divided into 4 sections — upper left, upper right, the middle and the bottom.</p>
+<p class="p7"><br></p>
+<p class="p6">The upper left section holds the grammar under development. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">The upper right section hold various test cases.<span class="Apple-converted-space">  </span>Test cases can be add using the "+Add" button or by double-clicking on a specific case.</p>
+<p class="p7"><br></p>
+<p class="p6">The middle section (here showing "2 * * 4 2 - 1 ) / 9") shows the string being parsed.</p>
+<p class="p7"><br></p>
+<p class="p6">The bottom section shows the resulting CST<a id="fnlink7"></a><a href="#fn7"><span class="s2"><sup>[7]</sup></span></a>.<span class="Apple-converted-space">  </span>The CST is gray when the parse is successful and red when the parse fails.<span class="Apple-converted-space">  </span>Hovering over a node in the parse tree highlights the corresponding grammar rule.</p>
+<p class="p7"><br></p>
+<p class="p6">The most common problem encountered when debugging a PEG grammar is the that of incorrect parsing of whitespace.<span class="Apple-converted-space">  </span>The Ohm Editor lets you see what the parser is doing and can give you hints as to where the parse is failing.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix - Thoughts About PEG in Editors</b></h2>
+<p class="p2">REGEX is found in many editors, namely Vim and Emacs.</p>
+<p class="p3"><br></p>
+<p class="p2">Q: How could we wire PEG into editors?<span class="Apple-converted-space">  </span>The main difference between PEG and REGEX is in the number of lines for a specification.<span class="Apple-converted-space">  </span>REGEXs are usually one line long and PEG specifications are usually many lines long.<span class="Apple-converted-space">  </span><i>Awk</i> faced this same issue when compared with <i>grep </i>and <i>sed.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">Ohm-JS works inside of HTML.<span class="Apple-converted-space">  </span>(See the Ohm documentation for further details)</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix - Other Languages with PEG</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Racket</b></h2>
+<p class="p2"><a href="https://racket-lang.org/">https://racket-lang.org/</a></p>
+<p class="p8"><br></p>
+<p class="p9">#lang peg</p>
+<p class="p3"><br></p>
+<p class="p2">or<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p9">(require peg)</p>
+<p class="p8"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>REBOL</b></h2>
+<p class="p2">REBOL's <i>parse</i> is PEG or very much like PEG.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://en.wikipedia.org/wiki/Rebol">https://en.wikipedia.org/wiki/Rebol</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lisp Macros</b></h2>
+<p class="p2">Lisp macros are not PEG, but they show what can be done if you build a language that is machine-readable (vs. human-readable).</p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Actually, other parser technologies like ANTRL do this.<span class="Apple-converted-space">  </span>PEG feels more "light weight" to me.</p>
+<p class="p10"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>There is Rebol and its Parse function.<span class="Apple-converted-space">  </span>There is #lang peg in Racket.<span class="Apple-converted-space">  </span>There seems to be no Perl for PEG, though.<span class="Apple-converted-space">  </span>REGEXs are built-into JS and Python. <span class="Apple-converted-space">  </span>Can PEG be built into those languages?</p>
+<p class="p10"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>FP is Functional Programming</p>
+<p class="p6"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>For example, CL defines BREAK as part of the language, etc.</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>Lispworks has a better debugger than emacs (e.g. emacs+SBCL, etc.).<span class="Apple-converted-space">  </span>They both appear to have the same features, but debugging flows more smoothly in LW.</p>
+<p class="p6"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>and PEG</p>
+<p class="p6"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>A CST is often called an AST.<span class="Apple-converted-space">  </span>When fractalized, a grammar breaks down into two parts - the AST and the CST (abstract syntax tree and concrete syntax tree, resp.).<span class="Apple-converted-space">  </span>The AST shows what<i> can </i>parsed, which the CST shows what <i>was</i> parsed (in concrete terms).</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
