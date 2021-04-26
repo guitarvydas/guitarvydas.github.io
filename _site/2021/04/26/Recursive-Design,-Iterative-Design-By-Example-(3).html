@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>RecursiveDesign, Iterative Design By Example (3)</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="leftovers">Left Overs</h1>
+
+<h2 id="openingbalance">Opening Balance</h2>
+
+<p>I need a line for opening balance.</p>
+
+<p>It should be input as:</p>
+
+<p>{ opening: date balance }</p>
+
+<p>I will skip this for now — until the tools are better — and will enter it directly into the spreadsheet.</p>
+
+<p>This puts me into the manual work mode and the work that I do now will be unrecoverable and will need to be re-done every time I generate new data.</p>
+
+<p>This is, also, a maintenance problem — I need to remember to re-do all of the manual work.</p>
+
+<p>For now, I choose to do manual work and hope that I will remember what to re-do.</p>
+
+<p>When the amount of re-doing reaches some critical mass, I will re-cast this work in automatable form. What is the &#8220;critical mass&#8221;? I have no hard definition for it — probably a factor of my boredom when re-doing work.</p>
+
+<h2 id="m4">M4</h2>
+
+<p>I need to include files.</p>
+
+<p>I want to to create an output format for each parsed Transaction, and, I want these to be slightly different for the Transaction types (two). I want to use an editor to mass edit these output formats. (I ended up using a spreadsheet as the editor)l.</p>
+
+<p>The SCN I&#8217;m using doesn&#8217;t have an include statement built into (i.e. there is no grammar rule for include)</p>
+
+<p>Instead of extending the grammar with an include statement, I consider two simpler options:</p>
+
+<ol>
+<li>use cat from the command line (and create file snippets that can be combined)</li>
+<li>use a macro processor tool, such as M4.</li>
+</ol>
+
+<p>I choose to use M4 for this solution. I think of using an include statement to include the output-gl*.inc files into their corresponding grasem files. M4 supports an include statement (M4 has many other features, all of which I can ignore in this solution).</p>
+
+<h2 id="usingaspreadsheetforroughformat">Using a Spreadsheet For Rough Format</h2>
+
+<p>I used LibreOffice calc to rough-in the output formats for the parser.</p>
+
+<p>I ended up with two files — output-gl.inc and output-glcsv.inc — due to the (slight) differences between the way that my financial institution provides statements to me.</p>
+
+<h2 id="negativeamounts">Negative Amounts</h2>
+
+<p>My financial institution delivers account statements with negative amounts — in some cases, but not others.</p>
+
+<p>I haven&#8217;t figured out what the pattern is, yet.</p>
+
+<p>For now, I will fix this directly in output-glcsv.inc. All accounts will grow in the +ve direction.</p>
+
+<p>Maybe I need to figure out — again — the difference between credit and debit and liability accounts and asset accounts. For now, I will continue to use + and -.</p>
+
+<h1 id="parserruleduplication">Parser Rule Duplication</h1>
+
+<p>It should be noted that I used parse rule duplication (RY).<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> I let the computer do more work instead of trying to abstract my work and save computer time.</p>
+
+<p>Parser Rule Duplication is the idea of using the same parse under multiple different names.</p>
+
+<p>The name tells me what the parser parsed and dictates the final format of the output.</p>
+
+<p>In this case, see where ${amt} appears. It appears in slightly different places depending on the transaction account (e.g. &#8220;rbc&#8221; &#8220;lit&#8221; vs. &#8220;rbc&#8221; &#8220;pro&#8221;). In typical programming languages, one would be encouraged to write complex if-then-else-code to figure out in which field the ${amt} data fits, but, using a pattern-matcher, it is easier (for me, the human) to duplicate the parser rule and make a slight change to the output format.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>RY means Repeat Yourself. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

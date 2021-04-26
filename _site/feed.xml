@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T12:11:51-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-26T12:14:17-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Factbases 101</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html" rel="alternate" type="text/html" title="Factbases 101" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Factbases%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Factbases-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -758,7 +758,98 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Factbases 101</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Factbases 101</summary></entry><entry><title type="html">Recursive design, iterative design by example (3)</title><link href="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (3)" /><published>2021-04-26T00:00:00-04:00</published><updated>2021-04-26T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/26/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(3)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;RecursiveDesign, Iterative Design By Example (3)&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;leftovers&quot;&gt;Left Overs&lt;/h1&gt;
+
+&lt;h2 id=&quot;openingbalance&quot;&gt;Opening Balance&lt;/h2&gt;
+
+&lt;p&gt;I need a line for opening balance.&lt;/p&gt;
+
+&lt;p&gt;It should be input as:&lt;/p&gt;
+
+&lt;p&gt;{ opening: date balance }&lt;/p&gt;
+
+&lt;p&gt;I will skip this for now — until the tools are better — and will enter it directly into the spreadsheet.&lt;/p&gt;
+
+&lt;p&gt;This puts me into the manual work mode and the work that I do now will be unrecoverable and will need to be re-done every time I generate new data.&lt;/p&gt;
+
+&lt;p&gt;This is, also, a maintenance problem — I need to remember to re-do all of the manual work.&lt;/p&gt;
+
+&lt;p&gt;For now, I choose to do manual work and hope that I will remember what to re-do.&lt;/p&gt;
+
+&lt;p&gt;When the amount of re-doing reaches some critical mass, I will re-cast this work in automatable form. What is the &amp;#8220;critical mass&amp;#8221;? I have no hard definition for it — probably a factor of my boredom when re-doing work.&lt;/p&gt;
+
+&lt;h2 id=&quot;m4&quot;&gt;M4&lt;/h2&gt;
+
+&lt;p&gt;I need to include files.&lt;/p&gt;
+
+&lt;p&gt;I want to to create an output format for each parsed Transaction, and, I want these to be slightly different for the Transaction types (two). I want to use an editor to mass edit these output formats. (I ended up using a spreadsheet as the editor)l.&lt;/p&gt;
+
+&lt;p&gt;The SCN I&amp;#8217;m using doesn&amp;#8217;t have an include statement built into (i.e. there is no grammar rule for include)&lt;/p&gt;
+
+&lt;p&gt;Instead of extending the grammar with an include statement, I consider two simpler options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;use cat from the command line (and create file snippets that can be combined)&lt;/li&gt;
+&lt;li&gt;use a macro processor tool, such as M4.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I choose to use M4 for this solution. I think of using an include statement to include the output-gl*.inc files into their corresponding grasem files. M4 supports an include statement (M4 has many other features, all of which I can ignore in this solution).&lt;/p&gt;
+
+&lt;h2 id=&quot;usingaspreadsheetforroughformat&quot;&gt;Using a Spreadsheet For Rough Format&lt;/h2&gt;
+
+&lt;p&gt;I used LibreOffice calc to rough-in the output formats for the parser.&lt;/p&gt;
+
+&lt;p&gt;I ended up with two files — output-gl.inc and output-glcsv.inc — due to the (slight) differences between the way that my financial institution provides statements to me.&lt;/p&gt;
+
+&lt;h2 id=&quot;negativeamounts&quot;&gt;Negative Amounts&lt;/h2&gt;
+
+&lt;p&gt;My financial institution delivers account statements with negative amounts — in some cases, but not others.&lt;/p&gt;
+
+&lt;p&gt;I haven&amp;#8217;t figured out what the pattern is, yet.&lt;/p&gt;
+
+&lt;p&gt;For now, I will fix this directly in output-glcsv.inc. All accounts will grow in the +ve direction.&lt;/p&gt;
+
+&lt;p&gt;Maybe I need to figure out — again — the difference between credit and debit and liability accounts and asset accounts. For now, I will continue to use + and -.&lt;/p&gt;
+
+&lt;h1 id=&quot;parserruleduplication&quot;&gt;Parser Rule Duplication&lt;/h1&gt;
+
+&lt;p&gt;It should be noted that I used parse rule duplication (RY).&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; I let the computer do more work instead of trying to abstract my work and save computer time.&lt;/p&gt;
+
+&lt;p&gt;Parser Rule Duplication is the idea of using the same parse under multiple different names.&lt;/p&gt;
+
+&lt;p&gt;The name tells me what the parser parsed and dictates the final format of the output.&lt;/p&gt;
+
+&lt;p&gt;In this case, see where ${amt} appears. It appears in slightly different places depending on the transaction account (e.g. &amp;#8220;rbc&amp;#8221; &amp;#8220;lit&amp;#8221; vs. &amp;#8220;rbc&amp;#8221; &amp;#8220;pro&amp;#8221;). In typical programming languages, one would be encouraged to write complex if-then-else-code to figure out in which field the ${amt} data fits, but, using a pattern-matcher, it is easier (for me, the human) to duplicate the parser rule and make a slight change to the output format.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;RY means Repeat Yourself. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">RecursiveDesign, Iterative Design By Example (3)</summary></entry><entry><title type="html">Regex</title><link href="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html" rel="alternate" type="text/html" title="Regex" /><published>2021-04-24T00:00:00-04:00</published><updated>2021-04-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/24/REGEX</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/24/REGEX.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -835,7 +926,57 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Imcompleteness</summary></entry><entry><title type="html">Relational programming and the kitchen sink</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Relational-Programming-and-the-Kitchen-Sink.html" rel="alternate" type="text/html" title="Relational programming and the kitchen sink" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Relational%20Programming%20and%20the%20Kitchen%20Sink</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Relational-Programming-and-the-Kitchen-Sink.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Imcompleteness</summary></entry><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Scoping Rebol&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;rebolisstaticallyscoped&quot;&gt;Rebol is Statically Scoped&lt;/h1&gt;
+
+&lt;p&gt;Rebol has static scoping,&lt;/p&gt;
+
+&lt;p&gt;but,&lt;/p&gt;
+
+&lt;p&gt;The question is not &amp;#8220;&lt;em&gt;what&lt;/em&gt; scoping does Rebol employ?&amp;#8221;, but, &amp;#8220;&lt;em&gt;when&lt;/em&gt; is a Rebol scoping determined, &lt;em&gt;when&lt;/em&gt; is a Rebol program compiled?&amp;#8221;.&lt;/p&gt;
+
+&lt;h1 id=&quot;rebol-statictypingdynamiccompilation&quot;&gt;Rebol - Static Typing, Dynamic Compilation&lt;/h1&gt;
+
+&lt;p&gt;Rebol has static typing, but dynamic compilation.&lt;/p&gt;
+
+&lt;p&gt;We are accustomed to there being &lt;em&gt;one&lt;/em&gt; compilation time and &lt;em&gt;one&lt;/em&gt; runtime.&lt;/p&gt;
+
+&lt;p&gt;Rebol has &lt;em&gt;multiple&lt;/em&gt; compilation times.&lt;/p&gt;
+
+&lt;p&gt;The compilation of Rebol code depends on the &lt;em&gt;context&lt;/em&gt; that exists at the time of compilation.&lt;/p&gt;
+
+&lt;p&gt;Rebol code is compiled at different times, within different contexts. This means that Rebol functions might be compiled differently at different times.&lt;/p&gt;
+
+&lt;h1 id=&quot;appendix-rebolscoping&quot;&gt;Appendix - REBOL Scoping&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&quot;&gt;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/rebol-vs-lisp-macros/&quot;&gt;http://blog.hostilefork.com/rebol-vs-lisp-macros/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&quot;&gt;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Scoping Rebol</summary></entry><entry><title type="html">Failure Driven Design</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design.html" rel="alternate" type="text/html" title="Failure Driven Design" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design.html">&lt;p&gt;Failure Driven Design&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/assets/2021-04-23-FDD/index.html&quot;&gt;FDD&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Failure Driven Design</summary></entry><entry><title type="html">Relational programming and the kitchen sink</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Relational-Programming-and-the-Kitchen-Sink.html" rel="alternate" type="text/html" title="Relational programming and the kitchen sink" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Relational%20Programming%20and%20the%20Kitchen%20Sink</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Relational-Programming-and-the-Kitchen-Sink.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -1503,57 +1644,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Relational Programming and the Kitchen Sink</summary></entry><entry><title type="html">Failure Driven Design</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design.html" rel="alternate" type="text/html" title="Failure Driven Design" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Failure-Driven-Design.html">&lt;p&gt;Failure Driven Design&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/assets/2021-04-23-FDD/index.html&quot;&gt;FDD&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Failure Driven Design</summary></entry><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-23T00:00:00-04:00</published><updated>2021-04-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/23/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/23/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Scoping Rebol&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;rebolisstaticallyscoped&quot;&gt;Rebol is Statically Scoped&lt;/h1&gt;
-
-&lt;p&gt;Rebol has static scoping,&lt;/p&gt;
-
-&lt;p&gt;but,&lt;/p&gt;
-
-&lt;p&gt;The question is not &amp;#8220;&lt;em&gt;what&lt;/em&gt; scoping does Rebol employ?&amp;#8221;, but, &amp;#8220;&lt;em&gt;when&lt;/em&gt; is a Rebol scoping determined, &lt;em&gt;when&lt;/em&gt; is a Rebol program compiled?&amp;#8221;.&lt;/p&gt;
-
-&lt;h1 id=&quot;rebol-statictypingdynamiccompilation&quot;&gt;Rebol - Static Typing, Dynamic Compilation&lt;/h1&gt;
-
-&lt;p&gt;Rebol has static typing, but dynamic compilation.&lt;/p&gt;
-
-&lt;p&gt;We are accustomed to there being &lt;em&gt;one&lt;/em&gt; compilation time and &lt;em&gt;one&lt;/em&gt; runtime.&lt;/p&gt;
-
-&lt;p&gt;Rebol has &lt;em&gt;multiple&lt;/em&gt; compilation times.&lt;/p&gt;
-
-&lt;p&gt;The compilation of Rebol code depends on the &lt;em&gt;context&lt;/em&gt; that exists at the time of compilation.&lt;/p&gt;
-
-&lt;p&gt;Rebol code is compiled at different times, within different contexts. This means that Rebol functions might be compiled differently at different times.&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-rebolscoping&quot;&gt;Appendix - REBOL Scoping&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&quot;&gt;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/rebol-vs-lisp-macros/&quot;&gt;http://blog.hostilefork.com/rebol-vs-lisp-macros/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&quot;&gt;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Scoping Rebol</summary></entry><entry><title type="html">Variable names are not good enough</title><link href="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html" rel="alternate" type="text/html" title="Variable names are not good enough" /><published>2021-04-22T00:00:00-04:00</published><updated>2021-04-22T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/22/Variable%20Names%20Are%20Not%20Good%20Enough</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Relational Programming and the Kitchen Sink</summary></entry><entry><title type="html">Variable names are not good enough</title><link href="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html" rel="alternate" type="text/html" title="Variable names are not good enough" /><published>2021-04-22T00:00:00-04:00</published><updated>2021-04-22T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/22/Variable%20Names%20Are%20Not%20Good%20Enough</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/22/Variable-Names-Are-Not-Good-Enough.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1616,7 +1707,81 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Variable Names Are Not Good Enough</summary></entry><entry><title type="html">Recursive design, iterative design by example (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (2)" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Variable Names Are Not Good Enough</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Git Could Do More&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github, Git, Diff, etc.&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I consider &quot;github&quot; to be a whole gamut of technologies based on &quot;diff&quot;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;githhub
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;git
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;diff (a UNIX tool)&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&quot;Github&quot; is a production version of &quot;diff&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automated DRY&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Github could use &quot;diff&quot; in a bigger way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Instead of diff'ing lines of code, it should diff layers of design.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Which might be blocks of code).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Our PLs&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;are just glorified text editors.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A lot of what we think about and build into PLs is DRY.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;RY&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; is what we want, but we waste brain power on DRY.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Machines could detect DRY for us.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;And refactor the code/design/etc. for us automagically.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Github could include technology to figure out DRY.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Git-based Editors&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Our editors could figure out repeated lumps of text and make a golden copy for us.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The editor could show repeated lumps of source in gray and automagically update the golden copy when we edit the gray parts.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; PL means Programming Language&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;[2]&lt;/a&gt; DRY means Don’t Repeat Yourself&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;[3]&lt;/a&gt; &lt;span class=&quot;s1&quot;&gt;RY means Repeat Yourself&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry><entry><title type="html">Recursive design, iterative design by example (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html" rel="alternate" type="text/html" title="Recursive design, iterative design by example (2)" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Recursive%20Design,%20Iterative%20Design%20By%20Example%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1994,128 +2159,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design, Iterative Design By Example (2)</summary></entry><entry><title type="html">Git could do more</title><link href="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html" rel="alternate" type="text/html" title="Git could do more" /><published>2021-04-20T00:00:00-04:00</published><updated>2021-04-20T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/20/Git%20Could%20Do%20More</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/20/Git-Could-Do-More.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Git Could Do More&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-20T18:25:15Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 12.0px Helvetica}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: hyphen}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github, Git, Diff, etc.&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I consider &quot;github&quot; to be a whole gamut of technologies based on &quot;diff&quot;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;githhub
-  &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li4&quot;&gt;git
-    &lt;ul class=&quot;ul2&quot;&gt;
-      &lt;li class=&quot;li4&quot;&gt;diff (a UNIX tool)&lt;/li&gt;
-    &lt;/ul&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&quot;Github&quot; is a production version of &quot;diff&quot;. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Automated DRY&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Github could use &quot;diff&quot; in a bigger way.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Instead of diff'ing lines of code, it should diff layers of design.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(Which might be blocks of code).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Our PLs&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;are just glorified text editors.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A lot of what we think about and build into PLs is DRY.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;RY&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; is what we want, but we waste brain power on DRY.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Machines could detect DRY for us.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;And refactor the code/design/etc. for us automagically.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Github could include technology to figure out DRY.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Git-based Editors&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Our editors could figure out repeated lumps of text and make a golden copy for us.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The editor could show repeated lumps of source in gray and automagically update the golden copy when we edit the gray parts.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; PL means Programming Language&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;[2]&lt;/a&gt; DRY means Don’t Repeat Yourself&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;[3]&lt;/a&gt; &lt;span class=&quot;s1&quot;&gt;RY means Repeat Yourself&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Git Could Do More</summary></entry><entry><title type="html">Scoping static vs dynamic</title><link href="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html" rel="alternate" type="text/html" title="Scoping static vs dynamic" /><published>2021-04-16T00:00:00-04:00</published><updated>2021-04-16T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/16/Scoping%20Static%20vs%20Dynamic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/16/Scoping-Static-vs-Dynamic.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Scoping Static vs Dynamic&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-16T23:58:00Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-16T23:58:00Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Dynamic Scoping&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Dynamic scoping — the name is looked up at &lt;i&gt;runtime&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-04-16-23-58-00-Images/scoping-Dynamic Scoping.png&quot; width=&quot;300px&quot; height=&quot;82px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Values are placed in stacks, with one value stack per name.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Only the top-most value is visible.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Static Scoping&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Static scoping — the compiler looks up the names and assigns absolute locations for them at &lt;i&gt;compile time&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;After compilation, the names are discarded.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;In most languages, there are two places that variables can reside:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;global memory&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;stack.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-04-16-23-58-00-Images/scoping-Static Scoping.png&quot; width=&quot;300px&quot; height=&quot;264px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;The compiler assigns an absolute index for each name.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Names are stripped away after compilation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Scoping Static vs Dynamic</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Recursive Design, Iterative Design By Example (2)</summary></entry></feed>
