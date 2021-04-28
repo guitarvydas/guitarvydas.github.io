@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T10:51:29-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T11:12:40-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -386,55 +386,61 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Toolbox languages (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html" rel="alternate" type="text/html" title="Toolbox languages (2)" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Toolbox%20Languages%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
 &lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Tokenizing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Toolbox Languages (2)&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-28T11:12:31Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-28T11:12:31Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 9.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h1 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h1&gt;
-
-&lt;p&gt;I&amp;#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).&lt;/p&gt;
-
-&lt;p&gt;You can&amp;#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.&lt;/p&gt;
-
-&lt;p&gt;My experiments with ASON parsing&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; using Ohm-JS might show how to tokenize using Ohm-JS.&lt;/p&gt;
-
-&lt;h1 id=&quot;isolatedcomponents&quot;&gt;Isolated Components&lt;/h1&gt;
-
-&lt;p&gt;I think in terms of isolated software components.&lt;/p&gt;
-
-&lt;p&gt;I want to &lt;em&gt;build-and-forget&lt;/em&gt; any component.&lt;/p&gt;
-
-&lt;p&gt;Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;This is possible, but unlikely with current programming languages.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;whitespace&lt;/li&gt;
-&lt;li&gt;non-whitespace.&lt;/li&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Toolbox Languages&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The thing I call &lt;i&gt;toolbox languages&lt;/i&gt; is a form of high-level assembler (!).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Toolbox languages strive for &lt;i&gt;machine&lt;/i&gt;-readability instead of &lt;i&gt;human&lt;/i&gt;-readability.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Machine-readability comes from expunging edge-cases.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Machine-&lt;i&gt;writability&lt;/i&gt; comes from expunging edge-cases, too.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I want to write code that writes code. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I want to write comments that write code.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Relational Programming vs. Software Atoms&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I think that Relational Programming is the &lt;i&gt;atom &lt;/i&gt;of the 1&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;st&lt;/sup&gt;&lt;/span&gt; step in software design.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;There are only 2 steps:&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;read (gather, breathe-in)&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;write (emit, output, breathe-out).&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;For the record, I can&amp;#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/04/10/ASON&amp;#8211;Notation&amp;#8211;Pipeline.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Relational programming is well-suited to step (1) but is not well-suited for step (2).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Yes, it is &lt;i&gt;possible&lt;/i&gt; to perform step (2) using &lt;i&gt;only&lt;/i&gt; relational programming, but it is simpler to express step (2) in some other form, even &lt;i&gt;printf&lt;/i&gt; is better (!) at this.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I favour choosing the right paradigm for the job, instead of choosing one paradigm for all jobs.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Appendix - Toolbox Languages&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Further discussion&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
         issue-term=&quot;pathname&quot; 
@@ -443,4 +449,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Toolbox Languages (2)</summary></entry></feed>
