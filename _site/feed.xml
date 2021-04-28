@@ -1,31 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T08:22:31-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Txl</title><link href="https://computingsimplicity.neocities.org/2021/04/28/TXL.html" rel="alternate" type="text/html" title="Txl" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/TXL</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/TXL.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T08:42:26-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;TXL&lt;/title&gt;
+	&lt;title&gt;Tokenizing&lt;/title&gt;
 	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;h1 id=&quot;txl&quot;&gt;TXL&lt;/h1&gt;
+&lt;h1 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h1&gt;
 
-&lt;p&gt;[&lt;em&gt;Why not use TXL instead of Ohm?&lt;/em&gt;]&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).&lt;/p&gt;
 
-&lt;p&gt;Good question. I didn&amp;#8217;t explicitly understand the problem until later, when I had PEG and JavaScript in my hands.&lt;/p&gt;
+&lt;p&gt;You can&amp;#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.&lt;/p&gt;
 
-&lt;p&gt;S/SL laid the groundwork for my understanding. It took only 30 more years. [&lt;em&gt;I used S/SL right from the beginning, but it took me a while to verbalize why I found it so useful.&lt;/em&gt;]&lt;/p&gt;
+&lt;p&gt;My experiments with ASON parsing&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; using Ohm-JS might show how to tokenize using Ohm-JS.&lt;/p&gt;
 
-&lt;p&gt;I wonder if Cordy &amp;#8220;got it&amp;#8221; much earlier?&lt;/p&gt;
+&lt;h1 id=&quot;isolatedcomponents&quot;&gt;Isolated Components&lt;/h1&gt;
 
-&lt;p&gt;TXL is based on parse trees. Ohm-JS is based on JS objects. It became easier to program when I thought of objects instead of parse trees.&lt;/p&gt;
+&lt;p&gt;I think in terms of isolated software components.&lt;/p&gt;
 
-&lt;p&gt;TXL looks like &amp;#8220;compiler technology&amp;#8221;. Ohm-JS &lt;em&gt;can&lt;/em&gt; look like lowly JS. Maybe that makes Ohm-JS &lt;em&gt;feel&lt;/em&gt; more accessible?&lt;/p&gt;
+&lt;p&gt;I want to &lt;em&gt;build-and-forget&lt;/em&gt; any component.&lt;/p&gt;
 
-&lt;p&gt;Paul Morrison talks about &amp;#8220;steam engine time&amp;#8221; - multiple inventions of the same concept, at about the same time.&lt;/p&gt;
+&lt;p&gt;Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.&lt;/p&gt;
 
-&lt;h1 id=&quot;appendix-txl&quot;&gt;Appendix - TXL&lt;/h1&gt;
+&lt;p&gt;[&lt;em&gt;This is possible, but unlikely with current programming languages.&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.txl.ca/&quot;&gt;https://www.txl.ca/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;whitespace&lt;/li&gt;
+&lt;li&gt;non-whitespace.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;For the record, I can&amp;#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.&lt;/em&gt;]&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;https://guitarvydas.github.io/2021/04/10/ASON&amp;#8211;Notation&amp;#8211;Pipeline.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -35,7 +55,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">TXL</summary></entry><entry><title type="html">Subdividing problems</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html" rel="alternate" type="text/html" title="Subdividing problems" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Subdividing%20Problems</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry><entry><title type="html">Subdividing problems</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html" rel="alternate" type="text/html" title="Subdividing problems" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Subdividing%20Problems</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -132,7 +152,36 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">Exhaustive search</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Exhaustive-Search.html" rel="alternate" type="text/html" title="Exhaustive search" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Exhaustive%20Search</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Exhaustive-Search.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">First class functions</title><link href="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html" rel="alternate" type="text/html" title="First class functions" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/First%20Class%20Functions</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;First Class Functions&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;first-classfunctions&quot;&gt;First-Class Functions&lt;/h1&gt;
+
+&lt;p&gt;I don&amp;#8217;t think that mortal programmers should be allowed to use 1st-class. They are no better than C&amp;#8217;s &amp;#8220;(*f)(x, y z)&amp;#8221; stuff. (case in point: the JS-callbacks-using-anonymous-functions disaster)&lt;/p&gt;
+
+&lt;p&gt;CPS is just another kludgy attempt at making 1st-class functions more palatable to human programmers.&lt;/p&gt;
+
+&lt;p&gt;1st class functions *are* incredibly useful in toolbox languages, (aka High Level Assembler). 1st-class functions make it easier to create syntaxes (SCNs) with specific control flows.&lt;/p&gt;
+
+&lt;p&gt;People are &amp;#8220;in love&amp;#8221; with 1st class functions, CPS, promises, etc. They don&amp;#8217;t notice, though that this is the same &amp;#8220;power&amp;#8221; as assembler put in programmers' hands in the '70&amp;#8217;s.&lt;/p&gt;
+
+&lt;p&gt;Case-in-point: most programmers think that &amp;#8220;multitasking is hard&amp;#8221; and throw up their hands and just accept scraps from the dinner table. In fact, multitasking is easy, but you need to use an appropriate notation (SCN). Kids learn multitasking at the age of 5 (e.g. music notation). Only programmers think that multitasking is hard. Square peg, round hole.&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">First Class Functions</summary></entry><entry><title type="html">Exhaustive search</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Exhaustive-Search.html" rel="alternate" type="text/html" title="Exhaustive search" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Exhaustive%20Search</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Exhaustive-Search.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -335,54 +384,34 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Txl</title><link href="https://computingsimplicity.neocities.org/2021/04/28/TXL.html" rel="alternate" type="text/html" title="Txl" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/TXL</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/TXL.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Tokenizing&lt;/title&gt;
+	&lt;title&gt;TXL&lt;/title&gt;
 	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;h1 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h1&gt;
+&lt;h1 id=&quot;txl&quot;&gt;TXL&lt;/h1&gt;
 
-&lt;p&gt;I&amp;#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).&lt;/p&gt;
+&lt;p&gt;[&lt;em&gt;Why not use TXL instead of Ohm?&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;You can&amp;#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.&lt;/p&gt;
+&lt;p&gt;Good question. I didn&amp;#8217;t explicitly understand the problem until later, when I had PEG and JavaScript in my hands.&lt;/p&gt;
 
-&lt;p&gt;My experiments with ASON parsing&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; using Ohm-JS might show how to tokenize using Ohm-JS.&lt;/p&gt;
+&lt;p&gt;S/SL laid the groundwork for my understanding. It took only 30 more years. [&lt;em&gt;I used S/SL right from the beginning, but it took me a while to verbalize why I found it so useful.&lt;/em&gt;]&lt;/p&gt;
 
-&lt;h1 id=&quot;isolatedcomponents&quot;&gt;Isolated Components&lt;/h1&gt;
+&lt;p&gt;I wonder if Cordy &amp;#8220;got it&amp;#8221; much earlier?&lt;/p&gt;
 
-&lt;p&gt;I think in terms of isolated software components.&lt;/p&gt;
+&lt;p&gt;TXL is based on parse trees. Ohm-JS is based on JS objects. It became easier to program when I thought of objects instead of parse trees.&lt;/p&gt;
 
-&lt;p&gt;I want to &lt;em&gt;build-and-forget&lt;/em&gt; any component.&lt;/p&gt;
+&lt;p&gt;TXL looks like &amp;#8220;compiler technology&amp;#8221;. Ohm-JS &lt;em&gt;can&lt;/em&gt; look like lowly JS. Maybe that makes Ohm-JS &lt;em&gt;feel&lt;/em&gt; more accessible?&lt;/p&gt;
 
-&lt;p&gt;Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.&lt;/p&gt;
+&lt;p&gt;Paul Morrison talks about &amp;#8220;steam engine time&amp;#8221; - multiple inventions of the same concept, at about the same time.&lt;/p&gt;
 
-&lt;p&gt;[&lt;em&gt;This is possible, but unlikely with current programming languages.&lt;/em&gt;]&lt;/p&gt;
+&lt;h1 id=&quot;appendix-txl&quot;&gt;Appendix - TXL&lt;/h1&gt;
 
-&lt;p&gt;Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;whitespace&lt;/li&gt;
-&lt;li&gt;non-whitespace.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;For the record, I can&amp;#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/04/10/ASON&amp;#8211;Notation&amp;#8211;Pipeline.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.txl.ca/&quot;&gt;https://www.txl.ca/&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -392,49 +421,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry><entry><title type="html">Scoping rebol</title><link href="https://computingsimplicity.neocities.org/2021/04/27/Scoping-Rebol.html" rel="alternate" type="text/html" title="Scoping rebol" /><published>2021-04-27T00:00:00-04:00</published><updated>2021-04-27T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/27/Scoping%20Rebol</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/27/Scoping-Rebol.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Scoping Rebol&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;rebolisstaticallyscoped&quot;&gt;Rebol is Statically Scoped&lt;/h1&gt;
-
-&lt;p&gt;Rebol has static scoping,&lt;/p&gt;
-
-&lt;p&gt;but,&lt;/p&gt;
-
-&lt;p&gt;The question is not &amp;#8220;&lt;em&gt;what&lt;/em&gt; scoping does Rebol employ?&amp;#8221;, but, &amp;#8220;&lt;em&gt;when&lt;/em&gt; is Rebol scoping determined, &lt;em&gt;when&lt;/em&gt; is a Rebol program compiled?&amp;#8221;.&lt;/p&gt;
-
-&lt;h1 id=&quot;rebol-statictypingdynamiccompilation&quot;&gt;Rebol - Static Typing, Dynamic Compilation&lt;/h1&gt;
-
-&lt;p&gt;Rebol has static scoping, but dynamic compilation.&lt;/p&gt;
-
-&lt;p&gt;We are accustomed to there being &lt;em&gt;one&lt;/em&gt; compilation time and &lt;em&gt;one&lt;/em&gt; run time.&lt;/p&gt;
-
-&lt;p&gt;Rebol has &lt;em&gt;multiple&lt;/em&gt; compilation times.&lt;/p&gt;
-
-&lt;p&gt;The compilation of Rebol code depends on the &lt;em&gt;context&lt;/em&gt; that exists at the time of compilation.&lt;/p&gt;
-
-&lt;p&gt;Rebol code is compiled at different times, within different contexts. This means that Rebol functions might be compiled differently at different times.&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-rebolscoping&quot;&gt;Appendix - REBOL Scoping&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&quot;&gt;https://stackoverflow.com/questions/21964110/is-there-a-overall-explanation-about-definitional-scoping-in-rebol-and-red&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/rebol-vs-lisp-macros/&quot;&gt;http://blog.hostilefork.com/rebol-vs-lisp-macros/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&quot;&gt;http://blog.hostilefork.com/core-rebol-concept-flexible-series/&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Scoping Rebol</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">TXL</summary></entry></feed>
