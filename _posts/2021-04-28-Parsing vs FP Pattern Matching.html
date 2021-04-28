@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Parsing vs FP Pattern Matching</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="functionsoftimeusingfp">Functions of Time Using FP</h1>
+
+<p>I discuss how parsers can be used to create functions of time (<em>f(t)</em>) using FP components&#8230;</p>
+
+<h1 id="stringofbeads">String of Beads</h1>
+
+<p>I think of a pipeline of parsers as a string of beads.</p>
+
+<p>Each <em>bead</em> is a function, maybe programmed in an FP language.</p>
+
+<h1 id="astsandcsts">ASTs and CSTs</h1>
+
+<p>People have generalized the term AST &#8212; abstract syntax tree &#8212; to mean the result of a parse (usually a tree data structure, remembering that trees can be serialized into streams of tokens).</p>
+
+<p>I subdivide parsing into two parts</p>
+
+<ol>
+<li>what <em>can</em> be parsed</li>
+<li>what <em>was</em> actually parsed.</li>
+</ol>
+
+<p>I use the term AST for (1). Abstract Syntax Tree.</p>
+
+<p>I use the term CST for (2). Concrete Syntax Tree.</p>
+
+<h1 id="historyvs.fp">History vs. FP</h1>
+
+<p>Likewise, a program can be subdivided into two parts:</p>
+
+<ol>
+<li>what <em>can</em> the program accept and process?</li>
+<li>what <em>did</em> the program accept and process?</li>
+</ol>
+
+<p>History is but a function of time &#8212; <em>f(t)</em>.</p>
+
+<p>In general, history is not reversible (as far as we know).</p>
+
+<p>But, pure FP (functional programming) expunges <em>f(t)</em> <a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a>from its notation, to appease its notation (and to allow transformations that would be impossible if <em>f(t)</em> were allowed (that&#8217;s where the onus to expunge side-effects comes from)).</p>
+
+<p>How, then, could history be expressed in FP???</p>
+
+<p>Parsers walk input streams (aka trees) driven by reality. Parsers don&#8217;t process abstractions (ASTs). Parsers walk realities (CSTs).</p>
+
+<p>History is encoded in the backtrace of how a parser walked the CST. The actual input causes the parser to walk a (crooked?) path through the AST. The AST does not change, but the history of the walk is different with every different input.</p>
+
+<p>Each step <em>along</em> the way can be expressed as an FP function.</p>
+
+<p>Steps are FP, history is not FP<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a>.</p>
+
+<h1 id="example">Example</h1>
+
+<p>Let us concoct a simple example:</p>
+
+<p>function f(x) {</p>
+
+<p>if (x == 5) {</p>
+
+<p>printf (&#8220;5&#8221;);</p>
+
+<p>} else {</p>
+
+<p>printf (&#8220;not 5&#8221;);</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>What is the final output of the above function?</p>
+
+<p>We can&#8217;t know what the final output is without supplying a value for the parameter, x.</p>
+
+<p>The function is like an AST &#8212; it expresses all possible outcomes.</p>
+
+<p>When we supply a value for the parameter, x, then the function runs and produces one or the other outcome. The run is <em>history</em>. The run is like a CST. We can get a backtrace for the run. (A CST is like a backtrace).</p>
+
+<p>Parsers &#8212; grammars in particular &#8212; give us a declarative way to talk about history.</p>
+
+<p>Note that FP increasingly uses parser technology &#8212; pattern matching.</p>
+
+<p>Pattern matching taken to the limit, is parsing.</p>
+
+<p>Parsing deals with history and, hence, with <em>f(t)</em>.</p>
+
+<h1 id="analogy">Analogy</h1>
+
+<p>Note that a <em>parsing engine</em> is analogous to a PROLOG <em>rule engine</em>.</p>
+
+<h1 id="flags">Flags</h1>
+
+<p>Programmers have used <em>flags</em> (mutable variables) for ages. We have discovered that <em>flags</em> cause accidental complexity and lack-of-debuggability.</p>
+
+<p>Parsers are engines that subsume the use of <em>flags</em>. [<em>Parsers give us a way to talk about flags in a declarative manner.]</em></p>
+
+<h1 id="parsingvs.fppatternmatching">Parsing vs. FP Pattern Matching</h1>
+
+<p>Parsers are FP pattern matching taken to the limit.</p>
+
+<p>FP uses relational engines and pattern matching.</p>
+
+<p>FP <em>could</em> use relational engines <em>and</em> parsing engines.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Side&#8211;effects are <em>f(t)</em>. FP expunges side&#8211;effects. FP expunges time from its notation. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>FP does not allow <em>f(t)</em>. <em>f(t)</em> is History. Hence, FP expunges History. History must be recorded using some other notation. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
