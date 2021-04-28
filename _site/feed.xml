@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T08:42:26-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T09:07:52-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -55,63 +55,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry><entry><title type="html">Subdividing problems</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html" rel="alternate" type="text/html" title="Subdividing problems" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Subdividing%20Problems</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Dubdividing Problems&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;subdividingproblems&quot;&gt;Subdividing Problems&lt;/h1&gt;
-
-&lt;p&gt;[&lt;em&gt;Do you have a heuristic when to use certain paradigms and when to avoid them?&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Fractalize.&lt;/p&gt;
-
-&lt;p&gt;FDD - Failure Driven Development.&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Break a problem down, break each part down into sub-parts. Repeat (recur).&lt;/p&gt;
-
-&lt;p&gt;Choose a different paradigm for each sub-part. Choose based on the problem-at-hand.&lt;/p&gt;
-
-&lt;p&gt;For example, input is mostly pattern matching &amp;#8212; parsing, PEG, S/SL.&lt;/p&gt;
-
-&lt;p&gt;Output can be done with printf and JS back-tick strings. When I need tabular output, I use a spreadsheet to edit the final tables (I convert / normalize the data into .CSV files, to make the data more acceptable to spreadsheets).&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;N.B. I needed an editor to make the final output format for a project. Spreadsheets are good editors (for tabular data), but tend to lock you into a single paradigm (spreadsheet language). .CSV is a normalized format acceptable to most spreadsheets. If you convert your data to/from .CSV, you can use any editor (built into spreadsheets) you want. Export from the &amp;#8220;editor&amp;#8221; to CSV. We need a .CSV-like normal form for all data and programs (I suggest triples).&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;N.B. Talking about editors, I like to use Keynote as an editor &amp;#8212; it helps me organize my thoughts and to keep my text short. Keynote has the disadvantage in that it doesn&amp;#8217;t export well to normalized forms. Keynote does export to HTML, but includes a bunch of JS in the process.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Queries are exhaustive search. PROLOG has a nice syntax for crafting queries. PROLOG can import and export data in normal form (triples).&lt;/p&gt;
-
-&lt;p&gt;Note that I am breaking programming down into two classes (at least): human readable syntax vs. machine readable syntax.&lt;/p&gt;
-
-&lt;p&gt;/bin/sh was aimed at machine readability. After that, things like /bin/bash and /bin/zsh only danced around the elephant and didn&amp;#8217;t really bring any new advances in think-ability.&lt;/p&gt;
-
-&lt;p&gt;In my mind, the next step for /bin/sh is to make it diagrammatic. Visual Shell. vsh. [&lt;em&gt;Experimental version at &lt;a href=&quot;https://github.com/guitarvydas/vsh&quot;&gt;https://github.com/guitarvydas/vsh&lt;/a&gt;&lt;/em&gt;]&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/04/23/Failure&amp;#8211;Driven&amp;#8211;Design.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Dubdividing Problems</summary></entry><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -152,7 +96,84 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">First class functions</title><link href="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html" rel="alternate" type="text/html" title="First class functions" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/First%20Class%20Functions</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">Function or list?</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html" rel="alternate" type="text/html" title="Function or list?" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Function%20or%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Function or List?&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;lisp&quot;&gt;lisp&lt;/h1&gt;
+
+&lt;p&gt;Is this a function or a list?&lt;/p&gt;
+
+&lt;p&gt;(rectangle id1 nil)&lt;/p&gt;
+
+&lt;p&gt;Actually, it&amp;#8217;s a bit more convoluted than that. Lisp was one of the first (if not first) &amp;#8220;homoiconic languages&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;Programs are stored as lists of atoms (and lists, and, &amp;#8230;)&lt;/p&gt;
+
+&lt;p&gt;&amp;#8220;Eval&amp;#8221; (as in Read-Eval-Print-Loop) is used to impart &lt;em&gt;meaning&lt;/em&gt; to the lists.&lt;/p&gt;
+
+&lt;p&gt;So, in actuality, &amp;#8220;(rectangle id1 nil)&amp;#8221; is just a list containing 3 atoms.&lt;/p&gt;
+
+&lt;p&gt;Atoms that look like symbols are hashed, for efficiency. The above list, internally, is a list of 3 hash-codes, e.g. *list(hash-code-for-rectangle,hash-code-for-id1,hash-code-for-nil*).&lt;/p&gt;
+
+&lt;p&gt;Lisps are also classified by their packaging strategy, e.g. Lisp2&amp;#8217;s vs Lisp1&amp;#8217;s. Lisp2&amp;#8217;s have several name-spaces and allow the same symbol (hash-code) to be used in different contexts, while Lisp1&amp;#8217;s have only one namespace into which all symbols are poured (and must be unique from one another). CL is a Lisp2.&lt;/p&gt;
+
+&lt;p&gt;Eval() attempts to interpret the first item of a list as a function. Eval accepts a list, the symbol LAMBDA and any other symbol as the first item. If the first item is a symbol, eval() digs through the properties of the symbol looking for a function thing, and when it finds such a property it applies the function thing to the rest of the list (the args).&lt;/p&gt;
+
+&lt;p&gt;Symbols, like rectangle, have &amp;#8220;1st class&amp;#8221; functions stored in them under their function properties.&lt;/p&gt;
+
+&lt;p&gt;Apply() never really gets to see a symbol, it only gets a 1st-class function and a list of args.&lt;/p&gt;
+
+&lt;p&gt;In JS, we might say something like {name: rectangle, value: xyz, func: function (&amp;#8230;) { &amp;#8230;}}. I.E. &amp;#8220;rectangle&amp;#8221; can have a value AND it can have a function. Which property gets used is determined by the context (and, by the interpretation of the context).&lt;/p&gt;
+
+&lt;p&gt;The &amp;#8220;type&amp;#8221; of &amp;#8220;rectangle&amp;#8221; is SYMBOL, and, things of type SYMBOL have several properties, including VALUE and FUNCTION.&lt;/p&gt;
+
+&lt;h1 id=&quot;prolog&quot;&gt;PROLOG&lt;/h1&gt;
+
+&lt;p&gt;In PROLOG we don&amp;#8217;t need to declare a rectangle type. PROLOG (being one of the early languages, I think it was originally built in Lisp), uses a similar hashing trick.&lt;/p&gt;
+
+&lt;p&gt;rectangle(id1,nil).&lt;/p&gt;
+
+&lt;p&gt;is also a bunch of hash-codes, probably stored as a Lisp-like list (hash-code-of-rectangle hash-code-of-id hash-code-of-nil). The &lt;em&gt;type&lt;/em&gt; of the above thing is &amp;#8220;functor&amp;#8221; (and &amp;#8220;functor&amp;#8221; is a lisp-like list).&lt;/p&gt;
+
+&lt;p&gt;Lisp lists and PROLOG functors are generalized data structures. In a strongly-typed language, we would define a 3-tuple &amp;#8212; {relation, subject, object} &amp;#8212; and, we would implement these kinds of 3-tuples in a more efficient way than generalized Lisp-like lists. [Elsewhere, I argue, that this concern for this kind of efficiency is mis-placed. It&amp;#8217;s very 1960&amp;#8217;s. In 2020, we can burn CPU power to construct data structures at run-time, instead of wasting our own (programmers') time and efficiency. PROLOG is good at constructing (by inference) data structures for us. Our end-goal is always to run queries against data. If we structure our data at compile-time, we end up wasting brain-power, if we let PROLOG infer our data structures, we end up wasting CPU power. Either way, we are wasting &lt;em&gt;&amp;lt;something&amp;gt;&lt;/em&gt;. I believe that wasting CPU power is a better choice tham wasting brain-power.]&lt;/p&gt;
+
+&lt;p&gt;PROLOG stores functors in some data structure, Lisp stores lists in some data structures. With PROLOG, we let the engine decide on the shape of the data structure, whereas in Lisp (and Python, and JS, and etc.) we decide on the shape of the data structure and hard-code it into the program.&lt;/p&gt;
+
+&lt;p&gt;A.T.M. PROLOG is worse at guessing what the best data structure is than humans are. We can usually create data structures that are &amp;#8220;better&amp;#8221; (more efficient) than what PROLOG decides to use under-the-hood.&lt;/p&gt;
+
+&lt;p&gt;But, that&amp;#8217;s what Assembler programmers said until GCC came along. At some point, automation catches up with the best manually-written code created by humans.&lt;/p&gt;
+
+&lt;p&gt;Take-aways:&lt;/p&gt;
+
+&lt;p&gt;(rectangle id1 nil) is just a list of atoms (hash-codes) in Lisp.&lt;/p&gt;
+
+&lt;p&gt;rectangle(id,nil) is just a &amp;#8220;functor&amp;#8221; of atoms (hash-codes) in PROLOG.&lt;/p&gt;
+
+&lt;p&gt;Both are sufficiently general data structures for &amp;#8220;normalization&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;PROLOG (and Lisp) are not as good as today&amp;#8217;s programmers, but automation techniques will catch up.&lt;/p&gt;
+
+&lt;p&gt;Let PROLOG do your work for you. Don&amp;#8217;t worry about preemptive efficiency, let them (and their compilers) catch up with what you&amp;#8217;re doing.&lt;/p&gt;
+
+&lt;h1 id=&quot;now&quot;&gt;Now&lt;/h1&gt;
+
+&lt;p&gt;If you need to deliver something today, write a design using factbases, then hire an Optimization Engineer to fixup the inefficiencies (after using a profiler ; (unprofiled Rust code ain&amp;#8217;t gonna be much help)). If you can&amp;#8217;t afford to hire an Optimization Engineer (and/or you don&amp;#8217;t know what that is), then do it all yourself, but, do yourself a favour and create the design in layers. The goals of Architecting and Engineering should be to write as little code as possible (e.g. using an SCN) and to maximize the time allotted to &lt;em&gt;thinking-things-through&lt;/em&gt;. Implementation should use &lt;em&gt;no&lt;/em&gt; thought-time at all - the measure of Implementors is how fast they can create code (keyboarding skill, etc.). Implementors should never have to stop and think about a Design. All Design thinking needs to punted back upwards to Architects and Engineers and whiteboards. (Implementors punt back to Engineers, Engineers either clarify the details or punt back to Architects for clarifications of the Design).&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Function or List?</summary></entry><entry><title type="html">First class functions</title><link href="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html" rel="alternate" type="text/html" title="First class functions" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/First%20Class%20Functions</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/First-Class-Functions.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;

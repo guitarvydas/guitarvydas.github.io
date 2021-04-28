@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Function or List?</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="lisp">lisp</h1>
+
+<p>Is this a function or a list?</p>
+
+<p>(rectangle id1 nil)</p>
+
+<p>Actually, it&#8217;s a bit more convoluted than that. Lisp was one of the first (if not first) &#8220;homoiconic languages&#8221;.</p>
+
+<p>Programs are stored as lists of atoms (and lists, and, &#8230;)</p>
+
+<p>&#8220;Eval&#8221; (as in Read-Eval-Print-Loop) is used to impart <em>meaning</em> to the lists.</p>
+
+<p>So, in actuality, &#8220;(rectangle id1 nil)&#8221; is just a list containing 3 atoms.</p>
+
+<p>Atoms that look like symbols are hashed, for efficiency. The above list, internally, is a list of 3 hash-codes, e.g. *list(hash-code-for-rectangle,hash-code-for-id1,hash-code-for-nil*).</p>
+
+<p>Lisps are also classified by their packaging strategy, e.g. Lisp2&#8217;s vs Lisp1&#8217;s. Lisp2&#8217;s have several name-spaces and allow the same symbol (hash-code) to be used in different contexts, while Lisp1&#8217;s have only one namespace into which all symbols are poured (and must be unique from one another). CL is a Lisp2.</p>
+
+<p>Eval() attempts to interpret the first item of a list as a function. Eval accepts a list, the symbol LAMBDA and any other symbol as the first item. If the first item is a symbol, eval() digs through the properties of the symbol looking for a function thing, and when it finds such a property it applies the function thing to the rest of the list (the args).</p>
+
+<p>Symbols, like rectangle, have &#8220;1st class&#8221; functions stored in them under their function properties.</p>
+
+<p>Apply() never really gets to see a symbol, it only gets a 1st-class function and a list of args.</p>
+
+<p>In JS, we might say something like {name: rectangle, value: xyz, func: function (&#8230;) { &#8230;}}. I.E. &#8220;rectangle&#8221; can have a value AND it can have a function. Which property gets used is determined by the context (and, by the interpretation of the context).</p>
+
+<p>The &#8220;type&#8221; of &#8220;rectangle&#8221; is SYMBOL, and, things of type SYMBOL have several properties, including VALUE and FUNCTION.</p>
+
+<h1 id="prolog">PROLOG</h1>
+
+<p>In PROLOG we don&#8217;t need to declare a rectangle type. PROLOG (being one of the early languages, I think it was originally built in Lisp), uses a similar hashing trick.</p>
+
+<p>rectangle(id1,nil).</p>
+
+<p>is also a bunch of hash-codes, probably stored as a Lisp-like list (hash-code-of-rectangle hash-code-of-id hash-code-of-nil). The <em>type</em> of the above thing is &#8220;functor&#8221; (and &#8220;functor&#8221; is a lisp-like list).</p>
+
+<p>Lisp lists and PROLOG functors are generalized data structures. In a strongly-typed language, we would define a 3-tuple &#8212; {relation, subject, object} &#8212; and, we would implement these kinds of 3-tuples in a more efficient way than generalized Lisp-like lists. [Elsewhere, I argue, that this concern for this kind of efficiency is mis-placed. It&#8217;s very 1960&#8217;s. In 2020, we can burn CPU power to construct data structures at run-time, instead of wasting our own (programmers') time and efficiency. PROLOG is good at constructing (by inference) data structures for us. Our end-goal is always to run queries against data. If we structure our data at compile-time, we end up wasting brain-power, if we let PROLOG infer our data structures, we end up wasting CPU power. Either way, we are wasting <em>&lt;something&gt;</em>. I believe that wasting CPU power is a better choice tham wasting brain-power.]</p>
+
+<p>PROLOG stores functors in some data structure, Lisp stores lists in some data structures. With PROLOG, we let the engine decide on the shape of the data structure, whereas in Lisp (and Python, and JS, and etc.) we decide on the shape of the data structure and hard-code it into the program.</p>
+
+<p>A.T.M. PROLOG is worse at guessing what the best data structure is than humans are. We can usually create data structures that are &#8220;better&#8221; (more efficient) than what PROLOG decides to use under-the-hood.</p>
+
+<p>But, that&#8217;s what Assembler programmers said until GCC came along. At some point, automation catches up with the best manually-written code created by humans.</p>
+
+<p>Take-aways:</p>
+
+<p>(rectangle id1 nil) is just a list of atoms (hash-codes) in Lisp.</p>
+
+<p>rectangle(id,nil) is just a &#8220;functor&#8221; of atoms (hash-codes) in PROLOG.</p>
+
+<p>Both are sufficiently general data structures for &#8220;normalization&#8221;.</p>
+
+<p>PROLOG (and Lisp) are not as good as today&#8217;s programmers, but automation techniques will catch up.</p>
+
+<p>Let PROLOG do your work for you. Don&#8217;t worry about preemptive efficiency, let them (and their compilers) catch up with what you&#8217;re doing.</p>
+
+<h1 id="now">Now</h1>
+
+<p>If you need to deliver something today, write a design using factbases, then hire an Optimization Engineer to fixup the inefficiencies (after using a profiler ; (unprofiled Rust code ain&#8217;t gonna be much help)). If you can&#8217;t afford to hire an Optimization Engineer (and/or you don&#8217;t know what that is), then do it all yourself, but, do yourself a favour and create the design in layers. The goals of Architecting and Engineering should be to write as little code as possible (e.g. using an SCN) and to maximize the time allotted to <em>thinking-things-through</em>. Implementation should use <em>no</em> thought-time at all - the measure of Implementors is how fast they can create code (keyboarding skill, etc.). Implementors should never have to stop and think about a Design. All Design thinking needs to punted back upwards to Architects and Engineers and whiteboards. (Implementors punt back to Engineers, Engineers either clarify the details or punt back to Architects for clarifications of the Design).</p>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
