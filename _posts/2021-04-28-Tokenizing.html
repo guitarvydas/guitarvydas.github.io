@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Tokenizing</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="tokenizing">Tokenizing</h1>
+
+<p>I&#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).</p>
+
+<p>You can&#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.</p>
+
+<p>My experiments with ASON parsing<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> using Ohm-JS might show how to tokenize using Ohm-JS.</p>
+
+<h1 id="isolatedcomponents">Isolated Components</h1>
+
+<p>I think in terms of isolated software components.</p>
+
+<p>I want to <em>build-and-forget</em> any component.</p>
+
+<p>Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.</p>
+
+<p>[<em>This is possible, but unlikely with current programming languages.</em>]</p>
+
+<p>Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens</p>
+
+<ol>
+<li>whitespace</li>
+<li>non-whitespace.</li>
+</ol>
+
+<p>Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.</p>
+
+<p>[<em>For the record, I can&#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.</em>]</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>https://guitarvydas.github.io/2021/04/10/ASON&#8211;Notation&#8211;Pipeline.html <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

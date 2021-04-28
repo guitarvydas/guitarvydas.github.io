@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Dubdividing Problems</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="subdividingproblems">Subdividing Problems</h1>
+
+<p>[<em>Do you have a heuristic when to use certain paradigms and when to avoid them?</em>]</p>
+
+<p>Fractalize.</p>
+
+<p>FDD - Failure Driven Development.<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a></p>
+
+<p>Break a problem down, break each part down into sub-parts. Repeat (recur).</p>
+
+<p>Choose a different paradigm for each sub-part. Choose based on the problem-at-hand.</p>
+
+<p>For example, input is mostly pattern matching &#8212; parsing, PEG, S/SL.</p>
+
+<p>Output can be done with printf and JS back-tick strings. When I need tabular output, I use a spreadsheet to edit the final tables (I convert / normalize the data into .CSV files, to make the data more acceptable to spreadsheets).</p>
+
+<p>[<em>N.B. I needed an editor to make the final output format for a project. Spreadsheets are good editors (for tabular data), but tend to lock you into a single paradigm (spreadsheet language). .CSV is a normalized format acceptable to most spreadsheets. If you convert your data to/from .CSV, you can use any editor (built into spreadsheets) you want. Export from the &#8220;editor&#8221; to CSV. We need a .CSV-like normal form for all data and programs (I suggest triples).</em>]</p>
+
+<p>[<em>N.B. Talking about editors, I like to use Keynote as an editor &#8212; it helps me organize my thoughts and to keep my text short. Keynote has the disadvantage in that it doesn&#8217;t export well to normalized forms. Keynote does export to HTML, but includes a bunch of JS in the process.</em>]</p>
+
+<p>Queries are exhaustive search. PROLOG has a nice syntax for crafting queries. PROLOG can import and export data in normal form (triples).</p>
+
+<p>Note that I am breaking programming down into two classes (at least): human readable syntax vs. machine readable syntax.</p>
+
+<p>/bin/sh was aimed at machine readability. After that, things like /bin/bash and /bin/zsh only danced around the elephant and didn&#8217;t really bring any new advances in think-ability.</p>
+
+<p>In my mind, the next step for /bin/sh is to make it diagrammatic. Visual Shell. vsh. [<em>Experimental version at <a href="https://github.com/guitarvydas/vsh">https://github.com/guitarvydas/vsh</a></em>]</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>https://guitarvydas.github.io/2021/04/23/Failure&#8211;Driven&#8211;Design.html <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+

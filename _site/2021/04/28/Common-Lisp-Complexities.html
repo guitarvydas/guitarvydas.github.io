@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Common Lisp Complexities</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="complexitiesofcl">Complexities of CL</h1>
+
+<h2 id="whatwerethecomplexitiesthatwereaddedtocommonlisp">What were the complexities that were added to Common Lisp?</h2>
+
+<p>The main complexity was the switch from dynamic scoping to static scoping.</p>
+
+<p>This allowed Lisp to be compiled. Up until then, many Lisps were only interpreted. One of the biggest knocks against Lisp was that it was interpreted, and, everyone was worried about efficiency and thought that they would write more-efficient code if they used C instead of Lisp. If you squint hard enough, you will see that operating systems are manually-written versions of Lisp and are wildly inefficient (processes instead of closures (in fact, closures weren&#8217;t even necessary in early Lisps - their existence is driven by the goal of compilation)).</p>
+
+<p>A second complication was the invention of packages. Packages in CL are much more detailed than packages in other languages. In CL, packages are based on symbols instead of being mostly syntactic constructs. The way that packages interact with the reader make it harder to write SCNs<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> in CL.</p>
+
+<p>C had scoping rules that worked OK. Names (variables and functions) were invisible outside of the boundaries of a compilation unit, by default. C had globals (variables and functions), locals (variables mostly) and parameters (variables mostly).</p>
+
+<p>A third complication was macros. People were experimenting with writing code that writes code and that was distilled down into macros. Lisp macros are much more powerful than macros in most other languages. Lisp macros are, essentially, the Lisp compiler being exposed to programmers. With that power comes accidental complexity.</p>
+
+<p>Lisp, originally, addressed all sorts of debugging and quick prototyping issues. Then, Lisp, became schizophrenic with the standardization of CL. It still had many debugging features, but it also had efficiency (premature optimization) features.</p>
+
+<p>In general, CL dumbed Lisp down by addressing micro-problems instead of addressing the elephant in the room (elephant: why is software so much harder to build correctly than, say, hardware?)</p>
+
+<p>CL has restarts which are error handlers that are more powerful than what can be found in most languages. This power comes from the fact that Lispers can think in any paradigm they choose &#8212; most languages flog a certain paradigm to exclusion of all else (e.g. Smalltalk and OO, PROLOG and relational, etc.). The multi-paradigmatic nature of Lisp comes from the fact that Lisp has no syntax. A Lisper can invent a syntax (using functions and macros) for any paradigm. OTOH, the lack of syntax in Lisp is very closely related to Assembler. Some people love the power, others hate it. Some programmers loved to program in assembler and others hated it. The circle is being closed again, with the advent of CPS<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a> and WASM<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a>.</p>
+
+<p>People did not make a distinction between high-level languages for human readability and high-level languages for machine readability (high-level assembler) and debugging (mostly for humans).</p>
+
+<p>Note that just about every interesting advance in CSC started out life as Lisp (e.g. GHC &#8211;&gt; Haskell, Lisp &#8211;&gt; JavaScript). Researchers should be prohibited from using anything but Lisp and, researchers should be prohibited from providing their &#8220;languages&#8221; to mortal programmers. (E.G. I can&#8217;t imagine a JS programmer using Haskell, nor AGDA, nor Idris, nor PROLOG, nor &#8230; [Research is about defining the Universe of Programming Languages, whereas Programming Language design is about creating a useful compromise (JavaScript ain&#8217;t it ; is HTML+CSS <em>it</em>?).]).</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>SCN means Solution Centric Notation. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:2">
+<p>CPS means Continuation Passing Style &#8211; the ultimate GOTO. https://en.wikipedia.org/wiki/Continuation&#8211;passing_style#:~:text=In%20functional%20programming%2C%20continuation%2Dpassing,the%20form%20of%20a%20continuation.&amp;text=When%20the%20CPS%20function%20has,this%20value%20as%20the%20argument. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+<li id="fn:3">
+<p>WASM mean Web Assembly. https://webassembly.org/ <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
+</li>
+
+</ol>
+</div>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
