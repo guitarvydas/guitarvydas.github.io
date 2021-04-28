@@ -1,131 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T10:16:47-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Parsing vs fp pattern matching</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Parsing-vs-FP-Pattern-Matching.html" rel="alternate" type="text/html" title="Parsing vs fp pattern matching" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Parsing%20vs%20FP%20Pattern%20Matching</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Parsing-vs-FP-Pattern-Matching.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Parsing vs FP Pattern Matching&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-28T10:16:31Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-28T10:16:31Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 13.0px Palatino}
-    ol.ol1 {list-style-type: decimal}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Functions of Time Using FP&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I discuss how parsers can be used to create functions of time (&lt;i&gt;f(t)&lt;/i&gt;) using FP components…&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;String of Beads&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I think of a pipeline of parsers as a string of beads.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Each &lt;i&gt;bead&lt;/i&gt; is a function, maybe programmed in an FP language.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;ASTs and CSTs&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;People have generalized the term AST — abstract syntax tree — to mean the result of a parse (usually a tree data structure, remembering that trees can be serialized into streams of tokens).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I subdivide parsing into two parts&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;can &lt;/i&gt;be parsed&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;was&lt;/i&gt; actually parsed.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I use the term AST for (1).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Abstract Syntax Tree.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;I use the term CST for (2).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Concrete Syntax Tree.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;History vs. FP&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Likewise, a program can be subdivided into two parts:&lt;/p&gt;
-&lt;ol class=&quot;ol1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;can&lt;/i&gt; the program accept and process?&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;did &lt;/i&gt;the program accept and process?&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;History is but a function of time — &lt;i&gt;f(t)&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;In general, history is not reversible (as far as we know).&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;But, pure FP (functional programming) expunges &lt;i&gt;f(t) &lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;from its notation, to appease its notation (and to allow transformations that would be impossible if &lt;i&gt;f(t)&lt;/i&gt; were allowed (that's where the onus to expunge side-effects comes from)).&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;How, then, could history be expressed in FP???&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Parsers walk input streams (aka trees) driven by reality.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parsers don't process abstractions (ASTs).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parsers walk realities (CSTs). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;History is encoded in the backtrace of how a parser walked the CST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The actual input causes the parser to walk a (crooked?) path through the AST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The AST does not change, but the history of the walk is different with every different input.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Each step &lt;i&gt;along&lt;/i&gt; the way can be expressed as an FP function. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Steps are FP, history is not FP&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Let us concoct a simple example:&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;function f(x) {&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;if (x == 5) {&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;printf (&quot;5&quot;);&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} else {&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;printf (&quot;not 5&quot;);&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;}&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;}&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;What is the final output of the above function?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;We can't know what the final output is without supplying a value for the parameter, x.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The function is like an AST — it expresses all possible outcomes.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;When we supply a value for the parameter, x, then the function runs and produces one or the other outcome.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The run is &lt;i&gt;history&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The run is like a CST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We can get a backtrace for the run.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(A CST is like a backtrace).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Parsers — grammars in particular — give us a declarative way to talk about history.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Note that FP increasingly uses parser technology — pattern matching. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Pattern matching taken to the limit, is parsing.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Parsing deals with history and, hence, with &lt;i&gt;f(t)&lt;/i&gt;.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Analogy&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Note that a &lt;i&gt;parsing engine&lt;/i&gt; is analogous to a PROLOG &lt;i&gt;rule engine&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Flags&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Programmers have used &lt;i&gt;flags&lt;/i&gt; (mutable variables) for ages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We have discovered that &lt;i&gt;flags &lt;/i&gt;cause accidental complexity and lack-of-debuggability.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Parsers are engines that subsume the use of &lt;i&gt;flags&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;Parsers give us a way to talk about flags in a declarative manner.]&lt;/i&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Parsing vs. FP Pattern Matching&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Parsers are FP pattern matching taken to the limit.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;FP uses relational engines and pattern matching.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;FP &lt;i&gt;could&lt;/i&gt; use relational engines &lt;i&gt;and&lt;/i&gt; parsing engines.&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Side-effects are &lt;i&gt;f(t)&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FP expunges side-effects.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FP expunges time from its notation.&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;FP does not allow &lt;i&gt;f(t)&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;f(t) &lt;/i&gt;is History.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Hence, FP expunges History.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;History must be recorded using some other notation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Parsing vs FP Pattern Matching</summary></entry><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-04-28T10:51:29-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -166,7 +39,45 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">Function or list?</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html" rel="alternate" type="text/html" title="Function or list?" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Function%20or%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">Mutable variables and flags</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Mutable-Variables-and-Flags.html" rel="alternate" type="text/html" title="Mutable variables and flags" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Mutable%20Variables%20and%20Flags</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Mutable-Variables-and-Flags.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Mutable Variables and Flags&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-28T10:51:25Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-28T10:51:25Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;p class=&quot;p1&quot;&gt;Programmers use mutable variables, but, the practice causes trouble.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;One use of mutable variables is to create flags.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;Wouldn't it be nice if there were a declarative way to express flags?&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;I think that parsers do this.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;I discuss the issues in &lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Parsing-vs-FP-Pattern-Matching.html&quot;&gt;https://guitarvydas.github.io/2021/04/28/Parsing-vs-FP-Pattern-Matching.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;[&lt;i&gt;Q: What else, if anything, are mutable variables used for?&lt;/i&gt;]&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Mutable Variables and Flags</summary></entry><entry><title type="html">Function or list?</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html" rel="alternate" type="text/html" title="Function or list?" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Function%20or%20List</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Function-or-List.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
@@ -475,34 +386,54 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Txl</title><link href="https://computingsimplicity.neocities.org/2021/04/28/TXL.html" rel="alternate" type="text/html" title="Txl" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/TXL</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/TXL.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;TXL&lt;/title&gt;
+	&lt;title&gt;Tokenizing&lt;/title&gt;
 	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;h1 id=&quot;txl&quot;&gt;TXL&lt;/h1&gt;
+&lt;h1 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h1&gt;
 
-&lt;p&gt;[&lt;em&gt;Why not use TXL instead of Ohm?&lt;/em&gt;]&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).&lt;/p&gt;
 
-&lt;p&gt;Good question. I didn&amp;#8217;t explicitly understand the problem until later, when I had PEG and JavaScript in my hands.&lt;/p&gt;
+&lt;p&gt;You can&amp;#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.&lt;/p&gt;
 
-&lt;p&gt;S/SL laid the groundwork for my understanding. It took only 30 more years. [&lt;em&gt;I used S/SL right from the beginning, but it took me a while to verbalize why I found it so useful.&lt;/em&gt;]&lt;/p&gt;
+&lt;p&gt;My experiments with ASON parsing&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; using Ohm-JS might show how to tokenize using Ohm-JS.&lt;/p&gt;
 
-&lt;p&gt;I wonder if Cordy &amp;#8220;got it&amp;#8221; much earlier?&lt;/p&gt;
+&lt;h1 id=&quot;isolatedcomponents&quot;&gt;Isolated Components&lt;/h1&gt;
 
-&lt;p&gt;TXL is based on parse trees. Ohm-JS is based on JS objects. It became easier to program when I thought of objects instead of parse trees.&lt;/p&gt;
+&lt;p&gt;I think in terms of isolated software components.&lt;/p&gt;
 
-&lt;p&gt;TXL looks like &amp;#8220;compiler technology&amp;#8221;. Ohm-JS &lt;em&gt;can&lt;/em&gt; look like lowly JS. Maybe that makes Ohm-JS &lt;em&gt;feel&lt;/em&gt; more accessible?&lt;/p&gt;
+&lt;p&gt;I want to &lt;em&gt;build-and-forget&lt;/em&gt; any component.&lt;/p&gt;
 
-&lt;p&gt;Paul Morrison talks about &amp;#8220;steam engine time&amp;#8221; - multiple inventions of the same concept, at about the same time.&lt;/p&gt;
+&lt;p&gt;Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.&lt;/p&gt;
 
-&lt;h1 id=&quot;appendix-txl&quot;&gt;Appendix - TXL&lt;/h1&gt;
+&lt;p&gt;[&lt;em&gt;This is possible, but unlikely with current programming languages.&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.txl.ca/&quot;&gt;https://www.txl.ca/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;whitespace&lt;/li&gt;
+&lt;li&gt;non-whitespace.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.&lt;/p&gt;
+
+&lt;p&gt;[&lt;em&gt;For the record, I can&amp;#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.&lt;/em&gt;]&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;https://guitarvydas.github.io/2021/04/10/ASON&amp;#8211;Notation&amp;#8211;Pipeline.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -512,4 +443,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">TXL</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry></feed>
