@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Software Components 101</title>
+  <meta name="CreationTime" content="2021-05-03T18:30:43Z">
+  <meta name="ModificationTime" content="2021-05-03T18:30:43Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {text-decoration: underline}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Software Components 101</b></h2>
+<p class="p2">This essay introduces some of the concepts of Software Components.</p>
+<p class="p3"><br></p>
+<p class="p2">A full discussion of Software Components is fractal and recursive in nature.<span class="Apple-converted-space">  </span>This essay is an introduction and I choose to skip some of the details.</p>
+<p class="p3"><br></p>
+<p class="p2">The key concept is that Components are <i>relative </i>to one another and are <i>asynchronous</i>.<span class="Apple-converted-space">  </span>These concepts are quite different from those of most modern programming languages, but the concepts are subtle.</p>
+<p class="p3"><br></p>
+<p class="p2">I intend to draw components in SVG and I intend to show<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> how to use diagrams, and SVG, as syntax (instead of characters).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Top Level</b></h2>
+<p class="p2"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic1.png" width="150px" height="99px" alt="Image"></p>
+<p class="p4">Fig. 1 Basic Component</p>
+<p class="p5"><br></p>
+<p class="p4">Fig. 1 shows a basic software component diagram.</p>
+<p class="p5"><br></p>
+<p class="p4">This diagram represents the top level of a software Component.</p>
+<p class="p5"><br></p>
+<p class="p4">The component's name is "main".</p>
+<p class="p5"><br></p>
+<p class="p4">The Component has one Input Port — "in" — represented by the green circle (containing the text "in").</p>
+<p class="p5"><br></p>
+<p class="p4">The Component has one Output Port — "out" — represented by the yellow circle (containing the text "out").</p>
+<p class="p5"><br></p>
+<p class="p4">The Port "in" is connected to the Port "out" by a line representing the flow of Events from "in" to "out".</p>
+<p class="p5"><br></p>
+<p class="p4">[<i>Most lines begin at a green input and end at a yellow output.<span class="Apple-converted-space">  </span>If we used an arrow, instead of a line, the arrow would point at the yellow output port (the direction of flow).<span class="Apple-converted-space">  </span>We will see that it is also possible to connect a yellow output to another yellow output and a green input to another green input, later.]</i></p>
+<p class="p6"><br></p>
+<p class="p5"><br></p>
+<p class="p4">We write the name of the Component as</p>
+<p class="p7">[main]</p>
+<p class="p4">the input port as</p>
+<p class="p7">(in)</p>
+<p class="p4">and the output port as</p>
+<p class="p7">(out).</p>
+<p class="p8"><br></p>
+<p class="p2">[<i>I.E. Component names are written in brackets, Port names are written in parentheses.</i>]</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Nested</b></h2>
+<p class="p2"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic2.png" width="150px" height="99px" alt="Image"></p>
+<p class="p4">Fig. 2 Nested Component</p>
+<p class="p5"><br></p>
+<p class="p4">Fig. 2 shows a component, called "subcomponent" nested inside the component called "main".</p>
+<p class="p5"><br></p>
+<p class="p4">Inner input ports are green rectangles.</p>
+<p class="p5"><br></p>
+<p class="p4">Inner output ports are yellow rectangles.</p>
+<p class="p5"><br></p>
+<p class="p4">External ports are circles, inner ports are rectangles.</p>
+<p class="p5"><br></p>
+<p class="p4">The Input Port "in" is connected to the inner Input Port "A".</p>
+<p class="p5"><br></p>
+<p class="p4">The inner Output Port "B" is connected to the External Output Port "out".</p>
+<p class="p5"><br></p>
+<p class="p4">[<i>This diagram contains two components and a total of two connections.</i>]</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Nested Component in a Nested Component</b></h2>
+<p class="p4"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic3.png" width="150px" height="78px" alt="Image"></p>
+<p class="p4">Fig. 3 Component Nested in a Nested Component</p>
+<p class="p5"><br></p>
+<p class="p4">This diagram shows 3 components.<span class="Apple-converted-space">  </span>"Component X" is inside component "subcomponent" and component "subcomponent" is, itself, inside the Component "main".</p>
+<p class="p5"><br></p>
+<p class="p4">The component "subcomponent" has an output port called "#".<span class="Apple-converted-space">  </span>The Output Port has a shadow<a id="fnlink2"></a><a href="#fn2"><span class="s1"><sup>[2]</sup></span></a>.<span class="Apple-converted-space">  </span>The shadow means that the port is connected to all sub-ports with the same name.<span class="Apple-converted-space">  </span>We write this Port name as (*#).<span class="Apple-converted-space">  </span>[<i>We prefix the component name with *</i>].</p>
+<p class="p5"><br></p>
+<p class="p4">In this diagram, there are 3 Components and 4 connections.<span class="Apple-converted-space">  </span>3 connections are explicit (shown as lines) and one connection is implicit ([component X].(#) connected to [subcomponent].(*#)).</p>
+<p class="p5"><br></p>
+<p class="p4">Here, we introduce another syntactical point - names can include spaces and any characters except brackets, parentheses and dots.<span class="Apple-converted-space">  </span>For example the name of the inner-inner component is [component X]. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">Names are <i>relative</i>.<span class="Apple-converted-space">  </span>See the section Relative Naming below.</p>
+<p class="p5"><br></p>
+<p class="p4">It is easier to think of the above diagram as being subdivided into several layers, eliding the inner details at each layer. <span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">The topmost layer might be thought of as:</p>
+<p class="p5"><span class="Apple-converted-space"> </span></p>
+<p class="p4"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic3 (0).png" width="150px" height="78px" alt="Image"></p>
+<p class="p5"><br></p>
+<p class="p4">Fig. 4 Component Nested in a Nested Component</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">whereas the inner layer might be thought of as:</p>
+<p class="p5"><br></p>
+<p class="p4"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic3 (1).png" width="150px" height="77px" alt="Image"></p>
+<p class="p5"><br></p>
+<p class="p4">Fig. 5 Component Nested in a Nested Component</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">The detail to note is the <i>self [.]</i> is relative, not absolute.<span class="Apple-converted-space">  </span>Hence, [.] refers to [subcomponent] or to [component X], depending on context.</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Copied Component</b></h2>
+<p class="p4"><img src="/assets/2021-05-03-18-30-43-Images/basic1-basic4.png" width="150px" height="133px" alt="Image"></p>
+<p class="p4">Fig. 2 Copied Component</p>
+<p class="p5"><br></p>
+<p class="p4">Fig. 2 shows a simple COPY/PAST of [subcomponent].<span class="Apple-converted-space">  </span>The Component [main] contains two clones of the component [subcomponent].</p>
+<p class="p5"><br></p>
+<p class="p4">Relative naming makes this possible and simple and easy.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Composite vs. Leaf Components</b></h2>
+<p class="p2">Components can contain other components (e.g. <i>composition</i>).</p>
+<p class="p3"><br></p>
+<p class="p2">Such components are call <i>composite</i> <i>components</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Composite Components, once invoked, run until all of their children have subsided.</p>
+<p class="p3"><br></p>
+<p class="p2">Components that do not contain other components, or are implemented in some other language (other than <span class="s2">dasl</span>), are called <i>leaf components</i>.</p>
+<p class="p3"><br></p>
+<p class="p2">Leaf Components are like black boxes.<span class="Apple-converted-space">  </span>When they are invoked, they run to completion (one input event only).<span class="Apple-converted-space">  </span>We do not "see" — at the <span class="s2">dasl</span> level — the inner workings of <i>Leaf Components.</i></p>
+<p class="p3"><i></i><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Asynchronous</b></h2>
+<p class="p2">Components are asynchronous.</p>
+<p class="p3"><br></p>
+<p class="p2">Components may only communicate by sending events to their output ports.</p>
+<p class="p3"><br></p>
+<p class="p2">Event delivery is, conceptually, not implemented as CALL / RETURN.</p>
+<p class="p3"><br></p>
+<p class="p2">Event delivery occurs in two phases,<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> see <a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a>).</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>It might help to think of closures with input queues and a distinguished routine, called the Dispatcher, that invokes closures that are ready.<span class="Apple-converted-space">  </span>This concept is not very different from processes and scheduling found in most operating systems, but it can be implemented in a more light-weight manner (there is no requirement for full preemption).</i>]</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Run to Completion</b></h2>
+<p class="p2">Components consume one input event at a time.</p>
+<p class="p3"><br></p>
+<p class="p2">Components process each input event to completion before popping another input event from their input queues.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Note that components can be broken up into pieces which are coordinated by event arrival.<span class="Apple-converted-space">  </span>Events invoke only one piece of a Component at a time and "running to completion" means that only one piece completes running.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ready / Busy</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax Details</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dot Syntax</b></h2>
+<p class="p2">We write a component / port pair as<span class="Apple-converted-space"> </span></p>
+<p class="p7">[ … ] . ( … )</p>
+<p class="p3"><br></p>
+<p class="p2">I.E. the Component name is enclosed in brackets, the Port name is enclosed in parentheses and the <i>dot</i> operator joins the two (much like the field operator in most textual OO languages).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Self Component</b></h2>
+<p class="p2">The <i>self</i> Component has a special name "." and is written as</p>
+<p class="p7">[.]</p>
+<p class="p8"><br></p>
+<p class="p2">Reference to a Port of a <i>self </i>Component looks like</p>
+<p class="p7">[.].(A)</p>
+<p class="p8"><br></p>
+<p class="p2">[<i>We want machine readability first, human readability second.<span class="Apple-converted-space">  </span>The important point is that Components and Ports have a different syntax which is always the same.<span class="Apple-converted-space">  </span>The namespace of Input Ports can overlap with the namespace of Output Ports.<span class="Apple-converted-space">  </span>Syntax is easy to change, if you don't like the above</i>.]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Green vs. Yellow</b></h2>
+<p class="p2">Green is defined as any colour where the R component is &lt;#80 and the G component is &gt;= #80.</p>
+<p class="p3"><br></p>
+<p class="p2">Yellow is defined as any colour where the R component is &gt;= #80 and the G component is &gt;= #80.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Relative Naming</b></h2>
+<p class="p2">Component names are constructed in a relative manner, by prefixing each component name with its parent component, followed by a space followed by the Component's name.</p>
+<p class="p3"><br></p>
+<p class="p2">For example, we would refer to the inner-inner Component of Nested Component in a Nested Component, as</p>
+<p class="p7">[main subcomponent component X].</p>
+<p class="p3"><br></p>
+<p class="p2">This convention does not apply to Port names, since Port names are always internally distinguished by the Component that they belong to, e.g. the Port (c) in Nested Component in a Nested Component is written as:</p>
+<p class="p7">[main subcomponent component X].(c)</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Kinds vs. Names</b></h2>
+<p class="p2">What we have been calling Component <i>names</i> are actually Component <i>kinds</i> — much like their type or class.</p>
+<p class="p3"><br></p>
+<p class="p2">In most cases, there is only one Component of a given kind on a diagram<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">In the cases where there is more than one Component of a given kind, the components are written as digits, starting at 1, in the order of declaration of the Components (component declarations will be discussed elsewhere).</p>
+<p class="p3"><br></p>
+<p class="p2">For example, in Copied Component, the [main] Component has two copies of [subcomponent].<span class="Apple-converted-space">  </span>They are written as</p>
+<p class="p7">[1]…</p>
+<p class="p2">and</p>
+<p class="p7">[2]…</p>
+<p class="p3"><br></p>
+<p class="p2">(Internally, the components are further distinguished by their (x,y) coordinates and are unique).</p>
+<p class="p3"><br></p>
+<p class="p2">Note that <span class="s2">[subcomponent]</span> has only one copy of <span class="s2">[component X]</span> inside of it, so <span class="s2">[component X]</span> is <span class="s3">not</span> written in a qualified manner in the implementation of <span class="s2">[subcomponent]</span>.<span class="Apple-converted-space">  </span>[<i>Hopefully this will become more clear with more examples.<span class="Apple-converted-space">  </span>We are using </i><span class="s3"><i>relative</i></span><i> naming, whereas most modern programming languages use </i><span class="s3"><i>absolute</i></span><i> naming.<span class="Apple-converted-space">  </span>All naming and namespacing is relative to the immediate parent Component.<span class="Apple-converted-space">  </span>Another subtlety is that we are splitting each component up into 3 specifications — signature, children, connections — whereas most modern programming languages attempt to consolidate all code into flat, not relative, specifications</i>]</p>
+<hr>
+<p class="p4"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>In a following essay.<span class="Apple-converted-space">  </span>If one looks at SVG, it should become apparent how to use SVG as syntax.<span class="Apple-converted-space">  </span>Instead of characters, I use a syntax composed of rects, circles, ellipses, lines and text. I call this DaS (Diagrams as Syntax).</p>
+<p class="p4"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>In fact, I will begin using a stroke-width of 3, which is more easily represented and recognized in SVG.</p>
+<p class="p4"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>Notably, event receivers are not immediately executed once an event arrives.<span class="Apple-converted-space">  </span>It is best to think of events as (1) being placed on input queues and (2) Component execution being coordinated by a Scheduler (separate from event delivery).</p>
+<p class="p4"><a id="fn4"></a><a href="#fnlink4"><span class="s1">[4]</span></a><span class="s1"> </span>If this seems anti-intuitive, note that diagrams represent Software Architecture, not Code.<span class="Apple-converted-space">  </span>In practice, Architectures tend to have only one of each kind of thing on a diagram.<span class="Apple-converted-space">  </span>(If you are thinking of "+" Components, then you are thinking about Code, not Architecture).</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
