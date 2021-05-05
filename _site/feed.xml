@@ -1,4 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-05T09:50:37-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-05T14:04:39-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Tags instead of names</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Tags-Instead-of-Names.html" rel="alternate" type="text/html" title="Tags instead of names" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Tags%20Instead%20of%20Names</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Tags-Instead-of-Names.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Tags Instead of Names&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;tagsinsteadofnames&quot;&gt;Tags Instead of Names&lt;/h1&gt;
+
+&lt;p&gt;Below is a simple equation&lt;/p&gt;
+
+&lt;p&gt;y = mx + b&lt;/p&gt;
+
+&lt;p&gt;There are, at least, 4 names in this equation:&lt;/p&gt;
+
+&lt;p&gt;y, m, x, b.&lt;/p&gt;
+
+&lt;p&gt;These names are only meaningful to those who already understand the purpose of this equation.&lt;/p&gt;
+
+&lt;p&gt;A novice would want different names, e.g.&lt;/p&gt;
+
+&lt;p&gt;y, slope, x, y-intersect.&lt;/p&gt;
+
+&lt;p&gt;A compiler-writer might used numeric names instead (aka addresses), e.g.&lt;/p&gt;
+
+&lt;p&gt;0x7512, 0x5525, 0x7518, 0x1234.&lt;/p&gt;
+
+&lt;p&gt;Or, a compiler-writer, might wish to abstract the names, using Data Descriptors, e.g.&lt;/p&gt;
+
+&lt;p&gt;@sp.2, @r11.0, @sp.8, @0x1230.4&lt;/p&gt;
+
+&lt;p&gt;In some cases&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; names are more like comments. The names are superfluous except as comments to the reader.&lt;/p&gt;
+
+&lt;p&gt;In some cases&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; it is enough to know only the type of a datum, e.g. if a datum appears only once in code, there is not point in assigning two identifiers (name and type) to the datum, where only one identifier will do.&lt;/p&gt;
+
+&lt;p&gt;The Common Lisp language incorporates a construct called symbol macros which emphasizes the superfluous nature of names.&lt;/p&gt;
+
+&lt;p&gt;The above observations lead to the notion that names in PLs&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; are not single entities, but might be treated more like lists of tags.&lt;/p&gt;
+
+&lt;p&gt;Names could be defined as lists.&lt;/p&gt;
+
+&lt;p&gt;Named entities could be named by a list of valid synonyms.&lt;/p&gt;
+
+&lt;p&gt;The above would be like projectional-editing-in-the-small.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;Software Architecture using assign&amp;#8211;once languages. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;E.G. diagrams, etc. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li id=&quot;fn:3&quot;&gt;
+&lt;p&gt;PL means Programming Language &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tags Instead of Names</summary></entry><entry><title type="html">Prolog vs kanren</title><link href="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html" rel="alternate" type="text/html" title="Prolog vs kanren" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/PROLOG%20vs%20Kanren</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;PROLOG vs Kanren&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;exhaustivesearch&quot;&gt;Exhaustive Search&lt;/h1&gt;
+
+&lt;p&gt;Both methods, PROLOG and Kanren, perform exhaustive search.&lt;/p&gt;
+
+&lt;p&gt;PROLOG achieves exhaustive search via backtracking and re-binding via Unification.&lt;/p&gt;
+
+&lt;p&gt;Kanren achieves exhaustive search by creating an object of all possible matches at a given point, then passing the object+answers+unifiableVariables down a pipeline for further augmentation and clipping.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;/assets/2021-05-05-09-45-06-Images/PROLOGvsKanren.png&quot; alt=&quot;&quot; id=&quot;prologvskanren&quot; width=&quot;300&quot; height=&quot;200&quot; /&gt;
+&lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PROLOG vs Kanren</summary></entry><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -51,37 +155,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Breaking Long Running Loops</summary></entry><entry><title type="html">Prolog vs kanren</title><link href="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html" rel="alternate" type="text/html" title="Prolog vs kanren" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/PROLOG%20vs%20Kanren</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;PROLOG vs Kanren&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;exhaustivesearch&quot;&gt;Exhaustive Search&lt;/h1&gt;
-
-&lt;p&gt;Both methods, PROLOG and Kanren, perform exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;PROLOG achieves exhaustive search via backtracking and re-binding via Unification.&lt;/p&gt;
-
-&lt;p&gt;Kanren achieves exhaustive search by creating an object of all possible matches at a given point, then passing the object+answers+unifiableVariables down a pipeline for further augmentation and clipping.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;/assets/2021-05-05-09-45-06-Images/PROLOGvsKanren.png&quot; alt=&quot;&quot; id=&quot;prologvskanren&quot; width=&quot;300&quot; height=&quot;200&quot; /&gt;
-&lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">PROLOG vs Kanren</summary></entry><entry><title type="html">Software components 001</title><link href="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-001.html" rel="alternate" type="text/html" title="Software components 001" /><published>2021-05-04T00:00:00-04:00</published><updated>2021-05-04T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/04/Software%20Components%20001</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-001.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Breaking Long Running Loops</summary></entry><entry><title type="html">Software components 001</title><link href="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-001.html" rel="alternate" type="text/html" title="Software components 001" /><published>2021-05-04T00:00:00-04:00</published><updated>2021-05-04T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/04/Software%20Components%20001</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-001.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1661,53 +1735,49 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101</summary></entry><entry><title type="html">Common lisp complexities</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Common-Lisp-Complexities.html" rel="alternate" type="text/html" title="Common lisp complexities" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Common%20Lisp%20Complexities</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Common-Lisp-Complexities.html">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101</summary></entry><entry><title type="html">Subdividing problems</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html" rel="alternate" type="text/html" title="Subdividing problems" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Subdividing%20Problems</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Subdividing-Problems.html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Common Lisp Complexities&lt;/title&gt;
+	&lt;title&gt;Dubdividing Problems&lt;/title&gt;
 	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;h1 id=&quot;complexitiesofcl&quot;&gt;Complexities of CL&lt;/h1&gt;
+&lt;h1 id=&quot;subdividingproblems&quot;&gt;Subdividing Problems&lt;/h1&gt;
 
-&lt;h2 id=&quot;whatwerethecomplexitiesthatwereaddedtocommonlisp&quot;&gt;What were the complexities that were added to Common Lisp?&lt;/h2&gt;
+&lt;p&gt;[&lt;em&gt;Do you have a heuristic when to use certain paradigms and when to avoid them?&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;The main complexity was the switch from dynamic scoping to static scoping.&lt;/p&gt;
+&lt;p&gt;Fractalize.&lt;/p&gt;
 
-&lt;p&gt;This allowed Lisp to be compiled. Up until then, many Lisps were only interpreted. One of the biggest knocks against Lisp was that it was interpreted, and, everyone was worried about efficiency and thought that they would write more-efficient code if they used C instead of Lisp. If you squint hard enough, you will see that operating systems are manually-written versions of Lisp and are wildly inefficient (processes instead of closures (in fact, closures weren&amp;#8217;t even necessary in early Lisps - their existence is driven by the goal of compilation)).&lt;/p&gt;
+&lt;p&gt;FDD - Failure Driven Development.&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;A second complication was the invention of packages. Packages in CL are much more detailed than packages in other languages. In CL, packages are based on symbols instead of being mostly syntactic constructs. The way that packages interact with the reader make it harder to write SCNs&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; in CL.&lt;/p&gt;
+&lt;p&gt;Break a problem down, break each part down into sub-parts. Repeat (recur).&lt;/p&gt;
 
-&lt;p&gt;C had scoping rules that worked OK. Names (variables and functions) were invisible outside of the boundaries of a compilation unit, by default. C had globals (variables and functions), locals (variables mostly) and parameters (variables mostly).&lt;/p&gt;
+&lt;p&gt;Choose a different paradigm for each sub-part. Choose based on the problem-at-hand.&lt;/p&gt;
 
-&lt;p&gt;A third complication was macros. People were experimenting with writing code that writes code and that was distilled down into macros. Lisp macros are much more powerful than macros in most other languages. Lisp macros are, essentially, the Lisp compiler being exposed to programmers. With that power comes accidental complexity.&lt;/p&gt;
+&lt;p&gt;For example, input is mostly pattern matching &amp;#8212; parsing, PEG, S/SL.&lt;/p&gt;
 
-&lt;p&gt;Lisp, originally, addressed all sorts of debugging and quick prototyping issues. Then, Lisp, became schizophrenic with the standardization of CL. It still had many debugging features, but it also had efficiency (premature optimization) features.&lt;/p&gt;
+&lt;p&gt;Output can be done with printf and JS back-tick strings. When I need tabular output, I use a spreadsheet to edit the final tables (I convert / normalize the data into .CSV files, to make the data more acceptable to spreadsheets).&lt;/p&gt;
 
-&lt;p&gt;In general, CL dumbed Lisp down by addressing micro-problems instead of addressing the elephant in the room (elephant: why is software so much harder to build correctly than, say, hardware?)&lt;/p&gt;
+&lt;p&gt;[&lt;em&gt;N.B. I needed an editor to make the final output format for a project. Spreadsheets are good editors (for tabular data), but tend to lock you into a single paradigm (spreadsheet language). .CSV is a normalized format acceptable to most spreadsheets. If you convert your data to/from .CSV, you can use any editor (built into spreadsheets) you want. Export from the &amp;#8220;editor&amp;#8221; to CSV. We need a .CSV-like normal form for all data and programs (I suggest triples).&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;CL has restarts which are error handlers that are more powerful than what can be found in most languages. This power comes from the fact that Lispers can think in any paradigm they choose &amp;#8212; most languages flog a certain paradigm to exclusion of all else (e.g. Smalltalk and OO, PROLOG and relational, etc.). The multi-paradigmatic nature of Lisp comes from the fact that Lisp has no syntax. A Lisper can invent a syntax (using functions and macros) for any paradigm. OTOH, the lack of syntax in Lisp is very closely related to Assembler. Some people love the power, others hate it. Some programmers loved to program in assembler and others hated it. The circle is being closed again, with the advent of CPS&lt;a href=&quot;#fn:2&quot; id=&quot;fnref:2&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; and WASM&lt;a href=&quot;#fn:3&quot; id=&quot;fnref:3&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;[&lt;em&gt;N.B. Talking about editors, I like to use Keynote as an editor &amp;#8212; it helps me organize my thoughts and to keep my text short. Keynote has the disadvantage in that it doesn&amp;#8217;t export well to normalized forms. Keynote does export to HTML, but includes a bunch of JS in the process.&lt;/em&gt;]&lt;/p&gt;
 
-&lt;p&gt;People did not make a distinction between high-level languages for human readability and high-level languages for machine readability (high-level assembler) and debugging (mostly for humans).&lt;/p&gt;
+&lt;p&gt;Queries are exhaustive search. PROLOG has a nice syntax for crafting queries. PROLOG can import and export data in normal form (triples).&lt;/p&gt;
 
-&lt;p&gt;Note that just about every interesting advance in CSC started out life as Lisp (e.g. GHC &amp;#8211;&amp;gt; Haskell, Lisp &amp;#8211;&amp;gt; JavaScript). Researchers should be prohibited from using anything but Lisp and, researchers should be prohibited from providing their &amp;#8220;languages&amp;#8221; to mortal programmers. (E.G. I can&amp;#8217;t imagine a JS programmer using Haskell, nor AGDA, nor Idris, nor PROLOG, nor &amp;#8230; [Research is about defining the Universe of Programming Languages, whereas Programming Language design is about creating a useful compromise (JavaScript ain&amp;#8217;t it ; is HTML+CSS &lt;em&gt;it&lt;/em&gt;?).]).&lt;/p&gt;
+&lt;p&gt;Note that I am breaking programming down into two classes (at least): human readable syntax vs. machine readable syntax.&lt;/p&gt;
+
+&lt;p&gt;/bin/sh was aimed at machine readability. After that, things like /bin/bash and /bin/zsh only danced around the elephant and didn&amp;#8217;t really bring any new advances in think-ability.&lt;/p&gt;
+
+&lt;p&gt;In my mind, the next step for /bin/sh is to make it diagrammatic. Visual Shell. vsh. [&lt;em&gt;Experimental version at &lt;a href=&quot;https://github.com/guitarvydas/vsh&quot;&gt;https://github.com/guitarvydas/vsh&lt;/a&gt;&lt;/em&gt;]&lt;/p&gt;
 
 &lt;div class=&quot;footnotes&quot;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
 
 &lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;SCN means Solution Centric Notation. &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:2&quot;&gt;
-&lt;p&gt;CPS means Continuation Passing Style &amp;#8211; the ultimate GOTO. https://en.wikipedia.org/wiki/Continuation&amp;#8211;passing_style#:~:text=In%20functional%20programming%2C%20continuation%2Dpassing,the%20form%20of%20a%20continuation.&amp;amp;text=When%20the%20CPS%20function%20has,this%20value%20as%20the%20argument. &lt;a href=&quot;#fnref:2&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li id=&quot;fn:3&quot;&gt;
-&lt;p&gt;WASM mean Web Assembly. https://webassembly.org/ &lt;a href=&quot;#fnref:3&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://guitarvydas.github.io/2021/04/23/Failure&amp;#8211;Driven&amp;#8211;Design.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 
 &lt;/ol&gt;
@@ -1721,113 +1791,165 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Common Lisp Complexities</summary></entry><entry><title type="html">Clojure</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Clojure.html" rel="alternate" type="text/html" title="Clojure" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Clojure</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Clojure.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Dubdividing Problems</summary></entry><entry><title type="html">Parsing vs fp pattern matching</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Parsing-vs-FP-Pattern-Matching.html" rel="alternate" type="text/html" title="Parsing vs fp pattern matching" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Parsing%20vs%20FP%20Pattern%20Matching</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Parsing-vs-FP-Pattern-Matching.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
 &lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Clojure&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Parsing vs FP Pattern Matching&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-04-28T10:16:31Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-04-28T10:16:31Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    ol.ol1 {list-style-type: decimal}
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h1 id=&quot;clojure&quot;&gt;Clojure&lt;/h1&gt;
-
-&lt;p&gt;[&lt;em&gt;What do you think of Clojure?&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;I like Lisp (and CL) because it is multi-paradigm. Clojure is single-paradigm (FP).&lt;/p&gt;
-
-&lt;p&gt;Again, I like languages that I can write code to write code in.&lt;/p&gt;
-
-&lt;p&gt;Most people want languages that are human-readable. But, that stunts growth in the field of programming - growth stops at what the language designer imagined.&lt;/p&gt;
-
-&lt;p&gt;PEG+Lisp is a powerful combination - multiple syntaxes built on top of HLL assembler (I use the phrase &amp;#8220;toolbox language&amp;#8221; to mean &amp;#8220;HL assembler&amp;#8221;). Syntaxes can be tuned to a specific problem instead of only what Guido van Rossum could imagine (something which doesn&amp;#8217;t fit most problems).&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Clojure</summary></entry><entry><title type="html">Backtracking, mathematics, reversability, garbage collection, time Sharing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Backtracking,-Mathematics,-Reversability,-Garbage-Collection,-Time-Sharing.html" rel="alternate" type="text/html" title="Backtracking, mathematics, reversability, garbage collection, time Sharing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Backtracking,%20Mathematics,%20Reversability,%20Garbage%20Collection,%20Time-Sharing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Backtracking,-Mathematics,-Reversability,-Garbage-Collection,-Time-Sharing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Backtracking, Mathematics, Reversability, Garbage Collection, Time-Sharing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;backtracking&quot;&gt;Backtracking&lt;/h1&gt;
-
-&lt;p&gt;I&amp;#8217;ve stopped using the phrase &amp;#8220;backtracking&amp;#8221; and try to use the phrase &amp;#8220;exhaustive search&amp;#8221;. Backtracking is an implementation detail, &amp;#8220;exhaustive search&amp;#8221; is a semantic concept that doesn&amp;#8217;t imply how it&amp;#8217;s implemented.&lt;/p&gt;
-
-&lt;p&gt;Note that Microsoft Word has had &amp;#8220;exhaustive search&amp;#8221; for a loooong time (WordStar had it before Word. Ed/vi/emacs?). Grep could do exhaustive search. We should&amp;#8217;a turned left at Albuquerque (&lt;em&gt;Bugs Bunny&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Mathematics notation employs exhaustive search. The strive for immutability is in aid of exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;Mathematics is 2 things: (1) a pencil-and-paper notation that employs exhaustive search and (2) a body of experience with using that notation.&lt;/p&gt;
-
-&lt;p&gt;Reversability. Who cares? No one asked for reversability, but it was a side-effect of immutability and now has risen to the level of an ideology.&lt;/p&gt;
-
-&lt;p&gt;Reversability can be used to solve one class of problems - UNDO. Should we be forced to bolt UNDO into every app? We seem to force ourselves to bolt time-sharing into every app. Is this a good thing? (If we were allowed to use multiple paradigms, we would be able to choose time-sharing and UNDO when we actually needed it, instead of having it built-into every language we use).&lt;/p&gt;
-
-&lt;p&gt;Garbage collection might have been the latest useful feature that we invented. Is UNDO in that same class? (I don&amp;#8217;t know, this is rhetorical question).&lt;/p&gt;
-
-&lt;p&gt;Time-sharing came about due to premature optimization (we optimized CPU usage instead of believing in Moore&amp;#8217;s Law). Are we making the same mistake again?&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Backtracking, Mathematics, Reversability, Garbage Collection, Time-Sharing</summary></entry><entry><title type="html">Actors</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Actors.html" rel="alternate" type="text/html" title="Actors" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Actors</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Actors.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Actors&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;actors&quot;&gt;Actors&lt;/h1&gt;
-
-&lt;p&gt;Actors are single-paradigm.&lt;/p&gt;
-
-&lt;p&gt;Not all kinds of solutions fit, cleanly, into the Actors paradigm.&lt;/p&gt;
-
-&lt;p&gt;For example, &lt;em&gt;printf&lt;/em&gt; and JS back-tick strings are pretty good at formatting output. OO, FP, Actors, PROLOG, etc.. don&amp;#8217;t make it easier to format output.&lt;/p&gt;
-
-&lt;p&gt;For example, REGEX is pretty good at matching text. OO, FP, Actors, PROLOG, etc., don&amp;#8217;t make it easier to match text. REGEX breaks down into an unreadable mess when patterns become complicated. Maybe there is something better than REGEX for use in such cases? Not OO, not FP, not Actors, et al. PEG comes to mind.&lt;/p&gt;
-
-&lt;h1 id=&quot;scns&quot;&gt;SCNs&lt;/h1&gt;
-
-&lt;p&gt;My emphasis is on solving problems by creating specific notations for specific problem and having a bunch of paradigms in one&amp;#8217;s toolbelt. This attitude is very different from the language, heavy-weight language, design paradigm that is in vogue. Paradigms are interesting and hard to learn. Languages &amp;#8212; syntax &amp;#8212; are noise.&lt;/p&gt;
-
-&lt;p&gt;What if building a compiler was easy?&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;What if all notations were as easy-to-use as REGEX?&lt;/p&gt;
-
-&lt;p&gt;Paradigms should not be dumbed down to assembler. Maybe each paradigm could come with a suggested syntax? Maybe we could just mix-and-match paradigms and suggested syntaxes?&lt;/p&gt;
-
-&lt;p&gt;What if we could use many paradigms &amp;#8212; and many syntaxes &amp;#8212; to solve one problem?&lt;/p&gt;
-
-&lt;p&gt;What if SCN-building was so cheap that we could just switch to any paradigm we wanted for a given problem? For example, using REGEX to input line-oriented data, PROLOG to perform queries, and printf to write out reports.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/04/26/What&amp;#8211;If&amp;#8211;Making&amp;#8211;A&amp;#8211;Compiler&amp;#8211;Was&amp;#8211;Easy.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Functions of Time Using FP&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I discuss how parsers can be used to create functions of time (&lt;i&gt;f(t)&lt;/i&gt;) using FP components…&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;String of Beads&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I think of a pipeline of parsers as a string of beads.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Each &lt;i&gt;bead&lt;/i&gt; is a function, maybe programmed in an FP language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;ASTs and CSTs&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;People have generalized the term AST — abstract syntax tree — to mean the result of a parse (usually a tree data structure, remembering that trees can be serialized into streams of tokens).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I subdivide parsing into two parts&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;can &lt;/i&gt;be parsed&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;was&lt;/i&gt; actually parsed.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;I use the term AST for (1).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Abstract Syntax Tree.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;I use the term CST for (2).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Concrete Syntax Tree.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;History vs. FP&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Likewise, a program can be subdivided into two parts:&lt;/p&gt;
+&lt;ol class=&quot;ol1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;can&lt;/i&gt; the program accept and process?&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;what &lt;i&gt;did &lt;/i&gt;the program accept and process?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;History is but a function of time — &lt;i&gt;f(t)&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;In general, history is not reversible (as far as we know).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;But, pure FP (functional programming) expunges &lt;i&gt;f(t) &lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;from its notation, to appease its notation (and to allow transformations that would be impossible if &lt;i&gt;f(t)&lt;/i&gt; were allowed (that's where the onus to expunge side-effects comes from)).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;How, then, could history be expressed in FP???&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Parsers walk input streams (aka trees) driven by reality.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parsers don't process abstractions (ASTs).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parsers walk realities (CSTs). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;History is encoded in the backtrace of how a parser walked the CST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The actual input causes the parser to walk a (crooked?) path through the AST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The AST does not change, but the history of the walk is different with every different input.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Each step &lt;i&gt;along&lt;/i&gt; the way can be expressed as an FP function. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Steps are FP, history is not FP&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Let us concoct a simple example:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;function f(x) {&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;if (x == 5) {&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;printf (&quot;5&quot;);&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;} else {&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;printf (&quot;not 5&quot;);&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;}&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;}&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What is the final output of the above function?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We can't know what the final output is without supplying a value for the parameter, x.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The function is like an AST — it expresses all possible outcomes.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;When we supply a value for the parameter, x, then the function runs and produces one or the other outcome.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The run is &lt;i&gt;history&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The run is like a CST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We can get a backtrace for the run.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(A CST is like a backtrace).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Parsers — grammars in particular — give us a declarative way to talk about history.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Note that FP increasingly uses parser technology — pattern matching. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Pattern matching taken to the limit, is parsing.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Parsing deals with history and, hence, with &lt;i&gt;f(t)&lt;/i&gt;.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Analogy&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Note that a &lt;i&gt;parsing engine&lt;/i&gt; is analogous to a PROLOG &lt;i&gt;rule engine&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Flags&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Programmers have used &lt;i&gt;flags&lt;/i&gt; (mutable variables) for ages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We have discovered that &lt;i&gt;flags &lt;/i&gt;cause accidental complexity and lack-of-debuggability.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Parsers are engines that subsume the use of &lt;i&gt;flags&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;Parsers give us a way to talk about flags in a declarative manner.]&lt;/i&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Parsing vs. FP Pattern Matching&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Parsers are FP pattern matching taken to the limit.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;FP uses relational engines and pattern matching.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;FP &lt;i&gt;could&lt;/i&gt; use relational engines &lt;i&gt;and&lt;/i&gt; parsing engines.&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Side-effects are &lt;i&gt;f(t)&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FP expunges side-effects.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FP expunges time from its notation.&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;FP does not allow &lt;i&gt;f(t)&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;f(t) &lt;/i&gt;is History.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Hence, FP expunges History.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;History must be recorded using some other notation.&lt;/p&gt;
 &lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Parsing vs FP Pattern Matching</summary></entry><entry><title type="html">Observation why relational programming works</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html" rel="alternate" type="text/html" title="Observation why relational programming works" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Observation%20Why%20Relational%20Programming%20Works</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Observation-Why-Relational-Programming-Works.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;Observation Why Relational Programming Works&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;observation:whyrelationalprogrammingworks&quot;&gt;Observation: Why Relational Programming Works&lt;/h1&gt;
+
+&lt;p&gt;Relational programming expresses &amp;#8220;code&amp;#8221; in a declarative manner.&lt;/p&gt;
+
+&lt;p&gt;Relational programming divides &amp;#8220;coding&amp;#8221; into two main tasks:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;relations (code)&lt;/li&gt;
+&lt;li&gt;engine.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The relational engine is divorced from the &amp;#8220;code&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;A programmer cannot express &amp;#8220;how&amp;#8221; to do something, the engine decides.&lt;/p&gt;
+
+&lt;p&gt;This is the key &amp;#8212; divide a problem into sub-parts, remove all inter-dependencies between the parts.&lt;/p&gt;
+
+&lt;p&gt;Other Examples:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CPUs hide the gory details of how various kinds of rust interact electrically. CPUs are opcode engines, programmers write code in HLLs, and these are divorced from the inner workings of the hardware.&lt;/li&gt;
+&lt;li&gt;Peter Lee approached an otherwise hoary notation &amp;#8212; Denotational Semantics &amp;#8212; and managed to build practical compilers using D.S. by subdividing the notation into sub-notations.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -1837,7 +1959,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Actors</summary></entry><entry><title type="html">Toolbox languages (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html" rel="alternate" type="text/html" title="Toolbox languages (2)" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Toolbox%20Languages%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Observation Why Relational Programming Works</summary></entry><entry><title type="html">Toolbox languages (2)</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html" rel="alternate" type="text/html" title="Toolbox languages (2)" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Toolbox%20Languages%20(2)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Toolbox-Languages-(2).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
