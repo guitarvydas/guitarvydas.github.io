@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>PROLOG vs Kanren</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="exhaustivesearch">Exhaustive Search</h1>
+
+<p>Both methods, PROLOG and Kanren, perform exhaustive search.</p>
+
+<p>PROLOG achieves exhaustive search via backtracking and re-binding via Unification.</p>
+
+<p>Kanren achieves exhaustive search by creating an object of all possible matches at a given point, then passing the object+answers+unifiableVariables down a pipeline for further augmentation and clipping.</p>
+
+<figure>
+<img src="/assets/2021-05-05-09-45-06-Images/PROLOGvsKanren.png" alt="" id="prologvskanren" width="300" height="200" />
+<figcaption></figcaption>
+</figure>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
