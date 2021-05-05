@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Breaking Long Running Loops</title>
+	<meta name="author" content=""/>
+</head>
+<body>
+
+<h1 id="breakinglongrunningloops">Breaking Long Running Loops</h1>
+
+<p>Compilers can help prevent long-running loops by compiling the code for a loop differently.</p>
+
+<p>At its most basic, a loop is a start-label and an end-label.</p>
+
+<p>loop
+x := 1
+end loop</p>
+
+<p>Currently, loops are compiled as:</p>
+
+<p>START:
+MOV [X],1
+GOTO START
+END:</p>
+
+<p>Loops could be compiled as</p>
+
+<p>START:
+MOV [X],1
+CALL YIELD
+GOTO START
+END:</p>
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
+
