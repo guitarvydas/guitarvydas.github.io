@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Software Components 101 - Connection Queries</title>
+  <meta name="CreationTime" content="2021-05-04T23:29:22Z">
+  <meta name="ModificationTime" content="2021-05-04T23:29:22Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 11.0px Menlo}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">See <a href="https://guitarvydas.github.io/2021/05/03/Software-Components-101.html">https://guitarvydas.github.io/2021/05/03/Software-Components-101.html</a> for an introduction to the examples shown below.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>github</b></h2>
+<p class="p2"><a href="https://github.com/guitarvydas/basicdasl">https://github.com/guitarvydas/basicdasl</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Query Code</b></h2>
+<p class="p4">conn(Component,[Sender|SendingPort],[ReceivingComponent|ReceivingPort]) :-</p>
+<p class="p4"><span class="Apple-converted-space">    </span>connection(Component,ConnectionID),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>sender(ConnectionID,SenderPairID),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>pp(SenderPairID,SendingPort),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>pc(SenderPairID,Sender),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>receiver(ConnectionID,ReceiverPairID),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>pc(ReceiverPairID,ReceivingComponent),</p>
+<p class="p4"><span class="Apple-converted-space">    </span>pp(ReceiverPairID,ReceivingPort).</p>
+<p class="p5"><br></p>
+<p class="p4">allReceivers(Component,S,R) :-</p>
+<p class="p4"><span class="Apple-converted-space">    </span>setof(Receivers,conn(Component,S,Receivers),R).</p>
+<p class="p5"><br></p>
+<p class="p4">conn(Component,'--&gt;'(S,RBag)):-</p>
+<p class="p4"><span class="Apple-converted-space">    </span>allReceivers(Component, S, RBag).</p>
+<p class="p5"><br></p>
+<p class="p4">conn(':'(C,W)) :-</p>
+<p class="p4"><span class="Apple-converted-space">    </span>conn(C,W).</p>
+<p class="p5"><br></p>
+<p class="p2">The <span class="s1">conn/1</span> query results in one connection (W) for a given component (C).</p>
+<p class="p3"><br></p>
+<p class="p2">We repeat the query at the REPL (using semi-colon) to get all connections on a diagram.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>It is possible to write a query that returns all connections for all components, but the REPL version is sufficient for this essay.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Each sender and each receiver is represented by a <i>pair</i>.<span class="Apple-converted-space">  </span>Each pair is given a unique ID and each pair consists of two parts <i>pc </i>and <i>pp</i>, pair-component and pair-port, resp.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Basic</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>diagram</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-29-22-Images/basic1-basic1.png" width="150px" height="99px" alt="Image"></p>
+<p class="p6">Fig. 1 Basic Component</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dasl (basic1)</b></h2>
+<p class="p4">=== signatures</p>
+<p class="p4">[main] &lt; (in) &gt; (out)</p>
+<p class="p4">=== components</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(in) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">component("main",nil).</p>
+<p class="p4">connection("main",n0).</p>
+<p class="p4">inputPort("main","in").</p>
+<p class="p4">outputPort("main","out").</p>
+<p class="p4">pc(pair1,".").</p>
+<p class="p4">pc(pair2,".").</p>
+<p class="p4">pp(pair1,"in").</p>
+<p class="p4">pp(pair2,"out").</p>
+<p class="p4">receiver(n0,pair2).</p>
+<p class="p4">sender(n0,pair1).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p4">?- consult(fb).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- consult(q).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- conn(X).</p>
+<p class="p4">X = "main":(["."|"in"]--&gt;[["."|"out"]]).</p>
+<p class="p5"><br></p>
+<p class="p4">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Nested</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>diagram</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-29-22-Images/basic1-basic2.png" width="150px" height="99px" alt="Image"></p>
+<p class="p6">Fig. 2 Nested Component</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dasl (basic2)</b></h2>
+<p class="p4">=== signatures</p>
+<p class="p4">[main] &lt; (in) &gt; (out)</p>
+<p class="p4">=== components</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [subcomponent] ]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(in) -&gt; [subcomponent].(A)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[subcomponent].(B) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<p class="p4">=== signatures</p>
+<p class="p4">[subcomponent] &lt; (A) &gt; (B)</p>
+<p class="p4">=== components</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p5"><span class="Apple-converted-space">  </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">component("main",nil).</p>
+<p class="p4">component("subcomponent",nil).</p>
+<p class="p4">connection("main",n0).</p>
+<p class="p4">connection("main",n3).</p>
+<p class="p4">contains("main","subcomponent").</p>
+<p class="p4">inputPort("main","in").</p>
+<p class="p4">inputPort("subcomponent","A").</p>
+<p class="p4">outputPort("main","out").</p>
+<p class="p4">outputPort("subcomponent","B").</p>
+<p class="p4">pc(pair1,".").</p>
+<p class="p4">pc(pair2,"subcomponent").</p>
+<p class="p4">pc(pair4,"subcomponent").</p>
+<p class="p4">pc(pair5,".").</p>
+<p class="p4">pp(pair1,"in").</p>
+<p class="p4">pp(pair2,"A").</p>
+<p class="p4">pp(pair4,"B").</p>
+<p class="p4">pp(pair5,"out").</p>
+<p class="p4">receiver(n0,pair2).</p>
+<p class="p4">receiver(n3,pair5).</p>
+<p class="p4">sender(n0,pair1).</p>
+<p class="p4">sender(n3,pair4).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p4">?- consult(fb).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- consult(q).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- conn(X).</p>
+<p class="p4">X = "main":(["."|"in"]--&gt;[["subcomponent"|"A"]]) <b>;</b></p>
+<p class="p4">X = "main":(["subcomponent"|"B"]--&gt;[["."|"out"]]).</p>
+<p class="p5"><br></p>
+<p class="p4">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Nested Component Nested Inside a Nested Component-1</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>diagram</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-29-22-Images/basic1-basic3.png" width="150px" height="78px" alt="Image"></p>
+<p class="p6">Fig. 3 Component Nested in a Nested Component</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dasl (basic3)</b></h2>
+<p class="p4">=== signatures</p>
+<p class="p4">[main] &lt; (in) &gt; (out)</p>
+<p class="p4">=== components</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [subcomponent] ]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(in) -&gt; [subcomponent].(A)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[subcomponent].(B) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<p class="p4">=== signatures</p>
+<p class="p4">[subcomponent] &lt; (A) &gt; (*#)</p>
+<p class="p4">=== components</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [component X] ]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(A) -&gt; [component X].(c)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[component X].(#) -&gt; [.].(*#)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<p class="p4">=== signatures</p>
+<p class="p4">[component X] &lt; (c) &gt; (#)</p>
+<p class="p4">=== components</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">component("component_X",nil).</p>
+<p class="p4">component("main",nil).</p>
+<p class="p4">component("subcomponent",nil).</p>
+<p class="p4">connection("main",n0).</p>
+<p class="p4">connection("main",n3).</p>
+<p class="p4">connection("subcomponent",n6).</p>
+<p class="p4">connection("subcomponent",n9).</p>
+<p class="p4">contains("main","subcomponent").</p>
+<p class="p4">contains("subcomponent","component_X").</p>
+<p class="p4">inputPort("component_X","c").</p>
+<p class="p4">inputPort("main","in").</p>
+<p class="p4">inputPort("subcomponent","A").</p>
+<p class="p4">outputPort("component_X","o_").</p>
+<p class="p4">outputPort("main","out").</p>
+<p class="p4">outputPort("subcomponent","so_").</p>
+<p class="p4">pc(pair1,".").</p>
+<p class="p4">pc(pair10,"component_X").</p>
+<p class="p4">pc(pair11,".").</p>
+<p class="p4">pc(pair2,"subcomponent").</p>
+<p class="p4">pc(pair4,"subcomponent").</p>
+<p class="p4">pc(pair5,".").</p>
+<p class="p4">pc(pair7,".").</p>
+<p class="p4">pc(pair8,"component_X").</p>
+<p class="p4">pp(pair1,"in").</p>
+<p class="p4">pp(pair10,"o_").</p>
+<p class="p4">pp(pair11,"so_").</p>
+<p class="p4">pp(pair2,"A").</p>
+<p class="p4">pp(pair4,"B").</p>
+<p class="p4">pp(pair5,"out").</p>
+<p class="p4">pp(pair7,"A").</p>
+<p class="p4">pp(pair8,"c").</p>
+<p class="p4">receiver(n0,pair2).</p>
+<p class="p4">receiver(n3,pair5).</p>
+<p class="p4">receiver(n6,pair8).</p>
+<p class="p4">receiver(n9,pair11).</p>
+<p class="p4">sender(n0,pair1).</p>
+<p class="p4">sender(n3,pair4).</p>
+<p class="p4">sender(n6,pair7).</p>
+<p class="p4">sender(n9,pair10).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p4">?- consult(fb).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- consult(q).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- conn(X).</p>
+<p class="p4">X = "main":(["."|"in"]--&gt;[["subcomponent"|"A"]]) <b>;</b></p>
+<p class="p4">X = "main":(["subcomponent"|"so_"]--&gt;[["."|"out"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["."|"A"]--&gt;[["component_X"|"c"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["component_X"|"o_"]--&gt;[["."|"so_"]]).</p>
+<p class="p5"><br></p>
+<p class="p4">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Copied Component</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>diagram</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-29-22-Images/basic1-basic4.png" width="150px" height="133px" alt="Image"></p>
+<p class="p6">Fig. 4 Copied Component</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dasl (basic4)</b></h2>
+<p class="p4">=== signatures</p>
+<p class="p4">[main] &lt; (in) &gt; (out)</p>
+<p class="p4">=== components</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [subcomponent] ]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(in) -&gt; [1].(A),[2].(A)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[1].(*#) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[2].(*#) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<p class="p4">=== signatures</p>
+<p class="p4">[subcomponent] &lt; (A) &gt; (*#)</p>
+<p class="p4">=== components</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [component X] ]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(A) -&gt; [component X].(c)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[component X].(#) -&gt; [.].(*#)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">=== signatures</p>
+<p class="p4">[component X] &lt; (c) &gt; (#)</p>
+<p class="p4">=== components</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">component("component_X",nil).</p>
+<p class="p4">component("main",nil).</p>
+<p class="p4">component("subcomponent",nil).</p>
+<p class="p4">connection("main",n0).</p>
+<p class="p4">connection("main",n4).</p>
+<p class="p4">connection("main",n7).</p>
+<p class="p4">connection("subcomponent",n10).</p>
+<p class="p4">connection("subcomponent",n13).</p>
+<p class="p4">contains("main","subcomponent").</p>
+<p class="p4">contains("subcomponent","component_X").</p>
+<p class="p4">inputPort("component_X","c").</p>
+<p class="p4">inputPort("main","in").</p>
+<p class="p4">inputPort("subcomponent","A").</p>
+<p class="p4">outputPort("component_X","o_").</p>
+<p class="p4">outputPort("main","out").</p>
+<p class="p4">outputPort("subcomponent","so_").</p>
+<p class="p4">pc(pair1,".").</p>
+<p class="p4">pc(pair11,".").</p>
+<p class="p4">pc(pair12,"component_X").</p>
+<p class="p4">pc(pair14,"component_X").</p>
+<p class="p4">pc(pair15,".").</p>
+<p class="p4">pc(pair2,"1").</p>
+<p class="p4">pc(pair3,"2").</p>
+<p class="p4">pc(pair5,"1").</p>
+<p class="p4">pc(pair6,".").</p>
+<p class="p4">pc(pair8,"2").</p>
+<p class="p4">pc(pair9,".").</p>
+<p class="p4">pp(pair1,"in").</p>
+<p class="p4">pp(pair11,"A").</p>
+<p class="p4">pp(pair12,"c").</p>
+<p class="p4">pp(pair14,"o_").</p>
+<p class="p4">pp(pair15,"so_").</p>
+<p class="p4">pp(pair2,"A").</p>
+<p class="p4">pp(pair3,"A").</p>
+<p class="p4">pp(pair5,"so_").</p>
+<p class="p4">pp(pair6,"out").</p>
+<p class="p4">pp(pair8,"so_").</p>
+<p class="p4">pp(pair9,"out").</p>
+<p class="p4">receiver(n0,pair2).</p>
+<p class="p4">receiver(n0,pair3).</p>
+<p class="p4">receiver(n10,pair12).</p>
+<p class="p4">receiver(n13,pair15).</p>
+<p class="p4">receiver(n4,pair6).</p>
+<p class="p4">receiver(n7,pair9).</p>
+<p class="p4">sender(n0,pair1).</p>
+<p class="p4">sender(n10,pair11).</p>
+<p class="p4">sender(n13,pair14).</p>
+<p class="p4">sender(n4,pair5).</p>
+<p class="p4">sender(n7,pair8).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p4">?- consult(fb).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- consult(q).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- conn(X).</p>
+<p class="p4">X = "main":(["."|"in"]--&gt;[["1"|"A"], ["2"|"A"]]) <b>;</b></p>
+<p class="p4">X = "main":(["1"|"so_"]--&gt;[["."|"out"]]) <b>;</b></p>
+<p class="p4">X = "main":(["2"|"so_"]--&gt;[["."|"out"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["."|"A"]--&gt;[["component_X"|"c"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["component_X"|"o_"]--&gt;[["."|"so_"]]).</p>
+<p class="p5"><br></p>
+<p class="p4">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Squashed</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>diagram</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-29-22-Images/basic1-basic.png" width="150px" height="133px" alt="Image"></p>
+<p class="p6">Fig. 5 Copied Component<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">Diagram Fig. 5 is the same as Fig. 4.</p>
+<p class="p7"><br></p>
+<p class="p6">At this point, we are not changing the diagram, we will only be changing the .dasl file…</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Dasl (basic5)</b></h2>
+<p class="p4">=== signatures</p>
+<p class="p4">[main] &lt; (in) &gt; (out)</p>
+<p class="p4">[subcomponent] &lt; (A) &gt; (*#)</p>
+<p class="p4">[component X] &lt; (c) &gt; (#)</p>
+<p class="p4">=== components</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [subcomponent] ]</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[ [component X] ]</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p4">=== connections</p>
+<p class="p4">[main]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(in) -&gt; [1].(A),[2].(A)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[1].(*#) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[2].(*#) -&gt; [.].(out)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p4">[subcomponent]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[.].(A) -&gt; [component X].(c)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[component X].(#) -&gt; [.].(*#)</p>
+<p class="p4"><span class="Apple-converted-space">  </span>]</p>
+<p class="p4">[component X]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>[]</p>
+<p class="p5"><br></p>
+<p class="p2">In this .dasl file, we squash all of the signatures / components / connections together, but, otherwise this .dasl file represents the same constructs as in Copied Component.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">component("component_X",nil).</p>
+<p class="p4">component("main",nil).</p>
+<p class="p4">component("subcomponent",nil).</p>
+<p class="p4">connection("main",n0).</p>
+<p class="p4">connection("main",n4).</p>
+<p class="p4">connection("main",n7).</p>
+<p class="p4">connection("subcomponent",n10).</p>
+<p class="p4">connection("subcomponent",n13).</p>
+<p class="p4">contains("main","subcomponent").</p>
+<p class="p4">contains("subcomponent","component_X").</p>
+<p class="p4">inputPort("component_X","c").</p>
+<p class="p4">inputPort("main","in").</p>
+<p class="p4">inputPort("subcomponent","A").</p>
+<p class="p4">outputPort("component_X","o_").</p>
+<p class="p4">outputPort("main","out").</p>
+<p class="p4">outputPort("subcomponent","so_").</p>
+<p class="p4">pc(pair1,".").</p>
+<p class="p4">pc(pair11,".").</p>
+<p class="p4">pc(pair12,"component_X").</p>
+<p class="p4">pc(pair14,"component_X").</p>
+<p class="p4">pc(pair15,".").</p>
+<p class="p4">pc(pair2,"1").</p>
+<p class="p4">pc(pair3,"2").</p>
+<p class="p4">pc(pair5,"1").</p>
+<p class="p4">pc(pair6,".").</p>
+<p class="p4">pc(pair8,"2").</p>
+<p class="p4">pc(pair9,".").</p>
+<p class="p4">pp(pair1,"in").</p>
+<p class="p4">pp(pair11,"A").</p>
+<p class="p4">pp(pair12,"c").</p>
+<p class="p4">pp(pair14,"o_").</p>
+<p class="p4">pp(pair15,"so_").</p>
+<p class="p4">pp(pair2,"A").</p>
+<p class="p4">pp(pair3,"A").</p>
+<p class="p4">pp(pair5,"so_").</p>
+<p class="p4">pp(pair6,"out").</p>
+<p class="p4">pp(pair8,"so_").</p>
+<p class="p4">pp(pair9,"out").</p>
+<p class="p4">receiver(n0,pair2).</p>
+<p class="p4">receiver(n0,pair3).</p>
+<p class="p4">receiver(n10,pair12).</p>
+<p class="p4">receiver(n13,pair15).</p>
+<p class="p4">receiver(n4,pair6).</p>
+<p class="p4">receiver(n7,pair9).</p>
+<p class="p4">sender(n0,pair1).</p>
+<p class="p4">sender(n10,pair11).</p>
+<p class="p4">sender(n13,pair14).</p>
+<p class="p4">sender(n4,pair5).</p>
+<p class="p4">sender(n7,pair8).</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p4">?- consult(fb).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- consult(q).</p>
+<p class="p4"><b>true.</b></p>
+<p class="p5"><br></p>
+<p class="p4">?- conn(X).</p>
+<p class="p4">X = "main":(["."|"in"]--&gt;[["1"|"A"], ["2"|"A"]]) <b>;</b></p>
+<p class="p4">X = "main":(["1"|"so_"]--&gt;[["."|"out"]]) <b>;</b></p>
+<p class="p4">X = "main":(["2"|"so_"]--&gt;[["."|"out"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["."|"A"]--&gt;[["component_X"|"c"]]) <b>;</b></p>
+<p class="p4">X = "subcomponent":(["component_X"|"o_"]--&gt;[["."|"so_"]]).</p>
+<p class="p5"><br></p>
+<p class="p4">?-<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p2">The queries return the same results as in Copied Component.<span class="Apple-converted-space">  </span>We have changed nothing, except for the formatting (squashing) of the .dasl file.</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
