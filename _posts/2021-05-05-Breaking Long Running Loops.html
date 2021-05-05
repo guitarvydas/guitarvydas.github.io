@@ -1,37 +1,48 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-	<meta charset="utf-8"/>
-	<title>Breaking Long Running Loops</title>
-	<meta name="author" content=""/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Breaking Long Running Loops</title>
+  <meta name="CreationTime" content="2021-05-05T09:50:29Z">
+  <meta name="ModificationTime" content="2021-05-05T09:50:29Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  </style>
 </head>
 <body>
+<div style="width: 600px; margin: 0 auto">
 
-<h1 id="breakinglongrunningloops">Breaking Long Running Loops</h1>
-
-<p>Compilers can help prevent long-running loops by compiling the code for a loop differently.</p>
-
-<p>At its most basic, a loop is a start-label and an end-label.</p>
-
-<p>loop
-x := 1
-end loop</p>
-
-<p>Currently, loops are compiled as:</p>
-
-<p>START:
-MOV [X],1
-GOTO START
-END:</p>
-
-<p>Loops could be compiled as</p>
-
-<p>START:
-MOV [X],1
-CALL YIELD
-GOTO START
-END:</p>
-
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Breaking Long Running Loops</b></h2>
+<p class="p2">Compilers can help prevent long-running loops by compiling the code for a loop differently.</p>
+<p class="p3"><br></p>
+<p class="p2">At its most basic, a loop is a start-label and an end-label.</p>
+<p class="p3"><br></p>
+<p class="p4">loop</p>
+<p class="p4"><span class="Apple-converted-space">   </span>x := 1</p>
+<p class="p4">end loop</p>
+<p class="p5"><br></p>
+<p class="p2">Currently, loops are compiled as:</p>
+<p class="p5"><br></p>
+<p class="p4">START:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>MOV [X],1</p>
+<p class="p4"><span class="Apple-converted-space">  </span>GOTO START</p>
+<p class="p4">END:</p>
+<p class="p5"><br></p>
+<p class="p2">Loops <i>could<span class="Apple-converted-space"> </span></i> be compiled as</p>
+<p class="p5"><br></p>
+<p class="p4">START:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>MOV [X],1</p>
+<p class="p4"><span class="Apple-converted-space">  </span>CALL YIELD</p>
+<p class="p4"><span class="Apple-converted-space">  </span>GOTO START</p>
+<p class="p4">END:</p>
+<p class="p3"><br></p>
+</div>
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
@@ -41,4 +52,3 @@ END:</p>
 </script> 
 </body>
 </html>
-

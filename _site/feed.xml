@@ -1,37 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-05T09:45:07-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-05T09:50:37-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
 &lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Breaking Long Running Loops&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Breaking Long Running Loops&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-05T09:50:29Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-05T09:50:29Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h1 id=&quot;breakinglongrunningloops&quot;&gt;Breaking Long Running Loops&lt;/h1&gt;
-
-&lt;p&gt;Compilers can help prevent long-running loops by compiling the code for a loop differently.&lt;/p&gt;
-
-&lt;p&gt;At its most basic, a loop is a start-label and an end-label.&lt;/p&gt;
-
-&lt;p&gt;loop
-x := 1
-end loop&lt;/p&gt;
-
-&lt;p&gt;Currently, loops are compiled as:&lt;/p&gt;
-
-&lt;p&gt;START:
-MOV [X],1
-GOTO START
-END:&lt;/p&gt;
-
-&lt;p&gt;Loops could be compiled as&lt;/p&gt;
-
-&lt;p&gt;START:
-MOV [X],1
-CALL YIELD
-GOTO START
-END:&lt;/p&gt;
-
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Breaking Long Running Loops&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Compilers can help prevent long-running loops by compiling the code for a loop differently.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;At its most basic, a loop is a start-label and an end-label.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;loop&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;x := 1&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;end loop&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Currently, loops are compiled as:&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;START:&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;MOV [X],1&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTO START&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;END:&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Loops &lt;i&gt;could&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/i&gt; be compiled as&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;START:&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;MOV [X],1&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;CALL YIELD&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTO START&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;END:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
         issue-term=&quot;pathname&quot; 
