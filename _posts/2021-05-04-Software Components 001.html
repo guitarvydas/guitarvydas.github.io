@@ -1,0 +1,869 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Software Components 001</title>
+  <meta name="CreationTime" content="2021-05-04T23:43:52Z">
+  <meta name="ModificationTime" content="2021-05-04T23:43:52Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; color: #000000; -webkit-text-stroke: #000000}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; -webkit-text-stroke: #000000; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 12.0px Helvetica}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p12 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p14 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p15 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 13.0px 'Lucida Grande'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font-kerning: none; background-color: #f6f7f9}
+    span.s4 {font: 8.0px Helvetica}
+    span.s5 {font: 13.0px Palatino}
+    span.s6 {font: 9.0px Palatino}
+    span.s7 {font: 11.0px Menlo}
+    table.t1 {border-collapse: collapse}
+    td.td1 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #000000 #000000 #000000 #000000; padding: 0.0px 5.0px 0.0px 5.0px}
+    td.td2 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #bfbfbf #bfbfbf #bfbfbf #bfbfbf; padding: 0.0px 5.0px 0.0px 5.0px}
+    ol.ol1 {list-style-type: decimal}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p2">[<i>This essay is mostly superseded by </i><a href="https://guitarvydas.github.io/2021/05/03/Software-Components-101.html"><i>https://guitarvydas.github.io/2021/05/03/Software-Components-101.html</i></a><i> and </i><a href="https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html"><i>https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html</i></a><i>, etc.<span class="Apple-converted-space">  </span>I include this essay since it formed a step along my path towards the above articles.<span class="Apple-converted-space">  </span>Some parts of this essay remain relevant, e.g. Motivating Example and </i>Name Mangling, <i>etc</i>.<span class="Apple-converted-space">  </span><i>This essay contains the preamble to the above essays, the motivating example (although, I managed to simplify the example even further in the later essays) and contains queries that are very basic and very simple.<span class="Apple-converted-space">  </span>It might be helpful to skim this essay before reading the above essays, without getting stuck on any of the details contained herein.<span class="Apple-converted-space">  </span>This essay also shows a snapshot of my thinking process — continuous divide and conquer.<span class="Apple-converted-space">  </span>I started out with what looked like a simple problem (line intersection of boxes that have no rotation, and have only vertical and horizontal edges) and, while writing about it, found further simplifications.</i>]</p>
+<p class="p3"><i><span class="Apple-converted-space"> </span></i></p>
+<p class="p2">In this essay, I discuss Software Components, my diagrammatic notation for Components and how to manually compile diagrams to code.</p>
+<p class="p3"><br></p>
+<p class="p2">I happen to use <a href="http://draw.io">draw.io</a> for my diagrams, but any diagramming tool (including whiteboards and paper) could be used.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Component Signatures</b></h2>
+<p class="p2">A Component is defined by its signature:</p>
+<ul class="ul1">
+  <li class="li4">a name</li>
+  <li class="li4">a set of input ports</li>
+  <li class="li4">a set of output ports.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Notation</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components</b></h2>
+<p class="p2">A Component is drawn as a rectangle (I used rounded rectangles).</p>
+<p class="p3"><br></p>
+<p class="p2">The rectangle contains one (or zero) piece of text which is the "type" of the Component. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I used the word "kind" instead of "type". <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">If we use the OO analogy, then the "kind" of the Component would be its class.<span class="Apple-converted-space">  </span>Each Component on a diagram would be an <i>instance</i> of the class.</p>
+<p class="p3"><br></p>
+<p class="p2">We don't need to supply a name for the Component because the name is "obvious" from its position on the diagram, and, names are only needed when there are more than one Component of the same kind on the diagram.</p>
+<p class="p3"><br></p>
+<p class="p2">In practice, when diagrams are used to represent architecture, instead of code, we tend to have only one of each kind of Component on any one diagram.<span class="Apple-converted-space">  </span>In this case, the kind suffices to name the Component.<span class="Apple-converted-space">  </span>The IDE invents unique names for Components.<span class="Apple-converted-space">  </span>In this bootstrap case, we will name Components by digits between 1 &amp; 9.<span class="Apple-converted-space">  </span>Generally, we don't need more than 9 Components on a diagram.<span class="Apple-converted-space">  </span>Diagrams that use more than 9 Components are probably "too busy" to understand.<span class="Apple-converted-space">  </span>The rule should involve the psychological norm, i.e. 7<span class="s1">±</span>2 Components on a single diagram — we expect to use layers, so there might be more than 9 Components in a <i>system</i> but not on a <i>single</i> diagram.</p>
+<p class="p3"><br></p>
+<p class="p2">In text, brackets are used to delimit a component's kind, e.g. [a], [a b c], etc.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ports</b></h2>
+<p class="p3"><br></p>
+<p class="p2">Ports have the following attributes:</p>
+<p class="p3"><br></p>
+<table width="100%" cellspacing="0" cellpadding="0" class="t1">
+  <tbody>
+    <tr>
+      <td valign="top" class="td1">
+        <p class="p4"><b>direction</b></p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4"><b>visibility</b></p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4"><b>connection</b></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4"><b>name</b></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="td1">
+        <p class="p4">input</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4">external</p>
+      </td>
+      <td valign="top" class="td1">
+        <p class="p4">explicit</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">&lt;empty&gt;</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td2">
+        <p class="p4">output</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">internal</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">implicit</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p4">string</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">I use the convention that ports are<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">coloured green for input, and<span class="Apple-converted-space"> </span></li>
+  <li class="li4">coloured yellow/red for output.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">I use different shapes for port visibility</p>
+<ul class="ul1">
+  <li class="li4">bullets<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> denote external ports<span class="Apple-converted-space"> </span></li>
+  <li class="li4">squares, rectangles and circles denote internal ports.</li>
+  <li class="li5"><br></li>
+  <li class="li4">I use shadows (and text) to denote connection type</li>
+</ul>
+<ul class="ul1">
+  <li class="li4">ports with shadows<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> denote ports that can receive implicit connections (dynamic) ; in text, I mark implicit ports with the prefix *</li>
+  <li class="li4">ports with no shadows (flat, 2D) denote ports that must be connected explicitly (static connections).</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Ports can have names.<span class="Apple-converted-space">  </span>Textually, port names are enclosed in parentheses:</p>
+<ul class="ul1">
+  <li class="li4">a port with no name is assigned a number [1-9] by the system (the order is given by the textual signature of the Component)</li>
+  <li class="li4">a port name can be any text (including spaces, except parenthesis and brackets) allowed by the diagram editing tool.<span class="Apple-converted-space"> </span></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>External Ports</b></h2>
+<p class="p2">In this example, we have 4 external Ports — 2 input and 2 output.</p>
+<p class="p3"><br></p>
+<p class="p2">Their names are "R1", R2", "!" and "#", resp.</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-External Ports.png" width="75px" height="54px" alt="Image"></p>
+<p class="p3"><br></p>
+<p class="p2">As already mentioned, green Ports are Input Ports.<span class="Apple-converted-space">  </span>In this case "R1" and "R2" are External Input Ports.</p>
+<p class="p3"><br></p>
+<p class="p2">The two External Output Ports are "!" and "#", yellow and red, resp. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">By convention (only), I've used the red colour to signify ports that are error ports.<span class="Apple-converted-space">  </span>In this, simple, example, I collect all errors and send them to a single External Output Port (named "#").</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>All four of these ports are explicitly connected.<span class="Apple-converted-space">  </span>I will discuss explicit vs. implicit later.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Internal Ports</b></h2>
+<p class="p2">Example of various internal ports:</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-Internal Ports.png" width="23px" height="103px" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Input Ports</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-Input Ports.png" width="81px" height="25px" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Output Ports</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-Output Ports.png" width="75px" height="54px" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implicit Connections</b></h2>
+<p class="p4">Implicit connections "gather" all inputs/outputs from ports with the same name in the immediately enclosed context.<span class="Apple-converted-space">  </span>For example, a red box with a *# port connects implicitly to all *# ports in the boxes <span class="Apple-converted-space">  </span>contained in red box.<span class="Apple-converted-space">  </span>This is shown in <span class="s2">Fig. 1</span></p>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-Implicit Connection Example.png" width="150px" height="96px" alt="Image"></p>
+<p class="p6">Fig. 1 Implicit Connection Example</p>
+<p class="p7"><br></p>
+<p class="p6">In Fig. 1, the outer box contains one *# Port and it collects all data from the *# Ports of Box 1 and Box 2.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Explicit Connections</b></h2>
+<p class="p8"><span class="s3"><img src="/assets/2021-05-04-23-43-52-Images/intersection-Explicit Connection Example.png" width="100px" height="61px" alt="Image"></span></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Connections</b></h2>
+<p class="p4">Explicit connections are drawn with lines (and arrows).<span class="Apple-converted-space">  </span>Ports marked as explicit <i>must</i> be connected visually with lines to their sources/sinks.</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Composite Component Implementations</b></h2>
+<p class="p2">Furthermore, Composite Components are described by</p>
+<ul class="ul1">
+  <li class="li4">a name</li>
+  <li class="li4">a set of input ports</li>
+  <li class="li4">a set of output ports</li>
+  <li class="li4">an ordered list of child components (their signatures)</li>
+  <li class="li4">a list of connections.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Concurrency</b></h2>
+<p class="p2">Components are concurrent by default.</p>
+<p class="p3"><br></p>
+<p class="p2">Enclosing components wait for all children to <i>finish</i> before creating outputs.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Finish</i> is defined as<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">having empty input queues (no events waiting to be processed)</li>
+  <li class="li4">being <i>not busy</i> (busy-ness is an issue only in truly concurrent systems ; it is not an issue in systems based on sequential operation (e.g. most current PLs)).</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Components <i>can have</i> implicit "reset" inputs.<span class="Apple-converted-space">  </span>Any value applied to a "reset" input causes the component to immediately stop any work under way and to go back to a known idle (reset) state.</p>
+<p class="p5"><br></p>
+<p class="p4">[<i>Implicit reset inputs are meant for optimization — stopping long-running processes</i>].<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Special Components</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>#</b></h2>
+<p class="p2">[#] components are like exception handlers. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">[#] components gather any and all (#) outputs from child components.</p>
+<p class="p3"><br></p>
+<p class="p2">As soon as <i>any</i> (#) output is fired from a child component, the child components are <i>reset</i> and the [#] component outputs a <i>trigger</i> message from its (*#) pin.</p>
+<p class="p3"><br></p>
+<p class="p2">For debugging, implementation dependent trigger values can be defined, that carry error and debugging information in them.<span class="Apple-converted-space">  </span>Semantically, the trigger value is taken to be a <i>trigger<a id="fnlink3"></a></i><a href="#fn3"><sup>[3]</sup></a><i> </i>only and any debug information contained in the trigger is, semantically, ignored.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Any</b></h2>
+<p class="p2">Any runs all children Components and "stops" after the first one fires its (Any) pin.</p>
+<p class="p3"><br></p>
+<p class="p2">Any must wait for all children to subside before processing another event (or going dormant).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Motivating Example</b></h2>
+<p class="p2">In this essay, I will use a motivating example.</p>
+<p class="p3"><br></p>
+<p class="p2">The example is that of determining whether a rectangle intersects another<span class="Apple-converted-space">  </span>rectangle.</p>
+<p class="p3"><br></p>
+<p class="p2">We can do most of this work by looking for line intersections (the 4 edges of one rectangle line-intersecting any of the four edges of another rectangle).</p>
+<p class="p3"><br></p>
+<p class="p2">It turns out that <i>general </i>line intersection, e.g. that used by 3D graphics, can be complicated.</p>
+<p class="p3"><br></p>
+<p class="p2">For our purposes, we can use simpler algorithms.</p>
+<p class="p3"><br></p>
+<p class="p2">Q: How do we document the design rules that we use to determine simple rectangle intersection?</p>
+<p class="p3"><br></p>
+<p class="p2">A1: We document our design decisions using layers of diagrams.<span class="Apple-converted-space">  </span>The diagrams can be compiled to executable code.<span class="Apple-converted-space">  </span>The diagrams can act as executable comments.</p>
+<p class="p3"><br></p>
+<p class="p2">A2: Some of our design rules look like standard type checks.<span class="Apple-converted-space">  </span>Other design rules usually don't find their way into type systems and/or are hidden by the details of the type rules.<span class="Apple-converted-space">  </span>An example of this kind of design rule is the fact that we treat <i>only</i> rectangles the have vertical or horizontal edges (i.e. no rotation), to make our checks less onerous and more efficient.<span class="Apple-converted-space">  </span>We clearly show such rules in the diagrams.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>There is nothing new here.<span class="Apple-converted-space">  </span>Our design rules </i>could<i> be encoded in a type system.<span class="Apple-converted-space">  </span>I argue that the diagrams show our design decisions more clearly, in several layers, without losing any of the finer details.</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>main - Top Level</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main.png" width="300px" height="181px" alt="Image"></p>
+<p class="p6">Fig. 2 Top Level - main</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>check</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-check.png" width="400px" height="62px" alt="Image"></p>
+<p class="p10">Fig. 3 check</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>A smaller than B</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-A smaller than B.png" width="300px" height="108px" alt="Image"></p>
+<p class="p6">Fig. 4 A smaller than B</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>A intersects B</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-A intersects B.png" width="300px" height="174px" alt="Image"></p>
+<p class="p6">Fig. 5 A intersects B</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>intersects vertically</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-intersects vertically.png" width="300px" height="375px" alt="Image"></p>
+<p class="p6">Fig. 6 intersects vertically</p>
+<p class="p7"><br></p>
+<p class="p6">Note: I use diagrams as part of the name of the rectangles.<span class="Apple-converted-space">  </span>The diagrams highlight the intended matching.<span class="Apple-converted-space">  </span>For example, in the Component called "fig e", matches for the left edge of the smaller rectangle intersecting the top edge of the larger rectangle.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>intersect horizontally</b></h2>
+<p class="p2">asdf</p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-intersects horizontally.png" width="300px" height="402px" alt="Image"></p>
+<p class="p6">Fig. 7<span class="Apple-converted-space">  </span>intersects horizontally</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig a</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig a.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 8 fig a</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig b</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fib b.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 9 fig b</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig c</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig c.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 10 fig c</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig d</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig d.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 11 fig d</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig e</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig e.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 12 fig e</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig f</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig f.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 13 fig f</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig g</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig g.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 14 fig g</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>fig h</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-fig h.png" width="300px" height="177px" alt="Image"></p>
+<p class="p6">Fig. 15 fig h</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compiling</b></h2>
+<p class="p2">Let's begin by compiling the "main" component.</p>
+<p class="p3"><br></p>
+<p class="p2">We see that main has rectangles within rectangles.</p>
+<p class="p3"><br></p>
+<p class="p2">I've used colour and shape to emphasize some concepts.</p>
+<p class="p3"><br></p>
+<p class="p2">The Component called "main" consists of 3 levels (0-2), plus the main level.</p>
+<p class="p3"><br></p>
+<p class="p2">Each Level can be treated as a compilation unit. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">I discuss the levels below.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Overview</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>main</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main1.png" width="200px" height="120px" alt="Image"></p>
+<p class="p6">Fig. 16 main top level</p>
+<p class="p7"><br></p>
+<p class="p6">We compile this level by subdividing it…</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 0</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 0.png" width="300px" height="102px" alt="Image"></p>
+<p class="p6">Fig. 17 main Level 0</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6">Level 0 is the "top level".</p>
+<p class="p7"><br></p>
+<p class="p6">Here we see 2 input ports —<span class="Apple-converted-space">  </span>named (R1) and (R2) respectively.<span class="Apple-converted-space">  </span>The input ports are coloured green.</p>
+<p class="p7"><br></p>
+<p class="p6">We see 2 output ports — named (!) and (#) respectively.<span class="Apple-converted-space">  </span>The output ports are not coloured green.<span class="Apple-converted-space">  </span>The are coloured yellow and red.</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 1</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 1.png" width="300px" height="180px" alt="Image"></p>
+<p class="p6">Fig. 18 main Level 1</p>
+<p class="p7"><br></p>
+<p class="p6">At Level 1, we see 1 rectangle.<span class="Apple-converted-space">  </span>The rectangle is named [#] and is coloured red.</p>
+<p class="p7"><br></p>
+<p class="p6">By convention, we consider this rectangle to be a Software Component, denoted as [#] in text.</p>
+<p class="p7"><br></p>
+<p class="p6">The rectangle has 2 inputs port and 2 output ports.<span class="Apple-converted-space">  </span>These ports are internal ports and are square or circular in shape.</p>
+<p class="p7"><br></p>
+<p class="p6">The output port called (*#) has a shadow.<span class="Apple-converted-space">  </span>This means that it implicitly connects to <i>all </i>output ports named (*#) at Level 2.</p>
+<p class="p7"><br></p>
+<p class="p6">We see that the internal ports are explicitly connected to the external ports using lines (arrows).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 2</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 2.png" width="200px" height="120px" alt="Image"></p>
+<p class="p6">Fig. 19 main Level 2</p>
+<p class="p7"><br></p>
+<p class="p6">At Level 2, we see 3 inner components, with kinds [check], [check] and [#], resp.</p>
+<p class="p7"><br></p>
+<p class="p6">Because there are two components with the same kind, but different (x,y) coordinates, we (the compiler, the IDE) invent unique names for them. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">The 3 components are called [1], [2], and [#].</p>
+<p class="p7"><br></p>
+<p class="p6">The first 2 components, [1] and [2] have 1 input port (R) and two output ports, (#) and (BB) each.</p>
+<p class="p7"><br></p>
+<p class="p6">The 3<span class="s4"><sup>rd</sup></span> component, has 2 inputs ports, (A) and (B) and 2 output ports (!) and (#).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Signatures</b></h2>
+<p class="p2">We're going to proceed in very small, distinct, steps.</p>
+<p class="p3"><br></p>
+<p class="p2">In the following discussion of signatures, we will ignore the implementations (the stuff inside of the boxes).</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Signature for Level 0</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level .png" width="300px" height="102px" alt="Image"></p>
+<p class="p6">Fig. 17 main Level 0</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6">Level 0 is the "top level".</p>
+<p class="p7"><br></p>
+<p class="p6">The signature for Level 0 is</p>
+<p class="p7"><br></p>
+<p class="p11">[main] &lt; (R1) (R2) &gt; (!) (#)</p>
+<p class="p12"><br></p>
+<p class="p6">{name, inputs, outputs}. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">Component names are enclosed in brackets.</p>
+<p class="p7"><br></p>
+<p class="p6">Port names are enclosed in parentheses.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Signature for Level 1</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 3.png" width="300px" height="180px" alt="Image"></p>
+<p class="p6">Fig. 18 main Level 1</p>
+<p class="p7"><br></p>
+<p class="p6">The signature for Level 1 is</p>
+<p class="p7"><br></p>
+<p class="p11">[#] &lt; (R1) (R2) &gt; (!) (*#)</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Signature for Level 2</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 4.png" width="200px" height="120px" alt="Image"></p>
+<p class="p6">Fig. 19 main Level 2</p>
+<p class="p7"><br></p>
+<p class="p6">The signature for Level 2 is</p>
+<p class="p7"><br></p>
+<p class="p11">[#] &lt; (A) (B) &gt; (*!) (*#)</p>
+<p class="p12"><br></p>
+<p class="p6">At the moment, we ignore the signatures for all of the other levels.<span class="Apple-converted-space">  </span>We deal with only the signature<span class="Apple-converted-space">  </span>of the Level 2 box — the red box inside the red box on this diagram.</p>
+<p class="p7"><br></p>
+<p class="p6">The outer-most red box also contains 2 other components (white) which we will ignore in this part of the discussion. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">(The inner boxes are parts of the <i>implementation, </i>not the <i>signature</i>).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Implementations</b></h2>
+<p class="p4">The <i>implementation</i> deals with "what's inside" of each layer.</p>
+<p class="p3"><br></p>
+<p class="p2">We implement connections between components.</p>
+<p class="p3"><br></p>
+<p class="p2">Each component implementation contains:</p>
+<ol class="ol1">
+  <li class="li4">a list of child components</li>
+  <li class="li4">connections between children.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">(Note that a component can have connections from a component's own input ports directly to its own output ports.<span class="Apple-converted-space">  </span>This edge-case is handled here, in the implementations).</p>
+<p class="p5"><br></p>
+<p class="p4">Here, we deal with <i>implementations</i> only at the diagram SCN level.<span class="Apple-converted-space">  </span>Components might, also, be implemented as text in other languages, like Python, etc.<span class="Apple-converted-space">  </span>Those implementations are not described here and vector, via <i>foreign definitions</i>, to the actual implementations in other languages.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 0</b></h2>
+<p class="p7"><br></p>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 0 Implementation.png" width="200px" height="120px" alt="Image"></p>
+<p class="p6">Fig. 20 main Level 0 Implementation</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6">At this level, there are 2 input ports, 2 output ports and one component.</p>
+<p class="p7"><br></p>
+<p class="p6">The implementation at this level is a signature+implementation:</p>
+<p class="p7"><br></p>
+<p class="p6">[main] &lt; (R1) (R2) &gt; (!) (#)</p>
+<p class="p6">{</p>
+<p class="p6"><span class="Apple-converted-space">  </span>[</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#] <i>&lt; </i>(R1) (R2) &gt; (!) (*#) { … }</p>
+<p class="p6"><span class="Apple-converted-space">  </span>]</p>
+<p class="p6"><span class="Apple-converted-space">  </span>[</p>
+<p class="p6"><span class="Apple-converted-space">    </span>..(R1) -&gt; [#].(R1)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>..(R2) -&gt; [#].(R2)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#].(!) -&gt; ..(!)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#].(*#) -&gt; ..(!)</p>
+<p class="p6"><span class="Apple-converted-space">  </span>]</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">which contains two lists (denoted by brackets)</p>
+<ul class="ul1">
+  <li class="li6">a list of children components (described as signatures, with or without implementations)</li>
+  <li class="li6">a list of connections.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p6">Components use [] notation, while Ports use () notation.<span class="Apple-converted-space">  </span>[<i>The result is ugly from a human-readable perspective, but, we want machine-readability — uniformity is the goal, not human-readability.</i>]</p>
+<p class="p7"><br></p>
+<p class="p6">In this example, there is one child component called<a id="fnlink4"></a><a href="#fn4"><span class="s5"><sup>[4]</sup></span></a> [#].<span class="Apple-converted-space">  </span>It has 2 input ports and 2 output ports.<span class="Apple-converted-space">  </span>All ports belonging to the child are <i>internal</i>, wheres the ports belonging to the top-level are all <i>external.</i><span class="Apple-converted-space">  </span>The names of the internal ports overlaps with the names of the external ports — port namespaces belong to the components and must be fully qualified.</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 1</b></h2>
+<p class="p6"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 1 Implementation.png" width="200px" height="152px" alt="Image"></p>
+<p class="p6">Fig. 21 main Level 1 Implementation</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6">At this level, we write down the signature of Level 1 plus "what's inside" of level 1.</p>
+<p class="p7"><br></p>
+<p class="p6">The implementation consists of 3 child rectangles with corresponding signatures, plus a list of connections.</p>
+<p class="p7"><br></p>
+<p class="p6">We write this, in text, as</p>
+<p class="p7"><br></p>
+<p class="p6">[#] &lt; (R1) (R2) &gt; (*!) (*#)</p>
+<p class="p6">{</p>
+<p class="p6"><span class="Apple-converted-space">  </span>[</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[check] &lt; (R) &gt; (BB) (*#)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[check] &lt; (R) &gt; (BB) (*#)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#] &lt; (A) (B) &gt; (!) (*#)</p>
+<p class="p6"><span class="Apple-converted-space">  </span>]</p>
+<p class="p6"><span class="Apple-converted-space">  </span>[</p>
+<p class="p6"><span class="Apple-converted-space">    </span>.(R1) -&gt; [1].(R)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[1].(BB) -&gt; [#].(A)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[1].(*#) -&gt; ..(*#)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>.(R1) -&gt; [2].(R)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[2].(BB) -&gt; [#].(A)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[2].(*#) -&gt; ..(*#)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#].(*!) -&gt; ..(!)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[#].(*#) -&gt; ..(*#)</p>
+<p class="p6"><span class="Apple-converted-space">  </span>]</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">Here, the system has given unique "names" to the two instances of [check].<span class="Apple-converted-space">  </span>The names are [1] and [2].</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Level 2</b></h2>
+<p class="p2"><img src="/assets/2021-05-04-23-43-52-Images/intersection-main Level 2 Implementation.png" width="200px" height="231px" alt="Image"></p>
+<p class="p6">Fig. 19 main Level 2</p>
+<p class="p7"><br></p>
+<p class="p6">At Level 2, we see 2 inner components, with kinds [A smaller than B], and [A intersects B], resp.</p>
+<p class="p7"><br></p>
+<p class="p11">[#] &lt; (A) (B) &gt; (*!) (*#)<span class="Apple-converted-space"> </span></p>
+<p class="p11">{</p>
+<p class="p11"><span class="Apple-converted-space">  </span>[</p>
+<p class="p11"><span class="Apple-converted-space">    </span>[A smaller than B] &lt; (A) (B) &gt; (*#) { foreign: "aSmallerThanB" }</p>
+<p class="p11"><span class="Apple-converted-space">    </span>[A intersects B] &lt; (A) (B) &gt; (*!) (*#) { foreign: "aIntersectsB" }</p>
+<p class="p11"><span class="Apple-converted-space">  </span>]</p>
+<p class="p11"><span class="Apple-converted-space">  </span>[</p>
+<p class="p11"><span class="Apple-converted-space">    </span>.(A) -&gt; [1].(A), [2].(A)</p>
+<p class="p11"><span class="Apple-converted-space">    </span>.(B) -&gt; [1].(B), [2].(B)</p>
+<p class="p11"><span class="Apple-converted-space">    </span>[1].(*#) -&gt; ..(*#)</p>
+<p class="p11"><span class="Apple-converted-space">    </span>[2].(*#) -&gt; ..(*#)</p>
+<p class="p11"><span class="Apple-converted-space">    </span>[2].(*!) -&gt; ..(*!)</p>
+<p class="p11"><span class="Apple-converted-space">  </span>]</p>
+<p class="p11">}</p>
+<p class="p12"><br></p>
+<p class="p2">The above says Level 2 contains 2 components [A smaller than B] and [A intersects B].</p>
+<p class="p3"><br></p>
+<p class="p2">The components are, also, called [1] and [2], resp.</p>
+<p class="p3"><br></p>
+<p class="p2">Component [1] has 2 inputs (A) and (B) and one output (*#).</p>
+<p class="p3"><br></p>
+<p class="p2">Component [2] has 2 inputs (A) and (B) and two outputs (*!) and (*#) resp.</p>
+<p class="p3"><br></p>
+<p class="p2">Level 2's Port A is connected to [1]'s Port A and to [2]'s Port A.</p>
+<p class="p3"><br></p>
+<p class="p2">Level 2's Port B is connected to [1]'s Port B and to [2]'s Port B.</p>
+<p class="p3"><br></p>
+<p class="p2">[A smaller than B] and [A intersects B] have implementations that are "foreign", i.e. defined in some other language with the given names (names are the strings).</p>
+<p class="p3"><br></p>
+<p class="p2">We could have left the { foreign : … } declarations off.<span class="Apple-converted-space">  </span>The Component Loader (aka the runtime) loads components — if a component has no implementation at the point of final loading, it is assumed to be foreign.<span class="Apple-converted-space">  </span>[<i>Q: what are the default rules for name-mangling?<span class="Apple-converted-space">  </span>Should we delete whitespace, or convert whitespace characters to underscores "_" or, ???.<span class="Apple-converted-space">  </span>At this moment, I don't have an answer — probably trial and error will be needed.</i>].</p>
+<p class="p3"><br></p>
+<p class="p2">Each of the components <i>could</i> have been defined in separate files (along with implementations, if any).<span class="Apple-converted-space">  </span>The Component Loader checks signatures for compatibility and associates implementations (if any) with each Component.<span class="Apple-converted-space">  </span>Signatures can be declared multiple times, but only one implementation is allowed.</p>
+<p class="p3"><br></p>
+<p class="p2">DRY — Don't Repeat Yourself capabilities are not needed, since the diagram compiler can insert and repeat implementations as needed.<span class="Apple-converted-space">  </span>If a human-writable/readable notation is required, then DRY could be handled by having a special symbol type that denotes "same as" relationships to other symbols.<span class="Apple-converted-space">  </span>For example, I toyed with using ^xyz to mean "same as xyz" — which would apply to component names and to port names ; I discarded this notation, since I expect to automatically generate code from diagrams and don't expect to manually write in this notation (other than during bootstrap of the system ; if bootstrapping becomes involved, I might resurrect the ^ notation).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compilation-1</b></h2>
+<p class="p2">Putting it all together, we get …</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>See </i><a href="https://guitarvydas.github.io/2021/05/03/Software-Components-101.html"><i>https://guitarvydas.github.io/2021/05/03/Software-Components-101.html</i></a><i> and follow-ons for details</i>]</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Loader</b></h2>
+<p class="p6">The Loader doesn't declare that any component is foreign, until "the last minute", just before the system is executed.</p>
+<p class="p7"><br></p>
+<p class="p6">The Loader incrementally type-checks the signatures and builds a "soup" of valid components and implementations.<span class="Apple-converted-space">  </span>When a program is executed, it uses the latest versions of implementations for each component.</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Versioning</b></h2>
+<p class="p2">There is no need to version components.</p>
+<p class="p3"><br></p>
+<p class="p2">"Versioning" can be implemented by specifying components explicitly in the enclosing layers.</p>
+<p class="p3"><br></p>
+<p class="p2">Once a component is deemed to be "working" ("useful"), then no changes are made to that component.<span class="Apple-converted-space">  </span>Versions of similar components create completely different components, with different names.<span class="Apple-converted-space">  </span>Components are never versioned, but simply replaced by newer components in newer diagrams.<span class="Apple-converted-space">  </span>Old diagrams continue to refer to the set of Components that "worked" when the old diagrams were created.<span class="Apple-converted-space">  </span>New diagrams refer to new Components.<span class="Apple-converted-space">  </span>(New diagrams can refer, forever, to older Components, too).<span class="Apple-converted-space">  </span>There is no attempt to replace components in-situ.<span class="Apple-converted-space">  </span>When a component is upgraded, it is referred-to only by newer diagrams.</p>
+<p class="p3"><br></p>
+<p class="p2">Inter-component "type checking" is deferred until "the last minute".<span class="Apple-converted-space">  </span>The Loader checks to see that all components exist (and are type-correct) before running an app.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tidbits - Software Components By Example</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>How: Subject vs. Object</b></h2>
+<p class="p11">relation(Subject, Object)</p>
+<p class="p3"><br></p>
+<p class="p2">Subject == about what?</p>
+<p class="p3"><br></p>
+<p class="p2">Object == attribute of Subject under the given relation</p>
+<p class="p3"><br></p>
+<p class="p2">e.g.</p>
+<p class="p3"><br></p>
+<p class="p11">x(id97,5)</p>
+<p class="p3"><br></p>
+<p class="p2">means id97 has an attribute x with a value of 5</p>
+<p class="p3"><br></p>
+<p class="p2">I use the convention that Subject is always "bigger" than Object.<span class="Apple-converted-space">  </span>Subject encloses Object.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Queries</b></h2>
+<p class="p2">1<span class="s6"><sup>st</sup></span> thoughts - what can I do, what can I query?</p>
+<p class="p3"><br></p>
+<p class="p2">This train of thinking led to aimless experimentation.</p>
+<p class="p3"><br></p>
+<p class="p2">Next thoughts — what do I need?</p>
+<p class="p3"><br></p>
+<p class="p2">These thoughts led to concrete requirements for queries…</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Which Components Are Defined?</b></h2>
+<p class="p2">Goal: We want a list of all components that have been defined.</p>
+<p class="p3"><br></p>
+<p class="p2">PROLOG query</p>
+<p class="p3"><br></p>
+<p class="p11">component(C,nil).</p>
+<p class="p12"><br></p>
+<p class="p2">PROLOG Rule:</p>
+<p class="p12"><br></p>
+<p class="p11">allDefined(All) :-</p>
+<p class="p11"><span class="Apple-converted-space">  </span>setof(Defined,component(Defined,nil),All).</p>
+<p class="p3"><br></p>
+<p class="p2">Usage:</p>
+<p class="p11">&gt; swipl</p>
+<p class="p11">?- consult(pl).</p>
+<p class="p11">?- consult(queries).</p>
+<p class="p11">?- allDefined(All).</p>
+<p class="p12"><br></p>
+<p class="p2">Example:</p>
+<p class="p12"><br></p>
+<p class="p11">?- consult(fb).</p>
+<p class="p11"><b>true.</b></p>
+<p class="p12"><br></p>
+<p class="p11">?- consult(queries).</p>
+<p class="p11"><b>true.</b></p>
+<p class="p12"><br></p>
+<p class="p11">?- allDefined(All).</p>
+<p class="p11">All = ["main", "main #", "main # #"].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>All Components?</b></h2>
+<p class="p2">PROLOG query:</p>
+<p class="p3"><br></p>
+<p class="p11">isComponent(C) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>component(C,nil).</p>
+<p class="p12"><br></p>
+<p class="p11">isComponent(C) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>contained(C,_).</p>
+<p class="p12"><br></p>
+<p class="p2">This means: if component(C,nil), then return C, else if contained(C,_), then return C.</p>
+<p class="p3"><br></p>
+<p class="p2">Putting it all together, to get a list of unique components (defined or undefined):</p>
+<p class="p12"><br></p>
+<p class="p11">allComponents(Set) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>setof(C,isComponent(C),Set).</p>
+<p class="p12"><br></p>
+<p class="p2">example:</p>
+<p class="p12"><br></p>
+<p class="p11">?- allComponents(S).</p>
+<p class="p11">S = ["A intersects B", "A smaller than B", "check", "main", "main #", "main # #"].</p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Which Components Are Used But Not Defined?</b></h2>
+<p class="p2">Components that are undefined are ones which are contained, but not declared (with the component()<span class="Apple-converted-space">  </span>relation).</p>
+<p class="p3"><br></p>
+<p class="p11">undefined(C) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>contained(C,_),</p>
+<p class="p11"><span class="Apple-converted-space">    </span>\+ component(C,nil).</p>
+<p class="p3"><br></p>
+<p class="p11">?- allUndefined(List).</p>
+<p class="p11">List = ["A intersects B", "A smaller than B", "check"].</p>
+<p class="p12"><br></p>
+<p class="p2">On the full factbase:</p>
+<p class="p12"><br></p>
+<p class="p11">?- allUndefined(All).</p>
+<p class="p11">All = ["area", "bottom", "bounding box", "fig f", "is a rectangle", "is not a point", "left", "less", "line A intersects line B"|...].</p>
+<p class="p12"><br></p>
+<p class="p2">The SWIPL REPL elides lists that are too long.</p>
+<p class="p3"><br></p>
+<p class="p2">Using write() causes the complete result to be displayed.<span class="Apple-converted-space">  </span>(One would expect that there is an option, somewhere to set the output line length in the REPL, but I haven't found it, and it is not important enough — this is but a transient need).</p>
+<p class="p3"><br></p>
+<p class="p11">?- allUndefined(All),write(user_output,All),nl.</p>
+<p class="p11">[area,bottom,bounding box,fig f,is a rectangle,is not a point,left,less,line A intersects line B,make line,only vertical and horizontal lines,perfect rectangle,right,top]</p>
+<p class="p11">All = ["area", "bottom", "bounding box", "fig f", "is a rectangle", "is not a point", "left", "less", "line A intersects line B"|...].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p12"><br></p>
+<p class="p2">The above output shows "fig f" as being undefined.<span class="Apple-converted-space">  </span>I did not intend to leave "fig f" undefined — I need to check the input file.</p>
+<p class="p3"><br></p>
+<p class="p2">A: Yes, "fig f" was left out of instersects.components.dasl.<span class="Apple-converted-space">  </span>Copy/paste fixed the problem.<span class="Apple-converted-space">  </span>I "halt." out of swipl, re-run './run.bash' (to regenerate fb.pl) and re-enter swipl :</p>
+<p class="p3"><br></p>
+<p class="p11">?- consult(fb).</p>
+<p class="p11"><b>true.</b></p>
+<p class="p12"><br></p>
+<p class="p11">?- consult(queries).</p>
+<p class="p11"><b>true.</b></p>
+<p class="p12"><br></p>
+<p class="p11">?- allUndefined(All),write(user_output,All),nl.</p>
+<p class="p11">[area,bottom,bounding box,is a rectangle,is not a point,left,less,line A intersects line B,make line,only vertical and horizontal lines,perfect rectangle,right,top]</p>
+<p class="p11">All = ["area", "bottom", "bounding box", "is a rectangle", "is not a point", "left", "less", "line A intersects line B", "make line"|...].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p2">Now, "fig f" is not in the undefined list. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Do the rest of the undefined Components look OK?</p>
+<p class="p3"><br></p>
+<p class="p2">Yes, there are 14 undefined Components.<span class="Apple-converted-space">  </span>All of them look trivial to build (the heavy lifting was done in creating the diagram, the undefined Components <i>should</i> be trivial).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Missing Signatures</b></h2>
+<p class="p2">Design Rule check — formerly known as a <i>type check</i>.<span class="Apple-converted-space">  </span>Look for all components that have no signatures.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>Type checking is not ignored — type checking is made explicit, i.e. the Architect/Engineer must supply the design rule check.</i>]</p>
+<p class="p3"><br></p>
+<p class="p11">drcMissingSig(C) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>component(C,nil),</p>
+<p class="p11"><span class="Apple-converted-space">    </span>\+ signature(C,_).</p>
+<p class="p11">drcMissingSig(C) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>contained(C,_),</p>
+<p class="p11"><span class="Apple-converted-space">    </span>\+ signature(C,_).</p>
+<p class="p12"><br></p>
+<p class="p11">drcAllMissingSig(All) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>setof(C,dcMissingSig(C),All).</p>
+<p class="p12"><br></p>
+<p class="p11">?- dcAllMissingSig(All).</p>
+<p class="p11">All = ["area", "bottom", "bounding box", "intersects horizontally any", "intersects vertically any", "is a rectangle", "is not a point", "left", "less"|...].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p12"><br></p>
+<p class="p2">In general, it appears that I've not declared signatures for all of the undefined (foreign) components.</p>
+<p class="p3"><br></p>
+<p class="p2">After adding signatures, and re-running, I get</p>
+<p class="p12"><br></p>
+<p class="p11">?- drcAllMissingSig(All).</p>
+<p class="p11"><b>false.</b></p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Exactly One Signature</b></h2>
+<p class="p2">If we ask for signatures for a specific part, we sometimes get more than one signature.</p>
+<p class="p3"><br></p>
+<p class="p11">?- sig("main # #",S).</p>
+<p class="p11">S = "&lt; (A)(B) &gt; (*!)(*#)" <b>;</b></p>
+<p class="p11">S = "&lt; (A)(B) &gt; (*!)(*#)".</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p12"><br></p>
+<p class="p2">Why?</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s7">Sig()</span> is defined as a rule with 2 alternatives.</p>
+<p class="p3"><br></p>
+<p class="p2">PROLOG backtracks through <i>all</i> alternatives. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">In this particular case, <span class="s7">"main # #"</span> is defined as a component</p>
+<p class="p3"><br></p>
+<p class="p11">component("main # #", nil).</p>
+<p class="p3"><br></p>
+<p class="p2">and, <span class="s7">"main # #"</span> appears in a <span class="s7">contained</span> relationship.</p>
+<p class="p3"><br></p>
+<p class="p2">PROLOG will backtrack, using the <span class="s7">sig</span> rule as we defined it, and show us a signature for the <span class="s7">component</span> case as well as a signature for the <span class="s7">contained</span> case.</p>
+<p class="p3"><br></p>
+<p class="p2">The rule could be rewritten, or it could be written to use the <span class="s7">cut</span> (<span class="s7">!</span>) operator or we can just use <span class="s7">setof</span> to return only the unique values.</p>
+<p class="p3"><br></p>
+<p class="p2">In this case, we don't care about efficiency, so we'll take the easiest path — by using the <span class="s7">setof</span> operator.</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s7">Cut</span> would make the search more efficient (the search would stop after the first successful match), but, we leave that concern to Efficiency Engineers.<span class="Apple-converted-space">  </span>The goal would be for Engineers to hack on the code to make it more efficient, but to leave the original architecture intact, and, <i>always</i> generate the production version from the architectural version.<span class="Apple-converted-space">  </span>[How?<span class="Apple-converted-space">  </span>Using automation.<span class="Apple-converted-space">  </span>I think that Paul Bennett shows how to do this in his book "Framing Software Reuse",<a id="fnlink5"></a><a href="#fn5"><sup>[5]</sup></a> or, by using macros (see M4, awk, etc.)].<span class="Apple-converted-space">  </span>Modifying the original architecture effaces history and provinence.<span class="Apple-converted-space">  </span>Maybe <span class="s7">git</span> can be of help here, too.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>More Than One Signature</b></h2>
+<p class="p2">Some Components have more than one signature:</p>
+<p class="p12"><b></b><br></p>
+<p class="p11">drcMoreThanOneSig(C,Signatures) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>usig(C,Signatures),</p>
+<p class="p11"><span class="Apple-converted-space">    </span>length(Signatures,Len),</p>
+<p class="p11"><span class="Apple-converted-space">    </span>Len &gt; 1.</p>
+<p class="p12"><b></b><br></p>
+<p class="p12"><b></b><br></p>
+<p class="p11">?- drcMoreThanOneSig(C,S).</p>
+<p class="p11">C = "intersects horizontally Any",</p>
+<p class="p11">S = ["&lt; ()() &gt; (sb_)(so_)", "&lt; (BB1)(BB2) &gt; (sb_)(st_)(so_)"] <b>;</b></p>
+<p class="p11">C = "intersects vertically Any",</p>
+<p class="p11">S = ["&lt; ()() &gt; (sb_)(so_)", "&lt; (BB1)(BB2) &gt; (sb_)(st_)(so_)"] <b>;</b></p>
+<p class="p11"><b>false.</b></p>
+<p class="p12"><b></b><br></p>
+<p class="p2">(We have already weeded out Components that have 0 signatures, using Missing Signatures)</p>
+<p class="p3"><br></p>
+<p class="p2">This check shows us that <span class="s7">"intersects horizontally Any"</span> and <span class="s7">"intersects vertically Any"</span> have two signatures each.<span class="Apple-converted-space">  </span>They should have exactly one signature each.</p>
+<p class="p3"><br></p>
+<p class="p2">We need to go back to the files to check why this is the case.</p>
+<p class="p3"><br></p>
+<p class="p2">A: I added incompatible signatures when correcting Missing Signatures.<span class="Apple-converted-space">  </span>In fact, I've been learning as I go, and, it turns out that my original signatures were incorrect.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Type Checking Signatures</b></h2>
+<p class="p2">Note that we have broken type checking down into two sub-tasks:</p>
+<p class="p3"><br></p>
+<ol class="ol1">
+  <li class="li4">signature-to-signature checking</li>
+  <li class="li4">implementation vs. signature checking.</li>
+</ol>
+<p class="p5"><br></p>
+<p class="p4">Using normalization, (1) becomes a simple string compare.<span class="Apple-converted-space">  </span>Every signature is guaranteed to be of the<span class="Apple-converted-space">  </span>same form, so a simple comparison of signatures is enough to alert us to problems.</p>
+<p class="p5"><br></p>
+<p class="p4">We'll deal with sub-task (2) later.</p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Contains</b></h2>
+<p class="p2">What Components does "main" contain?</p>
+<p class="p3"><br></p>
+<p class="p2">Single query:</p>
+<p class="p3"><br></p>
+<p class="p11">?- contained(C,"main").</p>
+<p class="p11">C = "main #"</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p2">All:</p>
+<p class="p12"><br></p>
+<p class="p11">allContained(Parent,All) :-</p>
+<p class="p11"><span class="Apple-converted-space">    </span>setof(C,contained(C,Parent),All).</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11">?- allContained("main",All).</p>
+<p class="p11">All = ["main #"].</p>
+<p class="p12"><br></p>
+<p class="p2">Digging down into "main"…:</p>
+<p class="p13"><br></p>
+<p class="p11">?- allContained("main #",All).</p>
+<p class="p11">All = ["check", "main # #"].</p>
+<p class="p12"><br></p>
+<p class="p11">?- allContained("main # #",All).</p>
+<p class="p11">All = ["A intersects B", "A smaller than B"].</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Goals</b></h2>
+<ul class="ul1">
+  <li class="li4">stand-alone compilation of each diagram</li>
+  <li class="li4">implement all foreign functions</li>
+  <li class="li4">do I have enough info to begin implementing?
+  <ul class="ul2">
+    <li class="li4">what language? what languages?</li>
+    <li class="li4">2 languages at once, to keep me honest?</li>
+  </ul></li>
+  <li class="li4">rough-in all parts</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compiling Main Manually</b></h2>
+<p class="p2">Let's compile the top-most diagram.</p>
+<p class="p3"><br></p>
+<p class="p2">main - Top Level</p>
+<p class="p3"><br></p>
+<p class="p2">What do we need to know?</p>
+<p class="p3"><br></p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Name Mangling</b></h2>
+<p class="p2">3) name mangling</p>
+<p class="p2">We've included spaces (and other special characters) in the names of Components at the architectural level. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Most languages do not allow such characters in names.</p>
+<p class="p3"><br></p>
+<p class="p2">We need to adopt a convention on how to re-name architectural components.<span class="Apple-converted-space">  </span>Ideally, the re-naming should be done by automation (e.g. awk, sed, regex, etc.).</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all spaces are replaced by underscores "_".</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all exclamation points (!) are replaced by "_b_" (exclamation points are often abbreviated to<span class="Apple-converted-space">  </span>"bang"s).</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all octothorpes (#) are replaced by underscores "o_".</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all tildes (~) are replaced by underscores "t_".</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all (*!) are replaced by underscores "sb_".</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all (*#) are replaced by underscores "so_".</p>
+<p class="p3"><br></p>
+<p class="p2">Let's say that all (*~) are replaced by underscores "st_".</p>
+<p class="p3"><br></p>
+<p class="p2">I wrote an <i>awk</i> script to mangle names as above, and inserted the script in run.bash.</p>
+<p class="p3"><br></p>
+<p class="p11">{</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/\*!/,"sb_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/\*~/,"st_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/\*#/,"so_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/!/,"b_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/~/,"t_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>gsub(/#/,"o_",$0);</p>
+<p class="p11"><span class="Apple-converted-space">    </span>print $0</p>
+<p class="p11">}</p>
+<p class="p12"><br></p>
+<p class="p2">(Name mangling could have been done in many other languages, my choice of awk is not special.<span class="Apple-converted-space">  </span>Awk, though, pre-existed many of the other languages).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Components of Main</b></h2>
+<p class="p2">What Components does "main" contain (recursively)?:</p>
+<p class="p3"><br></p>
+<p class="p11">?- allContained("main",All).</p>
+<p class="p11">All = ["main_o_"].</p>
+<p class="p12"><br></p>
+<p class="p11">?- allContained("main_o_",All).</p>
+<p class="p11">All = ["check", "main_o__o_"].</p>
+<p class="p12"><br></p>
+<p class="p11">?- allContained("main_o__o_",All).</p>
+<p class="p11">All = ["A_intersects_B", "A_smaller_than_B"].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Signatures</b></h2>
+<p class="p2">What are the signatures for "main" and all of its children?:</p>
+<p class="p3"><br></p>
+<p class="p11">?- usig("main",S).</p>
+<p class="p11">S = ["&lt; (R1)(R2) &gt; (!)(#)"].</p>
+<p class="p12"><br></p>
+<p class="p11">?- usig("main #",S).</p>
+<p class="p11">S = ["&lt; (R1)(R2) &gt; (!)(*#)"].</p>
+<p class="p12"><br></p>
+<p class="p11">?- usig("main # #",S).</p>
+<p class="p11">S = ["&lt; (A)(B) &gt; (*!)(*#)"].</p>
+<p class="p12"><br></p>
+<p class="p11">?-<span class="Apple-converted-space"> </span></p>
+<p class="p14"><br></p>
+<hr>
+<p class="p15"><a id="fn1"></a><a href="#fnlink1"><span class="s5">[1]</span></a><span class="s5"> </span>I have switched, since writing this, to using circles to denote external ports (circles are explicit in SVG, whereas bullets are formed by polylines, etc.<span class="Apple-converted-space">  </span>Bullets can be parsed, but circles require less work).</p>
+<p class="p15"><a id="fn2"></a><a href="#fnlink2"><span class="s5">[2]</span></a><span class="s5"> </span>I have switched, since writing this, to using stroke-width=3 instead of shadows.<span class="Apple-converted-space">  </span>Stroke-width is more easily handled by SVG.</p>
+<p class="p15"><a id="fn3"></a><a href="#fnlink3"><span class="s5">[3]</span></a><span class="s5"> </span>A <i>trigger </i>is like half of a boolean.<span class="Apple-converted-space">  </span>It carries no information beyond its own existence.<span class="Apple-converted-space">  </span>In hardware, these are called "edge triggers".</p>
+<p class="p6"><a id="fn4"></a><a href="#fnlink4"><span class="s5">[4]</span></a><span class="s5"> </span>The red rounded rectangle.<span class="Apple-converted-space">  </span>It's name is # and we enclose component names in brackets, giving [#] as the component name.</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s5">[5]</span></a><span class="s5"> </span>See https://guitarvydas.github.io/2021/01/14/References.html</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
