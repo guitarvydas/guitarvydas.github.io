@@ -1,69 +1,67 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-	<meta charset="utf-8"/>
-	<title>Tags Instead of Names</title>
-	<meta name="author" content=""/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Tags Instead of Names</title>
+  <meta name="CreationTime" content="2021-05-05T14:45:32Z">
+  <meta name="ModificationTime" content="2021-05-05T14:45:32Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 13.0px Palatino}
+  </style>
 </head>
 <body>
+<div style="width: 600px; margin: 0 auto">
 
-<h1 id="tagsinsteadofnames">Tags Instead of Names</h1>
-
-<p>Below is a simple equation</p>
-
-<p>y = mx + b</p>
-
-<p>There are, at least, 4 names in this equation:</p>
-
-<p>y, m, x, b.</p>
-
-<p>These names are only meaningful to those who already understand the purpose of this equation.</p>
-
-<p>A novice would want different names, e.g.</p>
-
-<p>y, slope, x, y-intersect.</p>
-
-<p>A compiler-writer might used numeric names instead (aka addresses), e.g.</p>
-
-<p>0x7512, 0x5525, 0x7518, 0x1234.</p>
-
-<p>Or, a compiler-writer, might wish to abstract the names, using Data Descriptors, e.g.</p>
-
-<p>@sp.2, @r11.0, @sp.8, @0x1230.4</p>
-
-<p>In some cases<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote"><sup>1</sup></a> names are more like <em>comments</em>. The names are superfluous except as comments to the reader.</p>
-
-<p>In some cases<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote"><sup>2</sup></a> it is enough to know only the type of a datum, e.g. if a datum appears only once in code, there is not point in assigning two identifiers (name and type) to the datum, where only one identifier will do.</p>
-
-<p>The Common Lisp language incorporates a construct called <em>symbol macros</em> which emphasizes the superfluous nature of names.</p>
-
-<p>The above observations lead to the notion that names in PLs<a href="#fn:3" id="fnref:3" title="see footnote" class="footnote"><sup>3</sup></a> are not single entities, but might be treated more like lists of tags.</p>
-
-<p>Names could be defined as lists.</p>
-
-<p>Named entities could be named by a list of valid synonyms.</p>
-
-<p>The above would be like projectional-editing-in-the-small.</p>
-
-<div class="footnotes">
-<hr />
-<ol>
-
-<li id="fn:1">
-<p>Software Architecture using assign&#8211;once languages. <a href="#fnref:1" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
-</li>
-
-<li id="fn:2">
-<p>E.G. diagrams, etc. <a href="#fnref:2" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
-</li>
-
-<li id="fn:3">
-<p>PL means Programming Language <a href="#fnref:3" title="return to body" class="reversefootnote">&#160;&#8617;&#xfe0e;</a></p>
-</li>
-
-</ol>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tags Instead of Names</b></h2>
+<p class="p2">Below is a simple equation</p>
+<p class="p3"><br></p>
+<p class="p4">y = mx + b</p>
+<p class="p3"><br></p>
+<p class="p2">There are, at least, 4 names in this equation:</p>
+<p class="p3"><br></p>
+<p class="p4">y, m, x, b.</p>
+<p class="p3"><br></p>
+<p class="p2">These names are only meaningful to those who already understand the purpose of this equation.</p>
+<p class="p3"><br></p>
+<p class="p2">A novice would want different names, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">y, slope, x, y-intersect.</p>
+<p class="p3"><br></p>
+<p class="p2">A compiler-writer might used numeric names instead (aka addresses), e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">0x7512, 0x5525, 0x7518, 0x1234.</p>
+<p class="p3"><br></p>
+<p class="p2">Or, a compiler-writer, might wish to abstract the names, using Data Descriptors, e.g.</p>
+<p class="p3"><br></p>
+<p class="p4">@sp.2, @r11.0, @sp.8, @0x1230.4</p>
+<p class="p3"><br></p>
+<p class="p2">In some cases<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> names are more like <i>comments</i>.<span class="Apple-converted-space">  </span>The names are superfluous except as comments to the reader.</p>
+<p class="p3"><br></p>
+<p class="p2">In some cases<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> it is enough to know only the type of a datum, e.g. if a datum appears only once in code, there is not point in assigning two identifiers (name and type) to the datum, where only one identifier will do.</p>
+<p class="p3"><br></p>
+<p class="p2">The Common Lisp language incorporates a construct called <i>symbol macros</i> which emphasizes the superfluous nature of names.</p>
+<p class="p3"><br></p>
+<p class="p2">The above observations lead to the notion that names in PLs<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> are not single entities, but might be treated more like lists of tags. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Names could be defined as lists. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Named entities could be named by a list of valid synonyms.</p>
+<p class="p3"><br></p>
+<p class="p2">The above would be like projectional-editing-in-the-small.</p>
+<p class="p5"><br></p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>Software Architecture using assign-once languages.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>E.G. diagrams, etc.</p>
+<p class="p6"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a><span class="s1"> </span>PL means Programming Language</p>
 </div>
-
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
@@ -73,4 +71,3 @@
 </script> 
 </body>
 </html>
-
