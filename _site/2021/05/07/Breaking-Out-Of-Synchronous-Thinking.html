@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Breaking Out Of Synchronous Thinking</title>
+  <meta name="CreationTime" content="2021-05-07T09:56:01Z">
+  <meta name="ModificationTime" content="2021-05-07T09:56:01Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p12 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Async</b></h2>
+<p class="p2">The default should be that everything is asynchronous.</p>
+<p class="p3"><br></p>
+<p class="p2">Synchrony should be the exception, not the rule.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>No Loops</b></h2>
+<p class="p2">Loops and recursion, currently, imply synchrony.</p>
+<p class="p3"><br></p>
+<p class="p2">Loops are replaced<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> by:</p>
+<ul class="ul1">
+  <li class="li4">send message to self<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a>.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">See <a href="https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html">https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sync</b></h2>
+<p class="p2">Functions/operations that are synchronous must be prefixed by the <span class="s1">sync</span> keyword.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sequencing is not the Default</b></h2>
+<p class="p2">In most current PLs, operations follow a strict sequence specified by consecutive lines of code or nested function calls.</p>
+<p class="p3"><br></p>
+<p class="p2">For example</p>
+<p class="p3"><br></p>
+<p class="p5">fn(5)</p>
+<p class="p5">fn(6)</p>
+<p class="p2">and</p>
+<p class="p5">fnx(fny(7))</p>
+<p class="p6"><br></p>
+<p class="p2">implies that <span class="s1">fn(6)</span> is invoked only after <span class="s1">fn(5)</span> has been invoked and has finished.<span class="Apple-converted-space">  </span>Likewise, <span class="s1">fnx()</span> is called only after <span class="s1">fny()</span> has finished.<span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p2">In the first case, the language has a <i>hidden</i> synchronization operation and in the second case, <span class="s1">fnx()</span> has a <i>hidden</i> <span class="s1">wait()</span> operation built into it<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Computers are able to perform concurrent operations, but our PLs build synchronization in as the default<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Distributed computers don't necessarily act as functions, but act as <i>components<a id="fnlink5"></a></i><a href="#fn5"><sup>[5]</sup></a>.</p>
+<p class="p3"><br></p>
+<p class="p2">Mathematics is a <i>notation</i> for dealing with <i>functions </i>that are implicitly synchronized.<span class="Apple-converted-space">  </span>Using mathematical notation for programming languages limits what can be done<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> with a computer.<span class="Apple-converted-space">  </span>For example, programmers imagine that distributed programming is "hard" and tend not to invent languages that span processors, e.g. inventing a <i>language</i> that deals with 2 rPis instead of only one rPi at a time ; currently we have only <i>libraries </i>of assembler-like operations to deal with multiple processes and multiple CPUs<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a> and some languages attempt conflate expression of so-called parallel processes into a functional notation.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What Happens When Functions Aren't Synchronous?</b></h2>
+<p class="p2">Q: In the case</p>
+<p class="p3"><br></p>
+<p class="p5">fnx(fny(7))</p>
+<p class="p3"><br></p>
+<p class="p2">what happens if <span class="s1">fnx()</span> does not employ a built-in wait operation?</p>
+<p class="p3"><br></p>
+<p class="p2">A: Maybe fnx() runs before fny(). (!)</p>
+<p class="p3"><br></p>
+<p class="p2">Components run <i>forever.</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2">When an Architect wants a component to wait for input from another component, the Architect must specify that this is the case.</p>
+<p class="p3"><br></p>
+<p class="p2">Q: Does that mean more code?</p>
+<p class="p3"><br></p>
+<p class="p2">A: Not if an appropriate <i>notation</i> is employed.</p>
+<p class="p3"><br></p>
+<p class="p2">Currently, our notations specify synchronization.</p>
+<p class="p3"><br></p>
+<p class="p2">See Relational Programming.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculators vs. Programming</b></h2>
+<p class="p2">Current programming make it easy to express <i>calculator</i> style code.</p>
+<p class="p3"><br></p>
+<p class="p2">E.G. input -&gt; perform calculation -&gt; output.</p>
+<p class="p3"><br></p>
+<p class="p2">Even for this simplistic paradigm, we have added a syntactic bag called <i>exceptions</i>.<span class="Apple-converted-space">  </span>Exceptions break the fundamental tennet of Structured Programming</p>
+<ul class="ul1">
+  <li class="li4">Structured Programming means one in, one out, whereas,</li>
+  <li class="li4">Most modern languages support one-in, two-out (output a result or output an exception).<a id="fnlink8"></a><a href="#fn8"><sup>[8]</sup></a></li>
+  <li class="li4">Exceptions are based on the <i>dynamic</i> call-chain.<span class="Apple-converted-space">  </span>The order that functions are called determines the order in which exceptions are inherited and acted upon.<span class="Apple-converted-space">  </span><i>Dynamic</i> call-chains make code harder to debug (chains are determined at runtime, instead of a compile-time).</li>
+  <li class="li4">JavaScript callbacks were an attempt to express, differently, the dynamic nature of call-chains.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Building a calculator should be the exception, not the rule.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">Programming can go well beyond the notion of just building calculators.</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://vimeo.com/113707214">https://vimeo.com/113707214</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculator Paradigm</b></h2>
+<p class="p2">The <i>calculator</i> paradigm assumes that a program has</p>
+<ul class="ul1">
+  <li class="li4">one input</li>
+  <li class="li4">one output.</li>
+</ul>
+<p class="p7"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Pros</b></h2>
+<ul class="ul1">
+  <li class="li4">expunges time, <i>f(t)</i>, from the notation making it possible to manipulate<a id="fnlink9"></a><a href="#fn9"><sup>[9]</sup></a> the notation statically</li>
+  <li class="li4">based on mathematical notation — we have 100's of years of experience with this notation</li>
+  <li class="li4">notation can be manipulated at "compile time" and weeding out can occur before runtime</li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Cons</b></h2>
+<ul class="ul1">
+  <li class="li4">the calculator paradigm breaks down in the presence of exceptions</li>
+  <li class="li4">the calculator paradigm breaks the fundamental rule of Structured Programming — one in and one out (current PLs support one in and two outs (result and exception), which is not structured<a id="fnlink10"></a><a href="#fn10"><sup>[10]</sup></a>)</li>
+  <li class="li4">"calculators" are but a subset of what computers can do</li>
+  <li class="li4">pencil-and-paper notation used for in an advanced 2D<a id="fnlink11"></a><a href="#fn11"><sup>[11]</sup></a> (3D) medium</li>
+  <li class="li4">lines+offsets of non-overlapping elements vs. (x,y) of overlapping elements (e.g. grid vs. overlapping windows)</li>
+  <li class="li4">expunges time, e.g. <i>f(t)</i> from the notation, which results in concepts like JS callbacks (this comes from force-fitting the notation onto the problem, instead of choosing a notation first, depending on the problem — see <a href="https://guitarvydas.github.io/2021/04/10/Notation.html">https://guitarvydas.github.io/2021/04/10/Notation.html</a>)</li>
+  <li class="li4">expunging <i>f(t)</i> was responsible for set-backs in physics<a id="fnlink12"></a><a href="#fn12"><sup>[12]</sup></a></li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Examples</b></h2>
+<ul class="ul1">
+  <li class="li4">mathematical functions<span class="Apple-converted-space"> </span></li>
+  <li class="li4">text processing (sed, awk)</li>
+  <li class="li4">pipelines (e.g. bash)</li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Anti-Examples</b></h2>
+<ul class="ul1">
+  <li class="li4">distributed processing (result, error, network error)</li>
+  <li class="li4">the human body's autonomous system</li>
+  <li class="li4">recipes (while potatoes boil, do …)</li>
+  <li class="li4">walking through a doorway (with a closed door)</li>
+  <li class="li4">window re-draw (onPaint).</li>
+  <li class="li4">keyboard input</li>
+  <li class="li4">mouse input</li>
+  <li class="li4">sensor input.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Relational Programming</b></h2>
+<p class="p2"><i>Relational Programming</i> (aka declarative programming) is backing in to the idea that code should not specify synchronization.<span class="Apple-converted-space">  </span>In <i>relational</i> languages, one writes <i>relations</i> that must be satisfied — in any order — for a rule to succeed.<span class="Apple-converted-space">  </span>The engine decides on the ordering of relation evaluation.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Asynchronous Languages</b></h2>
+<p class="p2">An asynchronous language does not have implicit synchronization built into its syntax.</p>
+<p class="p3"><br></p>
+<p class="p2">An example is <i>relational</i> programming.</p>
+<p class="p3"><br></p>
+<p class="p2">A language for asynchronous components allows the programmer to specify:</p>
+<ul class="ul1">
+  <li class="li4">the set of inputs for the component</li>
+  <li class="li4">the set of outputs of a component.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Inputs do not necessarily "happen at the same time", as is the case with current programming languages (parameters are all delivered at the same time when a function is called).<span class="Apple-converted-space">  </span>[<i>If a component needs to wait for a set of inputs to be ready, then the Architect must explicitly say so.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Outputs do not necessarily "happen at the same time".<span class="Apple-converted-space">  </span>A component can produce an output at any time. <span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li4">A component can produce an output in response to an input.</li>
+  <li class="li4">A component can produce no output in response to an input (this can't be done with CALL/RETURN — a function always returns <i>something </i>(even if it is just the return of <i>control flow</i>)).</li>
+  <li class="li4">A component can produce an output even when it has not been given any input(s).</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">Current PLs return all values "at the same time".<span class="Apple-converted-space">  </span>A function returns its values when it returns.<span class="Apple-converted-space">  </span>This is a form of synchronization.<span class="Apple-converted-space">  </span>[<i>In contrast, consider a server.<span class="Apple-converted-space">  </span>It waits for requests and responds when it is good and ready.<span class="Apple-converted-space">  </span>It </i>could<i> respond more than once — there is nothing stopping it from doing so — but, our mindset occludes this possibility and considers it to be an error.</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Q: Does the Architect need to be explicit about synchronization?</p>
+<p class="p3"><br></p>
+<p class="p2">A: Yes.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">Q: What work can be done asynchronously?</p>
+<p class="p3"><br></p>
+<p class="p2">A: All sorts of work that we can't even imagine when using the current breed of synchronous languages.<span class="Apple-converted-space">  </span>For an analogy, consider the human body.<span class="Apple-converted-space">  </span>The human body has an autonomous system that involves some 500 concurrent processes, but, the human body has only one thread of consciousness.<span class="Apple-converted-space">  </span>In our current mindset, we would program this by building 500 calculators and shoving them into envelopes (called "threads") with point-to-point connections for inter-envelope messaging.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">Q: Does any of the above look familiar?</p>
+<p class="p3"><br></p>
+<p class="p2">A: Yes.<span class="Apple-converted-space">  </span>Networking, internet, distributed computing, etc. is like this.<span class="Apple-converted-space">  </span>Note that GUI's are like this, too.<span class="Apple-converted-space">  </span>User input — keyboard, mouse, etc. — comes "at any time" and there must be a component ready to accept such input.<span class="Apple-converted-space">  </span>Currently, we fake it and force-fit the everything-is-a-function paradigm onto these kinds of problems.<span class="Apple-converted-space">  </span>We can solve these problems in the current paradigm, but they could be solved more easily using other paradigms.<span class="Apple-converted-space">  </span>Our current solution — using an inappropriate paradigm — have been causing accidental complexities.<a id="fnlink13"></a><a href="#fn13"><sup>[13]</sup></a></p>
+<p class="p9"><br></p>
+<hr>
+<p class="p10"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Compilers could do this replacement.</p>
+<p class="p11"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>To signal next iteration step.</p>
+<p class="p11"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Specifically, fnx() uses the CALL low-level opcode and fny() uses the RETURN low-level opcode to signal that it has finished.<span class="Apple-converted-space">  </span>The synchronization is performed by the underlying hardware, using a global variable (the Stack).</p>
+<p class="p10"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>So, by default, we do not get concurrency.</p>
+<p class="p10"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>A component is like an Actor that isn't synchronized by default.</p>
+<p class="p10"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>easily</p>
+<p class="p10"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>Note that we talk about CPU - centralized processing units - even when discussing distributed computing.</p>
+<p class="p11"><a id="fn8"></a><a href="#fnlink8"><span class="s2">[8]</span></a><span class="s2"> </span>https://vimeo.com/113707214 shows an interesting way to organize one-in-two-out programs.</p>
+<p class="p11"><a id="fn9"></a><a href="#fnlink9"><span class="s2">[9]</span></a><span class="s2"> </span>Substitution works only if (a) there are no side effects or (b) components are well-isolated and all side-effects do not leak beyond the boundaries of an isolated component.</p>
+<p class="p12"><span class="s3"><a id="fn10"></a><a href="#fnlink10"><span class="s2">[10]</span></a></span> Typed languages with pattern matching are attempting to rein this in.<span class="Apple-converted-space">  </span>Such languages make it possible to create two types — result and error — instead of creating two outputs.<span class="Apple-converted-space">  </span>I argue that it would be simpler to admit that components can have more than one output port.</p>
+<p class="p11"><span class="s2"><a id="fn11"></a><a href="#fnlink11">[11]</a> </span>I consider "pencil and paper" to be a 1D notation.<span class="Apple-converted-space">  </span>Actually, it deals with grids of non-overlapping characters arranged in rows, which is 2D-ish.<span class="Apple-converted-space">  </span>I argue that we should deal with grids of overlappable elements arranged in (x,y) space instead of in (row,line) cell space.</p>
+<p class="p11"><a id="fn12"></a><a href="#fnlink12"><span class="s2">[12]</span></a><span class="s2"> </span>Ilya Prigogene (Nobel laureate), "Order Out Of Chaos"</p>
+<p class="p12"><span class="s3"><a id="fn13"></a><a href="#fnlink13"><span class="s2">[13]</span></a></span> <span class="s3">Such as </span>priority inversion, full preemption, thread safety, etc.</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
