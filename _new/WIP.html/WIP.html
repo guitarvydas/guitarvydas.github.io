@@ -1,0 +1,743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>WIP</title>
+  <meta name="CreationTime" content="2021-05-07T08:40:08Z">
+  <meta name="ModificationTime" content="2021-05-07T08:40:08Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 12.0px 0.0px 12.0px 36.0px; font: 12.0px Arial; color: #02020b; -webkit-text-stroke: #02020b; background-color: #ffffff}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; -webkit-text-stroke: #02020b; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; -webkit-text-stroke: #02020b}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p13 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; color: #000000; -webkit-text-stroke: #000000}
+    p.p14 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; -webkit-text-stroke: #000000; min-height: 13.0px}
+    p.p15 {margin: 12.0px 0.0px 12.0px 0.0px; font: 18.0px Arial; color: #02020b; -webkit-text-stroke: #02020b; background-color: #ffffff}
+    p.p16 {margin: 12.0px 0.0px 12.0px 0.0px; font: 12.0px Helvetica; color: #02020b; -webkit-text-stroke: #02020b}
+    p.p17 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Helvetica}
+    p.p18 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 13.0px Palatino}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Arial}
+    span.s3 {font: 11.0px Menlo}
+    span.s4 {font: 9.0px Palatino}
+    span.s5 {font: 12.0px Arial; font-kerning: none}
+    span.s6 {font: 18.0px Arial; font-kerning: none; background-color: #ffffff}
+    span.s7 {font: 12.0px Arial; font-kerning: none; background-color: #ffffff}
+    span.s8 {color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s9 {font: 12.0px Helvetica}
+    span.s10 {font: 13.0px Palatino}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Optimization Stunts Progress</b></h2>
+<p class="p2"><span class="s1">"Give a man a fish, and you feed him for a day. Teach a man to fish, and you feed him for a lifetime."<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></span></p>
+<p class="p3"><br></p>
+<p class="p4">Create a data structure and you solve one problem.</p>
+<p class="p3"><br></p>
+<p class="p4">Normalize the data and you can let you computer automate the solution to many problems.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Optimized vs Normalized Form</b></h2>
+<p class="p5">This is optimized:</p>
+<p class="p6"><br></p>
+<p class="p7">rectangle(R,[x,y,w,h]).</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">This is normalized:</p>
+<p class="p6"><br></p>
+<p class="p7">rectangle(R,nil).</p>
+<p class="p7">top_x(R,x).</p>
+<p class="p7">top_y(R,y).</p>
+<p class="p7">width(R,w).</p>
+<p class="p7">height(R,h).</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Human Readable vs. Machine Readable</b></h2>
+<p class="p5">Normalized form is not friendly for human consumption not human readability.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Example- Architecting, Engineering, Optimizing, Implementing, Testing</b></h2>
+<p class="p5">Problem statement:</p>
+<p class="p5">determine if a rectangle intersects another rectangle</p>
+<p class="p6"><br></p>
+<p class="p5">Motivation:</p>
+<p class="p5">create a set of design rules that allow us to transpile diagrams to code</p>
+<p class="p6"><br></p>
+<p class="p5">sub-problem:</p>
+<p class="p5">determine if a rectangle intersects another rectangle</p>
+<p class="p6"><br></p>
+<p class="p5">sub-problem</p>
+<p class="p5">determine if a rectangle is smaller than another rectangle</p>
+<p class="p6"><span class="Apple-converted-space"> </span></p>
+<p class="p6"><br></p>
+<p class="p5">Architecture: intersects</p>
+<p class="p6"><br></p>
+<p class="p5">Engineering: what about point lines?<span class="Apple-converted-space">  </span>What about parallel lines?<span class="Apple-converted-space">  </span>Does a larger rectangle intersect a smaller rect, or, only smaller rect intersects larger?</p>
+<p class="p5">Engineering sub-problem:<span class="Apple-converted-space"> </span></p>
+<p class="p5">determine area of rectangle for small-vs-big comparisons</p>
+<p class="p5">create bounding boxes for ease of comparison</p>
+<p class="p6"><br></p>
+<p class="p5">Optimization Engineering: What about efficiency?<span class="Apple-converted-space">  </span>Rearrange lines to give better performance?<span class="Apple-converted-space">  </span>Use cut?</p>
+<p class="p6"><br></p>
+<p class="p5">Implementation: write code as specified by Engineer</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>`</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Acknowledgements</b></h2>
+<p class="p5">Chris Lewis</p>
+<p class="p5">Holt</p>
+<p class="p5">Cordy</p>
+<p class="p5">Cordy &amp; Schneider</p>
+<p class="p5">TS</p>
+<p class="p5">- Sanford</p>
+<p class="p5">- Shuve</p>
+<p class="p5">- Minnan</p>
+<p class="p5">- Stephen</p>
+<p class="p5">- &lt;…&gt;</p>
+<p class="p5">Lee</p>
+<p class="p5">CSRI</p>
+<p class="p5">SmallC - Ron Cain</p>
+<p class="p5">ed, vi, emacs</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Compiling SVG 101</b></h2>
+<p class="p5">Sample SGV drawing:</p>
+<p class="p8"><img src="Images/Method Draw Image.png" width="200px" height="150px" alt="Image"></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG details</b></h2>
+<p class="p5">[created with <a href="https://editor.method.ac/">https://editor.method.ac/</a>]</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p10"><br></p>
+<p class="p7">&lt;svg width="800" height="600" xmlns="http://www.w3.org/2000/svg"&gt;</p>
+<p class="p7"><span class="Apple-converted-space"> </span>&lt;!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ --&gt;</p>
+<p class="p10"><br></p>
+<p class="p7"><span class="Apple-converted-space"> </span>&lt;g id="Layer_1"&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;title&gt;Layer 1&lt;/title&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;rect rx="50" fill="#ffffff" stroke="#000" x="88" y="57" width="578" height="359" id="svg_1"/&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;ellipse fill="#56ffaa" stroke="#000000" cx="88.5" cy="223.5" id="svg_2" rx="36.5" ry="36.5" fill-opacity="0.51"/&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;ellipse fill="#ffffaa" stroke="#000" cx="665.5" cy="222.5" id="svg_3" rx="36.5" ry="36.5" fill-opacity="0.51"/&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;text fill="#000000" stroke="#000" x="342" y="100" id="svg_4" stroke-width="0" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve"&gt;main&lt;/text&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;text fill="#000000" stroke="#000000" fill-opacity="0.51" x="79" y="232" id="svg_5" stroke-width="0" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve"&gt;in&lt;/text&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;text fill="#000000" stroke="#000000" stroke-width="0" fill-opacity="0.51" x="650" y="228" id="svg_6" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve"&gt;out&lt;/text&gt;</p>
+<p class="p7"><span class="Apple-converted-space">  </span>&lt;line fill="none" stroke="#000000" fill-opacity="0.51" x1="120" y1="220" x2="641" y2="220" id="svg_7"/&gt;</p>
+<p class="p7"><span class="Apple-converted-space"> </span>&lt;/g&gt;</p>
+<p class="p7">&lt;/svg&gt;</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Conventions</b></h2>
+<p class="p11">Let us adopt the following conventions:</p>
+<ul class="ul1">
+  <li class="li11">software is composed of Components with Ports</li>
+  <li class="li11">Ports are joined by Connections</li>
+  <li class="li11">software components are rectangles</li>
+  <li class="li11">external inputs are green circles</li>
+  <li class="li11">external outputs are yellow circles</li>
+  <li class="li11">lines from green inputs to yellow outputs are <i>connections</i>
+  <ul class="ul2">
+    <li class="li11">line beginning (x1,y1) is inside a green input</li>
+    <li class="li11">line end (x2,y2) is inside a yellow output</li>
+  </ul></li>
+  <li class="li11">text inside rectangles/circles is a Port name</li>
+  <li class="li11">text inside a (large) rectangle is a Component name</li>
+  <li class="li11">coordinates
+  <ul class="ul2">
+    <li class="li11">rectangle — (x,y) is (left,top)</li>
+    <li class="li11">circle — cx = center x, cy = center y</li>
+    <li class="li11">line — (x1,y1) to (x2,y2)</li>
+    <li class="li11">text — (x,y) is (left,top)</li>
+    <li class="li9"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ideal IDE</b></h2>
+<p class="p5">editor window<span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li11">rectangles</li>
+  <li class="li11">ellipses</li>
+  <li class="li11">text</li>
+  <li class="li11">lines</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">design rule window</p>
+<ul class="ul1">
+  <li class="li11">choose design rule
+  <ul class="ul2">
+    <li class="li11">e.g. Python</li>
+    <li class="li11">e.g. StateCharts</li>
+    <li class="li11">e.g. Arrowgrams</li>
+    <li class="li11">etc.</li>
+  </ul></li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">clone detector RY -&gt; DRY</p>
+<ul class="ul1">
+  <li class="li11">refactoring</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">PEG + ASON window</p>
+<ul class="ul1">
+  <li class="li11">patterns —&gt; factbase</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">Query Window</p>
+<ul class="ul1">
+  <li class="li11">PROLOG</li>
+  <li class="li11">factbases</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">Pipeline Window</p>
+<ul class="ul1">
+  <li class="li11">workflow of SCNs</li>
+  <li class="li9"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Notation Based Software Design</b></h2>
+<p class="p5">M</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p5">A notation makes it easy to express software designs without incurring the overhead usually associated with PL (programming language) and DSL (Domain Specific Language) development.</p>
+<p class="p6"><br></p>
+<p class="p5">SCNs are light-weight variants of formal concepts, like REGEXs compared to DFA theory.<span class="Apple-converted-space">  </span>SCNs take hours to implement, instead of taking days, weeks, months and years.</p>
+<p class="p6"><br></p>
+<p class="p5">The recent advances in parsing technologies, e.g. PEG (Parsing Expression Grammars) allow construction of light-weight SCNs.</p>
+<p class="p6"><br></p>
+<p class="p5">I use the term SCN — solution-centric notation — to denote the kinds of software notations that I describe.</p>
+<p class="p6"><br></p>
+<p class="p5">In this essay, I discuss how to construct notations — SCNs.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>notes</b></h2>
+<p class="p5">Rely on toolbox language for heavy-lifting.</p>
+<p class="p6"><br></p>
+<p class="p5">PEG instead of Yacc, etc.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">hours not days/weeks/months/years</p>
+<p class="p5">lightweight like REGEX</p>
+<p class="p6"><br></p>
+<p class="p5">need language design skills</p>
+<p class="p5">understand a design, time to</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">problem first, notation second</p>
+<p class="p5">YAGNI - implement the minimum subset of SCN required for a given solution.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PEG Instead of YACC</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Toolbox Languages</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>YAGNI Principle</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Objections to Developing DSLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Foreign Functions</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scopes</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>RY vs DRY</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Clone Detection</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Once vs FP</b></h2>
+<p class="p5">FP gets around the "doing it once only" problem and provides reverse-ability.</p>
+<p class="p6"><br></p>
+<p class="p5">Using an imperative procedure and ensuring that it is called only once also solves the "doing it once only" problem.</p>
+<p class="p6"><br></p>
+<p class="p5">What real problems require reverse-ability?</p>
+<p class="p6"><br></p>
+<p class="p5">Is it worth burdening <i>every</i> solution with reverse-ability?</p>
+<p class="p6"><br></p>
+<p class="p5">Is this the same kind of problem as the full preemption problem?<span class="Apple-converted-space">  </span>Not needed in every solution.</p>
+<p class="p6"><br></p>
+<p class="p5">Should undo be implemented explicitly?</p>
+<p class="p6"><br></p>
+<p class="p5">Is FP a <i>subset</i> of what we need?<span class="Apple-converted-space">  </span>Is FP just a <i>paradigm</i> which is useful in some situations, but not others?</p>
+<p class="p6"><br></p>
+<p class="p5">What if every function had a <i>once</i> flag — automatically built in?</p>
+<p class="p6"><br></p>
+<p class="p5">Can history be preserved with sufficient use of parsing? Break grammar up, not use FP.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Issues / Problems</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Once-Only</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Reversability</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Memory Sharing</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Time-Sharing</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm-JS</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm Editor</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Inspiration</b></h2>
+<p class="p5">I read a lot of other people's code.</p>
+<p class="p6"><br></p>
+<p class="p5">Thankfully, complete systems were small enough for one person to read and understand (and debug)</p>
+<p class="p6"><br></p>
+<p class="p5">utah lisp</p>
+<p class="p5">1.5</p>
+<p class="p5">smalltalk blue book</p>
+<p class="p5">small c</p>
+<p class="p5">fritz van der wateren lisp</p>
+<p class="p5">ddj tiny basic</p>
+<p class="p5">s/sl<span class="Apple-converted-space"> </span></p>
+<p class="p5">pt pascal</p>
+<p class="p5">unix v7</p>
+<p class="p5">anatomy of lisp</p>
+<p class="p5">holt's concurrent euclid unix &amp; tunis</p>
+<p class="p5">tunis</p>
+<p class="p5">gc - smalltalk &amp; 1.5</p>
+<p class="p5">utah lisp</p>
+<p class="p5">sci-fi</p>
+<p class="p5">dennett, astronomy, photography (chemistry)</p>
+<p class="p5">remove magic</p>
+<p class="p5">take clocks apart</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">- breadth-first (learn a lot of things, shallow learning instead of deep learning)</p>
+<p class="p5">- take other people's work apart</p>
+<p class="p5">- assume that you will be wrong</p>
+<p class="p5">- assume that everything is a fractal (nothing is ever black and white, every step forward presents at least 2 new sub-steps, recursively)</p>
+<p class="p5">- learn new technologies, keep abreast, read stuff about new stuff</p>
+<p class="p5">- always trying to put the new technologies to practical use (kind-of a business driven outlook) (which leads to questions like "what do I keep, what do I throw away?")</p>
+<p class="p6"><br></p>
+<p class="p5">- languages are easy - they are just syntax ; paradigms are harder, they are different ways to think about things</p>
+<p class="p6"><br></p>
+<p class="p5">What is new?<span class="Apple-converted-space">  </span>Blockchain, 3D printing, A.I. (the new kind, there was at least one other kind), gene splicing, ...</p>
+<p class="p6"><br></p>
+<p class="p5">brainstorming techniques</p>
+<p class="p5">flow / zone</p>
+<p class="p5">the more you know the more creative you can be</p>
+<p class="p6"><br></p>
+<p class="p5">svg + pdf</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Breaking Away From Synchronous Thinking</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Async</b></h2>
+<p class="p5">The default should be that everything is asynchronous.</p>
+<p class="p6"><br></p>
+<p class="p5">Synchrony should be the exception, not the rule.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>No Loops</b></h2>
+<p class="p5">Loops and recursion, currently, imply synchrony.</p>
+<p class="p6"><br></p>
+<p class="p5">Loops are replaced<a id="fnlink2"></a><a href="#fn2"><span class="s2"><sup>[2]</sup></span></a> by:</p>
+<ul class="ul1">
+  <li class="li11">send message to self<a id="fnlink3"></a><a href="#fn3"><span class="s2"><sup>[3]</sup></span></a>.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">See <a href="https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html">https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html</a></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sync</b></h2>
+<p class="p5">Functions/operations that are synchronous must be prefixed by the <span class="s3">sync</span> keyword.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sequencing is not the Default</b></h2>
+<p class="p5">In most current PLs, operations follow a strict sequence specified by consecutive lines of code or nested function calls.</p>
+<p class="p6"><br></p>
+<p class="p5">For example</p>
+<p class="p6"><br></p>
+<p class="p7">fn(5)</p>
+<p class="p7">fn(6)</p>
+<p class="p5">and</p>
+<p class="p7">fnx(fny(7))</p>
+<p class="p10"><br></p>
+<p class="p5">implies that <span class="s3">fn(6)</span> is invoked only after <span class="s3">fn(5)</span> has been invoked and has finished.<span class="Apple-converted-space">  </span>Likewise, <span class="s3">fnx()</span> is called only after <span class="s3">fny()</span> has finished.<span class="Apple-converted-space"> </span></p>
+<p class="p10"><br></p>
+<p class="p5">In the first case, the language has a <i>hidden</i> synchronization operation and in the second case, <span class="s3">fnx()</span> has a <i>hidden</i> <span class="s3">wait()</span> operation built into it<a id="fnlink4"></a><a href="#fn4"><span class="s2"><sup>[4]</sup></span></a>.</p>
+<p class="p6"><br></p>
+<p class="p5">Computers are able to perform concurrent operations, but our PLs build synchronization in as the default<a id="fnlink5"></a><a href="#fn5"><span class="s2"><sup>[5]</sup></span></a>.</p>
+<p class="p6"><br></p>
+<p class="p5">Distributed computers don't necessarily act as functions, but act as <i>components<a id="fnlink6"></a></i><a href="#fn6"><span class="s2"><sup>[6]</sup></span></a>.</p>
+<p class="p6"><br></p>
+<p class="p5">Mathematics is a <i>notation</i> for dealing with <i>functions </i>that are implicitly synchronized.<span class="Apple-converted-space">  </span>Using mathematical notation for programming languages limits what can be done<a id="fnlink7"></a><a href="#fn7"><span class="s2"><sup>[7]</sup></span></a> with a computer.<span class="Apple-converted-space">  </span>For example, programmers imagine that distributed programming is "hard" and tend not to invent languages that span processors, e.g. inventing a <i>language</i> that deals with 2 rPis instead of only one rPi at a time ; currently we have only <i>libraries </i>of assembler-like operations to deal with multiple processes and multiple CPUs<a id="fnlink8"></a><a href="#fn8"><span class="s2"><sup>[8]</sup></span></a> and some languages attempt conflate expression of so-called parallel processes into a functional notation.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>What Happens When Functions Aren't Synchronous?</b></h2>
+<p class="p5">Q: In the case</p>
+<p class="p6"><br></p>
+<p class="p7">fnx(fny(7))</p>
+<p class="p6"><br></p>
+<p class="p5">what happens if <span class="s3">fnx()</span> does not employ a built-in wait operation?</p>
+<p class="p6"><br></p>
+<p class="p5">A: Maybe fnx() runs before fny(). (!)</p>
+<p class="p6"><br></p>
+<p class="p5">Components run <i>forever.</i></p>
+<p class="p6"><i></i><br></p>
+<p class="p5">When an Architect wants a component to wait for input from another component, the Architect must specify that this is the case.</p>
+<p class="p6"><br></p>
+<p class="p5">Q: Does that mean more code?</p>
+<p class="p6"><br></p>
+<p class="p5">A: Not if an appropriate <i>notation</i> is employed.</p>
+<p class="p6"><br></p>
+<p class="p5">Currently, our notations specify synchronization.</p>
+<p class="p6"><br></p>
+<p class="p5">See Relational Programming.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculators vs. Programming</b></h2>
+<p class="p5">Current programming make it easy to express <i>calculator</i> style code.</p>
+<p class="p6"><br></p>
+<p class="p5">E.G. input -&gt; perform calculation -&gt; output.</p>
+<p class="p6"><br></p>
+<p class="p5">Even for this simplistic paradigm, we have added a syntactic bag called <i>exceptions</i>.<span class="Apple-converted-space">  </span>Exceptions break the fundamental tennet of Structured Programming</p>
+<ul class="ul1">
+  <li class="li11">Structured Programming means one in, one out.</li>
+  <li class="li11">Whereas, most modern languages support one-in, two-out (output a result or output an exception).</li>
+  <li class="li11">Exceptions are based on the <i>dynamic</i> call-chain.<span class="Apple-converted-space">  </span>The order that functions are called determines the order in which exceptions are inherited and acted upon.<span class="Apple-converted-space">  </span><i>Dynamic</i> call-chains make code harder to debug (chains are determined at runtime, instead of a compile-time).</li>
+  <li class="li11">JavaScript callbacks were an attempt to express, differently, the dynamic nature of call-chains.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Building a calculator should be the exception, not the rule.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">Programming can go well beyond the notion of just building calculators.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Calculator Paradigm</b></h2>
+<p class="p5">The <i>calculator</i> paradigm assumes that a program has</p>
+<ul class="ul1">
+  <li class="li11">one input</li>
+  <li class="li11">one output.</li>
+</ul>
+<p class="p9"><br></p>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Pros</b></h2>
+<ul class="ul1">
+  <li class="li11">expunges time, <i>f(t)</i>, from the notation making it possible to manipulate<a id="fnlink9"></a><a href="#fn9"><span class="s2"><sup>[9]</sup></span></a> the notation statically</li>
+  <li class="li11">based on mathematical notation — we have 100's of years of experience with this notation</li>
+  <li class="li11">notation can be manipulated at "compile time" and weeding out can occur before runtime</li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Cons</b></h2>
+<ul class="ul1">
+  <li class="li11">the calculator paradigm breaks down in the presence of exceptions</li>
+  <li class="li11">the calculator paradigm breaks the fundamental rule of Structured Programming — one in and one out (current PLs support one in and two outs (result and exception), which is not structured<a id="fnlink10"></a><a href="#fn10"><span class="s2"><sup>[10]</sup></span></a>)</li>
+  <li class="li11">"calculators" are but a subset of what computers can do</li>
+  <li class="li11">pencil-and-paper notation used for in an advanced 2D<a id="fnlink11"></a><a href="#fn11"><span class="s2"><sup>[11]</sup></span></a> (3D) medium</li>
+  <li class="li11">lines+offsets of non-overlapping elements vs. (x,y) of overlapping elements (e.g. grid vs. overlapping windows)</li>
+  <li class="li11">expunges time, e.g. <i>f(t)</i> from the notation, which results in concepts like JS callbacks (this comes from force-fitting the notation onto the problem, instead of choosing a notation first, depending on the problem — see <a href="https://guitarvydas.github.io/2021/04/10/Notation.html">https://guitarvydas.github.io/2021/04/10/Notation.html</a>)</li>
+  <li class="li11">expunging <i>f(t)</i> was responsible for set-backs in physics<a id="fnlink12"></a><a href="#fn12"><span class="s2"><sup>[12]</sup></span></a></li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Examples</b></h2>
+<ul class="ul1">
+  <li class="li11">mathematical functions<span class="Apple-converted-space"> </span></li>
+  <li class="li11">text processing (sed, awk)</li>
+  <li class="li11">pipelines (e.g. bash)</li>
+</ul>
+<h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino"><b>Anti-Examples</b></h2>
+<ul class="ul1">
+  <li class="li11">distributed processing (result, error, network error)</li>
+  <li class="li11">the human body's autonomous system</li>
+  <li class="li11">recipes (while potatoes boil, do …)</li>
+  <li class="li11">walking through a doorway (with a closed door)</li>
+  <li class="li11">window re-draw (onPaint).</li>
+  <li class="li11">keyboard input</li>
+  <li class="li11">mouse input</li>
+  <li class="li11">sensor input.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Relational Programming</b></h2>
+<p class="p5"><i>Relational Programming</i> (aka declarative programming) is backing in to the idea that code should not specify synchronization.<span class="Apple-converted-space">  </span>In <i>relational</i> languages, one writes <i>relations</i> that must be satisfied — in any order — for a rule to succeed.<span class="Apple-converted-space">  </span>The engine decides on the ordering of relation evaluation.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Asynchronous Languages</b></h2>
+<p class="p5">An asynchronous language does not have implicit synchronization built into its syntax.</p>
+<p class="p6"><br></p>
+<p class="p5">An example is <i>relational</i> programming.</p>
+<p class="p6"><br></p>
+<p class="p5">A language for asynchronous components allows the programmer to specify:</p>
+<ul class="ul1">
+  <li class="li11">the set of inputs for the component</li>
+  <li class="li11">the set of outputs of a component.</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Inputs do not necessarily "happen at the same time", as is the case with current programming languages (parameters are all delivered at the same time when a function is called).<span class="Apple-converted-space">  </span>[<i>If a component needs to wait for a set of inputs to be ready, then the Architect must explicitly say so.</i>]</p>
+<p class="p6"><br></p>
+<p class="p5">Outputs do not necessarily "happen at the same time".<span class="Apple-converted-space">  </span>A component can produce an output at any time. <span class="Apple-converted-space"> </span></p>
+<ul class="ul1">
+  <li class="li11">A component can produce an output in response to an input.</li>
+  <li class="li11">A component can produce no output in response to an input (this can't be done with CALL/RETURN — a function always returns <i>something </i>(even if it is just the return of <i>control flow</i>)).</li>
+  <li class="li11">A component can produce an output even when it has not been given any input(s).</li>
+</ul>
+<p class="p6"><br></p>
+<p class="p5">Current PLs return all values "at the same time".<span class="Apple-converted-space">  </span>A function returns its values when it returns.<span class="Apple-converted-space">  </span>This is a form of synchronization.<span class="Apple-converted-space">  </span>[<i>In contrast, consider a server.<span class="Apple-converted-space">  </span>It waits for requests and responds when it is good and ready.<span class="Apple-converted-space">  </span>It </i>could<i> respond more than once — there is nothing stopping it from doing so — but, our mindset occludes this possibility and considers it to be an error.</i>]</p>
+<p class="p6"><br></p>
+<p class="p5">Q: Does the Architect need to be explicit about synchronization?</p>
+<p class="p6"><br></p>
+<p class="p5">A: Yes.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">Q: What work can be done asynchronously?</p>
+<p class="p6"><br></p>
+<p class="p5">A: All sorts of work that we can't even imagine when using the current breed of synchronous languages.<span class="Apple-converted-space">  </span>For an analogy, consider the human body.<span class="Apple-converted-space">  </span>The human body has an autonomous system that involves some 500 concurrent processes, but, the human body has only one thread of consciousness.<span class="Apple-converted-space">  </span>In our current mindset, we would program this by building 500 calculators and shoving them into envelopes (called "threads") with point-to-point connections for inter-envelope messaging.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">Q: Does any of the above look familiar?</p>
+<p class="p6"><br></p>
+<p class="p5">A: Yes.<span class="Apple-converted-space">  </span>Networking, internet, distributed computing, etc. is like this.<span class="Apple-converted-space">  </span>Note that GUI's are like this, too.<span class="Apple-converted-space">  </span>User input — keyboard, mouse, etc. — comes "at any time" and there must be a component ready to accept such input.<span class="Apple-converted-space">  </span>Currently, we fake it and force-fit the everything-is-a-function paradigm onto these kinds of problems.<span class="Apple-converted-space">  </span>We can solve these problems in the current paradigm, but they could be solved more easily using other paradigms.<span class="Apple-converted-space">  </span>Our current solution — using an inappropriate paradigm — have been causing accidental complexities.<a id="fnlink13"></a><a href="#fn13"><span class="s2"><sup>[13]</sup></span></a></p>
+<p class="p6"><br></p>
+<p class="p5">* Pattern Matching vs. DI</p>
+<p class="p5">** DI means Design Intent</p>
+<p class="p5">*** Ohm Leaves DI Intact</p>
+<p class="p5">**** <span class="Apple-converted-space">    </span>Grammar is unspoiled by details, such as capture</p>
+<p class="p5"><span class="Apple-converted-space">     </span>REGEX DSL is spoiled by capture details, e.g. \/ab\/ --&gt; \/(a)(b)\/</p>
+<p class="p5"><span class="Apple-converted-space">     </span>Other PEGs are spoiled by capture details, e.g. Racket #lang peg --&gt; x:('a') y:('b')</p>
+<p class="p5"><span class="Apple-converted-space">     </span>Ohm --&gt; "a" "b"</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm PEG Editor</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p5">Ohm-JS is a PEG library.</p>
+<p class="p6"><br></p>
+<p class="p5">Important advantage Ohm-JS vs. other PEG libraries:</p>
+<ul class="ul1">
+  <li class="li11">grammar remains unspoiled by detail</li>
+  <li class="li11">PEG editor (IDE) for rapid debugging.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">Ohm-JS divides parser into 2 stages</p>
+<ul class="ul1">
+  <li class="li11">grammar</li>
+  <li class="li11">semantics code.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">(See GLUE tool for PEG for generating semantics code<span class="Apple-converted-space"> </span></p>
+<p class="p11"><a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">https://guitarvydas.github.io/2021/03/24/Glue-Manual.html</a></p>
+<p class="p11"><a href="https://guitarvydas.github.io/2021/03/18/Little-Language.html">https://guitarvydas.github.io/2021/03/18/Little-Language.html</a>)</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b><span class="Apple-converted-space"> </span>Editor and IDE</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Research</b></h2>
+<p class="p5">little languages (blog)</p>
+<p class="p5"><a href="https://guitarvydas.github.io/2021/03/18/Little-Language.html">https://guitarvydas.github.io/2021/03/18/Little-Language.html</a></p>
+<p class="p6"><br></p>
+<p class="p5">ohm editor github</p>
+<p class="p5"><a href="https://github.com/harc/ohm-editor">https://github.com/harc/ohm-editor</a></p>
+<p class="p6"><br></p>
+<p class="p5">ohm-js</p>
+<p class="p5"><a href="https://github.com/harc/ohm/tree/master/ohm-js">https://github.com/harc/ohm/tree/master/ohm-js</a></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG grammar</b></h2>
+<p class="p13"><span class="s1">SVGSwitchAndForeign {</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>Svg = XMLHeader DOCTypeHeader SvgElement</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>XMLHeader = "&lt;?" stuff* "?&gt;"<span class="Apple-converted-space"> </span></span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>DOCTypeHeader = "&lt;!DOCTYPE" stuff* "&gt;" <span class="Apple-converted-space"> </span></span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>SvgElement = "&lt;svg" attribute* "&gt;" EmptyDefs Element+ "&lt;/svg&gt;"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>EmptyDefs = "&lt;defs/&gt;"<span class="Apple-converted-space"> </span></span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>Element = ElementWithSwitch | ElementWithForeign | ElementWithElements | ElementWithoutElements</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>ElementWithSwitch =<span class="Apple-converted-space">  </span>"&lt;switch&gt;" Element Element "&lt;/switch&gt;"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>ElementWithForeign = "&lt;foreignObject" attribute* "&gt;" Element "&lt;/foreignObject&gt;"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>ElementWithElements = "&lt;" name stuff* "&gt;" (Element+ | text*) "&lt;/" name "&gt;"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>ElementWithoutElements = "&lt;" name stuff* "/&gt;"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>stuff = ~"&gt;" ~"/&gt;" ~"&lt;" ~"?&gt;" any</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>text = stuff</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>attribute = stuff</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>name = name1st nameFollow*</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>name1st = "a" .. "z" | "A" .. "Z"</span></p>
+<p class="p13"><span class="s1"><span class="Apple-converted-space">  </span>nameFollow = "0" .. "9" | name1st</span></p>
+<p class="p13"><span class="s1">}</span></p>
+<p class="p13"><span class="s1"><br>
+</span></p>
+<p class="p14"><span class="s1"></span><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Decoupling Data From Code</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p5">I examine how data and code is coupled.</p>
+<p class="p6"><br></p>
+<p class="p5">I examine how data and code can be decoupled.</p>
+<p class="p6"><br></p>
+<p class="p5">Most current, popular, PLs (Programming Languages), like JavaScript and Python, encourage coupling of data and code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Coupling</b></h2>
+<p class="p5">Any PL that provides any kind of operation on data encourages coupling.</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Lists and Arrays</b></h2>
+<p class="p5">Creating a list or an array, often implies knowledge of the type (shape) of the data.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>+</b></h2>
+<p class="p5">Low level operations like "+" often imply knowledge of the data type.</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Decoupling</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FP</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>OO</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>UNIX®</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>S/SL</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Assembler and CPUs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>VMs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>JIT</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>FBP</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>PROLOG</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>miniKanren</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Deferred Functions</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Advanced Language Design</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 0 - Hardware</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 1 - Assembler</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 2 - HLLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 3a - Declarative</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier3b - Distributed</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 2 - Paradigm Specific Languages</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Tier 3 - First Class Functions</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Rapid Development of SCLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Introduction</b></h2>
+<p class="p5">SCLs are like DSLs, but more specific.</p>
+<p class="p6"><br></p>
+<p class="p5">I argue that you should use many SCLs for one project.</p>
+<p class="p6"><br></p>
+<p class="p5">SCL means Solution Specific Language.</p>
+<p class="p6"><br></p>
+<p class="p5">Example DSLs:</p>
+<ul class="ul1">
+  <li class="li11">REGEX</li>
+  <li class="li11">SQL</li>
+  <li class="li11">etc.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">Example SCL:</p>
+<ul class="ul1">
+  <li class="li11">diagram compiler project - BMFBP (bare metal FBP)</li>
+  <li class="li11">Scrivener to Jekyll (to github Pages)</li>
+  <li class="li11">VSH (Visual Shell - prototype Bash as diagrams)</li>
+  <li class="li11">JS PROLOG</li>
+  <li class="li11">Stack DSL</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">asdf</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Wish List</b></h2>
+<ul class="ul1">
+  <li class="li11">approach
+  <ul class="ul2">
+    <li class="li11">extreme divide and conquer</li>
+    <li class="li11">each sub-division may be described in a separate paradigm(s)</li>
+  </ul></li>
+  <li class="li11">isolation</li>
+  <li class="li11">scalability</li>
+  <li class="li11">testability, maintenance</li>
+  <li class="li11">syntax</li>
+  <li class="li11">toolbox language</li>
+  <li class="li11">normalization</li>
+  <li class="li11">inferencing</li>
+  <li class="li11">formatting output</li>
+  <li class="li11">target language(s)</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Notable Exceptions</b></h2>
+<ul class="ul1">
+  <li class="li11">Multitasking is not on the wish list.</li>
+  <li class="li11">FP is not on the wish list</li>
+  <li class="li11">Synchrony and Asynchrony are not on the wish list.</li>
+  <li class="li11">Provability is not on the wish list.</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p11">All of the above are 2<span class="s4"><sup>nd</sup></span> order (or less) implementation details.</p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SCL Projects (Experimental)</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagram Compiler Project</b></h2>
+<ul class="ul1">
+  <ul class="ul2">
+    <li class="li11">SVG compiler
+    <ul class="ul2">
+      <li class="li11">editor
+      <ul class="ul2">
+        <li class="li11">Draw.io</li>
+        <li class="li11">export SVG</li>
+      </ul></li>
+      <li class="li11">front end
+      <ul class="ul2">
+        <li class="li11">Haskell — SVG to CL (Common Lisp)</li>
+        <li class="li11">CL to FB (factbase)</li>
+      </ul></li>
+      <li class="li11">compiler
+      <ul class="ul2">
+        <li class="li11">rule inferencer</li>
+        <li class="li11">JSON output</li>
+        <li class="li11">ESRAP</li>
+        <li class="li11">~40 software components</li>
+      </ul></li>
+      <li class="li11">back end
+      <ul class="ul2">
+        <li class="li11">ESRAP</li>
+        <li class="li11">scanner</li>
+        <li class="li11">Parsing Assembler</li>
+        <li class="li11">SL</li>
+        <li class="li11">cl-event-passing</li>
+        <li class="li11">expr DSL</li>
+        <li class="li11">Holm Prolog
+        <ul class="ul2">
+          <li class="li11">ported to CL - cl-holm-prolog</li>
+        </ul></li>
+      </ul></li>
+      <li class="li11">Stack DSL</li>
+    </ul></li>
+    <li class="li11">IDE
+    <ul class="ul2">
+      <li class="li11">ESA</li>
+      <li class="li11">ESA transpiler</li>
+      <li class="li11"></li>
+    </ul></li>
+  </ul>
+  <li class="li11">adsf</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scrivener to Jekyll (to Github Pages)</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>VSH - Visual Shell</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>JS PROLOG</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Little Languages</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SL (SCL)</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parsing Assembler</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Scanner</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Stack DSL</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>SVG Parser</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Objections to DSLs</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Manifestation</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Extreme Divide and Conquer</b></h2>
+<p class="p5">defer,</p>
+<p class="p5">e.g. bash 1<span class="s4"><sup>st</sup></span> order == pipelines, 2<span class="s4"><sup>nd</sup></span> order = directory manipulation, 3<span class="s4"><sup>nd</sup></span> order == string language</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Many SCLs</b></h2>
+<p class="p5">Many Paradigms</p>
+<p class="p5">One or more SCLs for each paradigm</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Syntax</b></h2>
+<ul class="ul1">
+  <li class="li11">Syntax Editor</li>
+  <li class="li11">Diagrams
+  <ul class="ul2">
+    <li class="li11">boxes</li>
+    <li class="li11">ellipses</li>
+    <li class="li11">lines and arrows</li>
+    <li class="li11">text
+    <ul class="ul2">
+      <li class="li11">Text is but a subset of syntax for PLs</li>
+      <li class="li11">text-only constrains thinking and creativity</li>
+    </ul></li>
+  </ul></li>
+  <li class="li11">at least one syntax for each paradigm</li>
+  <li class="li11">at least 2 syntaxes for each language</li>
+</ul>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Toolbox</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Normalization</b></h2>
+<p class="p5">Factbase</p>
+<p class="p6"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Inferencing</b></h2>
+<p class="p5">learn from PROLOG &amp; miniKanren</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Formatting Output</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Target Language</b></h2>
+<ul class="ul1">
+  <li class="li11">JavaScript</li>
+  <li class="li11">Bash</li>
+  <li class="li11">Common Lisp</li>
+  <li class="li9"><br></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Isolation</b></h2>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Contributors / Kibitzers</b></h2>
+<p class="p5">Rajiv Abraham</p>
+<p class="p5">John Shuve</p>
+<p class="p5">Jahan Malekzadeh</p>
+<p class="p5">Ken Khan</p>
+<p class="p5">Boken Lin</p>
+<p class="p5">(Gaelen</p>
+<p class="p5"><span class="Apple-converted-space"> </span>Jos'h)</p>
+<hr>
+<p class="p15"><span class="s1"><a id="fn1"></a><a href="#fnlink1">[1]</a></span><span class="s5"> </span><span class="s1">Mathew 4:19</span></p>
+<p class="p16"><span class="s6"><a id="fn2"></a><a href="#fnlink2"><span class="s5">[2]</span></a></span><span class="s7"> </span><span class="s8">Compilers could do this replacement.</span></p>
+<p class="p17"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>To signal next iteration step.</p>
+<p class="p17"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Specifically, fnx() uses the CALL low-level opcode and fny() uses the RETURN low-level opcode to signal that it has finished.<span class="Apple-converted-space">  </span>The synchronization is performed by the underlying hardware, using a global variable (the Stack).</p>
+<p class="p8"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>So, by default, we do not get concurrency.</p>
+<p class="p8"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>A component is like an Actor that isn't synchronized by default.</p>
+<p class="p8"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>easily</p>
+<p class="p8"><a id="fn8"></a><a href="#fnlink8"><span class="s2">[8]</span></a><span class="s2"> </span>Note that we talk about CPU - centralized processing units - even when discussing distributed computing.</p>
+<p class="p17"><a id="fn9"></a><a href="#fnlink9"><span class="s2">[9]</span></a><span class="s2"> </span>Substitution works only if (a) there are no side effects or (b) components are well-isolated and all side-effects do not leak beyond the boundaries of an isolated component.</p>
+<p class="p18"><span class="s9"><a id="fn10"></a><a href="#fnlink10"><span class="s2">[10]</span></a></span><span class="s2"> </span>Typed languages with pattern matching are attempting to rein this in.<span class="Apple-converted-space">  </span>Such languages make it possible to create two types — result and error — instead of creating two outputs.<span class="Apple-converted-space">  </span>I argue that it would be simpler to admit that components can have more than one output port.</p>
+<p class="p17"><span class="s10"><a id="fn11"></a><a href="#fnlink11"><span class="s2">[11]</span></a></span><span class="s2"> </span>I consider "pencil and paper" to be a 1D notation.<span class="Apple-converted-space">  </span>Actually, it deals with grids of non-overlapping characters arranged in rows, which is 2D-ish.<span class="Apple-converted-space">  </span>I argue that we should deal with grids of overlappable elements arranged in (x,y) space instead of in (row,line) cell space.</p>
+<p class="p17"><a id="fn12"></a><a href="#fnlink12"><span class="s2">[12]</span></a><span class="s2"> </span>Ilya Prigogene (Nobel laureate), "Order Out Of Chaos"</p>
+<p class="p18"><span class="s9"><a id="fn13"></a><a href="#fnlink13"><span class="s2">[13]</span></a></span><span class="s2"> </span><span class="s9">Such as </span>priority inversion, full preemption, thread safety, etc.</p>
+</div>
+</body>
+</html>
