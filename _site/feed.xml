@@ -1,4 +1,215 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-07T09:56:43-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Breaking out of synchronous thinking</title><link href="https://computingsimplicity.neocities.org/2021/05/07/Breaking-Out-Of-Synchronous-Thinking.html" rel="alternate" type="text/html" title="Breaking out of synchronous thinking" /><published>2021-05-07T00:00:00-04:00</published><updated>2021-05-07T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/07/Breaking%20Out%20Of%20Synchronous%20Thinking</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/07/Breaking-Out-Of-Synchronous-Thinking.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-08T07:51:53-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Software components 101</title><link href="https://computingsimplicity.neocities.org/2021/05/08/Software-Components-101.html" rel="alternate" type="text/html" title="Software components 101" /><published>2021-05-08T00:00:00-04:00</published><updated>2021-05-08T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/08/Software%20Components%20101</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/08/Software-Components-101.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Software Components 101&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-08T07:51:28Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-08T07:51:28Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 13.0px Palatino; min-height: 18.0px}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 11.0px Menlo}
+    span.s3 {text-decoration: underline}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Software Components 101&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;This essay introduces some of the concepts of Software Components.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A full discussion of Software Components is fractal and recursive in nature.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This essay is an introduction and I choose to skip some of the details.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The key concept is that Components are &lt;i&gt;relative &lt;/i&gt;to one another and are &lt;i&gt;asynchronous&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;These concepts are quite different from those of most modern programming languages, but the concepts are subtle.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I intend to draw components in SVG and I intend to show&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; how to use diagrams, and SVG, as syntax (instead of characters).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Top Level&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic1.png&quot; width=&quot;150px&quot; height=&quot;99px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 1 Basic Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 1 shows a basic software component diagram.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;This diagram represents the top level of a software Component.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The component's name is &quot;main&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The Component has one Input Port — &quot;in&quot; — represented by the green circle (containing the text &quot;in&quot;).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The Component has one Output Port — &quot;out&quot; — represented by the yellow circle (containing the text &quot;out&quot;).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The Port &quot;in&quot; is connected to the Port &quot;out&quot; by a line representing the flow of Events from &quot;in&quot; to &quot;out&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;[&lt;i&gt;Most lines begin at a green input and end at a yellow output.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If we used an arrow, instead of a line, the arrow would point at the yellow output port (the direction of flow).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We will see that it is also possible to connect a yellow output to another yellow output and a green input to another green input, later.]&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;We write the name of the Component as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[main]&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;the input port as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;(in)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;and the output port as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;(out).&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;I.E. Component names are written in brackets, Port names are written in parentheses.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Nested&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic2.png&quot; width=&quot;150px&quot; height=&quot;99px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 2 Nested Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 2 shows a component, called &quot;subcomponent&quot; nested inside the component called &quot;main&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Inner input ports are green rectangles.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Inner output ports are yellow rectangles.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;External ports are circles, inner ports are rectangles.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The Input Port &quot;in&quot; is connected to the inner Input Port &quot;A&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The inner Output Port &quot;B&quot; is connected to the External Output Port &quot;out&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;[&lt;i&gt;This diagram contains two components and a total of two connections.&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Nested Component in a Nested Component&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic3.png&quot; width=&quot;150px&quot; height=&quot;78px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 3 Component Nested in a Nested Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;This diagram shows 3 components.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&quot;Component X&quot; is inside component &quot;subcomponent&quot; and component &quot;subcomponent&quot; is, itself, inside the Component &quot;main&quot;.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The component &quot;subcomponent&quot; has an output port called &quot;#&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Output Port has a shadow&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/span&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The shadow means that the port is connected to all sub-ports with the same name.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We write this Port name as (*#).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;We prefix the component name with *&lt;/i&gt;].&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;In this diagram, there are 3 Components and 4 connections.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;3 connections are explicit (shown as lines) and one connection is implicit ([component X].(#) connected to [subcomponent].(*#)).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Here, we introduce another syntactical point - names can include spaces and any characters except brackets, parentheses and dots.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example the name of the inner-inner component is [component X]. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Names are &lt;i&gt;relative&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See the section Relative Naming below.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;It is easier to think of the above diagram as being subdivided into several layers, eliding the inner details at each layer. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The topmost layer might be thought of as:&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic3 (0).png&quot; width=&quot;150px&quot; height=&quot;78px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 4 Component Nested in a Nested Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;whereas the inner layer might be thought of as:&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic3 (1).png&quot; width=&quot;150px&quot; height=&quot;77px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 5 Component Nested in a Nested Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;The detail to note is the &lt;i&gt;self [.]&lt;/i&gt; is relative, not absolute.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Hence, [.] refers to [subcomponent] or to [component X], depending on context.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Copied Component&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;img src=&quot;/assets/2021-05-08-07-51-28-Images/basic1-basic4.png&quot; width=&quot;150px&quot; height=&quot;133px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 6 Copied Component&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Fig. 6 shows a simple COPY/PASTE of [subcomponent].&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Component [main] contains two clones of the component [subcomponent].&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Relative naming makes this possible and simple and easy.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Composite vs. Leaf Components&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Components can contain other components (e.g. &lt;i&gt;composition&lt;/i&gt;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Such components are call &lt;i&gt;composite&lt;/i&gt; &lt;i&gt;components&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Composite Components, once invoked, run until all of their children have subsided.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Components that do not contain other components, or are implemented in some other language (other than &lt;span class=&quot;s2&quot;&gt;dasl&lt;/span&gt;), are called &lt;i&gt;leaf components&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Leaf Components are like black boxes.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When they are invoked, they run to completion (one input event only).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We do not &quot;see&quot; — at the &lt;span class=&quot;s2&quot;&gt;dasl&lt;/span&gt; level — the inner workings of &lt;i&gt;Leaf Components.&lt;/i&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Asynchronous&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Components are asynchronous.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Components may only communicate by sending events to their output ports.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Event delivery is, conceptually, not implemented as CALL / RETURN.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Event delivery occurs in two phases,&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; see &lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&lt;/a&gt;).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;It might help to think of closures with input queues and a distinguished routine, called the Dispatcher, that invokes closures that are ready.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This concept is not very different from processes and scheduling found in most operating systems, but it can be implemented in a more light-weight manner (there is no requirement for full preemption).&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Run to Completion&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Components consume one input event at a time.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Components process each input event to completion before popping another input event from their input queues.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;Note that components can be broken up into pieces which are coordinated by event arrival.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Events invoke only one piece of a Component at a time and &quot;running to completion&quot; means that only one piece completes running.&lt;/i&gt;]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ready / Busy&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Syntax Details&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Dot Syntax&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;We write a component / port pair as&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[ … ] . ( … )&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I.E. the Component name is enclosed in brackets, the Port name is enclosed in parentheses and the &lt;i&gt;dot&lt;/i&gt; operator joins the two (much like the field operator in most textual OO languages).&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Self Component&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;self&lt;/i&gt; Component has a special name &quot;.&quot; and is written as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[.]&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Reference to a Port of a &lt;i&gt;self &lt;/i&gt;Component looks like&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[.].(A)&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;We want machine readability first, human readability second.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The important point is that Components and Ports have a different syntax which is always the same.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The namespace of Input Ports can overlap with the namespace of Output Ports.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Syntax is easy to change, if you don't like the above&lt;/i&gt;.]&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Green vs. Yellow&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Green is defined as any colour where the R component is &amp;lt;#80 and the G component is &amp;gt;= #80.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Yellow is defined as any colour where the R component is &amp;gt;= #80 and the G component is &amp;gt;= #80.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Relative Naming&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Component names are constructed in a relative manner, by prefixing each component name with its parent component, followed by a space followed by the Component's name.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, we would refer to the inner-inner Component of Nested Component in a Nested Component, as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[main subcomponent component X].&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This convention does not apply to Port names, since Port names are always internally distinguished by the Component that they belong to, e.g. the Port (c) in Nested Component in a Nested Component is written as:&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[main subcomponent component X].(c)&lt;/p&gt;
+&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Kinds vs. Names&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;What we have been calling Component &lt;i&gt;names&lt;/i&gt; are actually Component &lt;i&gt;kinds&lt;/i&gt; — much like their type or class.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In most cases, there is only one Component of a given kind on a diagram&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;In the cases where there is more than one Component of a given kind, the components are written as digits, starting at 1, in the order of declaration of the Components (component declarations will be discussed elsewhere).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;For example, in Copied Component, the [main] Component has two copies of [subcomponent].&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They are written as&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[1]…&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;and&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;[2]…&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;(Internally, the components are further distinguished by their (x,y) coordinates and are unique).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Note that &lt;span class=&quot;s2&quot;&gt;[subcomponent]&lt;/span&gt; has only one copy of &lt;span class=&quot;s2&quot;&gt;[component X]&lt;/span&gt; inside of it, so &lt;span class=&quot;s2&quot;&gt;[component X]&lt;/span&gt; is &lt;span class=&quot;s3&quot;&gt;not&lt;/span&gt; written in a qualified manner in the implementation of &lt;span class=&quot;s2&quot;&gt;[subcomponent]&lt;/span&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[&lt;i&gt;Hopefully this will become more clear with more examples.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We are using &lt;/i&gt;&lt;span class=&quot;s3&quot;&gt;&lt;i&gt;relative&lt;/i&gt;&lt;/span&gt;&lt;i&gt; naming, whereas most modern programming languages use &lt;/i&gt;&lt;span class=&quot;s3&quot;&gt;&lt;i&gt;absolute&lt;/i&gt;&lt;/span&gt;&lt;i&gt; naming.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;All naming and namespacing is relative to the immediate parent Component.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Another subtlety is that we are splitting each component up into 3 specifications — signature, children, connections — whereas most modern programming languages attempt to consolidate all code into flat, not relative, specifications&lt;/i&gt;]&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;In a following essay.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;If one looks at SVG, it should become apparent how to use SVG as syntax.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Instead of characters, I use a syntax composed of rects, circles, ellipses, lines and text. I call this DaS (Diagrams as Syntax).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;In fact, I will begin using a stroke-width of 3, which is more easily represented and recognized in SVG.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;Notably, event receivers are not immediately executed once an event arrives.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is best to think of events as (1) being placed on input queues and (2) Component execution being coordinated by a Scheduler (separate from event delivery).&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;If this seems anti-intuitive, note that diagrams represent Software Architecture, not Code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In practice, Architectures tend to have only one of each kind of thing on a diagram.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(If you are thinking of &quot;+&quot; Components, then you are thinking about Code, not Architecture).&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101</summary></entry><entry><title type="html">Breaking out of synchronous thinking</title><link href="https://computingsimplicity.neocities.org/2021/05/07/Breaking-Out-Of-Synchronous-Thinking.html" rel="alternate" type="text/html" title="Breaking out of synchronous thinking" /><published>2021-05-07T00:00:00-04:00</published><updated>2021-05-07T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/07/Breaking%20Out%20Of%20Synchronous%20Thinking</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/07/Breaking-Out-Of-Synchronous-Thinking.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -212,7 +423,37 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Breaking Out Of Synchronous Thinking</summary></entry><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Breaking Out Of Synchronous Thinking</summary></entry><entry><title type="html">Prolog vs kanren</title><link href="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html" rel="alternate" type="text/html" title="Prolog vs kanren" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/PROLOG%20vs%20Kanren</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;utf-8&quot;/&gt;
+	&lt;title&gt;PROLOG vs Kanren&lt;/title&gt;
+	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;exhaustivesearch&quot;&gt;Exhaustive Search&lt;/h1&gt;
+
+&lt;p&gt;Both methods, PROLOG and Kanren, perform exhaustive search.&lt;/p&gt;
+
+&lt;p&gt;PROLOG achieves exhaustive search via backtracking and re-binding via Unification.&lt;/p&gt;
+
+&lt;p&gt;Kanren achieves exhaustive search by creating an object of all possible matches at a given point, then passing the object+answers+unifiableVariables down a pipeline for further augmentation and clipping.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;/assets/2021-05-05-09-45-06-Images/PROLOGvsKanren.png&quot; alt=&quot;&quot; id=&quot;prologvskanren&quot; width=&quot;300&quot; height=&quot;200&quot; /&gt;
+&lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">PROLOG vs Kanren</summary></entry><entry><title type="html">Breaking long running loops</title><link href="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html" rel="alternate" type="text/html" title="Breaking long running loops" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/Breaking%20Long%20Running%20Loops</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/Breaking-Long-Running-Loops.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -337,37 +578,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tags Instead of Names</summary></entry><entry><title type="html">Prolog vs kanren</title><link href="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html" rel="alternate" type="text/html" title="Prolog vs kanren" /><published>2021-05-05T00:00:00-04:00</published><updated>2021-05-05T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/05/PROLOG%20vs%20Kanren</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/05/PROLOG-vs-Kanren.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;PROLOG vs Kanren&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;exhaustivesearch&quot;&gt;Exhaustive Search&lt;/h1&gt;
-
-&lt;p&gt;Both methods, PROLOG and Kanren, perform exhaustive search.&lt;/p&gt;
-
-&lt;p&gt;PROLOG achieves exhaustive search via backtracking and re-binding via Unification.&lt;/p&gt;
-
-&lt;p&gt;Kanren achieves exhaustive search by creating an object of all possible matches at a given point, then passing the object+answers+unifiableVariables down a pipeline for further augmentation and clipping.&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;img src=&quot;/assets/2021-05-05-09-45-06-Images/PROLOGvsKanren.png&quot; alt=&quot;&quot; id=&quot;prologvskanren&quot; width=&quot;300&quot; height=&quot;200&quot; /&gt;
-&lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">PROLOG vs Kanren</summary></entry><entry><title type="html">Software components 101 connection queries</title><link href="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-101-Connection-Queries.html" rel="alternate" type="text/html" title="Software components 101 connection queries" /><published>2021-05-04T00:00:00-04:00</published><updated>2021-05-04T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/04/Software%20Components%20101%20-%20Connection%20Queries</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-101-Connection-Queries.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tags Instead of Names</summary></entry><entry><title type="html">Software components 101 connection queries</title><link href="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-101-Connection-Queries.html" rel="alternate" type="text/html" title="Software components 101 connection queries" /><published>2021-05-04T00:00:00-04:00</published><updated>2021-05-04T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/04/Software%20Components%20101%20-%20Connection%20Queries</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/04/Software-Components-101-Connection-Queries.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -2067,41 +2278,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry><entry><title type="html">Txl</title><link href="https://computingsimplicity.neocities.org/2021/04/28/TXL.html" rel="alternate" type="text/html" title="Txl" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/TXL</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/TXL.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;TXL&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;txl&quot;&gt;TXL&lt;/h1&gt;
-
-&lt;p&gt;[&lt;em&gt;Why not use TXL instead of Ohm?&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Good question. I didn&amp;#8217;t explicitly understand the problem until later, when I had PEG and JavaScript in my hands.&lt;/p&gt;
-
-&lt;p&gt;S/SL laid the groundwork for my understanding. It took only 30 more years. [&lt;em&gt;I used S/SL right from the beginning, but it took me a while to verbalize why I found it so useful.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;I wonder if Cordy &amp;#8220;got it&amp;#8221; much earlier?&lt;/p&gt;
-
-&lt;p&gt;TXL is based on parse trees. Ohm-JS is based on JS objects. It became easier to program when I thought of objects instead of parse trees.&lt;/p&gt;
-
-&lt;p&gt;TXL looks like &amp;#8220;compiler technology&amp;#8221;. Ohm-JS &lt;em&gt;can&lt;/em&gt; look like lowly JS. Maybe that makes Ohm-JS &lt;em&gt;feel&lt;/em&gt; more accessible?&lt;/p&gt;
-
-&lt;p&gt;Paul Morrison talks about &amp;#8220;steam engine time&amp;#8221; - multiple inventions of the same concept, at about the same time.&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-txl&quot;&gt;Appendix - TXL&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.txl.ca/&quot;&gt;https://www.txl.ca/&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">TXL</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry></feed>
