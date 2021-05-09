@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Software Components 101 - Engine Development (Part 1)</title>
+  <meta name="CreationTime" content="2021-05-09T15:05:16Z">
+  <meta name="ModificationTime" content="2021-05-09T15:05:16Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 12.0px 'Apple Symbols'}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Goal</b></h2>
+<p class="p2">The goal of this sub-project is to build an engine<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> that runs software components.</p>
+<p class="p3"><br></p>
+<p class="p2">I try to show how to compile diagrams by hand.<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a></p>
+<p class="p3"><br></p>
+<p class="p2">I am trying to capture my design thoughts while they are still fresh.<span class="Apple-converted-space">  </span>See the roadmap in Roadmap.</p>
+<p class="p3"><br></p>
+<p class="p2">I hope to build the engine in:</p>
+<p class="p3"><br></p>
+<ul class="ul1">
+  <li class="li4">Common Lisp</li>
+  <li class="li4">JavaScript</li>
+  <li class="li4">Python.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">The <i>design</i> for each of the above, is the same, but the details change depending on the language.</p>
+<p class="p3"><br></p>
+<p class="p2">I want to capture the design similarities and generate the above engines automatically, if possible.</p>
+<p class="p3"><br></p>
+<p class="p2">To do this, I sub-divide the problem and add a new sub-problem:</p>
+<ul class="ul1">
+  <li class="li4">pseudo-code in diagram form for the engine.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">I <i>think</i> that I'm going to use Ohm-JS and PROLOG to generate code.<span class="Apple-converted-space">  </span>Let's see…</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Prerequisites</b></h2>
+<p class="p2">See</p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/04/Software-Components-001.html">https://guitarvydas.github.io/2021/05/04/Software-Components-001.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/08/Software-Components-101.html">https://guitarvydas.github.io/2021/05/08/Software-Components-101.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html">https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Diagrams</b></h2>
+<p class="p2">I drew diagrams<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> for the engine.</p>
+<p class="p3"><br></p>
+<p class="p2">First, I drew an overview diagram, then I successively added detail.<span class="Apple-converted-space">  </span>I kept each diagram "simple enough" for me to understand.</p>
+<p class="p3"><br></p>
+<p class="p2">As I drew the diagrams, I kept "implementability" and "explainability" in mind.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>1. Data and Types</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Data &amp; Types.png" width="500px" height="179px" alt="Image"></p>
+<p class="p6">Fig. 1 Data &amp; Types</p>
+<p class="p7"><br></p>
+<ul class="ul1">
+  <li class="li4"><b>Template</b>
+  <ul class="ul2">
+    <li class="li4">a Template is like a class</li>
+    <li class="li4">a Template specifies the structure of a Component, but doesn't create an instance</li>
+    <li class="li4">a Template can be used more than once in a diagrams</li>
+    <li class="li4">Kind<span class="Apple-converted-space"> </span>
+    <ul class="ul2">
+      <li class="li4">a Kind is akin to a Type (Class / whatever)</li>
+      <li class="li4">I'm using a different name - <i>kind</i> - because the main operation is different than in OO (see below)</li>
+    </ul></li>
+    <li class="li4">we combine Templates using <i>composition</i> instead of inheritance</li>
+    <li class="li4">we might want to use the index as a name</li>
+  </ul></li>
+</ul>
+<ul class="ul1">
+  <ul class="ul2">
+    <ul class="ul2">
+      <li class="li4">name is either<span class="Apple-converted-space"> </span>
+      <ul class="ul2">
+        <li class="li4">template name (if the template is used only once on a diagram), or,</li>
+        <li class="li4">an index into the ordered bag of children (of this template)</li>
+        <li class="li4">(we could assign string names to each child, but that's more work than is necessary for this simple example).</li>
+      </ul></li>
+    </ul>
+  </ul>
+</ul>
+<ul class="ul1">
+  <li class="li4"><b>Composite Template<span class="Apple-converted-space"> </span></b>
+  <ul class="ul2">
+    <li class="li4">A Composite is a Template that contains (is composed of) other Templates</li>
+    <li class="li4">recursive<span class="Apple-converted-space">     </span></li>
+    <li class="li4">a Composite is a Basic Template with 2 additions
+    <ul class="ul2">
+      <li class="li4">children
+      <ul class="ul2">
+        <li class="li4">an ordered bag of other Templates<span class="Apple-converted-space"> </span></li>
+      </ul></li>
+      <li class="li4">connections
+      <ul class="ul2">
+        <li class="li4">connections between child components (and/or self)</li>
+        <li class="li4">connections can ONLY be made between direct children (and self)</li>
+        <li class="li4">sender<span class="Apple-converted-space">       </span>
+        <ul class="ul2">
+          <li class="li4">one sender per connection</li>
+          <li class="li4">each sender specifies a connection to zero or more receivers</li>
+          <li class="li4">each sender is joined to a bag of receivers</li>
+          <li class="li4">multiple senders can appear to send to the same connection on a diagram
+          <ul class="ul2">
+            <li class="li4">connections can specify the same bag of receivers, but only one sender per connection</li>
+            <li class="li4">this looks-like multiple senders sending to the <i>same</i> bag of receivers</li>
+          </ul></li>
+          <li class="li4">each sender has a name as above (i.e. Template name or index)</li>
+        </ul></li>
+        <li class="li4">bag of receivers
+        <ul class="ul2">
+          <li class="li4">each receiver has a name as above (i.e. Template name or index)</li>
+        </ul></li>
+      </ul></li>
+    </ul></li>
+  </ul></li>
+  <li class="li4"><b>Leaf Template</b>
+  <ul class="ul2">
+    <li class="li4">a Leaf is the "bottom" of the hierarchy of Templates</li>
+    <li class="li4">a Leaf is the "termination case" for recursive construction of Templates <span class="Apple-converted-space">   </span>
+    <ul class="ul2">
+      <li class="li4">a Leaf is a "black box"</li>
+      <li class="li4">a Leaf is (probably) implemented in some other language</li>
+    </ul></li>
+  </ul></li>
+  <li class="li4"><b>Runnable</b>
+  <ul class="ul2">
+    <li class="li4">a Runnable is the extra stuff needed to instantiate a Template</li>
+    <li class="li4">since Templates can be used more than once, each Runnable must be unique</li>
+    <li class="li4">Runnable "points back" to Template for stuff that doesn't need to be copied</li>
+    <li class="li4">to make a Composite Runnable unique
+    <ul class="ul2">
+      <li class="li4">need to copy Connections</li>
+      <li class="li4">fixup all Runnable's Connections to refer to children in Runnable (instances of children)</li>
+    </ul></li>
+  </ul></li>
+  <li class="li4"><b>Types</b>
+  <ul class="ul2">
+    <ul class="ul2">
+      <li class="li4">inputs</li>
+      <li class="li4">outputs</li>
+      <li class="li4">input_events</li>
+      <li class="li4">output_events</li>
+      <li class="li4">children</li>
+      <li class="li4">connections</li>
+      <li class="li4">connection</li>
+      <li class="li4">port</li>
+      <li class="li4">component</li>
+      <li class="li4">sender</li>
+      <li class="li4">receiver</li>
+      <li class="li4">event_queue</li>
+      <li class="li4">event</li>
+    </ul>
+    <li class="li4">types boil down to several possibilities:
+    <ul class="ul2">
+      <li class="li4">a <i>name</i>
+      <ul class="ul2">
+        <li class="li4">a symbol
+        <ul class="ul2">
+          <li class="li4">probably implemented as a hashed string</li>
+        </ul></li>
+      </ul></li>
+      <li class="li4">a <i>collection</i>
+      <ul class="ul2">
+        <li class="li4">namespace</li>
+        <li class="li4">bag</li>
+        <li class="li4">queue</li>
+      </ul></li>
+      <li class="li4">a <i>tuple</i>
+      <ul class="ul2">
+        <li class="li4">{ ..., ..., ... }</li>
+      </ul></li>
+      <li class="li4"><b>any</b>
+      <ul class="ul2">
+        <li class="li4">any of the above</li>
+      </ul></li>
+    </ul></li>
+  </ul></li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Note that the "type language" described in the diagram (under legend) should be easy to build in PEG (I like Ohm-JS).</p>
+<p class="p5"><br></p>
+<p class="p4">I intend to use the type language in the component diagrams below.</p>
+<p class="p5"><br></p>
+<p class="p4">I know that I can implement the type language in Ohm-JS (I've done it before).<span class="Apple-converted-space">  </span>It simply represents work and "no risk".<span class="Apple-converted-space">  </span>I will step around this sub-problem for now.<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>2. Nested Components</b></h2>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Nested Components.png" width="400px" height="129px" alt="Image"></p>
+<p class="p6">Fig. 2 Nested Components</p>
+<p class="p7"><br></p>
+<p class="p6">At first, I draw a rough diagram of how I wish to architect the solution.</p>
+<p class="p7"><br></p>
+<p class="p6">The basic operation is: input a <i>template</i> and convert it to a <i>runnable</i>.</p>
+<p class="p7"><br></p>
+<p class="p6">I immediately see this solution as 3 nested layers.<span class="Apple-converted-space">  </span>I jot down the overview — informally — to give myself a roadmap of how I want to solve this problem (the problem is: to build an engine for components and to deliver it in various target languages).</p>
+<p class="p7"><br></p>
+<p class="p6">I imagine 3 processes and draw them as rounded rectangles.</p>
+<p class="p7"><br></p>
+<p class="p6">I imagine 2 intermediate results and draw them as cylinders.</p>
+<p class="p7"><br></p>
+<p class="p6">I draw only the <i>happy path</i> between the processes as arrows.</p>
+<p class="p7"><br></p>
+<p class="p6">The gist of this step is to capture/explain my intended architecture while deferring details<a id="fnlink5"></a><a href="#fn5"><span class="s1"><sup>[5]</sup></span></a> for later.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>3. Add Ports to Nested Diagrams</b></h2>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Add Ports to Nested Components.png" width="400px" height="100px" alt="Image"></p>
+<p class="p6">Fig. 3 Add Ports</p>
+<p class="p7"><br></p>
+<p class="p6">I embellish the diagram by drawing input and output ports (green and yellow, resp.).</p>
+<p class="p7"><br></p>
+<p class="p6">External ports are drawn as circles.</p>
+<p class="p7"><br></p>
+<p class="p6">Internal ports are drawn a small squares.</p>
+<p class="p7"><br></p>
+<p class="p6">The work, in this step, is minimal, but it makes me ponder the design further.<span class="Apple-converted-space">  </span>This example is simple.<span class="Apple-converted-space">  </span>In a more complicated solution, I might change my mind about the design and update the diagrams in this step.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>4. Layers</b></h2>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Layers.png" width="400px" height="500px" alt="Image"></p>
+<p class="p6">Fig. 4 Layers</p>
+<p class="p7"><br></p>
+<p class="p6">I divvy up the design into layers using the previous diagrams as guides.<span class="Apple-converted-space">  </span>I often do this step implicitly without drawing anything further.</p>
+<p class="p7"><br></p>
+<p class="p6">As can be seen, each <i>layer</i> is a black box with input ports and output ports.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>5. Rough-in Processes</b></h2>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Rough-in Processes.png" width="400px" height="332px" alt="Image"></p>
+<p class="p6">Fig. 5 Rough in</p>
+<p class="p7"><br></p>
+<p class="p6">At this point, I am satisfied with the intended solution, so I begin roughing-in the details.</p>
+<p class="p7"><br></p>
+<p class="p6">I morphed the top level diagram somewhat — it now contains 2 major process, but still contains 2 intermediate results.</p>
+<p class="p7"><br></p>
+<p class="p6">This is <i>engineering, </i>i.e. adding details to the original <i>architecture</i> to make it realizable.</p>
+<p class="p7"><br></p>
+<p class="p6">As I consider the details, I add more external ports and flesh out the two main blocks. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">I need to remind myself that I am starting out with a <i>template</i> and am trying to build a <i>runnable</i>.<span class="Apple-converted-space">  </span>I keep these concepts separated, using separate ports and separate connections.<span class="Apple-converted-space">  </span>When using current programming languages, I would normally fold the architectural concepts (of <i>template</i> and <i>runnable</i>) into a single data structure.<span class="Apple-converted-space">  </span>In essence, this kind of folding is a premature optimization.<span class="Apple-converted-space">  </span>I believe that the above diagrams and separation capture my intended approach for all to read (and/or to criticize, I'm not perfect).<span class="Apple-converted-space">  </span>I want to communicate what I'm thinking and the <i>why's</i> of my intended solution.<span class="Apple-converted-space">  </span>There might be more than one way to solve this problem, but these diagrams need to show how <i>I </i>choose to solve it.</p>
+<p class="p7"><br></p>
+<p class="p6">To enable easier hand-compilation, I've drawn all ports <i>inside</i> the components that own them.<span class="Apple-converted-space">  </span>Normally, I would draw ports so that they intersect the boundaries of the parent components — intersection and ownership is "easy" for a computer to calculate, but this minor change makes it easier for me to hand-compile the diagrams (as I eye-ball the diagrams).<span class="Apple-converted-space">  </span>In this case I have only 1 relationship — <i>contains</i> —instead of the two relationships a non-bootstrap compiler would use — <i>contains</i> and <i>intersects</i>.<span class="Apple-converted-space">  </span>I avoid putting (x,y) coordinates on the diagram as that will slow me down during hand-compilation, but is no problem for a computer.</p>
+<p class="p7"><br></p>
+<p class="p6">New invention: the solution that I want to express needs 2 <i>forall</i> operations.<span class="Apple-converted-space">  </span>I draw these as large components with the <span class="s2">∀</span> character as the first character in the names and with blue ports signifying the "inputs" from the encompassing <i>forall </i>operation.<span class="Apple-converted-space">  </span>This might be written as</p>
+<p class="p8">for child in Template.children { … }</p>
+<p class="p6">in pseudo-code.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>6. Re-Label Rough-in</b></h2>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/kernel-Rough-in Processes Labelled.png" width="400px" height="336px" alt="Image"></p>
+<p class="p6">Fig. 6 Re-Labelling</p>
+<p class="p7"><br></p>
+<p class="p6">As another aid to hand-compilation, I tag every drawing element with a single-letter symbol.<span class="Apple-converted-space">  </span>Again, this kind of tagging is not necessary in a fully-automated process, but removes some of the boring and error-prone steps in hand-compilation.</p>
+<p class="p7"><br></p>
+<p class="p6">I've tagged all circles, rectangles and cylinders this way.</p>
+<p class="p7"><br></p>
+<p class="p6">A fully automated compiler would simply use the graphical objects' IDs and would not require tags.</p>
+<p class="p7"><br></p>
+<p class="p6">We can say that the <i>tag</i>s are <i>synonym</i>s for the tagged object ID's.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Further</b></h2>
+<p class="p2">I the next instalment, I will discuss how to convert <span class="s3">Fig. 6 into a text file, ready for processing.</span></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Github</b></h2>
+<p class="p2"><a href="https://github.com/guitarvydas/basicdasl/tree/master/pseudo">https://github.com/guitarvydas/basicdasl/tree/master/pseudo</a></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Roadmap</b></h2>
+<p class="p2"><img src="/assets/2021-05-09-15-05-16-Images/Roadmap.png" width="100%" alt="Image"></p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s1">[1]</span></a><span class="s1"> </span>I also call the <i>engine</i> a <i>kernel</i>.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s1">[2]</span></a><span class="s1"> </span>The first step in automating anything is to do it manually.<span class="Apple-converted-space">  </span>The work should be really boring to do and scream to be automated.</p>
+<p class="p4"><span class="s3"><a id="fn3"></a><a href="#fnlink3"><span class="s1">[3]</span></a></span> The diagrams are in the file kernel.drawio, under separate tabs.</p>
+<p class="p6"><span class="s1"><a id="fn4"></a><a href="#fnlink4">[4]</a> </span>I will show how to build the type language in another blog.<span class="Apple-converted-space">  </span>It is just simple, repetitive and boring work.<span class="Apple-converted-space">  </span>I'll implement it when my brain is fried — there is no point doing it now while I'm still fresh and on a designing-roll.<span class="Apple-converted-space">  </span>Maybe this is what athletes call "the zone" or "flow state" - I choose to do nothing to break this flow, leaving menial implementation tasks for later.</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s1">[5]</span></a><span class="s1"> </span>https://guitarvydas.github.io/2021/03/17/Details-Kill.html</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>

@@ -1,4 +1,298 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-09T11:27:27-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Ohm Editor</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html" rel="alternate" type="text/html" title="Ohm Editor" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-09T15:05:22-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Software components 101 engine development (part 1)</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html" rel="alternate" type="text/html" title="Software components 101 engine development (part 1)" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Software%20Components%20101%20-%20Engine%20Development%20(Part%201)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Software Components 101 - Engine Development (Part 1)&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-09T15:05:16Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-09T15:05:16Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 13.0px Palatino}
+    span.s2 {font: 12.0px 'Apple Symbols'}
+    span.s3 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
+
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Goal&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The goal of this sub-project is to build an engine&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; that runs software components.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I try to show how to compile diagrams by hand.&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I am trying to capture my design thoughts while they are still fresh.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See the roadmap in Roadmap.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I hope to build the engine in:&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;Common Lisp&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;JavaScript&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;Python.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;design&lt;/i&gt; for each of the above, is the same, but the details change depending on the language.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I want to capture the design similarities and generate the above engines automatically, if possible.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;To do this, I sub-divide the problem and add a new sub-problem:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;pseudo-code in diagram form for the engine.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;I &lt;i&gt;think&lt;/i&gt; that I'm going to use Ohm-JS and PROLOG to generate code.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Let's see…&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Prerequisites&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;See&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/04/Software-Components-001.html&quot;&gt;https://guitarvydas.github.io/2021/05/04/Software-Components-001.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/08/Software-Components-101.html&quot;&gt;https://guitarvydas.github.io/2021/05/08/Software-Components-101.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html&quot;&gt;https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Diagrams&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I drew diagrams&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; for the engine.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;First, I drew an overview diagram, then I successively added detail.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I kept each diagram &quot;simple enough&quot; for me to understand.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;As I drew the diagrams, I kept &quot;implementability&quot; and &quot;explainability&quot; in mind.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;1. Data and Types&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Data &amp;amp; Types.png&quot; width=&quot;500px&quot; height=&quot;179px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 1 Data &amp;amp; Types&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;Template&lt;/b&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Template is like a class&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Template specifies the structure of a Component, but doesn't create an instance&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Template can be used more than once in a diagrams&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;Kind&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;a Kind is akin to a Type (Class / whatever)&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;I'm using a different name - &lt;i&gt;kind&lt;/i&gt; - because the main operation is different than in OO (see below)&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;we combine Templates using &lt;i&gt;composition&lt;/i&gt; instead of inheritance&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;we might want to use the index as a name&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;name is either&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;template name (if the template is used only once on a diagram), or,&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;an index into the ordered bag of children (of this template)&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;(we could assign string names to each child, but that's more work than is necessary for this simple example).&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;Composite Template&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;A Composite is a Template that contains (is composed of) other Templates&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;recursive&lt;span class=&quot;Apple-converted-space&quot;&gt;     &lt;/span&gt;&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Composite is a Basic Template with 2 additions
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;children
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;an ordered bag of other Templates&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;connections
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;connections between child components (and/or self)&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;connections can ONLY be made between direct children (and self)&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;sender&lt;span class=&quot;Apple-converted-space&quot;&gt;       &lt;/span&gt;
+        &lt;ul class=&quot;ul2&quot;&gt;
+          &lt;li class=&quot;li4&quot;&gt;one sender per connection&lt;/li&gt;
+          &lt;li class=&quot;li4&quot;&gt;each sender specifies a connection to zero or more receivers&lt;/li&gt;
+          &lt;li class=&quot;li4&quot;&gt;each sender is joined to a bag of receivers&lt;/li&gt;
+          &lt;li class=&quot;li4&quot;&gt;multiple senders can appear to send to the same connection on a diagram
+          &lt;ul class=&quot;ul2&quot;&gt;
+            &lt;li class=&quot;li4&quot;&gt;connections can specify the same bag of receivers, but only one sender per connection&lt;/li&gt;
+            &lt;li class=&quot;li4&quot;&gt;this looks-like multiple senders sending to the &lt;i&gt;same&lt;/i&gt; bag of receivers&lt;/li&gt;
+          &lt;/ul&gt;&lt;/li&gt;
+          &lt;li class=&quot;li4&quot;&gt;each sender has a name as above (i.e. Template name or index)&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;bag of receivers
+        &lt;ul class=&quot;ul2&quot;&gt;
+          &lt;li class=&quot;li4&quot;&gt;each receiver has a name as above (i.e. Template name or index)&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;Leaf Template&lt;/b&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Leaf is the &quot;bottom&quot; of the hierarchy of Templates&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Leaf is the &quot;termination case&quot; for recursive construction of Templates &lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;a Leaf is a &quot;black box&quot;&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;a Leaf is (probably) implemented in some other language&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;Runnable&lt;/b&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;li class=&quot;li4&quot;&gt;a Runnable is the extra stuff needed to instantiate a Template&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;since Templates can be used more than once, each Runnable must be unique&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;Runnable &quot;points back&quot; to Template for stuff that doesn't need to be copied&lt;/li&gt;
+    &lt;li class=&quot;li4&quot;&gt;to make a Composite Runnable unique
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;need to copy Connections&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;fixup all Runnable's Connections to refer to children in Runnable (instances of children)&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;Types&lt;/b&gt;
+  &lt;ul class=&quot;ul2&quot;&gt;
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;inputs&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;outputs&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;input_events&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;output_events&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;children&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;connections&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;connection&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;port&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;component&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;sender&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;receiver&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;event_queue&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;event&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;li class=&quot;li4&quot;&gt;types boil down to several possibilities:
+    &lt;ul class=&quot;ul2&quot;&gt;
+      &lt;li class=&quot;li4&quot;&gt;a &lt;i&gt;name&lt;/i&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;a symbol
+        &lt;ul class=&quot;ul2&quot;&gt;
+          &lt;li class=&quot;li4&quot;&gt;probably implemented as a hashed string&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;a &lt;i&gt;collection&lt;/i&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;namespace&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;bag&lt;/li&gt;
+        &lt;li class=&quot;li4&quot;&gt;queue&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;a &lt;i&gt;tuple&lt;/i&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;{ ..., ..., ... }&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+      &lt;li class=&quot;li4&quot;&gt;&lt;b&gt;any&lt;/b&gt;
+      &lt;ul class=&quot;ul2&quot;&gt;
+        &lt;li class=&quot;li4&quot;&gt;any of the above&lt;/li&gt;
+      &lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;Note that the &quot;type language&quot; described in the diagram (under legend) should be easy to build in PEG (I like Ohm-JS).&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;I intend to use the type language in the component diagrams below.&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;I know that I can implement the type language in Ohm-JS (I've done it before).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It simply represents work and &quot;no risk&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will step around this sub-problem for now.&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;2. Nested Components&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Nested Components.png&quot; width=&quot;400px&quot; height=&quot;129px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 2 Nested Components&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;At first, I draw a rough diagram of how I wish to architect the solution.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The basic operation is: input a &lt;i&gt;template&lt;/i&gt; and convert it to a &lt;i&gt;runnable&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I immediately see this solution as 3 nested layers.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I jot down the overview — informally — to give myself a roadmap of how I want to solve this problem (the problem is: to build an engine for components and to deliver it in various target languages).&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I imagine 3 processes and draw them as rounded rectangles.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I imagine 2 intermediate results and draw them as cylinders.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I draw only the &lt;i&gt;happy path&lt;/i&gt; between the processes as arrows.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The gist of this step is to capture/explain my intended architecture while deferring details&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/span&gt;&lt;/a&gt; for later.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;3. Add Ports to Nested Diagrams&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Add Ports to Nested Components.png&quot; width=&quot;400px&quot; height=&quot;100px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 3 Add Ports&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I embellish the diagram by drawing input and output ports (green and yellow, resp.).&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;External ports are drawn as circles.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Internal ports are drawn a small squares.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;The work, in this step, is minimal, but it makes me ponder the design further.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This example is simple.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In a more complicated solution, I might change my mind about the design and update the diagrams in this step.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;4. Layers&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Layers.png&quot; width=&quot;400px&quot; height=&quot;500px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 4 Layers&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I divvy up the design into layers using the previous diagrams as guides.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I often do this step implicitly without drawing anything further.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;As can be seen, each &lt;i&gt;layer&lt;/i&gt; is a black box with input ports and output ports.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;5. Rough-in Processes&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Rough-in Processes.png&quot; width=&quot;400px&quot; height=&quot;332px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 5 Rough in&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;At this point, I am satisfied with the intended solution, so I begin roughing-in the details.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I morphed the top level diagram somewhat — it now contains 2 major process, but still contains 2 intermediate results.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;This is &lt;i&gt;engineering, &lt;/i&gt;i.e. adding details to the original &lt;i&gt;architecture&lt;/i&gt; to make it realizable.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;As I consider the details, I add more external ports and flesh out the two main blocks. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I need to remind myself that I am starting out with a &lt;i&gt;template&lt;/i&gt; and am trying to build a &lt;i&gt;runnable&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I keep these concepts separated, using separate ports and separate connections.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When using current programming languages, I would normally fold the architectural concepts (of &lt;i&gt;template&lt;/i&gt; and &lt;i&gt;runnable&lt;/i&gt;) into a single data structure.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In essence, this kind of folding is a premature optimization.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I believe that the above diagrams and separation capture my intended approach for all to read (and/or to criticize, I'm not perfect).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I want to communicate what I'm thinking and the &lt;i&gt;why's&lt;/i&gt; of my intended solution.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There might be more than one way to solve this problem, but these diagrams need to show how &lt;i&gt;I &lt;/i&gt;choose to solve it.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;To enable easier hand-compilation, I've drawn all ports &lt;i&gt;inside&lt;/i&gt; the components that own them.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Normally, I would draw ports so that they intersect the boundaries of the parent components — intersection and ownership is &quot;easy&quot; for a computer to calculate, but this minor change makes it easier for me to hand-compile the diagrams (as I eye-ball the diagrams).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In this case I have only 1 relationship — &lt;i&gt;contains&lt;/i&gt; —instead of the two relationships a non-bootstrap compiler would use — &lt;i&gt;contains&lt;/i&gt; and &lt;i&gt;intersects&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I avoid putting (x,y) coordinates on the diagram as that will slow me down during hand-compilation, but is no problem for a computer.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;New invention: the solution that I want to express needs 2 &lt;i&gt;forall&lt;/i&gt; operations.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I draw these as large components with the &lt;span class=&quot;s2&quot;&gt;∀&lt;/span&gt; character as the first character in the names and with blue ports signifying the &quot;inputs&quot; from the encompassing &lt;i&gt;forall &lt;/i&gt;operation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This might be written as&lt;/p&gt;
+&lt;p class=&quot;p8&quot;&gt;for child in Template.children { … }&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;in pseudo-code.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;6. Re-Label Rough-in&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/kernel-Rough-in Processes Labelled.png&quot; width=&quot;400px&quot; height=&quot;336px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;Fig. 6 Re-Labelling&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;As another aid to hand-compilation, I tag every drawing element with a single-letter symbol.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Again, this kind of tagging is not necessary in a fully-automated process, but removes some of the boring and error-prone steps in hand-compilation.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;I've tagged all circles, rectangles and cylinders this way.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;A fully automated compiler would simply use the graphical objects' IDs and would not require tags.&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;We can say that the &lt;i&gt;tag&lt;/i&gt;s are &lt;i&gt;synonym&lt;/i&gt;s for the tagged object ID's.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Further&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I the next instalment, I will discuss how to convert &lt;span class=&quot;s3&quot;&gt;Fig. 6 into a text file, ready for processing.&lt;/span&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Github&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://github.com/guitarvydas/basicdasl/tree/master/pseudo&quot;&gt;https://github.com/guitarvydas/basicdasl/tree/master/pseudo&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Roadmap&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-15-05-16-Images/Roadmap.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;I also call the &lt;i&gt;engine&lt;/i&gt; a &lt;i&gt;kernel&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;The first step in automating anything is to do it manually.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The work should be really boring to do and scream to be automated.&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;s3&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; The diagrams are in the file kernel.drawio, under separate tabs.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;[4]&lt;/a&gt; &lt;/span&gt;I will show how to build the type language in another blog.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is just simple, repetitive and boring work.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I'll implement it when my brain is fried — there is no point doing it now while I'm still fresh and on a designing-roll.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Maybe this is what athletes call &quot;the zone&quot; or &quot;flow state&quot; - I choose to do nothing to break this flow, leaving menial implementation tasks for later.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s1&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;https://guitarvydas.github.io/2021/03/17/Details-Kill.html&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101 - Engine Development (Part 1)</summary></entry><entry><title type="html">Ohm Editor</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html" rel="alternate" type="text/html" title="Ohm Editor" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -2087,61 +2381,4 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Toolbox Languages (2)</summary></entry><entry><title type="html">Tokenizing</title><link href="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html" rel="alternate" type="text/html" title="Tokenizing" /><published>2021-04-28T00:00:00-04:00</published><updated>2021-04-28T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/04/28/Tokenizing</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/04/28/Tokenizing.html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;&gt;
-&lt;head&gt;
-	&lt;meta charset=&quot;utf-8&quot;/&gt;
-	&lt;title&gt;Tokenizing&lt;/title&gt;
-	&lt;meta name=&quot;author&quot; content=&quot;&quot;/&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h1&gt;
-
-&lt;p&gt;I&amp;#8217;m struggling with this. I think in terms of tokenizing, but Ohm-JS fights me. I was very un-amused to discover that ESRAP only worked with characters (instead of tokens and CL forms).&lt;/p&gt;
-
-&lt;p&gt;You can&amp;#8217;t skip whitespace unless the whitespace has been tokenized. Ohm-JS handles languages, like JS, that use commas (,). Ohm-JS creates bugs (accidental complexity) when parsing comma-less languages.&lt;/p&gt;
-
-&lt;p&gt;My experiments with ASON parsing&lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;see footnote&quot; class=&quot;footnote&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; using Ohm-JS might show how to tokenize using Ohm-JS.&lt;/p&gt;
-
-&lt;h1 id=&quot;isolatedcomponents&quot;&gt;Isolated Components&lt;/h1&gt;
-
-&lt;p&gt;I think in terms of isolated software components.&lt;/p&gt;
-
-&lt;p&gt;I want to &lt;em&gt;build-and-forget&lt;/em&gt; any component.&lt;/p&gt;
-
-&lt;p&gt;Ideally, there are no dependencies between components. Adding new components does not affect the way that old ones work.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;This is possible, but unlikely with current programming languages.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;p&gt;Parsing and tokenizing is like that. The first pass should break the input into two kinds of tokens&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;whitespace&lt;/li&gt;
-&lt;li&gt;non-whitespace.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Then, if we want to delete whitespace, we simple drop tokens of type (1). The rest of the tokens remain the same.&lt;/p&gt;
-
-&lt;p&gt;[&lt;em&gt;For the record, I can&amp;#8217;t bring myself to do something this simple using current languages. When I address (1), I immediately worry about counting newlines. Counting lines should, ideally, be done in another pass.&lt;/em&gt;]&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-
-&lt;li id=&quot;fn:1&quot;&gt;
-&lt;p&gt;https://guitarvydas.github.io/2021/04/10/ASON&amp;#8211;Notation&amp;#8211;Pipeline.html &lt;a href=&quot;#fnref:1&quot; title=&quot;return to body&quot; class=&quot;reversefootnote&quot;&gt;&amp;#160;&amp;#8617;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;/ol&gt;
-&lt;/div&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Tokenizing</summary></entry></feed>
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Toolbox Languages (2)</summary></entry></feed>
