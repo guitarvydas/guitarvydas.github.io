@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Ohm-Editor</title>
+  <meta name="CreationTime" content="2021-05-09T11:27:11Z">
+  <meta name="ModificationTime" content="2021-05-09T11:27:11Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    span.s1 {font: 12.0px Helvetica}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm Editor Introduction</b></h2>
+<p class="p2">A screenshot of the Ohm Editor is show in <span class="s1">Fig. 1.</span></p>
+<p class="p2"><img src="/assets/2021-05-09-11-27-11-Images/Screen Shot 2021-04-26 at 5.48.37 PM.png" width="100%" alt="Image"></p>
+<p class="p3">Fig. 1 Ohm Editor screenshot.</p>
+<p class="p4"><br></p>
+<p class="p3">The screen is divided into 4 sections — upper left, upper right, the middle and the bottom.</p>
+<p class="p4"><br></p>
+<p class="p3">The upper left section holds the grammar under development. <span class="Apple-converted-space"> </span></p>
+<p class="p4"><br></p>
+<p class="p3">The upper right section hold various test cases.<span class="Apple-converted-space">  </span>Test cases can be add using the "+Add" button or by double-clicking on a specific case.</p>
+<p class="p4"><br></p>
+<p class="p3">The middle section (here showing "2 * * 4 2 - 1 ) / 9") shows the string being parsed.</p>
+<p class="p4"><br></p>
+<p class="p3">The bottom section shows the resulting CST<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a>.<span class="Apple-converted-space">  </span>The CST is gray when the parse is successful and red when the parse fails.<span class="Apple-converted-space">  </span>Hovering over a node in the parse tree highlights the corresponding grammar rule.</p>
+<p class="p4"><br></p>
+<p class="p3">The most common problem encountered when debugging a PEG grammar is the that of incorrect parsing of whitespace.<span class="Apple-converted-space">  </span>The Ohm Editor lets you see what the parser is doing and can give you hints as to where the parse is failing.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Salient Points About Ohm-JS</b></h2>
+<p class="p2">Ohm-JS is a PEG library.</p>
+<p class="p5"><br></p>
+<p class="p2">Important advantages of Ohm-JS vs. other PEG libraries:</p>
+<ul class="ul1">
+  <li class="li6">grammar remains unspoiled by detail</li>
+  <li class="li6">PEG editor (IDE) for rapid debugging.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p6">Ohm-JS divides a parser into 2 stages</p>
+<ul class="ul1">
+  <li class="li6">grammar</li>
+  <li class="li6">semantics code.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>See Also</b></h2>
+<p class="p2">This note appeared as Appendix A in:</p>
+<p class="p5"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html">https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html</a></p>
+<p class="p5"><br></p>
+<p class="p6">See GLUE tool for PEG for generating semantics code<span class="Apple-converted-space"> </span></p>
+<p class="p6"><a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">https://guitarvydas.github.io/2021/03/24/Glue-Manual.html</a></p>
+<p class="p6"><a href="https://guitarvydas.github.io/2021/03/18/Little-Language.html">https://guitarvydas.github.io/2021/03/18/Little-Language.html</a>)</p>
+<p class="p4"><br></p>
+<hr>
+<p class="p3"><a id="fn1"></a><a href="#fnlink1">[1]</a> A CST is often called an AST.<span class="Apple-converted-space">  </span>When fractalized, a grammar breaks down into two parts - the AST and the CST (abstract syntax tree and concrete syntax tree, resp.).<span class="Apple-converted-space">  </span>The AST shows what<i> can </i>parsed, which the CST shows what <i>was</i> parsed (in concrete terms).</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
