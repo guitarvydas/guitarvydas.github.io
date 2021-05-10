@@ -27,3 +27,11 @@ arrowEnd(idXXX,[c_c_m]).
 This bug should be relatively easy to repair.  We need to visit the `grasem`/`glue` code for arrow and add another fact.
 
 [N.B. There is at least one other appeasement to human-readability - the use of PROLOG lists (`[...]`) in arrowEnd facts.  I don't think that we'll bother to fix this.  The pure form would be to unroll arrowEnd and make it into multiple facts, i.e. to express the Lists as multiple facts (something like `beginArrowEnd`, `arrowEndNext`, `arrowEndEnd`). PROLOG lets us "get away" with lists of the form `[ ... ]` and we will let this impurity stand, for now.  This is an interim project which doesn't need to be fixed yet (YAGNI)].
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
