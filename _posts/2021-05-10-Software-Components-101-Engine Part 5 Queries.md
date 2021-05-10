@@ -57,12 +57,21 @@ I create `gkind` and `tag` queries and double-check by running queries and looki
 
 For example, we double-check the arrow with two receivers:
 ```
-?- printAllAend.
+?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- printAllAEnd.
 ...
 aEnd(a82,[id62,id69]).
 ...
-?- tag(id62,T).
-T = e_e_l ;
+false.
+
+?- tag(id62,Tag).
+Tag = e_e_l ;
+false.
 ```
 (which appears to coincide with what is on the diagram).
 
