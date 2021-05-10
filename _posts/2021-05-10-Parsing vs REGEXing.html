@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Parsing vs REGEXing</title>
+  <meta name="CreationTime" content="2021-05-10T10:41:49Z">
+  <meta name="ModificationTime" content="2021-05-10T10:41:49Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parsing vs REGEXing</b></h2>
+<p class="p2">I wanted to change all "/" to "_" in my .opml file, but only in qualified identifiers.</p>
+<p class="p3"><br></p>
+<p class="p2">The global-find-and-replace strategy doesn't work, because the .opml contains legitimate "/"s that shouldn't change.</p>
+<p class="p3"><br></p>
+<p class="p2">Using a parser, the change can be done in 1 line:</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">   </span>qident_recursive [id slash qid] = [[${id}${slash}${qid}]]</p>
+<p class="p3"><br></p>
+<p class="p2">becomes</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>qident_recursive [id slash qid] = [[${id}_${qid}]]</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>REGEX is Flat, Parsing is Hierarchical</b></h2>
+<p class="p2">The main difference between the two approaches is that REGEX and find-and-replace are "flat".</p>
+<p class="p3"><br></p>
+<p class="p2">REGEX cannot easily follow structure.</p>
+<p class="p3"><br></p>
+<p class="p2">Parsing can follow structure.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Parsing Is Now Accessible</b></h2>
+<p class="p2">Parsing used to be the domain of compiler writers.</p>
+<p class="p3"><br></p>
+<p class="p2">PEG, and especially Ohm-JS, bring this technology down from the mountain and make it as easily accessible as REGEX (which <i>used</i> to be only available in the domain of compiler writers).</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix OPML Source Code</b></h2>
+<p class="p2">See the code in the project <a href="https://guitarvydas.github.io/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html">https://guitarvydas.github.io/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html</a>.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Appendix - PEG and Ohm-JS</b></h2>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/02/PEG-Cheat-Sheet.html">https://guitarvydas.github.io/2021/04/02/PEG-Cheat-Sheet.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html">https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/19/Racket-PEG.html">https://guitarvydas.github.io/2021/03/19/Racket-PEG.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html">https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/27/PEG.html">https://guitarvydas.github.io/2020/12/27/PEG.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html">https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html">https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><a href="https://github.com/harc/ohm">https://github.com/harc/ohm</a></p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
