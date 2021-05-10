@@ -1,0 +1,517 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Software Components 101 - Engine Part 3 Factbase</title>
+  <meta name="CreationTime" content="2021-05-10T00:53:29Z">
+  <meta name="ModificationTime" content="2021-05-10T00:53:29Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
+    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo}
+    p.p11 {margin: 0.0px 0.0px 0.0px 36.0px; font: 9.0px Menlo; min-height: 10.0px}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
+    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 11.0px Menlo}
+    span.s2 {font: 13.0px Palatino}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Goal</b></h2>
+<p class="p2">The Goal of this step is to construct a factbase from the diagrams.</p>
+<p class="p3"><br></p>
+<p class="p2">I use my <i>grasem </i>tool for this step.</p>
+<p class="p3"><br></p>
+<p class="p2">I use SWI PROLOG (swipl) for creating queries, hence, target its syntax using grasem.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Grasem Overview</b></h2>
+<p class="p2">Grasem combines Ohm-JS grammar specification and <i>glue</i> semantic specifications in one file.</p>
+<p class="p3"><br></p>
+<p class="p2">Grasem simply glues a grammar and a <i>glue</i> spec together into one input file.<span class="Apple-converted-space">  </span>It splits the two specifications apart, runs the <i>glue</i> transpiler then glues it into a JS file along with a grammar to produce a single JS program.</p>
+<p class="p3"><br></p>
+<p class="p2">[<i>This could be done by a shell script (e.g. by using /usr/bin/split)</i>]</p>
+<p class="p3"><br></p>
+<p class="p2">Why combine both parts?</p>
+<ul class="ul1">
+  <li class="li4">Keep all assets of a project together, where possible.</li>
+</ul>
+<p class="p5"><br></p>
+<p class="p4">Why keep the parts separated?</p>
+<ul class="ul1">
+  <li class="li4">isolation</li>
+  <li class="li4">psychological "trick" to prevent premature optimization (something encouraged by current PLs)<span class="Apple-converted-space"> </span>
+  <ul class="ul2">
+    <li class="li4">low-level optimization should not be addressed during architecture (low-level details get in the way)</li>
+    <li class="li4">for example, questions like "is this implemented as a list or as an array?" should not enter at the Architectural level and, maybe, not even at the Engineering level — such details are the domain of Implementation</li>
+    <li class="li5"><br></li>
+  </ul></li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Ohm-JS</b></h2>
+<p class="p2">Ohm-JS creates parsers from grammar specifications.</p>
+<p class="p3"><br></p>
+<p class="p2">Ohm-JS parsers use JS as the toolbox language.</p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Glue</b></h2>
+<p class="p2">The <i>glue</i> tool supplies JS code to output code depending on matching done by the grammar.</p>
+<p class="p3"><br></p>
+<p class="p2"><i>Glue</i> allows the programmer to specify an output action for every rule in the grammar.<span class="Apple-converted-space">  </span><i>Glue</i> uses JS back-tick string notation (`...${x}…`).</p>
+<p class="p3"><br></p>
+<p class="p2">The combination of a grammar plus simple string outputting is curiously powerful.</p>
+<p class="p3"><br></p>
+<p class="p2">This tool — the <i>grasem </i>tool — is used to transpile a .opml file into a PROLOG factbase that can be queried.</p>
+<p class="p3"><br></p>
+<p class="p2">.SVG files could be used instead of .opml files.<span class="Apple-converted-space">  </span>I choose to use .opml for this — simple — example only because I have ready access to a non-svg drawing tool (<a href="http://draw.io">draw.io</a>) plus an .opml editor.</p>
+<p class="p3"><br></p>
+<p class="p2">Editing .SVG is not the primary purpose of this essay.<span class="Apple-converted-space">  </span>I need to convince you — the reader — that this process is straight-forward and that it can be easily automated.<span class="Apple-converted-space">  </span>I believe that performing the transpilation steps manually — and showing the intermediate steps — will be a convincing argument for the simplicity of this technique.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Sight-Reading</b></h2>
+<p class="p2">To show this set of steps, I simply sight-read the diagram and transcribed it into a tree-view. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The tree-view tool, that I use,<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a> can export the tree in .opml format. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">From that point forward, we can apply automation.<span class="Apple-converted-space">  </span>I happen to use Ohm-JS and PROLOG and UNIX® shell scripts, but, other technologies (like other parser tools, miniKanren, etc.) could be used.</p>
+<p class="p3"><br></p>
+<p class="p2">As an example of converting a diagram, let us look at the top-level diagram in this example…</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-10-00-53-29-Images/kernel-Copy of Rough-in Processes.png" width="500px" height="179px" alt="Image"></p>
+<p class="p6">Fig. 1 Top Level Diagram For Creating a Runnable</p>
+<p class="p3"><br></p>
+<p class="p2"><img src="/assets/2021-05-10-00-53-29-Images/kernel-Copy of Rough-in Processes Labelled.png" width="500px" height="181px" alt="Image"></p>
+<p class="p6">Fig. 2 Tagged Top Level Diagram For Creating a Runnable</p>
+<p class="p7"><br></p>
+<p class="p6">In this diagram, we see</p>
+<ul class="ul1">
+  <li class="li6">3 circles (two green, one yellow)</li>
+  <li class="li6">3 rounded rectangles (one gray, the other two white</li>
+  <li class="li6">2 cylinders</li>
+  <li class="li6">14 small squares (2 blue, 8 green, 4 yellow)</li>
+  <li class="li6">9 arrows.</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p6">For convenience in this example, we've tagged most of the above with single-letter tags <span class="s1">a-m</span>.<span class="Apple-converted-space">  </span>We didn't bother to tag the largest, gray rectangle.</p>
+<p class="p7"><br></p>
+<p class="p6">A true drawing editor would assign an (x,y) point to the position of each of these graphical items.<span class="Apple-converted-space">  </span>For convenience, we've omitted this information and eye-ball the <i>contains</i> relationship directly (this is easier for human manual input than trying to calculate and specify the (x,y) of every item).<span class="Apple-converted-space">  </span>A fully automated transpiler would use the (x,y) coordinates of all items to infer <i>contains</i> and <i>intersects</i> relationships.<span class="Apple-converted-space">  </span>I have found it useful to generate a bounding box (left/top/right/bottom) for each graphical item before inferring containment and intersection relationships.</p>
+<p class="p7"><br></p>
+<p class="p6">Likewise, for human input, it was easier to directly assign text items to the various objects.<span class="Apple-converted-space">  </span>A fully automated transpiler would infer text containment from the (x,y) coordinates of the text items and the various graphical items.<span class="Apple-converted-space">  </span>The actual text items are seen in the non-tagged diagram Fig. 1.</p>
+<p class="p7"><br></p>
+<p class="p6">We start sight-reading by creating an item in the tree view corresponding to each graphical item on the diagram:</p>
+<p class="p7"><br></p>
+<p class="p2"><img src="/assets/2021-05-10-00-53-29-Images/Screen Shot 2021-05-09 at 3.22.58 PM.png" width="500px" height="439px" alt="Image"></p>
+<p class="p6">[<i>We have left out the text for the top level rounded rect.<span class="Apple-converted-space">  </span>This is probably a typo bug.<span class="Apple-converted-space">  </span>We'll fix it later.</i>]</p>
+<p class="p7"><br></p>
+<p class="p6">Then, for each item in the diagram, we insert attributes into the tree view. <span class="Apple-converted-space"> </span></p>
+<p class="p7"><br></p>
+<p class="p6">For example, "cicle a" has 3 attributes:</p>
+<ul class="ul1">
+  <li class="li6">color (green)</li>
+  <li class="li6">stroke-width (3)</li>
+  <li class="li6">text ("my Composite Template").</li>
+</ul>
+<p class="p7"><br></p>
+<p class="p6">Note that stroke-width=3 will become significant when we infer information.<span class="Apple-converted-space">  </span>A Port with stroke-width=3 will be considered to be an implicit Port — we do not draw connection lines to/from implicit Ports (and we let dynamic inheritance make the connections).</p>
+<p class="p7"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>OPML2FB Source Code</b></h2>
+<p class="p2">The opml2fb.grasem file contains</p>
+<ul class="ul1">
+  <li class="li4">a grammar that matches the .opml entries (YAGNI - we match only what we need — this is a one-shot transpiler, more like a REGEX than a compiler)</li>
+  <li class="li4">a set of rewrite rules (JS back-tick strings) that produce the output — in this case, we want to convert .opml <span class="s1">&lt;outline …&gt; … &lt;/outline&gt;</span> into facts.</li>
+</ul>
+<p class="p3"><br></p>
+<p class="p2">For example,<span class="Apple-converted-space"> </span></p>
+<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;outline text="circle “a”"&gt;</p>
+<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;outline text="color=green" /&gt;</p>
+<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;outline text="stroke-width=3" /&gt;</p>
+<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;outline text="text=“my Composite Template”" /&gt;</p>
+<p class="p2">is converted to the facts:</p>
+<p class="p8">circle(id1, "a").</p>
+<p class="p8">color(id1, green).</p>
+<p class="p9"><br></p>
+<p class="p8">strokeWidth(id1, 3).</p>
+<p class="p9"><br></p>
+<p class="p8">str(tid2, "my Composite Template").</p>
+<p class="p8">text(id1, tid2).</p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p2">The grammar rules involved in this conversion are:</p>
+<p class="p8">…</p>
+<p class="p8"><span class="Apple-converted-space">  </span>circleObject = "text=\"circle " stringTail</p>
+<p class="p8">…</p>
+<p class="p8"><span class="Apple-converted-space">  </span>colorAttr = "text=\"color=" stringTail</p>
+<p class="p8"><span class="Apple-converted-space">  </span>strokeWidthAttr = "text=\"stroke-width=" stringTail</p>
+<p class="p8"><span class="Apple-converted-space">  </span>textAttr = "text=\"text=" stringTail</p>
+<p class="p9"><br></p>
+<p class="p2">[<i>The pattern matches are tortuous due to the actual structure of the &lt;outline…&gt; input</i>.]</p>
+<p class="p3"><br></p>
+<p class="p2">and the outputting rules are:</p>
+<p class="p8">…</p>
+<p class="p8"><span class="Apple-converted-space">  </span>circleObject [teqc str] = [[circle(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p8">…</p>
+<p class="p8"><span class="Apple-converted-space">  </span>colorAttr [teqc str] = [[color(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>strokeWidthAttr [teqc str] = [[strokeWidth(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>textAttr [teqc str] =</p>
+<p class="p8"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>[[str(${scopeGet ("tobject")}, ${changeUnicodeQuotes (str)}).\ntext(${scopeGet ("gobject")}, ${scopeGet ("tobject")}).]]</p>
+<p class="p9"><br></p>
+<p class="p3"><br></p>
+<p class="p2">The first grammar rule</p>
+<p class="p8"><span class="Apple-converted-space">  </span>circleObject = "text=\"circle " stringTail</p>
+<p class="p2">says that the grammar matches<span class="Apple-converted-space">  </span><span class="s1">'text="circle '</span> followed by a stringTail match</p>
+<p class="p8"><span class="Apple-converted-space">  </span>stringTail = notDQ* dq</p>
+<p class="p3"><br></p>
+<p class="p2">After such matches occur, the <i>glue </i>rules are invoked with matches as parameters to the rules (<span class="s1">teqc</span> and <span class="s1">str</span>, in this case):</p>
+<p class="p8"><span class="Apple-converted-space">  </span>circleObject [teqc str] = [[circle(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p9"><br></p>
+<p class="p2">The <i>glue </i>rule says that when a match of a <span class="s1">circleObject</span> happens, output it as</p>
+<p class="p8">circle(xxx,yyy).</p>
+<p class="p2">where <span class="s1">xxx</span> is the ID of the most-recent object and <span class="s1">yyy</span> is the <span class="s1">stringTail</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">We want to create a new ID for every graphical object and we want attributes to reference the IDs.<span class="Apple-converted-space">  </span>We create new IDs by calling scopeAdd("gobject",…) and we reference such IDs by calling <span class="s1">scopeGet("gobject")</span>.</p>
+<p class="p3"><br></p>
+<p class="p2">New <span class="s1">gobject</span> ID's are created during the tree-walk, and, various sub-rules reference and output this value during the tree-walk.</p>
+<p class="p3"><br></p>
+<p class="p2">We use <span class="s1">scopeAdd("…",value)</span> to insert values into the dynamic scope and <span class="s1">scopeGet("…")</span> to fetch the most recent value.</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">The opml2fb.grasem file is included below:</p>
+<p class="p9"><br></p>
+<p class="p9"><br></p>
+<p class="p10">OPML2FB {</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OPML = xmlHeader opmlHeader head body Outline endBody endOPML</p>
+<p class="p10"><span class="Apple-converted-space">  </span>opmlHeader = "&lt;opml" opmlHeaderChar* "&gt;" newline</p>
+<p class="p10"><span class="Apple-converted-space">  </span>xmlHeader = "&lt;?xml" xmlHeaderChar* "?&gt;" newline</p>
+<p class="p10"><span class="Apple-converted-space">  </span>head = "&lt;head&gt;" headChar* "&lt;/head&gt;" newline</p>
+<p class="p10"><span class="Apple-converted-space">  </span>body = "&lt;body&gt;" newline</p>
+<p class="p10"><span class="Apple-converted-space">  </span>endBody = "&lt;/body&gt;" newline</p>
+<p class="p10"><span class="Apple-converted-space">  </span>endOPML = "&lt;/opml&gt;" (newline | end)</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>Outline = OutlineNoContent | OutlineWithContent</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutlineNoContent = "&lt;outline" item "/&gt;"</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutlineWithContent = "&lt;outline" item "&gt;" Outline* "&lt;/outline&gt;"</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>item = noise | graphicalObject | attribute<span class="Apple-converted-space"> </span></p>
+<p class="p10"><span class="Apple-converted-space">  </span>graphicalObject = lineObject | arrowObject | circleObject | compObject | rectObject | cylinderObject</p>
+<p class="p10"><span class="Apple-converted-space">  </span>attribute = colorAttr | strokeWidthAttr | textAttr | genericAttr</p>
+<p class="p11"><span class="Apple-converted-space">  </span></p>
+<p class="p10"><span class="Apple-converted-space">  </span>noise = "text=\"lines" stringTail</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>circleObject = "text=\"circle " stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>compObject = "text=\"comp " stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>rectObject = "text=\"rect " stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>cylinderObject = "text=\"cyl " stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>lineObject = "text=\"line " stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>arrowObject = "text=\"arrow " stringTail</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>colorAttr = "text=\"color=" stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>strokeWidthAttr = "text=\"stroke-width=" stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>textAttr = "text=\"text=" stringTail</p>
+<p class="p10"><span class="Apple-converted-space">  </span>genericAttr = "text=" string</p>
+<p class="p11"><span class="Apple-converted-space">  </span></p>
+<p class="p10"><span class="Apple-converted-space">  </span>headChar = ~"&lt;/head&gt;" any</p>
+<p class="p10"><span class="Apple-converted-space">  </span>opmlHeaderChar = ~"&gt;" any</p>
+<p class="p10"><span class="Apple-converted-space">  </span>xmlHeaderChar = ~"?&gt;" any</p>
+<p class="p10"><span class="Apple-converted-space">  </span>newline = "\n"</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>string = dq notDQ* dq</p>
+<p class="p10"><span class="Apple-converted-space">  </span>stringTail = notDQ* dq</p>
+<p class="p10"><span class="Apple-converted-space">  </span>dq = "\""</p>
+<p class="p10"><span class="Apple-converted-space">  </span>notDQ = ~"\"" any</p>
+<p class="p10">}</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>OPML [xmlhdr opmlhdr head body outline endbody endopml] =</p>
+<p class="p10"><span class="Apple-converted-space">    </span></p>
+<p class="p10"><span class="Apple-converted-space">    </span>[[${xmlhdr}${opmlhdr}${head}${body}${outline}${endbody}${endopml}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>opmlHeader [begin @hdr close nl] = [[]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>xmlHeader [begin @hdr close nl] = [[]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>head [begin @hdr close nl] = [[]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>body [begin nl] = [[]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>endBody [begin nl] = [[]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>endOPML [begin nl] = [[]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>Outline [o] = [[${o}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutlineNoContent [begin t slashClose] = [[${t}\n]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>OutlineWithContent [begin t close @o slasho] =  [[${t}${o}]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>headChar [c] = [[${c}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>opmlHeaderChar [c] = [[${c}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>xmlHeaderChar [c] = [[${c}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>newline [c] = [[${c}]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>item [i] = [[${i}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>graphicalObject [o] = [[${o.trim ()}\n]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>attribute [a] = [[${a.trim ()}\n]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>circleObject [teqc str] = [[circle(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>compObject [teqc str] = [[comp(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>rectObject [teqc str] = [[rect(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>cylinderObject [teqc str] = [[cylinder(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>lineObject [teqc str] = [[line(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>arrowObject [teqc str] =</p>
+<p class="p10"><span class="Apple-converted-space">  </span>[[</p>
+<p class="p10">arrowBegin(${scopeGet ("gobject")}, ${abegin (str)}).</p>
+<p class="p10">arrowEnd(${scopeGet ("gobject")}, ${aend (str)}).]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>colorAttr [teqc str] = [[color(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>strokeWidthAttr [teqc str] = [[strokeWidth(${scopeGet ("gobject")}, ${str}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>textAttr [teqc str] =</p>
+<p class="p10"><span class="Apple-converted-space">    </span></p>
+<p class="p10"><span class="Apple-converted-space">    </span>[[str(${scopeGet ("tobject")}, ${changeUnicodeQuotes (str)}).\ntext(${scopeGet ("gobject")}, ${scopeGet ("tobject")}).]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>genericAttr [teq str] = [[${teq}${str}]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>string [q1 @cs q2] = [[${q1}${changeUnicodeQuotes (cs)}${q2}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>stringTail [@cs q2] = [[${changeUnicodeQuotes (cs)}${q2}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>notDQ [c] = [[${c}]]</p>
+<p class="p10"><span class="Apple-converted-space">  </span>dq [c] = [[]]</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-converted-space">  </span>noise [a b] = [[]]</p>
+<p class="p11"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Factbase</b></h2>
+<p class="p2">The resulting factbase is:</p>
+<p class="p8">arrowBegin(id40, a).</p>
+<p class="p8">arrowBegin(id40, b).</p>
+<p class="p8">arrowBegin(id40, c).</p>
+<p class="p8">arrowBegin(id40, f).</p>
+<p class="p8">arrowBegin(id40, g).</p>
+<p class="p8">arrowBegin(id40, h).</p>
+<p class="p8">arrowBegin(id40, j).</p>
+<p class="p8">arrowBegin(id40, l).</p>
+<p class="p8">arrowBegin(id40, n).</p>
+<p class="p8">arrowBegin(id40, s).</p>
+<p class="p8">arrowBegin(id40, v).</p>
+<p class="p8">arrowBegin(id69, a).</p>
+<p class="p8">arrowBegin(id69, b).</p>
+<p class="p8">arrowBegin(id69, c).</p>
+<p class="p8">arrowBegin(id69, f).</p>
+<p class="p8">arrowBegin(id69, h).</p>
+<p class="p8">arrowBegin(id69, l).</p>
+<p class="p8">arrowBegin(id69, m).</p>
+<p class="p8">arrowBegin(id69, p).</p>
+<p class="p8">arrowBegin(id69, s).</p>
+<p class="p8">arrowEnd(id40, [d]).</p>
+<p class="p8">arrowEnd(id40, [f]).</p>
+<p class="p8">arrowEnd(id40, [h]).</p>
+<p class="p8">arrowEnd(id40, [j]).</p>
+<p class="p8">arrowEnd(id40, [l]).</p>
+<p class="p8">arrowEnd(id40, [m]).</p>
+<p class="p8">arrowEnd(id40, [o]).</p>
+<p class="p8">arrowEnd(id40, [p]).</p>
+<p class="p8">arrowEnd(id40, [r]).</p>
+<p class="p8">arrowEnd(id40, [t]).</p>
+<p class="p8">arrowEnd(id40, [u]).</p>
+<p class="p8">arrowEnd(id69, [d]).</p>
+<p class="p8">arrowEnd(id69, [f]).</p>
+<p class="p8">arrowEnd(id69, [g]).</p>
+<p class="p8">arrowEnd(id69, [h]).</p>
+<p class="p8">arrowEnd(id69, [k]).</p>
+<p class="p8">arrowEnd(id69, [l,o]).</p>
+<p class="p8">arrowEnd(id69, [l]).</p>
+<p class="p8">arrowEnd(id69, [n]).</p>
+<p class="p8">arrowEnd(id69, [r]).</p>
+<p class="p8">circle(id1, "a").</p>
+<p class="p8">circle(id11, "c").</p>
+<p class="p8">circle(id13, "d").</p>
+<p class="p8">circle(id3, "b").</p>
+<p class="p8">circle(id45, "a").</p>
+<p class="p8">circle(id46, "b").</p>
+<p class="p8">circle(id47, "c").</p>
+<p class="p8">circle(id7, "a").</p>
+<p class="p8">circle(id70, "d").</p>
+<p class="p8">circle(id73, "g").</p>
+<p class="p8">circle(id9, "b").</p>
+<p class="p8">color(id1, green).</p>
+<p class="p8">color(id11, green).</p>
+<p class="p8">color(id13, yellow).</p>
+<p class="p8">color(id16, green).</p>
+<p class="p8">color(id17, yellow).</p>
+<p class="p8">color(id22, green).</p>
+<p class="p8">color(id23, green).</p>
+<p class="p8">color(id24, yellow).</p>
+<p class="p8">color(id29, green).</p>
+<p class="p8">color(id3, green).</p>
+<p class="p8">color(id30, yellow).</p>
+<p class="p8">color(id35, green).</p>
+<p class="p8">color(id36, green).</p>
+<p class="p8">color(id37, yellow).</p>
+<p class="p8">color(id45, green).</p>
+<p class="p8">color(id46, green).</p>
+<p class="p8">color(id47, green).</p>
+<p class="p8">color(id50, green).</p>
+<p class="p8">color(id51, green).</p>
+<p class="p8">color(id52, yellow).</p>
+<p class="p8">color(id57, green).</p>
+<p class="p8">color(id58, green).</p>
+<p class="p8">color(id59, yellow).</p>
+<p class="p8">color(id64, green).</p>
+<p class="p8">color(id65, green).</p>
+<p class="p8">color(id66, yellow).</p>
+<p class="p8">color(id7, green).</p>
+<p class="p8">color(id70, yellow).</p>
+<p class="p8">color(id73, yellow).</p>
+<p class="p8">color(id9, green).</p>
+<p class="p8">comp(id0, "A").</p>
+<p class="p8">comp(id14, "e").</p>
+<p class="p8">comp(id20, "g").</p>
+<p class="p8">comp(id27, "i").</p>
+<p class="p8">comp(id33, "k").</p>
+<p class="p8">comp(id43, "e").</p>
+<p class="p8">comp(id48, "e").</p>
+<p class="p8">comp(id5, "c").</p>
+<p class="p8">comp(id55, "g").</p>
+<p class="p8">comp(id62, "i").</p>
+<p class="p8">cylinder(id18, "f").</p>
+<p class="p8">cylinder(id25, "h").</p>
+<p class="p8">cylinder(id31, "j").</p>
+<p class="p8">cylinder(id38, "l").</p>
+<p class="p8">cylinder(id41, "d").</p>
+<p class="p8">cylinder(id53, "f").</p>
+<p class="p8">cylinder(id60, "h").</p>
+<p class="p8">cylinder(id67, "j").</p>
+<p class="p8">cylinder(id71, "f").</p>
+<p class="p8">rect(id16, "m").</p>
+<p class="p8">rect(id17, "n").</p>
+<p class="p8">rect(id22, "o").</p>
+<p class="p8">rect(id23, "p").</p>
+<p class="p8">rect(id24, "q").</p>
+<p class="p8">rect(id29, "r").</p>
+<p class="p8">rect(id30, "s").</p>
+<p class="p8">rect(id35, "t").</p>
+<p class="p8">rect(id36, "u").</p>
+<p class="p8">rect(id37, "v").</p>
+<p class="p8">rect(id50, "k").</p>
+<p class="p8">rect(id51, "l").</p>
+<p class="p8">rect(id52, "m").</p>
+<p class="p8">rect(id57, "n").</p>
+<p class="p8">rect(id58, "o").</p>
+<p class="p8">rect(id59, "p").</p>
+<p class="p8">rect(id64, "q").</p>
+<p class="p8">rect(id65, "r").</p>
+<p class="p8">rect(id66, "s").</p>
+<p class="p8">str(tid10, "my Composite Template").</p>
+<p class="p8">str(tid12, "child").</p>
+<p class="p8">str(tid15, "make instance").</p>
+<p class="p8">str(tid19, "child instance").</p>
+<p class="p8">str(tid2, "my Composite Template").</p>
+<p class="p8">str(tid21, "invent name").</p>
+<p class="p8">str(tid26, "named child instance").</p>
+<p class="p8">str(tid28, "recursively instantiate").</p>
+<p class="p8">str(tid32, "filled child instance").</p>
+<p class="p8">str(tid34, "insert child into children of my runnable").</p>
+<p class="p8">str(tid39, "my runnable filled in with children").</p>
+<p class="p8">str(tid4, "my runnable").</p>
+<p class="p8">str(tid42, "my runnable filled in with children").</p>
+<p class="p8">str(tid44, "∀ connections of my Composite Template").</p>
+<p class="p8">str(tid49, "clone connection").</p>
+<p class="p8">str(tid54, "runnable connection with holes").</p>
+<p class="p8">str(tid56, "fixup connection").</p>
+<p class="p8">str(tid6, "∀ children of my Composite Template").</p>
+<p class="p8">str(tid61, "fixed up connection").</p>
+<p class="p8">str(tid63, "insert connection into runnable").</p>
+<p class="p8">str(tid68, "final runnable").</p>
+<p class="p8">str(tid72, "runnable").</p>
+<p class="p8">str(tid8, "my runnable").</p>
+<p class="p8">strokeWidth(id1, 3).</p>
+<p class="p8">strokeWidth(id3, 1).</p>
+<p class="p8">strokeWidth(id45, 1).</p>
+<p class="p8">strokeWidth(id46, 1).</p>
+<p class="p8">strokeWidth(id47, 1).</p>
+<p class="p8">strokeWidth(id50, 1).</p>
+<p class="p8">strokeWidth(id51, 1).</p>
+<p class="p8">strokeWidth(id52, 1).</p>
+<p class="p8">strokeWidth(id57, 1).</p>
+<p class="p8">strokeWidth(id58, 1).</p>
+<p class="p8">strokeWidth(id59, 1).</p>
+<p class="p8">strokeWidth(id64, 1).</p>
+<p class="p8">strokeWidth(id65, 1).</p>
+<p class="p8">strokeWidth(id66, 1).</p>
+<p class="p8">strokeWidth(id70, 1).</p>
+<p class="p8">strokeWidth(id73, 1).</p>
+<p class="p8">text(id1, tid2).</p>
+<p class="p8">text(id11, tid12).</p>
+<p class="p8">text(id14, tid15).</p>
+<p class="p8">text(id18, tid19).</p>
+<p class="p8">text(id20, tid21).</p>
+<p class="p8">text(id25, tid26).</p>
+<p class="p8">text(id27, tid28).</p>
+<p class="p8">text(id3, tid4).</p>
+<p class="p8">text(id31, tid32).</p>
+<p class="p8">text(id33, tid34).</p>
+<p class="p8">text(id38, tid39).</p>
+<p class="p8">text(id41, tid42).</p>
+<p class="p8">text(id43, tid44).</p>
+<p class="p8">text(id48, tid49).</p>
+<p class="p8">text(id5, tid6).</p>
+<p class="p8">text(id53, tid54).</p>
+<p class="p8">text(id55, tid56).</p>
+<p class="p8">text(id60, tid61).</p>
+<p class="p8">text(id62, tid63).</p>
+<p class="p8">text(id67, tid68).</p>
+<p class="p8">text(id7, tid8).</p>
+<p class="p8">text(id71, tid72).</p>
+<p class="p8">text(id9, tid10).</p>
+<p class="p9"><br></p>
+<p class="p2">Note that PROLOG requires that all facts with the same name be grouped together.<span class="Apple-converted-space">  </span>We do this by invoking the UNIX® <i>sort</i> command (see run.bash — <a href="https://github.com/guitarvydas/basicdasl/blob/master/pseudo/run.bash">https://github.com/guitarvydas/basicdasl/blob/master/pseudo/run.bash</a>)</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Roadmap</b></h2>
+<p class="p2"><img src="/assets/2021-05-10-00-53-29-Images/Roadmap3.png" width="100%" alt="Image"></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Prerequisites</b></h2>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/26/Factbases-101.html">https://guitarvydas.github.io/2021/04/26/Factbases-101.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/11/Grasem.html">https://guitarvydas.github.io/2021/04/11/Grasem.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html">https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><b>Ohm-JS </b>(skim or familiarize yourself with Ohm-JS using this essay or Ohm-JS documentation)<span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html">https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html</a></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>ohm-js editor</b><span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html">https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html</a></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>glue</b><span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">https://guitarvydas.github.io/2021/04/11/Glue-Tool.html</a></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>grasem</b><span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/11/Grasem.html">https://guitarvydas.github.io/2021/04/11/Grasem.html</a></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>isolation</b><span class="Apple-converted-space"> </span></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/16/Superposition.html">https://guitarvydas.github.io/2021/01/16/Superposition.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/22/superposition.html">https://guitarvydas.github.io/2021/01/22/superposition.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/01/24/superposition-2.html">https://guitarvydas.github.io/2021/01/24/superposition-2.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">https://guitarvydas.github.io/2020/12/09/Isolation.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><b>details kill</b></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/17/Details-Kill.html">https://guitarvydas.github.io/2021/03/17/Details-Kill.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><b>software development roles</b></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html">https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><b>toolbox language</b></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html">https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html</a></p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html">https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html</a></p>
+<p class="p3"><br></p>
+<p class="p2"><b>screencasts</b> (esp. PROLOG For Programmers)</p>
+<p class="p2"><a href="https://guitarvydas.github.io/2021/04/11/Playlists.html">https://guitarvydas.github.io/2021/04/11/Playlists.html</a></p>
+<p class="p3"><br></p>
+<p class="p7"><br></p>
+<hr>
+<p class="p6"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>Cloud Outliner</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>
