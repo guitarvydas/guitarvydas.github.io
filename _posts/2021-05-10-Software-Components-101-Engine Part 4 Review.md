@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Software Component 101 - Part 4 Review"
+title:  "Software Components 101 - Engine Part 4 Review"
 ---
 In beginning to work on part 5 of this series of essays, I noticed a design bug.
 
