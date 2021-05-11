@@ -92,6 +92,56 @@ arithmetic %
 # WASM
 Wasm is next.
 
+# Dissection
+Let's look at pymath.grasem.
+
+Let's look at the bottom-most grammar rule (the middle of the file, just before the closing `}`):
+```
+  number  (a number)
+    = ...
+    | digit+             -- whole
+```
+
+The grammar rule says that a whole number is `digit+`.  PEG uses syntax that is similar to REGEX, for example `digit+` means `match 1 or more digits`.  Digit is a built-in rule that comes with out-of-the-box Ohm-JS.  `+` means 1-or-more, whereas `*` means 0-or-more and `?` means optional (0 or 1).  
+
+The comment in the parentheses `(a number)` is used only during the creation of parse-error messages and is ignored in successful parses.
+
+The `number` grammar rule is broken into two branches
+1. the `-- fract` branch
+2. and the `-- whole` branch
+
+Each branch is named by the rule name and the branch name, e.g. `number_whole` in this case.
+
+(Notice that the branches are "uneven" in match length.  The `number_fract` branch matches 3 things - "digit*" and "." and "digit+".  The `number_whole` branch matches only 1 thing - "digit+".  That is why we need separate sub-names for the branches).
+
+The _glue_ section contains a matching rule
+```
+number_whole [@n] = [[${n}]]
+```
+
+This rule says that `number_whole` takes one parameter `n` and that it is a tree parameter `@n` matching up with `digit+` (`*`, `+` and `?` are tree parameters).
+
+The RHS of this _glue_ rule gives the rewrite surrounded by double-brackets
+`[[${n}]]`.  The RHS says to make the variable `n` into a string and to return that string.  See JS back-tick string documentation for further information on how to format the RHS.
+
+OTOH, the AddExp_plus rule is
+```
+AddExp_plus [e1 op e2] = [[${e1}+${e2}]]
+```
+which says that AddExp takes 3 parameters (e1, op and e2), none of which are tree parameters.  The rewrite is fairly simple - make e1 and e2 into strings and stick a `+` character between them.  
+
+## Rabbit Hole
+Basically, anything inside the dollar form `${ ... }` is evaluated (by Javascript), whereas everything else is just copied to the output string.
+
+_Glue_ does almost no work here.  _Glue_ just wraps back-ticks around the rewrite string and relies on JS to do the actual work.  We transpile the _.grasem_ spec into a .js file and then run the JS file (using node.js).  See the pyrun.bash file.  You can view the generated intermediate file by looking at `_pymath.js`.  `_pymath.js` is a _JS app_ that _creates_ a python program - see `_temp.py`.
+
+### Deeper Rabbit Hole
+Aside: this example is quite simple - the _glue_ rules consist of `name / parameters / = / [[rewrite]]`.  There is no optional JS such as `{{ ... }}` on the RHS).
+
+
+
+
+
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
