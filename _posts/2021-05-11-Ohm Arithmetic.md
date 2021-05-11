@@ -136,7 +136,7 @@ Basically, anything inside the dollar form `${ ... }` is evaluated (by Javascrip
 _Glue_ does almost no work here.  _Glue_ just wraps back-ticks around the rewrite string and relies on JS to do the actual work.  We transpile the _.grasem_ spec into a .js file and then run the JS file (using node.js).  See the pyrun.bash file.  You can view the generated intermediate file by looking at `_pymath.js`.  `_pymath.js` is a _JS app_ that _creates_ a python program - see `_temp.py`.
 
 ### Deeper Rabbit Hole
-Aside: this example is quite simple - the _glue_ rules consist of `name / parameters / = / [[rewrite]]`.  There is no optional JS such as `{{ ... }}` on the RHS).
+Aside: this example is quite simple - the _glue_ rules consist of `name [ parameters ] = [[rewrite]]`.  There is no optional JS on the RHS (optional JS would be enclosed in double-braces)).
 
 
 
