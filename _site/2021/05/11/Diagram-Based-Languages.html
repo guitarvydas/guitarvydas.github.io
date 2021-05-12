@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Diagram Based Languages</title>
+  <meta name="CreationTime" content="2021-05-11T23:51:36Z">
+  <meta name="ModificationTime" content="2021-05-11T23:51:36Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    p.p6 {margin: 0.0px 0.0px 7.0px 36.0px; text-indent: -18.0px; font: 10.0px Times}
+    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    li.li4 {margin: 0.0px 0.0px 14.2px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px Times}
+    span.s3 {text-decoration: underline ; color: #000080}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<div style="width: 600px; margin: 0 auto">
+
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>DaS</b></h2>
+<p class="p2">It is often believed that programming languages come in only 2 forms: (1) textual and (2) visual.</p>
+<p class="p2">Visual Programming has become to mean pixel-based image processing.</p>
+<p class="p2">I have implemented an intermediate form of programming.<span class="Apple-converted-space">  </span>Something between (1) textual and (2) pixel-based image processing.<a id="fnlink1"></a><a href="#fn1"><sup>[1]</sup></a></p>
+<p class="p2">I call it DaS – Diagram as Syntax.<span class="Apple-converted-space">  </span>It is <i>diagrammatic programming</i>.<span class="Apple-converted-space">  </span>I used to call this “visual programming”, but that phrase has come to mean something else, something much harder to implement.</p>
+<p class="p3"><br></p>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>aha</b></h2>
+<p class="p2">I backed into a number of design principles.<span class="Apple-converted-space">  </span>I will do my best to summarize them below...</p>
+<ul class="ul1">
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Most programming languages and compilers are based on glyphs.<span class="Apple-converted-space">  </span>A <i>character </i>is a small bitmap.<span class="Apple-converted-space">  </span>A <i>character </i>is a <i>glyph.<span class="Apple-converted-space">  </span></i>Programming languages are based on grids of non-overlapping glyphs.<span class="Apple-converted-space">  </span>Language design has been driven by programming-editor capabilities, e.g. emacs, Vim, VisualStudio.<span class="Apple-converted-space">  </span>Fixed-font programming editors determine the shape of programming languages (not the other way around).<span class="Apple-converted-space">  </span>Programming editors are frozen in the 1950’s, whereas non-programming editors (e.g. Word) have advanced to include variable-sized fonts, diagrams, images, etc.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Modern hardware is not constrained to editing non-overlapping glyphs in a grid.</li>
+  <li class="li4"><span class="s1">•<span class="Apple-tab-span">	</span></span>It is OK to mix text and diagrams.<span class="Apple-converted-space">  </span>A diagrammatic language does not need to be 100% diagrams.<span class="Apple-converted-space">  </span>Some concepts, e.g. concepts like “a = b + c”, are better expressed as text.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Diagrams for concurrency need only a few overlapping glyphs<a id="fnlink2"></a><a href="#fn2"><sup>[2]</sup></a> – (1) boxes, (2) arrows, (3) text. <span class="Apple-converted-space"> </span></li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Diagrams for StateCharts need only a few overlapping glyphs – (1) ellipses (or rounded boxes), (2) curved lines, (3) text</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Backtracking is OK.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>PROLOG can be used as a parser.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>A single app can use more than one paradigm, e.g. if PROLOG backtracking is used for parsing, the rest of the app is not constrained to use only PROLOG</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>DSLs everywhere – multiple DSLs can (should)<a id="fnlink3"></a><a href="#fn3"><sup>[3]</sup></a> be used in one project.<span class="Apple-converted-space">  </span>It is OK to build source-to-source converters that let the base language do the heavy lifting – this makes building DSLs much less onerous.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Hierarchical composition – makes Software Architecture, DI<a id="fnlink4"></a><a href="#fn4"><sup>[4]</sup></a> easier and, more expressive, and promotes <i>divide &amp; conquer<a id="fnlink5"></a></i><a href="#fn5"><sup>[5]</sup></a></li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>I want to derive interesting information about a diagram (code).<span class="Apple-converted-space">  </span>For example, I want to know the (x,y) for a box, I want to know (x,y) for the start-point of a line, I want to know (x,y) for the end-point of a line.<span class="Apple-converted-space">  </span>I can used backtracking pattern matching to derive some of this information. <span class="Apple-converted-space"> </span></li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Current PLs (programming languages) are based on the concept that, in (x,y),“x” is a character position and “y” is a line number.<span class="Apple-converted-space">  </span>Characters are strictly non-overlapping and sequential.<span class="Apple-converted-space">  </span>I would say that characters are not 2D, but something less, like 1.5D.<span class="Apple-converted-space">  </span>Current hardware can do better – (x,y), <i>can</i> be represented as pixel coordinates and full 2D glyphs can overlap.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>I need to ensure that my “editor” gives me enough information.<span class="Apple-converted-space">  </span>The requirements for a diagrammatic programming editor are different from the requirements for a business editor (like Word, VISIO, Draw.io, etc.).</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>SVG and XML based editors and diagram editors produce diagrams that contain much of this needed information, but they also contain lots of noise (aka syntactic sugar).<span class="Apple-converted-space">  </span>It might be better to build one’s own diagram-programming editor, but in the meantime, Draw.io, yEd, etc., might suffice.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>I am more concerned with DI than with Maintenance Engineering, Efficiency Engineering, Test Engineering, etc., etc.<span class="Apple-converted-space">  </span>From this perspective – i.e. DI - I don’t care about the efficiency of parsers that employ backtracking, as long as it doesn’t keep me waiting, on my computer.</li>
+  <li class="li2"><span class="s1">•<span class="Apple-tab-span">	</span></span>Hierarchical composition – keeps things small.<span class="Apple-converted-space">  </span>O(3) doesn’t matter when things are small.<span class="Apple-converted-space">  </span>O(3) still runs “fast enough”.</li>
+</ul>
+<h2 style="margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica"><b>Box-and-Arrow Diagrams and Concurrency</b></h2>
+<p class="p2">The canonical form of “visual programming” - which I call DaS – is the box-and-arrow diagram.<span class="Apple-converted-space">  </span>It is a network diagram wherein nodes are functions instead of full-blown computers.</p>
+<p class="p2">Most attempts at implementing box-and-arrow diagrams have failed (as far as I know).<span class="Apple-converted-space">  </span>Most attempts at “visual programming” have failed (as far as I know – visual programming can produce pretty pictures, but do not address PLs).</p>
+<p class="p2">I have been successfully using box-and-arrow diagrams in production since the mid-1990’s.<span class="Apple-converted-space">  </span>FBP<a id="fnlink6"></a><a href="#fn6"><sup>[6]</sup></a> has been using box-and-arrow diagrams since the 1960’s.<span class="Apple-converted-space">  </span>UNIX® pipelines are a degenerate form of box-and-arrow-diagrams.</p>
+<p class="p2">Why have most attempts at box-and-arrow diagrams failed?</p>
+<p class="p2">Concurrency.<a id="fnlink7"></a><a href="#fn7"><sup>[7]</sup></a></p>
+<p class="p2">Box-and-arrow diagrams do not work well in the sequential paradigm.</p>
+<p class="p2">All of the working instances of box-and-arrow diagrams – that I know of – treat boxes as being concurrent components and treat arrows as pipelines of concurrent messages between (concurrent) components.</p>
+<p class="p2">UNIX® pipelines and existing implementations of FBP use heavy-weight <i>threads</i> to implement concurrency.<span class="Apple-converted-space">  </span>I implemented the concurrent paradigm without using <i>threads</i>.<span class="Apple-converted-space">  </span>I used something like closures.</p>
+<hr>
+<p class="p5"><a id="fn1"></a><a href="#fnlink1"><span class="s2">[1]</span></a><span class="s2"> </span>“Visual Programming” also meant, for a while, software development using GUIs. MFC and Visual BASIC were touted as “visual programming”.</p>
+<p class="p6"><a id="fn2"></a><a href="#fnlink2"><span class="s2">[2]</span></a><span class="s2"> </span>Here, I am using the word “glyph” to mean “atomic graphical symbol”.<span class="Apple-converted-space">  </span>See also <a href="https://en.wikipedia.org/wiki/Glyph"><span class="s3">https://en.wikipedia.org/wiki/Glyph</span></a>.<span class="Apple-converted-space">  </span>Unlike character glyphs, atomic graphical elements are not fixed size, but, like character glyphs they can be bound to a single input gesture (e.g. a keystroke).<span class="Apple-converted-space">  </span>There are not many of these kinds of glyphs in any given notation (e.g. about 3).</p>
+<p class="p6"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>See my essay “DSLs - The Future of Computing”</p>
+<p class="p6"><a id="fn4"></a><a href="#fnlink4"><span class="s2">[4]</span></a><span class="s2"> </span>Design Intent</p>
+<p class="p6"><a id="fn5"></a><a href="#fnlink5"><span class="s2">[5]</span></a><span class="s2"> </span>See my essay “Divide And Conquer”</p>
+<p class="p6"><a id="fn6"></a><a href="#fnlink6"><span class="s2">[6]</span></a><span class="s2"> </span>&lt;ref to FBP&gt;</p>
+<p class="p5"><a id="fn7"></a><a href="#fnlink7"><span class="s2">[7]</span></a><span class="s2"> </span>See my essay “Concurrency is a Paradigm”</p>
+</div>
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
+</body>
+</html>

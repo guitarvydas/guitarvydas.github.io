@@ -1,0 +1,68 @@
+I"4<p>Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.</p>
+
+<p>Currently, arrows contain references to graphical objects.  These references should actually be ids.  These references are (human-readable) synonyms to (machine-readable) ids.</p>
+
+<p>For example, as in part 4, we have facts like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp(id5, c).
+arrow(id40, a41).
+arrowBegin(a41, c_c).
+arrowEnd(a41, [c_e_m]).
+</code></pre></div></div>
+
+<p>Firstly, we can create synonym facts, e.g.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp(id5, c).
+synonym(c, id5).
+</code></pre></div></div>
+
+<p>Then, we use the synonym facts to modify all arrowBegin facts, e.g.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arrowBegin(a41, c_c).
+aBegin(a41, idYYY).
+</code></pre></div></div>
+
+<p>Then, we use the synonym facts to modify all arrowEnd facts, e.g.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arrowEnd(a41, [c_e_m]).
+aEnd(a41, [idZZZ]).
+</code></pre></div></div>
+
+<p>N.B. Currently, we leave all of the facts in the factbase.  There is no need to remove facts.  Removing facts at this stage – without proof of needing to do so – is premature optimization (and uneccessary brain clutter).</p>
+
+<p>We define gobject(ID).  See <a href="https://github.com/guitarvydas/basicdasl/blob/master/pseudo/q.pl">q.pl</a></p>
+
+<p>Since we specify the synonym in gobject definitions, the query for synonyms is straight-forward<br />
+synonym(ID,Synonym) :-</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nonArrowGobject(ID,Synonym).
+</code></pre></div></div>
+<p>[A ‘nonArrowGobject’ is any gobject except arrows.  See the code for further details.]</p>
+
+<p>Creating a new aBegin fact consists of a compound query - print out an aBegin fact for every arrowBegin fact, replacing the synonym… (again, details elided, see code):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>printAllABegin :-
+    forall(arrowBegin(ID,_),printABegin(ID)).
+</code></pre></div></div>
+
+<h2 id="sanity-checks">Sanity Checks</h2>
+<p>I create <code class="language-plaintext highlighter-rouge">gkind</code> and <code class="language-plaintext highlighter-rouge">tag</code> queries and double-check by running queries and looking at the diagram (the code for transpilation in this example is meant to be done manually, so I would expect many bugs.  We’ll see what I missed when we try to run this stuff.)</p>
+
+<p>For example, we double-check the arrow with two receivers:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- printAllAEnd.
+...
+aEnd(a82,[id62,id69]).
+...
+false.
+
+?- tag(id62,Tag).
+Tag = e_e_l ;
+false.
+</code></pre></div></div>
+<p>(which appears to coincide with what is on the diagram).</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

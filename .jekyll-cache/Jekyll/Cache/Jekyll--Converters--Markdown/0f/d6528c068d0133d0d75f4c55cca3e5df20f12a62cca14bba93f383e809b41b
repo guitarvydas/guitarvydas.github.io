@@ -1,0 +1,28 @@
+I"q	<p>In beginning to work on part 5 of this series of essays, I noticed a design bug.</p>
+
+<p>Arrows contain two parts (<code class="language-plaintext highlighter-rouge">arrowBegin</code> and <code class="language-plaintext highlighter-rouge">arrowEnd</code>) and should be written as a pair referencing the containing composite component.</p>
+
+<p>For example</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;outline text="comp “c”"&gt;
+  ...
+    &lt;outline text="arrow c/c  c/e/m" /&gt;
+  ...
+</code></pre></div></div>
+
+<p>should create a pair, referring to “comp c”, and, should create a beginning and end for the pair, like…</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp(id5, c).
+arrow(id5,idXXX).
+arrowBegin(idXXX,c_c).
+arrowEnd(idXXX,[c_c_m]).
+</code></pre></div></div>
+
+<p>(In part 5, we will convert the synonyms <code class="language-plaintext highlighter-rouge">"c_c"</code> and <code class="language-plaintext highlighter-rouge">"c_c_m"</code> into ids.  This essay is only about fixing the design bug mentioned above).</p>
+
+<p>This bug should be relatively easy to repair.  We need to visit the <code class="language-plaintext highlighter-rouge">grasem</code>/<code class="language-plaintext highlighter-rouge">glue</code> code for arrow and add another fact.</p>
+
+<p>[N.B. There is at least one other appeasement to human-readability - the use of PROLOG lists (<code class="language-plaintext highlighter-rouge">[...]</code>) in arrowEnd facts.  I don’t think that we’ll bother to fix this.  The pure form would be to unroll arrowEnd and make it into multiple facts, i.e. to express the Lists as multiple facts (something like <code class="language-plaintext highlighter-rouge">beginArrowEnd</code>, <code class="language-plaintext highlighter-rouge">arrowEndNext</code>, <code class="language-plaintext highlighter-rouge">arrowEndEnd</code>). PROLOG lets us “get away” with lists of the form <code class="language-plaintext highlighter-rouge">[ ... ]</code> and we will let this impurity stand, for now.  This is an interim project which doesn’t need to be fixed yet (YAGNI)].</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

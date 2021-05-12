@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Arithmetic Example in Ohm-JS and grasem | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Arithmetic Example in Ohm-JS and grasem" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS." />
+<meta property="og:description" content="Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-11T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Arithmetic Example in Ohm-JS and grasem" />
+<script type="application/ld+json">
+{"headline":"Arithmetic Example in Ohm-JS and grasem","@type":"BlogPosting","dateModified":"2021-05-11T00:00:00-04:00","datePublished":"2021-05-11T00:00:00-04:00","description":"Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS.","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html"},"url":"https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Arithmetic Example in Ohm-JS and grasem</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-11T00:00:00-04:00" itemprop="datePublished">May 11, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+<p>This essay discusses how to build the simple “Arithmetic” example found in <br />
+<a href="https://github.com/harc/ohm/tree/master/examples/math">Ohm-JS</a>.</p>
+
+<p>We create an identity grammar.</p>
+
+<p>We create code for Python and JS and Lisp from the specification.</p>
+
+<p>We discuss the difference between upper-case and lower-case grammar rules.</p>
+<h1 id="basics">Basics</h1>
+<p>Ohm-JS is a PEG parser library (it calls itself a language).</p>
+
+<p>PEG is a lot like REGEX, but better.</p>
+
+<p>PEG is easy to use and can match things that REGEX can’t match (in fact, PEG can match things that other parsers can’t match).</p>
+
+<p>Ohm-JS is my (current) favorite version of PEG for 2 main reasons:</p>
+
+<ol>
+  <li>The grammar remains pure and readable.  The code for doing-something with the matches does not go in the grammar, as it does in most other PEG tools that I’ve seen.</li>
+  <li>The <a href="https://ohmlang.github.io/editor/">Ohm-Editor</a> makes it very easy to develop and debug grammars.  PEG is already good for developing grammars, but Ohm-Editor is maybe 10x better than even PEG.  I usually spend about a day or two debugging PEG grammars, but with Ohm-Editor I measure development time in 10’s of minutes.</li>
+</ol>
+
+<p><a href="https://github.com/harc/ohm">Ohm</a></p>
+
+<p>We use the same grammar to generate code in the 3 languages.</p>
+
+<h1 id="grasem-and-glue">GRASEM and GLUE</h1>
+<p>I developed a tool that I call <em>glue</em> to dovetail with Ohm-JS.</p>
+
+<p><em>Glue</em> generates the what-to-do-with-the-matches code for Ohm-JS.  (Ohm-JS calls this “the semantics” and expects us to program it in JavaScript).</p>
+
+<p><em>Grasem</em> is a micro-tool that joins an Ohm-JS grammar together with a <em>glue</em> specification into one file (a .grasem file).  (Guess what?  The <em>glue</em> tool was developed using Ohm-JS.)</p>
+
+<p>With <em>grasem</em>, we can write a transpiler - using only simple operations - and not touch JS at all.</p>
+
+<p>Briefly - a <em>glue</em> spec consists of one rule for every rule in the grammar.  The name of the rule must be the same as the name used to name a grammar rule.  The LHS of a <em>glue</em> rule takes one parameter for each partial match in the grammar rule (the match can be a single match or a tree-match, with slightly different syntax for each kind of parameter).  The RHS of a <em>glue</em> rule consists of an optional chunk of JS followed by an output format (using the JS back-tick syntax).  <em>Glue</em> also allows the programmer to create a set of scoped (inherited) variables that annotate the tree-walk.  A <em>glue</em> rule recursively walks the CST (concrete, not abstract, syntax tree) built by the Ohm-JS grammar and outputs code as per the specification.</p>
+
+<p>The <em>glue</em> syntax is meant for machine-readability instead of human-readability.  (Hint: Someone might want to create a more human-readable syntax, using, of course, <em>Ohm-JS</em> or <em>glue</em> or <em>grasem</em>).</p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Manual</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Grasem.html">Grasem Documention</a></p>
+<h1 id="identity-grammar">Identity Grammar</h1>
+<p>The first step in developing a grasem program is to write the grammar using the Ohm-Editor.</p>
+
+<p>The second step is to create <em>glue</em> code that outputs the input - exactly.  Most parser technologies strip and discard whitespace at an early stage.</p>
+
+<p>An example of these two steps can be seen in commit 5dd6c3df5a31e19cc09a7ff3ea3192a0eeb57976 of <a href="https://github.com/guitarvydas/arithmetic">arithmetic identity</a>.</p>
+
+<p>This set of 2 steps - creating an identity transpiler - produces a working a grammar and an output spec.</p>
+
+<p>In subsequent steps, the programmer hacks on the output spec to perform desired manipulations.</p>
+
+<p>In this (simple) example, I cloned the <em>grasem</em> spec 3 times and hacked on the <em>glue</em> specs of each clone to produce Python, JS and Lisp code.  The final result is in <a href="https://github.com/guitarvydas/arithmetic">my github arithmetic repo</a>.</p>
+<h1 id="upper-case-vs-lower-case">Upper-case vs Lower-case</h1>
+<p>Ohm-JS tries to improve grammar readability by skipping over whitespace.</p>
+
+<p>In Ohm-JS, rules that begin with capital letters, perform automatic whitespace skipping.</p>
+
+<p>Ohm-JS rules that begin with lower-case letters work like PEG, requiring the programmer to specify matches for whitespace.</p>
+
+<p>PEG, unlike other parsing technologies, allows programmers to write, both, the scanner and the parser in the same language (for example, to use YACC, you need to provide a LEX scanner - YACC and LEX are two completely different things with separate syntaxes).  This feature makes PEG more accessible to non-compiler-writers, but, it means that grammars are sullied by the addition of whitespace sub-rules.</p>
+
+<p>If one is concerned more with machine-readability than with human-readability (as I am), then this feature is of little help.</p>
+
+<p>When one writes grammars for languages that use commas and semi-colons (<code class="language-plaintext highlighter-rouge">,</code> and <code class="language-plaintext highlighter-rouge">;</code> resp), this Ohm-JS feature is a time-saver, but, when one writes grammars for comma-less languages, this feature can cause strange behaviour ((you don’t need to understand this point to be able to just-use Ohm-JS - e.g. “two words” is matched as one word “twowords”.  The secret to dealing with this kind of problem is to use tokens, or, to create a list of delimiters in the grammar, or, to build grammars in a staged manner (the first stage is written using only lower-case rules)).</p>
+
+<h1 id="arithmetic-in-3-languages---python-js-and-lisp">Arithmetic in 3 Languages - Python, JS and Lisp</h1>
+<p>The 3 language transpilers are invoked by running <code class="language-plaintext highlighter-rouge">.bash</code> scripts:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arithmetic % ./pyrun.bash 
+9.11111111111111
+7
+123
+42
+arithmetic % ./jsrun.bash
+9.11111111111111
+7
+123
+42
+arithmetic % ./lisprun.bash
+82/9
+7
+123
+42
+arithmetic % 
+</code></pre></div></div>
+
+<h1 id="wasm">WASM</h1>
+<p>Wasm is next.</p>
+
+<h1 id="dissection">Dissection</h1>
+<p>Let’s look at pymath.grasem.</p>
+
+<p>Let’s look at the bottom-most grammar rule (the middle of the file, just before the closing <code class="language-plaintext highlighter-rouge">}</code>):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  number  (a number)
+    = ...
+    | digit+             -- whole
+</code></pre></div></div>
+
+<p>The grammar rule says that a whole number is <code class="language-plaintext highlighter-rouge">digit+</code>.  PEG uses syntax that is similar to REGEX, for example <code class="language-plaintext highlighter-rouge">digit+</code> means <code class="language-plaintext highlighter-rouge">match 1 or more digits</code>.  Digit is a built-in rule that comes with out-of-the-box Ohm-JS.  <code class="language-plaintext highlighter-rouge">+</code> means 1-or-more, whereas <code class="language-plaintext highlighter-rouge">*</code> means 0-or-more and <code class="language-plaintext highlighter-rouge">?</code> means optional (0 or 1).</p>
+
+<p>The comment in the parentheses <code class="language-plaintext highlighter-rouge">(a number)</code> is used only during the creation of parse-error messages and is ignored in successful parses.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">number</code> grammar rule is broken into two branches</p>
+<ol>
+  <li>the <code class="language-plaintext highlighter-rouge">-- fract</code> branch</li>
+  <li>and the <code class="language-plaintext highlighter-rouge">-- whole</code> branch</li>
+</ol>
+
+<p>Each branch is named by the rule name and the branch name, e.g. <code class="language-plaintext highlighter-rouge">number_whole</code> in this case.</p>
+
+<p>(Notice that the branches are “uneven” in match length.  The <code class="language-plaintext highlighter-rouge">number_fract</code> branch matches 3 things - “digit*” and “.” and “digit+”.  The <code class="language-plaintext highlighter-rouge">number_whole</code> branch matches only 1 thing - “digit+”.  That is why we need separate sub-names for the branches).</p>
+
+<p>The <em>glue</em> section contains a matching rule</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>number_whole [@n] = [[${n}]]
+</code></pre></div></div>
+
+<p>This rule says that <code class="language-plaintext highlighter-rouge">number_whole</code> takes one parameter <code class="language-plaintext highlighter-rouge">n</code> and that it is a tree parameter <code class="language-plaintext highlighter-rouge">@n</code> matching up with <code class="language-plaintext highlighter-rouge">digit+</code> (<code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">?</code> are tree parameters).</p>
+
+<p>The RHS of this <em>glue</em> rule gives the rewrite surrounded by double-brackets<br />
+<code class="language-plaintext highlighter-rouge">[[${n}]]</code>.  The RHS says to make the variable <code class="language-plaintext highlighter-rouge">n</code> into a string and to return that string.  See JS back-tick string documentation for further information on how to format the RHS.</p>
+
+<p>OTOH, the AddExp_plus rule is</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AddExp_plus [e1 op e2] = [[${e1}+${e2}]]
+</code></pre></div></div>
+<p>which says that AddExp takes 3 parameters (e1, op and e2), none of which are tree parameters.  The rewrite is fairly simple - make e1 and e2 into strings and stick a <code class="language-plaintext highlighter-rouge">+</code> character between them.</p>
+
+<h2 id="rabbit-hole">Rabbit Hole</h2>
+<p>Basically, anything inside the dollar form <code class="language-plaintext highlighter-rouge">${ ... }</code> is evaluated (by Javascript), whereas everything else is just copied to the output string.</p>
+
+<p><em>Glue</em> does almost no work here.  <em>Glue</em> just wraps back-ticks around the rewrite string and relies on JS to do the actual work.  We transpile the <em>.grasem</em> spec into a .js file and then run the JS file (using node.js).  See the pyrun.bash file.  You can view the generated intermediate file by looking at <code class="language-plaintext highlighter-rouge">_pymath.js</code>.  <code class="language-plaintext highlighter-rouge">_pymath.js</code> is a <em>JS app</em> that <em>creates</em> a python program - see <code class="language-plaintext highlighter-rouge">_temp.py</code>.</p>
+
+<h3 id="deeper-rabbit-hole">Deeper Rabbit Hole</h3>
+<p>Aside: this example is quite simple - the <em>glue</em> rules consist of <code class="language-plaintext highlighter-rouge">name [ parameters ] = [[rewrite]]</code>.  There is no optional JS on the RHS (optional JS would be enclosed in double-braces)).</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/05/11/Ohm-Arithmetic.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
