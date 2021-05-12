@@ -1,81 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-11T23:52:37-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Concurrency is not parallelism</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html" rel="alternate" type="text/html" title="Concurrency is not parallelism" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Concurrency%20is%20not%20Parallelism</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-12T08:22:46-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Table of contents</title><link href="https://computingsimplicity.neocities.org/2021/05/12/Table-Of-Contents.html" rel="alternate" type="text/html" title="Table of contents" /><published>2021-05-12T00:00:00-04:00</published><updated>2021-05-12T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/12/Table%20Of%20Contents</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/12/Table-Of-Contents.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Concurrency is not Parallelism&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
+  &lt;title&gt;Table Of Contents&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-12T08:21:06Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-12T08:21:06Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
-    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
-    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    span.s1 {text-decoration: underline}
-    span.s2 {font: 12.0px Helvetica}
-    span.s3 {font: 12.0px Times}
-    span.s4 {font: 7.0px Times}
-    span.Apple-tab-span {white-space:pre}
-    ul.ul1 {list-style-type: disc}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Central Point&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency is a programming &lt;i&gt;paradigm&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Parallelism is an application problem, &lt;i&gt;not&lt;/i&gt; a paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parallel programs must use the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Concurrent programs, though, are not necessarily parallel.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Rob Pike's Talk&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;https://vimeo.com/49718712&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Conflating Concurrency and Parallelism&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I used to conflate parallelism and concurrency until I watched Rob Pike’s talk.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I used to try to convince people that they could write concurrent programs using something “better” than Processes (Threads).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What I didn’t realize was that I was trying to explain the difference between the &lt;span class=&quot;s1&quot;&gt;paradigm&lt;/span&gt; called “concurrency” and the application &lt;span class=&quot;s1&quot;&gt;problem&lt;/span&gt; called “parallelism”.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A parallel program &lt;i&gt;must&lt;/i&gt; run on multiple processors.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A program designed using the concurrent paradigm can run on a &lt;i&gt;single&lt;/i&gt; Processor or on multiple processors. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The advantages of using the concurrent paradigm can be seen even on a single processor system.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;One can write concurrent software that uses only a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One cannot write parallel software that uses a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One can &lt;i&gt;simulate&lt;/i&gt; parallel software on a single processor, but this is not necessary (although it might help debugging, while hindering debugging). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Multi-tasking – as we know it today – is a &lt;i&gt;simulation&lt;/i&gt; of parallelism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking, as we know it today, tries valiantly to solve too many problems at once – e.g. memory sharing, bandwidth optimization, time-sharing, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking as we know it today, is a simulation of parallelism that attempts to optimize concurrency using multiple stacks (a form of memory sharing optimization + processor optimization and sharing).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A concurrent system is composed of a number of &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is a single distinguished routine, called the Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Distpacher() invokes closures, at random.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;That’s all there is.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is simple – almost too simple – to implement concurrency in any language that supports &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is possible to implement the concurrent paradigm in C or assembler, too, one just needs to pay more attention to details.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;As simple as this sounds, the concurrent paradigm forces one to program in a completely different manner.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program cannot rely on synchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program – composed of many communicating closures – must be written in a way that acknowledges that &lt;i&gt;any&lt;/i&gt; closure might be awakened at &lt;i&gt;any &lt;/i&gt;time (by the Dispatcher()).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This seemingly simple requirement causes programmers to re-evaluate control-flow coupling.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Operating system Processes and threading libraries are heavy-handed approaches to creating closures and a Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use hardware to protect one program from another (e.g. MMUs).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to optimize memory usage using memory-sharing and stacks (stacks are just an optimized form of linked lists).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use time-sharing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When you strip these features out of threading libraries, you get multi-tasking that is easy.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Closures have been around for a long time, and they don’t require MMUs, memory sharing, stacks and time-sharing.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Closures are like GOTOs – they &lt;i&gt;can&lt;/i&gt; be misused.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Organizing closures in a hierarchical manner (see my other essays on this subject) is one way to tame their use.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We have found that we need “languages” that encourage certain usage patterns – e.g. C vs. assembler programming (C encourages Structured control flow, through if-then-else statements, etc.) - e.g. OO encourages data encapsulation (but leaves control-flow encapsulation wide open, if not worse off).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;GOTOs are assembler-level details.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must exist.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Likewise, Closures exist and must be tamed.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Message-passing is another GOTO-like atomic element.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing enables the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A component can send another component a message, but the receiving component is not constrained as to when it deals with the message.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing defeats rendezvous.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing allows asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The concurrent paradigm requires asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Backus asked “Can Programming Be Liberated From The von Neumann Style?”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The question is a good one.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The answer that Backus proposed was insufficient, though.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Mathematics, as we know it today, implies synchronous evaluation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We need to think of mathematics and synchrony being &lt;i&gt;isolated&lt;/i&gt; on asynchronous &lt;i&gt;islands&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Computers are parallel by default.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Forcing synchrony onto every part of computing is contrary to the manner in which computers work.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, multi-tasking is considered to be a “hard” problem mostly because multi-tasking is being solved using only one paradigm – a paradigm that is not the best choice for every problem in a particular solution.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is like trying to emulate C-like &lt;i&gt;format&lt;/i&gt; statements in PROLOG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It can be done, but results in accidental complexity.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;“Yes” to synchronous operations floating on asynchronous islands.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;“No” to synchronous &lt;i&gt;everything&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is OK to use more than one paradigm at a time.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, again, PROLOG leads the way towards thinking in relational terms, but casting &lt;i&gt;everything &lt;/i&gt;as a relation brings unnecessary difficulty.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Paradigms are DSLs draped over full-featured assemblers.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Concurrent API&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The API for the concurrent paradigm consists of one routine – Send().&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;br&gt;
-&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Examples of the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;These are some examples of the concurrent paradigm:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;UNIX® shell pipelines&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;closures using queues/mailboxes for inter-closure communication.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;O/S threads, and threading libraries, are often conflated with the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O/S threads – and many threading libraries – solve much greater problems,&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; and are poor examples of the concurrent paradigm.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Advantages to Using the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Encourages the absence of dependencies&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Isolation.&lt;/li&gt;
-  &lt;hr&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Most HLL PLs started out life as DSLs built on top of full-featured substrate languages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Greenspun’s 10&lt;span class=&quot;s4&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; rule is usually taken as a joke, but taken in the light of HLLs-as-DSLs, it begins to ring true.&lt;/p&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;OK, OK, I am simplifying.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are some house-keeping functions that might be necessary.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We definitely don’t need RETURN and we don’t need CATCH/THROW.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Send() is sufficient. &lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;RETURN?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead. CATCH/THROW?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;LOOP?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Recursion?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[Also, we don’t need dynamicism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Dynamic programming is just another way to say “self modifying code”, which is even worse than using the word “GOTO”]. RETURN &amp;amp; CATCH/THROW &amp;amp; LOOP &amp;amp; Recursion make sense &lt;i&gt;only &lt;/i&gt;on a synchronous island.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They are not atomic elements of the concurrent paradigm.&lt;/p&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Problems such as time-sharing, memory-sharing, protecting apps from one another, protecting against long-running apps, code-reuse, etc..&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most single apps don’t need these features / problems.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Note that mutual-multitasking is OK within a single app.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A “bug” is just a “bug” regardless of whether the concurrent paradigm or the synchronous paradigm is used.&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;&lt;img src=&quot;/assets/2021-05-12-08-21-06-Images/index2.png&quot; width=&quot;500px&quot; height=&quot;3730px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -85,86 +25,7 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Concurrency is not Parallelism</summary></entry><entry><title type="html">Diagram based languages</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html" rel="alternate" type="text/html" title="Diagram based languages" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Diagram%20Based%20Languages</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Diagram Based Languages&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
-    p.p6 {margin: 0.0px 0.0px 7.0px 36.0px; text-indent: -18.0px; font: 10.0px Times}
-    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    li.li4 {margin: 0.0px 0.0px 14.2px 0.0px; font: 12.0px Times}
-    span.s1 {font: 12.0px Helvetica}
-    span.s2 {font: 12.0px Times}
-    span.s3 {text-decoration: underline ; color: #000080}
-    span.Apple-tab-span {white-space:pre}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;DaS&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;It is often believed that programming languages come in only 2 forms: (1) textual and (2) visual.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Visual Programming has become to mean pixel-based image processing.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have implemented an intermediate form of programming.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Something between (1) textual and (2) pixel-based image processing.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I call it DaS – Diagram as Syntax.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is &lt;i&gt;diagrammatic programming&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used to call this “visual programming”, but that phrase has come to mean something else, something much harder to implement.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;aha&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I backed into a number of design principles.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will do my best to summarize them below...&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Most programming languages and compilers are based on glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a small bitmap.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a &lt;i&gt;glyph.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/i&gt;Programming languages are based on grids of non-overlapping glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Language design has been driven by programming-editor capabilities, e.g. emacs, Vim, VisualStudio.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Fixed-font programming editors determine the shape of programming languages (not the other way around).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Programming editors are frozen in the 1950’s, whereas non-programming editors (e.g. Word) have advanced to include variable-sized fonts, diagrams, images, etc.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Modern hardware is not constrained to editing non-overlapping glyphs in a grid.&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;It is OK to mix text and diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A diagrammatic language does not need to be 100% diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some concepts, e.g. concepts like “a = b + c”, are better expressed as text.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for concurrency need only a few overlapping glyphs&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; – (1) boxes, (2) arrows, (3) text. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for StateCharts need only a few overlapping glyphs – (1) ellipses (or rounded boxes), (2) curved lines, (3) text&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Backtracking is OK.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;PROLOG can be used as a parser.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;A single app can use more than one paradigm, e.g. if PROLOG backtracking is used for parsing, the rest of the app is not constrained to use only PROLOG&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;DSLs everywhere – multiple DSLs can (should)&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; be used in one project.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is OK to build source-to-source converters that let the base language do the heavy lifting – this makes building DSLs much less onerous.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – makes Software Architecture, DI&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; easier and, more expressive, and promotes &lt;i&gt;divide &amp;amp; conquer&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I want to derive interesting information about a diagram (code).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, I want to know the (x,y) for a box, I want to know (x,y) for the start-point of a line, I want to know (x,y) for the end-point of a line.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I can used backtracking pattern matching to derive some of this information. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Current PLs (programming languages) are based on the concept that, in (x,y),“x” is a character position and “y” is a line number.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Characters are strictly non-overlapping and sequential.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I would say that characters are not 2D, but something less, like 1.5D.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Current hardware can do better – (x,y), &lt;i&gt;can&lt;/i&gt; be represented as pixel coordinates and full 2D glyphs can overlap.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I need to ensure that my “editor” gives me enough information.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The requirements for a diagrammatic programming editor are different from the requirements for a business editor (like Word, VISIO, Draw.io, etc.).&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;SVG and XML based editors and diagram editors produce diagrams that contain much of this needed information, but they also contain lots of noise (aka syntactic sugar).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It might be better to build one’s own diagram-programming editor, but in the meantime, Draw.io, yEd, etc., might suffice.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I am more concerned with DI than with Maintenance Engineering, Efficiency Engineering, Test Engineering, etc., etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;From this perspective – i.e. DI - I don’t care about the efficiency of parsers that employ backtracking, as long as it doesn’t keep me waiting, on my computer.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – keeps things small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) doesn’t matter when things are small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) still runs “fast enough”.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Box-and-Arrow Diagrams and Concurrency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The canonical form of “visual programming” - which I call DaS – is the box-and-arrow diagram.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is a network diagram wherein nodes are functions instead of full-blown computers.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Most attempts at implementing box-and-arrow diagrams have failed (as far as I know).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most attempts at “visual programming” have failed (as far as I know – visual programming can produce pretty pictures, but do not address PLs).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have been successfully using box-and-arrow diagrams in production since the mid-1990’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FBP&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; has been using box-and-arrow diagrams since the 1960’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;UNIX® pipelines are a degenerate form of box-and-arrow-diagrams.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Why have most attempts at box-and-arrow diagrams failed?&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency.&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Box-and-arrow diagrams do not work well in the sequential paradigm.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;All of the working instances of box-and-arrow diagrams – that I know of – treat boxes as being concurrent components and treat arrows as pipelines of concurrent messages between (concurrent) components.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;UNIX® pipelines and existing implementations of FBP use heavy-weight &lt;i&gt;threads&lt;/i&gt; to implement concurrency.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I implemented the concurrent paradigm without using &lt;i&gt;threads&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used something like closures.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;“Visual Programming” also meant, for a while, software development using GUIs. MFC and Visual BASIC were touted as “visual programming”.&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Here, I am using the word “glyph” to mean “atomic graphical symbol”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See also &lt;a href=&quot;https://en.wikipedia.org/wiki/Glyph&quot;&gt;&lt;span class=&quot;s3&quot;&gt;https://en.wikipedia.org/wiki/Glyph&lt;/span&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Unlike character glyphs, atomic graphical elements are not fixed size, but, like character glyphs they can be bound to a single input gesture (e.g. a keystroke).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are not many of these kinds of glyphs in any given notation (e.g. about 3).&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “DSLs - The Future of Computing”&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Design Intent&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Divide And Conquer”&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&amp;lt;ref to FBP&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Concurrency is a Paradigm”&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Diagram Based Languages</summary></entry><entry><title type="html">Arithmetic Example in Ohm-JS and grasem</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html" rel="alternate" type="text/html" title="Arithmetic Example in Ohm-JS and grasem" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Ohm%20Arithmetic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Table Of Contents</summary></entry><entry><title type="html">Arithmetic Example in Ohm-JS and grasem</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html" rel="alternate" type="text/html" title="Arithmetic Example in Ohm-JS and grasem" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Ohm%20Arithmetic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;This essay discusses how to build the simple “Arithmetic” example found in &lt;br /&gt;
 &lt;a href=&quot;https://github.com/harc/ohm/tree/master/examples/math&quot;&gt;Ohm-JS&lt;/a&gt;.&lt;/p&gt;
 
@@ -301,72 +162,198 @@ arithmetic %
 &lt;p&gt;Aside: this example is quite simple - the &lt;em&gt;glue&lt;/em&gt; rules consist of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name [ parameters ] = [[rewrite]]&lt;/code&gt;.  There is no optional JS on the RHS (optional JS would be enclosed in double-braces)).&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS.</summary></entry><entry><title type="html">Software Components 101 - Engine Part 5 Queries</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html" rel="alternate" type="text/html" title="Software Components 101 - Engine Part 5 Queries" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine%20Part%205%20Queries</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html">&lt;p&gt;Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.&lt;/p&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS.</summary></entry><entry><title type="html">Diagram based languages</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html" rel="alternate" type="text/html" title="Diagram based languages" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Diagram%20Based%20Languages</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Diagram Based Languages&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    p.p6 {margin: 0.0px 0.0px 7.0px 36.0px; text-indent: -18.0px; font: 10.0px Times}
+    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    li.li4 {margin: 0.0px 0.0px 14.2px 0.0px; font: 12.0px Times}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px Times}
+    span.s3 {text-decoration: underline ; color: #000080}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;p&gt;Currently, arrows contain references to graphical objects.  These references should actually be ids.  These references are (human-readable) synonyms to (machine-readable) ids.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;DaS&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;It is often believed that programming languages come in only 2 forms: (1) textual and (2) visual.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Visual Programming has become to mean pixel-based image processing.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I have implemented an intermediate form of programming.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Something between (1) textual and (2) pixel-based image processing.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I call it DaS – Diagram as Syntax.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is &lt;i&gt;diagrammatic programming&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used to call this “visual programming”, but that phrase has come to mean something else, something much harder to implement.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;aha&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I backed into a number of design principles.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will do my best to summarize them below...&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Most programming languages and compilers are based on glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a small bitmap.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a &lt;i&gt;glyph.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/i&gt;Programming languages are based on grids of non-overlapping glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Language design has been driven by programming-editor capabilities, e.g. emacs, Vim, VisualStudio.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Fixed-font programming editors determine the shape of programming languages (not the other way around).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Programming editors are frozen in the 1950’s, whereas non-programming editors (e.g. Word) have advanced to include variable-sized fonts, diagrams, images, etc.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Modern hardware is not constrained to editing non-overlapping glyphs in a grid.&lt;/li&gt;
+  &lt;li class=&quot;li4&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;It is OK to mix text and diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A diagrammatic language does not need to be 100% diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some concepts, e.g. concepts like “a = b + c”, are better expressed as text.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for concurrency need only a few overlapping glyphs&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; – (1) boxes, (2) arrows, (3) text. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for StateCharts need only a few overlapping glyphs – (1) ellipses (or rounded boxes), (2) curved lines, (3) text&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Backtracking is OK.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;PROLOG can be used as a parser.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;A single app can use more than one paradigm, e.g. if PROLOG backtracking is used for parsing, the rest of the app is not constrained to use only PROLOG&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;DSLs everywhere – multiple DSLs can (should)&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; be used in one project.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is OK to build source-to-source converters that let the base language do the heavy lifting – this makes building DSLs much less onerous.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – makes Software Architecture, DI&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; easier and, more expressive, and promotes &lt;i&gt;divide &amp;amp; conquer&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I want to derive interesting information about a diagram (code).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, I want to know the (x,y) for a box, I want to know (x,y) for the start-point of a line, I want to know (x,y) for the end-point of a line.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I can used backtracking pattern matching to derive some of this information. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Current PLs (programming languages) are based on the concept that, in (x,y),“x” is a character position and “y” is a line number.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Characters are strictly non-overlapping and sequential.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I would say that characters are not 2D, but something less, like 1.5D.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Current hardware can do better – (x,y), &lt;i&gt;can&lt;/i&gt; be represented as pixel coordinates and full 2D glyphs can overlap.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I need to ensure that my “editor” gives me enough information.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The requirements for a diagrammatic programming editor are different from the requirements for a business editor (like Word, VISIO, Draw.io, etc.).&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;SVG and XML based editors and diagram editors produce diagrams that contain much of this needed information, but they also contain lots of noise (aka syntactic sugar).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It might be better to build one’s own diagram-programming editor, but in the meantime, Draw.io, yEd, etc., might suffice.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I am more concerned with DI than with Maintenance Engineering, Efficiency Engineering, Test Engineering, etc., etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;From this perspective – i.e. DI - I don’t care about the efficiency of parsers that employ backtracking, as long as it doesn’t keep me waiting, on my computer.&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – keeps things small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) doesn’t matter when things are small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) still runs “fast enough”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Box-and-Arrow Diagrams and Concurrency&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The canonical form of “visual programming” - which I call DaS – is the box-and-arrow diagram.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is a network diagram wherein nodes are functions instead of full-blown computers.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Most attempts at implementing box-and-arrow diagrams have failed (as far as I know).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most attempts at “visual programming” have failed (as far as I know – visual programming can produce pretty pictures, but do not address PLs).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I have been successfully using box-and-arrow diagrams in production since the mid-1990’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FBP&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; has been using box-and-arrow diagrams since the 1960’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;UNIX® pipelines are a degenerate form of box-and-arrow-diagrams.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Why have most attempts at box-and-arrow diagrams failed?&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Concurrency.&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Box-and-arrow diagrams do not work well in the sequential paradigm.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;All of the working instances of box-and-arrow diagrams – that I know of – treat boxes as being concurrent components and treat arrows as pipelines of concurrent messages between (concurrent) components.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;UNIX® pipelines and existing implementations of FBP use heavy-weight &lt;i&gt;threads&lt;/i&gt; to implement concurrency.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I implemented the concurrent paradigm without using &lt;i&gt;threads&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used something like closures.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;“Visual Programming” also meant, for a while, software development using GUIs. MFC and Visual BASIC were touted as “visual programming”.&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Here, I am using the word “glyph” to mean “atomic graphical symbol”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See also &lt;a href=&quot;https://en.wikipedia.org/wiki/Glyph&quot;&gt;&lt;span class=&quot;s3&quot;&gt;https://en.wikipedia.org/wiki/Glyph&lt;/span&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Unlike character glyphs, atomic graphical elements are not fixed size, but, like character glyphs they can be bound to a single input gesture (e.g. a keystroke).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are not many of these kinds of glyphs in any given notation (e.g. about 3).&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “DSLs - The Future of Computing”&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Design Intent&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Divide And Conquer”&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&amp;lt;ref to FBP&amp;gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Concurrency is a Paradigm”&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Diagram Based Languages</summary></entry><entry><title type="html">Concurrency is not parallelism</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html" rel="alternate" type="text/html" title="Concurrency is not parallelism" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Concurrency%20is%20not%20Parallelism</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Concurrency is not Parallelism&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
+    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
+    span.s1 {text-decoration: underline}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px Times}
+    span.s4 {font: 7.0px Times}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;p&gt;For example, as in part 4, we have facts like:&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Central Point&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;Concurrency is a programming &lt;i&gt;paradigm&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Parallelism is an application problem, &lt;i&gt;not&lt;/i&gt; a paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parallel programs must use the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Concurrent programs, though, are not necessarily parallel.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Rob Pike's Talk&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;https://vimeo.com/49718712&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Conflating Concurrency and Parallelism&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;I used to conflate parallelism and concurrency until I watched Rob Pike’s talk.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;I used to try to convince people that they could write concurrent programs using something “better” than Processes (Threads).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What I didn’t realize was that I was trying to explain the difference between the &lt;span class=&quot;s1&quot;&gt;paradigm&lt;/span&gt; called “concurrency” and the application &lt;span class=&quot;s1&quot;&gt;problem&lt;/span&gt; called “parallelism”.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A parallel program &lt;i&gt;must&lt;/i&gt; run on multiple processors.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;A program designed using the concurrent paradigm can run on a &lt;i&gt;single&lt;/i&gt; Processor or on multiple processors. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;The advantages of using the concurrent paradigm can be seen even on a single processor system.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;One can write concurrent software that uses only a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One cannot write parallel software that uses a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One can &lt;i&gt;simulate&lt;/i&gt; parallel software on a single processor, but this is not necessary (although it might help debugging, while hindering debugging). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Multi-tasking – as we know it today – is a &lt;i&gt;simulation&lt;/i&gt; of parallelism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking, as we know it today, tries valiantly to solve too many problems at once – e.g. memory sharing, bandwidth optimization, time-sharing, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking as we know it today, is a simulation of parallelism that attempts to optimize concurrency using multiple stacks (a form of memory sharing optimization + processor optimization and sharing).&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;A concurrent system is composed of a number of &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is a single distinguished routine, called the Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Distpacher() invokes closures, at random.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;That’s all there is.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;It is simple – almost too simple – to implement concurrency in any language that supports &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is possible to implement the concurrent paradigm in C or assembler, too, one just needs to pay more attention to details.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;As simple as this sounds, the concurrent paradigm forces one to program in a completely different manner.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program cannot rely on synchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program – composed of many communicating closures – must be written in a way that acknowledges that &lt;i&gt;any&lt;/i&gt; closure might be awakened at &lt;i&gt;any &lt;/i&gt;time (by the Dispatcher()).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;This seemingly simple requirement causes programmers to re-evaluate control-flow coupling.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Operating system Processes and threading libraries are heavy-handed approaches to creating closures and a Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use hardware to protect one program from another (e.g. MMUs).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to optimize memory usage using memory-sharing and stacks (stacks are just an optimized form of linked lists).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use time-sharing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When you strip these features out of threading libraries, you get multi-tasking that is easy.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Closures have been around for a long time, and they don’t require MMUs, memory sharing, stacks and time-sharing.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Closures are like GOTOs – they &lt;i&gt;can&lt;/i&gt; be misused.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Organizing closures in a hierarchical manner (see my other essays on this subject) is one way to tame their use.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We have found that we need “languages” that encourage certain usage patterns – e.g. C vs. assembler programming (C encourages Structured control flow, through if-then-else statements, etc.) - e.g. OO encourages data encapsulation (but leaves control-flow encapsulation wide open, if not worse off).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;GOTOs are assembler-level details.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must exist.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Likewise, Closures exist and must be tamed.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Message-passing is another GOTO-like atomic element.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing enables the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A component can send another component a message, but the receiving component is not constrained as to when it deals with the message.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing defeats rendezvous.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing allows asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The concurrent paradigm requires asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Backus asked “Can Programming Be Liberated From The von Neumann Style?”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The question is a good one.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The answer that Backus proposed was insufficient, though.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Mathematics, as we know it today, implies synchronous evaluation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We need to think of mathematics and synchrony being &lt;i&gt;isolated&lt;/i&gt; on asynchronous &lt;i&gt;islands&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Computers are parallel by default.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Forcing synchrony onto every part of computing is contrary to the manner in which computers work.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, multi-tasking is considered to be a “hard” problem mostly because multi-tasking is being solved using only one paradigm – a paradigm that is not the best choice for every problem in a particular solution.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is like trying to emulate C-like &lt;i&gt;format&lt;/i&gt; statements in PROLOG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It can be done, but results in accidental complexity.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;“Yes” to synchronous operations floating on asynchronous islands.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;“No” to synchronous &lt;i&gt;everything&lt;/i&gt;.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;It is OK to use more than one paradigm at a time.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, again, PROLOG leads the way towards thinking in relational terms, but casting &lt;i&gt;everything &lt;/i&gt;as a relation brings unnecessary difficulty.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Paradigms are DSLs draped over full-featured assemblers.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Concurrent API&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;The API for the concurrent paradigm consists of one routine – Send().&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;br&gt;
+&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Examples of the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;These are some examples of the concurrent paradigm:&lt;/p&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;UNIX® shell pipelines&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;closures using queues/mailboxes for inter-closure communication.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&quot;p2&quot;&gt;O/S threads, and threading libraries, are often conflated with the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O/S threads – and many threading libraries – solve much greater problems,&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; and are poor examples of the concurrent paradigm.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Advantages to Using the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
+&lt;ul class=&quot;ul1&quot;&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Encourages the absence of dependencies&lt;/li&gt;
+  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Isolation.&lt;/li&gt;
+  &lt;hr&gt;
+  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Most HLL PLs started out life as DSLs built on top of full-featured substrate languages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Greenspun’s 10&lt;span class=&quot;s4&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; rule is usually taken as a joke, but taken in the light of HLLs-as-DSLs, it begins to ring true.&lt;/p&gt;
+  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;OK, OK, I am simplifying.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are some house-keeping functions that might be necessary.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We definitely don’t need RETURN and we don’t need CATCH/THROW.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Send() is sufficient. &lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;RETURN?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead. CATCH/THROW?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;LOOP?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Recursion?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[Also, we don’t need dynamicism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Dynamic programming is just another way to say “self modifying code”, which is even worse than using the word “GOTO”]. RETURN &amp;amp; CATCH/THROW &amp;amp; LOOP &amp;amp; Recursion make sense &lt;i&gt;only &lt;/i&gt;on a synchronous island.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They are not atomic elements of the concurrent paradigm.&lt;/p&gt;
+  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Problems such as time-sharing, memory-sharing, protecting apps from one another, protecting against long-running apps, code-reuse, etc..&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most single apps don’t need these features / problems.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Note that mutual-multitasking is OK within a single app.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A “bug” is just a “bug” regardless of whether the concurrent paradigm or the synchronous paradigm is used.&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Concurrency is not Parallelism</summary></entry><entry><title type="html">Software Components 101 - Engine Part 4 Review</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-4-Review.html" rel="alternate" type="text/html" title="Software Components 101 - Engine Part 4 Review" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine%20Part%204%20Review</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-4-Review.html">&lt;p&gt;In beginning to work on part 5 of this series of essays, I noticed a design bug.&lt;/p&gt;
 
+&lt;p&gt;Arrows contain two parts (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEnd&lt;/code&gt;) and should be written as a pair referencing the containing composite component.&lt;/p&gt;
+
+&lt;p&gt;For example&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;outline text=&quot;comp “c”&quot;&amp;gt;
+  ...
+    &amp;lt;outline text=&quot;arrow c/c  c/e/m&quot; /&amp;gt;
+  ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;should create a pair, referring to “comp c”, and, should create a beginning and end for the pair, like…&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
-arrow(id40, a41).
-arrowBegin(a41, c_c).
-arrowEnd(a41, [c_e_m]).
+arrow(id5,idXXX).
+arrowBegin(idXXX,c_c).
+arrowEnd(idXXX,[c_c_m]).
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Firstly, we can create synonym facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
-synonym(c, id5).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(In part 5, we will convert the synonyms &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;c_c&quot;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;c_c_m&quot;&lt;/code&gt; into ids.  This essay is only about fixing the design bug mentioned above).&lt;/p&gt;
 
-&lt;p&gt;Then, we use the synonym facts to modify all arrowBegin facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowBegin(a41, c_c).
-aBegin(a41, idYYY).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This bug should be relatively easy to repair.  We need to visit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grasem&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; code for arrow and add another fact.&lt;/p&gt;
 
-&lt;p&gt;Then, we use the synonym facts to modify all arrowEnd facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowEnd(a41, [c_e_m]).
-aEnd(a41, [idZZZ]).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;N.B. Currently, we leave all of the facts in the factbase.  There is no need to remove facts.  Removing facts at this stage – without proof of needing to do so – is premature optimization (and uneccessary brain clutter).&lt;/p&gt;
-
-&lt;p&gt;We define gobject(ID).  See &lt;a href=&quot;https://github.com/guitarvydas/basicdasl/blob/master/pseudo/q.pl&quot;&gt;q.pl&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Since we specify the synonym in gobject definitions, the query for synonyms is straight-forward&lt;br /&gt;
-synonym(ID,Synonym) :-&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nonArrowGobject(ID,Synonym).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;[A ‘nonArrowGobject’ is any gobject except arrows.  See the code for further details.]&lt;/p&gt;
-
-&lt;p&gt;Creating a new aBegin fact consists of a compound query - print out an aBegin fact for every arrowBegin fact, replacing the synonym… (again, details elided, see code):&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;printAllABegin :-
-    forall(arrowBegin(ID,_),printABegin(ID)).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;sanity-checks&quot;&gt;Sanity Checks&lt;/h2&gt;
-&lt;p&gt;I create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gkind&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tag&lt;/code&gt; queries and double-check by running queries and looking at the diagram (the code for transpilation in this example is meant to be done manually, so I would expect many bugs.  We’ll see what I missed when we try to run this stuff.)&lt;/p&gt;
-
-&lt;p&gt;For example, we double-check the arrow with two receivers:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;?- consult(fb).
-true.
-
-?- consult(q).
-true.
-
-?- printAllAEnd.
-...
-aEnd(a82,[id62,id69]).
-...
-false.
-
-?- tag(id62,Tag).
-Tag = e_e_l ;
-false.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(which appears to coincide with what is on the diagram).&lt;/p&gt;
+&lt;p&gt;[N.B. There is at least one other appeasement to human-readability - the use of PROLOG lists (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[...]&lt;/code&gt;) in arrowEnd facts.  I don’t think that we’ll bother to fix this.  The pure form would be to unroll arrowEnd and make it into multiple facts, i.e. to express the Lists as multiple facts (something like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beginArrowEnd&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEndNext&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEndEnd&lt;/code&gt;). PROLOG lets us “get away” with lists of the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[ ... ]&lt;/code&gt; and we will let this impurity stand, for now.  This is an interim project which doesn’t need to be fixed yet (YAGNI)].&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.</summary></entry><entry><title type="html">Software components 101 engine part 3 factbase</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html" rel="alternate" type="text/html" title="Software components 101 engine part 3 factbase" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software%20Components%20101%20-%20Engine%20Part%203%20Factbase</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">In beginning to work on part 5 of this series of essays, I noticed a design bug.</summary></entry><entry><title type="html">Software components 101 engine part 3 factbase</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html" rel="alternate" type="text/html" title="Software components 101 engine part 3 factbase" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software%20Components%20101%20-%20Engine%20Part%203%20Factbase</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -953,32 +940,72 @@ false.
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Parsing vs REGEXing</summary></entry><entry><title type="html">Software Components 101 - Engine Part 4 Review</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-4-Review.html" rel="alternate" type="text/html" title="Software Components 101 - Engine Part 4 Review" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine%20Part%204%20Review</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-4-Review.html">&lt;p&gt;In beginning to work on part 5 of this series of essays, I noticed a design bug.&lt;/p&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Parsing vs REGEXing</summary></entry><entry><title type="html">Software Components 101 - Engine Part 5 Queries</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html" rel="alternate" type="text/html" title="Software Components 101 - Engine Part 5 Queries" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine%20Part%205%20Queries</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html">&lt;p&gt;Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.&lt;/p&gt;
 
-&lt;p&gt;Arrows contain two parts (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEnd&lt;/code&gt;) and should be written as a pair referencing the containing composite component.&lt;/p&gt;
+&lt;p&gt;Currently, arrows contain references to graphical objects.  These references should actually be ids.  These references are (human-readable) synonyms to (machine-readable) ids.&lt;/p&gt;
 
-&lt;p&gt;For example&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;outline text=&quot;comp “c”&quot;&amp;gt;
-  ...
-    &amp;lt;outline text=&quot;arrow c/c  c/e/m&quot; /&amp;gt;
-  ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;For example, as in part 4, we have facts like:&lt;/p&gt;
 
-&lt;p&gt;should create a pair, referring to “comp c”, and, should create a beginning and end for the pair, like…&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
-arrow(id5,idXXX).
-arrowBegin(idXXX,c_c).
-arrowEnd(idXXX,[c_c_m]).
+arrow(id40, a41).
+arrowBegin(a41, c_c).
+arrowEnd(a41, [c_e_m]).
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;(In part 5, we will convert the synonyms &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;c_c&quot;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;c_c_m&quot;&lt;/code&gt; into ids.  This essay is only about fixing the design bug mentioned above).&lt;/p&gt;
+&lt;p&gt;Firstly, we can create synonym facts, e.g.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
+synonym(c, id5).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;This bug should be relatively easy to repair.  We need to visit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grasem&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; code for arrow and add another fact.&lt;/p&gt;
+&lt;p&gt;Then, we use the synonym facts to modify all arrowBegin facts, e.g.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowBegin(a41, c_c).
+aBegin(a41, idYYY).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;[N.B. There is at least one other appeasement to human-readability - the use of PROLOG lists (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[...]&lt;/code&gt;) in arrowEnd facts.  I don’t think that we’ll bother to fix this.  The pure form would be to unroll arrowEnd and make it into multiple facts, i.e. to express the Lists as multiple facts (something like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beginArrowEnd&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEndNext&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEndEnd&lt;/code&gt;). PROLOG lets us “get away” with lists of the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[ ... ]&lt;/code&gt; and we will let this impurity stand, for now.  This is an interim project which doesn’t need to be fixed yet (YAGNI)].&lt;/p&gt;
+&lt;p&gt;Then, we use the synonym facts to modify all arrowEnd facts, e.g.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowEnd(a41, [c_e_m]).
+aEnd(a41, [idZZZ]).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;N.B. Currently, we leave all of the facts in the factbase.  There is no need to remove facts.  Removing facts at this stage – without proof of needing to do so – is premature optimization (and uneccessary brain clutter).&lt;/p&gt;
+
+&lt;p&gt;We define gobject(ID).  See &lt;a href=&quot;https://github.com/guitarvydas/basicdasl/blob/master/pseudo/q.pl&quot;&gt;q.pl&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Since we specify the synonym in gobject definitions, the query for synonyms is straight-forward&lt;br /&gt;
+synonym(ID,Synonym) :-&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nonArrowGobject(ID,Synonym).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;[A ‘nonArrowGobject’ is any gobject except arrows.  See the code for further details.]&lt;/p&gt;
+
+&lt;p&gt;Creating a new aBegin fact consists of a compound query - print out an aBegin fact for every arrowBegin fact, replacing the synonym… (again, details elided, see code):&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;printAllABegin :-
+    forall(arrowBegin(ID,_),printABegin(ID)).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;sanity-checks&quot;&gt;Sanity Checks&lt;/h2&gt;
+&lt;p&gt;I create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gkind&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tag&lt;/code&gt; queries and double-check by running queries and looking at the diagram (the code for transpilation in this example is meant to be done manually, so I would expect many bugs.  We’ll see what I missed when we try to run this stuff.)&lt;/p&gt;
+
+&lt;p&gt;For example, we double-check the arrow with two receivers:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- printAllAEnd.
+...
+aEnd(a82,[id62,id69]).
+...
+false.
+
+?- tag(id62,Tag).
+Tag = e_e_l ;
+false.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(which appears to coincide with what is on the diagram).&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">In beginning to work on part 5 of this series of essays, I noticed a design bug.</summary></entry><entry><title type="html">Software components 101 engine part 2 diagram to text</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html" rel="alternate" type="text/html" title="Software components 101 engine part 2 diagram to text" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Software%20Components%20101%20-%20Engine%20Part%202%20Diagram%20to%20Text</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.</summary></entry><entry><title type="html">Software components 101 engine part 2 diagram to text</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html" rel="alternate" type="text/html" title="Software components 101 engine part 2 diagram to text" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Software%20Components%20101%20-%20Engine%20Part%202%20Diagram%20to%20Text</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -1294,84 +1321,7 @@ arrowEnd(idXXX,[c_c_m]).
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101 - Engine Part 2 Diagram to Text</summary></entry><entry><title type="html">Ohm Editor</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html" rel="alternate" type="text/html" title="Ohm Editor" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Ohm-Editor.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Ohm-Editor&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-09T11:27:11Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-09T11:27:11Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    span.s1 {font: 12.0px Helvetica}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ohm Editor Introduction&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A screenshot of the Ohm Editor is show in &lt;span class=&quot;s1&quot;&gt;Fig. 1.&lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-09-11-27-11-Images/Screen Shot 2021-04-26 at 5.48.37 PM.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;Fig. 1 Ohm Editor screenshot.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The screen is divided into 4 sections — upper left, upper right, the middle and the bottom.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The upper left section holds the grammar under development. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The upper right section hold various test cases.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Test cases can be add using the &quot;+Add&quot; button or by double-clicking on a specific case.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The middle section (here showing &quot;2 * * 4 2 - 1 ) / 9&quot;) shows the string being parsed.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The bottom section shows the resulting CST&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The CST is gray when the parse is successful and red when the parse fails.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Hovering over a node in the parse tree highlights the corresponding grammar rule.&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;The most common problem encountered when debugging a PEG grammar is the that of incorrect parsing of whitespace.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Ohm Editor lets you see what the parser is doing and can give you hints as to where the parse is failing.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Salient Points About Ohm-JS&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Ohm-JS is a PEG library.&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Important advantages of Ohm-JS vs. other PEG libraries:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;grammar remains unspoiled by detail&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;PEG editor (IDE) for rapid debugging.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Ohm-JS divides a parser into 2 stages&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;grammar&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;semantics code.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;This note appeared as Appendix A in:&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html&quot;&gt;https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;See GLUE tool for PEG for generating semantics code&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/Glue-Manual.html&quot;&gt;https://guitarvydas.github.io/2021/03/24/Glue-Manual.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Little-Language.html&quot;&gt;https://guitarvydas.github.io/2021/03/18/Little-Language.html&lt;/a&gt;)&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;[1]&lt;/a&gt; A CST is often called an AST.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When fractalized, a grammar breaks down into two parts - the AST and the CST (abstract syntax tree and concrete syntax tree, resp.).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The AST shows what&lt;i&gt; can &lt;/i&gt;parsed, which the CST shows what &lt;i&gt;was&lt;/i&gt; parsed (in concrete terms).&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Ohm-Editor</summary></entry><entry><title type="html">Software components 101 engine development (part 1)</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html" rel="alternate" type="text/html" title="Software components 101 engine development (part 1)" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Software%20Components%20101%20-%20Engine%20Development%20(Part%201)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101 - Engine Part 2 Diagram to Text</summary></entry><entry><title type="html">Software components 101 engine development (part 1)</title><link href="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html" rel="alternate" type="text/html" title="Software components 101 engine development (part 1)" /><published>2021-05-09T00:00:00-04:00</published><updated>2021-05-09T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/09/Software%20Components%20101%20-%20Engine%20Development%20(Part%201)</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
