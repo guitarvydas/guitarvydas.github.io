@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Software Components 101 Part 6 Recap | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Software Components 101 Part 6 Recap" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Thus far, we have 13 distinct kinds of facts: arrow arrowBegin arrowEnd circle color comp cyl rect str strokeWidth text aBegin aEnd" />
+<meta property="og:description" content="Thus far, we have 13 distinct kinds of facts: arrow arrowBegin arrowEnd circle color comp cyl rect str strokeWidth text aBegin aEnd" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-15T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Components 101 Part 6 Recap" />
+<script type="application/ld+json">
+{"headline":"Software Components 101 Part 6 Recap","@type":"BlogPosting","dateModified":"2021-05-15T00:00:00-04:00","datePublished":"2021-05-15T00:00:00-04:00","description":"Thus far, we have 13 distinct kinds of facts: arrow arrowBegin arrowEnd circle color comp cyl rect str strokeWidth text aBegin aEnd","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html"},"url":"https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Components 101 Part 6 Recap</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-15T00:00:00-04:00" itemprop="datePublished">May 15, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Thus far, we have 13 distinct kinds of facts:</p>
+<ol>
+  <li>arrow</li>
+  <li>arrowBegin</li>
+  <li>arrowEnd</li>
+  <li>circle</li>
+  <li>color</li>
+  <li>comp</li>
+  <li>cyl</li>
+  <li>rect</li>
+  <li>str</li>
+  <li>strokeWidth</li>
+  <li>text</li>
+  <li>aBegin</li>
+  <li>aEnd</li>
+</ol>
+
+<p>Let’s recap what these facts all mean.</p>
+
+<p>Each fact refers to a unique ID (the Subject) and most facts contain a second ID (the Object).</p>
+
+<p>Facts do one of 2 things</p>
+<ol>
+  <li>declare a unique ID for some item</li>
+  <li>specify a property for an item.</li>
+</ol>
+
+<p>Facts of the form (1) have a <code class="language-plaintext highlighter-rouge">relation</code> and a <code class="language-plaintext highlighter-rouge">subject</code>.  The 3rd field - the <code class="language-plaintext highlighter-rouge">object</code> is ignored (and is usually written as <code class="language-plaintext highlighter-rouge">nil</code>).</p>
+
+<p>Facts of the form (2) have a <code class="language-plaintext highlighter-rouge">relation</code> (aka property) and, both, a <code class="language-plaintext highlighter-rouge">subject</code> and and an <code class="language-plaintext highlighter-rouge">object</code>.  In this case, the <code class="language-plaintext highlighter-rouge">subject</code> refers to the ID of some item.  The <code class="language-plaintext highlighter-rouge">object</code> is an atomic property, or, the ID of a related item.</p>
+
+<p>[We will be querying facts using PROLOG, so we need to wrap the <code class="language-plaintext highlighter-rouge">subject</code> and <code class="language-plaintext highlighter-rouge">object</code> in parentheses and put a period at the end of each fact.  PROLOG does not allow there to be a space between the relation name and the first open parenthesis.  The syntax will vary depending on the target query language.]</p>
+
+<p>Working our way down the list:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">arrows</code> declare the ID for a (unique) arrow and relate the arrow to another item (a graphical shape - rect, (comp), circle, cylinder).  <code class="language-plaintext highlighter-rouge">Arrow</code> facts are of the form <code class="language-plaintext highlighter-rouge">arrow(shapeID,arrowID).</code>  Arrow items are always accompanied by <code class="language-plaintext highlighter-rouge">aBegin</code> and <code class="language-plaintext highlighter-rouge">aEnd</code> facts which specify the arrowID and the source/target items’ ID.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ArrowBegin</code> and <code class="language-plaintext highlighter-rouge">arrowEnd</code> facts are used for inferencing <code class="language-plaintext highlighter-rouge">aBegin</code> and <code class="language-plaintext highlighter-rouge">aEnd</code> facts.  After inferencing, we ignore all <code class="language-plaintext highlighter-rouge">arrowBegin</code> and <code class="language-plaintext highlighter-rouge">arrowEnd</code> facts.  These facts contain short-hand references to objects.  We get rid of the short-hand (through inferencing) early and ignore these facts.  [Instead of ignoring the obsolete facts, should we delete them?  No.  See below for a discussion].</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Circle</code>, <code class="language-plaintext highlighter-rouge">cyl</code> and <code class="language-plaintext highlighter-rouge">rect</code> facts declare unique IDs for circle, cylinder and rectangle graphical items.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Comp</code> facts are like <code class="language-plaintext highlighter-rouge">rect</code> facts, but are used as short-hand for human-input.  In a fully automated system - not a bootstrap one like this one - there would be no need for <code class="language-plaintext highlighter-rouge">comp</code> facts.  Rectangles would be differentiated based on their size and containment properties.  Here, <code class="language-plaintext highlighter-rouge">comp</code> facts demonstrate the divide between human-readability and machine-readability.  Machines can easily perform the repetitive work required in sorting rectangles into two categories (components and ports), but humans cannot enter low-level information reliably and prefer to eye-ball and sort the rectangles during data entry.  Errors during data entry can be more easily spotted by humans when the rectangles are pre-sorted.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Text</code> facts declare IDs for text items and associate them with graphical items.  The format is <code class="language-plaintext highlighter-rouge">text(graphicalID, textID).</code>.  <code class="language-plaintext highlighter-rouge">Text</code> facts are alway accompanied by <code class="language-plaintext highlighter-rouge">str</code> facts which associate strings with textIDs.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+  </li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Color</code> facts specify properties of graphical objects.  The general format of these facts is <code class="language-plaintext highlighter-rouge">color(shapeID,colorName).</code>.  Colors are specified by name - green, yellow and red are valid color names.  Shapes have no color specified by default.  We use a positive-inferencing methodology - colors are specified where they matter.  In the case of this simple example, input ports have color green.  Output ports and all other shapes do not match color=green.  Other colors are “don’t cares”.  Anything-but-green is ignored.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Stroke-width</code> facts supply a stroke-width property for shapes.  We only care about stroke-width=3.  All other stroke-widths (including no stroke-width) are ignored and don’t match stroke-width=3.  In this particular case, ports with stroke-width=3 signify implicitly connected ports.  All other ports must be explicitly connected (using arrows).  We infer explicit-vs-implicit ports early and ignore stroke-width facts after explicit/implicit facts have been created.</p>
+
+<p>[N.B. Facts are built up in layers. As we add semantically-interesting facts, we can ignore the low-level, grapihical facts that were used in previous layers.  The goal is to build isolated layers of software components, instead of trying to do “everything” at once.  This maximizes the possibility for completely different interpretations of the same factbase.  For this same reason, we do not delete facts from the factbase, if possible.  Committing to a certain factbase format and/or to data structures snips off other design possibilities.<sup id="fnref:snip" role="doc-noteref"><a href="#fn:snip" class="footnote">2</a></sup>]</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Why do we have separate <code class="language-plaintext highlighter-rouge">text</code> and <code class="language-plaintext highlighter-rouge">str</code> facts?  The reason is mostly historical - efficiency concerns with other querying languages.  Folding <code class="language-plaintext highlighter-rouge">str</code> facts into <code class="language-plaintext highlighter-rouge">text</code> facts is but an optimization.  This kind of optimization is better left to Efficiency experts using profiling tools.  We are <em>only</em> concerned with making this design workable - low-level efficiency can be addressed later.  Our inferencing queries make this distinction invisible (be expending computing power).  Usually, efficiency concerns tend to muddy clean designs.  In this particular case, we will stick to the dogmatic expression of repetitive facts and leave efficiency concerns for later.  The only efficiency that matters, at this stage, is time-to-architect and time-to-engineer.  If our choice(s) create slow turn-around times for Architecture and Engineering, then we will optimize our choice(s) sooner rather than later.<sup id="fnref:gradual" role="doc-noteref"><a href="#fn:gradual" class="footnote">3</a></sup> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:snip" role="doc-endnote">
+      <p>My favourite example is the idea of building a factbase that implements a full techincal project.  Imagine that your business manager walks in and asks for a Gannt Chart of the project.  This can be created in 10’s of minutes if the factbase retains all data in machine-readable form.  If, though, the project is implemented in data structure format (e.g. a tree), then a walk of the structured data is required and makes the task, of producing a Gannt Chart, more difficult.  We (the royal we) are developing new technologies to perform such walks of structured information (e.g. PEG on structured text), but the human resources needed to create these technologies can be put to better - higher-level - use.  This happened in the transition from assembly code to structured programming languages.  When human resources were freed from having to deal with assembly programming, programmer creativity blossomed and we (the royal we) could attack problems in new ways (e.g. relational thinking).  What are the trade-offs and what is the best mix of such ideas and technologies?  I don’t know.  But, I believe that we should leverage machines to do the repetitive work, freeing our own selves to do more creative work.  Everything is a fractal - once we scale the next layer, we can divvy up the work and give as much of it to machinery as possible, allowing us to scale the next layers.  And so on.  The divvying process should never stop.  We see this same kind of thing happening now - Python was invented to solve one kind of problem, but Python is now being used to solve A.I. problems.  We insulate ourselves from future changes by inferring information and inserting higher-level facts into the factbase - we isolate inferences based on graphical properties to their own, isolated, layer.  Each layer “produces” semantic facts that the next layer uses.  A change to the project requirements affects the inferencing at particular layers only. <a href="#fnref:snip" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gradual" role="doc-endnote">
+      <p>Optimization (and typing) should be done in a gradual manner, in layers, and, should be done on a per-project basis.  Some optimizations affect the final throughput in ways that affect the ultimate users of the solution.  This effect depends on the particular problem-at-hand and cannot be generalized.  Typing is the same - it should be done in a gradual manner, in layers.  Typing was originally invented to aid compiler-writers but has grown into a brainstorming and design technique.  What is missing is the concept of project-specific design rules.  Design rules are like typing, but based on the problem-at-hand.  An obvious example is the divide between decimal notation and binary notation for financial apps vs. digital control apps.  Several languages offer a “union” of such capabilities, while making the languages more complicated and harder to implement.  In some problem domains, we use the term “business rules” to mean problem-specific design rules.  A union of <em>all</em> possible design rules results in spaghetti.  As we’ve learned time and again - scoping and nesting and restricting solutions is the best way to tame tangled design rules.  (For example, “global variables” were considered to be a problem - the solution was scoping.  GOTOs were considered to be a problem - Structured Programming (nested control flow) was the solution.).  A union cannot be achieved unless <em>all</em> possible design rules are known before-hand.  Unions of design rules is just Waterfall thinking.  The answer is to design isolated components and to plug them together into larger and larger applications. <a href="#fnref:gradual" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/05/15/Software-Components-101-Part-6-Recap.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

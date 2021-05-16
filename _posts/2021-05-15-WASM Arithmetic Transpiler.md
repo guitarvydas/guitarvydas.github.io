@@ -295,7 +295,7 @@ Arithmetic {
 ```
   Top [e] = 
 {{ 
-   console.log ("(module");
+   console.log ("(module"));
    console.log ( " (func $custom (param $x f64) (param $y f64) (result f64)" );
 }}
 [[
@@ -467,7 +467,7 @@ function addSemantics (sem) {
 	{
 	    Top : function (_e,) {
 		_ruleEnter ("Top");
-		console.log ("(module");
+		console.log ("(module"));
 		console.log ( " (func $custom (param $x f64) (param $y f64) (result f64)" );
 
 		var e = _e._glue ();

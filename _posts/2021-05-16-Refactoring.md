@@ -6,7 +6,7 @@ Refactoring is accidental complexity.
 
 Accidental complexity is also known as "epicycles"[^1].
 
-[^1]: See Copernican vs. Ptolemaic Cosmology.  See Arthur Koestler's "Sleepwalkers".
+[^1]: See Copernican vs. Ptolemaic Cosmology.  See Arthur Koestler's "The Sleepwalkers".
 
 The need to refactor a design or to refactor code, should be a red flag. 
 
