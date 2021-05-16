@@ -293,12 +293,355 @@ Arithmetic {
 ## Appendix - Glue Specification for WASM Arithmetic
 
 ```
-testing, testing, testing
+  Top [e] = 
+{{ 
+   console.log ("(module"));
+   console.log ( " (func $custom (param $x f64) (param $y f64) (result f64)" );
+}}
+[[
+${e})
+  (export "custom" (func $custom))
+)
+    ]]
+  Exp [e] = [[${e}]]
+  AddExp_plus [e1 op e2] = [[${e1}\n${e2}\nf64.add\n]]
+  AddExp_minus [e1 op e2] = [[${e1}\n${e2}\nf64.sub\n]]
+  AddExp [e] = [[${e}]]
+  MulExp_times [e1 op e2] = [[${e1}\n${e2}\nf64.mul\n]]
+  MulExp_divide [e1 op e2] = [[${e1}\n${e2}\nf64.div\n]]
+  MulExp [e] = [[${e}]]
+  ExpExp_power[p op e] = [[(???exp ${p} ${e})]]
+  ExpExp [p] = [[${p}]]
+  PriExp_paren [lp p rp] = [[${p}]]
+  PriExp_pos [sign p] = [[${p}]]
+  PriExp_neg [sign p] = [[${p}\nf64.neg]]
+  PriExp [p] = [[${p}]]
+  ident [l @a] = [[local.get \$${l}${a}]]
+  number_fract [@numerator dot @denominator] = [[f64.const ${numerator}.${denominator}]]
+  number_whole [@n] = [[f64.const ${n}]]
 ```
 ## Appendix - Generated JavaScript Transpiler from Arithmetic to WASM
 [warts and all...]
 ```
-Testing, Testing, Testing
+// npm install ohm-js
+'use strict';
+
+const grammar =
+      `
+Arithmetic {
+  /* WASM code emitter */
+  
+  Top = Exp
+  
+  Exp
+    = AddExp
+
+  AddExp
+    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+    | MulExp
+
+  MulExp
+    = MulExp "*" ExpExp  -- times
+    | MulExp "/" ExpExp  -- divide
+    | ExpExp
+
+  ExpExp
+    = PriExp "^" ExpExp  -- power
+    | PriExp
+
+  PriExp
+    = "(" Exp ")"  -- paren
+    | "+" PriExp   -- pos
+    | "-" PriExp   -- neg
+    | ident
+    | number
+
+  ident  (an identifier)
+    = letter alnum*
+
+  number  (a number)
+    = digit* "." digit+  -- fract
+    | digit+             -- whole
+}
+
+  
+
+`;
+
+
+function ohm_parse (grammar, text) {
+    var ohm = require ('ohm-js');
+    var parser = ohm.grammar (grammar);
+    var cst = parser.match (text);
+    if (cst.succeeded ()) {
+	return { succeeded: true, message: "OK", parser: parser, cst: cst };
+    } else {
+	//console.log (parser.trace (text).toString ());
+	//throw "glue: Ohm matching failed";
+        
+        return { succeeded: false, message: cst.message, parser: parser, cst: cst };
+    }
+}
+
+function getNamedFile (fname) {
+    var fs = require ('fs');
+    if (fname === undefined || fname === null || fname === "-") {
+	return fs.readFileSync (0, 'utf-8');
+    } else {
+	return fs.readFileSync (fname, 'utf-8');
+    }	
+}
+'use strict'
+
+var _scope;
+
+function scopeStack () {
+    this._stack = [];
+    this.pushNew = function () {this._stack.push ([])};
+    this.pop = function () {this._stack.pop ()};
+    this._topIndex = function () {return this._stack.length - 1;};
+    this._top = function () { return this._stack[this._topIndex ()]; };
+    this.scopeAdd = function (key, val) {
+	this._top ().push ({key: key, val: val});
+    };
+    this._lookup = function (key, a) { 
+	return a.find (obj => {return obj && obj.key && (obj.key == key)}); };
+    this.scopeGet = function (key) {
+	var i = this._topIndex ();
+	for (; i >= 0 ; i -= 1) {
+	    var obj = this._lookup (key, this._stack [i]);
+	    if (obj) {
+		return obj.val;
+	    };
+	};
+        console.log ('*** scopeGet error key=' + key + ' ***');
+	console.log (this._stack);
+	console.log (key);
+	throw "scopeGet internal error";
+    };
+    this.scopeModify = function (key, val) {
+	var i = this._topIndex ();
+	for (; i >= 0 ; i -= 1) {
+	    var obj = this._lookup (key, this._stack [i]);
+	    if (obj) {
+		obj.val = val;
+		return val;
+	    };
+	};
+        console.log ('*** scopeModify error key=' + key + ' ***');
+	console.log (this._stack);
+	console.log (key);
+	throw "scopeModify internal error";
+    };
+}
+
+function scopeAdd (key, val) {
+    return _scope.scopeAdd (key, val);
+}
+
+function scopeModify (key, val) {
+    return _scope.scopeModify (key, val);
+}
+
+function scopeGet (key, val) {
+    return _scope.scopeGet (key, val);
+}
+
+function _ruleInit () {
+    _scope = new scopeStack ();
+}
+
+function _ruleEnter (ruleName) {
+    _scope.pushNew ();
+}
+
+function _ruleExit (ruleName) {
+    _scope.pop ();
+}
+
+_ruleInit ();
+function addSemantics (sem) {
+    sem.addOperation (
+	'_glue',
+	{
+	    Top : function (_e,) {
+		_ruleEnter ("Top");
+		console.log ("(module"));
+		console.log ( " (func $custom (param $x f64) (param $y f64) (result f64)" );
+
+		var e = _e._glue ();
+		var _result = `${e})
+  (export "custom" (func $custom))
+)
+    `;
+		_ruleExit ("Top");
+		return _result;
+	    },
+	    Exp : function (_e,) {
+		_ruleEnter ("Exp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("Exp");
+		return _result;
+	    },
+	    AddExp_plus : function (_e1,_op,_e2,) {
+		_ruleEnter ("AddExp_plus");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.add\n`;
+		_ruleExit ("AddExp_plus");
+		return _result;
+	    },
+	    AddExp_minus : function (_e1,_op,_e2,) {
+		_ruleEnter ("AddExp_minus");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.sub\n`;
+		_ruleExit ("AddExp_minus");
+		return _result;
+	    },
+	    AddExp : function (_e,) {
+		_ruleEnter ("AddExp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("AddExp");
+		return _result;
+	    },
+	    MulExp_times : function (_e1,_op,_e2,) {
+		_ruleEnter ("MulExp_times");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.mul\n`;
+		_ruleExit ("MulExp_times");
+		return _result;
+	    },
+	    MulExp_divide : function (_e1,_op,_e2,) {
+		_ruleEnter ("MulExp_divide");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.div\n`;
+		_ruleExit ("MulExp_divide");
+		return _result;
+	    },
+	    MulExp : function (_e,) {
+		_ruleEnter ("MulExp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("MulExp");
+		return _result;
+	    },
+	    ExpExp_power : function (_p,_op,_e,) {
+		_ruleEnter ("ExpExp_power");
+
+		var p = _p._glue ();var op = _op._glue ();var e = _e._glue ();
+		var _result = `(???exp ${p} ${e})`;
+		_ruleExit ("ExpExp_power");
+		return _result;
+	    },
+	    ExpExp : function (_p,) {
+		_ruleEnter ("ExpExp");
+
+		var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("ExpExp");
+		return _result;
+	    },
+	    PriExp_paren : function (_lp,_p,_rp,) {
+		_ruleEnter ("PriExp_paren");
+
+		var lp = _lp._glue ();var p = _p._glue ();var rp = _rp._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp_paren");
+		return _result;
+	    },
+	    PriExp_pos : function (_sign,_p,) {
+		_ruleEnter ("PriExp_pos");
+
+		var sign = _sign._glue ();var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp_pos");
+		return _result;
+	    },
+	    PriExp_neg : function (_sign,_p,) {
+		_ruleEnter ("PriExp_neg");
+
+		var sign = _sign._glue ();var p = _p._glue ();
+		var _result = `${p}\nf64.neg`;
+		_ruleExit ("PriExp_neg");
+		return _result;
+	    },
+	    PriExp : function (_p,) {
+		_ruleEnter ("PriExp");
+
+		var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp");
+		return _result;
+	    },
+	    ident : function (_l,_a
+			      ,) {
+		_ruleEnter ("ident");
+
+		var l = _l._glue ();var a = _a._glue ().join ('');
+		var _result = `local.get \$${l}${a}`;
+		_ruleExit ("ident");
+		return _result;
+	    },
+	    number_fract : function (_numerator
+				     ,_dot,_denominator
+				     ,) {
+		_ruleEnter ("number_fract");
+
+		var numerator = _numerator._glue ().join ('');var dot = _dot._glue ();var denominator = _denominator._glue ().join ('');
+		var _result = `f64.const ${numerator}.${denominator}`;
+		_ruleExit ("number_fract");
+		return _result;
+	    },
+	    number_whole : function (_n
+				     ,) {
+		_ruleEnter ("number_whole");
+
+		var n = _n._glue ().join ('');
+		var _result = `f64.const ${n}`;
+		_ruleExit ("number_whole");
+		return _result;
+	    },
+
+	    _terminal: function () {return this.primitiveValue; }
+	});
+}
+
+
+function main () {
+    // usage: node glue <file
+    // grammar is inserted from grasem.ohm
+    // test.grasem is read from stdin
+    var text = getNamedFile ("-");
+    var { succeeded, message, parser, cst } = ohm_parse (grammar, text);
+    var sem = {};
+    var outputString = "";
+    if (cst.succeeded ()) {
+	sem = parser.createSemantics ();
+	addSemantics (sem);
+	outputString = sem (cst)._glue ();
+	return { succeeded: true, message: "OK", cst: cst, semantics: sem, resultString: outputString };
+    } else {
+	return { succeeded: false, message: message, cst: cst, semantics: sem, resultString: outputString };
+    }
+}
+
+
+var { succeeded, message, cst, semantics, resultString } = main ();
+if (succeeded) {
+    console.log (resultString);
+} else {
+    process.stderr.write (`${message}\n`);
+    return false;
+}
 ```
 ## Appendix - Bash File to Run the WASM Transpiler (wasmrun.bash)
 ```
