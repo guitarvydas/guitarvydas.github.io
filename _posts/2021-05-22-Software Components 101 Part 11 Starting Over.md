@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "title:  "Software Components 101 - Part 11 Starting Over"
+title:  "Software Components 101 - Part 11 Starting Over"
 ---
 
 # Do What I Say
