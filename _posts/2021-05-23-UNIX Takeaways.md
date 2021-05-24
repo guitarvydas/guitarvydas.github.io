@@ -55,9 +55,13 @@ These PL advances have, unfortunately, been conflated with Operating Systems and
 ## Union of Coordination and String Processing and ...
   O/Ss are just libraries.
   
-  Windows, MacOS, Linux are just applications[^os].
+  Windows, MacOS, Linux are just applications.
   
-  Not every app should have all of the above principles built-in, e.g. not every app needs memory sharing and time-sharing.
+  The _problems_ that Windows, MacOS and Linux must solve are different from the problems that most apps need to solve.
+  
+  Not every app should have all of the operating system principles built-in, e.g. not every app needs memory sharing and time-sharing.
+  
+  Some apps use the concurrent programming paradigm.  This should not mean that they must include all of O/S-style threading.
 # Pipelines vs. Isolation
 UNIX popularize pipelines of isolated components.
 
