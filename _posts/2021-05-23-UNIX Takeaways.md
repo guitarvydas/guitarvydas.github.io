@@ -37,8 +37,9 @@ Parallelism is an application problem that needs to use the concurrent paradigm
 ## Time-Sharing
 ## Memory Sharing
 ## Closures
-Threads are just closure-wannabees[^cc].  
-[^cc]:Maybe I mean /CCs?.
+Threads are just closure-wannabees[^ccs].  
+
+[^ccs]:Maybe I mean /CCs?.
 
 UNIX threads are just ad-hoc implementations of closures in C.
 ## Dependency Spaghetti
