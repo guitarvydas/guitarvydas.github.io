@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Software Components 101 Part 7 - Visual Inspection | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Software Components 101 Part 7 - Visual Inspection" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In reviewing the facts in Part 6, I noticed that there is no contains relationship." />
+<meta property="og:description" content="In reviewing the facts in Part 6, I noticed that there is no contains relationship." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-15T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Components 101 Part 7 - Visual Inspection" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html","@type":"BlogPosting","description":"In reviewing the facts in Part 6, I noticed that there is no contains relationship.","dateModified":"2021-05-15T00:00:00-04:00","datePublished":"2021-05-15T00:00:00-04:00","headline":"Software Components 101 Part 7 - Visual Inspection","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Components 101 Part 7 - Visual Inspection</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-15T00:00:00-04:00" itemprop="datePublished">May 15, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In reviewing the facts in Part 6, I noticed that there is no <code class="language-plaintext highlighter-rouge">contains</code> relationship.</p>
+
+<p>What is needed: a <code class="language-plaintext highlighter-rouge">contains(ID,shapeID).</code> fact for every circle and cylinder and rect and comp object.</p>
+
+<p>Further, for sanity checking (aka development testing), we need to add convenience facts <code class="language-plaintext highlighter-rouge">shape(shapeID,"string").</code>, as we would like to query the factbase to find every <code class="language-plaintext highlighter-rouge">contains</code> relationship and to find every <code class="language-plaintext highlighter-rouge">shape</code> of every contained item.</p>
+
+<p>[N.B. Storing the design as a factbase makes it easy to add convenience facts.  We simply add them.  The existing queries will not be affected, since they skip facts that they are not interested in.  In other words, adding extra facts - convenience facts - does not add new dependencies into the factbase.  The existing queries continue to function. Normalizing data into factbase form has given us isolation.]</p>
+
+<p>We simply need to modify the very “top” query to read:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  OPML [xmlhdr opmlhdr head body outline endbody endopml] =
+    
+    [[${xmlhdr}${opmlhdr}${head}${body}${outline}${endbody}${endopml}]]
+</code></pre></div></div>
+<p>and we need to push a new ID for every shape:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[${t}${o}\ncontains(${scopeGet ('container')}, ${scopeGet ('gobject')}).\n]]
+</code></pre></div></div>
+
+<p>The convenience facts are added by modifying all of the shape rules (circle, cyl, rect, comp, line, arrow), for example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  circleObject [teq dq1 circle spc ubq id ueq dq2] =  [[circle(${scopeGet ("gobject")}, ${id}).\nshape(${scopeGet ('gobject')}, "circle").]]
+</code></pre></div></div>
+<p>The convenience facts are meant for human-readability.  It turns out that we already have human-readable synonyms.  The addition of <code class="language-plaintext highlighter-rouge">shape</code> facts is moot (a dead end).  We can leave them in the code, for now, since they do no alter any of the existing queries.</p>
+
+<p>We add a round-trip query and display all parent/child relationships using synonyms.</p>
+
+<p>[In general, I oppose the use of round-trips.  A round-trip is justified, here, because we are bootstrapping and eye-balling results to confirm sanity.  After bootstrapping, round-trips should be unneccessary.  Round-trips are included in post-bootstrap code for one of two reasons:</p>
+<ol>
+  <li>The Notation is not sufficiently powerful.</li>
+  <li>The user(s) do not believe that they can use the notation without resorting to low-level manipulations.<br />
+Round-trips are hard to create and cause more work.  The need for round-trips should be a red flag.]</li>
+</ol>
+
+<h2 id="new-queries">New Queries</h2>
+<p>We add the queries:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parent(P,C) :-
+    contains(PID,CID),
+    synonym(PID,P),
+    synonym(CID,C).
+
+display(P):-
+    setof(C,parent(P,C),Bag),
+    format("~w: ~w~n", [P,Bag]).
+
+displayAllPC:-
+    setof(P,display(P),_).
+</code></pre></div></div>
+<h2 id="using-the-new-queries">Using the New Queries</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- displayAllPC.
+c: [c_a,c_b,c_c,c_d,c_e,c_f,c_g,c_h,c_i,c_j,c_k,c_l]
+c_e: [c_e_m,c_e_n]
+c_g: [c_g_o,c_g_p,c_g_q]
+c_i: [c_i_r,c_i_s]
+c_k: [c_h_v,c_k_t,c_k_u]
+e: [e_a,e_b,e_c,e_e,e_f,e_g,e_h,e_i,e_j]
+e_e: [e_e_k,e_e_l,e_e_m]
+e_g: [e_g_n,e_g_o,e_g_p]
+e_i: [e_i_q,e_i_r,e_i_s]
+z: [a,b,c,d,e,f,g]
+true.
+
+?- 
+</code></pre></div></div>
+<h2 id="error---missing-node">Error - Missing Node</h2>
+<p>Looking a the “e:” line, we see that e_d is missing.</p>
+
+<p>This is probably human error.</p>
+
+<p>Let’s look at the <code class="language-plaintext highlighter-rouge">diagrams.opml</code> file.</p>
+
+<p>Indeed, a node was missing.</p>
+
+<p>We add:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>				&lt;outline text="circle “e/d”"&gt;
+					&lt;outline text="color=yellow" /&gt;
+				&lt;/outline&gt;
+</code></pre></div></div>
+<p>and, now the result looks correct (that doesn’t mean that it <em>is</em> correct, but only that it passes visual inspection)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- displayAllPC.
+c: [c_a,c_b,c_c,c_d,c_e,c_f,c_g,c_h,c_i,c_j,c_k,c_l]
+c_e: [c_e_m,c_e_n]
+c_g: [c_g_o,c_g_p,c_g_q]
+c_i: [c_i_r,c_i_s]
+c_k: [c_h_v,c_k_t,c_k_u]
+e: [e_a,e_b,e_c,e_d,e_e,e_f,e_g,e_h,e_i,e_j]
+e_e: [e_e_k,e_e_l,e_e_m]
+e_g: [e_g_n,e_g_o,e_g_p]
+e_i: [e_i_q,e_i_r,e_i_s]
+z: [a,b,c,d,e,f,g]
+true.
+</code></pre></div></div>
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

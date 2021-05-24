@@ -1,0 +1,66 @@
+I"b	<ul>
+  <li>normalization</li>
+</ul>
+
+<h1 id="gcc">gcc</h1>
+
+<p>The Gnu C compiler uses RTL invented as a peepholing technology by Fraser-Davidson.</p>
+
+<h1 id="ocg">OCG</h1>
+<p>Orthogonal Code Generator (Cordy).</p>
+
+<p>Declarative decision language for portability.</p>
+
+<p>Splits portable code generation into two sub-tasks:</p>
+<ol>
+  <li>Compile input program to normalized form.</li>
+  <li>Convert normalized form to code for specific CPU.</li>
+</ol>
+
+<h1 id="denotational-semantics">Denotational Semantics</h1>
+<p>Functional description of PL<sup id="fnref:pl" role="doc-noteref"><a href="#fn:pl" class="footnote">1</a></sup>.</p>
+
+<p>Includes grammar + semantics + code emission.</p>
+
+<p>Originally an <em>all-in-one</em> concept resulting in large compilers that were not practical.</p>
+
+<p>Peter Lee “Realistic Compiler Generation” broke the concept down into sub-tasks and produced more practical results.</p>
+<h1 id="normalization">Normalization</h1>
+<ul>
+  <li>Triples</li>
+  <li>Data Descriptors
+    <h2 id="opcodes">Opcodes</h2>
+    <p>Opcodes are triples.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MOV R0,R1
+</code></pre></div>    </div>
+    <h2 id="rtl">RTL</h2>
+    <p>Register Transfer Logic created by Fraser/Davidson as peephole technology for portability.</p>
+  </li>
+</ul>
+
+<p>Splits code selectiion into two sub-tasks</p>
+<ol>
+  <li>Compile input program to normalized form (RTL “everything is a register”)</li>
+  <li>Convert normalized form to code for specific CPU.
+    <h2 id="data-descriptors">Data Descriptors</h2>
+    <p>Normalized form for description of data locations.</p>
+  </li>
+</ol>
+
+<p>Enables splitting of portable compilers into smaller sub-tasks.</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:pl" role="doc-endnote">
+      <p>PL means Programming Language. <a href="#fnref:pl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

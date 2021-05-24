@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="As it stands, the grammar works, but I keep running into trouble with the code outputter (aka code emission)." />
+<meta property="og:description" content="As it stands, the grammar works, but I keep running into trouble with the code outputter (aka code emission)." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-20T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html","@type":"BlogPosting","description":"As it stands, the grammar works, but I keep running into trouble with the code outputter (aka code emission).","dateModified":"2021-05-20T00:00:00-04:00","datePublished":"2021-05-20T00:00:00-04:00","headline":"Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-20T00:00:00-04:00" itemprop="datePublished">May 20, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>As it stands, the grammar works, but I keep running into trouble with the code outputter (aka code emission).</p>
+
+<p>I’ve gotten this far, without any real trouble, but, something isn’t working.</p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>I want the code outputter to keep track of the object hierarchy and to output containment relations, e.g. <code class="language-plaintext highlighter-rouge">contains(id9,id28)</code>.</p>
+
+<p>I’ve roughed-in containment handling, but, it gives wrong answers - sometimes.</p>
+
+<h2 id="complexity-tell">Complexity Tell</h2>
+<p>The above is a red flag that tells me that I haven’t simplified enough.</p>
+
+<p>I can play whack-a-mole and fix edge-cases as they come up, or, I can look for an overriding simplification.</p>
+
+<h2 id="how-do-you-know-when-to-stop-simplifying">How Do you Know When To Stop Simplifying?</h2>
+<p>Everything is a fractal.</p>
+
+<p>Everything can be broken apart and simplified.</p>
+
+<p>How do to you know when to stop simplifying?</p>
+
+<p>You can’t know when to stop.</p>
+
+<p>The only rule is: is it good enough to solve the problem-at-hand?</p>
+
+<h2 id="what-is-needed-for-this-problem">What is Needed For This Problem</h2>
+
+<p>We want to parse something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a {
+  b {
+    c
+  }
+}
+</code></pre></div></div>
+<p>and we want to output <code class="language-plaintext highlighter-rouge">c</code> as <code class="language-plaintext highlighter-rouge">a.b.c</code>.</p>
+
+<p>We need to remember that a contains b, and, that b contains c.</p>
+
+<p>We want to create an ID for each of the objects, a, b, and, c.</p>
+
+<p>We’ll create those IDs dynamically and call the IDs <code class="language-plaintext highlighter-rouge">gobject</code> (for “graphical object”).</p>
+
+<p>We, also, want to track that <code class="language-plaintext highlighter-rouge">container</code> for each object using a <code class="language-plaintext highlighter-rouge">contains</code> relationship.</p>
+
+<p>We need:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contains(b,c)
+contains(a,b)
+</code></pre></div></div>
+<p>while noticing that <em>nothing</em> contains a.</p>
+
+<p>Actually, the top-level drawing contains a, so we need to make a relation for that?</p>
+
+<p>Do we want to make an ID for the drawing?.</p>
+
+<p>If we don’t create an ID for the drawing, we create an edge-case for the top-level - nothing contains a, but a contains b, and so on.</p>
+
+<p>The top-level becomes a special case.</p>
+
+<p>Hmm, special cases lead to edge-cases and are a <em>tell</em> of insufficient simplicity.</p>
+
+<p>Maybe that’s the answer - every drawing gets an ID and starts the containment hierarchy off.</p>
+
+<p>Later, we’re going to want to join drawings to other drawings, but, we haven’t started to think about that problem, yet.  Keep things simple.</p>
+
+<p>OTOH, making an ID for the top-level drawing will probably serve us when we need to start solving the problem of how to join drawings together.</p>
+
+<p>Let’s do that for now - we can always change our mind.</p>
+
+<p>If we keep the code simple and concise, changing our minds won’t cause many future problems.</p>
+
+<p>We want to keep the <em>thinking</em> separate from the <em>coding</em>.</p>
+
+<p>If we have to re-think a solution that is OK.</p>
+
+<p>If we have to re-code a solution, then we will tend not to allow our re-thinking to change our solution.</p>
+
+<p>Less code, more thinking.</p>
+
+<p>We should strive to encode <em>all</em> of our thinking into one line of code.  That way, if we change our minds, all we have to do is to change one line of code.</p>
+
+<p>I’ve never achieved this ideal - only one line of code - but, I’ve made many designs that have very few lines of “code” (about one page, or about one eye-full).</p>
+
+<h2 id="back-to-the-drawing-board">Back To The Drawing Board</h2>
+
+<p>We are at liberty to change the design completely.</p>
+
+<p>We are always at liberty to make such sweeping changes, but, there things that discourage us from doing so.</p>
+
+<p>Having written too much code discourages us from changing our designs.</p>
+
+<p>The answer to this problem is simple: write less code.  D’oh.</p>
+
+<p>Spend a disportionately huge amount of time on the design and very little time on creating code.</p>
+
+<p>Throw code away and start again…</p>
+
+<h3 id="how-to-write-less-code">How To Write Less Code?</h3>
+
+<p>See my essays entitled “Less Code” and “Writing Code That Writes Code”.</p>
+
+<p>Write down the DI (the Architecture), don’t spend much time writing down code that has the DI calcified into it.</p>
+
+<p>Simplify the DI until it occupies only one eye-full (e.g. a page, a window).</p>
+
+<p>No one wants to read your 200-page manual on how to use your DI notation, so keep it simple.  Goals: 1 page for the DI notation manual and 1 page of code in the DI notation<sup id="fnref:manual" role="doc-noteref"><a href="#fn:manual" class="footnote">1</a></sup>.</p>
+
+<h2 id="tipping-point">Tipping Point</h2>
+
+<p>I have found that there is a psychological tipping point that affects DI Refactoring<sup id="fnref:di" role="doc-noteref"><a href="#fn:di" class="footnote">2</a></sup>.</p>
+
+<p>See my other essay called <code class="language-plaintext highlighter-rouge">DI Refactoring</code>.</p>
+
+<h1 id="red-flag---whack-a-mole-tell">Red Flag - Whack-A-Mole Tell</h1>
+<p>Playing whack-a-mole with edge cases is a red flag.</p>
+
+<p>Something is not simple enough.</p>
+
+<p>Ah - the diagrams are diagrams, but we’ve tangled semantics into the diagrams.</p>
+
+<h1 id="the-end---begin-again">The End - Begin Again</h1>
+<p>Let’s start again, and make the diagrams simpler.</p>
+
+<p>Plan:</p>
+<ol>
+  <li>convert the diagrams to markdown.</li>
+  <li>convert the markdown into nested syntax (technical term: CFG)</li>
+  <li>convert the nested syntax into factbases with inferred <code class="language-plaintext highlighter-rouge">contain</code> facts</li>
+  <li>inference interesting information.</li>
+</ol>
+
+<p>See Part 11, where we start all over again.</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:manual" role="doc-endnote">
+      <p>Try to fractalize the DI manual.  1 page to get the basics, and a hierarchy of more detailed stuff (fractalized) that might be needed later.  Flat <em>anything</em> is bad.  Flat manuals are TL;DR. <a href="#fnref:manual" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:di" role="doc-endnote">
+      <p>DI means <em>Design Intent</em>.  Often, the term <em>Software Architecture</em> is overloaded to mean DI. <a href="#fnref:di" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

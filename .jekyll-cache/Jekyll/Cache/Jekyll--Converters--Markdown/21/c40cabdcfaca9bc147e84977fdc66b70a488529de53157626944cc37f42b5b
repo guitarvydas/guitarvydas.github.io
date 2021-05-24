@@ -1,0 +1,208 @@
+I"�<h1 id="synopsis">Synopsis</h1>
+<ol>
+  <li>.md -&gt; .block</li>
+  <li>.block -&gt; .lisp</li>
+  <li>.block -&gt; .brace</li>
+</ol>
+
+<p>[<em>N.B. We use .lisp only because we have easy access to a pretty printer for .lisp files. This allows us to eye-ball test the interim code.</em>]</p>
+
+<h1 id="isolated-stages">Isolated Stages</h1>
+<p>We choose to build the diagram transpiler in isolated stages.</p>
+
+<p>We will apply <code class="language-plaintext highlighter-rouge">grasem</code> over and over until we can process the information using PROLOG facts.</p>
+
+<p>Instead of trying to do everything in one <code class="language-plaintext highlighter-rouge">grasem</code> file, we will split the work up into small, understandable pieces.</p>
+
+<h2 id="example-of-isolation---unix-pipelines">Example of Isolation - UNIX Pipelines</h2>
+<p>To get a flavor for isolation, consider UNIX pipelines.</p>
+
+<p>UNIX pipelines provide isolated stages with the restriction that components have 1 input and 2 outputs (stdin, stdout, stderr, resp).</p>
+
+<h1 id="steps">Steps</h1>
+<h2 id="step-1-the-blocks-grammar">Step 1 The Blocks Grammar</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MD2BLOCK {
+
+main = line+
+line = indent spc toEOL* newline+
+indent = "#"+
+toEOL = ~newline any
+
+newline = "\n"
+spc = " "
+}
+</code></pre></div></div>
+<h2 id="step-2-rough-in-glue-spec">Step 2 Rough-in Glue Spec</h2>
+<p>Let’s begin the <em>glue</em> code (the 2nd part of the grasem spec) by roughing-in the rules and parameters :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main [@lines]
+line [block spc @chars @nl]
+indent [@octo]
+toEOL [c]
+newline [c]
+spc [c]
+</code></pre></div></div>
+<h2 id="step-3-create-rewrites-for-an-identity-grammar">Step 3 Create Rewrites for an Identity Grammar</h2>
+<p>(output is the same as the input)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main [@lines] = [[${lines}]]
+line [block spc @chars @nl] = [[${block}: ${chars}\n]]
+indent [@octo] = [[${convertIndentationToBlockNumber (octo)}]]
+toEOL [c] = [[${c}]]
+newline [c] = [[${c}]] 
+spc [c] = [[${c}]]
+</code></pre></div></div>
+<h2 id="step-4-create-foreignjs-support-code">Step 4 Create Foreign.js (support code)</h2>
+<p>[<em>N.B. I like to put a space between a function and the open paren.</em>]</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'use strict';
+// empty
+
+function resetBlock () {
+    scopeAdd ('block' , 0);
+}
+
+function convertIndentationToBlockNumber (octoString) {
+    return octoString.length;
+}
+
+function asNumber (s) {
+    return parseInt (s, 10);
+}
+</code></pre></div></div>
+<p>Q: This code should be boring.  Is it?</p>
+
+<p>Q: Even if you don’t grok JS, nor use it daily, can you understand what is going on here?  The DI Architect’s Responsibility is to make the Design clear to readers.  Is the design clear?</p>
+
+<h2 id="step-5-run-and-test-md-to-block-conversion">Step 5 Run and Test MD to Block Conversion</h2>
+<p>Run.bash:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+set -e
+trap 'catch' ERR
+
+catch () {
+    echo '*** fatal error in run.bash'
+    exit 1
+}
+
+./run-block.bash v
+./run-block.bash v-x
+./run-block.bash v-x-y
+./run-block.bash v-x-y-z
+
+# v/x is the most complicated diagram
+cat v-x.block
+</code></pre></div></div>
+
+<p>Eye-ball test - it looks OK.</p>
+
+<p>(It’s OK to make mistakes, since we can always start again. We haven’t written much code.  The <em>Design</em> remains flexible and hasn’t been cast in stone).</p>
+
+<h1 id="graduate-to-the-next-steps">Graduate to the Next Steps</h1>
+<h2 id="step-6-emit-open-and-close-brackets">Step 6 Emit Open and Close Brackets</h2>
+<h3 id="step-7-emit-open-and-close-parens-in-lisp">Step 7 Emit Open and Close Parens in Lisp</h3>
+<p>We use Lisp at this stage, because we have easy access to a pretty printer which will allow us to eye-ball the results.</p>
+
+<p>In this case, we use Emacs’ <code class="language-plaintext highlighter-rouge">indent-region</code> command.  Other pretty printers can be used.  Other languages can be used.  We could just eye-ball the results and forego the pretty printing step.</p>
+
+<h4 id="md2block">MD2Block</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MD2BLOCK {
+
+main = line+
+line = indent spc toEOL* newline+
+indent = "#"+
+toEOL = ~newline any
+
+newline = "\n"
+spc = " "
+}
+
+main [@lines] = [[${lines}]]
+line [block spc @chars @nl] = [[${block}: ${chars}\n]]
+indent [@octo] = [[${convertIndentationToBlockNumber (octo)}]]
+toEOL [c] = [[${c}]]
+newline [c] = [[${c}]] 
+spc [c] = [[${c}]]
+</code></pre></div></div>
+<h4 id="block2lisp">Block2Lisp</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BLOCK2LISP {
+
+main = line+
+line = block ":" spc toEOL* newline+
+block = decimalDigit+
+decimalDigit = "0" .. "9"
+toEOL = ~newline any
+
+newline = "\n"
+spc = " "
+}
+
+main [@lines] =  [[${lines}${emitcloseparen (0)}]]
+line [block colon spc @chars @nl] = [[${emitopenparen (block)}${emitcloseparen (block)}${chars}\n${shiftblock (block)}]]
+block [@digits] = [[${digits}]]
+decimalDigit [d] = [[${d}]]
+toEOL [c] = [[${c}]]
+newline [c] = [[${c}]] 
+spc [c] = [[${c}]]
+</code></pre></div></div>
+<h4 id="runbash">Run.bash</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+set -e
+trap 'catch' ERR
+
+catch () {
+    echo '*** fatal error in run.bash'
+    exit 1
+}
+
+./run-block.bash v
+./run-block.bash v-x
+./run-block.bash v-x-y
+./run-block.bash v-x-y-z
+
+
+./run-block2lisp.bash v
+./run-block2lisp.bash v-x
+./run-block2lisp.bash v-x-y
+./run-block2lisp.bash v-x-y-z
+
+./run-block2brace.bash v
+./run-block2brace.bash v-x
+./run-block2brace.bash v-x-y
+./run-block2brace.bash v-x-y-z
+# v/x is the most complicated diagram
+cat v-x.brace
+</code></pre></div></div>
+<h4 id="run-block2lispbash">Run-block2lisp.bash</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+set -e
+trap 'catch' ERR
+target=$1
+catch () {
+    echo '*** fatal error in run-blocks.bash'
+    exit 1
+}
+
+../../grasem/run.bash block2lisp.grasem &gt;_.js
+cat _.js foreign.js &gt;_block2lisp.js
+node _block2lisp.js &lt; ${target}.block &gt; ${target}.lisp
+</code></pre></div></div>
+<h4 id="run-block2bracebash">Run-block2brace.bash</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+set -e
+trap 'catch' ERR
+target=$1
+catch () {
+    echo '*** fatal error in run-blocks.bash'
+    exit 1
+}
+
+../../grasem/run.bash block2brace.grasem &gt;_.js
+cat _.js foreign.js &gt;_block2brace.js
+node _block2brace.js &lt; ${target}.block &gt; ${target}.brace
+</code></pre></div></div>
+
+<h1 id="appendix---code-in-github-repo">Appendix - Code in Github Repo</h1>
+<p><a href="https://github.com/guitarvydas/basicdasl/tree/master/pseudo">repo</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

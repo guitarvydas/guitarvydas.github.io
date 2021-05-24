@@ -1,0 +1,76 @@
+I"�<ul>
+  <li>restricted interfaces</li>
+  <li>low-level types for interfaces</li>
+</ul>
+
+<h1 id="restricted-interfaces">Restricted Interfaces</h1>
+
+<p>UNIX commands have</p>
+<ul>
+  <li>1 input (stdin)</li>
+  <li>2 outputs (stdout, stderr).</li>
+</ul>
+
+<p>UNIX shows how much can be done with simple interfaces.</p>
+
+<h1 id="low-level-types">Low-Level Types</h1>
+<p>Typing should be done in layers, not in an <em>all-in-one</em> basis.</p>
+
+<p>UNIX commands use a very simple, low-level type for communication between components - a line of text.</p>
+
+<p>This simplicity allows components to be plugged together.</p>
+
+<p>Note that more elaborate types can be used, but the fundamental (atomic) type for plugging components together remains constant (a line of text).</p>
+
+<p>More elaborate types can be enforced by components in UNIX pipelines.</p>
+
+<h1 id="type-pipelines">Type Pipelines</h1>
+<p>More elaborate types can be checked in layers in a type pipeline.  Each successive component in a pipeline either</p>
+<ol>
+  <li>passes data down the pipe (after checking it)</li>
+  <li>signals an error, e.g. by withholding (1) and sending an error object (/message) on a side-channel.</li>
+</ol>
+
+<p>This structure inherently needs multiple outputs (e.g. at least stdout and stderr (I favor having more than 2)) which is not well-served by functional notation (which is fundamentally a 1-in-1-out notation<sup id="fnref:bags" role="doc-noteref"><a href="#fn:bags" class="footnote">1</a></sup>)</p>
+
+<h1 id="fbp">FBP</h1>
+
+<p>FBP means Flow-Based Programming.</p>
+
+<p>UNIX commands are a subset of FBP<sup id="fnref:cbp" role="doc-noteref"><a href="#fn:cbp" class="footnote">2</a></sup>.</p>
+
+<h1 id="edge-cases">Edge-Cases</h1>
+
+<p>Q: What kinds of operations cannot be handled with the above?</p>
+
+<p>Q: Should we create PLs<sup id="fnref:pl" role="doc-noteref"><a href="#fn:pl" class="footnote">3</a></sup> that are the Union of all edge-cases, or, should we create many SCNs<sup id="fnref:scn" role="doc-noteref"><a href="#fn:scn" class="footnote">4</a></sup> instead?</p>
+
+<p>Q: Does PEG offer advantages over REGEX for creating commands (e.g. grep vs. fictional peggrep ; awk vs. fictional pegawk ; python vs. fictional pegpy ; lisp vs. peglisp)?  Is this an edge-case or something common to many apps?</p>
+
+<p>Q: Should PLs be hierarchical, not flat?  Should variables be hierarchical?  (Symbols, in general).  [Example: “y = mx + b” vs. “y = (slope * x) + intersect”.  Is the difference a language decision or a IDE feature?  Or, is this the goal of Projectional Editing?).]</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:bags" role="doc-endnote">
+      <p>Over time, the limits of functional notation have been addressed by playing whack-a-mole - adding bags onto the side of the otherwise-pure syntax, e.g. exceptions. <a href="#fnref:bags" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cbp" role="doc-endnote">
+      <p>I favor Component Based Programming, which is more similar to EE and LEGO.  FBP focuses on the flows of data while CBP focuses on the components themselves. <a href="#fnref:cbp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:pl" role="doc-endnote">
+      <p>PL means Programming Language. <a href="#fnref:pl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:scn" role="doc-endnote">
+      <p>SCN means Solution Centric Notation (essentially a light-weight DSL). <a href="#fnref:scn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

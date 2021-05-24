@@ -1,0 +1,107 @@
+
+<hr />
+<p>layout: post<br />
+title:  “S/SL Takeaways”<br />
+—</p>
+<h1 id="ssl">S/SL</h1>
+
+<p>S/SL means Syntax Semantic Language.  (See References).</p>
+
+<p>S/SL is described as a minimal syntax for parsing.</p>
+
+<p>Parsing has been subsumed by Parser Combinators and PEG.</p>
+
+<p>Yet, S/SL still contains a hidden gem.</p>
+
+<h1 id="takeaways">Takeaways</h1>
+
+<ul>
+  <li>link functions<sup id="fnref:mech" role="doc-noteref"><a href="#fn:mech" class="footnote">1</a></sup>.</li>
+</ul>
+
+<h1 id="link-functions">Link Functions</h1>
+<p>Link functions are unimplemented functions.</p>
+
+<p>Link functions are not implemented in S/SL, but are implemented in the base language (I call this a Toolbox Language).</p>
+
+<h1 id="dataless-language">Dataless Language</h1>
+
+<p>In S/SL, there is no data.</p>
+
+<p>There are only <em>handles</em><sup id="fnref:enums" role="doc-noteref"><a href="#fn:enums" class="footnote">2</a></sup> to data.</p>
+
+<p>One can declare the existence of data and can move it around, but one <em>cannot</em> specify the implementation of the data in S/SL.</p>
+
+<h1 id="typeless-language">Typeless Language</h1>
+<p>S/SL has no built-in types[^builtintypes].</p>
+
+<p>In S/SL, you can declare <em>handles</em><sup id="fnref:enums:1" role="doc-noteref"><a href="#fn:enums" class="footnote">2</a></sup> to types, but you <em>cannot</em> specify how the types are implemented.</p>
+
+<h1 id="inputs">Inputs</h1>
+<p>Inputs are declared as <em>handles</em>.</p>
+<h1 id="outputs">Outputs</h1>
+<p>Outputs are declared as <em>handles</em>.</p>
+<h1 id="errors">Errors</h1>
+<p>Erros are declared as <em>handles</em>.</p>
+
+<h1 id="restricted-api-tofrom-link-functions">Restricted API To/From Link Functions</h1>
+
+<p>S/SL functions can take 0 or 1 parameters (only).</p>
+
+<p>S/SL functions can return 0 or 1 return values.</p>
+
+<h1 id="datalessness-in-other-pls">Datalessness In Other PLs</h1>
+<p>It is <em>possible</em> to create data handles in other PLs, but most PLs tend to encourage description of the implementations.</p>
+
+<p>For example, <em>int</em>, <em>float</em>, <em>array</em>, <em>list</em>, etc. are examples of data implementations.</p>
+
+<p>S/SL enforces non-implementation of details</p>
+
+<h1 id="typelessness-in-other-pls">Typelessness in Other PLs</h1>
+<p>It is <em>possible</em> to create hierarchies of abstract types in other PLs, but this usually tends (psychologically) towards accidental complexity.</p>
+
+<p>S/SL enforces the use of type handles.</p>
+
+<h1 id="input-in-other-pls">Input in Other PLs</h1>
+
+<p>S/SL’s simple handles enforce simple description of inputs.</p>
+
+<h1 id="output-in-other-pls">Output in Other PLs</h1>
+
+<p>S/SL’s simple handles enforce simple description of outputs.</p>
+
+<h1 id="error-in-other-pls">Error in Other PLs</h1>
+
+<p>S/SL’s simple handles enforce simple description of errors.</p>
+
+<p>Many current PLs implement error handling using <code class="language-plaintext highlighter-rouge">throw</code>, resulting in backtraces of uninteresting details (e.g. essentially the same as core dumps).</p>
+
+<p>Error handles could be used to invoke <code class="language-plaintext highlighter-rouge">throw</code>, or, better, could be used to provide useful debugging error messages.</p>
+
+<h1 id="encouraging-behavior-vs-possible-behavior">Encouraging Behavior vs Possible Behavior</h1>
+<p>There seems to be a fine line between PLs that encourage certain paradigms vs. making those behavior possible.</p>
+
+<p>For example, it is <em>possible</em> to write CPS in assembly code, but few programmers bother to do so.</p>
+
+<p>Lifting concepts to make them visible, vs. eliding other concepts, is an important aspect of PL design.</p>
+
+<p>S/SL’s use of <em>handles</em> makes the Architectural concepts of a progam visible, while eliding implementation.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:mech" role="doc-endnote">
+      <p>Link functions are called mechanisms in S/SL.  See also, S/SL’s types, inputs, outputs and errors. <a href="#fnref:mech" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:enums" role="doc-endnote">
+      <p>Similar to the concept of enums. <a href="#fnref:enums" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:enums:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>

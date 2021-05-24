@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>UNIX Takeaways | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="UNIX Takeaways" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Isolation Coordination Language Concurrency" />
+<meta property="og:description" content="Isolation Coordination Language Concurrency" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-23T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="UNIX Takeaways" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html","@type":"BlogPosting","description":"Isolation Coordination Language Concurrency","dateModified":"2021-05-23T00:00:00-04:00","datePublished":"2021-05-23T00:00:00-04:00","headline":"UNIX Takeaways","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">UNIX Takeaways</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-23T00:00:00-04:00" itemprop="datePublished">May 23, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul>
+  <li>Isolation</li>
+  <li>Coordination Language</li>
+  <li>Concurrency</li>
+</ul>
+
+<h1 id="threads-are-isolation">Threads are Isolation</h1>
+
+<p>Programs are completely separated from each other and can communicate only over very restricted channels.</p>
+
+<p>Threads are <em>envelopes</em> that one can drop <em>calculators</em> into.</p>
+
+<h1 id="coordination-language">Coordination Language</h1>
+
+<p>PLs have traditionally been restricted to expressing the contstruction of synchronous calculators.</p>
+
+<p>Few PLs address the issues of distributed programming<sup id="fnref:alib" role="doc-noteref"><a href="#fn:alib" class="footnote">1</a></sup>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/sh</code> (<code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">|</code>) is a DSL for creating higher-level concurrent abstractions.</p>
+
+<h2 id="pid">PID</h2>
+
+<p>PIDs - process ID - are handles to first-class components.</p>
+
+<h1 id="concurrency">Concurrency</h1>
+
+<p>Concurrency is a programming paradigm.</p>
+
+<p>Parallelism is an application problem that needs to use the concurrent paradigm</p>
+
+<h1 id="anti-takeaways">Anti-Takeaways</h1>
+<h2 id="time-sharing">Time-Sharing</h2>
+<h2 id="memory-sharing">Memory Sharing</h2>
+<h2 id="closures">Closures</h2>
+<p>Threads are just closure-wannabees<sup id="fnref:ccs" role="doc-noteref"><a href="#fn:ccs" class="footnote">2</a></sup>.</p>
+
+<p>UNIX threads are just ad-hoc implementations of closures in C.</p>
+<h2 id="dependency-spaghetti">Dependency Spaghetti</h2>
+<h2 id="rendezvous">Rendezvous</h2>
+<p>Attempt to corral concurrency by making <em>everything</em> synchronous.</p>
+<h2 id="syntax-for-distributed-programming-is-minimal">Syntax for Distributed Programming is Minimal</h2>
+<p>The UNIX shell syntax for distributed programming is muddied by the inclusion of many other features<sup id="fnref:soc" role="doc-noteref"><a href="#fn:soc" class="footnote">3</a></sup>.</p>
+
+<h2 id="continued-conflation-and-muddied-waters-between-programming-and-oss">Continued Conflation and Muddied Waters Between Programming and O/Ss</h2>
+<p>UNIX contains several fundamental advances in PL features (e.g. |, &amp;, fork, etc).</p>
+
+<p>These PL advances have, unfortunately, been conflated with Operating Systems and have largely been ignored in PL designs.</p>
+<h2 id="union-of-coordination-and-string-processing-and-">Union of Coordination and String Processing and …</h2>
+<p>O/Ss are just libraries.</p>
+
+<p>Windows, MacOS, Linux are just applications.</p>
+
+<p>The <em>problems</em> that Windows, MacOS and Linux must solve are different from the problems that most apps need to solve.</p>
+
+<p>Not every app should have all of the operating system principles built-in, e.g. not every app needs memory sharing and time-sharing.</p>
+
+<p>Some apps use the concurrent programming paradigm.  This should not mean that they must include all of O/S-style threading.</p>
+<h1 id="pipelines-vs-isolation">Pipelines vs. Isolation</h1>
+<p>UNIX popularize pipelines of isolated components.</p>
+
+<p>These advances have been, unfortunately, overlooked due to</p>
+<ul>
+  <li>conflation with heavy technologies (e.g. O/Ss)</li>
+  <li>premature optimization (e.g. the ideas of <em>isolation</em> were burned into hardware before they were sufficiently explored, e.g. C had some useful ideas about <em>isolation</em> but these were missed in lieue of C’s system-language features)
+    <h1 id="see-also">See Also</h1>
+    <p>Concurrency is not Parallelism - Rob Pike</p>
+  </li>
+</ul>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:alib" role="doc-endnote">
+      <p>Distributed programming is, currently, only addressed by second-class, assembler-like operations and libraries. <a href="#fnref:alib" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ccs" role="doc-endnote">
+      <p>Maybe I mean /CCs?. <a href="#fnref:ccs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:soc" role="doc-endnote">
+      <p>Lack of Separation of Concerns <a href="#fnref:soc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/05/23/UNIX-Takeaways.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

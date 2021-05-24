@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Software Components 101 - Part 9 - What’s Next? | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Software Components 101 - Part 9 - What’s Next?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="So, what kinds of queries do we need to build next?" />
+<meta property="og:description" content="So, what kinds of queries do we need to build next?" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-16T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Components 101 - Part 9 - What’s Next?" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html","@type":"BlogPosting","description":"So, what kinds of queries do we need to build next?","dateModified":"2021-05-16T00:00:00-04:00","datePublished":"2021-05-16T00:00:00-04:00","headline":"Software Components 101 - Part 9 - What’s Next?","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Components 101 - Part 9 - What&#39;s Next?</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-16T00:00:00-04:00" itemprop="datePublished">May 16, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>So, what kinds of queries do we need to build next?</p>
+
+<p>Let’s recap our goal:</p>
+<ul>
+  <li>we want convert our diagram to code.</li>
+</ul>
+
+<p>RQ: [Rhetorical questions][^pattison]</p>
+<ul>
+  <li>What have we got?</li>
+  <li>What do we need?</li>
+</ul>
+
+<p>We have:</p>
+<ul>
+  <li>Basic queries</li>
+  <li>We know what things are components</li>
+  <li>We know what things are ports</li>
+  <li>We know stuff about the ports - external/internal, input/output, implicit/explicit</li>
+  <li>We know which things are arrows and which way they point (aBegin and aEnd).</li>
+</ul>
+
+<p>So, what else do we need to know to satisfy our goal?</p>
+
+<p>For one, we need to know which components are <em>foreign</em>, i.e. not implemented in DASL as composite components.</p>
+
+<p>What are the queries that will give us that information?</p>
+
+<p>First guess - any component that does not contain other components is <em>foreign</em>.</p>
+
+<p>Is that good enough?</p>
+
+<p>We don’t need to answer that question at the moment - that would be over-confident, Waterfall-style thinking.</p>
+
+<p>Let’s build a query based on the above and see where that gets us…</p>
+
+<p>We can test our ideas, since the drawings are small enough to eye-ball.  Gross bugs in the design will jump out at us.</p>
+
+<p>For starters, let’s see what we should expect.</p>
+
+<p>I count 7 missing components - aka <em>foreign</em> components.</p>
+
+<ol>
+  <li>[make instance]</li>
+  <li>[invent name]</li>
+  <li>[recursively instantiate]</li>
+  <li>[insert child into children of my runnable]</li>
+  <li>[clone connection]</li>
+  <li>[fixup connection]</li>
+  <li>[insert connection into runnable].</li>
+</ol>
+
+<p>Let’s see if our query returns those 7 - and <em>only</em> those 7…</p>
+
+<p>[Aside: The missing components should be drop-dead simple to implement.  Are they?  If not, maybe they need to be decomposed even further.  Goal: implement each component using 1 line of JavaScript<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">1</a></sup>.  Keep this goal in mind as we proceed.]</p>
+
+<p>[^pattison]Pat Pattison teaches songwriting and poetry.  He often says (paraphrased) “What have you got? What is different?”.</p>
+
+<h2 id="debugging-using-queries">Debugging Using Queries</h2>
+<p>Hmm, something isn’t working.</p>
+
+<p>Let’s take one example of a missing (foreign) component and follow it through the queries.</p>
+
+<p>Let’s pick on [clone connection].</p>
+
+<p>It’s human-readable synonym is e_e (from the diagrams, tab “Rough-in Processes Labelled”).</p>
+
+<p>What is its machine-readable ID?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- synonym(ID,e_e).
+ID = id61 ;
+false.
+
+?- 
+</code></pre></div></div>
+<p>It’s “id61”.</p>
+
+<p>Sanity check - is id61 a Composite Component?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- compositeComponent(id61).
+true ;
+true ;
+true.
+
+?- 
+</code></pre></div></div>
+<p>Woah, that doesn’t seem right.  How did that answer come into being?</p>
+
+<p>We examine the definition for <code class="language-plaintext highlighter-rouge">compositeComponent</code>.</p>
+
+<p>We see that checking for <code class="language-plaintext highlighter-rouge">contains</code> is not enough.</p>
+
+<p>A component can contain things other than components, such as Ports.</p>
+
+<p>What we want is to check if a composite component contains another component.</p>
+
+<p>We extend the query to succeed only if the contained item is another component:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compositeComponent(C):-
+    comp(C,_),
+    contains(C,Sub),
+    comp(Sub,_).
+</code></pre></div></div>
+
+<p>And try again:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- compositeComponent(id61).
+false.
+
+?- 
+</code></pre></div></div>
+<p>That’s better.</p>
+
+<p>Now, let’s add a query for missing components</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>allCompositeComponents(Cs):-
+    setof(C,compositeComponent(C),Cs).
+missingComponent(C):-
+    comp(C,_),
+    allCompositeComponents(Composites),
+    \+ member(C,Composites).
+</code></pre></div></div>
+<p>and check its result:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- missingComponent(C).
+C = id15 ;
+C = id21 ;
+C = id28 ;
+C = id34 ;
+C = id61 ;
+C = id68 ;
+C = id75.
+
+?- 
+</code></pre></div></div>
+<p>That’s more promising.  The query says that 7 components are missing.</p>
+
+<p>We are in the middle of development.  Anything could be wrong.  Errors could be due to logic problems, or, simply due to typos.  Typos result in “random” behaviour.  Sometimes you can deduce where a random behaviour is coming from and sometimes you can’t.</p>
+
+<p>Let’s sanity check those 7 missing components.<br />
+We can write the query at the REPL, or put it in a file.  It is simple enough to enter at the REPL.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- missingComponent(C),synonym(C,Syn).
+C = id15,
+Syn = c_e ;
+C = id21,
+Syn = c_g ;
+C = id28,
+Syn = c_i ;
+C = id34,
+Syn = c_k ;
+C = id61,
+Syn = e_e ;
+C = id68,
+Syn = e_g ;
+C = id75,
+Syn = e_i ;
+false.
+
+?- 
+</code></pre></div></div>
+<p>It says that the missing components are:</p>
+<ul>
+  <li>c_e</li>
+  <li>c_g</li>
+  <li>c_i</li>
+  <li>c_k</li>
+  <li>e_e</li>
+  <li>e_g</li>
+  <li>e_i.</li>
+</ul>
+
+<p>Looking at the diagram, we see that those synonyms match up with the components that we expect to be foreign (aka missing).</p>
+
+<p>Let’s rewrite this query as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describeForeignComponent(C):-
+    missingComponent(C),
+    synonym(C,Syn),
+    format("foreign: ~w~n", [Syn]).
+describeForeignComponents:-
+    setof(C,describeForeignComponent(C),_).
+</code></pre></div></div>
+<p>and try</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- describeForeignComponents.
+foreign: c_e
+foreign: c_g
+foreign: c_i
+foreign: c_k
+foreign: e_e
+foreign: e_g
+foreign: e_i
+true.
+
+?- 
+</code></pre></div></div>
+
+<p>What else is needed?</p>
+
+<p>A connection list for every composite.</p>
+
+<h2 id="arrow-bug">Arrow Bug</h2>
+<p>Writing a query for connection lists starts by finding all arrows directly contained by a component</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- arrow(C,A),comp(C,Syn).
+false.
+
+?- 
+</code></pre></div></div>
+<p>Bug: arrows don’t seem to be connected to their containers.</p>
+
+<p>We added a “container” symbol earlier.</p>
+
+<p>We should be using it for arrows.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  arrowObject [teq dq1 comp spc idsender @ws idsreceiver dq2] =
+  
+  [[
+arrow(${scopeGet ("container")}, ${scopeGet ("arrow")}).
+arrowBegin(${scopeGet ("arrow")}, ${abegin (idsender)}).
+arrowEnd(${scopeGet ("arrow")}, ${aend (idsreceiver)}).
+shape(${scopeGet ('gobject')}, "arrow").]]
+
+</code></pre></div></div>
+
+<p>Now, all arrows look like they are contained by only the top.</p>
+
+<h2 id="bug">Bug</h2>
+<p>Visual inspection of the results indicates that something is wrong.</p>
+
+<p>It turns out that the .opml file contains a typo <code class="language-plaintext highlighter-rouge">c/h/v</code> instead of <code class="language-plaintext highlighter-rouge">c/k/v</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>					&lt;outline text="rect “c/h/v”"&gt;
+						&lt;outline text="color=yellow" /&gt;
+					&lt;/outline&gt;
+</code></pre></div></div>
+
+<p>Changing this line (and bringing <code class="language-plaintext highlighter-rouge">Diagrams 1 2 1.cod</code> up to date) results in:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?- consult(fb).
+true.
+
+?- consult(q).
+true.
+
+?- describeArrows.
+id55: [[e_c,[e_e_k]],[e_b,[e_e_l,e_g_o]],[e_e_m,[e_f]],[e_f,[e_g_n]],[e_g_p,[e_h]],[e_h,[e_i_q]],[e_a,[e_i_r]],[e_i_s,[e_j]],[e_j,[e_d]]]
+id6: [[c_c,[c_e_m]],[c_e_n,[c_f]],[c_f,[c_g_o]],[c_b,[c_g_p]],[c_g_q,[c_h]],[c_h,[c_i_r]],[c_i_s,[c_j]],[c_j,[c_k_t]],[c_a,[c_k_u]],[c_k_v,[c_l]],[c_l,[c_d]]]
+true.
+
+?- 
+</code></pre></div></div>
+<p>Which looks OK.</p>
+
+<h2 id="completing-the-diagrams">Completing the Diagrams</h2>
+
+<p>What is still missing?</p>
+
+<p><code class="language-plaintext highlighter-rouge">Diagrams.opml</code> contains only the two components “c” and “e”.</p>
+
+<p>We will finish the full set of diagrams in Part 10.</p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:3" role="doc-endnote">
+      <p>If we can write these in JS, then we can write them in <em>anything</em> :-). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

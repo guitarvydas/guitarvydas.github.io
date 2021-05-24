@@ -1,377 +1,220 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-16T10:03:52-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Refactoring</title><link href="https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html" rel="alternate" type="text/html" title="Refactoring" /><published>2021-05-16T00:00:00-04:00</published><updated>2021-05-16T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/16/Refactoring</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html">&lt;p&gt;Refactoring is accidental complexity.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-24T12:52:39-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html"></title><link href="https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software-Components-101-Part-13-Identity-Grammar-Before-Creating-Factbase.html" rel="alternate" type="text/html" title="" /><published>2021-05-24T12:52:39-04:00</published><updated>2021-05-24T12:52:39-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software%20Components%20101%20Part%2013%20Identity%20Grammar%20Before%20Creating%20Factbase</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software-Components-101-Part-13-Identity-Grammar-Before-Creating-Factbase.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;We create a factbase from the nested documents&lt;/p&gt;
+&lt;h2 id=&quot;identity-grammar&quot;&gt;Identity Grammar&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BRACES2FB {
+  topLevel = ws+ tBEGIN rect tEND
 
-&lt;p&gt;Accidental complexity is also known as “epicycles”&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
-&lt;p&gt;The need to refactor a design or to refactor code, should be a red flag.&lt;/p&gt;
+  nestedAttributesOrObjects = tBEGIN attributeOrObject+ tEND
+  attributeOrObject = attribute | object
 
-&lt;p&gt;Refactoring should never be needed in a design which has been decomposed into its most-atomic units.&lt;/p&gt;
+  object = rect | ellipse | circle | arrow
+  rect = tRECT synonym nestedAttributesOrObjects? ws*
+  circle = tCIRCLE synonym nestedAttributesOrObjects? ws*
+  ellipse = tELLIPSE synonym nestedAttributesOrObjects? ws*
+  arrow = tARROW sender receiver ws*
 
-&lt;p&gt;Refactoring is accidental complexity caused by too much structure in a design.&lt;/p&gt;
+  attribute = shapeAttribute | colorAttribute | strokeWidthAttribute
+  shapeAttribute = &quot;shape&quot; ws* &quot;rounded&quot; ws*
+  colorAttribute = &quot;color&quot; ws* color ws*
+  strokeWidthAttribute = &quot;stroke-width&quot; ws* number ws*
 
-&lt;p&gt;Structure can be added in by creating queries.&lt;/p&gt;
+  sender = qualident ws*
+  receiver = qualident ws*
 
-&lt;p&gt;Structure should not be baked into a factbase.&lt;/p&gt;
+  synonym = qualident ws*
 
-&lt;p&gt;[Structure in queries is OK, structure in factbases is bad].&lt;/p&gt;
+    /* mid-level */
+    tRECT = &quot;rect&quot; ws*
+    tCIRCLE = &quot;circle&quot; ws*
+    tELLIPSE = &quot;ellipse&quot; ws*
+    tARROW = &quot;arrow&quot; ws*
+
+    tBEGIN = &quot;{&quot; ws*
+    tEND = &quot;}&quot; ws*
+
+      /* low-level */
+      color = rgba | &quot;green&quot; | &quot;yellow&quot; | &quot;red&quot;
+
+      keyword = color
+
+      flat_ident = ~keyword flat_ident_char+ 
+      flat_ident_char = &quot;a&quot; .. &quot;z&quot;
+      qualident = qualident_recursive | flat_ident
+      qualident_recursive = flat_ident &quot;/&quot; qualident
+
+      number = dig+
+      dig = &quot;0&quot; .. &quot;9&quot;
+      rgba = hex hex hex hex
+      hex = hd hd
+      hd = dig | &quot;A&quot; .. &quot;F&quot;
+ 
+      ws = &quot; &quot; | &quot;\t&quot; | newline
+      newline = &quot;\n&quot;
+}
+
+
+
+  topLevel [@ws begin rect end] = [[${ws}${begin}${rect}${end}]]
+
+
+  nestedAttributesOrObjects [begin @aorobj end] = [[${begin}${aorobj}${end}]]
+  attributeOrObject [aorobj] = [[${aorobj}]]
+
+  object [obj] = [[${obj}]]
+  rect [rect syn @nested @ws] = [[${rect}${syn}${nested}${ws}]]
+  circle [circle syn @nested @ws] = [[${circle}${syn}${nested}${ws}]]
+  ellipse [ellipse syn @nested @ws] = [[${ellipse}${syn}${nested}${ws}]]
+  arrow [arrow sender receiver @ws] = [[${arrow}${sender}${receiver}${ws}]]
+
+  attribute [attr] = [[${attr}]]
+  shapeAttribute [shape @ws1 rounded @ws2] = [[${shape}${ws1}${rounded}${ws2}]]
+  colorAttribute [k @ws1 color @ws2] = [[${k}${ws1}${color}${ws2}]]
+  strokeWidthAttribute [sw @ws1 n @ws2] = [[${sw}${ws1}${n}${ws2}]]
+
+  sender [ident @ws] = [[${ident}${ws}]]
+  receiver [ident @ws] = [[${ident}${ws}]]
+
+  synonym [ident @ws] = [[${ident}${ws}]]
+
+    tRECT [t @ws] = [[${t}${ws}]]
+    tCIRCLE [t @ws] = [[${t}${ws}]]
+    tELLIPSE [t @ws] = [[${t}${ws}]]
+    tARROW [t @ws] = [[${t}${ws}]]
+
+    tBEGIN [t @ws] = [[${t}${ws}]]
+    tEND [t @ws] = [[${t}${ws}]]
+
+      color [cl] = [[${cl}]]
+
+      keyword [kw] = [[${kw}]]
+
+      flat_ident [@cs] = [[${cs}]]
+      flat_ident_char [c] = [[${c}]]
+      qualident [ident] = [[${ident}]]
+      qualident_recursive [flatident slash recursiveident] = [[${flatident}${slash}${recursiveident}]]
+
+      number [num] = [[${num}]]
+      dig [digit] = [[${digit}]]
+      rgba [h1 h2 h3 h4] = [[${h1}${h2}${h3}${h4}]]
+      hex [h1 h2] = [[${h1}${h2}]]
+      hd [c] = [[${c}]]
+ 
+      ws [c] = [[${c}]]
+      newline [c] = [[${c}]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The identity grammar should produce output that is the same as the input.&lt;/p&gt;
+
+&lt;p&gt;Check that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v.fb&lt;/code&gt; is the same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v.brace&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Eye-ball or use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;diff&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Look for low-hanging fruit.&lt;/p&gt;
+
+&lt;p&gt;[We can always come back and fix errors, so this doesn’t need to be perfect.  The only test will be if the app is good enough for its purposes.  Everything is a fractal, everything is relative, nothing is absolute.  Absolute perfection is not possible.  Trying to attain absolute perfection will retard higher-level learning and progress.  Waterfall design is the process of closing doors behind you, whereas FDD[^fdd] leaves doors open on the assumption that iteration will be needed (design iteration as well as code iteration)].&lt;/p&gt;
+
+&lt;p&gt;[^fdd] FDD means Failure Driven Design.&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;See Copernican vs. Ptolemaic Cosmology.  See Arthur Koestler’s “The Sleepwalkers”. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Refactoring is accidental complexity.</summary></entry><entry><title type="html">Software components 101 engine part 3 factbase</title><link href="https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Engine-Part-3-Factbase.html" rel="alternate" type="text/html" title="Software components 101 engine part 3 factbase" /><published>2021-05-16T00:00:00-04:00</published><updated>2021-05-16T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/16/Software%20Components%20101%20-%20Engine%20Part%203%20Factbase</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/16/Software-Components-101-Engine-Part-3-Factbase.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;/script&gt;</content><author><name></name></author></entry><entry><title type="html">Table of contents since may 13, 2013</title><link href="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html" rel="alternate" type="text/html" title="Table of contents since may 13, 2013" /><published>2021-05-24T00:00:00-04:00</published><updated>2021-05-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/Table%20of%20Contents%20Since%20May%2013,%202013</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
   &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Software Components 101 - Engine Part 3 Factbase&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-16T10:01:04Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-16T10:01:04Z&quot;&gt;
+  &lt;title&gt;Table of Contents Since May 13, 2013&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-24T12:52:29Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-24T12:52:29Z&quot;&gt;
   &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
   &lt;meta name=&quot;CocoaVersion&quot; content=&quot;2022.44&quot;&gt;
   &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo}
-    p.p9 {margin: 0.0px 0.0px 0.0px 36.0px; font: 11.0px Menlo; min-height: 13.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino}
-    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Palatino; min-height: 18.0px}
-    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    span.s1 {font: 11.0px Menlo}
-    span.s2 {font: 13.0px Palatino}
-    ul.ul1 {list-style-type: disc}
-    ul.ul2 {list-style-type: hyphen}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Goal&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The Goal of this step is to construct a factbase from the diagrams.&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Table Of Contents Since May 15 2021&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Java-Takeaways.html&quot;&gt;Java Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I use my &lt;i&gt;grasem &lt;/i&gt;tool for this step.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Functional-Programming-Takeaways.html&quot;&gt;Functional Programming - Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I use SWI PROLOG (swipl) for creating queries, hence, target its syntax using grasem.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Grasem Overview&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Grasem combines Ohm-JS grammar specification and &lt;i&gt;glue&lt;/i&gt; semantic specifications in one file.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/First-Class-Functions-Takeaways.html&quot;&gt;First Class Functions - Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Grasem simply glues a grammar and a &lt;i&gt;glue&lt;/i&gt; spec together into one input file.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It splits the two specifications apart, runs the &lt;i&gt;glue&lt;/i&gt; transpiler then glues it into a JS file along with a grammar to produce a single JS program.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/21/Functional-Programming-vs-Parsing.html&quot;&gt;Functional programming vs parsing&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;[&lt;i&gt;This could be done by a shell script (e.g. by using /usr/bin/split)&lt;/i&gt;]&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways.html&quot;&gt;Compiler Technology Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Why combine both parts?&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;Keep all assets of a project together, where possible.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p4&quot;&gt;Why keep the parts separated?&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li4&quot;&gt;isolation&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;psychological &quot;trick&quot; to prevent premature optimization (something encouraged by current PLs)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;
-  &lt;ul class=&quot;ul2&quot;&gt;
-    &lt;li class=&quot;li4&quot;&gt;low-level optimization should not be addressed during architecture (low-level details get in the way)&lt;/li&gt;
-    &lt;li class=&quot;li4&quot;&gt;for example, questions like &quot;is this implemented as a list or as an array?&quot; should not enter at the Architectural level and, maybe, not even at the Engineering level — such details are the domain of Implementation&lt;/li&gt;
-    &lt;li class=&quot;li5&quot;&gt;&lt;br&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Ohm-JS&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Ohm-JS creates parsers from grammar specifications.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/21/Diagram-Conventions.html&quot;&gt;Diagram Conventions&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Ohm-JS parsers use JS as the toolbox language.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Glue&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The &lt;i&gt;glue&lt;/i&gt; tool supplies JS code to output code depending on matching done by the grammar.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways-3.html&quot;&gt;Compiler Technology Takeaways 3&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;i&gt;Glue&lt;/i&gt; allows the programmer to specify an output action for every rule in the grammar.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;i&gt;Glue&lt;/i&gt; uses JS back-tick string notation (`...${x}…`).&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Thinking-Is-Hard-Coding-Is-Easy.html&quot;&gt;Thinking is Hard, Coding is Easy&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The combination of a grammar plus simple string outputting is curiously powerful.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways-2.html&quot;&gt;Compiler Technology Takeaways 2&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This tool — the &lt;i&gt;grasem &lt;/i&gt;tool — is used to transpile a .opml file into a PROLOG factbase that can be queried.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/API-Takeaways.html&quot;&gt;API Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;.SVG files could be used instead of .opml files.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I choose to use .opml for this — simple — example only because I have ready access to a non-svg drawing tool (&lt;a href=&quot;http://draw.io&quot;&gt;draw.io&lt;/a&gt;) plus an .opml editor.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/Software-Components-101-Part-6-Recap.html&quot;&gt;Software Components 101 Part 6 Recap&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Editing .SVG is not the primary purpose of this essay.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I need to convince you — the reader — that this process is straight-forward and that it can be easily automated.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I believe that performing the transpilation steps manually — and showing the intermediate steps — will be a convincing argument for the simplicity of this technique.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html&quot;&gt;Software Components 101 Part 7 - Visual Inspection&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Sight-Reading&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;To show this set of steps, I simply sight-read the diagram and transcribed it into a tree-view. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html&quot;&gt;WASM Transpiler Example&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The tree-view tool, that I use,&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt; can export the tree in .opml format. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/DRY-vs-RY.html&quot;&gt;DRY vs. RY&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;From that point forward, we can apply automation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I happen to use Ohm-JS and PROLOG and UNIX® shell scripts, but, other technologies (like other parser tools, miniKanren, etc.) could be used.&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Refactoring.html&quot;&gt;Refactoring&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;As an example of converting a diagram, let us look at the top-level diagram in this example…&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Data-Descriptors-Takeaways.html&quot;&gt;Data Descriptors Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-16-10-01-04-Images/kernel-Copy of Rough-in Processes.png&quot; width=&quot;500px&quot; height=&quot;179px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Fig. 1 Top Level Diagram For Creating a Runnable&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Software-Components-101-Part-8-Ports.html&quot;&gt;Software Components 101 Part 8 - Ports&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-16-10-01-04-Images/kernel-Copy of Rough-in Processes Labelled.png&quot; width=&quot;500px&quot; height=&quot;181px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Fig. 2 Tagged Top Level Diagram For Creating a Runnable&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;In this diagram, we see&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;3 circles (two green, one yellow)&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;3 rounded rectangles (one gray, the other two white&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;2 cylinders&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;14 small squares (2 blue, 8 green, 4 yellow)&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;9 arrows.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;For convenience in this example, we've tagged most of the above with single-letter tags &lt;span class=&quot;s1&quot;&gt;a-m&lt;/span&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We didn't bother to tag the largest, gray rectangle.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;A true drawing editor would assign an (x,y) point to the position of each of these graphical items.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For convenience, we've omitted this information and eye-ball the &lt;i&gt;contains&lt;/i&gt; relationship directly (this is easier for human manual input than trying to calculate and specify the (x,y) of every item).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A fully automated transpiler would use the (x,y) coordinates of all items to infer &lt;i&gt;contains&lt;/i&gt; and &lt;i&gt;intersects&lt;/i&gt; relationships.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I have found it useful to generate a bounding box (left/top/right/bottom) for each graphical item before inferring containment and intersection relationships.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Likewise, for human input, it was easier to directly assign text items to the various objects.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A fully automated transpiler would infer text containment from the (x,y) coordinates of the text items and the various graphical items.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The actual text items are seen in the non-tagged diagram Fig. 1.&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;We start sight-reading by creating an item in the tree view corresponding to each graphical item on the diagram:&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-16-10-01-04-Images/Screen Shot 2021-05-09 at 3.22.58 PM.png&quot; width=&quot;500px&quot; height=&quot;439px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;[&lt;i&gt;We have left out the text for the top level rounded rect.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This is probably a typo bug.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We'll fix it later.&lt;/i&gt;]&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Then, for each item in the diagram, we insert attributes into the tree view. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;For example, &quot;cicle a&quot; has 3 attributes:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li6&quot;&gt;color (green)&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;stroke-width (3)&lt;/li&gt;
-  &lt;li class=&quot;li6&quot;&gt;text (&quot;my Composite Template&quot;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;Note that stroke-width=3 will become significant when we infer information.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A Port with stroke-width=3 will be considered to be an implicit Port — we do not draw connection lines to/from implicit Ports (and we let dynamic inheritance make the connections).&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Factbase&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The resulting factbase is:&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, a).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, b).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, c).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, f).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, g).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, h).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, j).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, l).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, n).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, s).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id40, v).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, a).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, b).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, c).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, f).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, h).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, l).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, m).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, p).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowBegin(id69, s).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [d]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [f]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [h]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [j]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [l]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [m]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [o]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [p]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [r]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [t]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id40, [u]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [d]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [f]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [g]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [h]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [k]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [l,o]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [l]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [n]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;arrowEnd(id69, [r]).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id1, &quot;a&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id11, &quot;c&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id13, &quot;d&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id3, &quot;b&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id45, &quot;a&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id46, &quot;b&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id47, &quot;c&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id7, &quot;a&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id70, &quot;d&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id73, &quot;g&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;circle(id9, &quot;b&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id1, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id11, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id13, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id16, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id17, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id22, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id23, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id24, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id29, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id3, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id30, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id35, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id36, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id37, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id45, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id46, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id47, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id50, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id51, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id52, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id57, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id58, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id59, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id64, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id65, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id66, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id7, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id70, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id73, yellow).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;color(id9, green).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id0, &quot;A&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id14, &quot;e&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id20, &quot;g&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id27, &quot;i&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id33, &quot;k&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id43, &quot;e&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id48, &quot;e&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id5, &quot;c&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id55, &quot;g&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;comp(id62, &quot;i&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id18, &quot;f&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id25, &quot;h&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id31, &quot;j&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id38, &quot;l&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id41, &quot;d&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id53, &quot;f&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id60, &quot;h&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id67, &quot;j&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;cylinder(id71, &quot;f&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id16, &quot;m&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id17, &quot;n&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id22, &quot;o&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id23, &quot;p&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id24, &quot;q&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id29, &quot;r&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id30, &quot;s&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id35, &quot;t&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id36, &quot;u&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id37, &quot;v&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id50, &quot;k&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id51, &quot;l&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id52, &quot;m&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id57, &quot;n&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id58, &quot;o&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id59, &quot;p&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id64, &quot;q&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id65, &quot;r&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;rect(id66, &quot;s&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid10, &quot;my Composite Template&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid12, &quot;child&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid15, &quot;make instance&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid19, &quot;child instance&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid2, &quot;my Composite Template&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid21, &quot;invent name&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid26, &quot;named child instance&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid28, &quot;recursively instantiate&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid32, &quot;filled child instance&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid34, &quot;insert child into children of my runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid39, &quot;my runnable filled in with children&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid4, &quot;my runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid42, &quot;my runnable filled in with children&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid44, &quot;∀ connections of my Composite Template&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid49, &quot;clone connection&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid54, &quot;runnable connection with holes&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid56, &quot;fixup connection&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid6, &quot;∀ children of my Composite Template&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid61, &quot;fixed up connection&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid63, &quot;insert connection into runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid68, &quot;final runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid72, &quot;runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;str(tid8, &quot;my runnable&quot;).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id1, 3).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id3, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id45, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id46, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id47, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id50, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id51, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id52, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id57, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id58, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id59, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id64, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id65, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id66, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id70, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;strokeWidth(id73, 1).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id1, tid2).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id11, tid12).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id14, tid15).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id18, tid19).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id20, tid21).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id25, tid26).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id27, tid28).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id3, tid4).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id31, tid32).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id33, tid34).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id38, tid39).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id41, tid42).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id43, tid44).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id48, tid49).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id5, tid6).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id53, tid54).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id55, tid56).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id60, tid61).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id62, tid63).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id67, tid68).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id7, tid8).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id71, tid72).&lt;/p&gt;
-&lt;p class=&quot;p8&quot;&gt;text(id9, tid10).&lt;/p&gt;
-&lt;p class=&quot;p9&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Note that PROLOG requires that all facts with the same name be grouped together.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We do this by invoking the UNIX® &lt;i&gt;sort&lt;/i&gt; command (see run.bash — &lt;a href=&quot;https://github.com/guitarvydas/basicdasl/blob/master/pseudo/run.bash&quot;&gt;https://github.com/guitarvydas/basicdasl/blob/master/pseudo/run.bash&lt;/a&gt;)&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Dataless-Language.html&quot;&gt;Dataless Language&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Roadmap&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-16-10-01-04-Images/Roadmap3.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Prerequisites&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/Factbases-101.html&quot;&gt;https://guitarvydas.github.io/2021/04/26/Factbases-101.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Grasem.html&quot;&gt;https://guitarvydas.github.io/2021/04/11/Grasem.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html&quot;&gt;https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Denotational-Semantics-Takeaways.html&quot;&gt;Denotational Semantics Takeaways&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Ohm-JS &lt;/b&gt;(skim or familiarize yourself with Ohm-JS using this essay or Ohm-JS documentation)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;ohm-js editor&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html&quot;&gt;https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;glue&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;grasem&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Grasem.html&quot;&gt;https://guitarvydas.github.io/2021/04/11/Grasem.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;isolation&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/Superposition.html&quot;&gt;https://guitarvydas.github.io/2021/01/16/Superposition.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/superposition.html&quot;&gt;https://guitarvydas.github.io/2021/01/22/superposition.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/24/superposition-2.html&quot;&gt;https://guitarvydas.github.io/2021/01/24/superposition-2.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Isolation.html&quot;&gt;https://guitarvydas.github.io/2020/12/09/Isolation.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html&quot;&gt;Software Components 101 - Part 9 - What's Next?&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;details kill&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/Details-Kill.html&quot;&gt;https://guitarvydas.github.io/2021/03/17/Details-Kill.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Diagram-Notation.html&quot;&gt;Diagram Notation&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;software development roles&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html&quot;&gt;https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Less-Code.html&quot;&gt;Less Code&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;toolbox language&lt;/b&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&quot;&gt;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html&quot;&gt;https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Layers.html&quot;&gt;Layers&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;screencasts&lt;/b&gt; (esp. PROLOG For Programmers)&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Playlists.html&quot;&gt;https://guitarvydas.github.io/2021/04/11/Playlists.html&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Software-Components-101-Part-11-Starting-Over.html&quot;&gt;Software Components 101 - Part 11 Starting Over&lt;/a&gt;&lt;/p&gt;
 &lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p7&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Cloud Outliner&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Software-Components-101-Part-12-Converting-Indentation-to-Nesting.html&quot;&gt;Software Components 101 Part 12 Converting Indentation to Nesting&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html&quot;&gt;Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Lisp-Takeaways.html&quot;&gt;Lisp Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Normalization.html&quot;&gt;Normalization&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Object-Oriented-Takeaways.html&quot;&gt;Object Oriented Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Pattern-Matching-Takeaways.html&quot;&gt;Pattern Matching Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Relational-Programming-Takeaways.html&quot;&gt;Relational Programming Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/SSL-Takeaways.html&quot;&gt;Ssl takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Scalability-Takeaways-2.html&quot;&gt;Scalability 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Scalability-Takeaways.html&quot;&gt;Scalability Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Structured-Programming-Takeaways.html&quot;&gt;Structured Programming Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/UNIX-Takeaways-2.html&quot;&gt;UNIX Takeaways 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/UNIX-Takeaways.html&quot;&gt;UNIX Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/24/Componentization-Measuring-Success.html&quot;&gt;Componentization: Measuring Success&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;script src=&quot;https://utteranc.es/client.js&quot; 
         repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
@@ -381,900 +224,398 @@
         async&gt; 
 &lt;/script&gt; 
 &lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Software Components 101 - Engine Part 3 Factbase</summary></entry><entry><title type="html">Software Components 101 Part 6 Recap</title><link href="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html" rel="alternate" type="text/html" title="Software Components 101 Part 6 Recap" /><published>2021-05-15T00:00:00-04:00</published><updated>2021-05-15T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/15/Software%20Components%20101%20Part%206%20Recap</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/15/Software-Components-101-Part-6-Recap.html">&lt;p&gt;Thus far, we have 13 distinct kinds of facts:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;arrow&lt;/li&gt;
-  &lt;li&gt;arrowBegin&lt;/li&gt;
-  &lt;li&gt;arrowEnd&lt;/li&gt;
-  &lt;li&gt;circle&lt;/li&gt;
-  &lt;li&gt;color&lt;/li&gt;
-  &lt;li&gt;comp&lt;/li&gt;
-  &lt;li&gt;cyl&lt;/li&gt;
-  &lt;li&gt;rect&lt;/li&gt;
-  &lt;li&gt;str&lt;/li&gt;
-  &lt;li&gt;strokeWidth&lt;/li&gt;
-  &lt;li&gt;text&lt;/li&gt;
-  &lt;li&gt;aBegin&lt;/li&gt;
-  &lt;li&gt;aEnd&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Table of Contents Since May 13, 2013</summary></entry><entry><title type="html">Componentization: Measuring Success</title><link href="https://computingsimplicity.neocities.org/2021/05/24/Componentization-Measuring-Success.html" rel="alternate" type="text/html" title="Componentization: Measuring Success" /><published>2021-05-24T00:00:00-04:00</published><updated>2021-05-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/Componentization%20-%20Measuring%20Success</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/Componentization-Measuring-Success.html">&lt;h1 id=&quot;the-elephant-in-the-room&quot;&gt;The Elephant In The Room&lt;/h1&gt;
+&lt;p&gt;The fundamental problem is that programmers don’t build software components that are completely isolated.&lt;/p&gt;
 
-&lt;p&gt;Let’s recap what these facts all mean.&lt;/p&gt;
+&lt;p&gt;Most PLs, package managers and Docker, nip at the heels of the problem but don’t address the fundamental problem.&lt;/p&gt;
 
-&lt;p&gt;Each fact refers to a unique ID (the Subject) and most facts contain a second ID (the Object).&lt;/p&gt;
+&lt;h1 id=&quot;how-would-we-measure-success-at-componentization&quot;&gt;How Would We Measure Success at Componentization?&lt;/h1&gt;
 
-&lt;p&gt;Facts do one of 2 things&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;declare a unique ID for some item&lt;/li&gt;
-  &lt;li&gt;specify a property for an item.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Facts of the form (1) have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relation&lt;/code&gt; and a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;subject&lt;/code&gt;.  The 3rd field - the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object&lt;/code&gt; is ignored (and is usually written as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Facts of the form (2) have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relation&lt;/code&gt; (aka property) and, both, a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;subject&lt;/code&gt; and and an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object&lt;/code&gt;.  In this case, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;subject&lt;/code&gt; refers to the ID of some item.  The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object&lt;/code&gt; is an atomic property, or, the ID of a related item.&lt;/p&gt;
-
-&lt;p&gt;[We will be querying facts using PROLOG, so we need to wrap the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;subject&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object&lt;/code&gt; in parentheses and put a period at the end of each fact.  PROLOG does not allow there to be a space between the relation name and the first open parenthesis.  The syntax will vary depending on the target query language.]&lt;/p&gt;
-
-&lt;p&gt;Working our way down the list:&lt;/p&gt;
-
+&lt;p&gt;Success:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrows&lt;/code&gt; declare the ID for a (unique) arrow and relate the arrow to another item (a graphical shape - rect, (comp), circle, cylinder).  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Arrow&lt;/code&gt; facts are of the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrow(shapeID,arrowID).&lt;/code&gt;  Arrow items are always accompanied by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aEnd&lt;/code&gt; facts which specify the arrowID and the source/target items’ ID.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrowBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEnd&lt;/code&gt; facts are used for inferencing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aEnd&lt;/code&gt; facts.  After inferencing, we ignore all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowBegin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrowEnd&lt;/code&gt; facts.  These facts contain short-hand references to objects.  We get rid of the short-hand (through inferencing) early and ignore these facts.  [Instead of ignoring the obsolete facts, should we delete them?  No.  See below for a discussion].&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Circle&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cyl&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rect&lt;/code&gt; facts declare unique IDs for circle, cylinder and rectangle graphical items.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Comp&lt;/code&gt; facts are like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rect&lt;/code&gt; facts, but are used as short-hand for human-input.  In a fully automated system - not a bootstrap one like this one - there would be no need for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;comp&lt;/code&gt; facts.  Rectangles would be differentiated based on their size and containment properties.  Here, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;comp&lt;/code&gt; facts demonstrate the divide between human-readability and machine-readability.  Machines can easily perform the repetitive work required in sorting rectangles into two categories (components and ports), but humans cannot enter low-level information reliably and prefer to eye-ball and sort the rectangles during data entry.  Errors during data entry can be more easily spotted by humans when the rectangles are pre-sorted.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Text&lt;/code&gt; facts declare IDs for text items and associate them with graphical items.  The format is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text(graphicalID, textID).&lt;/code&gt;.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Text&lt;/code&gt; facts are alway accompanied by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str&lt;/code&gt; facts which associate strings with textIDs.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;everything becomes simpler&lt;/li&gt;
+  &lt;li&gt;everything becomes “obvious” (aka easy to understand).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Color&lt;/code&gt; facts specify properties of graphical objects.  The general format of these facts is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;color(shapeID,colorName).&lt;/code&gt;.  Colors are specified by name - green, yellow and red are valid color names.  Shapes have no color specified by default.  We use a positive-inferencing methodology - colors are specified where they matter.  In the case of this simple example, input ports have color green.  Output ports and all other shapes do not match color=green.  Other colors are “don’t cares”.  Anything-but-green is ignored.&lt;/p&gt;
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Stroke-width&lt;/code&gt; facts supply a stroke-width property for shapes.  We only care about stroke-width=3.  All other stroke-widths (including no stroke-width) are ignored and don’t match stroke-width=3.  In this particular case, ports with stroke-width=3 signify implicitly connected ports.  All other ports must be explicitly connected (using arrows).  We infer explicit-vs-implicit ports early and ignore stroke-width facts after explicit/implicit facts have been created.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;[N.B. Facts are built up in layers. As we add semantically-interesting facts, we can ignore the low-level, grapihical facts that were used in previous layers.  The goal is to build isolated layers of software components, instead of trying to do “everything” at once.  This maximizes the possibility for completely different interpretations of the same factbase.  For this same reason, we do not delete facts from the factbase, if possible.  Committing to a certain factbase format and/or to data structures snips off other design possibilities.&lt;sup id=&quot;fnref:snip&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:snip&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;]&lt;/p&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">The Elephant In The Room The fundamental problem is that programmers don’t build software components that are completely isolated.</summary></entry><entry><title type="html">Compiler Technology Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html" rel="alternate" type="text/html" title="Compiler Technology Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Compiler%20Technology%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html">&lt;ul&gt;
+  &lt;li&gt;REGEX&lt;/li&gt;
+  &lt;li&gt;Parsing&lt;/li&gt;
+  &lt;li&gt;Normalization&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;regex&quot;&gt;REGEX&lt;/h1&gt;
+&lt;h1 id=&quot;parsing-peg&quot;&gt;Parsing, PEG&lt;/h1&gt;
+&lt;h1 id=&quot;normalization&quot;&gt;Normalization&lt;/h1&gt;
+&lt;p&gt;Opcodes are triples.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MOV R0,R1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Triples =&amp;gt; normalization.&lt;/p&gt;
+
+&lt;p&gt;CPUs are horribly complex under-the-hood&lt;sup id=&quot;fnref:rust&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:rust&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.  Opcodes provide a normalized view of this complexity.&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;PEG&lt;/li&gt;
+  &lt;li&gt;Ohm-JS&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=w_znRopGtbE&quot;&gt;Jeri Homebrew NMOS Transistor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
 &lt;/script&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Why do we have separate &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str&lt;/code&gt; facts?  The reason is mostly historical - efficiency concerns with other querying languages.  Folding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str&lt;/code&gt; facts into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text&lt;/code&gt; facts is but an optimization.  This kind of optimization is better left to Efficiency experts using profiling tools.  We are &lt;em&gt;only&lt;/em&gt; concerned with making this design workable - low-level efficiency can be addressed later.  Our inferencing queries make this distinction invisible (be expending computing power).  Usually, efficiency concerns tend to muddy clean designs.  In this particular case, we will stick to the dogmatic expression of repetitive facts and leave efficiency concerns for later.  The only efficiency that matters, at this stage, is time-to-architect and time-to-engineer.  If our choice(s) create slow turn-around times for Architecture and Engineering, then we will optimize our choice(s) sooner rather than later.&lt;sup id=&quot;fnref:gradual&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gradual&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:snip&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;My favourite example is the idea of building a factbase that implements a full techincal project.  Imagine that your business manager walks in and asks for a Gannt Chart of the project.  This can be created in 10’s of minutes if the factbase retains all data in machine-readable form.  If, though, the project is implemented in data structure format (e.g. a tree), then a walk of the structured data is required and makes the task, of producing a Gannt Chart, more difficult.  We (the royal we) are developing new technologies to perform such walks of structured information (e.g. PEG on structured text), but the human resources needed to create these technologies can be put to better - higher-level - use.  This happened in the transition from assembly code to structured programming languages.  When human resources were freed from having to deal with assembly programming, programmer creativity blossomed and we (the royal we) could attack problems in new ways (e.g. relational thinking).  What are the trade-offs and what is the best mix of such ideas and technologies?  I don’t know.  But, I believe that we should leverage machines to do the repetitive work, freeing our own selves to do more creative work.  Everything is a fractal - once we scale the next layer, we can divvy up the work and give as much of it to machinery as possible, allowing us to scale the next layers.  And so on.  The divvying process should never stop.  We see this same kind of thing happening now - Python was invented to solve one kind of problem, but Python is now being used to solve A.I. problems.  We insulate ourselves from future changes by inferring information and inserting higher-level facts into the factbase - we isolate inferences based on graphical properties to their own, isolated, layer.  Each layer “produces” semantic facts that the next layer uses.  A change to the project requirements affects the inferencing at particular layers only. &lt;a href=&quot;#fnref:snip&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:gradual&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Optimization (and typing) should be done in a gradual manner, in layers, and, should be done on a per-project basis.  Some optimizations affect the final throughput in ways that affect the ultimate users of the solution.  This effect depends on the particular problem-at-hand and cannot be generalized.  Typing is the same - it should be done in a gradual manner, in layers.  Typing was originally invented to aid compiler-writers but has grown into a brainstorming and design technique.  What is missing is the concept of project-specific design rules.  Design rules are like typing, but based on the problem-at-hand.  An obvious example is the divide between decimal notation and binary notation for financial apps vs. digital control apps.  Several languages offer a “union” of such capabilities, while making the languages more complicated and harder to implement.  In some problem domains, we use the term “business rules” to mean problem-specific design rules.  A union of &lt;em&gt;all&lt;/em&gt; possible design rules results in spaghetti.  As we’ve learned time and again - scoping and nesting and restricting solutions is the best way to tame tangled design rules.  (For example, “global variables” were considered to be a problem - the solution was scoping.  GOTOs were considered to be a problem - Structured Programming (nested control flow) was the solution.).  A union cannot be achieved unless &lt;em&gt;all&lt;/em&gt; possible design rules are known before-hand.  Unions of design rules is just Waterfall thinking.  The answer is to design isolated components and to plug them together into larger and larger applications. &lt;a href=&quot;#fnref:gradual&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:rust&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Transistors are built using oxides, e.g. various forms of rust.  Most programmers don’t care about what is inside those little black boxes we call ICs.  Triples provide the interface between physical rust and software. &lt;a href=&quot;#fnref:rust&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Thus far, we have 13 distinct kinds of facts: arrow arrowBegin arrowEnd circle color comp cyl rect str strokeWidth text aBegin aEnd</summary></entry><entry><title type="html">Wasm arithmetic transpiler</title><link href="https://computingsimplicity.neocities.org/2021/05/15/WASM-Arithmetic-Transpiler.html" rel="alternate" type="text/html" title="Wasm arithmetic transpiler" /><published>2021-05-15T00:00:00-04:00</published><updated>2021-05-15T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/15/WASM%20Arithmetic%20Transpiler</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/15/WASM-Arithmetic-Transpiler.html">&lt;h1 id=&quot;arithmetic-example-for-wasm-using-ohm-js-and-glue&quot;&gt;Arithmetic Example for WASM Using Ohm-JS and Glue&lt;/h1&gt;
-
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;In this essay, I discuss how to build a WASM transpiler that converts simple notation&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; for arithmetic into WASM code, and runs the result.&lt;/p&gt;
-
-&lt;p&gt;The transpiler technology is meant to be simple and to make you yawn.&lt;/p&gt;
-
-&lt;h2 id=&quot;code---grammar-and-rewrite-specifications&quot;&gt;Code - Grammar and Rewrite Specifications&lt;/h2&gt;
-&lt;p&gt;The full Grammar and the Rewrite specifications (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; code) can be found in the Appendices.&lt;/p&gt;
-
-&lt;p&gt;A full specification for a transpiler consists of&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;a grammar (in Ohm-JS style)&lt;/li&gt;
-  &lt;li&gt;a rewrite specification (in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; style).&lt;/li&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">REGEX Parsing Normalization</summary></entry><entry><title type="html">Compiler Technology Takeaways 3</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways-3.html" rel="alternate" type="text/html" title="Compiler Technology Takeaways 3" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Compiler%20Technology%20Takeaways%203</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways-3.html">&lt;ul&gt;
+  &lt;li&gt;optimization&lt;/li&gt;
+  &lt;li&gt;portability&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;More details can be found in the Appendices.&lt;/p&gt;
+&lt;h1 id=&quot;optimization&quot;&gt;Optimization&lt;/h1&gt;
 
-&lt;p&gt;The following discussion is meant to be a gentle introduction to this transpiler technology.  (Yawn).&lt;/p&gt;
+&lt;p&gt;Make a program boring.&lt;/p&gt;
 
-&lt;h2 id=&quot;grammar-rules&quot;&gt;Grammar Rules&lt;/h2&gt;
-&lt;p&gt;Let’s look at the AddExpr rule..&lt;/p&gt;
+&lt;p&gt;Someone else will, later, optimize it under-the-hood.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  AddExp
-    = AddExp &quot;+&quot; MulExp  -- plus
-    | AddExp &quot;-&quot; MulExp  -- minus
-    | MulExp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;portability&quot;&gt;Portability&lt;/h1&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; says:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Try to match an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; followed by a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; followed by a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If that fails, try &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; followed by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt; followed by a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If that fails, try a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt;.&lt;/li&gt;
+&lt;p&gt;Forget about addressing portability directly.&lt;/p&gt;
+
+&lt;p&gt;Portabilty is a subset of optimization.&lt;/p&gt;
+
+&lt;p&gt;Normalize the program.  Optimization techniques can be used to port the program to other architectures.&lt;/p&gt;
+
+&lt;p&gt;RTL ports programs to disparate CPU architectures using normalization (“everything is a register”).&lt;/p&gt;
+
+&lt;p&gt;OCG ports programs to disparate CPU architectures using normalization (“everything is a lower-level operation using Data Descriptors”).&lt;/p&gt;
+
+&lt;p&gt;OCG provides a declarative syntax for describing portability decision trees.&lt;/p&gt;
+
+&lt;p&gt;Portability is a subset of Projectional Editing.  Projectional Editing is a subset of Normalization.&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">optimization portability</summary></entry><entry><title type="html">Compiler Technology Takeaways 2</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways-2.html" rel="alternate" type="text/html" title="Compiler Technology Takeaways 2" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Compiler%20Technology%20Takeaways%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways-2.html">&lt;ul&gt;
+  &lt;li&gt;normalization&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;pdfas&quot;&gt;PDFAs&lt;/h3&gt;
-&lt;p&gt;This demonstrates the main difference between PEG &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grammars&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REGEXs&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;gcc&quot;&gt;gcc&lt;/h1&gt;
 
-&lt;p&gt;PEG (and other parser-generators) allow the programmer to write subroutines that contains sub-matches.  The subroutines can be called as often as needed and, they can be called recursively.&lt;/p&gt;
+&lt;p&gt;The Gnu C compiler uses RTL invented as a peepholing technology by Fraser-Davidson.&lt;/p&gt;
 
-&lt;p&gt;For example, looking only at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; rule, we don’t need to know what the sub-rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt; is.  We just use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt;.  At the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; layer, the sub-rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt; is matched as a single item.  The single match maps directly to a single parameter in the follow-on, &lt;em&gt;semantics&lt;/em&gt;, code.&lt;/p&gt;
+&lt;h1 id=&quot;ocg&quot;&gt;OCG&lt;/h1&gt;
+&lt;p&gt;Orthogonal Code Generator (Cordy).&lt;/p&gt;
 
-&lt;p&gt;Technically, the difference is that PEG (and all parsers, in general) uses a stack, whereas REGEX does not employ a stack (jargon: parsers use push-down-finite-automata vs. discrete-finite-automata, resp.  The issue is whether the Stack is exposed to the programmer, not whether the technologies use stacks in their implementations).&lt;/p&gt;
+&lt;p&gt;Declarative decision language for portability.&lt;/p&gt;
 
-&lt;p&gt;The specification for a PEG parser usually needs more than one line of code, but most of the code is understandable vs. being a single string of hieroglyphics.&lt;/p&gt;
-
-&lt;h3 id=&quot;left-recursion&quot;&gt;Left Recursion&lt;/h3&gt;
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; example also shows that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left recursion&lt;/code&gt; is supported by Ohm-JS.&lt;/p&gt;
-
-&lt;p&gt;[This is a technical point that improves readability.  If you can read and understand the above grammar, then you don’t need to go down the rabbit hole of understanding what ‘left recursion` is all about.]&lt;/p&gt;
-
-&lt;h3 id=&quot;rule-splitting&quot;&gt;Rule Splitting&lt;/h3&gt;
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; rule is transpiled, by Ohm-JS into three rules:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;AddExp_plus&lt;/li&gt;
-  &lt;li&gt;AddExp_minus&lt;/li&gt;
-  &lt;li&gt;AddExp&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The programmer is responsible to creating the splits&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;The first two lines of the rule&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    = AddExp &quot;+&quot; MulExp  -- plus
-    | AddExp &quot;-&quot; MulExp  -- minus
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;match 3 items each&lt;/p&gt;
+&lt;p&gt;Splits portable code generation into two sub-tasks:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;an AddExp&lt;/li&gt;
-  &lt;li&gt;a “+” or “-“&lt;/li&gt;
-  &lt;li&gt;a MulExp&lt;/li&gt;
+  &lt;li&gt;Compile input program to normalized form.&lt;/li&gt;
+  &lt;li&gt;Convert normalized form to code for specific CPU.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;while the last line matches only 1 item&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    | MulExp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;denotational-semantics&quot;&gt;Denotational Semantics&lt;/h1&gt;
+&lt;p&gt;Functional description of PL&lt;sup id=&quot;fnref:pl&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:pl&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Includes grammar + semantics + code emission.&lt;/p&gt;
+
+&lt;p&gt;Originally an &lt;em&gt;all-in-one&lt;/em&gt; concept resulting in large compilers that were not practical.&lt;/p&gt;
+
+&lt;p&gt;Peter Lee “Realistic Compiler Generation” broke the concept down into sub-tasks and produced more practical results.&lt;/p&gt;
+&lt;h1 id=&quot;normalization&quot;&gt;Normalization&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Triples&lt;/li&gt;
+  &lt;li&gt;Data Descriptors
+    &lt;h2 id=&quot;opcodes&quot;&gt;Opcodes&lt;/h2&gt;
+    &lt;p&gt;Opcodes are triples.&lt;/p&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MOV R0,R1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;h2 id=&quot;rtl&quot;&gt;RTL&lt;/h2&gt;
+    &lt;p&gt;Register Transfer Logic created by Fraser/Davidson as peephole technology for portability.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Splits code selectiion into two sub-tasks&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;a MulExp&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The symbols following the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--&lt;/code&gt; in the first two lines become suffixes to the rule name, e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp_plus&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp_minus&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;A PEG grammar can &lt;em&gt;match&lt;/em&gt; different numbers of items.  The grammar calls follow-on code (called the &lt;em&gt;semantics&lt;/em&gt;) as functions for every rule and passes the matched items in as parameters.&lt;/p&gt;
-
-&lt;p&gt;Ohm-JS checks that the generated &lt;em&gt;semantics&lt;/em&gt; functions have consistent parameter lists, so the AddExp rule needs to be broken (by the programmer) into separate rules, using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--&lt;/code&gt; name-mangling.&lt;/p&gt;
-
-&lt;p&gt;[Other PEG libraries use a different strategy - e.g. the programmer must embed sub-rule names into the grammar, which allows the generator to create single functions for each rule that use programmer-supplied parameter names.  The Ohm-JS strategy puts more onus on the code generator, but keeps the grammar intact and readable.  I prefer the Ohm-JS strategy, as it leads to better separation between grammar and semantics.]&lt;/p&gt;
-
-&lt;h3 id=&quot;reading-the-grammar&quot;&gt;Reading the Grammar&lt;/h3&gt;
-&lt;p&gt;To read - and understand - the grammar, start at the top-most rule, call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; (in this case).&lt;/p&gt;
-
-&lt;p&gt;It says:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;At the top level, match an Expression (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;To match an Expression, match an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;To match an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;try to match an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp_plus&lt;/code&gt;,&lt;/li&gt;
-      &lt;li&gt;then try to match &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp_minus&lt;/code&gt;,&lt;/li&gt;
-      &lt;li&gt;then try to match &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;Compile input program to normalized form (RTL “everything is a register”)&lt;/li&gt;
+  &lt;li&gt;Convert normalized form to code for specific CPU.
+    &lt;h2 id=&quot;data-descriptors&quot;&gt;Data Descriptors&lt;/h2&gt;
+    &lt;p&gt;Normalized form for description of data locations.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;In PEG, matching order matters&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MulExp&lt;/code&gt; rule is similar to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; rule.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PriExp&lt;/code&gt; rule matches for a “primary”.&lt;/p&gt;
-
-&lt;p&gt;First, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PriExp&lt;/code&gt; tries to match a parenthesized expression.  If an open parenthesis found, then we start at the top again and try to match an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The idea of writing a grammar is to specify the pattern-matching in &lt;em&gt;layers&lt;/em&gt;.  The layers can recur (loop back to the top) as needed.  In this case, we loop back to the top if we begin to see a parenthesized expression.  Note that a parenthesized expression can contain another parenthesized expression - the grammar will handle it recursively (to the limits of our computer’s memory).&lt;/p&gt;
-
-&lt;p&gt;This example grammar will “bookmark” a sub-match and re-start at the top&lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; when it hits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PriExp_paren&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;PEG does its matching with bookmarks and backtracking.  If one path through the grammar fails, it will try another one.  If all paths fail, the transpiler throws up its hands and declares a non-match (aka “syntax error”).&lt;/p&gt;
-
-&lt;h3 id=&quot;rule-descriptions&quot;&gt;Rule Descriptions&lt;/h3&gt;
-&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident  (an identifier)&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number  (a number)&lt;/code&gt;, we see another feature of Ohm-JS - the ability to tag a rule with an informative string (in parentheses) that is included in the error message, when the match fails.&lt;/p&gt;
-
-&lt;h3 id=&quot;--and-&quot;&gt;+ * and ?&lt;/h3&gt;
-&lt;p&gt;The rules &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number&lt;/code&gt; also contain &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; operators.  These work similarly to REGEX.&lt;/p&gt;
-
-&lt;p&gt;See the Appendix for Ohm-JS documentation.&lt;/p&gt;
-
-&lt;h2 id=&quot;semantics-glue&quot;&gt;Semantics (Glue)&lt;/h2&gt;
-&lt;p&gt;Ohm-JS expects programmers to write follow-on code in JavaScript.&lt;/p&gt;
-
-&lt;p&gt;We can use Ohm-JS to write a simple tool that writes JavaScript for us.  I call this tool &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the example below, we use the grammar to generate a JS app (a pattern-matcher) that accepts pseudo-code and produces WASM code.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Glue&lt;/code&gt; doesn’t do very much - it parses input code and then creates output code.&lt;/p&gt;
-
-&lt;p&gt;For parsing, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; uses Ohm-JS.  For outputting, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; uses JavaScript back-tick syntax&lt;sup id=&quot;fnref:6&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;It may, at first, seem surprising that we can create WASM code by just using JS back-tick syntax.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;trick&lt;/em&gt; is to do things in a very repeatable (aka boring) manner.&lt;/p&gt;
-
-&lt;p&gt;Ohm-JS plays into this &lt;em&gt;trick&lt;/em&gt;, easily.  (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Glue&lt;/code&gt; could do more, and might do more in the future, but this quick-and-dirty trick is enough to generate WASM.  Why add complexity when simplicity will suffice?).&lt;/p&gt;
-
-&lt;p&gt;Let’s begin by looking at the code associated with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp&lt;/code&gt; grammar rule, above.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Exp [e] = [[${e}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This is the simplest form of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule.&lt;/p&gt;
-
-&lt;p&gt;It consists of&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;a name, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;a list of parameters, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[e]&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;a separator &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;=&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;a rewrite rule, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[[${e}]]&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name&lt;/code&gt; must correspond - exactly - to the name of a grammar rule.  There needs to be exactly one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule for each grammar rule.&lt;/p&gt;
-
-&lt;p&gt;The parameters consist of programmer-chosen names, separated by spaces.&lt;/p&gt;
-
-&lt;p&gt;There must be one parameter for each sub-match in a rule.&lt;/p&gt;
-
-&lt;p&gt;The names are Javascript compatible and are resolved and used in the rewrite portion.&lt;/p&gt;
-
-&lt;p&gt;A parameter name can be prefixed by the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; operator (not present in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt;), to mean that the parameter lines up with a tree of sub-matches, i.e. generated by a grammar sub-match that has &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?&lt;/code&gt; suffixes.&lt;/p&gt;
-
-&lt;p&gt;Parameter names are used in the rewrite portion without the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; prefix. [The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; is a signal to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; to unpack the tree sub-match in a recursive manner - see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ohm-JS&lt;/code&gt; documentation.]&lt;/p&gt;
-
-&lt;p&gt;The rewrite is a literal string contained in double-brackets, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[[ ... ]]&lt;/code&gt;.  The literal string is a JavaScript back-tick string.  In this kind of string, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;${...}&lt;/code&gt; is used to refer to parameters.  [Aside - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; simply wraps the string in back-ticks and generates a JavaScript string.  Leading spaces are skipped.  Yawn.]&lt;/p&gt;
-
-&lt;p&gt;In summary,&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Exp [e] = [[${e}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;means:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;line up with the grammar rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;supply the grammar sub-match in the named parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;e&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;rewrite the sub-match as the JavaScript string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\&lt;/code&gt;${e}``&lt;/li&gt;
-  &lt;li&gt;return the JavaScript string from the rule (to the calling layer).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident&lt;/code&gt; rule uses an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ident [l @a] = [[local.get \$${l}${a}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This rule matches up with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident&lt;/code&gt; rule in the grammar:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ident  (an identifier)
-    = letter alnum*
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alnum*&lt;/code&gt; uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; operator.&lt;/p&gt;
-
-&lt;p&gt;In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;we use the named parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;l&lt;/code&gt; to hold from the sub-match &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;letter&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;and we use the named parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alnum&lt;/code&gt; to hold the tree from the sub-match &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alnum*&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;[Note that the grammar rule also contains a rule description &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(an identifier)&lt;/code&gt; which is ignored in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule.]&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rewrite is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[[local.get \$${l}${a}]]&lt;/code&gt; which returns the JavaScript string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\&lt;/code&gt;local.get $${l}${a}`&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.  This rewrite creates a string that contains the literal characters &lt;/code&gt;local.get $&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; followed by the values of the parameters &lt;/code&gt;l&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; and &lt;/code&gt;a`.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Glue&lt;/code&gt; unpacks the sub-matches from the grammar, resulting in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;l&lt;/code&gt; being bound to the sub-match from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;letter&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; being bound to the sub-match from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alnum*&lt;/code&gt;.  The sub-match from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alnum*&lt;/code&gt; is treated specially by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;[&amp;amp;7].&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; rule uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;s preamble feature.&lt;/p&gt;
-
-&lt;p&gt;The RHS (right-hand side) of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rule contains an arbitrary block of Javascript code contained in double-braces.  The preamble is executed before any of the parameters are unpacked&lt;sup id=&quot;fnref:8&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the end, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; generates a Javascript program.  The Javascript program is a transpiler - a parser and a code-generator.  The program is run using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node&lt;/code&gt; with input from a file-to-be-parsed.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grasem&lt;/code&gt; tool joins the Ohm-JS grammar with a corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; specification and produces one Javascript parser program from the pair.&lt;/p&gt;
-
-&lt;h3 id=&quot;ry&quot;&gt;RY&lt;/h3&gt;
-&lt;p&gt;In the set of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arithmetic&lt;/code&gt; examples, we produce code for 4 languages using one Ohm-JS grammar.&lt;/p&gt;
-
-&lt;p&gt;At present, we simply clone the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grasem&lt;/code&gt; template 4 times.&lt;/p&gt;
-
-&lt;p&gt;Ohm allows multiple follow-on (&lt;em&gt;semantics&lt;/em&gt;) functions for one grammar, but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; does not use this feature, at the moment.  A simple project would be to extend &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; to allow multiple rewrites for any one grammar (collapsing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arithmetic&lt;/code&gt; examples from 4 files into 1 file).  The project would be written in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; and shell scripts (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin/*sh&lt;/code&gt;).  Another approach would be to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m4&lt;/code&gt; macro processor to provide &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt; operations - in fact, this can be done immediately, without writing any new code. [M4 makes the above project moot.  Instead of extending &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;, just use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M4&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;, or, …].&lt;/p&gt;
-&lt;h3 id=&quot;design-of-the-grammarrewrites&quot;&gt;Design of the Grammar+Rewrites&lt;/h3&gt;
-&lt;p&gt;The Ohm-JS grammar for the simple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arithmetic&lt;/code&gt; language simply creates a CST (concrete syntax tree of the actual input, similar to an AST) and then walks the tree using the specified rewrite strings.&lt;/p&gt;
-
-&lt;p&gt;The topmost rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; outputs the resulting string wrapped in appropriate WAT details.  [WAT is the human-readable, text, version of a WASM file.  See &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wasrun.bash&lt;/code&gt; for how to convert a WAT file into a WASM file.]&lt;/p&gt;
-
-&lt;p&gt;The bottom-most rules - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_fract&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_whole&lt;/code&gt; create WASM code to push the operand onto the WASM stack (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f64.const&lt;/code&gt; to push a double-float constant onto the WASM stack and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local.get&lt;/code&gt; to push a named WASM parameter onto the WASM stack.).&lt;/p&gt;
-
-&lt;p&gt;The rest of the layers - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt; rules - simply rearrange the operand and WASM operators.&lt;/p&gt;
-
-&lt;p&gt;For example, the rule &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AddExp_plus&lt;/code&gt; is:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  AddExp_plus [e1 op e2] = [[${e1}\n${e2}\nf64.add\n]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This rule takes 3 operands - two expressions and one operator.  The rewrite rearranges the operands in RPN&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; order and suffixes the string with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f64.add&lt;/code&gt; (and appropriate newlines &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\n&lt;/code&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;the-ident-rule&quot;&gt;The ident Rule&lt;/h3&gt;
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ident&lt;/code&gt; rule is implemented only in the WASM transpiler.  The other tranpsilers - pymath, jsmath and lispmath - do not deal with this rule.&lt;/p&gt;
-&lt;h3 id=&quot;exponentiation&quot;&gt;Exponentiation&lt;/h3&gt;
-&lt;p&gt;Exponentiation - the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExpExp_power&lt;/code&gt; rule - is not, presently implemented in the WASM transpiler.  Finishing this rule consists of looking up the exponentiation operator in the WASM instruction manual and writing the rewrite rule.  This is left as an exercise for the reader.&lt;/p&gt;
-&lt;h3 id=&quot;foreign-functions&quot;&gt;Foreign Functions&lt;/h3&gt;
-&lt;p&gt;As can be seen in wasmrun.bash, we expect a file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foreign.js&lt;/code&gt; to exist.  It is meant to contain support functions needed for a specific transpiler.&lt;/p&gt;
-
-&lt;p&gt;In this simple example, there are no support functions, so the file is empty.&lt;/p&gt;
-
-&lt;h3 id=&quot;scope-variables&quot;&gt;Scope Variables&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Glue&lt;/code&gt; also supports the creation and querying of variables tied to the CST tree-walk.  See the &lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;Glue Manual&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This simple example does not use scope variables.&lt;/p&gt;
-
-&lt;h2 id=&quot;appendix---arithmetic-grammar&quot;&gt;Appendix - Arithmetic Grammar&lt;/h2&gt;
-&lt;p&gt;The grammar for arithmetic is lifted, literally, from &lt;a href=&quot;https://github.com/harc/ohm/tree/master/examples/math&quot;&gt;Ohm Arithmetic Example&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Arithmetic {
-  /* WASM code emitter */
-  
-  Top = Exp
-  
-  Exp
-    = AddExp
-
-  AddExp
-    = AddExp &quot;+&quot; MulExp  -- plus
-    | AddExp &quot;-&quot; MulExp  -- minus
-    | MulExp
-
-  MulExp
-    = MulExp &quot;*&quot; ExpExp  -- times
-    | MulExp &quot;/&quot; ExpExp  -- divide
-    | ExpExp
-
-  ExpExp
-    = PriExp &quot;^&quot; ExpExp  -- power
-    | PriExp
-
-  PriExp
-    = &quot;(&quot; Exp &quot;)&quot;  -- paren
-    | &quot;+&quot; PriExp   -- pos
-    | &quot;-&quot; PriExp   -- neg
-    | ident
-    | number
-
-  ident  (an identifier)
-    = letter alnum*
-
-  number  (a number)
-    = digit* &quot;.&quot; digit+  -- fract
-    | digit+             -- whole
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;appendix---glue-specification-for-wasm-arithmetic&quot;&gt;Appendix - Glue Specification for WASM Arithmetic&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;testing, testing, testing
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;appendix---generated-javascript-transpiler-from-arithmetic-to-wasm&quot;&gt;Appendix - Generated JavaScript Transpiler from Arithmetic to WASM&lt;/h2&gt;
-&lt;p&gt;[warts and all…]&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Testing, Testing, Testing
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;appendix---bash-file-to-run-the-wasm-transpiler-wasmrunbash&quot;&gt;Appendix - Bash File to Run the WASM Transpiler (wasmrun.bash)&lt;/h2&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#!/bin/bash
-set -e
-WTOOLSDIR=/Users/tarvydas/quicklisp/local-projects/wabt/build
-
-../grasem/run.bash wasmmath.grasem &amp;gt;_.js
-
-cat foreign.js _.js &amp;gt;_wasmmath.js
-node _wasmmath.js &amp;lt; ex1.math &amp;gt;_temp.wat
-${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
-node wasm.js
-
-node _wasmmath.js &amp;lt; ex2.math &amp;gt;_temp.wat
-${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
-node wasm.js
-
-node _wasmmath.js &amp;lt; ex4.math &amp;gt;_temp.wat
-${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
-node wasm.js
-
-node _wasmmath.js &amp;lt; ex5.math &amp;gt;_temp.wat
-${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
-node wasm.js
-
-node _wasmmath.js &amp;lt; ex6.math &amp;gt;_temp.wat
-${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
-node wasm.js
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;appendix---wasmjs-support-code&quot;&gt;Appendix - Wasm.js Support code&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var fs = require ('fs');
-
-async function getws () {
-    var w;
-    try {
-	w = fs.readFileSync('_temp.wasm');
-    } catch (e) {
-	console.log (&quot;error: &quot; + e);
-    }
-    return await WebAssembly.instantiate(w)
-}
-
-var w = getws ();
-w.then (function (value) {
-    console.log (value.instance.exports.custom (3,5));
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(Note that the parameters (3,5) are chosen arbitrarily.  See what happens when you change them.)&lt;/p&gt;
-&lt;h2 id=&quot;appendix---glue-manual&quot;&gt;Appendix - Glue Manual&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;Glue Manual&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;appendix---grasem-manual&quot;&gt;Appendix - Grasem Manual&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Grasem.html&quot;&gt;Grasem Manual&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;appendix---ohm-js&quot;&gt;Appendix - Ohm-JS&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/harc/ohm&quot;&gt;Ohm-JS&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;appendix---ohm-in-small-steps&quot;&gt;Appendix - Ohm In Small Steps&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;Ohm In Small Steps&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This essay - Ohm In Small Steps - also, includes a Scheme-to-JS transpiler that creates a simple PROLOG library in JS, used as a running example.&lt;/p&gt;
-
-&lt;h2 id=&quot;appendix---more-about-peg&quot;&gt;Appendix - More About PEG&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/&quot;&gt;My essays&lt;/a&gt; are not restricted to PEG.&lt;/p&gt;
-
-&lt;p&gt;If you want only PEG-related opinions, look at the &lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt; and look for the PEG sections, and, for the Ohm sections.&lt;/p&gt;
-&lt;h2 id=&quot;appendix---github&quot;&gt;Appendix - Github&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/arithmetic&quot;&gt;Code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;N.B. This essay deals with only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wasmmath.grasem&lt;/code&gt;, but the codebase includes transpilers for Python, JS and Lisp.&lt;/p&gt;
+&lt;p&gt;Enables splitting of portable compilers into smaller sub-tasks.&lt;/p&gt;
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
 &lt;/script&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I use the word &lt;em&gt;notation&lt;/em&gt; to mean a light-weight programming language (lighter weight than even a DSL). &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;If you don’t like this, just write a preprocessor (as a PEG grammar). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;The programmer is responsible to order rules in the correct sequence (usually longest to shortest).  Other parser technologies, e.g. parsers based on CFG theory, don’t need programmer-specified rule ordering, but, those technologies put limits on what &lt;em&gt;can&lt;/em&gt; be matched.  PEG usually wins (from the perspective of practicality).  PEG can match patterns that CFG parsers (like YACC) can’t match. [The “classic” example is that PEG can match balanced parentheses, whereas CFGs can’t.  The real test is whether PEG grammars can be easily written for everyday cases.  I believe that PEG is readable, that programmer-supplied rule-ordering is easy to specify, and, is “natural” for programmers to write.  IMO, PEG is the next REGEX.  Ohm-JS is the best PEG variant I’ve used.]. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Actually, it restarts at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Exp&lt;/code&gt; which is almost-the-top. &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:6&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Back-tick strings are called &lt;em&gt;template strings&lt;/em&gt; in JS and EcmaScript. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:8&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;This can require knowledge of the simple name-mangling rules of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;.  The best way to understand the name-mangling operations is to examine the code generated by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;.  Same as before: if you don’t like this, feel free to write a PEG-based preprocessor (chain preprocessors in a pipeline, the more the merrier).  I believe in YAGNI - this set of rules and quirks is enough to get my job done.  N.B. you don’t need to understand name-mangling to use scope variables (see below). &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;RPN means &lt;em&gt;Reverse Polish Notation&lt;/em&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:pl&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;PL means Programming Language. &lt;a href=&quot;#fnref:pl&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Arithmetic Example for WASM Using Ohm-JS and Glue</summary></entry><entry><title type="html">Table of contents</title><link href="https://computingsimplicity.neocities.org/2021/05/14/Table-Of-Contents.html" rel="alternate" type="text/html" title="Table of contents" /><published>2021-05-14T00:00:00-04:00</published><updated>2021-05-14T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/14/Table%20Of%20Contents</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/14/Table-Of-Contents.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Table Of Contents&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-14T16:36:01Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-14T16:36:01Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;p class=&quot;p1&quot;&gt;&lt;img src=&quot;/assets/2021-05-14-16-36-01-Images/index2.png&quot; width=&quot;500px&quot; height=&quot;3730px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Table Of Contents</summary></entry><entry><title type="html">Programming</title><link href="https://computingsimplicity.neocities.org/2021/05/13/Programming.html" rel="alternate" type="text/html" title="Programming" /><published>2021-05-13T00:00:00-04:00</published><updated>2021-05-13T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/13/Programming</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/13/Programming.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Programming&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-13T08:37:43Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-13T08:37:43Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Programming Layers&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Top Level&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-05-13-08-37-43-Images/edit-output-top level program.png&quot; width=&quot;400px&quot; height=&quot;52px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Intermediate&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-05-13-08-37-43-Images/edit-output-intermediate.png&quot; width=&quot;400px&quot; height=&quot;42px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Drill Down 1&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-05-13-08-37-43-Images/edit-output-drill down 1.png&quot; width=&quot;400px&quot; height=&quot;50px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Drill Down 2&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-05-13-08-37-43-Images/edit-output-drill down 2.png&quot; width=&quot;400px&quot; height=&quot;64px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Drill Down 3&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;img src=&quot;/assets/2021-05-13-08-37-43-Images/edit-output-drill down 3.png&quot; width=&quot;400px&quot; height=&quot;79px&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Programming</summary></entry><entry><title type="html">Diagram based languages</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html" rel="alternate" type="text/html" title="Diagram based languages" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Diagram%20Based%20Languages</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Diagram-Based-Languages.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Diagram Based Languages&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:51:36Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
-    p.p6 {margin: 0.0px 0.0px 7.0px 36.0px; text-indent: -18.0px; font: 10.0px Times}
-    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    li.li4 {margin: 0.0px 0.0px 14.2px 0.0px; font: 12.0px Times}
-    span.s1 {font: 12.0px Helvetica}
-    span.s2 {font: 12.0px Times}
-    span.s3 {text-decoration: underline ; color: #000080}
-    span.Apple-tab-span {white-space:pre}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
-
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;DaS&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;It is often believed that programming languages come in only 2 forms: (1) textual and (2) visual.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Visual Programming has become to mean pixel-based image processing.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have implemented an intermediate form of programming.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Something between (1) textual and (2) pixel-based image processing.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I call it DaS – Diagram as Syntax.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is &lt;i&gt;diagrammatic programming&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used to call this “visual programming”, but that phrase has come to mean something else, something much harder to implement.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;aha&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I backed into a number of design principles.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I will do my best to summarize them below...&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Most programming languages and compilers are based on glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a small bitmap.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A &lt;i&gt;character &lt;/i&gt;is a &lt;i&gt;glyph.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/i&gt;Programming languages are based on grids of non-overlapping glyphs.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Language design has been driven by programming-editor capabilities, e.g. emacs, Vim, VisualStudio.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Fixed-font programming editors determine the shape of programming languages (not the other way around).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Programming editors are frozen in the 1950’s, whereas non-programming editors (e.g. Word) have advanced to include variable-sized fonts, diagrams, images, etc.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Modern hardware is not constrained to editing non-overlapping glyphs in a grid.&lt;/li&gt;
-  &lt;li class=&quot;li4&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;It is OK to mix text and diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A diagrammatic language does not need to be 100% diagrams.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Some concepts, e.g. concepts like “a = b + c”, are better expressed as text.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for concurrency need only a few overlapping glyphs&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt; – (1) boxes, (2) arrows, (3) text. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Diagrams for StateCharts need only a few overlapping glyphs – (1) ellipses (or rounded boxes), (2) curved lines, (3) text&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Backtracking is OK.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;PROLOG can be used as a parser.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;A single app can use more than one paradigm, e.g. if PROLOG backtracking is used for parsing, the rest of the app is not constrained to use only PROLOG&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;DSLs everywhere – multiple DSLs can (should)&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; be used in one project.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is OK to build source-to-source converters that let the base language do the heavy lifting – this makes building DSLs much less onerous.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – makes Software Architecture, DI&lt;a id=&quot;fnlink4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn4&quot;&gt;&lt;sup&gt;[4]&lt;/sup&gt;&lt;/a&gt; easier and, more expressive, and promotes &lt;i&gt;divide &amp;amp; conquer&lt;a id=&quot;fnlink5&quot;&gt;&lt;/a&gt;&lt;/i&gt;&lt;a href=&quot;#fn5&quot;&gt;&lt;sup&gt;[5]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I want to derive interesting information about a diagram (code).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, I want to know the (x,y) for a box, I want to know (x,y) for the start-point of a line, I want to know (x,y) for the end-point of a line.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I can used backtracking pattern matching to derive some of this information. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Current PLs (programming languages) are based on the concept that, in (x,y),“x” is a character position and “y” is a line number.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Characters are strictly non-overlapping and sequential.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I would say that characters are not 2D, but something less, like 1.5D.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Current hardware can do better – (x,y), &lt;i&gt;can&lt;/i&gt; be represented as pixel coordinates and full 2D glyphs can overlap.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I need to ensure that my “editor” gives me enough information.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The requirements for a diagrammatic programming editor are different from the requirements for a business editor (like Word, VISIO, Draw.io, etc.).&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;SVG and XML based editors and diagram editors produce diagrams that contain much of this needed information, but they also contain lots of noise (aka syntactic sugar).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It might be better to build one’s own diagram-programming editor, but in the meantime, Draw.io, yEd, etc., might suffice.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;I am more concerned with DI than with Maintenance Engineering, Efficiency Engineering, Test Engineering, etc., etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;From this perspective – i.e. DI - I don’t care about the efficiency of parsers that employ backtracking, as long as it doesn’t keep me waiting, on my computer.&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s1&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Hierarchical composition – keeps things small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) doesn’t matter when things are small.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O(3) still runs “fast enough”.&lt;/li&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">normalization</summary></entry><entry><title type="html">API Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/API-Takeaways.html" rel="alternate" type="text/html" title="API Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/API%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/API-Takeaways.html">&lt;ul&gt;
+  &lt;li&gt;restricted interface between components&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Box-and-Arrow Diagrams and Concurrency&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The canonical form of “visual programming” - which I call DaS – is the box-and-arrow diagram.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is a network diagram wherein nodes are functions instead of full-blown computers.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Most attempts at implementing box-and-arrow diagrams have failed (as far as I know).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most attempts at “visual programming” have failed (as far as I know – visual programming can produce pretty pictures, but do not address PLs).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I have been successfully using box-and-arrow diagrams in production since the mid-1990’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;FBP&lt;a id=&quot;fnlink6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn6&quot;&gt;&lt;sup&gt;[6]&lt;/sup&gt;&lt;/a&gt; has been using box-and-arrow diagrams since the 1960’s.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;UNIX® pipelines are a degenerate form of box-and-arrow-diagrams.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Why have most attempts at box-and-arrow diagrams failed?&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency.&lt;a id=&quot;fnlink7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn7&quot;&gt;&lt;sup&gt;[7]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Box-and-arrow diagrams do not work well in the sequential paradigm.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;All of the working instances of box-and-arrow diagrams – that I know of – treat boxes as being concurrent components and treat arrows as pipelines of concurrent messages between (concurrent) components.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;UNIX® pipelines and existing implementations of FBP use heavy-weight &lt;i&gt;threads&lt;/i&gt; to implement concurrency.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I implemented the concurrent paradigm without using &lt;i&gt;threads&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;I used something like closures.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;“Visual Programming” also meant, for a while, software development using GUIs. MFC and Visual BASIC were touted as “visual programming”.&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Here, I am using the word “glyph” to mean “atomic graphical symbol”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;See also &lt;a href=&quot;https://en.wikipedia.org/wiki/Glyph&quot;&gt;&lt;span class=&quot;s3&quot;&gt;https://en.wikipedia.org/wiki/Glyph&lt;/span&gt;&lt;/a&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Unlike character glyphs, atomic graphical elements are not fixed size, but, like character glyphs they can be bound to a single input gesture (e.g. a keystroke).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are not many of these kinds of glyphs in any given notation (e.g. about 3).&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “DSLs - The Future of Computing”&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn4&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[4]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;Design Intent&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn5&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink5&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Divide And Conquer”&lt;/p&gt;
-&lt;p class=&quot;p6&quot;&gt;&lt;a id=&quot;fn6&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink6&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[6]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&amp;lt;ref to FBP&amp;gt;&lt;/p&gt;
-&lt;p class=&quot;p5&quot;&gt;&lt;a id=&quot;fn7&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink7&quot;&gt;&lt;span class=&quot;s2&quot;&gt;[7]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;See my essay “Concurrency is a Paradigm”&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Diagram Based Languages</summary></entry><entry><title type="html">Concurrency is not parallelism</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html" rel="alternate" type="text/html" title="Concurrency is not parallelism" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Concurrency%20is%20not%20Parallelism</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Concurrency-is-not-Parallelism.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
-  &lt;title&gt;Concurrency is not Parallelism&lt;/title&gt;
-  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
-  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-11T23:43:05Z&quot;&gt;
-  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
-  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;1894.6&quot;&gt;
-  &lt;style type=&quot;text/css&quot;&gt;
-    p.p2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    p.p3 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
-    p.p4 {margin: 0.0px 0.0px 7.0px 0.0px; font: 10.0px Times}
-    li.li2 {margin: 0.0px 0.0px 7.0px 0.0px; font: 12.0px Times}
-    span.s1 {text-decoration: underline}
-    span.s2 {font: 12.0px Helvetica}
-    span.s3 {font: 12.0px Times}
-    span.s4 {font: 7.0px Times}
-    span.Apple-tab-span {white-space:pre}
-    ul.ul1 {list-style-type: disc}
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Central Point&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;Concurrency is a programming &lt;i&gt;paradigm&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Parallelism is an application problem, &lt;i&gt;not&lt;/i&gt; a paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Parallel programs must use the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Concurrent programs, though, are not necessarily parallel.&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Rob Pike's Talk&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;https://vimeo.com/49718712&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Conflating Concurrency and Parallelism&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;I used to conflate parallelism and concurrency until I watched Rob Pike’s talk.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;I used to try to convince people that they could write concurrent programs using something “better” than Processes (Threads).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;What I didn’t realize was that I was trying to explain the difference between the &lt;span class=&quot;s1&quot;&gt;paradigm&lt;/span&gt; called “concurrency” and the application &lt;span class=&quot;s1&quot;&gt;problem&lt;/span&gt; called “parallelism”.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A parallel program &lt;i&gt;must&lt;/i&gt; run on multiple processors.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;A program designed using the concurrent paradigm can run on a &lt;i&gt;single&lt;/i&gt; Processor or on multiple processors. &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;The advantages of using the concurrent paradigm can be seen even on a single processor system.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;One can write concurrent software that uses only a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One cannot write parallel software that uses a single Processor.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;One can &lt;i&gt;simulate&lt;/i&gt; parallel software on a single processor, but this is not necessary (although it might help debugging, while hindering debugging). &lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Multi-tasking – as we know it today – is a &lt;i&gt;simulation&lt;/i&gt; of parallelism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking, as we know it today, tries valiantly to solve too many problems at once – e.g. memory sharing, bandwidth optimization, time-sharing, etc.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Multi-tasking as we know it today, is a simulation of parallelism that attempts to optimize concurrency using multiple stacks (a form of memory sharing optimization + processor optimization and sharing).&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Implementing the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;A concurrent system is composed of a number of &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There is a single distinguished routine, called the Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The Distpacher() invokes closures, at random.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;That’s all there is.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is simple – almost too simple – to implement concurrency in any language that supports &lt;i&gt;closures&lt;/i&gt;.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is possible to implement the concurrent paradigm in C or assembler, too, one just needs to pay more attention to details.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;As simple as this sounds, the concurrent paradigm forces one to program in a completely different manner.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program cannot rely on synchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The program – composed of many communicating closures – must be written in a way that acknowledges that &lt;i&gt;any&lt;/i&gt; closure might be awakened at &lt;i&gt;any &lt;/i&gt;time (by the Dispatcher()).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;This seemingly simple requirement causes programmers to re-evaluate control-flow coupling.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Operating system Processes and threading libraries are heavy-handed approaches to creating closures and a Dispatcher().&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use hardware to protect one program from another (e.g. MMUs).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to optimize memory usage using memory-sharing and stacks (stacks are just an optimized form of linked lists).&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;In some, &lt;i&gt;but not most&lt;/i&gt;, cases it is necessary to use time-sharing.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;When you strip these features out of threading libraries, you get multi-tasking that is easy.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Closures have been around for a long time, and they don’t require MMUs, memory sharing, stacks and time-sharing.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Closures are like GOTOs – they &lt;i&gt;can&lt;/i&gt; be misused.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Organizing closures in a hierarchical manner (see my other essays on this subject) is one way to tame their use.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We have found that we need “languages” that encourage certain usage patterns – e.g. C vs. assembler programming (C encourages Structured control flow, through if-then-else statements, etc.) - e.g. OO encourages data encapsulation (but leaves control-flow encapsulation wide open, if not worse off).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;GOTOs are assembler-level details.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must exist.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;GOTOs must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Likewise, Closures exist and must be tamed.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Message-passing is another GOTO-like atomic element.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It must be tamed.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing enables the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A component can send another component a message, but the receiving component is not constrained as to when it deals with the message.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing defeats rendezvous.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Message-passing allows asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The concurrent paradigm requires asynchrony.&lt;span class=&quot;Apple-converted-space&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Backus asked “Can Programming Be Liberated From The von Neumann Style?”.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The question is a good one.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;The answer that Backus proposed was insufficient, though.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Mathematics, as we know it today, implies synchronous evaluation.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We need to think of mathematics and synchrony being &lt;i&gt;isolated&lt;/i&gt; on asynchronous &lt;i&gt;islands&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Computers are parallel by default.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Forcing synchrony onto every part of computing is contrary to the manner in which computers work.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, multi-tasking is considered to be a “hard” problem mostly because multi-tasking is being solved using only one paradigm – a paradigm that is not the best choice for every problem in a particular solution.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It is like trying to emulate C-like &lt;i&gt;format&lt;/i&gt; statements in PROLOG.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;It can be done, but results in accidental complexity.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;“Yes” to synchronous operations floating on asynchronous islands.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;“No” to synchronous &lt;i&gt;everything&lt;/i&gt;.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;It is OK to use more than one paradigm at a time.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;For example, again, PROLOG leads the way towards thinking in relational terms, but casting &lt;i&gt;everything &lt;/i&gt;as a relation brings unnecessary difficulty.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;Paradigms are DSLs draped over full-featured assemblers.&lt;a id=&quot;fnlink1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn1&quot;&gt;&lt;sup&gt;[1]&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;The Concurrent API&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;The API for the concurrent paradigm consists of one routine – Send().&lt;a id=&quot;fnlink2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn2&quot;&gt;&lt;sup&gt;[2]&lt;/sup&gt;&lt;/a&gt;&lt;br&gt;
-&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Examples of the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;p class=&quot;p2&quot;&gt;These are some examples of the concurrent paradigm:&lt;/p&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;UNIX® shell pipelines&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;closures using queues/mailboxes for inter-closure communication.&lt;/li&gt;
+&lt;h1 id=&quot;input-apis&quot;&gt;Input APIs&lt;/h1&gt;
+&lt;p&gt;APIs usually specify only the input side of software components.&lt;/p&gt;
+
+&lt;h1 id=&quot;output-apis&quot;&gt;Output APIs&lt;/h1&gt;
+&lt;p&gt;Full APIs must include, both, input and output descriptions.&lt;/p&gt;
+
+&lt;h1 id=&quot;dlls&quot;&gt;DLLs&lt;/h1&gt;
+&lt;p&gt;DLLs - .dll, .so, .dylib files - are one form of output API (created using indirection which is resolved by the linker).&lt;/p&gt;
+
+&lt;p&gt;DLLs are not formalized to the point of having first-class output APIs.&lt;/p&gt;
+
+&lt;h1 id=&quot;normalized-interfaces-apis&quot;&gt;Normalized Interfaces, APIs&lt;/h1&gt;
+
+&lt;p&gt;Input APIs and output APIs should look the same.&lt;/p&gt;
+
+&lt;p&gt;Currently we specify output APIs using a mish-mosh of syntax, e.g. exceptions, synchronous return values, etc.&lt;/p&gt;
+
+&lt;h1 id=&quot;components&quot;&gt;Components&lt;/h1&gt;
+
+&lt;p&gt;A Component is described by&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a name&lt;/li&gt;
+  &lt;li&gt;an input interface&lt;/li&gt;
+  &lt;li&gt;an output interface.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p class=&quot;p2&quot;&gt;O/S threads, and threading libraries, are often conflated with the concurrent paradigm.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;O/S threads – and many threading libraries – solve much greater problems,&lt;a id=&quot;fnlink3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fn3&quot;&gt;&lt;sup&gt;[3]&lt;/sup&gt;&lt;/a&gt; and are poor examples of the concurrent paradigm.&lt;/p&gt;
-&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Advantages to Using the Concurrent Paradigm&lt;/b&gt;&lt;/h2&gt;
-&lt;ul class=&quot;ul1&quot;&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Encourages the absence of dependencies&lt;/li&gt;
-  &lt;li class=&quot;li2&quot;&gt;&lt;span class=&quot;s2&quot;&gt;•&lt;span class=&quot;Apple-tab-span&quot;&gt;	&lt;/span&gt;&lt;/span&gt;Isolation.&lt;/li&gt;
-  &lt;hr&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn1&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink1&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Most HLL PLs started out life as DSLs built on top of full-featured substrate languages.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Greenspun’s 10&lt;span class=&quot;s4&quot;&gt;&lt;sup&gt;th&lt;/sup&gt;&lt;/span&gt; rule is usually taken as a joke, but taken in the light of HLLs-as-DSLs, it begins to ring true.&lt;/p&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink2&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[2]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;OK, OK, I am simplifying.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;There are some house-keeping functions that might be necessary.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;We definitely don’t need RETURN and we don’t need CATCH/THROW.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Send() is sufficient. &lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;RETURN?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead. CATCH/THROW?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Use Send() instead.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;LOOP?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Recursion?&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Get rid of it.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;[Also, we don’t need dynamicism.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Dynamic programming is just another way to say “self modifying code”, which is even worse than using the word “GOTO”]. RETURN &amp;amp; CATCH/THROW &amp;amp; LOOP &amp;amp; Recursion make sense &lt;i&gt;only &lt;/i&gt;on a synchronous island.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;They are not atomic elements of the concurrent paradigm.&lt;/p&gt;
-  &lt;p class=&quot;p4&quot;&gt;&lt;a id=&quot;fn3&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#fnlink3&quot;&gt;&lt;span class=&quot;s3&quot;&gt;[3]&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;s3&quot;&gt; &lt;/span&gt;Problems such as time-sharing, memory-sharing, protecting apps from one another, protecting against long-running apps, code-reuse, etc..&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Most single apps don’t need these features / problems.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Note that mutual-multitasking is OK within a single app.&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;A “bug” is just a “bug” regardless of whether the concurrent paradigm or the synchronous paradigm is used.&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=&quot;https://utteranc.es/client.js&quot; 
-        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
-        issue-term=&quot;pathname&quot; 
-        theme=&quot;github-light&quot; 
-        crossorigin=&quot;anonymous&quot; 
-        async&gt; 
-&lt;/script&gt; 
-&lt;/body&gt;
-&lt;/html&gt;</content><author><name></name></author><summary type="html">Concurrency is not Parallelism</summary></entry><entry><title type="html">Arithmetic Example in Ohm-JS and grasem</title><link href="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html" rel="alternate" type="text/html" title="Arithmetic Example in Ohm-JS and grasem" /><published>2021-05-11T00:00:00-04:00</published><updated>2021-05-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/11/Ohm%20Arithmetic</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/11/Ohm-Arithmetic.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;This essay discusses how to build the simple “Arithmetic” example found in &lt;br /&gt;
-&lt;a href=&quot;https://github.com/harc/ohm/tree/master/examples/math&quot;&gt;Ohm-JS&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;We create an identity grammar.&lt;/p&gt;
+&lt;p&gt;[N.B. Currently, we specify APIs with too much detail, a result of flatness instead of layering.  Libraries are hard to use because of the fact that too much detail is exposed at the top levels].&lt;/p&gt;
 
-&lt;p&gt;We create code for Python and JS and Lisp from the specification.&lt;/p&gt;
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
 
-&lt;p&gt;We discuss the difference between upper-case and lower-case grammar rules.&lt;/p&gt;
-&lt;h1 id=&quot;basics&quot;&gt;Basics&lt;/h1&gt;
-&lt;p&gt;Ohm-JS is a PEG parser library (it calls itself a language).&lt;/p&gt;
-
-&lt;p&gt;PEG is a lot like REGEX, but better.&lt;/p&gt;
-
-&lt;p&gt;PEG is easy to use and can match things that REGEX can’t match (in fact, PEG can match things that other parsers can’t match).&lt;/p&gt;
-
-&lt;p&gt;Ohm-JS is my (current) favorite version of PEG for 2 main reasons:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The grammar remains pure and readable.  The code for doing-something with the matches does not go in the grammar, as it does in most other PEG tools that I’ve seen.&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;Ohm-Editor&lt;/a&gt; makes it very easy to develop and debug grammars.  PEG is already good for developing grammars, but Ohm-Editor is maybe 10x better than even PEG.  I usually spend about a day or two debugging PEG grammars, but with Ohm-Editor I measure development time in 10’s of minutes.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/harc/ohm&quot;&gt;Ohm&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;We use the same grammar to generate code in the 3 languages.&lt;/p&gt;
-
-&lt;h1 id=&quot;grasem-and-glue&quot;&gt;GRASEM and GLUE&lt;/h1&gt;
-&lt;p&gt;I developed a tool that I call &lt;em&gt;glue&lt;/em&gt; to dovetail with Ohm-JS.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Glue&lt;/em&gt; generates the what-to-do-with-the-matches code for Ohm-JS.  (Ohm-JS calls this “the semantics” and expects us to program it in JavaScript).&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Grasem&lt;/em&gt; is a micro-tool that joins an Ohm-JS grammar together with a &lt;em&gt;glue&lt;/em&gt; specification into one file (a .grasem file).  (Guess what?  The &lt;em&gt;glue&lt;/em&gt; tool was developed using Ohm-JS.)&lt;/p&gt;
-
-&lt;p&gt;With &lt;em&gt;grasem&lt;/em&gt;, we can write a transpiler - using only simple operations - and not touch JS at all.&lt;/p&gt;
-
-&lt;p&gt;Briefly - a &lt;em&gt;glue&lt;/em&gt; spec consists of one rule for every rule in the grammar.  The name of the rule must be the same as the name used to name a grammar rule.  The LHS of a &lt;em&gt;glue&lt;/em&gt; rule takes one parameter for each partial match in the grammar rule (the match can be a single match or a tree-match, with slightly different syntax for each kind of parameter).  The RHS of a &lt;em&gt;glue&lt;/em&gt; rule consists of an optional chunk of JS followed by an output format (using the JS back-tick syntax).  &lt;em&gt;Glue&lt;/em&gt; also allows the programmer to create a set of scoped (inherited) variables that annotate the tree-walk.  A &lt;em&gt;glue&lt;/em&gt; rule recursively walks the CST (concrete, not abstract, syntax tree) built by the Ohm-JS grammar and outputs code as per the specification.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;glue&lt;/em&gt; syntax is meant for machine-readability instead of human-readability.  (Hint: Someone might want to create a more human-readable syntax, using, of course, &lt;em&gt;Ohm-JS&lt;/em&gt; or &lt;em&gt;glue&lt;/em&gt; or &lt;em&gt;grasem&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;Glue Manual&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Grasem.html&quot;&gt;Grasem Documention&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;identity-grammar&quot;&gt;Identity Grammar&lt;/h1&gt;
-&lt;p&gt;The first step in developing a grasem program is to write the grammar using the Ohm-Editor.&lt;/p&gt;
-
-&lt;p&gt;The second step is to create &lt;em&gt;glue&lt;/em&gt; code that outputs the input - exactly.  Most parser technologies strip and discard whitespace at an early stage.&lt;/p&gt;
-
-&lt;p&gt;An example of these two steps can be seen in commit 5dd6c3df5a31e19cc09a7ff3ea3192a0eeb57976 of &lt;a href=&quot;https://github.com/guitarvydas/arithmetic&quot;&gt;arithmetic identity&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This set of 2 steps - creating an identity transpiler - produces a working a grammar and an output spec.&lt;/p&gt;
-
-&lt;p&gt;In subsequent steps, the programmer hacks on the output spec to perform desired manipulations.&lt;/p&gt;
-
-&lt;p&gt;In this (simple) example, I cloned the &lt;em&gt;grasem&lt;/em&gt; spec 3 times and hacked on the &lt;em&gt;glue&lt;/em&gt; specs of each clone to produce Python, JS and Lisp code.  The final result is in &lt;a href=&quot;https://github.com/guitarvydas/arithmetic&quot;&gt;my github arithmetic repo&lt;/a&gt;.&lt;/p&gt;
-&lt;h1 id=&quot;upper-case-vs-lower-case&quot;&gt;Upper-case vs Lower-case&lt;/h1&gt;
-&lt;p&gt;Ohm-JS tries to improve grammar readability by skipping over whitespace.&lt;/p&gt;
-
-&lt;p&gt;In Ohm-JS, rules that begin with capital letters, perform automatic whitespace skipping.&lt;/p&gt;
-
-&lt;p&gt;Ohm-JS rules that begin with lower-case letters work like PEG, requiring the programmer to specify matches for whitespace.&lt;/p&gt;
-
-&lt;p&gt;PEG, unlike other parsing technologies, allows programmers to write, both, the scanner and the parser in the same language (for example, to use YACC, you need to provide a LEX scanner - YACC and LEX are two completely different things with separate syntaxes).  This feature makes PEG more accessible to non-compiler-writers, but, it means that grammars are sullied by the addition of whitespace sub-rules.&lt;/p&gt;
-
-&lt;p&gt;If one is concerned more with machine-readability than with human-readability (as I am), then this feature is of little help.&lt;/p&gt;
-
-&lt;p&gt;When one writes grammars for languages that use commas and semi-colons (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;;&lt;/code&gt; resp), this Ohm-JS feature is a time-saver, but, when one writes grammars for comma-less languages, this feature can cause strange behaviour ((you don’t need to understand this point to be able to just-use Ohm-JS - e.g. “two words” is matched as one word “twowords”.  The secret to dealing with this kind of problem is to use tokens, or, to create a list of delimiters in the grammar, or, to build grammars in a staged manner (the first stage is written using only lower-case rules)).&lt;/p&gt;
-
-&lt;h1 id=&quot;arithmetic-in-3-languages---python-js-and-lisp&quot;&gt;Arithmetic in 3 Languages - Python, JS and Lisp&lt;/h1&gt;
-&lt;p&gt;The 3 language transpilers are invoked by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bash&lt;/code&gt; scripts:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arithmetic % ./pyrun.bash 
-9.11111111111111
-7
-123
-42
-arithmetic % ./jsrun.bash
-9.11111111111111
-7
-123
-42
-arithmetic % ./lisprun.bash
-82/9
-7
-123
-42
-arithmetic % 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;wasm&quot;&gt;WASM&lt;/h1&gt;
-&lt;p&gt;Wasm is next.&lt;/p&gt;
-
-&lt;h1 id=&quot;dissection&quot;&gt;Dissection&lt;/h1&gt;
-&lt;p&gt;Let’s look at pymath.grasem.&lt;/p&gt;
-
-&lt;p&gt;Let’s look at the bottom-most grammar rule (the middle of the file, just before the closing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;}&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  number  (a number)
-    = ...
-    | digit+             -- whole
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The grammar rule says that a whole number is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;digit+&lt;/code&gt;.  PEG uses syntax that is similar to REGEX, for example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;digit+&lt;/code&gt; means &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;match 1 or more digits&lt;/code&gt;.  Digit is a built-in rule that comes with out-of-the-box Ohm-JS.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; means 1-or-more, whereas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; means 0-or-more and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?&lt;/code&gt; means optional (0 or 1).&lt;/p&gt;
-
-&lt;p&gt;The comment in the parentheses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(a number)&lt;/code&gt; is used only during the creation of parse-error messages and is ignored in successful parses.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number&lt;/code&gt; grammar rule is broken into two branches&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-- fract&lt;/code&gt; branch&lt;/li&gt;
-  &lt;li&gt;and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-- whole&lt;/code&gt; branch&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Each branch is named by the rule name and the branch name, e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_whole&lt;/code&gt; in this case.&lt;/p&gt;
-
-&lt;p&gt;(Notice that the branches are “uneven” in match length.  The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_fract&lt;/code&gt; branch matches 3 things - “digit*” and “.” and “digit+”.  The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_whole&lt;/code&gt; branch matches only 1 thing - “digit+”.  That is why we need separate sub-names for the branches).&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;glue&lt;/em&gt; section contains a matching rule&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;number_whole [@n] = [[${n}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This rule says that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_whole&lt;/code&gt; takes one parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; and that it is a tree parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@n&lt;/code&gt; matching up with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;digit+&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?&lt;/code&gt; are tree parameters).&lt;/p&gt;
-
-&lt;p&gt;The RHS of this &lt;em&gt;glue&lt;/em&gt; rule gives the rewrite surrounded by double-brackets&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[[${n}]]&lt;/code&gt;.  The RHS says to make the variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; into a string and to return that string.  See JS back-tick string documentation for further information on how to format the RHS.&lt;/p&gt;
-
-&lt;p&gt;OTOH, the AddExp_plus rule is&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;AddExp_plus [e1 op e2] = [[${e1}+${e2}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;which says that AddExp takes 3 parameters (e1, op and e2), none of which are tree parameters.  The rewrite is fairly simple - make e1 and e2 into strings and stick a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; character between them.&lt;/p&gt;
-
-&lt;h2 id=&quot;rabbit-hole&quot;&gt;Rabbit Hole&lt;/h2&gt;
-&lt;p&gt;Basically, anything inside the dollar form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;${ ... }&lt;/code&gt; is evaluated (by Javascript), whereas everything else is just copied to the output string.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Glue&lt;/em&gt; does almost no work here.  &lt;em&gt;Glue&lt;/em&gt; just wraps back-ticks around the rewrite string and relies on JS to do the actual work.  We transpile the &lt;em&gt;.grasem&lt;/em&gt; spec into a .js file and then run the JS file (using node.js).  See the pyrun.bash file.  You can view the generated intermediate file by looking at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_pymath.js&lt;/code&gt;.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_pymath.js&lt;/code&gt; is a &lt;em&gt;JS app&lt;/em&gt; that &lt;em&gt;creates&lt;/em&gt; a python program - see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_temp.py&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;deeper-rabbit-hole&quot;&gt;Deeper Rabbit Hole&lt;/h3&gt;
-&lt;p&gt;Aside: this example is quite simple - the &lt;em&gt;glue&lt;/em&gt; rules consist of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name [ parameters ] = [[rewrite]]&lt;/code&gt;.  There is no optional JS on the RHS (optional JS would be enclosed in double-braces)).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Introduction This essay discusses how to build the simple “Arithmetic” example found in Ohm-JS.</summary></entry><entry><title type="html">Software Components 101 - Engine Part 5 Queries</title><link href="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html" rel="alternate" type="text/html" title="Software Components 101 - Engine Part 5 Queries" /><published>2021-05-10T00:00:00-04:00</published><updated>2021-05-10T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine%20Part%205%20Queries</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html">&lt;p&gt;Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.&lt;/p&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">restricted interface between components</summary></entry><entry><title type="html">UNIX Takeaways 2</title><link href="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways-2.html" rel="alternate" type="text/html" title="UNIX Takeaways 2" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/UNIX%20Takeaways%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways-2.html">&lt;ul&gt;
+  &lt;li&gt;restricted interfaces&lt;/li&gt;
+  &lt;li&gt;low-level types for interfaces&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Currently, arrows contain references to graphical objects.  These references should actually be ids.  These references are (human-readable) synonyms to (machine-readable) ids.&lt;/p&gt;
+&lt;h1 id=&quot;restricted-interfaces&quot;&gt;Restricted Interfaces&lt;/h1&gt;
 
-&lt;p&gt;For example, as in part 4, we have facts like:&lt;/p&gt;
+&lt;p&gt;UNIX commands have&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;1 input (stdin)&lt;/li&gt;
+  &lt;li&gt;2 outputs (stdout, stderr).&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
-arrow(id40, a41).
-arrowBegin(a41, c_c).
-arrowEnd(a41, [c_e_m]).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;UNIX shows how much can be done with simple interfaces.&lt;/p&gt;
 
-&lt;p&gt;Firstly, we can create synonym facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;comp(id5, c).
-synonym(c, id5).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;low-level-types&quot;&gt;Low-Level Types&lt;/h1&gt;
+&lt;p&gt;Typing should be done in layers, not in an &lt;em&gt;all-in-one&lt;/em&gt; basis.&lt;/p&gt;
 
-&lt;p&gt;Then, we use the synonym facts to modify all arrowBegin facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowBegin(a41, c_c).
-aBegin(a41, idYYY).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;UNIX commands use a very simple, low-level type for communication between components - a line of text.&lt;/p&gt;
 
-&lt;p&gt;Then, we use the synonym facts to modify all arrowEnd facts, e.g.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arrowEnd(a41, [c_e_m]).
-aEnd(a41, [idZZZ]).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This simplicity allows components to be plugged together.&lt;/p&gt;
 
-&lt;p&gt;N.B. Currently, we leave all of the facts in the factbase.  There is no need to remove facts.  Removing facts at this stage – without proof of needing to do so – is premature optimization (and uneccessary brain clutter).&lt;/p&gt;
+&lt;p&gt;Note that more elaborate types can be used, but the fundamental (atomic) type for plugging components together remains constant (a line of text).&lt;/p&gt;
 
-&lt;p&gt;We define gobject(ID).  See &lt;a href=&quot;https://github.com/guitarvydas/basicdasl/blob/master/pseudo/q.pl&quot;&gt;q.pl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;More elaborate types can be enforced by components in UNIX pipelines.&lt;/p&gt;
 
-&lt;p&gt;Since we specify the synonym in gobject definitions, the query for synonyms is straight-forward&lt;br /&gt;
-synonym(ID,Synonym) :-&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nonArrowGobject(ID,Synonym).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;[A ‘nonArrowGobject’ is any gobject except arrows.  See the code for further details.]&lt;/p&gt;
+&lt;h1 id=&quot;type-pipelines&quot;&gt;Type Pipelines&lt;/h1&gt;
+&lt;p&gt;More elaborate types can be checked in layers in a type pipeline.  Each successive component in a pipeline either&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;passes data down the pipe (after checking it)&lt;/li&gt;
+  &lt;li&gt;signals an error, e.g. by withholding (1) and sending an error object (/message) on a side-channel.&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;Creating a new aBegin fact consists of a compound query - print out an aBegin fact for every arrowBegin fact, replacing the synonym… (again, details elided, see code):&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;printAllABegin :-
-    forall(arrowBegin(ID,_),printABegin(ID)).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This structure inherently needs multiple outputs (e.g. at least stdout and stderr (I favor having more than 2)) which is not well-served by functional notation (which is fundamentally a 1-in-1-out notation&lt;sup id=&quot;fnref:bags&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:bags&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;)&lt;/p&gt;
 
-&lt;h2 id=&quot;sanity-checks&quot;&gt;Sanity Checks&lt;/h2&gt;
-&lt;p&gt;I create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gkind&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tag&lt;/code&gt; queries and double-check by running queries and looking at the diagram (the code for transpilation in this example is meant to be done manually, so I would expect many bugs.  We’ll see what I missed when we try to run this stuff.)&lt;/p&gt;
+&lt;h1 id=&quot;fbp&quot;&gt;FBP&lt;/h1&gt;
 
-&lt;p&gt;For example, we double-check the arrow with two receivers:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;?- consult(fb).
-true.
+&lt;p&gt;FBP means Flow-Based Programming.&lt;/p&gt;
 
-?- consult(q).
-true.
+&lt;p&gt;UNIX commands are a subset of FBP&lt;sup id=&quot;fnref:cbp&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:cbp&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
-?- printAllAEnd.
-...
-aEnd(a82,[id62,id69]).
-...
-false.
+&lt;h1 id=&quot;edge-cases&quot;&gt;Edge-Cases&lt;/h1&gt;
 
-?- tag(id62,Tag).
-Tag = e_e_l ;
-false.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(which appears to coincide with what is on the diagram).&lt;/p&gt;
+&lt;p&gt;Q: What kinds of operations cannot be handled with the above?&lt;/p&gt;
+
+&lt;p&gt;Q: Should we create PLs&lt;sup id=&quot;fnref:pl&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:pl&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; that are the Union of all edge-cases, or, should we create many SCNs&lt;sup id=&quot;fnref:scn&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:scn&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; instead?&lt;/p&gt;
+
+&lt;p&gt;Q: Does PEG offer advantages over REGEX for creating commands (e.g. grep vs. fictional peggrep ; awk vs. fictional pegawk ; python vs. fictional pegpy ; lisp vs. peglisp)?  Is this an edge-case or something common to many apps?&lt;/p&gt;
+
+&lt;p&gt;Q: Should PLs be hierarchical, not flat?  Should variables be hierarchical?  (Symbols, in general).  [Example: “y = mx + b” vs. “y = (slope * x) + intersect”.  Is the difference a language decision or a IDE feature?  Or, is this the goal of Projectional Editing?).]&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Let’s undo one of the human-input conveniences and normalize the factbase to contain only machine-readable codings.</summary></entry></feed>
+&lt;/script&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:bags&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Over time, the limits of functional notation have been addressed by playing whack-a-mole - adding bags onto the side of the otherwise-pure syntax, e.g. exceptions. &lt;a href=&quot;#fnref:bags&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cbp&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;I favor Component Based Programming, which is more similar to EE and LEGO.  FBP focuses on the flows of data while CBP focuses on the components themselves. &lt;a href=&quot;#fnref:cbp&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:pl&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;PL means Programming Language. &lt;a href=&quot;#fnref:pl&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:scn&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;SCN means Solution Centric Notation (essentially a light-weight DSL). &lt;a href=&quot;#fnref:scn&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">restricted interfaces low-level types for interfaces</summary></entry><entry><title type="html">UNIX Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html" rel="alternate" type="text/html" title="UNIX Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/UNIX%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/UNIX-Takeaways.html">&lt;ul&gt;
+  &lt;li&gt;Isolation&lt;/li&gt;
+  &lt;li&gt;Coordination Language&lt;/li&gt;
+  &lt;li&gt;Concurrency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;threads-are-isolation&quot;&gt;Threads are Isolation&lt;/h1&gt;
+
+&lt;p&gt;Programs are completely separated from each other and can communicate only over very restricted channels.&lt;/p&gt;
+
+&lt;p&gt;Threads are &lt;em&gt;envelopes&lt;/em&gt; that one can drop &lt;em&gt;calculators&lt;/em&gt; into.&lt;/p&gt;
+
+&lt;h1 id=&quot;coordination-language&quot;&gt;Coordination Language&lt;/h1&gt;
+
+&lt;p&gt;PLs have traditionally been restricted to expressing the contstruction of synchronous calculators.&lt;/p&gt;
+
+&lt;p&gt;Few PLs address the issues of distributed programming&lt;sup id=&quot;fnref:alib&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:alib&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin/sh&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt;) is a DSL for creating higher-level concurrent abstractions.&lt;/p&gt;
+
+&lt;h2 id=&quot;pid&quot;&gt;PID&lt;/h2&gt;
+
+&lt;p&gt;PIDs - process ID - are handles to first-class components.&lt;/p&gt;
+
+&lt;h1 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h1&gt;
+
+&lt;p&gt;Concurrency is a programming paradigm.&lt;/p&gt;
+
+&lt;p&gt;Parallelism is an application problem that needs to use the concurrent paradigm&lt;/p&gt;
+
+&lt;h1 id=&quot;anti-takeaways&quot;&gt;Anti-Takeaways&lt;/h1&gt;
+&lt;h2 id=&quot;time-sharing&quot;&gt;Time-Sharing&lt;/h2&gt;
+&lt;h2 id=&quot;memory-sharing&quot;&gt;Memory Sharing&lt;/h2&gt;
+&lt;h2 id=&quot;closures&quot;&gt;Closures&lt;/h2&gt;
+&lt;p&gt;Threads are just closure-wannabees&lt;sup id=&quot;fnref:ccs&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:ccs&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;UNIX threads are just ad-hoc implementations of closures in C.&lt;/p&gt;
+&lt;h2 id=&quot;dependency-spaghetti&quot;&gt;Dependency Spaghetti&lt;/h2&gt;
+&lt;h2 id=&quot;rendezvous&quot;&gt;Rendezvous&lt;/h2&gt;
+&lt;p&gt;Attempt to corral concurrency by making &lt;em&gt;everything&lt;/em&gt; synchronous.&lt;/p&gt;
+&lt;h2 id=&quot;syntax-for-distributed-programming-is-minimal&quot;&gt;Syntax for Distributed Programming is Minimal&lt;/h2&gt;
+&lt;p&gt;The UNIX shell syntax for distributed programming is muddied by the inclusion of many other features&lt;sup id=&quot;fnref:soc&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:soc&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;continued-conflation-and-muddied-waters-between-programming-and-oss&quot;&gt;Continued Conflation and Muddied Waters Between Programming and O/Ss&lt;/h2&gt;
+&lt;p&gt;UNIX contains several fundamental advances in PL features (e.g. |, &amp;amp;, fork, etc).&lt;/p&gt;
+
+&lt;p&gt;These PL advances have, unfortunately, been conflated with Operating Systems and have largely been ignored in PL designs.&lt;/p&gt;
+&lt;h2 id=&quot;union-of-coordination-and-string-processing-and-&quot;&gt;Union of Coordination and String Processing and …&lt;/h2&gt;
+&lt;p&gt;O/Ss are just libraries.&lt;/p&gt;
+
+&lt;p&gt;Windows, MacOS, Linux are just applications.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;problems&lt;/em&gt; that Windows, MacOS and Linux must solve are different from the problems that most apps need to solve.&lt;/p&gt;
+
+&lt;p&gt;Not every app should have all of the operating system principles built-in, e.g. not every app needs memory sharing and time-sharing.&lt;/p&gt;
+
+&lt;p&gt;Some apps use the concurrent programming paradigm.  This should not mean that they must include all of O/S-style threading.&lt;/p&gt;
+&lt;h1 id=&quot;pipelines-vs-isolation&quot;&gt;Pipelines vs. Isolation&lt;/h1&gt;
+&lt;p&gt;UNIX popularize pipelines of isolated components.&lt;/p&gt;
+
+&lt;p&gt;These advances have been, unfortunately, overlooked due to&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;conflation with heavy technologies (e.g. O/Ss)&lt;/li&gt;
+  &lt;li&gt;premature optimization (e.g. the ideas of &lt;em&gt;isolation&lt;/em&gt; were burned into hardware before they were sufficiently explored, e.g. C had some useful ideas about &lt;em&gt;isolation&lt;/em&gt; but these were missed in lieue of C’s system-language features)
+    &lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+    &lt;p&gt;Concurrency is not Parallelism - Rob Pike&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:alib&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Distributed programming is, currently, only addressed by second-class, assembler-like operations and libraries. &lt;a href=&quot;#fnref:alib&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ccs&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Maybe I mean /CCs?. &lt;a href=&quot;#fnref:ccs&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:soc&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Lack of Separation of Concerns &lt;a href=&quot;#fnref:soc&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Isolation Coordination Language Concurrency</summary></entry><entry><title type="html">Structured Programming Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Structured-Programming-Takeaways.html" rel="alternate" type="text/html" title="Structured Programming Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Structured%20Programming%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Structured-Programming-Takeaways.html">&lt;ul&gt;
+  &lt;li&gt;Nesting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;scoping&quot;&gt;Scoping&lt;/h1&gt;
+
+&lt;p&gt;Scoping is nesting.&lt;/p&gt;
+
+&lt;p&gt;Structured Programming suggested ways to scope control flow.&lt;/p&gt;
+
+&lt;p&gt;Control flow spaghetti was discarded in lieue of structured control-flow concepts such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while loops&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;[N.B. The problem of Global Variables was, also, solved by using nesting (scoping), although this was not fundamentally a control-flow problem]&lt;/p&gt;
+
+&lt;h1 id=&quot;what-is-not-nested-in-todays-pls&quot;&gt;What is &lt;em&gt;not&lt;/em&gt; nested in today’s PLs?&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;functions&lt;/li&gt;
+  &lt;li&gt;types&lt;/li&gt;
+  &lt;li&gt;CPS&lt;/li&gt;
+  &lt;li&gt;environments&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;package-managers&quot;&gt;Package Managers&lt;/h1&gt;
+
+&lt;p&gt;Packaging, package managers, are attempts for providing nesting for symbols.&lt;/p&gt;
+
+&lt;p&gt;The fact that there is more than one kind of package manager implies that the concept has not been normalized, yet.&lt;/p&gt;
+
+&lt;h1 id=&quot;docker&quot;&gt;Docker&lt;/h1&gt;
+&lt;p&gt;Docker is an attempt at providing nesting and isolation.&lt;/p&gt;
+
+&lt;h1 id=&quot;environments&quot;&gt;Environments&lt;/h1&gt;
+&lt;p&gt;Environments and environment variables are just another use of flat global entities.&lt;/p&gt;
+
+&lt;p&gt;In this case, isolation is implicitly provided by the physical hardware.&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Nesting</summary></entry></feed>

@@ -47,7 +47,9 @@ UNIX threads are just ad-hoc implementations of closures in C.
 Attempt to corral concurrency by making _everything_ synchronous.
 ## Syntax for Distributed Programming is Minimal
 The UNIX shell syntax for distributed programming is muddied by the inclusion of many other features[^soc].
+
 [^soc]: Lack of Separation of Concerns
+
 ## Continued Conflation and Muddied Waters Between Programming and O/Ss
 UNIX contains several fundamental advances in PL features (e.g. |, &, fork, etc).
 

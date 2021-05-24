@@ -1,0 +1,25 @@
+I"&<h1 id="asynchronous">Asynchronous</h1>
+<p>Send() down<br />
+  Wait for response(s) from children.<br />
+  filter children’s responses, then Send() response</p>
+<h2 id="children">Children</h2>
+<p>Children Send() response(s).</p>
+<ul>
+  <li>N.B. Children operate in any order.</li>
+  <li>N.B. Child sequencing determined by Scheduler.
+    <h1 id="synchronous">Synchronous</h1>
+    <p>loop for all children collecting responses<br />
+Call() down.<br />
+<em>stall</em><br />
+save response.<br />
+  end loop<br />
+  filter reponses and Return().</p>
+    <h2 id="children-1">Children</h2>
+    <p>Children invoke Return to send responses.</p>
+  </li>
+  <li>N.B. Children operate in the order given by the loop.</li>
+  <li>N.B. Child sequencing determined by Parent.</li>
+</ul>
+
+<h1 id="see-also">See Also</h1>
+:ET

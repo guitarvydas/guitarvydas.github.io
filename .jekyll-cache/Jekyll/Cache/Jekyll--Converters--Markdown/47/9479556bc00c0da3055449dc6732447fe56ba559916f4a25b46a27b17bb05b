@@ -1,0 +1,235 @@
+I"�*<p>DRY means “Don’t Repeat Yourself”.</p>
+
+<p>RY mean “Repeat Yourself”.</p>
+
+<p>Many programs are first created by cut &amp; paste of working code.</p>
+
+<p>Cut/Paste is RY.</p>
+
+<p>Programmers are taught to organize code so that there is little repetition - DRY.</p>
+
+<p>DRY organization is also called <em>scoping</em> (and I call it <em>nesting</em>).</p>
+
+<p>RY introduces multiple degrees of freedom into a design.</p>
+
+<p>In general RY results in dimension explosion.  DRY tries to constrain the explosion by grouping similarities.</p>
+
+<p>An example of RY is shown below.</p>
+
+<p>[This is incorrect code, but shows the problem].</p>
+
+<p>In this (incorrect) code, a <code class="language-plaintext highlighter-rouge">port</code> is</p>
+<ul>
+  <li>a rectangle that contains nothing else</li>
+  <li>a circle that contains nothing else</li>
+  <li>a rectangle that contains only one text object</li>
+  <li>a circle that contains only one text object.</li>
+</ul>
+
+<p>We can write a rule for <code class="language-plaintext highlighter-rouge">port</code> by making 4 clones of the code, with the appropriate conditions: [where <code class="language-plaintext highlighter-rouge">\+ contains(ID,_)</code> means “doesn’t contain anything”].</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% layer high
+%     port is a rect or circle that contains nothing
+port(ID) :-
+    rect(ID,nil),
+    \+ contains(ID,_).
+port(ID) :-
+    circle(ID,nil),
+    \+ contains(ID,_).
+% or, port is a rect or circle that contains only [text]
+port(ID) :-
+    rect(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+port(ID) :-
+    circle(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+</code></pre></div></div>
+
+<p>The above is RY.  When we start adding more lines to the code, the code explodes in a number of directions and becomes unmaintainable.</p>
+
+<p>For example, at this point in the design, we want to add one more condition to the rule.  E.G. a port must be a square rectangle.  A rounded rectangle is not a port.</p>
+
+<p>We could just hack on the code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% layer high
+%     port is a rect or circle that contains nothing
+port(ID) :-
+    rect(ID,nil),
+    \+ rounded(ID,nil).
+    \+ contains(ID,_).
+port(ID) :-
+    circle(ID,nil),
+    \+ contains(ID,_).
+% or, port is a rect or circle that contains only [text]
+port(ID) :-
+    rect(ID,nil),
+    \+ rounded(ID,nil).
+    contains(ID,Other),
+    text(Other,nil).
+port(ID) :-
+    circle(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+</code></pre></div></div>
+
+<p>We see lots of commonality in the code above.  If we keep hacking, the code will grow in a number of dimensions.</p>
+
+<p>Programmers are taught to apply DRY principles to the above.</p>
+
+<p>Programmers look for commonality and try to constrain it.  The ideal is to lasso every bit of commonality and to create a single rule for each grouping.</p>
+
+<p>We could lasso the shape of ports first - rounded rectangles and squares - or, we could lasso the notions of containing-nothing vs. containing-only-text.</p>
+
+<p>Can we wring out <em>all</em> of the commonalities?</p>
+
+<p>Trying to do this in an <em>all-in-one</em> manner brings complexity into the picture and obscures the final result.  The result might be good from a DRY perspective, but becomes harder to read.</p>
+
+<p>Some call this <em>abstraction</em>.</p>
+
+<p>Let’s say that we rewrite the code in the following way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% a port is, maybe, a square rect or a circle
+maybePort(ID) :-
+    squareRect(ID,nil).
+maybePort(ID) :-
+    circle(ID,nil).
+% a port contains nothing, or, 
+port(ID) :-
+    maybePort(ID),
+    containsNothing(ID).
+port(ID) :-
+    maybePort(ID),
+    containsExactlyOneTextItem(ID).
+</code></pre></div></div>
+
+<p>which starts out with rect-ness and circle-ness of ports.</p>
+
+<p>We could write the same code in another way:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maybePort(ID) :-
+    containsNothing(ID).
+maybePort(ID) :-
+    containsExactlyOneTextItem(ID).
+port(ID) :-
+    maybePort(ID),
+    squareRect(ID).
+port(ID) :-
+    maybePort(ID),
+    circle(ID).
+</code></pre></div></div>
+
+<p>Which choice is better?</p>
+
+<p>It depends on the Architect.</p>
+
+<p>Ideally, the code should capture the Architect’s thought process and make the thought process clear to the reader.</p>
+
+<p>What happens in a more complex situation?  We get <em>flat</em> code that represents a bunch of <em>non-flat</em> decisions that were made by the Architect.</p>
+
+<p>The ideal code would capture that Architect’s <em>non-flat</em> decisions, e.g. it would be</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>port(ID) :-
+    maybePort(ID),
+    containsNothing(ID).
+port(ID) :-
+    maybePort(ID),
+    containsExactlyOneTextItem(ID).
+</code></pre></div></div>
+<p>eliding <em>maybePort</em> and deferring its definition to elsewhere</p>
+
+<p>or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>port(ID) :-
+    maybePort(ID),
+    squareRect(ID).
+port(ID) :-
+    maybePort(ID),
+    circle(ID).
+</code></pre></div></div>
+<p>or, better,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(squarePort OR circle)
+AND
+(containsNothing OR containsExactlyOneTextItem)
+</code></pre></div></div>
+<p>or, if we wanted to capture the Architect’s flow</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(squarePort OR circle) -&gt; (containsNothing OR containsExactlyOneTextItem)
+                  else -&gt; fail
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(containsNothing OR containsExactlyOneTextItem) -&gt; (squarePort OR circle)
+                                           else -&gt; fail
+</code></pre></div></div>
+<p>[In this simple example it is “obvious” that this flow-code is the same as the code that precedes it.  The difference is that the former code uses text only, while the latter uses the “-&gt;” operator to show left-to-right design.]</p>
+
+<h1 id="the-state-explosion-problem">The State Explosion Problem</h1>
+<p>State-based code has a similar problem, often call the “state explosion problem”.</p>
+
+<p>StateCharts constrain the State Explosion problem.</p>
+
+<h1 id="database-theory">Database Theory</h1>
+<p>Databse theory is the notion of wringing out all commonality in data structures.</p>
+
+<h1 id="user-friendly">User Friendly</h1>
+
+<p>What notation is more user-friendly?</p>
+
+<p>Math?  Math wrings out commonality, but most people dislike the notation.  Mathematics maps a 4D design (X/Y/Z/time<sup id="fnref:time" role="doc-noteref"><a href="#fn:time" class="footnote">1</a></sup>)) to 2D (X/Y, aka text).  [We see this mapping in the above, where the code was abstracted to “maybePort”]</p>
+
+<p>Drawings? The idea of running diagrams has not been explored sufficiently (IMO).  Code-&gt;drawings is not sufficient.  We need drawings-&gt;code<sup id="fnref:das" role="doc-noteref"><a href="#fn:das" class="footnote">2</a></sup>.</p>
+
+<p>IDEs could deal with DRY and help programmers to specify DRY.  Github uses diff, we just need to use diff for higher level concepts.</p>
+
+<p>OO was an attempt to capture DRY.  OO was unsatisfactory, because of how it warps control-flow.</p>
+
+<p>IDE elision to help programmers create code in layers.  Org-mode for code.</p>
+
+<p>What we <em>really</em> want is to capture the design process.  Did the Architect address this problem by starting with rect/circle commonalities, or, did the Architect start by addressing the containment commonalities.</p>
+
+<p>It helps to know what the Architect was thinking, when one wants to upgrade or otherwise maintain the code.  The above example is simple.  Things get hoary in real-life examples.</p>
+
+<p>To capture this kind of thought process, we need to capture the design over <em>time</em>.  Mathematics wrings <em>time</em> out of its notation.  That is probably one of the reasons that non-mathematicians don’t like math - it doesn’t <em>always</em> suit the way they think about certain problems.</p>
+
+<p>We want to capture the thought process, for example</p>
+<ul>
+  <li>one train of thought starts out with rectangles and circles</li>
+  <li>another train of thought starts out with containment (contain nothing, contain only 1 text item).</li>
+</ul>
+
+<p>If we could build black boxes and just plug them together, we might be able to capture the thought process, for example:</p>
+
+<ol>
+  <li>rect -&gt; not rounded -&gt; contains-nothing -&gt; it’s a port.</li>
+  <li>rect -&gt; not rounded -&gt; contains-1-text-item -&gt; it’s a port.</li>
+  <li>circle -&gt; contains-nothing -&gt; it’s a port.</li>
+  <li>circle -&gt; contains-1-text-item -&gt; it’s a port.</li>
+  <li>contains-nothing -&gt; rect -&gt; not rounded -&gt; it’s a port</li>
+  <li>contains-1-text-item -&gt; rect -&gt; not rounded -&gt; it’s a port</li>
+  <li>contains-nothing -&gt; circle -&gt; it’s a port</li>
+  <li>contains-1-text-item -&gt; circle -&gt; it’s a port.</li>
+</ol>
+
+<p>Programmers are taught to abstract the above choices down to fewer choices.</p>
+
+<p>Math notation can capture the above choices, but doesn’t show any kind of ordering (by the Architect).</p>
+
+<p>Box-and-arrow notation, using black boxes, can capture the above and show the ordering of design.</p>
+
+<p><em>Isolation</em> could be used to create pluggable components.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:time" role="doc-endnote">
+      <p>A Design evolves over time and can punch-in and punch-out to different layers. <a href="#fnref:time" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:das" role="doc-endnote">
+      <p>Drawings-&gt;code can be accomplished by expressing the diagrams in normalized triple form (based on shapes, instead of pixels), using exhaustive search (e.g Relational Programming) to parse the information, then using well-known compiler technologies to transpile the result into working code. <a href="#fnref:das" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,64 @@
+I"ð<p>This note contains the conventions I use when creating Software Components with Draw.io.</p>
+
+<h2 id="port">port</h2>
+<ul>
+  <li>rectangle that does not include other objects</li>
+  <li>rectangle that can include color, text, strokeWidth</li>
+  <li>or, circle</li>
+</ul>
+
+<h2 id="external-port">external port</h2>
+<p>port<br />
+  circle</p>
+
+<h2 id="internal-port">internal port</h2>
+<p>port<br />
+  rect</p>
+
+<h2 id="input-port">input port</h2>
+<p>color=green</p>
+
+<h2 id="output-port">output port</h2>
+<p>color=yellow or color=red</p>
+
+<h2 id="explicit-port">explicit port</h2>
+
+<h2 id="implicit-port">implicit port</h2>
+
+<h2 id="component">component</h2>
+<ul>
+  <li>rectangle that includes ports, arrows, attributes</li>
+  <li>or, ellipse</li>
+</ul>
+
+<h2 id="link-component">link component</h2>
+<p>component that only contains attributes, text, ports</p>
+<h3 id="foreign-or-link">foreign or link?</h3>
+<p>link components are components that are not implemented on the given diagram</p>
+
+<p>link components can be</p>
+<ol>
+  <li>implemented by other diagrams, or,</li>
+  <li>directly implemented in the base language</li>
+</ol>
+
+<p>Link components used to be called Leaf components.</p>
+
+<p>Link is a general concept - we cannot know how the component will be implemented.</p>
+
+<p>All links must be resolved before running a Component hierarchy.</p>
+
+<p>Links can be resolved incrementally.  For example, Component A can be joined to Component B, which results in hierarchical system C that might contain unresolved links.</p>
+
+<h2 id="composite-component">composite component</h2>
+<p>component that contains other objects</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

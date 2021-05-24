@@ -1,0 +1,89 @@
+I"�<h1 id="multitasking">Multitasking</h1>
+<h2 id="the-bad-parts">The Bad Parts</h2>
+<ul>
+  <li>time-sharing</li>
+  <li>memory-sharing</li>
+</ul>
+
+<h2 id="how-to-avoid-time-sharing">How To Avoid Time-Sharing</h2>
+<p>Use multiple CPUs.</p>
+
+<p>(e.g. rPIs are cheap.  Laptops are fairly cheap.  Smart Phones are cheap (everybody has one)).</p>
+
+<h2 id="how-to-avoid-memory-sharing">How To Avoid Memory-Sharing</h2>
+<p>Use Send().</p>
+
+<p><em>Only</em></p>
+
+<h3 id="immutability">Immutability</h3>
+<p>Immutability is but one way to avoid memory-sharing.</p>
+<h3 id="ownership">Ownership</h3>
+<p>Ownership is but one way to avoid memory-sharing.</p>
+<h2 id="isolation">Isolation</h2>
+<p>Isolation is a superset of ownership and non-mutability.</p>
+
+<p>Ownership and non-mutability are but implementation details (towards achieving isolation).</p>
+
+<h3 id="deja-vu">Deja Vu</h3>
+<p>Have we already tried <em>isolation</em>?</p>
+
+<p>Yes - for example UNIX pipelines provide <em>isolation</em>.</p>
+
+<p>Yes - distributed processing involves <em>isolation</em>.</p>
+
+<p>Yes - HTML + Javascript provides distributed processing.</p>
+
+<h3 id="encapsulation">Encapsulation</h3>
+<p>OO-style encapsulation encapsulates data.</p>
+
+<p>Q: Does OO encapsulate control-flow?</p>
+
+<p>Q: Does OO encapsulate control-flow? Consider method over-riding.</p>
+
+<h3 id="goto">GOTO</h3>
+<p>GOTO modifies control flow.</p>
+
+<p>Q: Can you read programs written in GOTO style?</p>
+
+<h3 id="cps">CPS</h3>
+<p>CPS (Continuation Passing Style) encapsulates control flow and data.</p>
+
+<p>Q: How does CPS compare to GOTO?</p>
+
+<p>Q: Can you read programs written in CPS style?</p>
+
+<h3 id="spaghetti-complexity-etc-etc">Spaghetti, Complexity, etc., etc.</h3>
+<p>If a component is <em>isolated</em>, then, we don’t care - can’t care - if it uses mutable state, or, is complex, or, is coded in a non-structured manner.</p>
+
+<h3 id="ics---integrated-circuits">ICs - Integrated Circuits</h3>
+<p>Electronics ICs are built using oxides (rust).</p>
+
+<p>We run software on top of various oxides.</p>
+
+<p>When we pull out a 7400 chip out of a circuit and replace it with a 7400 from another manufacturer, do we care what variation of oxide the other manufacturer used?</p>
+
+<h3 id="homebrew-nmos-transistor-step-by-step---so-easy-even-jeri-can-do-it">Homebrew NMOS Transistor Step by Step - So Easy Even Jeri Can Do It</h3>
+
+<p><a href="https://www.youtube.com/watch?v=w_znRopGtbE">Homebrew NMOS</a></p>
+
+<p>Q: Does Jeri’s NMOS transistor use immutable state?</p>
+
+<p>Q: Does Jeri’s NMOS transitor use ownership?</p>
+
+<p>Q: Do you care?</p>
+
+<p>Q: Do your answers change if Jeri were to build a CPU instead of single transistor?</p>
+<h2 id="referential-transparency">Referential Transparency</h2>
+<p>Referential Transparency refers to the idea that one Component can replace another Component.</p>
+
+<p>Q: What is the base minimum required for Referential Transparency?  Pick only one, the most important one:</p>
+<ul>
+  <li>Immutable State</li>
+  <li>Ownership</li>
+  <li>Isolation</li>
+</ul>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

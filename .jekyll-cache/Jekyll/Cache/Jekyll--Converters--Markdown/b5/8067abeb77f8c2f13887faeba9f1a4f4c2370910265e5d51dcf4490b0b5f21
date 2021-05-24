@@ -1,0 +1,739 @@
+I"C�<h1 id="arithmetic-example-for-wasm-using-ohm-js-and-glue">Arithmetic Example for WASM Using Ohm-JS and Glue</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>In this essay, I discuss how to build a WASM transpiler that converts simple notation<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">1</a></sup> for arithmetic into WASM code, and runs the result.</p>
+
+<p>The transpiler technology is meant to be simple and is meant to make you yawn.</p>
+
+<p>“It may, at first, seem surprising that we can create WASM code by just using JS back-tick syntax.”</p>
+
+<h2 id="code---grammar-and-rewrite-specifications">Code - Grammar and Rewrite Specifications</h2>
+<p>The full Grammar and the Rewrite specifications (<code class="language-plaintext highlighter-rouge">glue</code> code) can be found in the Appendices.</p>
+
+<p>A full specification for a transpiler consists of</p>
+<ul>
+  <li>a grammar (in Ohm-JS style)</li>
+  <li>a rewrite specification (in <code class="language-plaintext highlighter-rouge">glue</code> style).</li>
+</ul>
+
+<p>More details can be found in the Appendices.</p>
+
+<p>The following discussion is meant to be a gentle introduction to this transpiler technology.  (Yawn).</p>
+
+<h2 id="grammar-rules">Grammar Rules</h2>
+<p>Let’s look at the AddExpr rule..</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  AddExp
+    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+    | MulExp
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">AddExp</code> says:</p>
+<ul>
+  <li>Try to match an <code class="language-plaintext highlighter-rouge">AddExp</code> followed by a <code class="language-plaintext highlighter-rouge">+</code> followed by a <code class="language-plaintext highlighter-rouge">MulExp</code>.</li>
+  <li>If that fails, try <code class="language-plaintext highlighter-rouge">AddExp</code> followed by <code class="language-plaintext highlighter-rouge">-</code> followed by a <code class="language-plaintext highlighter-rouge">MulExp</code>.</li>
+  <li>If that fails, try a <code class="language-plaintext highlighter-rouge">MulExp</code>.</li>
+</ul>
+
+<h3 id="pdfas">PDFAs</h3>
+<p>This demonstrates the main difference between PEG <code class="language-plaintext highlighter-rouge">grammars</code> and <code class="language-plaintext highlighter-rouge">REGEXs</code>.</p>
+
+<p>PEG (and other parser-generators) allow the programmer to write subroutines that contains sub-matches.  The subroutines can be called as often as needed and, they can be called recursively.</p>
+
+<p>For example, looking only at the <code class="language-plaintext highlighter-rouge">AddExp</code> rule, we don’t need to know what the sub-rule <code class="language-plaintext highlighter-rouge">MulExp</code> is.  We just use <code class="language-plaintext highlighter-rouge">MulExp</code>.  At the <code class="language-plaintext highlighter-rouge">AddExp</code> layer, the sub-rule <code class="language-plaintext highlighter-rouge">MulExp</code> is matched as a single item.  The single match maps directly to a single parameter in the follow-on, <em>semantics</em>, code.</p>
+
+<p>Technically, the difference is that PEG (and all parsers, in general) uses a stack, whereas REGEX does not employ a stack (jargon: parsers use PDFAs vs. DFAs, resp.  The issue is whether the Stack is exposed to the programmer, not whether the technologies use stacks in their implementations).</p>
+
+<p>The specification for a PEG parser usually needs more than one line of code, but most of the code is understandable vs. being a single string of hieroglyphics.</p>
+
+<h3 id="left-recursion">Left Recursion</h3>
+<p>The <code class="language-plaintext highlighter-rouge">AddExp</code> example also shows that <code class="language-plaintext highlighter-rouge">left recursion</code> is supported by Ohm-JS.</p>
+
+<p>[This is a technical point that improves readability.  If you can read and understand the above grammar, then you don’t need to go down the rabbit hole of understanding what ‘left recursion` is all about.]</p>
+
+<h3 id="rule-splitting">Rule Splitting</h3>
+<p>The <code class="language-plaintext highlighter-rouge">AddExp</code> rule is transpiled, by Ohm-JS into three rules:</p>
+<ul>
+  <li>AddExp_plus</li>
+  <li>AddExp_minus</li>
+  <li>AddExp</li>
+</ul>
+
+<p>The programmer is responsible for creating the splits<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">2</a></sup>.</p>
+
+<p>The first two lines of the rule</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+</code></pre></div></div>
+<p>match 3 items each</p>
+<ol>
+  <li>an AddExp</li>
+  <li>a “+” or “-“</li>
+  <li>a MulExp</li>
+</ol>
+
+<p>while the last line matches only 1 item</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    | MulExp
+</code></pre></div></div>
+<ol>
+  <li>a MulExp</li>
+</ol>
+
+<p>The symbols following the <code class="language-plaintext highlighter-rouge">--</code> in the first two lines become suffixes to the rule name, e.g. <code class="language-plaintext highlighter-rouge">AddExp_plus</code> and <code class="language-plaintext highlighter-rouge">AddExp_minus</code>.</p>
+
+<p>A PEG grammar can <em>match</em> different numbers of items.  The grammar, though, calls follow-on code (called the <em>semantics</em>) as functions for every rule and passes the matched items in as parameters.</p>
+
+<p>Ohm-JS checks that the generated <em>semantics</em> functions have consistent parameter lists, so the AddExp rule needs to be broken (by the programmer) into separate rules, using <code class="language-plaintext highlighter-rouge">--</code> name-mangling.</p>
+
+<p>[Other PEG libraries use a different strategy - e.g. the programmer must embed sub-rule names into the grammar, which allows the generator to create single functions for each rule that use programmer-supplied parameter names.  The Ohm-JS strategy puts more onus on the code generator, but keeps the grammar intact and readable.  I prefer the Ohm-JS strategy, as it leads to better separation between grammar and semantics.]</p>
+
+<h3 id="reading-the-grammar">Reading the Grammar</h3>
+<p>To read - and understand - the grammar, start at the top-most rule, call <code class="language-plaintext highlighter-rouge">Top</code> (in this case).</p>
+
+<p>It says:</p>
+<ol>
+  <li>At the top level, match an Expression (<code class="language-plaintext highlighter-rouge">Exp</code>).</li>
+  <li>To match an Expression, match an <code class="language-plaintext highlighter-rouge">AddExp</code>.</li>
+  <li>To match an <code class="language-plaintext highlighter-rouge">AddExp</code>
+    <ul>
+      <li>try to match an <code class="language-plaintext highlighter-rouge">AddExp_plus</code>,</li>
+      <li>then try to match <code class="language-plaintext highlighter-rouge">AddExp_minus</code>,</li>
+      <li>then try to match <code class="language-plaintext highlighter-rouge">MulExp</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>In PEG, matching order matters<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">3</a></sup>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">MulExp</code> rule is similar to the <code class="language-plaintext highlighter-rouge">AddExp</code> rule.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">PriExp</code> rule matches for a “primary”.</p>
+
+<p>First, <code class="language-plaintext highlighter-rouge">PriExp</code> tries to match a parenthesized expression.  If an open parenthesis is found, then we start at the top again and try to match an <code class="language-plaintext highlighter-rouge">Exp</code>.</p>
+
+<p>The idea of writing a grammar is to specify the pattern-matching in <em>layers</em>.  The layers can recur (loop back to the top) as needed.  In this case, we loop back to the top if we begin to see a parenthesized expression.  Note that a parenthesized expression can contain another parenthesized expression - the grammar will handle it recursively (to the limits of our computer’s memory).</p>
+
+<p>This example grammar will “bookmark” a sub-match and re-start at the top<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">4</a></sup> when it hits <code class="language-plaintext highlighter-rouge">PriExp_paren</code>.</p>
+
+<p>PEG does its matching with bookmarks and backtracking.  If one path through the grammar fails, it will try another one.  If all paths fail, the transpiler throws up its hands and declares a non-match (aka “syntax error”).</p>
+
+<h3 id="rule-descriptions">Rule Descriptions</h3>
+<p>In <code class="language-plaintext highlighter-rouge">ident  (an identifier)</code> and <code class="language-plaintext highlighter-rouge">number  (a number)</code>, we see another feature of Ohm-JS - the ability to tag a rule with an informative string (in parentheses) that is included in the error message, when the match fails.</p>
+
+<h3 id="--and-">+ * and ?</h3>
+<p>The rules <code class="language-plaintext highlighter-rouge">ident</code> and <code class="language-plaintext highlighter-rouge">number</code> also contain <code class="language-plaintext highlighter-rouge">*</code> and <code class="language-plaintext highlighter-rouge">+</code> operators.  These work similarly to REGEX.</p>
+
+<p>See the Appendix for Ohm-JS documentation.</p>
+
+<h2 id="semantics-glue">Semantics (Glue)</h2>
+<p>Ohm-JS expects programmers to write follow-on code in JavaScript.</p>
+
+<p>We can use Ohm-JS to write a simple tool that writes JavaScript for us.  I call this tool <code class="language-plaintext highlighter-rouge">glue</code>.</p>
+
+<p>In the example below, we use the grammar to generate a JS app (a pattern-matcher) that accepts pseudo-code and produces WASM code.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Glue</code> doesn’t do very much - it parses input code and then creates output code.</p>
+
+<p>For parsing, <code class="language-plaintext highlighter-rouge">glue</code> uses Ohm-JS.  For outputting, <code class="language-plaintext highlighter-rouge">glue</code> uses JavaScript back-tick syntax<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">5</a></sup>.</p>
+
+<p>It may, at first, seem surprising that we can create WASM code by just using JS back-tick syntax.</p>
+
+<p>The <em>trick</em> is to do things in a very repeatable (aka boring) manner. (Yawn).</p>
+
+<p>Ohm-JS plays into this <em>trick</em>, easily.  (<code class="language-plaintext highlighter-rouge">Glue</code> could do more, and might do more in the future, but this quick-and-dirty trick is enough to generate WASM.  Why add complexity when simplicity will suffice?).</p>
+
+<p>Let’s begin by looking at the code associated with the <code class="language-plaintext highlighter-rouge">AddExp</code> grammar rule, above.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Exp [e] = [[${e}]]
+</code></pre></div></div>
+<p>This is the simplest form of <code class="language-plaintext highlighter-rouge">glue</code> rule.</p>
+
+<p>It consists of</p>
+<ul>
+  <li>a name, <code class="language-plaintext highlighter-rouge">Exp</code></li>
+  <li>a list of parameters, <code class="language-plaintext highlighter-rouge">[e]</code></li>
+  <li>a separator <code class="language-plaintext highlighter-rouge">=</code></li>
+  <li>a rewrite rule, <code class="language-plaintext highlighter-rouge">[[${e}]]</code>.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">glue</code> rule <code class="language-plaintext highlighter-rouge">name</code> must correspond - exactly - to the name of a grammar rule.  There needs to be exactly one <code class="language-plaintext highlighter-rouge">glue</code> rule for each grammar rule.</p>
+
+<p>The parameters consist of programmer-chosen names, separated by spaces and enclosed in a pair of brackets.</p>
+
+<p>There must be one parameter for each sub-match in a rule.</p>
+
+<p>The names are Javascript compatible and are resolved and used in the rewrite portion.</p>
+
+<p>A parameter name can be prefixed by the <code class="language-plaintext highlighter-rouge">@</code> operator (not present in the <code class="language-plaintext highlighter-rouge">Exp</code> rule), to mean that the parameter lines up with a tree of sub-matches, i.e. generated by a grammar sub-match that has <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">+</code> or <code class="language-plaintext highlighter-rouge">?</code> suffixes.</p>
+
+<p>Parameter names are used in the rewrite portion without the <code class="language-plaintext highlighter-rouge">@</code> prefix. [The <code class="language-plaintext highlighter-rouge">@</code> is a signal to <code class="language-plaintext highlighter-rouge">glue</code> to unpack the tree sub-match in a recursive manner - see <code class="language-plaintext highlighter-rouge">Ohm-JS</code> documentation for details on how to do this manually (or look at the code generated by <code class="language-plaintext highlighter-rouge">glue</code> to see how I do it.]</p>
+
+<p>The rewrite is a literal string contained in double-brackets, <code class="language-plaintext highlighter-rouge">[[ ... ]]</code>.  The literal string is a JavaScript back-tick string.  In this kind of string, <code class="language-plaintext highlighter-rouge">${...}</code> is used to refer to parameters.  [Aside - <code class="language-plaintext highlighter-rouge">glue</code> simply wraps the string in back-ticks and generates a JavaScript string.  Yawn.  Leading spaces are skipped.]</p>
+
+<p>In summary,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Exp [e] = [[${e}]]
+</code></pre></div></div>
+<p>means:</p>
+<ul>
+  <li>line up with the grammar rule <code class="language-plaintext highlighter-rouge">Exp</code></li>
+  <li>supply the grammar sub-match in the named parameter <code class="language-plaintext highlighter-rouge">e</code></li>
+  <li>rewrite the sub-match as the JavaScript string <code class="language-plaintext highlighter-rouge">`${e}`</code></li>
+  <li>return the JavaScript string from the rule (to the calling layer).</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">ident</code> rule uses an <code class="language-plaintext highlighter-rouge">@</code> parameter.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ident [l @a] = [[local.get \$${l}${a}]]
+</code></pre></div></div>
+<p>This rule matches up with the <code class="language-plaintext highlighter-rouge">ident</code> rule in the grammar:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ident  (an identifier)
+    = letter alnum*
+</code></pre></div></div>
+<p>where <code class="language-plaintext highlighter-rouge">alnum*</code> uses the <code class="language-plaintext highlighter-rouge">*</code> operator.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">glue</code> rule</p>
+<ul>
+  <li>we use the named parameter <code class="language-plaintext highlighter-rouge">l</code> to hold from the sub-match <code class="language-plaintext highlighter-rouge">letter</code></li>
+  <li>and we use the named parameter <code class="language-plaintext highlighter-rouge">alnum</code> to hold the <em>tree</em> from the sub-match <code class="language-plaintext highlighter-rouge">alnum*</code>.</li>
+</ul>
+
+<p>[Note that the grammar rule also contains a rule description <code class="language-plaintext highlighter-rouge">(an identifier)</code> which is ignored in the <code class="language-plaintext highlighter-rouge">glue</code> rule.]</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">glue</code> rewrite is <code class="language-plaintext highlighter-rouge">[[local.get \$${l}${a}]]</code> which returns the JavaScript string <code class="language-plaintext highlighter-rouge">`local.get \$${l}${a}`</code>.  This rewrite creates a string that contains the literal characters <code class="language-plaintext highlighter-rouge">local.get $</code> followed by the values of the parameters <code class="language-plaintext highlighter-rouge">l</code> and <code class="language-plaintext highlighter-rouge">a</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Glue</code> unpacks the sub-matches from the grammar, resulting in the <code class="language-plaintext highlighter-rouge">l</code> being bound to the sub-match from <code class="language-plaintext highlighter-rouge">letter</code> and <code class="language-plaintext highlighter-rouge">a</code> being bound to the sub-match from <code class="language-plaintext highlighter-rouge">alnum*</code>.  The sub-match from <code class="language-plaintext highlighter-rouge">alnum*</code> is treated specially by <code class="language-plaintext highlighter-rouge">glue</code><sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">6</a></sup>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Top</code> rule uses <code class="language-plaintext highlighter-rouge">glue</code>s preamble feature.</p>
+
+<p>The RHS (right-hand side) of the <code class="language-plaintext highlighter-rouge">glue</code> rule contains an arbitrary block of Javascript code contained in double-braces `  `.  The preamble is executed before any of the parameters are unpacked<sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote">7</a></sup>.</p>
+
+<p>In the end, <code class="language-plaintext highlighter-rouge">glue</code> generates a Javascript program.  The Javascript program is a transpiler - a parser and a code-generator.  The program is run using <code class="language-plaintext highlighter-rouge">node</code> with input from a file-to-be-parsed.  Note that Ohm-JS is meant to be used in HTML.  See the Ohm-JS documentation. I happen to use node.js.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">grasem</code> tool joins the Ohm-JS grammar with a corresponding <code class="language-plaintext highlighter-rouge">glue</code> specification and produces one Javascript parser program from the pair.</p>
+
+<h3 id="ry">RY</h3>
+<p>In the set of <code class="language-plaintext highlighter-rouge">arithmetic</code> examples, we produce code for 4 languages using one Ohm-JS grammar.</p>
+
+<p>At present, we simply clone the <code class="language-plaintext highlighter-rouge">grasem</code> template 4 times.</p>
+
+<p>Ohm allows multiple follow-on (<em>semantics</em>) functions for one grammar, but <code class="language-plaintext highlighter-rouge">glue</code> does not use this feature, at the moment.  A simple project would be to extend <code class="language-plaintext highlighter-rouge">glue</code> to allow multiple rewrites for any one grammar (collapsing the <code class="language-plaintext highlighter-rouge">arithmetic</code> examples from 4 files into 1 file).  The project would be written in <code class="language-plaintext highlighter-rouge">glue</code> and shell scripts (<code class="language-plaintext highlighter-rouge">/bin/*sh</code>).  Another approach would be to use the <code class="language-plaintext highlighter-rouge">m4</code> macro processor to provide <code class="language-plaintext highlighter-rouge">include</code> operations.  In fact, this can be done immediately, without writing any new code. [M4 makes the above project moot.  Instead of extending <code class="language-plaintext highlighter-rouge">glue</code>, just use <code class="language-plaintext highlighter-rouge">M4</code> or <code class="language-plaintext highlighter-rouge">cat</code>, yawn].</p>
+<h3 id="design-of-the-grammarrewrites">Design of the Grammar+Rewrites</h3>
+<p>The Ohm-JS grammar for the simple <code class="language-plaintext highlighter-rouge">arithmetic</code> language simply creates a CST (concrete syntax tree of the actual input, similar to an AST) and then walks the tree using the specified rewrite strings.</p>
+
+<p>The topmost rule <code class="language-plaintext highlighter-rouge">Top</code> outputs the resulting string wrapped in appropriate WAT details.  [WAT is the human-readable, text, version of a WASM file.  See <code class="language-plaintext highlighter-rouge">wasmrun.bash</code> for how to convert a WAT file into a WASM file.]</p>
+
+<p>The bottom-most rules - <code class="language-plaintext highlighter-rouge">ident</code>, <code class="language-plaintext highlighter-rouge">number_fract</code> and <code class="language-plaintext highlighter-rouge">number_whole</code> create WASM code to push the operand onto the WASM stack (<code class="language-plaintext highlighter-rouge">f64.const</code> to push a double-float constant onto the WASM stack and <code class="language-plaintext highlighter-rouge">local.get</code> to push a named WASM parameter onto the WASM stack.).</p>
+
+<p>The rest of the layers - <code class="language-plaintext highlighter-rouge">glue</code> rules - simply rearrange the WASM operands and WASM operators.</p>
+
+<p>For example, the rule <code class="language-plaintext highlighter-rouge">AddExp_plus</code> is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  AddExp_plus [e1 op e2] = [[${e1}\n${e2}\nf64.add\n]]
+</code></pre></div></div>
+
+<p>This rule takes 3 operands - two expressions and one operator.  The rewrite rearranges the operands in RPN<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">8</a></sup> order and suffixes the string with <code class="language-plaintext highlighter-rouge">f64.add</code> (and appropriate newlines <code class="language-plaintext highlighter-rouge">\n</code>).</p>
+
+<h3 id="the-ident-rule">The ident Rule</h3>
+<p>The <code class="language-plaintext highlighter-rouge">ident</code> rule is implemented only in the WASM transpiler.  The other tranpsilers - pymath, jsmath and lispmath - do not deal with this rule.</p>
+<h3 id="exponentiation">Exponentiation</h3>
+<p>Exponentiation - the <code class="language-plaintext highlighter-rouge">ExpExp_power</code> rule - is not, presently implemented in the WASM transpiler.  Finishing this rule consists of looking up the exponentiation operator in the WASM instruction manual and writing the rewrite rule.  This is left as an exercise for the reader.</p>
+<h3 id="foreign-functions">Foreign Functions</h3>
+<p>As can be seen in wasmrun.bash, we expect a file <code class="language-plaintext highlighter-rouge">foreign.js</code> to exist.  It is meant to contain support functions needed for a specific transpiler.</p>
+
+<p>In this simple example, there are no support functions, so the file is empty.</p>
+
+<h3 id="scope-variables">Scope Variables</h3>
+<p><code class="language-plaintext highlighter-rouge">Glue</code> also supports the creation and querying of variables tied to the CST tree-walk.  See the <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Manual</a>.</p>
+
+<p>This simple example does not use scope variables.</p>
+
+<h2 id="appendix---arithmetic-grammar">Appendix - Arithmetic Grammar</h2>
+<p>The grammar for arithmetic is lifted, literally, from <a href="https://github.com/harc/ohm/tree/master/examples/math">Ohm Arithmetic Example</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Arithmetic {
+  /* WASM code emitter */
+  
+  Top = Exp
+  
+  Exp
+    = AddExp
+
+  AddExp
+    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+    | MulExp
+
+  MulExp
+    = MulExp "*" ExpExp  -- times
+    | MulExp "/" ExpExp  -- divide
+    | ExpExp
+
+  ExpExp
+    = PriExp "^" ExpExp  -- power
+    | PriExp
+
+  PriExp
+    = "(" Exp ")"  -- paren
+    | "+" PriExp   -- pos
+    | "-" PriExp   -- neg
+    | ident
+    | number
+
+  ident  (an identifier)
+    = letter alnum*
+
+  number  (a number)
+    = digit* "." digit+  -- fract
+    | digit+             -- whole
+}
+</code></pre></div></div>
+
+<h2 id="appendix---glue-specification-for-wasm-arithmetic">Appendix - Glue Specification for WASM Arithmetic</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Top [e] =
+
+[[
+${e})
+  (export "custom" (func $custom))
+)
+    ]]
+  Exp [e] = [[${e}]]
+  AddExp_plus [e1 op e2] = [[${e1}\n${e2}\nf64.add\n]]
+  AddExp_minus [e1 op e2] = [[${e1}\n${e2}\nf64.sub\n]]
+  AddExp [e] = [[${e}]]
+  MulExp_times [e1 op e2] = [[${e1}\n${e2}\nf64.mul\n]]
+  MulExp_divide [e1 op e2] = [[${e1}\n${e2}\nf64.div\n]]
+  MulExp [e] = [[${e}]]
+  ExpExp_power[p op e] = [[(???exp ${p} ${e})]]
+  ExpExp [p] = [[${p}]]
+  PriExp_paren [lp p rp] = [[${p}]]
+  PriExp_pos [sign p] = [[${p}]]
+  PriExp_neg [sign p] = [[${p}\nf64.neg]]
+  PriExp [p] = [[${p}]]
+  ident [l @a] = [[local.get \$${l}${a}]]
+  number_fract [@numerator dot @denominator] = [[f64.const ${numerator}.${denominator}]]
+  number_whole [@n] = [[f64.const ${n}]]
+</code></pre></div></div>
+<h2 id="appendix---generated-javascript-transpiler-from-arithmetic-to-wasm">Appendix - Generated JavaScript Transpiler from Arithmetic to WASM</h2>
+<p>[warts and all…]</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// npm install ohm-js
+'use strict';
+
+const grammar =
+      `
+Arithmetic {
+  /* WASM code emitter */
+  
+  Top = Exp
+  
+  Exp
+    = AddExp
+
+  AddExp
+    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+    | MulExp
+
+  MulExp
+    = MulExp "*" ExpExp  -- times
+    | MulExp "/" ExpExp  -- divide
+    | ExpExp
+
+  ExpExp
+    = PriExp "^" ExpExp  -- power
+    | PriExp
+
+  PriExp
+    = "(" Exp ")"  -- paren
+    | "+" PriExp   -- pos
+    | "-" PriExp   -- neg
+    | ident
+    | number
+
+  ident  (an identifier)
+    = letter alnum*
+
+  number  (a number)
+    = digit* "." digit+  -- fract
+    | digit+             -- whole
+}
+
+  
+
+`;
+
+
+function ohm_parse (grammar, text) {
+    var ohm = require ('ohm-js');
+    var parser = ohm.grammar (grammar);
+    var cst = parser.match (text);
+    if (cst.succeeded ()) {
+	return { succeeded: true, message: "OK", parser: parser, cst: cst };
+    } else {
+	//console.log (parser.trace (text).toString ());
+	//throw "glue: Ohm matching failed";
+        
+        return { succeeded: false, message: cst.message, parser: parser, cst: cst };
+    }
+}
+
+function getNamedFile (fname) {
+    var fs = require ('fs');
+    if (fname === undefined || fname === null || fname === "-") {
+	return fs.readFileSync (0, 'utf-8');
+    } else {
+	return fs.readFileSync (fname, 'utf-8');
+    }	
+}
+'use strict'
+
+var _scope;
+
+function scopeStack () {
+    this._stack = [];
+    this.pushNew = function () {this._stack.push ([])};
+    this.pop = function () {this._stack.pop ()};
+    this._topIndex = function () {return this._stack.length - 1;};
+    this._top = function () { return this._stack[this._topIndex ()]; };
+    this.scopeAdd = function (key, val) {
+	this._top ().push ({key: key, val: val});
+    };
+    this._lookup = function (key, a) { 
+	return a.find (obj =&gt; {return obj &amp;&amp; obj.key &amp;&amp; (obj.key == key)}); };
+    this.scopeGet = function (key) {
+	var i = this._topIndex ();
+	for (; i &gt;= 0 ; i -= 1) {
+	    var obj = this._lookup (key, this._stack [i]);
+	    if (obj) {
+		return obj.val;
+	    };
+	};
+        console.log ('*** scopeGet error key=' + key + ' ***');
+	console.log (this._stack);
+	console.log (key);
+	throw "scopeGet internal error";
+    };
+    this.scopeModify = function (key, val) {
+	var i = this._topIndex ();
+	for (; i &gt;= 0 ; i -= 1) {
+	    var obj = this._lookup (key, this._stack [i]);
+	    if (obj) {
+		obj.val = val;
+		return val;
+	    };
+	};
+        console.log ('*** scopeModify error key=' + key + ' ***');
+	console.log (this._stack);
+	console.log (key);
+	throw "scopeModify internal error";
+    };
+}
+
+function scopeAdd (key, val) {
+    return _scope.scopeAdd (key, val);
+}
+
+function scopeModify (key, val) {
+    return _scope.scopeModify (key, val);
+}
+
+function scopeGet (key, val) {
+    return _scope.scopeGet (key, val);
+}
+
+function _ruleInit () {
+    _scope = new scopeStack ();
+}
+
+function _ruleEnter (ruleName) {
+    _scope.pushNew ();
+}
+
+function _ruleExit (ruleName) {
+    _scope.pop ();
+}
+
+_ruleInit ();
+function addSemantics (sem) {
+    sem.addOperation (
+	'_glue',
+	{
+	    Top : function (_e,) {
+		_ruleEnter ("Top");
+		console.log ("(module"));
+		console.log ( " (func $custom (param $x f64) (param $y f64) (result f64)" );
+
+		var e = _e._glue ();
+		var _result = `${e})
+  (export "custom" (func $custom))
+)
+    `;
+		_ruleExit ("Top");
+		return _result;
+	    },
+	    Exp : function (_e,) {
+		_ruleEnter ("Exp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("Exp");
+		return _result;
+	    },
+	    AddExp_plus : function (_e1,_op,_e2,) {
+		_ruleEnter ("AddExp_plus");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.add\n`;
+		_ruleExit ("AddExp_plus");
+		return _result;
+	    },
+	    AddExp_minus : function (_e1,_op,_e2,) {
+		_ruleEnter ("AddExp_minus");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.sub\n`;
+		_ruleExit ("AddExp_minus");
+		return _result;
+	    },
+	    AddExp : function (_e,) {
+		_ruleEnter ("AddExp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("AddExp");
+		return _result;
+	    },
+	    MulExp_times : function (_e1,_op,_e2,) {
+		_ruleEnter ("MulExp_times");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.mul\n`;
+		_ruleExit ("MulExp_times");
+		return _result;
+	    },
+	    MulExp_divide : function (_e1,_op,_e2,) {
+		_ruleEnter ("MulExp_divide");
+
+		var e1 = _e1._glue ();var op = _op._glue ();var e2 = _e2._glue ();
+		var _result = `${e1}\n${e2}\nf64.div\n`;
+		_ruleExit ("MulExp_divide");
+		return _result;
+	    },
+	    MulExp : function (_e,) {
+		_ruleEnter ("MulExp");
+
+		var e = _e._glue ();
+		var _result = `${e}`;
+		_ruleExit ("MulExp");
+		return _result;
+	    },
+	    ExpExp_power : function (_p,_op,_e,) {
+		_ruleEnter ("ExpExp_power");
+
+		var p = _p._glue ();var op = _op._glue ();var e = _e._glue ();
+		var _result = `(???exp ${p} ${e})`;
+		_ruleExit ("ExpExp_power");
+		return _result;
+	    },
+	    ExpExp : function (_p,) {
+		_ruleEnter ("ExpExp");
+
+		var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("ExpExp");
+		return _result;
+	    },
+	    PriExp_paren : function (_lp,_p,_rp,) {
+		_ruleEnter ("PriExp_paren");
+
+		var lp = _lp._glue ();var p = _p._glue ();var rp = _rp._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp_paren");
+		return _result;
+	    },
+	    PriExp_pos : function (_sign,_p,) {
+		_ruleEnter ("PriExp_pos");
+
+		var sign = _sign._glue ();var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp_pos");
+		return _result;
+	    },
+	    PriExp_neg : function (_sign,_p,) {
+		_ruleEnter ("PriExp_neg");
+
+		var sign = _sign._glue ();var p = _p._glue ();
+		var _result = `${p}\nf64.neg`;
+		_ruleExit ("PriExp_neg");
+		return _result;
+	    },
+	    PriExp : function (_p,) {
+		_ruleEnter ("PriExp");
+
+		var p = _p._glue ();
+		var _result = `${p}`;
+		_ruleExit ("PriExp");
+		return _result;
+	    },
+	    ident : function (_l,_a
+			      ,) {
+		_ruleEnter ("ident");
+
+		var l = _l._glue ();var a = _a._glue ().join ('');
+		var _result = `local.get \$${l}${a}`;
+		_ruleExit ("ident");
+		return _result;
+	    },
+	    number_fract : function (_numerator
+				     ,_dot,_denominator
+				     ,) {
+		_ruleEnter ("number_fract");
+
+		var numerator = _numerator._glue ().join ('');var dot = _dot._glue ();var denominator = _denominator._glue ().join ('');
+		var _result = `f64.const ${numerator}.${denominator}`;
+		_ruleExit ("number_fract");
+		return _result;
+	    },
+	    number_whole : function (_n
+				     ,) {
+		_ruleEnter ("number_whole");
+
+		var n = _n._glue ().join ('');
+		var _result = `f64.const ${n}`;
+		_ruleExit ("number_whole");
+		return _result;
+	    },
+
+	    _terminal: function () {return this.primitiveValue; }
+	});
+}
+
+
+function main () {
+    // usage: node glue &lt;file
+    // grammar is inserted from grasem.ohm
+    // test.grasem is read from stdin
+    var text = getNamedFile ("-");
+    var { succeeded, message, parser, cst } = ohm_parse (grammar, text);
+    var sem = {};
+    var outputString = "";
+    if (cst.succeeded ()) {
+	sem = parser.createSemantics ();
+	addSemantics (sem);
+	outputString = sem (cst)._glue ();
+	return { succeeded: true, message: "OK", cst: cst, semantics: sem, resultString: outputString };
+    } else {
+	return { succeeded: false, message: message, cst: cst, semantics: sem, resultString: outputString };
+    }
+}
+
+
+var { succeeded, message, cst, semantics, resultString } = main ();
+if (succeeded) {
+    console.log (resultString);
+} else {
+    process.stderr.write (`${message}\n`);
+    return false;
+}
+</code></pre></div></div>
+<h2 id="appendix---bash-file-to-run-the-wasm-transpiler-wasmrunbash">Appendix - Bash File to Run the WASM Transpiler (wasmrun.bash)</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+set -e
+WTOOLSDIR=/Users/tarvydas/quicklisp/local-projects/wabt/build
+
+../grasem/run.bash wasmmath.grasem &gt;_.js
+
+cat foreign.js _.js &gt;_wasmmath.js
+node _wasmmath.js &lt; ex1.math &gt;_temp.wat
+${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
+node wasm.js
+
+node _wasmmath.js &lt; ex2.math &gt;_temp.wat
+${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
+node wasm.js
+
+node _wasmmath.js &lt; ex4.math &gt;_temp.wat
+${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
+node wasm.js
+
+node _wasmmath.js &lt; ex5.math &gt;_temp.wat
+${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
+node wasm.js
+
+node _wasmmath.js &lt; ex6.math &gt;_temp.wat
+${WTOOLSDIR}/wat2wasm _temp.wat -o _temp.wasm
+node wasm.js
+</code></pre></div></div>
+<h3 id="appendix---wasmjs-support-code">Appendix - Wasm.js Support code</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var fs = require ('fs');
+
+async function getws () {
+    var w;
+    try {
+	w = fs.readFileSync('_temp.wasm');
+    } catch (e) {
+	console.log ("error: " + e);
+    }
+    return await WebAssembly.instantiate(w)
+}
+
+var w = getws ();
+w.then (function (value) {
+    console.log (value.instance.exports.custom (3,5));
+});
+</code></pre></div></div>
+<p>(Note that the parameters (3,5) are chosen arbitrarily.  See what happens when you change them.)</p>
+<h2 id="appendix---glue-manual">Appendix - Glue Manual</h2>
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Manual</a></p>
+<h2 id="appendix---grasem-manual">Appendix - Grasem Manual</h2>
+<p><a href="https://guitarvydas.github.io/2021/04/11/Grasem.html">Grasem Manual</a></p>
+<h2 id="appendix---ohm-js">Appendix - Ohm-JS</h2>
+<p><a href="https://github.com/harc/ohm">Ohm-JS</a></p>
+<h2 id="appendix---ohm-in-small-steps">Appendix - Ohm In Small Steps</h2>
+<p><a href="https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html">Ohm In Small Steps</a></p>
+
+<p>This essay - Ohm In Small Steps - also, includes a Scheme-to-JS transpiler that creates a simple PROLOG library in JS, used as a running example.</p>
+
+<h2 id="appendix---more-about-peg">Appendix - More About PEG</h2>
+<p><a href="https://guitarvydas.github.io/">My essays</a> are not restricted to PEG.</p>
+
+<p>If you want only PEG-related opinions, look at the <a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a> and look for the PEG sections, and, for the Ohm sections.</p>
+<h2 id="appendix---github">Appendix - Github</h2>
+<p><a href="https://github.com/guitarvydas/arithmetic">Code</a></p>
+
+<hr />
+
+<p>N.B. This essay deals with only <code class="language-plaintext highlighter-rouge">wasmmath.grasem</code>, but the codebase includes transpilers for Python, JS and Lisp.</p>
+
+<hr />
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:2" role="doc-endnote">
+      <p>I use the word <em>notation</em> to mean a light-weight programming language (lighter weight than even a DSL). <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>If you don’t like this, just write a preprocessor (hint: use PEG). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>The programmer is responsible to order rules in the correct sequence (usually longest to shortest).  Other parser technologies, e.g. parsers based on CFG theory, don’t need programmer-specified rule ordering, but, those technologies put limits on what <em>can</em> be matched.  PEG usually wins (from the perspective of practicality).  PEG can match patterns that CFG parsers (like YACC) can’t match. [The “classic” example is that PEG can match balanced parentheses, whereas CFGs can’t.  The real test is whether PEG grammars can be easily written for everyday cases.  I believe that PEG is readable, that programmer-supplied rule-ordering is easy to specify, and, is “natural” for programmers to write.  IMO, PEG is the next REGEX.  Ohm-JS is the best PEG variant I’ve used.]. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Actually, it restarts at <code class="language-plaintext highlighter-rouge">Exp</code> which is almost-the-top. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Back-tick strings are called <em>template strings</em> in JS and EcmaScript. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p><code class="language-plaintext highlighter-rouge">glue</code> returns <em>all</em> of the match as a single string joined together (by Javascript’s .join(‘’) operation)). <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:8" role="doc-endnote">
+      <p>This can require knowledge of the simple name-mangling rules of <code class="language-plaintext highlighter-rouge">glue</code>.  The best way to understand the name-mangling operations is to examine the code generated by <code class="language-plaintext highlighter-rouge">glue</code>.  Same as before: if you don’t like this, feel free to write a PEG-based preprocessor (chain preprocessors in a pipeline, the more the merrier).  I believe in YAGNI - this set of rules and quirks is enough to get my job done.  N.B. you don’t need to understand name-mangling to use scope variables (see below). <a href="#fnref:8" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>RPN means <em>Reverse Polish Notation</em>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

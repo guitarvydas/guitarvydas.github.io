@@ -1,0 +1,127 @@
+I"�<h1 id="do-what-i-say">Do What I Say</h1>
+
+<p>In trying to solve the problem in chapter 10, I realized that I’m not following my own advice.</p>
+
+<p>I’m not simplifying enough.</p>
+
+<p>At this point, we will throw everything away and start again.</p>
+
+<p>We can do this because we haven’t written much code.</p>
+
+<p>We aren’t throwing away the <em>thinking</em>, just the code.</p>
+
+<p>We have learned more about the problem that we didn’t know at first.</p>
+
+<h1 id="fdd">FDD</h1>
+<p>This is FDD - Failure Driven Design.</p>
+
+<p>We can change our minds about the Architecture at the drop of a hat.</p>
+
+<h1 id="diagrams-should-be-simple">Diagrams Should Be Simple</h1>
+<p>Our diagrams contain</p>
+<ol>
+  <li>rectangles</li>
+  <li>ellipses</li>
+  <li>arrows (lines)</li>
+  <li>text.</li>
+</ol>
+
+<p>We will write simple grammars that convert such simple diagrams into factbases.</p>
+
+<p>From there, we will use inferencing to derive all other interesting information.</p>
+
+<p>See, also, the essay “Diagram Conventions”</p>
+<h1 id="un-nest-diagrams">Un-Nest Diagrams</h1>
+<p>One of the existing complications is that we chose to allow nested diagrams.</p>
+
+<p>Let’s stop doing this.</p>
+
+<p>Diagram “v” should consist of 4 diagrams</p>
+<ol>
+  <li>v</li>
+  <li>v-x</li>
+  <li>v-x-y</li>
+  <li>v-x-y-z</li>
+</ol>
+
+<h1 id="rewrite-diagrams-in-markdown">Rewrite Diagrams in Markdown</h1>
+<p>We rewrite the diagrams in markdown.</p>
+
+<p>For example, diagram v is written in markdown as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rect v
+## shape rounded
+## color F5F5F5FF
+## circle v/a
+## circle v/d
+## rect v/b
+### shape rounded
+### rect v/b/a
+#### color green
+### rect v/b/b
+#### color green
+### ellipse v/c
+### rect v/x
+#### color E3E3E3FF
+#### shape rounded
+#### rect v/x/a
+##### color green
+#### rect v/x/b
+##### color green
+#### rect v/x/c
+##### color yellow
+## arrow v/a v/x/a
+## arrow v/a v/b/a
+## arrow v/b/b v/c
+## arrow v/c v/x/b
+## arrow v/x/c v/d
+</code></pre></div></div>
+
+<p>See the final versions of the diagrams in <code class="language-plaintext highlighter-rouge">v.md</code>, <code class="language-plaintext highlighter-rouge">v-x.md</code>, <code class="language-plaintext highlighter-rouge">v-x-y.md</code>, and, <code class="language-plaintext highlighter-rouge">v-x-y-z-.md</code>.</p>
+
+<h2 id="emacs-elides-markdown">Emacs Elides Markdown</h2>
+<p>Emacs elides markdown in Org-mode manner.</p>
+
+<p>This makes it easier to eye-ball the the .md files.</p>
+
+<h1 id="de-indenting-markdown-de-indenting-python-de-indenting-org-mode">De-Indenting Markdown, De-Indenting Python, De-Indenting ORG Mode</h1>
+
+<p>The next step is to convert indentation-based syntax into nested syntax.</p>
+
+<p>This conversion should be easy to apply to Python code and to org-mode documents.</p>
+
+<p>See Part 12.</p>
+
+<h2 id="python">Python</h2>
+<p>Exercise: Write a program that converts Python code to nested code using REGEX in any programming language.</p>
+
+<p>Exercise: Write a program that converts Python code to nested code using <code class="language-plaintext highlighter-rouge">grasem</code> (hint: look ahead to part 12).</p>
+
+<h3 id="example">Example</h3>
+<p>(Python code lifted from https://www.w3schools.com/python/python_functions.asp))</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def my_function():
+  print("Hello from a function")
+</code></pre></div></div>
+<p>should be rewritten as</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def my_function() {
+  print("Hello from a function")
+}
+</code></pre></div></div>
+<h2 id="org-mode">Org Mode</h2>
+<p>Exercise: Write a program that converts an org-mode document to a nested document using REGEX in any programming language.  Skip this exercise if you used REGEX to convert Python code, in the above exercise.</p>
+
+<p>Exercise: Write a program that converts an org-mode document to a nested document using <code class="language-plaintext highlighter-rouge">grasem</code>.</p>
+
+<h3 id="example-1">Example</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* def my_function():
+** print("Hello from a function")
+</code></pre></div></div>
+<p>should be rewritten as</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def my_function() {
+  print("Hello from a function")
+}
+</code></pre></div></div>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

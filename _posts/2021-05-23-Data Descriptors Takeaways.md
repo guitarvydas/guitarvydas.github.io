@@ -15,6 +15,8 @@ DD's showed that normalization encourages higher level thinking.
 # See Also
 Data Descriptors paper (Holt)
 
+# See Also
+
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
 

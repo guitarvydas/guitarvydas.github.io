@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Refactoring" />
 <script type="application/ld+json">
-{"headline":"Refactoring","@type":"BlogPosting","dateModified":"2021-05-16T00:00:00-04:00","datePublished":"2021-05-16T00:00:00-04:00","description":"Refactoring is accidental complexity.","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html"},"url":"https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html","@context":"https://schema.org"}</script>
+{"url":"https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html","@type":"BlogPosting","description":"Refactoring is accidental complexity.","dateModified":"2021-05-16T00:00:00-04:00","datePublished":"2021-05-16T00:00:00-04:00","headline":"Refactoring","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/16/Refactoring.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
 <body><header class="site-header" role="banner">
@@ -53,7 +53,8 @@
 
 <p>The need to refactor a design or to refactor code, should be a red flag.</p>
 
-<p>Refactoring should never be needed in a design which has been decomposed into its most-atomic units.</p>
+<p>Refactoring should never be needed in a design which has been decomposed into its most-atomic units[^2].  <br />
+[^2]: Note that I believe that <em>code</em> should be machine-readable.  <em>Designs</em> are meant to be human readable.  Refactoring should be reserved for <em>designs</em> only.  Good designs, don’t need to be refactored.  Structure should only be applied to designs, not code.  [At present, all designs are baked into code by virtue of the kinds of languages we use.  If you find a need to refactor code, then split the code into 2 parts - design and code - first.]</p>
 
 <p>Refactoring is accidental complexity caused by too much structure in a design.</p>
 
