@@ -19,7 +19,7 @@ PLs have traditionally been restricted to expressing the contstruction of synchr
 
 Few PLs address the issues of distributed programming[^alib].
 
-/bin/sh ("&" and "|") is a DSL for creating higher-level concurrent abstractions.
+`/bin/sh` (`&` and `|`) is a DSL for creating higher-level concurrent abstractions.
 
 ## PID
 
@@ -37,8 +37,10 @@ Parallelism is an application problem that needs to use the concurrent paradigm
 ## Time-Sharing
 ## Memory Sharing
 ## Closures
-	Threads are just closure-wannabees.  (Maybe I mean /CCs?).
-	UNIX threads are just ad-hoc implementations of closures in C.
+Threads are just closure-wannabees[^cc].  
+[^cc]:Maybe I mean /CCs?.
+
+UNIX threads are just ad-hoc implementations of closures in C.
 ## Dependency Spaghetti
 ## Rendezvous
 Attempt to corral concurrency by making _everything_ synchronous.
@@ -49,7 +51,7 @@ The UNIX shell syntax for distributed programming is muddied by the inclusion of
 UNIX contains several fundamental advances in PL features (e.g. |, &, fork, etc).
 
 These PL advances have, unfortunately, been conflated with Operating Systems and have largely been ignored in PL designs.
-## /bin/*sh Union of Coordination and String Processing and ...
+## Union of Coordination and String Processing and ...
   O/Ss are just libraries.
   
   Windows, MacOS, Linux are just applications[^os].
