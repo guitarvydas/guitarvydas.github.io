@@ -1,127 +1,619 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-24T12:52:39-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html"></title><link href="https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software-Components-101-Part-13-Identity-Grammar-Before-Creating-Factbase.html" rel="alternate" type="text/html" title="" /><published>2021-05-24T12:52:39-04:00</published><updated>2021-05-24T12:52:39-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software%20Components%20101%20Part%2013%20Identity%20Grammar%20Before%20Creating%20Factbase</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/2021-05-22-Software-Components-101-Part-13-Identity-Grammar-Before-Creating-Factbase.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;We create a factbase from the nested documents&lt;/p&gt;
-&lt;h2 id=&quot;identity-grammar&quot;&gt;Identity Grammar&lt;/h2&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BRACES2FB {
-  topLevel = ws+ tBEGIN rect tEND
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2021-05-24T13:50:14-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">Table of contents may 24, 2021</title><link href="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-May-24,-2021.html" rel="alternate" type="text/html" title="Table of contents may 24, 2021" /><published>2021-05-24T00:00:00-04:00</published><updated>2021-05-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/Table%20of%20Contents%20May%2024,%202021</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-May-24,-2021.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Style-Type&quot; content=&quot;text/css&quot;&gt;
+  &lt;title&gt;Table of Contents May 24, 2021&lt;/title&gt;
+  &lt;meta name=&quot;CreationTime&quot; content=&quot;2021-05-24T13:48:07Z&quot;&gt;
+  &lt;meta name=&quot;ModificationTime&quot; content=&quot;2021-05-24T13:48:07Z&quot;&gt;
+  &lt;meta name=&quot;Generator&quot; content=&quot;Cocoa HTML Writer&quot;&gt;
+  &lt;meta name=&quot;CocoaVersion&quot; content=&quot;2022.44&quot;&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-indent: 18.0px; font: 13.0px Palatino}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica}
+    span.s1 {text-decoration: underline}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;width: 600px; margin: 0 auto&quot;&gt;
 
-
-  nestedAttributesOrObjects = tBEGIN attributeOrObject+ tEND
-  attributeOrObject = attribute | object
-
-  object = rect | ellipse | circle | arrow
-  rect = tRECT synonym nestedAttributesOrObjects? ws*
-  circle = tCIRCLE synonym nestedAttributesOrObjects? ws*
-  ellipse = tELLIPSE synonym nestedAttributesOrObjects? ws*
-  arrow = tARROW sender receiver ws*
-
-  attribute = shapeAttribute | colorAttribute | strokeWidthAttribute
-  shapeAttribute = &quot;shape&quot; ws* &quot;rounded&quot; ws*
-  colorAttribute = &quot;color&quot; ws* color ws*
-  strokeWidthAttribute = &quot;stroke-width&quot; ws* number ws*
-
-  sender = qualident ws*
-  receiver = qualident ws*
-
-  synonym = qualident ws*
-
-    /* mid-level */
-    tRECT = &quot;rect&quot; ws*
-    tCIRCLE = &quot;circle&quot; ws*
-    tELLIPSE = &quot;ellipse&quot; ws*
-    tARROW = &quot;arrow&quot; ws*
-
-    tBEGIN = &quot;{&quot; ws*
-    tEND = &quot;}&quot; ws*
-
-      /* low-level */
-      color = rgba | &quot;green&quot; | &quot;yellow&quot; | &quot;red&quot;
-
-      keyword = color
-
-      flat_ident = ~keyword flat_ident_char+ 
-      flat_ident_char = &quot;a&quot; .. &quot;z&quot;
-      qualident = qualident_recursive | flat_ident
-      qualident_recursive = flat_ident &quot;/&quot; qualident
-
-      number = dig+
-      dig = &quot;0&quot; .. &quot;9&quot;
-      rgba = hex hex hex hex
-      hex = hd hd
-      hd = dig | &quot;A&quot; .. &quot;F&quot;
- 
-      ws = &quot; &quot; | &quot;\t&quot; | newline
-      newline = &quot;\n&quot;
-}
-
-
-
-  topLevel [@ws begin rect end] = [[${ws}${begin}${rect}${end}]]
-
-
-  nestedAttributesOrObjects [begin @aorobj end] = [[${begin}${aorobj}${end}]]
-  attributeOrObject [aorobj] = [[${aorobj}]]
-
-  object [obj] = [[${obj}]]
-  rect [rect syn @nested @ws] = [[${rect}${syn}${nested}${ws}]]
-  circle [circle syn @nested @ws] = [[${circle}${syn}${nested}${ws}]]
-  ellipse [ellipse syn @nested @ws] = [[${ellipse}${syn}${nested}${ws}]]
-  arrow [arrow sender receiver @ws] = [[${arrow}${sender}${receiver}${ws}]]
-
-  attribute [attr] = [[${attr}]]
-  shapeAttribute [shape @ws1 rounded @ws2] = [[${shape}${ws1}${rounded}${ws2}]]
-  colorAttribute [k @ws1 color @ws2] = [[${k}${ws1}${color}${ws2}]]
-  strokeWidthAttribute [sw @ws1 n @ws2] = [[${sw}${ws1}${n}${ws2}]]
-
-  sender [ident @ws] = [[${ident}${ws}]]
-  receiver [ident @ws] = [[${ident}${ws}]]
-
-  synonym [ident @ws] = [[${ident}${ws}]]
-
-    tRECT [t @ws] = [[${t}${ws}]]
-    tCIRCLE [t @ws] = [[${t}${ws}]]
-    tELLIPSE [t @ws] = [[${t}${ws}]]
-    tARROW [t @ws] = [[${t}${ws}]]
-
-    tBEGIN [t @ws] = [[${t}${ws}]]
-    tEND [t @ws] = [[${t}${ws}]]
-
-      color [cl] = [[${cl}]]
-
-      keyword [kw] = [[${kw}]]
-
-      flat_ident [@cs] = [[${cs}]]
-      flat_ident_char [c] = [[${c}]]
-      qualident [ident] = [[${ident}]]
-      qualident_recursive [flatident slash recursiveident] = [[${flatident}${slash}${recursiveident}]]
-
-      number [num] = [[${num}]]
-      dig [digit] = [[${digit}]]
-      rgba [h1 h2 h3 h4] = [[${h1}${h2}${h3}${h4}]]
-      hex [h1 h2] = [[${h1}${h2}]]
-      hd [c] = [[${c}]]
- 
-      ws [c] = [[${c}]]
-      newline [c] = [[${c}]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The identity grammar should produce output that is the same as the input.&lt;/p&gt;
-
-&lt;p&gt;Check that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v.fb&lt;/code&gt; is the same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v.brace&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Eye-ball or use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;diff&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Look for low-hanging fruit.&lt;/p&gt;
-
-&lt;p&gt;[We can always come back and fix errors, so this doesn’t need to be perfect.  The only test will be if the app is good enough for its purposes.  Everything is a fractal, everything is relative, nothing is absolute.  Absolute perfection is not possible.  Trying to attain absolute perfection will retard higher-level learning and progress.  Waterfall design is the process of closing doors behind you, whereas FDD[^fdd] leaves doors open on the assumption that iteration will be needed (design iteration as well as code iteration)].&lt;/p&gt;
-
-&lt;p&gt;[^fdd] FDD means Failure Driven Design.&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author></entry><entry><title type="html">Table of contents since may 13, 2013</title><link href="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html" rel="alternate" type="text/html" title="Table of contents since may 13, 2013" /><published>2021-05-24T00:00:00-04:00</published><updated>2021-05-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/Table%20of%20Contents%20Since%20May%2013,%202013</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;Picture&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;img src=&quot;/assets/2021-05-24-13-48-07-Images/index 20210524.png&quot; width=&quot;100%&quot; alt=&quot;Image&quot;&gt;&lt;/p&gt;
+&lt;h2 style=&quot;margin: 24.0px 0.0px 12.0px 0.0px; font: 20.0px Helvetica&quot;&gt;&lt;b&gt;index 20210524&lt;/b&gt;&lt;/h2&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways-2.html&quot;&gt;Compiler Technology Takeaways 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/API-Takeaways.html&quot;&gt;API Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Thinking-Is-Hard-Coding-Is-Easy.html&quot;&gt;Thinking is Hard, Coding is Easy&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html&quot;&gt;WASM Transpiler Example&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways-3.html&quot;&gt;Compiler Technology Takeaways 3&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/21/Diagram-Conventions.html&quot;&gt;Diagram Conventions&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/DRY-vs-RY.html&quot;&gt;DRY vs. RY&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Refactoring.html&quot;&gt;Refactoring&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Compiler-Technology-Takeaways.html&quot;&gt;Compiler Technology Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Data-Descriptors-Takeaways.html&quot;&gt;Data Descriptors Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/21/Functional-Programming-vs-Parsing.html&quot;&gt;Functional programming vs parsing&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/First-Class-Functions-Takeaways.html&quot;&gt;First Class Functions - Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Dataless-Language.html&quot;&gt;Dataless Language&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Functional-Programming-Takeaways.html&quot;&gt;Functional Programming - Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Denotational-Semantics-Takeaways.html&quot;&gt;Denotational Semantics Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Java-Takeaways.html&quot;&gt;Java Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Diagram-Notation.html&quot;&gt;Diagram Notation&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Less-Code.html&quot;&gt;Less Code&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Layers.html&quot;&gt;Layers&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Lisp-Takeaways.html&quot;&gt;Lisp Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Normalization.html&quot;&gt;Normalization&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Object-Oriented-Takeaways.html&quot;&gt;Object Oriented Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Pattern-Matching-Takeaways.html&quot;&gt;Pattern Matching Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Relational-Programming-Takeaways.html&quot;&gt;Relational Programming Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/SSL-Takeaways.html&quot;&gt;Ssl takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Scalability-Takeaways-2.html&quot;&gt;Scalability 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Scalability-Takeaways.html&quot;&gt;Scalability Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/Structured-Programming-Takeaways.html&quot;&gt;Structured Programming Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/UNIX-Takeaways-2.html&quot;&gt;UNIX Takeaways 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/23/UNIX-Takeaways.html&quot;&gt;UNIX Takeaways&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/24/Componentization-Measuring-Success.html&quot;&gt;Componentization: Measuring Success&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Takeaways&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;(Programming - The Good Parts)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/03/Software-Components-101.html&quot;&gt;Software components 101&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/04/Software-Components-101-Connection-Queries.html&quot;&gt;Software components 101 connection queries&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Development-(Part-1).html&quot;&gt;Software components 101 engine development (part 1)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/09/Software-Components-101-Engine-Part-2-Diagram-to-Text.html&quot;&gt;Software components 101 engine part 2 diagram to text&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/10/Software-Components-101-Engine-Part-3-Factbase.html&quot;&gt;Software components 101 engine part 3 factbase&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/10/Software-Components-101-Engine-Part-4-Review.html&quot;&gt;Software Components 101 - Engine Part 4 Review&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/10/Software-Components-101-Engine-Part-5-Queries.html&quot;&gt;Software Components 101 - Engine Part 5 Queries&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/04/Software-Components-001.html&quot;&gt;Software components 001&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Software Components 101&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/Software-Components-101-Part-6-Recap.html&quot;&gt;Software Components 101 Part 6 Recap&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/15/Software-Components-101-Part-7-Visual-Inspection.html&quot;&gt;Software Components 101 Part 7 - Visual Inspection&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Software-Components-101-Part-8-Ports.html&quot;&gt;Software Components 101 Part 8 - Ports&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/16/Software-Components-101-Part-9-What-Is-Next.html&quot;&gt;Software Components 101 - Part 9 - What's Next?&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/20/Software-Components-101-Part-10-Tweaking-The-Grammar-to-Provide-More-Information.html&quot;&gt;Software Components 101 - Part 10 Tweaking the Grammar to Provide More Information&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Software-Components-101-Part-11-Starting-Over.html&quot;&gt;Software Components 101 - Part 11 Starting Over&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/22/Software-Components-101-Part-12-Converting-Indentation-to-Nesting.html&quot;&gt;Software Components 101 Part 12 Converting Indentation to Nesting&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/5-Whys-of-Software-Components.html&quot;&gt;5 whys of software components&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/FileReader.html&quot;&gt;Filereader&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/HTML-Components-Arrowgrams.html&quot;&gt;Html components arrowgrams&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/06/Components-(again).html&quot;&gt;Components (again)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Indirect-Calls.html&quot;&gt;Indirect calls&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/component-diagrams.html&quot;&gt;Component diagrams&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Need-To-Know.html&quot;&gt;Need to know&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/27/Patterns.html&quot;&gt;Patterns&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Software Components&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Programming&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/13/Programming.html&quot;&gt;Programming&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;META&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Introduction.html&quot;&gt;Introduction&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Divide-and-Conquer-is-Recursive-Design.html&quot;&gt;Divide and conquer is recursive design&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Recursive-Design-Knowns-and-Unknowns.html&quot;&gt;Recursive design knowns and unknowns&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Divide-and-Conquer.html&quot;&gt;Divide and conquer&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/12/Recursive-Iterative-Design-By-Example.html&quot;&gt;Recursive Design, Iterative Design By Example&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/20/Recursive-Design,-Iterative-Design-By-Example-(2).html&quot;&gt;Recursive design, iterative design by example (2)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Recursive Design&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/DI.html&quot;&gt;DI - Design Intent&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;DI - Design Intent&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html&quot;&gt;Di design intent&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/12/Restricted-Thinking-Programming-Editors.html&quot;&gt;Restricted thinking programming editors&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;DaS&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/10/Transpiling-Diagrams-Overview.html&quot;&gt;Transpiling diagrams overview&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Parsing-and-Compiling-Diagrams.html&quot;&gt;Parsing and compiling diagrams&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Editor-for-Gratoms.html&quot;&gt;Editor for gratoms&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/12/Transpiling-Diagrams-to-Code-101.html&quot;&gt;Transpiling diagrams to code 101&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html&quot;&gt;Box And Arrow dsl for concurrency&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/Transpiling-Diagrams-to-Code-101.html&quot;&gt;Transpiling diagrams to code 101&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/25/Processes-Are-State-Machines.html&quot;&gt;Processes are state machines&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/24/Compiling-Diagrams-2.html&quot;&gt;Compiling diagrams 2&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/22/Breaking-Free-of-the-Cell-Paradigm.html&quot;&gt;Breaking free of the cell paradigm&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/Syntax-Primitives.html&quot;&gt;Syntax Primitives&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Compiling-Diagrams.html&quot;&gt;Compiling Diagrams&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/11/Diagram-Based-Languages.html&quot;&gt;Diagram based languages&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Visual Programming&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/23/Curse-of-the-Editor.html&quot;&gt;Curse of the editor&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/11/Concurrency-is-not-Parallelism.html&quot;&gt;Concurrency is not parallelism&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Box-and-Arrow-DSL-For-Concurrency.html&quot;&gt;Box And Arrow dsl for concurrency&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;Call return spaghetti&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Concurrency-is-a-Paradigm.html&quot;&gt;Concurrency is a paradigm&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Javascript-Concurrency.html&quot;&gt;Javascript concurrency&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Multitasking-is-Easy.html&quot;&gt;Multitasking is easy&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/5-Whys-of-Full-Preemption.html&quot;&gt;5 whys of full preemption&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/5-Whys-of-Multiprocessing.html&quot;&gt;5 whys of multiprocessing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/sequencing.html&quot;&gt;Sequencing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/17/concurrency-bare-bones.html&quot;&gt;Concurrency bare bones&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/HTML-Components-Handling-Callback-Logic-Explicitly.html&quot;&gt;Html components handling callback logic explicitly&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/07/The-Problem.html&quot;&gt;The problem&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/23/blocking.html&quot;&gt;Blocking&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/07/Breaking-Out-Of-Synchronous-Thinking.html&quot;&gt;Breaking out of synchronous thinking&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html&quot;&gt;Breaking long running loops&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Concurrency&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html&quot;&gt;Call return spaghetti&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;CALL RETURN&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Sequencing&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/sequencing.html&quot;&gt;Sequencing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Complexity-II.html&quot;&gt;Complexity ii&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Complexity.html&quot;&gt;Complexity&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Simplicity-vs-Complexity.html&quot;&gt;Simplicity vs complexity&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Complexity&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html&quot;&gt;The algol bottleneck&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;ALGOL Bottleneck&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Computing-Then-And-Now-II.html&quot;&gt;Computing then and now ii&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Computing-Then-and-Now.html&quot;&gt;Computing then and now&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/New-Breed-HLLs.html&quot;&gt;New Breed hlls&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Programmers-vs-Humans.html&quot;&gt;Programmers vs humans&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/02/The-Primary-Issue.html&quot;&gt;The primary issue&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Twenty-Milliseconds-The-Magic-Number.html&quot;&gt;Twenty milliseconds the magic number&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Programming-Redux.html&quot;&gt;Programming redux&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Computing&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/01/Scheme-to-Javascript.html&quot;&gt;Scheme to javascript&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;PROLOG&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/DSL-Manifesto.html&quot;&gt;Dsl manifesto&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Scanning-and-Parsing-Overview.html&quot;&gt;Scanning and parsing overview&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html&quot;&gt;Toolbox languages&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/15/SVG-grammar.html&quot;&gt;Svg grammar&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Learning-About-Compilers-Quickly.html&quot;&gt;Learning about compilers quickly&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/29/SCLs-Little-Languages-Playlist.html&quot;&gt;Scls little languages playlist&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html&quot;&gt;Toolbox languages (2)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Transpilers&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/PEG.html&quot;&gt;Peg&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html&quot;&gt;Peg vs. other pattern matchers&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/REGEX-vs-PEG.html&quot;&gt;Regex vs peg&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/PEG-Cheat-Sheet.html&quot;&gt;Peg cheat sheet&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/19/Racket-PEG.html&quot;&gt;Racket peg&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/10/Parsing-vs-REGEXing.html&quot;&gt;Parsing vs regexing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;PEG&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html&quot;&gt;Ohminsmallsteps&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Efficiency.html&quot;&gt;Efficiency&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Everything-is-an-Interpreter.html&quot;&gt;Everything is an interpreter&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Efficiency&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/DLLs.html&quot;&gt;Dlls&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/Compile-Time-and-Runtime.html&quot;&gt;Compile time and runtime&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Compile Time vs Run Time&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/28/DSL-in-a-Day.html&quot;&gt;Dsl in a day&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/How-To-Design-An-SCL.html&quot;&gt;How to design an scl&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Little-Language.html&quot;&gt;Little language&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/SCN.html&quot;&gt;SCN&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/Notation.html&quot;&gt;Notation vs. DSLs and PLs&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;SCN - Software Centric Notation&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/FBP-is-No-Code-for-Banking-Apps.html&quot;&gt;Fbp is no Code for banking apps&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/HTML-Is-NoCode.html&quot;&gt;Html is nocode&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/No-Code.html&quot;&gt;No Code&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;No Code&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/fbp-v-actors-v-erlang.html&quot;&gt;Fbp v actors v erlang&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/23/The-Case-For-Fanout.html&quot;&gt;The case for fanout&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;FBP&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/Erlang-v-Actors.html&quot;&gt;Erlang v actors&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Actors.html&quot;&gt;Actors&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Actors&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Inspiration.html&quot;&gt;Inspiration&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/SSL.html&quot;&gt;S/SL - Syntax Semantic Language&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Inspiration&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Mathematics-Is-Not-Reality.html&quot;&gt;Mathematics is not reality&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/11/Induction-vs-Recursion.html&quot;&gt;Induction vs recursion&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/APL.html&quot;&gt;Apl&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/03/Kill-Math.html&quot;&gt;Kill math&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/Mathematics-Redux.html&quot;&gt;Mathematics redux&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Crass-Simplifications.html&quot;&gt;Crass simplifications&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Mathematics&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Two-Stacks-For-Every-Type.html&quot;&gt;Two stacks for every type&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Typing&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Type-Stacks.html&quot;&gt;Type stacks&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Programming-Languages-Are-Skins.html&quot;&gt;Programming languages are skins&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;PLs (Programming Languages)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Programming-Language-Design.html&quot;&gt;Programming language design&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Variable-Names-Not-Needed.html&quot;&gt;Variable names not needed&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Divide-and-Conquer-in-PLs.html&quot;&gt;Divide and conquer in pls&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/Asking-The-Right-Questions.html&quot;&gt;Asking the right questions&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/Two-Syntaxes-for-Every-Language.html&quot;&gt;Two Syntaxes For Every Programming Language&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/22/Variable-Names-Are-Not-Good-Enough.html&quot;&gt;Variable names are not good enough&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/TXL.html&quot;&gt;Txl&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/05/Breaking-Long-Running-Loops.html&quot;&gt;Breaking long running loops&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/05/Tags-Instead-of-Names.html&quot;&gt;Tags instead of names&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/RY-vs-DRY.html&quot;&gt;Ry vs dry&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/20/Git-Could-Do-More.html&quot;&gt;Git could do more&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;RY (Repeat Yourself)&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Reuse.html&quot;&gt;Reuse&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Architectural-Archaelogy.html&quot;&gt;Architectural archaelogy&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/17/Details-Kill.html&quot;&gt;Details kill&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/10/Architecting,-Engineering-and-Implementing-Software.html&quot;&gt;Architecting, engineering and implementing software&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Software Architecture&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;References&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Scalability-II.html&quot;&gt;Scalability ii&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Dependencies &amp;amp; Scalability&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Scalability.html&quot;&gt;Scalability&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Shuhari&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Shuhari.html&quot;&gt;Shuhari&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/State-Machine-for-Javascript.html&quot;&gt;State machine for javascript&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/26/State-Machines-to-JavaScript.html&quot;&gt;State machines to javascript&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;State Machines&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/25/statecharts-(again).html&quot;&gt;Statecharts (again)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/StateCharts.html&quot;&gt;Statecharts&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;StateCharts&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html&quot;&gt;Software development roles&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/02/Refactoring.html&quot;&gt;Refactoring&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/07/Software-Ceiling.html&quot;&gt;Software ceiling&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/10/Apple-Refunded-My-Money-Because-of-a-Bug.html&quot;&gt;Apple® refunded my money because of a bug&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/07/Sofware-Kleenex.html&quot;&gt;Sofware kleenex®&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/11/miscellaneous.html&quot;&gt;Miscellaneous&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/Pure-Research-vs-Applied-Research.html&quot;&gt;Pure research vs applied research&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/19/What-Is-Programming.html&quot;&gt;What is programming&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/One-In-How-Many-Out.html&quot;&gt;One in how many out?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/06/How-Many-Inputs-vs-How-Many-Outputs.html&quot;&gt;How many inputs vs how many outputs?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/06/Divide-and-Conquer-YAGNI.html&quot;&gt;Divide and conquer yagni&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/TOE-for-Software-Development.html&quot;&gt;Toe for software development&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/06/Dynamic-Anything-is-Bad.html&quot;&gt;Dynamic anything is bad&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Software Development&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/22/superposition.html&quot;&gt;Superposition&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/What-If-Making-A-Compiler-Was-Easy.html&quot;&gt;What if making a compiler was easy?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Holy Grail of Software Development&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/24/The-Stack-is-a-List.html&quot;&gt;The stack is a list&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/27/The-Stack-2.html&quot;&gt;The stack 2&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/25/The-Stack.html&quot;&gt;The stack&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/02/25/The-Stack-is-a-Global-Variable-(again).html&quot;&gt;The stack is a global variable (again)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;The Stack&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/16/Superposition.html&quot;&gt;Superposition&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Layered Design&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/24/superposition-2.html&quot;&gt;Superposition 2&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/01/Fractal-Design.html&quot;&gt;Fractal design&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Dataless-Programming-Language.html&quot;&gt;Dataless programming language&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/17/Factbases.html&quot;&gt;Factbases&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/Factbases-101.html&quot;&gt;Factbases 101&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;FB - Factbases&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/02/Universal-Datatype.html&quot;&gt;Universal datatype&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Triples&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/16/Triples.html&quot;&gt;Triples&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Testing&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/Testing.html&quot;&gt;Testing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/Glue-Manual.html&quot;&gt;Glue manual&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/24/SVG-to-Code-(1).html&quot;&gt;Svg to code (1)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/Notation-Example.html&quot;&gt;Notation Example&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/ASON-Notation-Pipeline.html&quot;&gt;ASON Notation Pipeline (building 7 passes)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/Recursive-Design,-Iterative-Design-By-Example-(3).html&quot;&gt;Recursive design, iterative design by example (3)&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/11/Ohm-Arithmetic.html&quot;&gt;Arithmetic Example in Ohm-JS and grasem&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Examples&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/27/Bootstrapping.html&quot;&gt;Bootstrapping&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/27/CPS-Considered-to-be-a-GOTO.html&quot;&gt;Cps considered to be a goto&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/27/Message-Passing.html&quot;&gt;Message passing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/30/State,-Analysis-of.html&quot;&gt;State, analysis of&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/meta-programming.html&quot;&gt;Meta Programming&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/24/Incompleteness.html&quot;&gt;Incompleteness&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/16/Scoping-Static-vs-Dynamic.html&quot;&gt;Scoping static vs dynamic&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Function-or-List.html&quot;&gt;Function or list?&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/23/Relational-Programming-and-the-Kitchen-Sink.html&quot;&gt;Relational programming and the kitchen sink&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/24/REGEX.html&quot;&gt;Regex&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Techniques&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Projectional Editing&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/02/Projectional-Editing.html&quot;&gt;Projectional editing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;Glue Tool&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Grasem.html&quot;&gt;Grasem Tool&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html&quot;&gt;Ohm Editor&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Tools&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Playlists.html&quot;&gt;Various Playlists&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Youtube Playlists&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html&quot;&gt;Failure Driven Design&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;FDD - Failure Driven Design&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/26/FDD-Example-Workflow.html&quot;&gt;Fdd example workflow&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Subdividing-Problems.html&quot;&gt;Subdividing problems&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Backtracking,-Mathematics,-Reversability,-Garbage-Collection,-Time-Sharing.html&quot;&gt;Backtracking, mathematics, reversability, garbage collection, time Sharing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Paradigms&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/First-Class-Functions.html&quot;&gt;First class functions&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Clojure.html&quot;&gt;Clojure&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Common-Lisp-Complexities.html&quot;&gt;Common lisp complexities&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Common Lisp&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Exhaustive-Search.html&quot;&gt;Exhaustive search&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/05/05/PROLOG-vs-Kanren.html&quot;&gt;Prolog vs kanren&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Observation-Why-Relational-Programming-Works.html&quot;&gt;Observation why relational programming works&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Relational Programming&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Mutable-Variables-and-Flags.html&quot;&gt;Mutable variables and flags&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Pattern Matching&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Parsing-vs-FP-Pattern-Matching.html&quot;&gt;Parsing vs fp pattern matching&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/28/Tokenizing.html&quot;&gt;Tokenizing&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Isolation&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/The-F-k-Program.html&quot;&gt;The f**k program&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/03/18/The-Rain-God.html&quot;&gt;The rain god&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/09/Anecdote-Language-Learning.html&quot;&gt;Anecdote language learning&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/10/Random-Anecdotes.html&quot;&gt;Random Anecdotes&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;Anecdotes&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&lt;a href=&quot;https://guitarvydas.github.io/2020/12/10/Anecdote-Secretary-vs.-Synchrony.html&quot;&gt;Anecdote secretary vs. synchrony&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; 
+        repo=&quot;guitarvydas/guitarvydas.github.io&quot; 
+        issue-term=&quot;pathname&quot; 
+        theme=&quot;github-light&quot; 
+        crossorigin=&quot;anonymous&quot; 
+        async&gt; 
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name></name></author><summary type="html">Table of Contents May 24, 2021</summary></entry><entry><title type="html">Table of contents since may 13, 2013</title><link href="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html" rel="alternate" type="text/html" title="Table of contents since may 13, 2013" /><published>2021-05-24T00:00:00-04:00</published><updated>2021-05-24T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/24/Table%20of%20Contents%20Since%20May%2013,%202013</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/24/Table-of-Contents-Since-May-13,-2013.html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
@@ -243,7 +735,240 @@
 &lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
 
 &lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">The Elephant In The Room The fundamental problem is that programmers don’t build software components that are completely isolated.</summary></entry><entry><title type="html">Compiler Technology Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html" rel="alternate" type="text/html" title="Compiler Technology Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Compiler%20Technology%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html">&lt;ul&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">The Elephant In The Room The fundamental problem is that programmers don’t build software components that are completely isolated.</summary></entry><entry><title type="html">DRY vs. RY</title><link href="https://computingsimplicity.neocities.org/2021/05/23/DRY-vs-RY.html" rel="alternate" type="text/html" title="DRY vs. RY" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/DRY%20vs%20RY</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/DRY-vs-RY.html">&lt;p&gt;DRY means “Don’t Repeat Yourself”.&lt;/p&gt;
+
+&lt;p&gt;RY mean “Repeat Yourself”.&lt;/p&gt;
+
+&lt;p&gt;Many programs are first created by cut &amp;amp; paste of working code.&lt;/p&gt;
+
+&lt;p&gt;Cut/Paste is RY.&lt;/p&gt;
+
+&lt;p&gt;Programmers are taught to organize code so that there is little repetition - DRY.&lt;/p&gt;
+
+&lt;p&gt;DRY organization is also called &lt;em&gt;scoping&lt;/em&gt; (and I call it &lt;em&gt;nesting&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;RY introduces multiple degrees of freedom into a design.&lt;/p&gt;
+
+&lt;p&gt;In general RY results in dimension explosion.  DRY tries to constrain the explosion by grouping similarities.&lt;/p&gt;
+
+&lt;p&gt;An example of RY is shown below.&lt;/p&gt;
+
+&lt;p&gt;[This is incorrect code, but shows the problem].&lt;/p&gt;
+
+&lt;p&gt;In this (incorrect) code, a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;port&lt;/code&gt; is&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a rectangle that contains nothing else&lt;/li&gt;
+  &lt;li&gt;a circle that contains nothing else&lt;/li&gt;
+  &lt;li&gt;a rectangle that contains only one text object&lt;/li&gt;
+  &lt;li&gt;a circle that contains only one text object.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can write a rule for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;port&lt;/code&gt; by making 4 clones of the code, with the appropriate conditions: [where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\+ contains(ID,_)&lt;/code&gt; means “doesn’t contain anything”].&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% layer high
+%     port is a rect or circle that contains nothing
+port(ID) :-
+    rect(ID,nil),
+    \+ contains(ID,_).
+port(ID) :-
+    circle(ID,nil),
+    \+ contains(ID,_).
+% or, port is a rect or circle that contains only [text]
+port(ID) :-
+    rect(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+port(ID) :-
+    circle(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above is RY.  When we start adding more lines to the code, the code explodes in a number of directions and becomes unmaintainable.&lt;/p&gt;
+
+&lt;p&gt;For example, at this point in the design, we want to add one more condition to the rule.  E.G. a port must be a square rectangle.  A rounded rectangle is not a port.&lt;/p&gt;
+
+&lt;p&gt;We could just hack on the code:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% layer high
+%     port is a rect or circle that contains nothing
+port(ID) :-
+    rect(ID,nil),
+    \+ rounded(ID,nil).
+    \+ contains(ID,_).
+port(ID) :-
+    circle(ID,nil),
+    \+ contains(ID,_).
+% or, port is a rect or circle that contains only [text]
+port(ID) :-
+    rect(ID,nil),
+    \+ rounded(ID,nil).
+    contains(ID,Other),
+    text(Other,nil).
+port(ID) :-
+    circle(ID,nil),
+    contains(ID,Other),
+    text(Other,nil).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We see lots of commonality in the code above.  If we keep hacking, the code will grow in a number of dimensions.&lt;/p&gt;
+
+&lt;p&gt;Programmers are taught to apply DRY principles to the above.&lt;/p&gt;
+
+&lt;p&gt;Programmers look for commonality and try to constrain it.  The ideal is to lasso every bit of commonality and to create a single rule for each grouping.&lt;/p&gt;
+
+&lt;p&gt;We could lasso the shape of ports first - rounded rectangles and squares - or, we could lasso the notions of containing-nothing vs. containing-only-text.&lt;/p&gt;
+
+&lt;p&gt;Can we wring out &lt;em&gt;all&lt;/em&gt; of the commonalities?&lt;/p&gt;
+
+&lt;p&gt;Trying to do this in an &lt;em&gt;all-in-one&lt;/em&gt; manner brings complexity into the picture and obscures the final result.  The result might be good from a DRY perspective, but becomes harder to read.&lt;/p&gt;
+
+&lt;p&gt;Some call this &lt;em&gt;abstraction&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s say that we rewrite the code in the following way:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;% a port is, maybe, a square rect or a circle
+maybePort(ID) :-
+    squareRect(ID,nil).
+maybePort(ID) :-
+    circle(ID,nil).
+% a port contains nothing, or, 
+port(ID) :-
+    maybePort(ID),
+    containsNothing(ID).
+port(ID) :-
+    maybePort(ID),
+    containsExactlyOneTextItem(ID).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;which starts out with rect-ness and circle-ness of ports.&lt;/p&gt;
+
+&lt;p&gt;We could write the same code in another way:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maybePort(ID) :-
+    containsNothing(ID).
+maybePort(ID) :-
+    containsExactlyOneTextItem(ID).
+port(ID) :-
+    maybePort(ID),
+    squareRect(ID).
+port(ID) :-
+    maybePort(ID),
+    circle(ID).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Which choice is better?&lt;/p&gt;
+
+&lt;p&gt;It depends on the Architect.&lt;/p&gt;
+
+&lt;p&gt;Ideally, the code should capture the Architect’s thought process and make the thought process clear to the reader.&lt;/p&gt;
+
+&lt;p&gt;What happens in a more complex situation?  We get &lt;em&gt;flat&lt;/em&gt; code that represents a bunch of &lt;em&gt;non-flat&lt;/em&gt; decisions that were made by the Architect.&lt;/p&gt;
+
+&lt;p&gt;The ideal code would capture that Architect’s &lt;em&gt;non-flat&lt;/em&gt; decisions, e.g. it would be&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;port(ID) :-
+    maybePort(ID),
+    containsNothing(ID).
+port(ID) :-
+    maybePort(ID),
+    containsExactlyOneTextItem(ID).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;eliding &lt;em&gt;maybePort&lt;/em&gt; and deferring its definition to elsewhere&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;port(ID) :-
+    maybePort(ID),
+    squareRect(ID).
+port(ID) :-
+    maybePort(ID),
+    circle(ID).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;or, better,&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(squarePort OR circle)
+AND
+(containsNothing OR containsExactlyOneTextItem)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;or, if we wanted to capture the Architect’s flow&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(squarePort OR circle) -&amp;gt; (containsNothing OR containsExactlyOneTextItem)
+                  else -&amp;gt; fail
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(containsNothing OR containsExactlyOneTextItem) -&amp;gt; (squarePort OR circle)
+                                           else -&amp;gt; fail
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;[In this simple example it is “obvious” that this flow-code is the same as the code that precedes it.  The difference is that the former code uses text only, while the latter uses the “-&amp;gt;” operator to show left-to-right design.]&lt;/p&gt;
+
+&lt;h1 id=&quot;the-state-explosion-problem&quot;&gt;The State Explosion Problem&lt;/h1&gt;
+&lt;p&gt;State-based code has a similar problem, often call the “state explosion problem”.&lt;/p&gt;
+
+&lt;p&gt;StateCharts constrain the State Explosion problem.&lt;/p&gt;
+
+&lt;h1 id=&quot;database-theory&quot;&gt;Database Theory&lt;/h1&gt;
+&lt;p&gt;Databse theory is the notion of wringing out all commonality in data structures.&lt;/p&gt;
+
+&lt;h1 id=&quot;user-friendly&quot;&gt;User Friendly&lt;/h1&gt;
+
+&lt;p&gt;What notation is more user-friendly?&lt;/p&gt;
+
+&lt;p&gt;Math?  Math wrings out commonality, but most people dislike the notation.  Mathematics maps a 4D design (X/Y/Z/time&lt;sup id=&quot;fnref:time&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:time&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;)) to 2D (X/Y, aka text).  [We see this mapping in the above, where the code was abstracted to “maybePort”]&lt;/p&gt;
+
+&lt;p&gt;Drawings? The idea of running diagrams has not been explored sufficiently (IMO).  Code-&amp;gt;drawings is not sufficient.  We need drawings-&amp;gt;code&lt;sup id=&quot;fnref:das&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:das&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;IDEs could deal with DRY and help programmers to specify DRY.  Github uses diff, we just need to use diff for higher level concepts.&lt;/p&gt;
+
+&lt;p&gt;OO was an attempt to capture DRY.  OO was unsatisfactory, because of how it warps control-flow.&lt;/p&gt;
+
+&lt;p&gt;IDE elision to help programmers create code in layers.  Org-mode for code.&lt;/p&gt;
+
+&lt;p&gt;What we &lt;em&gt;really&lt;/em&gt; want is to capture the design process.  Did the Architect address this problem by starting with rect/circle commonalities, or, did the Architect start by addressing the containment commonalities.&lt;/p&gt;
+
+&lt;p&gt;It helps to know what the Architect was thinking, when one wants to upgrade or otherwise maintain the code.  The above example is simple.  Things get hoary in real-life examples.&lt;/p&gt;
+
+&lt;p&gt;To capture this kind of thought process, we need to capture the design over &lt;em&gt;time&lt;/em&gt;.  Mathematics wrings &lt;em&gt;time&lt;/em&gt; out of its notation.  That is probably one of the reasons that non-mathematicians don’t like math - it doesn’t &lt;em&gt;always&lt;/em&gt; suit the way they think about certain problems.&lt;/p&gt;
+
+&lt;p&gt;We want to capture the thought process, for example&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;one train of thought starts out with rectangles and circles&lt;/li&gt;
+  &lt;li&gt;another train of thought starts out with containment (contain nothing, contain only 1 text item).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If we could build black boxes and just plug them together, we might be able to capture the thought process, for example:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;rect -&amp;gt; not rounded -&amp;gt; contains-nothing -&amp;gt; it’s a port.&lt;/li&gt;
+  &lt;li&gt;rect -&amp;gt; not rounded -&amp;gt; contains-1-text-item -&amp;gt; it’s a port.&lt;/li&gt;
+  &lt;li&gt;circle -&amp;gt; contains-nothing -&amp;gt; it’s a port.&lt;/li&gt;
+  &lt;li&gt;circle -&amp;gt; contains-1-text-item -&amp;gt; it’s a port.&lt;/li&gt;
+  &lt;li&gt;contains-nothing -&amp;gt; rect -&amp;gt; not rounded -&amp;gt; it’s a port&lt;/li&gt;
+  &lt;li&gt;contains-1-text-item -&amp;gt; rect -&amp;gt; not rounded -&amp;gt; it’s a port&lt;/li&gt;
+  &lt;li&gt;contains-nothing -&amp;gt; circle -&amp;gt; it’s a port&lt;/li&gt;
+  &lt;li&gt;contains-1-text-item -&amp;gt; circle -&amp;gt; it’s a port.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Programmers are taught to abstract the above choices down to fewer choices.&lt;/p&gt;
+
+&lt;p&gt;Math notation can capture the above choices, but doesn’t show any kind of ordering (by the Architect).&lt;/p&gt;
+
+&lt;p&gt;Box-and-arrow notation, using black boxes, can capture the above and show the ordering of design.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Isolation&lt;/em&gt; could be used to create pluggable components.&lt;/p&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;/script&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:time&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;A Design evolves over time and can punch-in and punch-out to different layers. &lt;a href=&quot;#fnref:time&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:das&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Drawings-&amp;gt;code can be accomplished by expressing the diagrams in normalized triple form (based on shapes, instead of pixels), using exhaustive search (e.g Relational Programming) to parse the information, then using well-known compiler technologies to transpile the result into working code. &lt;a href=&quot;#fnref:das&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">DRY means “Don’t Repeat Yourself”.</summary></entry><entry><title type="html">Compiler Technology Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html" rel="alternate" type="text/html" title="Compiler Technology Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Compiler%20Technology%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Compiler-Technology-Takeaways.html">&lt;ul&gt;
   &lt;li&gt;REGEX&lt;/li&gt;
   &lt;li&gt;Parsing&lt;/li&gt;
   &lt;li&gt;Normalization&lt;/li&gt;
@@ -575,47 +1300,4 @@
       &lt;p&gt;Lack of Separation of Concerns &lt;a href=&quot;#fnref:soc&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Isolation Coordination Language Concurrency</summary></entry><entry><title type="html">Structured Programming Takeaways</title><link href="https://computingsimplicity.neocities.org/2021/05/23/Structured-Programming-Takeaways.html" rel="alternate" type="text/html" title="Structured Programming Takeaways" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2021/05/23/Structured%20Programming%20Takeaways</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/05/23/Structured-Programming-Takeaways.html">&lt;ul&gt;
-  &lt;li&gt;Nesting&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;scoping&quot;&gt;Scoping&lt;/h1&gt;
-
-&lt;p&gt;Scoping is nesting.&lt;/p&gt;
-
-&lt;p&gt;Structured Programming suggested ways to scope control flow.&lt;/p&gt;
-
-&lt;p&gt;Control flow spaghetti was discarded in lieue of structured control-flow concepts such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while loops&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;[N.B. The problem of Global Variables was, also, solved by using nesting (scoping), although this was not fundamentally a control-flow problem]&lt;/p&gt;
-
-&lt;h1 id=&quot;what-is-not-nested-in-todays-pls&quot;&gt;What is &lt;em&gt;not&lt;/em&gt; nested in today’s PLs?&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;functions&lt;/li&gt;
-  &lt;li&gt;types&lt;/li&gt;
-  &lt;li&gt;CPS&lt;/li&gt;
-  &lt;li&gt;environments&lt;/li&gt;
-  &lt;li&gt;…&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;package-managers&quot;&gt;Package Managers&lt;/h1&gt;
-
-&lt;p&gt;Packaging, package managers, are attempts for providing nesting for symbols.&lt;/p&gt;
-
-&lt;p&gt;The fact that there is more than one kind of package manager implies that the concept has not been normalized, yet.&lt;/p&gt;
-
-&lt;h1 id=&quot;docker&quot;&gt;Docker&lt;/h1&gt;
-&lt;p&gt;Docker is an attempt at providing nesting and isolation.&lt;/p&gt;
-
-&lt;h1 id=&quot;environments&quot;&gt;Environments&lt;/h1&gt;
-&lt;p&gt;Environments and environment variables are just another use of flat global entities.&lt;/p&gt;
-
-&lt;p&gt;In this case, isolation is implicitly provided by the physical hardware.&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Nesting</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Isolation Coordination Language Concurrency</summary></entry></feed>

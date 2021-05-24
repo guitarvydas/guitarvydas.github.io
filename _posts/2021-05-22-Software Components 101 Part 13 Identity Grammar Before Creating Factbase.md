@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Software Components 101 - Part 13 Identiy Grammar Before Creating a Factbase""
+title:  "Software Components 101 - Part 13 Identity Grammar Before Creating a Factbase"
 ---
 # Introduction
-We create a factbase from the nested documents
+We create a factbase from the nested documents created in previous essays.
+
 ## Identity Grammar
 ```
 BRACES2FB {
