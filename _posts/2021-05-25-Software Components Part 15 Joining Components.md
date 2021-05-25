@@ -100,11 +100,11 @@ That's better, but still no cigar.  `V/x/y` and `v/x/d` appear twice in the link
 2. our query, or,
 3. something else.
 
-We can view this join as a [diagram](2021-05-25-join.png).
+We can view this join as a ![diagram](image 2021-05-25-join.png).
 
-This diagram shows that to sew the two components together, we must
-1. remove v/x from v
-2. rewrite all arru
+This diagram shows what we want to do. The exising arrows in `v` can remain, since they connect to `v/x` but do not penetrate the boundaries of `v/x`.
+
+In a more automated version, we would want to convert circles in `v/x` into rects. Or would we?
 
 _unifinished - experimenting with .png files and .md_
 
