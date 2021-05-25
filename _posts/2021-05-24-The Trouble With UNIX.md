@@ -5,7 +5,7 @@ title:  "The Trouble With UNIX"
 
 # Early BASIC
 
-In the early days, BASIC was based on bytecodes, called _VM_s today.
+In the early days, BASIC was based on bytecodes, called _VMs_ today.
 
 The trouble with this approach was that other people could read and modify the application code without clearing the changes with the owners.
 
