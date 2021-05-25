@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Software Components 101 - Joining Components"
+title:  "Software Components 101 - Part 15 Joining Components"
 ---
 
 # Introduction
@@ -100,9 +100,15 @@ That's better, but still no cigar.  `V/x/y` and `v/x/d` appear twice in the link
 2. our query, or,
 3. something else.
 
-We can view this join as a [diagram](../assets/2021-05-25-join.png).
+We can view this join as a [diagram](2021-05-25-join.png).
+
+This diagram shows that to sew the two components together, we must
+1. remove v/x from v
+2. rewrite all arru
 
 _unifinished - experimenting with .png files and .md_
+
+
 
 # See Also
 
