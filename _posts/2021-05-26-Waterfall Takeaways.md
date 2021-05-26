@@ -66,6 +66,8 @@ Aynchronous code and parallel code are easier to design in the concurrent paradi
 
 Most current PLs treat asynchrony as a second class paradigm.
 
+It is straight-forward to simulate concurrency on synchronous operating systems (See `CALL/RETURN Spaghetti`)  [_Note that threading is, also, just a simulation_.]
+
 # Tell: Backtraces
 
 Backtraces are a _tell_ that indicates happy-path-only thinking.
