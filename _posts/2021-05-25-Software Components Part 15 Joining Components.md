@@ -100,7 +100,7 @@ That's better, but still no cigar.  `V/x/y` and `v/x/d` appear twice in the link
 2. our query, or,
 3. something else.
 
-We can view this join as a ![diagram](image 2021-05-25-join.png).
+We can view this join as a ![diagram](2021-05-25-join.png).
 
 This diagram shows what we want to do. The exising arrows in `v` can remain, since they connect to `v/x` but do not penetrate the boundaries of `v/x`.
 
