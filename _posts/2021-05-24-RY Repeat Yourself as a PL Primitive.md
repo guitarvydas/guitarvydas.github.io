@@ -19,7 +19,7 @@ RY programs are hard to maintain.
 
 One bug-fix might affect a piece of code that has been copy/pasted in a number of places.  Each copied piece must be repaired.
 
-Programmers use _libraries_ to manually manage DRY.  Instead of copying pieces of code, the code is moved to a library an programs reference the library (instead of cut/pasting the code).
+Programmers use _libraries_ to manually manage DRY.  Instead of copying pieces of code, the code is moved to a library.  Programs reference the library (instead of cut/pasting the code).
 
 PLs are designed to enable manual DRY.  Code that is (manually) moved to a library is replaced by a single-line reference to the library (a CALL).
 
