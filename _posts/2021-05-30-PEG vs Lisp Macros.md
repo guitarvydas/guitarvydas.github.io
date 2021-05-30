@@ -85,7 +85,7 @@ There is no longer any excuse for using only one language for _everything_.
 I have learned a lot from Lisp.
 
 I conclude, though, that a lot of the features of Lisp should be broken out of Lisp and made into stand-alone features, e.g.
-- an expression language for Implementation[^1]
+- an expression language for Implementation[^2]
 - a Macro Language for parsing
 - a rapid-prototyping language for debugging concepts
 - a toolbox language for building better syntaxes and notations
@@ -93,7 +93,7 @@ I conclude, though, that a lot of the features of Lisp should be broken out of L
 
 Lisp started out as a simple language for rapid prototyping. Then, it became a kitchen sink for every kind of reseach-y idea. The ideas that stuck to the wall were unioned together and Common Lisp was the result. The CL standardizers had an agenda - they wanted a language that produced code that was as efficient as the FORTRANs of the day. As a result of this agenda, Lisp lost a lot of its debugability flavor (it _looks_ like it's still there (break, condition handlers, etc. but its all mixed in with complex features that reduce debugability (current SBCL is the epitome of anti-debugability (e.g. SBCL gives multi-line warnings that don't help you find the real problems)))))
 
-[^1]Note that Engineering is not Implementation.  We need a language for Architecture _and_ we need a language for Engineering. We already have multiple languages for Implementation (e.g. Python, Javascript, Haskell, etc.).  (Engineering is the stuff that fits between Architecture and Implementation. Engineering makes Architectural ideas do-able. Implementation is code. Currently, we do everything in one language and pay to have all software custom-built, where we could chope it up into Architecture/Engineering/Implementation/Testing, etc, etc. and pay only for what we need).
+[^2]Note that Engineering is not Implementation.  We need a language for Architecture _and_ we need a language for Engineering. We already have multiple languages for Implementation (e.g. Python, Javascript, Haskell, etc.).  Engineering is the stuff that fits between Architecture and Implementation. Engineering makes Architectural ideas do-able. Implementation is code. Currently, we do everything in one language and pay to have all software custom-built, where we could chop it up into Architecture/Engineering/Implementation/Testing, etc, etc. and pay only for what we need.
 
 # Conclusion - PEG vs Lisp Macros
 If you have to use only one language (something that I advise against), Lisp is "good" in that it doesn't restrict which paradigms you can use. Furthermore, it is possible to elide details by using Lisp macros. 
@@ -116,9 +116,9 @@ When you get good at this stuff, the little differences begin to matter more.  I
 
 I need to use a notation that reminds me to separate concepts.
 
-For example, you _can_ write OOP code in assembly language, but you tend not to.  OOP languages stop you from doing anti-OOP things in your code[^1]. Likewise, we need languages that stop us from doing anti-DI things in our code.  I _can_ write compilers in Lisp or C or Python, but when I use S/SL it reminds me to separate the compiler DI stuff from the implementation stuff, which, in the end, makes it easier to write the compilers.  People are "discovering" this kind of thinking when they use super-strongly-typed languages like Haskell.  "It just works" is not because of Haskell, it's because they've thought the design through, led by the boundaries imposed by Haskell's strong type-checking.  Strong typing is _only_ one way to think about an Architecture.). 
+For example, you _can_ write OOP code in assembly language, but you tend not to.  OOP languages stop you from doing anti-OOP things in your code[^3]. Likewise, we need languages that stop us from doing anti-DI things in our code.  I _can_ write compilers in Lisp or C or Python, but when I use S/SL it reminds me to separate the compiler DI stuff from the implementation stuff, which, in the end, makes it easier to write the compilers.  People are "discovering" this kind of thinking when they use super-strongly-typed languages like Haskell.  "It just works" is not because of Haskell, it's because they've thought the design through, led by the boundaries imposed by Haskell's strong type-checking.  Strong typing is but only _one_ way to think about an Architecture, but most people blame success on strong typing. 
 
-[^1]: For the record, 1st-class functions were supported in C, but not encouraged.  Closures were built into Lisp 1.5 in 1956, then ignored and re-built in assembler and C to make UNIX threads.  Garbage collection - malloc () - appeared in K&R.  Changing the notation helped us use these concepts pervasively.  The difference is "just" a psychological detail.
+[^3]: For the record, 1st-class functions were supported in C, but not encouraged.  Closures were built into Lisp 1.5 in 1956, then ignored and re-built in assembler and C to make UNIX threads.  Garbage collection - malloc () - appeared in K&R.  Changing the notation helped us use these concepts pervasively.  The difference is "just" a psychological detail.
 # See Also
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
