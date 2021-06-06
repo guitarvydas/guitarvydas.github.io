@@ -27,7 +27,7 @@ The cable doesn't care.
 
 What is a software cable?
 
-Can we connect the two software components via a chain (pipeline) of increasingly specific type filters? Bits in at one end, type "xyz" out the other end?
+Can we connect two software components via a chain (pipeline) of increasingly specific type filters? Bits in at one end, type "xyz" out the other end?
 
 Or, do we connect the software components using a smart cable?
 
@@ -67,9 +67,9 @@ How many more filters are there?
 
 I don't know. 
 
-I only need to know what I need to know.
+I only know what I need to know.
 
-If I wrap my data in the correct set of layers, it will make it all the way to the end and I will receive a response (wrapped in layers that I prescribe or agree to).
+If I wrap my data in the correct set of layers, it will make it all the way to the end and I will receive a response (wrapped in layers that I define or agree to).
 
 Today's software cables are based on the all-in-one mentality instead of the layered mentality.
 
@@ -108,9 +108,9 @@ DAGs allow cross-talk between nodes.
 DAGs are not truly hierarchical.
 
 ## Optimization
-Optimzation sometime requires poking information through layer walls.
+Optimization sometime requires poking information through layer walls.
 
-This can be necessary, but, should be delayed as long as possible, since it, by definition, destroys (poke holes into) otherwise pluggable designs.
+This can be necessary, but, should be delayed as long as possible, since, by definition, it destroys (poke holes into) otherwise pluggable designs.
 
 ## Low-Level Operations
 
