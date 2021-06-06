@@ -69,7 +69,7 @@ Hierarchical return values.
 
 Hierarchical parameters.
 
-Hierarchical sub-systems (e.g. a _system_ can be more than 7+-2 lines of code, as long as any sub-unit of code - isolated code - is only 7+-2 lines long).
+Hierarchical sub-systems (e.g. a _system_ can be more than 7±2 lines of code, as long as any sub-unit of code - isolated code - is only 7±2 lines long).
 
 etc. etc.
 
