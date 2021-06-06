@@ -65,9 +65,9 @@ Hierarchical sub-systems (e.g. a _system_ can be more than 7+-2 lines of code, a
 
 etc. etc.
 
-Flat-_anything_ is bad.
+_Flat-anything_ is bad.
 
-Non-_fractal_ anything is bad.
+_Non-fractal_ anything is bad.
 
 # Trees
 
