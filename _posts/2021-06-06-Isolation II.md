@@ -18,6 +18,8 @@ UNIX-like processes that die and are automagically cleaned up are a possibility.
 
 Even lowly C programs running under UNIX are isolated.
 
+[_Stolen from a license-plate I saw in a UNIX lab. "UNIX Live Free or Die"_]
+
 # Leaking State
 Leaking state should not be allowed.
 
