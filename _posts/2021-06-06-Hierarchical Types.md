@@ -15,6 +15,7 @@ Type-checking is (already) done like this. A type checker is an interpreter whic
 
 # See Also
 
+[Type Stacks](https://guitarvydas.github.io/2020/12/09/Type-Stacks.html)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
 
