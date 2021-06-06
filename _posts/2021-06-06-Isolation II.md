@@ -18,7 +18,9 @@ UNIX-like processes that die and are automagically cleaned up are a possibility.
 
 Even lowly C programs running under UNIX are isolated.
 
-[_Stolen from a license-plate I saw in a UNIX lab. "UNIX Live Free or Die"_]
+[...][^die]
+
+[^die]: Stolen from a license-plate I saw in a UNIX lab. "UNIX Live Free or Die".
 
 # Leaking State
 Leaking state should not be allowed.
@@ -47,11 +49,11 @@ For example, 26 global variables, named A-Z, are more than I need for only 5 lin
 
 # The Unit of Understandability
 
-7+-2.
+7±2.
 
 # Problem: How To Keep Software Units Small?
 
-The problem becomes: how do we keep all software units down to 7+-2 lines in length.
+The problem becomes: how do we keep all software units down to 7±2 lines in length.
 
 # Hierarchy
 
