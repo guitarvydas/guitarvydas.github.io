@@ -14,7 +14,7 @@ OOP-style encapsulation is not enough.
 
 # UNIX Live Free and Die
 
-UNIX-like processes that die and are automagically cleaned up are a possibility. 
+UNIX-like processes that die and are automagically cleaned up are another way to get isolation.
 
 Even lowly C programs running under UNIX are isolated.
 
@@ -53,7 +53,7 @@ For example, 26 global variables, named A-Z, are more than I need for only 5 lin
 
 # Problem: How To Keep Software Units Small?
 
-The problem becomes: how do we keep all software units down to 7±2 lines in length.
+The problem becomes: how do we keep all software units down to 7±2 lines in length?
 
 # Hierarchy
 
