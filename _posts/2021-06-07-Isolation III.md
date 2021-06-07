@@ -3,9 +3,8 @@ layout: post
 title:  "Isolation III"
 ---
 `True isolation` is
-```data isolation```
-+ 
-```control-flow isolation```
++ ```data isolation``` AND
++ ```control-flow isolation```
 
 # CALL / RETURN
 CALL/RETURN does not isolate control-flow, it implies sequential operation.
@@ -15,7 +14,7 @@ CALL/RETURN does not isolate control-flow, it implies sequential operation.
 # Relational Programming
 Relational programming does not imply sequential operation.
 
-All control flow is handled by the engine.
+All control flow is handled by the relational engine.
 
 # UNIX Threads
 
@@ -33,28 +32,41 @@ The return value is delivered in a "sequential block".
 
 The caller waits for a result.
 
+# Concurrency vs. Parameters
+
+Note that sequentialism leaks into parameter passing.
+
+In sequential programming, _all_ parameters must be delivered at the same time.
+
+In concurrent programming, parameters can be delivered 
+- _at any time_ 
+- _in any order_
+- _individually_.
+
+Grouping parameters together and grouping return values together is the exception, not the rule, in concurrent programming.
+
 # Lifetime - Forever vs. Live-Then-Die
 
 The caller does/can not care if the callee 
-- (a) lives-then-dies, or, 
-- (b) lives forever.
+- (a) lives forever, or,
+- (b) lives-then-dies.
 
-(a) is function-like
+(a) is server-like.
 
-(b) is server-like.
+(b) is function-like.
 
 # Need to Know
 Saying `x.fn(...)` implies that you know too much about "x". 
 
 That knowledge is hard-wired into the calling code and makes it hard to change later, aka accidental dependency.
 
-Suggestion: all methods have only one calling syntax and all methods have the _same_ parameter list syntactically, with the _same type_.
+Suggestion: all methods have only one calling syntax and all methods have the _same_ parameter list syntactically, with the _same type_ (!).
 
 ## Type Checking
 
 The suggestion is not to delete type-checking, but to move it elsewhere.
 
-We _already_ do this with compilers->opcodes.
+We _already_ do this with compilers -> opcodes.
 
 Compilers can be viewed as type filters that strip away semantic information to produce untyped opcodes.
 
