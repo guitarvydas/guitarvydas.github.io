@@ -76,6 +76,28 @@ In `var x = obj.method (...)`, you do not get to choose whether the operation is
 
 The choice is made for you and baked into your code (aka accidental dependency (aka accidentally not-isolated)).
 
+# Further Suggestion
+
+Suggestion: code cannot _call_ a method in an object.
+
+Code can only _send_ information to its _parent_.
+
+The _parent_ can _choose_ to _send_ this information to another child for further processing.
+
+I.E. a function cannot _name_ other objects and methods.
+
+# Software Components
+
+Software components can contain code.
+
+Software components can only _send_ information upwards to their _parents_, or, they can _send_ commands to their children.
+
+Cross-talk is not allowed.
+
+Cross-talk produces non-scalable code.
+
+Corollary: components cannot communicate directly with their peers.
+
 # See Also
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
