@@ -1,0 +1,51 @@
+I"�<p>All names shall be extracted from namespaces.</p>
+
+<p>(This means that not only variable names, but function and type names be placed in namespaces).</p>
+
+<p>Namespaces shall be hierarchical.</p>
+
+<p>Namespaces can contain namespaces.</p>
+
+<p>A fully qualified name consists of 3 parts[^3parts]:</p>
+<ul>
+  <li>
+    <ol>
+      <li>component</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>namespace within the component, i.e. i/o/x/c/n (input, output, connection, component, other names, resp.)</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>name (a string or a symbol).</li>
+    </ol>
+  </li>
+</ul>
+
+<p>Corrollary: Each <em>software component</em> contains 5 namespaces. Names are unique within a namespace, but may duplicate names in other namespaces, e.g. a <em>software component</em> might contain an input called “a” and an output called “a” without any name-clashing problems (the first “a” is in the input namespace, whereas the second “a” is in the output namespace).</p>
+
+<p>A name can be represented by a tuple <code class="language-plaintext highlighter-rouge">{component, namespace, name}</code>.</p>
+
+<p>Names are relative and nested, in general, the above tuple is recursive, e.g.<br />
+<code class="language-plaintext highlighter-rouge">\{\{component, namespace, name} namespace name}</code>.</p>
+
+<p>The namespace syntax is not meant to be easily human-readable.</p>
+
+<p>Purely for human readability, we abbreviate namespace notation in UNIX-like syntax:</p>
+
+<p><code class="language-plaintext highlighter-rouge">./c/outer/i/name</code></p>
+
+<p>where ‘.’ means the root component (also known as “self”) and the namespaces are abbreviated to a single letter <code class="language-plaintext highlighter-rouge">i/o/x/c/n</code>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -21,7 +21,7 @@ Corrollary: Each _software component_ contains 5 namespaces. Names are unique wi
 A name can be represented by a tuple `{component, namespace, name}`.
 
 Names are relative and nested, in general, the above tuple is recursive, e.g.
-`{ {component, namespace, name} namespace name}`.
+`\{\{component, namespace, name} namespace name}`.
 
 The namespace syntax is not meant to be easily human-readable.
 
