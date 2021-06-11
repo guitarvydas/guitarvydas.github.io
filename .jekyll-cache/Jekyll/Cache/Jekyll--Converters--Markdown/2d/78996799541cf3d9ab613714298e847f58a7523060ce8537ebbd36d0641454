@@ -1,0 +1,64 @@
+I"v<p>The most <em>atomic</em> API consists of a function with exactly one parameter and zero return value(s).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function api(param) {...}
+</code></pre></div></div>
+
+<p>The function runs forever.</p>
+
+<p>The function parameter is always of type <code class="language-plaintext highlighter-rouge">event</code>.</p>
+
+<p>An <code class="language-plaintext highlighter-rouge">event</code> message contains two fields</p>
+<ul>
+  <li>a tag</li>
+  <li>data.</li>
+</ul>
+
+<h1 id="type-checking-the-api">Type Checking the API</h1>
+<p>Type checking consists of ensuring that the <code class="language-plaintext highlighter-rouge">event</code> parameter is the correct shape (as above).</p>
+
+<h1 id="layered-type-checking">Layered Type Checking</h1>
+<p>Further type-checking is a layered form of the <code class="language-plaintext highlighter-rouge">event</code> data, like newtork packets.</p>
+
+<p>We can string type-checking filters together to successively ensure that events arriving at a software component are “valid”.</p>
+
+<p>This is akin to input validation for web-based forms (i.e. we already do this kind of type checking).</p>
+
+<p>We call this kind of type checking by a pipeline of filters <em>design rule checking</em>.</p>
+
+<p>Type checking by pipeline has had  several different names, e.g. input validation, business rules, OSI 7-layer model, etc.</p>
+
+<p>There can be no general definition of data within <code class="language-plaintext highlighter-rouge">events</code>.</p>
+
+<p>The definition of data is agreed upon by the sender and the receiver (much like the meaning of text lines in UNIX pipelines).</p>
+
+<p>An <code class="language-plaintext highlighter-rouge">event</code> tag is sufficiently large to hold a small <code class="language-plaintext highlighter-rouge">int</code> (0-31), i.e. the tag is on byte in size.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">data</code> portion of an event is at least 3 bytes long.</p>
+
+<p>The minimal <code class="language-plaintext highlighter-rouge">event</code> data structure is</p>
+<ul>
+  <li>1 byte tag</li>
+  <li>3 bytes data.</li>
+</ul>
+
+<p>Larger events are accomodated by agreement of the sender and receiver.</p>
+
+<p>Typically, the event <code class="language-plaintext highlighter-rouge">data</code> field contains layered information. The layers are peeled by a pipeline of receivers.</p>
+
+<p>Events larger than 4 bytes are</p>
+<ol>
+  <li>parsed by a pipeline of receivers, or,</li>
+  <li>treated as garbage by the receivers (note that large events can appear as successive garbled messages). The Software Implementor(s) must ensure that components are correctly connected together. It is advisable that software components be designed with a <em>reset</em> input that drives the component into a known, default state.  Systems can employ <code class="language-plaintext highlighter-rouge">watchdog timers</code> that reset components much like watchdog timers in hardware designs.</li>
+</ol>
+
+<p>It is advisable to design components in a manner similar to the OSI 7-layer model for networking. (Aside: components can contain component pipelines themselves, in order to process events in a layered manner).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

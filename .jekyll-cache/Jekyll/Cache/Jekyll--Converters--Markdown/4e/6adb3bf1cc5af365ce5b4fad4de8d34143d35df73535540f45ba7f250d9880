@@ -1,0 +1,82 @@
+I"r<p>Structured Programming introduced the notion of <em>nesting</em> control flow with constructs like <em>if-then-else</em>, <em>while</em>, etc.</p>
+
+<p>Object-Oriented Programming popularized the notion of <em>nesting</em> data via inhertiance.</p>
+
+<p>OOP and Structure Programming do not fully <em>isolate</em> control-flow. <code class="language-plaintext highlighter-rouge">CALL / RETURN</code> is usually supported in hardware by a global variable (the Stack).</p>
+
+<p><code class="language-plaintext highlighter-rouge">CALL / RETURN</code> violates the single-entry-single-exit edict of Structured Programming. Programmers can CALL subroutines directly and “break through” the boundaries of a properly structured</p>
+
+<p>To enable software construction using components, we must fully <em>isolate</em> data <em>and</em> control-flow.</p>
+
+<h1 id="threads-for-isolation-of-control-flow">Threads for Isolation of Control Flow</h1>
+<p>Threads, common in desktop operating systems like Linux, MacOS and Windows, isolate control flow in a heavy-handed manner. Threads often employ full-preemption and hardware MMUs.</p>
+
+<p>Full preemption has caused a great deal of accidental complexity, e.g. the Mars Rover disaster.</p>
+
+<p>Fixes for known problems have been developed, but it is clear that <em>full preemption</em> inhibits reasoning about designs.</p>
+<h1 id="pure-functions-for-isolation-of-control-flow">Pure Functions for Isolation of Control Flow</h1>
+<p>FP restricts programs by expunging mutability to achieve <em>isolation</em>.</p>
+
+<p>These kinds of languages severely restrict the programming paradigm(s) that can be employed to solve practical problems.</p>
+
+<h2 id="calculators---one-input-one-output">Calculators - One Input One Output</h2>
+<p>FP makes it easy to treat computers as <em>calculators</em>.</p>
+
+<p>FP assumes that all <em>functions</em> have one block of inputs and one block of outputs.</p>
+
+<p>FP is not well-suited to solving problems using paradigms that exceed this simple model.</p>
+
+<h3 id="exceptions">Exceptions</h3>
+<p>For example, <em>exceptions</em> are usually treated as edge-cases with second-class syntax and second-class semantics.</p>
+
+<h3 id="javascript">Javascript</h3>
+<p>Javascript was invented for creating distributed programs (aka web pages).</p>
+
+<p>Javascript continues to use function-like syntax with the result that simple distributed operations need to be programmed as <em>callbacks</em>.</p>
+
+<h2 id="referential-transparency">Referential Transparency</h2>
+
+<p>An ideal for component-based design is the ability to replace components with pin-compatible ones.</p>
+
+<p>In hardware design, this was called <em>pin compatibility</em>.</p>
+
+<p>In functional progamming languages, this is called <em>referential transparency</em>.</p>
+
+<p>FP languages achieve <em>referential transparency</em> by restricting the language paradigm that can be used.</p>
+
+<p>FP expunges mutability and mutable operations.</p>
+
+<p>(Note that this is <em>not</em> the only way to achieve <em>referential transparency</em>. A different solution was developed in the electronics industry in the 1950’s).</p>
+<h1 id="hidden-dependencies---global-variables">Hidden Dependencies - Global Variables</h1>
+<p>A major factor in the complexity of computer systems is the hidden dependencies between modules and the hardware-supported used of a global Stack.</p>
+
+<p>Earlier computers, e.g. the IBM 360, did not have a hardware-supported Stack (programmers had to simulate a Stack using the BALR instruction).</p>
+
+<h1 id="hidden-dependencies---synchrony-vs-asynchrony">Hidden Dependencies - Synchrony vs. Asynchrony</h1>
+<p>Most languages use a sequential function paradigm.</p>
+
+<p>This sequential model resists the natural paradigm for computing - asynchronous operation.</p>
+
+<p>It should be noted that asynchrony is common in human experience</p>
+<ol>
+  <li>the human body contains an autonomous nervous system which consists of some 500 independent units</li>
+  <li>children around the age of 5 learn to use a hard, real-time notation</li>
+  <li>businesses run in a top-down manner (aka Org Charts) and consist of many independent units.</li>
+</ol>
+
+<h1 id="concurrency">Concurrency</h1>
+
+<p>— spaghetti<br />
+— The Stack<br />
+— Scalability<br />
+— Superposition</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

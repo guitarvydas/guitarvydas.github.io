@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>RY - Repeat Yourself - As a PL Primitive | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="RY - Repeat Yourself - As a PL Primitive" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RY vs. DRY" />
+<meta property="og:description" content="RY vs. DRY" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/24/RY-Repeat-Yourself-as-a-PL-Primitive.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/24/RY-Repeat-Yourself-as-a-PL-Primitive.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-24T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="RY - Repeat Yourself - As a PL Primitive" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/24/RY-Repeat-Yourself-as-a-PL-Primitive.html","@type":"BlogPosting","description":"RY vs. DRY","dateModified":"2021-05-24T00:00:00-04:00","datePublished":"2021-05-24T00:00:00-04:00","headline":"RY - Repeat Yourself - As a PL Primitive","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/24/RY-Repeat-Yourself-as-a-PL-Primitive.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">RY - Repeat Yourself - As a PL Primitive</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-24T00:00:00-04:00" itemprop="datePublished">May 24, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="ry-vs-dry">RY vs. DRY</h1>
+
+<p>DRY means “Don’t Repeat Yourself”.</p>
+
+<p>Programmers learn to manually perform DRY.</p>
+
+<p>Most people, though, find RY - Repeat Yourself - to be the first programming idiom that they use.</p>
+
+<p>Grab a piece of working code, then hack on it.</p>
+
+<p>Later, RY brings trouble.  Programs built using RY tend to become large and unwieldy.</p>
+
+<p>RY programs are hard to maintain.</p>
+
+<p>One bug-fix might affect a piece of code that has been copy/pasted in a number of places.  Each copied piece must be repaired.</p>
+
+<p>Programmers use <em>libraries</em> to manually manage DRY.  Instead of copying pieces of code, the code is moved to a library.  Programs reference the library (instead of cut/pasting the code).</p>
+
+<p>PLs are designed to enable manual DRY.  Code that is (manually) moved to a library is replaced by a single-line reference to the library (a CALL).</p>
+
+<h1 id="ides-for-ry">IDEs for RY</h1>
+<p>IDEs could be designed to support automation of DRY.</p>
+
+<p>Currently, we use CUT/PASTE edit operations to implement RY (and, later, DRY).</p>
+
+<p>Instead, we could use some other gesture to copy/paste likenesses of code.</p>
+
+<p>Our IDEs+PLs could support <code class="language-plaintext highlighter-rouge">like</code> operators, meaning “this code is like that code over there”.</p>
+
+<p>The shared code might appear in gray font, with some transparency.</p>
+
+<p>If one hacks on the code, the new changes appear in a solid colour and no transparency.</p>
+
+<p>The system (IDE + PL) remembers what the original code is and what the changes (diffs) to it are. The programmer sees the code in whole and doesn’t need to remember to move it to a library.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Github</code> and <code class="language-plaintext highlighter-rouge">diff</code> already do something like this, except backwards.  Programmers started out using under-powered hardware and developed manual ways of doing things that could be automated today.</p>
+
+<h1 id="paul-bennett-framing-software-reuse">Paul Bennett “Framing Software Reuse”</h1>
+
+<p>Paul Bennett discusses <em>multiple use</em> of code, as opposed to simple <em>reuse</em>.</p>
+
+<h1 id="chanchal-roy-cordy-nicad">Chanchal Roy, Cordy “NiCAD”</h1>
+
+<p>Roy proposes a system for clone detection.</p>
+
+<p>If we had IDEs+PLs that allowed us to say that a piece of code is <em>like</em> another piece of code, we would not need to detect clones (we would simply tell the system about the clones we intend to build).</p>
+
+<h1 id="word-processors">Word Processors</h1>
+
+<p>In word processors, such as Microsoft Word, select/control-C/control-V means COPY/PASTE.</p>
+
+<p>This keyboard/mouse gesture could be repurposed to mean COPY-LIKENESS and remember (using diff) where the code came from.</p>
+
+<h1 id="collaborative-editing">Collaborative Editing</h1>
+
+<p>Many online word processors support collaborative editing and change management.</p>
+
+<p>This same set of techniques could be applied to code editing, even when only a single programmer is involved.</p>
+
+<h1 id="m4">M4</h1>
+
+<p>The UNIX tool <code class="language-plaintext highlighter-rouge">m4</code> contains a number of text-editing features (called <code class="language-plaintext highlighter-rouge">macros</code> and <code class="language-plaintext highlighter-rouge">include</code>) that could be used to implement IDEs.</p>
+
+<h1 id="pls-with-regex-and-strings">PLs With REGEX and Strings</h1>
+
+<p>PLs that contain REGEX and that make string manipulation easy are good candidates for implementing new-breed IDEs.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/05/24/RY-Repeat-Yourself-as-a-PL-Primitive.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

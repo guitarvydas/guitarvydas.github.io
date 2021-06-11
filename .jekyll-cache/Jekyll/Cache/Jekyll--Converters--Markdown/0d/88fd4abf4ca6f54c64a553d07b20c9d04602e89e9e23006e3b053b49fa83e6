@@ -1,0 +1,146 @@
+I"�<p>What is the minimum unit of connect-ability?</p>
+
+<p>Imagine that we want to connect one software module to another.</p>
+
+<p>What do we need to know to do this?</p>
+
+<h1 id="connecting-audio-signals">Connecting Audio Signals</h1>
+
+<p>Let’s imagine a physical real-world system.</p>
+
+<p>Imagine that we want to connect a guitar to a guitar amplifier.</p>
+
+<p>We connect the two using a cable (“guitar cord”).</p>
+
+<p>The only “typing” applied to the cable is the physical connector and the receptacle that it is going to be plugged into (e.g. 1/4-inch plug to 1/4-inch jack).</p>
+
+<p>Is the signal analog or digital? Is it +5V or +3V?</p>
+
+<p>The cable doesn’t care.</p>
+
+<h1 id="connecting-software-modules-together">Connecting Software Modules Together</h1>
+
+<p>What is a software cable?</p>
+
+<p>Can we connect two software components via a chain (pipeline) of increasingly specific type filters? Bits in at one end, type “xyz” out the other end?</p>
+
+<p>Or, do we connect the software components using a smart cable?</p>
+
+<p>How many smart cables do we need?</p>
+
+<p>Let’s imagine a very simple example. A box that generates “Hello World” strings.</p>
+
+<p>Can we connect that box to a calculator box?</p>
+
+<p>Maybe we have a “string-to-string” cable and a “number-to-number” cable? And a “string-to-number” cable? Do we need a “number-to-string” cable?</p>
+
+<p>How many smart cables do we need?</p>
+
+<h1 id="networks">Networks</h1>
+
+<p>Networks send packets of information.</p>
+
+<p>Information is wrapped in layers of information.</p>
+
+<p>Can my computer send a request to that server?</p>
+
+<p>Yes.</p>
+
+<p>I only need to know the port number.</p>
+
+<p>I can send any kind of information to that server on my port-number-cable.</p>
+
+<p>The server has a “line filter” that rejects my information if it doesn’t look like a valid HTTP request.</p>
+
+<p>That “line filter” is a type checker.  More generally, it is a design-rules checker.</p>
+
+<p>That line filter strips off the outer-most layer of information and passes the rest on down the line.</p>
+
+<p>After my data passes through the first line filter, my data is passed through more checkers.</p>
+
+<p>How many more filters are there?</p>
+
+<p>I don’t know.</p>
+
+<p>I only know what I need to know.</p>
+
+<p>If I wrap my data in the correct set of layers, it will make it all the way to the end and I will receive a response (wrapped in layers that I define or agree to).</p>
+
+<p>Today’s software cables are based on the all-in-one mentality instead of the layered mentality.</p>
+
+<p>We are - slowly - beginning to rediscover what networking people already know, what electronics people knew before them, etc.</p>
+
+<h1 id="layered-data">Layered Data</h1>
+
+<p>We need to wrap information like Russian Dolls.</p>
+
+<p>Wrapping data in layers will allow us to build checkers that can be bolted into pipelines.</p>
+
+<h1 id="no-dependencies">No Dependencies</h1>
+
+<p>Software layers cannot poke information through to other layers.</p>
+
+<p>We learned that lesson with so-called global variables, and, with Structured Programming.</p>
+
+<h1 id="scoping">Scoping</h1>
+
+<p>Scope everything.</p>
+
+<p>Currently, Types and Functions are not very well scoped.</p>
+
+<h1 id="trees">Trees</h1>
+
+<p>Trees are hierarchical and do not poke information (incl. control flow) through to other layers.</p>
+
+<h2 id="graphs">Graphs</h2>
+
+<p>Graphs allow cross-talk between nodes.</p>
+
+<p>Graphs are not truly hierarchical.</p>
+<h2 id="dags">DAGs</h2>
+<p>DAGs allow cross-talk between nodes.</p>
+
+<p>DAGs are not truly hierarchical.</p>
+
+<h2 id="optimization">Optimization</h2>
+<p>Optimization sometime requires poking information through layer walls.</p>
+
+<p>This can be necessary, but, should be delayed as long as possible, since, by definition, it destroys (poke holes into) otherwise pluggable designs.</p>
+
+<h2 id="low-level-operations">Low-Level Operations</h2>
+
+<p>Any PL<sup id="fnref:pl" role="doc-noteref"><a href="#fn:pl" class="footnote">1</a></sup> that provides, say “+” or “cons”, is too low-level for structured design and harms plug-ability of modules.</p>
+
+<h1 id="transport-layer-for-functions">Transport Layer for Functions</h1>
+
+<p>Referring to OSI’s model of layered networking, what is the Transport layer for functions?</p>
+
+<p>Do libraries obey the OSI model at the function level?</p>
+
+<h1 id="cpu">CPU</h1>
+
+<p>Most CPUs define the unit of pluggability to be the <em>byte</em>.</p>
+
+<p>Assembly op-codes are built on the assumption that instruction sequences have been pre-filtered.</p>
+
+<p>Additionally, many CPUs also define <em>sequentiality</em> as a unit operation. Opcodes are sequential<sup id="fnref:seq" role="doc-noteref"><a href="#fn:seq" class="footnote">2</a></sup>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:pl" role="doc-endnote">
+      <p>PL means Programming Language <a href="#fnref:pl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:seq" role="doc-endnote">
+      <p>There is no inherent reason that opcodes are interpreted in a sequential manner. In fact, the internal electronics of CPUs has circuitry to impose a sequential regimen onto opcode processing (i.e. this is a Design Choice, not inherent in the electronics itself). <a href="#fnref:seq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

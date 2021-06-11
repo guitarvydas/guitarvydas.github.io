@@ -1,0 +1,103 @@
+I"J<h1 id="happy-path">Happy Path</h1>
+<p>Tha Happy Path is the path through code when “everything goes right”.</p>
+
+<h1 id="other-paths">Other Paths</h1>
+<p>Software must deal with other paths through code - paths to execute when something fails.</p>
+
+<p>Other paths are even more important in distributed code, e.g. internet.</p>
+
+<p>Connections might fail.</p>
+
+<p>Connections might time out due to other reasons, e.g. taking too long to respond.</p>
+
+<h1 id="second-class-citizens">Second Class Citizens</h1>
+
+<p>Most current PLs make it easy to write code for the happy path.</p>
+
+<p>Most current PLs address code for other paths as second class issues, e.g. by providing syntactical warts, like exceptions.</p>
+
+<h1 id="waterfall-thinking">Waterfall Thinking</h1>
+
+<p>Thinking and coding <em>only</em> for the happy path is Waterfall Design.</p>
+
+<h1 id="statecharts">StateCharts</h1>
+
+<p>StateCharts address, both, happy paths and other paths in the same way, using the same programming syntax and contstructs.</p>
+
+<h1 id="functions">Functions</h1>
+
+<p>Functions are a notation that is unbalanced.</p>
+
+<p>With functions, the happy Path is first-class, and other paths are second class.</p>
+
+<p>Functions address only the happy path - input, process, return a value.</p>
+
+<p>Exceptions use a different syntax and follow a different dynamic call chain for the happy path.</p>
+
+<h1 id="send-">Send ()</h1>
+
+<p><code class="language-plaintext highlighter-rouge">Send ()</code> does not differentiate between happy path and other paths.</p>
+
+<p>The syntax is the same for happy path and other paths.</p>
+
+<p>The Architect can design code for multiple paths without resorting to syntactic ornaments.</p>
+
+<h1 id="drakon">Drakon</h1>
+<p><a href="http://drakon-editor.sourceforge.net/">Drakon</a> treats other paths as first class citizens.</p>
+
+<p>The Drakon tutorials are very good introductions to happy+other path notation:</p>
+<ul>
+  <li><a href="https://drakonhub.com/files/drakon_part1_eng.pdf">Part 1</a></li>
+  <li><a href="https://drakonhub.com/files/drakon_part2_eng.pdf">Part 2</a></li>
+  <li><a href="https://drakonhub.com/files/drakon_part3_eng.pdf">Part 3</a></li>
+</ul>
+
+<p>I favor <code class="language-plaintext highlighter-rouge">Component Based Programming</code> and consider Drakon to be a subset of CBP (Drakon would be a good way to implement leaf components).</p>
+
+<h1 id="concurrency">Concurrency</h1>
+<p>It is difficult to implement other paths using synchronous, non-concurrent, code.</p>
+
+<p>It is easy to implement other paths (and the happy path) in the concurrent paradigm.</p>
+
+<p>Aynchronous code and parallel code are easier to design in the concurrent paradigm.</p>
+
+<p>Most current PLs treat asynchrony as a second class paradigm.</p>
+
+<p>It is straight-forward to simulate concurrency on synchronous operating systems (See <code class="language-plaintext highlighter-rouge">CALL/RETURN Spaghetti</code>)  [<em>Note that threading is, also, just a simulation</em>.]</p>
+
+<h1 id="tell-backtraces">Tell: Backtraces</h1>
+
+<p>Backtraces are a <em>tell</em> that indicates happy-path-only thinking.</p>
+
+<p>Happy-path-only =&gt; Waterfall design.</p>
+
+<h1 id="tell-poor-error-messages">Tell: Poor Error Messages</h1>
+
+<p>Poor error messages are a <em>tell</em> that happy-path-only thinking has been used in the design, e.g. error handling is avoided and relegated to second class status.</p>
+
+<p>Elm claims to have good error messages.</p>
+
+<p>Compiler technologies researched error handling in the 1970’s. (At the least, maybe earlier).</p>
+
+<p>For example, you do not expect a compiler to give multiple-line warnings, multiple-line error messages and to stop after the first error.</p>
+
+<p>C gave reasonable error messages.  SBCL does not give reasonable error messages. JavaScript avoids the issue of errors and simply doesn’t check for many classes of problems.</p>
+
+<p>Early Lisps included experimental constructs for handling warnings and errors, e.g. restarts.  (Lisp suffered a dimunition of such abilities when CL was standardized, compilatility was emphasized over other path coding).</p>
+
+<h1 id="fp---functional-programming">FP - Functional Programming</h1>
+
+<p>Using FP, one is encouraged to deal with the happy path and to relegate other paths - exceptions and errors - to second class status.</p>
+
+<p>(This is not surprising, since FP is based on functions, see above).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">CALL/RETURN Spaghetti</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

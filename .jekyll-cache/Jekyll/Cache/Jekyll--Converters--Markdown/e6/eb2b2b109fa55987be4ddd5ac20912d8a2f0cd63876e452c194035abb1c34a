@@ -1,0 +1,321 @@
+I"$H<p>A stand-alone Software Component is characterized by:</p>
+<ul>
+  <li>a name</li>
+  <li>a bag of synonyms</li>
+  <li>a namespace for inputs</li>
+  <li>a namespace for outputs</li>
+  <li>a namespace for for children components</li>
+  <li>a namespace for connections.</li>
+</ul>
+
+<p>Naming of software components is relative</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">./</code> refers to the current component</li>
+  <li><code class="language-plaintext highlighter-rouge">./i/N</code> refers to the Nth input (N is an integer)</li>
+  <li><code class="language-plaintext highlighter-rouge">./o/N</code> refers to the Nth output (N is an integer)</li>
+  <li><code class="language-plaintext highlighter-rouge">./c/N</code> refers to the Nth child (N is an integer)</li>
+  <li><code class="language-plaintext highlighter-rouge">./x/N</code> refers to the Nth connection (N is an integer)</li>
+  <li><code class="language-plaintext highlighter-rouge">./c/N/i/M</code> refers to the Nth child’s Mth input</li>
+  <li><code class="language-plaintext highlighter-rouge">./c/N/o/M</code> refers to the Nth child’s Mth output</li>
+  <li>it is not possible to refer to a child’s children nor its connections.</li>
+</ul>
+
+<p>Note that only Container Components contain namespaces for children and connections.</p>
+<h1 id="container-component">Container Component</h1>
+<p>A <em>container</em> component contains 1 or more children components.</p>
+
+<p><em>Container</em> components a composed of other components.</p>
+
+<p><em>Container</em> components all behave the same way</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">handler (e)</code><br />
+ The input handler distributes incoming messages by distributing them using the connection namespace.</li>
+</ul>
+
+<p>peration).</p>
+
+<p>Input messages are normally distributed to children.</p>
+
+<p>Input messages can also be sent directly to a <em>container</em> <em>asc</em>’s output.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">initialize ()</code></li>
+</ul>
+
+<p>There is no user-supplied initialization for a <em>container</em> <em>asc</em>.</p>
+
+<p>From the users’s perspective, <em>initialize ()</em> can be called, but is a noop (no operation)</p>
+
+<p>A <em>Container</em> <em>asc</em> is composed of other _asc_s.</p>
+
+<p>A <em>Container</em> <em>asc</em> can contain <em>container</em> <em>asc_s and _link</em> _asc_s.</p>
+
+<p>It is not possible to know the implementation of contained children _asc_s.</p>
+
+<h1 id="link-asc">Link <em>Asc</em></h1>
+
+<p>A <em>link</em> <em>asc</em> contains 0 chilren and 0 connections.</p>
+
+<p>A <em>link</em> <em>asc</em> has only a <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">inputs</code> and <code class="language-plaintext highlighter-rouge">ouputs</code>.</p>
+
+<h1 id="connection">Connection</h1>
+<p>A connection consists of</p>
+<ul>
+  <li>a name (mostly for debugging)</li>
+  <li>a sender</li>
+  <li>a receiver.
+    <h2 id="sender">Sender</h2>
+    <p>A Sender is a reference to a child (or self) along with a tag</p>
+    <h2 id="receiver">Receiver</h2>
+    <p>A Receiver is a reference to a child (or self) along with a tag</p>
+    <h2 id="multiple-receivers">Multiple Receivers</h2>
+    <p>A Send () can distribute an message to multiple receivers.</p>
+  </li>
+</ul>
+
+<p>The system guarantees that all receivers attached to the same output, receive the same message in an atomic fashion.</p>
+
+<p>N.B. Atomicity is “automatic” when all _asc_s reside in the same thread.</p>
+
+<p>N.B.</p>
+<h1 id="bare-metal-and-multi-threaded">Bare Metal and Multi-Threaded</h1>
+<p>Note that the following applies only to implementations that employ multiple operating system threads or are on bare metal (no operating system at all).</p>
+
+<p>When the system is implemented with all _asc_s residing in the same thread in an operating system, “locking” is automatic (a by-product of sequential operation) and the considerations listed below can be ignored.</p>
+
+<p>To deliver an message to all receivers from one output, the Dispatcher:</p>
+<ol>
+  <li>locks all receivers related to the output</li>
+  <li>appends the message to the input queue of all receivers, N.B. the message tag is rewritten from being an output tag of the originating sender to the input tag of the receiver.</li>
+  <li>unocks all receivers related to the output</li>
+</ol>
+
+<h1 id="message">Message</h1>
+<p>An message is characterized by two details:</p>
+<ul>
+  <li>a tag</li>
+  <li>data.</li>
+</ul>
+
+<p>A tag is a string or a symbol that is used to qualify the intended destination of the message.</p>
+
+<p>Data can be <em>anything</em>.</p>
+
+<p>Data is usually some kind of data entity that is supported by the base language.</p>
+<h1 id="message-delivery-layer">Message Delivery Layer</h1>
+<h2 id="type-checking">Type Checking</h2>
+<h3 id="layered-type-checking">Layered Type Checking</h3>
+<p>Type checking in this system is not an <em>all-in-one</em> process.</p>
+
+<p>Types are checked in layers.</p>
+
+<p>Analogy: OSI 7-layer model.</p>
+
+<p>Analogy: Russian Dolls.</p>
+
+<p>Analogy: Layers of onion skins.</p>
+
+<p>As far as the ASC system is concerned, there is only one - very simple - type: the Message.</p>
+
+<p>This ASC system delivers Messages and does not concern itself with the actual contents of the messages. Further checking is the responsibility of higher-level _asc_s.</p>
+<h1 id="standard-methods">Standard Methods</h1>
+<h2 id="handler">Handler</h2>
+<p>Every <strong>asc</strong> handles incoming messages (see the definition of a tagged message).</p>
+
+<p>Every <strong>asc</strong> has a <code class="language-plaintext highlighter-rouge">handle (e)</code> method that takes one parameter - a tagged message.</p>
+
+<h2 id="initialize">Initialize</h2>
+<p>Every <strong>asc</strong> has an <code class="language-plaintext highlighter-rouge">initialize ()</code> method that takes no parameters.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">initialize ()</code> method is called before any calls to <em>handle (e)</em>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">initialize ()</code> method is called after a <strong>asc</strong> has been instantiated.</p>
+
+<h2 id="instantiation">Instantiation</h2>
+<p><em>_Asc_s</em> are instantiated in a manner similar to objects in OOP.</p>
+
+<p><em>Container _Asc_s</em> instantiate their children recursively, during instantiation.</p>
+
+<p>The instantiator returns the instantiated <em>asc</em> so that the instance may be used in creating containing <em>asc_s. This is a recursive process, so that _container _asc_s</em> can contain other <em>container</em> _asc_s).</p>
+<h1 id="templates--runnable-instances">Templates &amp; Runnable Instances</h1>
+<p>A <strong>asc</strong> is defined by its <em>template</em>.</p>
+
+<p><em>Templates</em> are like <em>classes</em> in OOP systems or <em>prototypes</em> in JavaScript.</p>
+
+<p>A <strong>asc</strong> can run only if its template has been instantiated into a <em>runnable instance</em>.</p>
+
+<p>A <em>Template</em> can be used to produce one or more <em>runnable instances</em>.</p>
+
+<p>[N.B. This is very similar to instance and classes in OOP systems.  <em>Templates</em> and <em>runnable instances</em> might be considered to be derived from OOP.  ASCs emphasize concurrency and isolation.  ASC <em>templates</em> are not general classes like OOP classes.]</p>
+
+<p>Roughly, a <em>template</em> defines an ASC, its inputs and outputs and its children and connections between children.</p>
+
+<p>Connections are internal to the <em>template</em>.</p>
+
+<p>Connections can only connect children <em>ascs</em> together (and the self container).</p>
+
+<p>Connections are not exported from the <em>template</em>.</p>
+
+<p>A <em>runnable instance</em> created from a <em>template</em> has a unique set of child instances and a unique set of connections between those children.</p>
+
+<p>The <em>shape</em> of the connections are specified by the <em>template</em>, but the actual connections are between unique instances of children (and self).  In other words: each instance of a <em>template</em> has the same kinds of connections as specified by the <em>template</em>, but the actual end-points of each connection are unique to the instance.</p>
+
+<p>Roughly, a <em>runnable instance</em> creates a unique instance of an <em>asc</em> from a template, and, creates a unique input queue and a unique output queue for each instance.</p>
+
+<p>Each <em>runnable</em> instance has exactly one input queue and exactly one output queue for messages.</p>
+
+<p>Message tags provide finer granularity for each message.</p>
+<h2 id="templates">Templates</h2>
+<p>(see discussion above)</p>
+<h2 id="runnable-instances">Runnable Instances</h2>
+<p>(see discussion above)</p>
+<h1 id="isolation">Isolation</h1>
+<p>Messages are routed by the direct parent <em>container</em> of the <em>asc</em>, not by the <em>asc</em> itself.</p>
+
+<p><em>Ascs</em> are isolated.</p>
+
+<p><em>Ascs</em> cannot refer to other <em>ascs</em>.</p>
+
+<p><em>Ascs</em> can only send messages “upwards” to their <em>containers</em> (direct parents) for routing.</p>
+
+<p>Only the <em>container</em> “knows” where a message originates and where it is sent to.</p>
+<h1 id="no-connection">No Connection</h1>
+<p>Outputs of an <em>asc</em> can be directed, via the connection table (a routing table), to other <em>ascs</em>.</p>
+
+<p>Connections can be directed at 0 (zero) or more other <em>ascs</em>.</p>
+
+<p>Connections that go to 0 (zero) other <em>ascs</em> are termed N/C (No Connection).</p>
+
+<p>A missing connection is treated as an N/C.</p>
+
+<p>Messages sent to N/C are discarded.</p>
+
+<p>Inputs can, also, be N/C.</p>
+
+<p>An N/C input never fires (IOW: never invokes the <em>asc</em> with the input’s tag).</p>
+
+<h1 id="inputs-and-tags">Inputs and Tags</h1>
+<p>An <em>asc</em> appears to have multiple inputs.</p>
+
+<p>In reality, an <em>asc</em> has exactly one input queue.</p>
+
+<p>All incoming messages are placed onto that single queue.</p>
+
+<p>Each message is <em>tagged</em> with an identifier defining “which input” the message came in on.</p>
+
+<p>Analogy: A Web server uses one computer, but has multiple ports. Ports are differentiated by intege tags called “port numbers”.</p>
+
+<h1 id="standard-output-methods">Standard Output Methods</h1>
+<h2 id="send">Send</h2>
+<p><em>Ascs</em> communicate by using the <code class="language-plaintext highlighter-rouge">Send ()</code> method to send messages.</p>
+
+<p>Messages are routed by the direct parent <em>container</em> of the <em>asc</em>, not by the <em>asc</em> itself.</p>
+<h3 id="parameters">Parameters</h3>
+<p><em>Ascs</em> do not have traditional parameter lists, and receive inputs as tagged messages.</p>
+<h3 id="return">Return</h3>
+<p><em>Ascs</em> do not have traditional return values, and send values using the <code class="language-plaintext highlighter-rouge">Send ()</code> method.</p>
+<h3 id="exceptions">Exceptions</h3>
+<p><em>Ascs</em> do not have traditional exception handlers, but send values using the <code class="language-plaintext highlighter-rouge">Send ()</code> method.</p>
+<h1 id="happy-path-vs-other-valid-outcomes">Happy Path vs. Other Valid Outcomes</h1>
+<p>One point in the design of <em>ascs</em> is that <em>ascs</em> can have more than one valid outcome.</p>
+
+<p>The distinction between the <em>Happy Path</em> and other valid outcomes is blurred.</p>
+
+<p>In some ways, <em>ascs</em> treat all outcomes “first class citizens”.</p>
+
+<p>Exceptions are not exceptional. Exceptions are, but, one valid outcome.</p>
+<h1 id="message-fan-out-and-copying">Message Fan-out and Copying</h1>
+<h1 id="queues">Queues</h1>
+<p>There is exactly one input queue for each <em>runnable</em>.</p>
+
+<p>There is exactly one output queue for each <em>runnable</em>.</p>
+<h1 id="deferred-sending">Deferred Sending</h1>
+<p>When an <em>asc</em> sends a message, the message is not delivered immediately, but is placed on the <em>asc’s</em> output queue.</p>
+
+<p>The output queue of an <em>asc</em> is emptied (distributed) only when<sup id="fnref:deferred" role="doc-noteref"><a href="#fn:deferred" class="footnote">1</a></sup> the <em>asc</em> has finished processing one input event.</p>
+
+<p>The <em>Dispatcher</em> distributes output messages from the output queue of an <em>asc</em> to the input queue(s) of other <em>ascs</em>.</p>
+
+<p>Messages are delivered using the connection list of the <em>container</em>.  A particular <em>asc</em> cannot know where its output messages are going (nor where its input messages originated).</p>
+
+<p>[Edge-case: messages can, also, be delivered to the output queue of a container.  This is essentially an internal <code class="language-plaintext highlighter-rouge">Send ()</code> employed by the container handler routine. (All <em>containers</em> share the same <code class="language-plaintext highlighter-rouge">handler ()</code> routine).]</p>
+
+<h1 id="dispatcher">Dispatcher</h1>
+<p>The <em>Dispatcher</em> is a distinguished routine that runs the system.</p>
+
+<p>The <em>Dispatcher</em> invokes <em>_asc_s</em> and expects them to process one event to completion.</p>
+
+<p>(See the section regarding long-running loops and deep concurrency).</p>
+
+<p>Essentially, the <em>Dispatcher</em> maintains a list of every <em>asc</em> in the system and invokes <em>asc</em> - in any order - that are ready-to-run.</p>
+
+<p>[Aside: Since <em>containers</em> cannot run if any of their children are busy (recursively), it might be possible to have the <em>Dispatcher</em> maintain only a tree of <em>ascs</em> instead of maintaining a list of all existing <em>ascs</em>. Each <em>container</em> maintains a list of its children ; maybe the <em>Dispatcher</em> need to keep only a list of top-level <em>containers</em>. This optimization is left as an open consideration and is implementation-specific.]</p>
+<h1 id="asynchronous-operation-concurrency">Asynchronous Operation, Concurrency</h1>
+<p>All <em>ascs</em> are asynchronous and concurrent.</p>
+
+<p>[Aside: this means that <em>ascs</em> cannot be implemented simply as callable functions.  Such functions imply synchronous operation.  This is a subtle point.]</p>
+
+<h1 id="run-forever">Run Forever</h1>
+<p><em>Ascs</em> run forever.</p>
+
+<p>There is, also, a start-up time, and, a shut-down time. <em>Ascs</em> run forever in the <em>steady state</em> time (the majority of an application’s lifetime).</p>
+<h2 id="like-a-event-loop">Like a Event Loop</h2>
+<p>It might be useful to imagine <em>ascs</em> as being GUI components that run in event loops.</p>
+<h1 id="long-running-loops--deep-recursion">Long Running Loops / Deep Recursion</h1>
+<p><em>Ascs</em> must not<sup id="fnref:promise" role="doc-noteref"><a href="#fn:promise" class="footnote">2</a></sup> run for a “long time” and/or execute “deep recursion”.</p>
+
+<h2 id="cooperative">Cooperative</h2>
+<p><em>Ascs</em> run cooperatively.</p>
+
+<p>This removes a major source of accidental complexity - full preemption.</p>
+
+<p>This adds the onus on the programmer to ensure that an <em>asc</em> runs to completion in a “small” amount of time.</p>
+
+<p>Note that, it is possible to have compilers emit <em>loops</em> that are not loops but self-message-sends, which would alleviate the major, non-bug, reason for long-running loops.</p>
+
+<p>Currently, we use hardware (MMUs and interrupts) and Operating Systems to ensure full preemption.  These techniques could be used to ensure against long-running loops.</p>
+
+<p>The use of Operating Systems and the reliance on long-running loops has caused subtle accidental complexity, e.g. priorities, which lead to priority inversion.</p>
+
+<p>I urge programmers to stop using Operating Systems altogether.  I urge programmers to design software that is directly suited to the problems-at-hand instead of relying on one-size-fits-all technologies like Operating Systems and the current crop of 3GL, loopful[^loop] languages (e.g. Python, Javascript, Haskell, Rust, etc..</p>
+
+<p>[^loop]Loops are a subset of Recursion. I urge programmers to avoid recursion. Recursion does not suit the new reality - distributed programming. Loopful languages encourage programmers to solve distributed programming problems using low-level, assembler-like operations such as thread libraries. Loops, an Recursion, should only be used to program single nodes in distributed systems. Programmers should write programs that are inherently distributed and push minor details, like implementation of nodes using looping/recursion, aside.</p>
+<h1 id="resolving">Resolving</h1>
+<h2 id="incremental-linking">Incremental “Linking”</h2>
+<p>UNIX ar.</p>
+<h1 id="ide">IDE</h1>
+<p>Only the IDE can know how _asc_s are implemented.</p>
+
+<p>The IDE checks that all <em>asc_s are _resolved</em> before executing an application constructed using components.</p>
+<h1 id="composition">Composition</h1>
+<p>Not inheritance.</p>
+<h1 id="execution">Execution</h1>
+<h1 id="example">Example</h1>
+<h2 id="sample-diagram">Sample Diagram</h2>
+<h2 id="sample-implementation">Sample Implementation</h2>
+<h2 id="common-lisp">Common Lisp</h2>
+<h2 id="javascript">JavaScript</h2>
+<h2 id="python">Python</h2>
+<h2 id="wasm">WASM</h2>
+
+<h1 id="see-also">See Also</h1>
+
+<p>spaghetti<br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:deferred" role="doc-endnote">
+      <p>Actually, output queues are emptied <em>some time</em> after the <em>asc</em> has finished processing.  The actual implementation of delivery is implementation-dependent.  Concurrency is the rule, not the exception, and <em>_asc_s</em> cannot run if they are, recursively, busy (I believe that all details emerge from this set of rules). <a href="#fnref:deferred" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:promise" role="doc-endnote">
+
+      <p><a href="#fnref:promise" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

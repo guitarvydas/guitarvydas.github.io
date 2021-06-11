@@ -1,0 +1,113 @@
+I"�<h1 id="introduction">Introduction</h1>
+
+<p>At this point, we have parsed 4 components - v, v/x, v/x/y and v/x/y/z.</p>
+
+<p>We are avoiding parsing the left-overs, z and c, for now. We think that the details will not be of help in designing and debugging the process (we’ll see if that assumption is correct, later).</p>
+
+<h1 id="join---simple">Join - Simple</h1>
+
+<p>Let’s join two components and build from there.</p>
+
+<p>Let’s join v and v/x.</p>
+
+<p>We write a simple bash script</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# join two .pl files and re-sort into the final .pl file
+# inputs: $1, $2
+# output: $3.pl
+cat $1.pl $2.pl &gt; _temp
+sort _temp &gt;$3.pl
+</code></pre></div></div>
+<p>and run it</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./join.bash v v_x inc
+</code></pre></div></div>
+
+<p>Next, we run our query:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pseudo % ./run-qr.bash inc
+inc
+component IDs [v_0,v_3,v_7,v_9,v_x_0,v_x_10,v_x_4,v_x_8]
+components    [v,v_b,v_c,v_x,v_x,v_x_d,v_x_y,v_x_c]
+ports [v_a,v_x_a,v_x_b,v_x_c,v_d,v_b_a,v_b_b,v_x_a,v_x_d_a,v_x_d_b,v_x_b,v_x_c,v_x_y_a,v_x_y_b,v_x_y_c]
+links [v_b,v_x,v_x_d,v_x_y]
+arrows [[[v_a,v_b_a]],[[v_a,v_x_a]],[[v_b_b,v_c]],[[v_c,v_x_b]],[[v_x_c,v_d]],[[v_x_a,v_x_y_a]],[[v_x_b,v_x_y_b]],[[v_x_c,v_x_d_a]],[[v_x_d_b,v_x_e]],[[v_x_y_c,v_x_c]]]
+</code></pre></div></div>
+
+<p>and see that the joined component <code class="language-plaintext highlighter-rouge">v/x</code> is still being reported as a <code class="language-plaintext highlighter-rouge">link</code>, and, <code class="language-plaintext highlighter-rouge">v/x</code> is reported twice in the components list.</p>
+
+<p>After joining <code class="language-plaintext highlighter-rouge">v</code> and <code class="language-plaintext highlighter-rouge">v/x</code>, we should see 3 link components <code class="language-plaintext highlighter-rouge">v/x/y</code>, <code class="language-plaintext highlighter-rouge">v/b/</code> and <code class="language-plaintext highlighter-rouge">v/x/d</code>.</p>
+
+<p>The list of links currently includes <code class="language-plaintext highlighter-rouge">v/x</code>. We need to modify our factbase and our query.</p>
+
+<p>Joining <em>should</em> make <code class="language-plaintext highlighter-rouge">v/x</code> into a sub-component of <code class="language-plaintext highlighter-rouge">v</code>.</p>
+
+<p>We want to change <code class="language-plaintext highlighter-rouge">v</code>s notion of <code class="language-plaintext highlighter-rouge">v/x</code>.</p>
+
+<p>What if we try to knock out the chain of declarations of <code class="language-plaintext highlighter-rouge">v/x</code> from <code class="language-plaintext highlighter-rouge">v</code>?</p>
+
+<p>Let’s try that with a simple manual edit.</p>
+
+<p>As humans who are getting really, really bored, we edit v.md for this test.</p>
+
+<h2 id="low-level-test-1">Low Level Test 1</h2>
+<p>We make the manual edit and get</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pseudo % ./run.bash 
+pseudo % ./join.bash v v_x inc
+pseudo % ./run-qr.bash inc
+inc
+component IDs [v_0,v_3,v_7,v_x_0,v_x_10,v_x_4,v_x_8]
+components    [v,v_b,v_c,v_x,v_x_d,v_x_y,v_x_c]
+ports [v_a,v_d,v_b_a,v_b_b,v_x_a,v_x_d_a,v_x_d_b,v_x_b,v_x_c,v_x_y_a,v_x_y_b,v_x_y_c]
+links [v_b,v_x_d,v_x_y]
+arrows [[[v_a,v_b_a]],[[v_a,v_x_a]],[[v_b_b,v_c]],[[v_c,v_x_b]],[[v_x_c,v_d]],[[v_x_a,v_x_y_a]],[[v_x_b,v_x_y_b]],[[v_x_c,v_x_d_a]],[[v_x_d_b,v_x_e]],[[v_x_y_c,v_x_c]]]
+</code></pre></div></div>
+
+<p>Now, <code class="language-plaintext highlighter-rouge">v/x</code> does not appear as a link and appears only once in the components list.</p>
+
+<p>Actually, that’s not quite correct (our test is lying to us).</p>
+
+<p>We want to replace the v/x hierarchy in v.md with the v_x.md hierarchy.</p>
+
+<p>Again, that’s not quite right.</p>
+
+<p>We want</p>
+<ol>
+  <li>to demote <code class="language-plaintext highlighter-rouge">v/x</code> by one level (## instead of # and so on)</li>
+  <li>paste the demoted version into <code class="language-plaintext highlighter-rouge">v</code> after deleting <code class="language-plaintext highlighter-rouge">v/x</code> from <code class="language-plaintext highlighter-rouge">v</code>.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pseudo % ./run.bash
+pseudo % ./join.bash v v_x inc
+pseudo % ./run-qr.bash inc    
+inc
+component IDs [v_0,v_13,v_17,v_19,v_3,v_7,v_9,v_x_0,v_x_10,v_x_4,v_x_8]
+components    [v,v_x_y,v_x_c,v_x_d,v_b,v_c,v_x,v_x,v_x_d,v_x_y,v_x_c]
+ports [v_a,v_x_a,v_x_b,v_x_c,v_x_y_a,v_x_y_b,v_x_y_c,v_d,v_x_d_a,v_x_d_b,v_b_a,v_b_b,v_x_a,v_x_d_a,v_x_d_b,v_x_b,v_x_c,v_x_y_a,v_x_y_b,v_x_y_c]
+links [v_x_y,v_x_d,v_b,v_x_d,v_x_y]
+arrows [[[v_a,v_b_a]],[[v_a,v_x_a]],[[v_b_b,v_c]],[[v_c,v_x_b]],[[v_x_a,v_x_y_a]],[[v_x_b,v_x_y_b]],[[v_x_c,v_d]],[[v_x_c,v_x_d_a]],[[v_x_d_b,v_x_e]],[[v_x_y_c,v_x_c]],[[v_x_a,v_x_y_a]],[[v_x_b,v_x_y_b]],[[v_x_c,v_x_d_a]],[[v_x_d_b,v_x_e]],[[v_x_y_c,v_x_c]]]
+
+</code></pre></div></div>
+
+<p>That’s better, but still no cigar.  <code class="language-plaintext highlighter-rouge">V/x/y</code> and <code class="language-plaintext highlighter-rouge">v/x/d</code> appear twice in the links (and other places).  Maybe something is wrong with</p>
+<ol>
+  <li>our manual edit</li>
+  <li>our query, or,</li>
+  <li>something else.</li>
+</ol>
+
+<p>We can view this join as a <img src="2021-05-25-join.png" alt="diagram" />.</p>
+
+<p>This diagram shows what we want to do. The exising arrows in <code class="language-plaintext highlighter-rouge">v</code> can remain, since they connect to <code class="language-plaintext highlighter-rouge">v/x</code> but do not penetrate the boundaries of <code class="language-plaintext highlighter-rouge">v/x</code>.</p>
+
+<p>In a more automated version, we would want to convert circles in <code class="language-plaintext highlighter-rouge">v/x</code> into rects. Or would we?</p>
+
+<p><em>unifinished - experimenting with .png files and .md</em></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

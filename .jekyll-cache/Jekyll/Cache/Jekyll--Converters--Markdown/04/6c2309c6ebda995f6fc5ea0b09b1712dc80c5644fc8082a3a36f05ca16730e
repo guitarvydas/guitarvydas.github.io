@@ -1,0 +1,111 @@
+I"�<p><code class="language-plaintext highlighter-rouge">True isolation</code> is</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">data isolation</code> AND</li>
+  <li><code class="language-plaintext highlighter-rouge">control-flow isolation</code></li>
+</ul>
+
+<h1 id="call--return">CALL / RETURN</h1>
+<p>CALL/RETURN does not isolate control-flow, it implies sequential operation.</p>
+
+<p><code class="language-plaintext highlighter-rouge">var x = obj.method (...)</code> is sequential.</p>
+
+<h1 id="relational-programming">Relational Programming</h1>
+<p>Relational programming does not imply sequential operation.</p>
+
+<p>All control flow is handled by the relational engine.</p>
+
+<h1 id="unix-threads">UNIX Threads</h1>
+
+<p>UNIX threads do not imply sequential operation.</p>
+
+<p>Uber control flow is handled by the dispatcher.</p>
+
+<h1 id="functions-are-sequential">Functions Are Sequential</h1>
+
+<p><code class="language-plaintext highlighter-rouge">fn(a)-&gt;b</code> implies sequential operation.</p>
+
+<p>The parameters are delivered in a “sequential block” (all parameters are delivered at the same time).</p>
+
+<p>The return value is delivered in a “sequential block”.</p>
+
+<p>The caller waits for a result.</p>
+
+<h1 id="concurrency-vs-parameters">Concurrency vs. Parameters</h1>
+
+<p>Note that sequentialism leaks into parameter passing.</p>
+
+<p>In sequential programming, <em>all</em> parameters must be delivered at the same time.</p>
+
+<p>In concurrent programming, parameters can be delivered</p>
+<ul>
+  <li><em>at any time</em></li>
+  <li><em>in any order</em></li>
+  <li><em>individually</em>.</li>
+</ul>
+
+<p>Grouping parameters together and grouping return values together is the exception, not the rule, in concurrent programming.</p>
+
+<h1 id="lifetime---forever-vs-live-then-die">Lifetime - Forever vs. Live-Then-Die</h1>
+
+<p>The caller does/can not care if the callee</p>
+<ul>
+  <li>(a) lives forever, or,</li>
+  <li>(b) lives-then-dies.</li>
+</ul>
+
+<p>(a) is server-like.</p>
+
+<p>(b) is function-like.</p>
+
+<h1 id="need-to-know">Need to Know</h1>
+<p>Saying <code class="language-plaintext highlighter-rouge">x.fn(...)</code> implies that you know too much about “x”.</p>
+
+<p>That knowledge is hard-wired into the calling code and makes it hard to change later, aka accidental dependency.</p>
+
+<p>Suggestion: all methods have only one calling syntax and all methods have the <em>same</em> parameter list syntactically, with the <em>same type</em> (!).</p>
+
+<h2 id="type-checking">Type Checking</h2>
+
+<p>The suggestion is not to delete type-checking, but to move it elsewhere.</p>
+
+<p>We <em>already</em> do this with compilers -&gt; opcodes.</p>
+
+<p>Compilers can be viewed as type filters that strip away semantic information to produce untyped opcodes.</p>
+
+<h1 id="choice">Choice</h1>
+
+<p>In <code class="language-plaintext highlighter-rouge">var x = obj.method (...)</code>, you do not get to choose whether the operation is concurrent or sequential.</p>
+
+<p>The choice is made for you and baked into your code (aka accidental dependency (aka accidentally not-isolated)).</p>
+
+<h1 id="further-suggestion">Further Suggestion</h1>
+
+<p>Suggestion: code cannot <em>call</em> a method in an object.</p>
+
+<p>Code can only <em>send</em> information to its <em>parent</em>.</p>
+
+<p>The <em>parent</em> can <em>choose</em> to <em>send</em> this information to another child for further processing.</p>
+
+<p>I.E. a function cannot <em>name</em> other objects and methods.</p>
+
+<h1 id="software-components">Software Components</h1>
+
+<p>Software components can contain code.</p>
+
+<p>Software components can only <em>send</em> information upwards to their <em>parents</em>, or, they can <em>send</em> commands to their children.</p>
+
+<p>Cross-talk is not allowed.</p>
+
+<p>Cross-talk produces non-scalable code.</p>
+
+<p>Corollary: components cannot communicate directly with their peers.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

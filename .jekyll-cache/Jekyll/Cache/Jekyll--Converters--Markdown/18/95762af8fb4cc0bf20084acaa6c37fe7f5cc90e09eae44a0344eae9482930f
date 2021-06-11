@@ -1,0 +1,123 @@
+I"� <h1 id="introduction">Introduction</h1>
+
+<p>I have written some 180 essays on various topics. (See below).</p>
+
+<p>These may seem to be isolated islands of writing, but, in my mind they all tie together towards one goal.</p>
+
+<p>The goal is <em>Asynchronous Software Components</em>.</p>
+
+<p>Concurrent computing and compiler-building and EE (Electrical Engineering) and Physics<sup id="fnref:ownership" role="doc-noteref"><a href="#fn:ownership" class="footnote">1</a></sup> are all tied together, at least in my mind.</p>
+
+<p>When one adopts the principles of <em>ascs</em>,</p>
+<ul>
+  <li>computing looks different (we can think in terms of isolated components instead of calculators)</li>
+  <li>many problems become much easier to solve</li>
+  <li>programming becomes the art of solving problems instead of twisting problems to fit specific languages</li>
+  <li>one sees that there are many “silver bullets”, not just one (the Silver Bullet used depends on the Problem and on the Architect)</li>
+  <li>Software Engineering - like Construction Engineering - becomes realizable.</li>
+</ul>
+
+<p>One of the problems of software design is that we (the royal we) have been thinking about software <em>only</em> in a synchronous manner (even when we try to solve asynchronous problems).</p>
+
+<p>I claim that we need to think about <em>asynchronous software components</em> and <em>relative naming</em>.</p>
+
+<p>Currently we talk about types and functions as if they are not hierarchical and are absolute.  Functions can refer directly to other functions, and so on.</p>
+
+<p>This mindset has caused many accidental complexities, like the notion of using Operating Systems and the windmill concept of one-languge-to-rule-them-all.</p>
+
+<p>I claim that we should be thinking of <em>notations</em> instead of <em>languages</em> and that we should learn about <em>paradigms</em> instead of specific <em>languages</em><sup id="fnref:smalltalk" role="doc-noteref"><a href="#fn:smalltalk" class="footnote">2</a></sup>.</p>
+
+<p>I claim that we should learn about the limitations of each paradigm and that we should learn <em>when</em> to apply certain paradigms to certain sub-problems<sup id="fnref:relational" role="doc-noteref"><a href="#fn:relational" class="footnote">3</a></sup>.</p>
+
+<p>This leads to a notation that treats software components in a relative manner. We’ve seen this in UNIX, but have not seen it in popular programming languages, e.g. all variables hav “flat” names and are allowed to break through the boundaries of components and to refer to objects in other components.</p>
+
+<h1 id="spaghetti-architecture">Spaghetti Architecture</h1>
+<p>When absolute naming was recognized in relation to Control Flow, it was called Spaghetti Programming.</p>
+
+<p>I call this same phenomenon in today’s software, <em>Spaghetti Architecture</em>.</p>
+
+<h1 id="asc-notes">ASC Notes</h1>
+<p>A syntax for relative, asynchronous, software components.<br />
+<a href="https://guitarvydas.github.io/2021/05/29/Asynchronous-Software-Components-Design-Note.html">ASC Design Notes</a></p>
+
+<h1 id="instructional">Instructional</h1>
+<h2 id="prolog-for-programmers">PROLOG For Programmers</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[PROLOG For Programmers](https://www.youtube.com/watch?v=QOYAHoLiyg0&amp;t=205s) ## PEG - Implementing a Simple Transpiler [Transpilation 101](https://guitarvydas.github.io/2021/05/29/Transpilation-101.html) ## Youtube - The Holy Grail (2:32) - Visual Programming (2:30) - Control Flow (5:51) - Prolog For Programmers (15:44) - Divide and Conquer (35:18) [Computing Simplicity](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy50fIg) ##  # 
+</code></pre></div></div>
+
+<h1 id="miscellaneous">Miscellaneous</h1>
+<h2 id="languages-are-cheap">Languages are Cheap</h2>
+<h2 id="code-is-cheap-design-is-hard">Code is Cheap, Design is Hard</h2>
+<h2 id="pl-really-means-notation">PL Really Means Notation</h2>
+<p>Programming languages are notations.</p>
+
+<p>Programming languages are notations for something deeper - paradigms.</p>
+
+<p>Programming languages are notations that take a looong time to build.</p>
+
+<p>Notations can be built in less than a day using modern tools (e.g. Ohm-JS (PEG) and Toolbox Languages).</p>
+<h2 id="paradigms">Paradigms</h2>
+<h3 id="concurrency">Concurrency</h3>
+<h3 id="oop">OOP</h3>
+<h3 id="fp-functional-programming">FP (Functional Programming)</h3>
+<p>Good paradigm for build fancy calculators.</p>
+
+<p>Less good for building distributed systems.</p>
+
+<p>A calculator is a one-in-one-out thing.</p>
+
+<p>Real life tells us that we deal with one-in-many-out things, though.</p>
+
+<p>For example, time-outs should be first-class things, not relegated to the back burner.</p>
+
+<p>Exceptions are edge-case syntax added as a bag onto the side of one-in-one-out syntax.</p>
+
+<p>Q: What about parameters that don’t want to come in one blob?</p>
+
+<p>Q: What about return values that don’t want to be sent in one blob?</p>
+
+<p>Real life says that objects are autonomous and can send information <em>at any time</em>.</p>
+
+<p>Autonomous –&gt; asynchronous.</p>
+
+<p>Analogy: synchronous == human consciousness. Asynchronous == all the rest (the human body’s autonomous system).  The book “The Inner Game of Tennis”<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">4</a></sup> does not imply that consciousness is better than sub-consciousness and uses the terms “self 1” and “self 2” instead.</p>
+
+<p>Async should be the default, sync should be an exception. E.G. we can use sync techniques <em>when allowed to by the problem</em>.</p>
+
+<p>Force-fitting async into sync notations has brought us epic failures, like threads and multitasking (which crashed the Mars Rover, for example).</p>
+
+<p>It is hard to reason about async problems with one hand tied behind your back, e.g. by forcing oneself to use sync notation <em>only</em> (a form of self-flagellation).</p>
+
+<p>CPS is another word for GOTO.</p>
+<h2 id="discard-operating-systems">Discard Operating Systems</h2>
+<h2 id="two-syntaxes-for-every-pl">Two Syntaxes for Every PL</h2>
+<p>##<br />
+#</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<p><a href="https://www.goodreads.com/book/show/905.The_Inner_Game_of_Tennis">The Inner Game of Tennis</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ownership" role="doc-endnote">
+      <p>For example, Rust’s notion of <em>ownership</em> relates to the idea of data as Physical objects. (FTR, ownership appeared in FBP in the 1960’s and in my own consulting work.  I discarded ownership in lieue of garbage collection). <a href="#fnref:ownership" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:smalltalk" role="doc-endnote">
+      <p>For example, learning OOP is good, learning the syntax of Smalltalk is less good.  Language notations that support OO principles blink into and out of existence, while the fundamental principles espoused by OO (e.g. encapsulation) carry on being relevant. <a href="#fnref:smalltalk" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:relational" role="doc-endnote">
+      <p>For example, <em>relational programming</em> is a good paradigm for searching, while it is not a very good paradigm for producing output (on a screen or on paper, etc.).  For example, OO is a good paradigm for encapsulating data, but less good for encapsulating control flow.  For example, FP is a good paradigm for creating calculators, but less good for creating asynchronous systems. It all depends on the problem-at-hand (and on the Architect(s) wielding the tools). <a href="#fnref:relational" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>The best book about golf (Shawn Clement). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

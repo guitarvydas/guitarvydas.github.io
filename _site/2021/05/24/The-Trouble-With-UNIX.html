@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>The Trouble With UNIX | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="The Trouble With UNIX" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Early BASIC" />
+<meta property="og:description" content="Early BASIC" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/05/24/The-Trouble-With-UNIX.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/05/24/The-Trouble-With-UNIX.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-24T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Trouble With UNIX" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/05/24/The-Trouble-With-UNIX.html","@type":"BlogPosting","description":"Early BASIC","dateModified":"2021-05-24T00:00:00-04:00","datePublished":"2021-05-24T00:00:00-04:00","headline":"The Trouble With UNIX","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/05/24/The-Trouble-With-UNIX.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Trouble With UNIX</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-24T00:00:00-04:00" itemprop="datePublished">May 24, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="early-basic">Early BASIC</h1>
+
+<p>In the early days, BASIC was based on bytecodes, called <em>VMs</em> today.</p>
+
+<p>The trouble with this approach was that other people could read and modify the application code without clearing the changes with the owners.</p>
+
+<p>At the time, this was considered a business problem, but it goes much deeper than that.</p>
+
+<p>It was thought that, since anyone could read the code, anyone could copy the code and undercut the business by offering the same software product without expending the same amount of sweat equity.</p>
+
+<p>Today, the problem manifests itself differently.  Open-source has taken away the profit motive, but,</p>
+<ol>
+  <li>a hacked<sup id="fnref:hack" role="doc-noteref"><a href="#fn:hack" class="footnote">1</a></sup> application might not operate as documented (hurting the Brand), and,</li>
+  <li>a hacked application might perform nasty operations that weren’t part of the original program.</li>
+</ol>
+
+<h1 id="the-trouble-with-unix-binsh">The Trouble With UNIX /bin/*sh</h1>
+
+<p>The UNIX shell, all flavours of /bin/*sh, has the same problem as early BASICs.</p>
+
+<p>I don’t like building apps that have “too many” moving parts and rely on files and operations that can be tweaked, hacked, by the user.  In the best case, such applications might fail in the field and cause maintenance headaches for me.</p>
+
+<p>OTOH, I like building apps using pipelines of isolated components.  /bin/*sh is good at this.</p>
+
+<p>I need a way to ship applications built as shell scripts, that won’t fail in the field.</p>
+
+<p>I need a “coordination language”.  I need a PL for distributed programming, that produces apps in the way I might produce apps in any current PL (e.g. Python, HTML+JS, etc.), but lets me build the apps using the comfort of pipelines.</p>
+
+<h1 id="docker">Docker</h1>
+
+<p>Docker is the proverbial Canary in the Coal Mine.</p>
+
+<p>Other people have already realized that they need to build self-contained apps that don’t fail in the field.</p>
+
+<h2 id="problems-with-docker">Problems With Docker</h2>
+
+<p>Docker fakes out a whole operating system.  This is a heavy weight solution to a more general problem.</p>
+
+<p>Docker assumes that I want to build apps using one of its supported O/Ss.</p>
+
+<p>Docker doesn’t run well (if at all) on smart phones.</p>
+
+<p>Q: What are the reasons why Docker isn’t used for <em>every</em> app?</p>
+
+<p>Q: What are the reasons why <em>every</em> function is not put in its own Docker envelope?</p>
+
+<h1 id="stripped-down-docker">Stripped Down Docker</h1>
+
+<p>I want<sup id="fnref:think" role="doc-noteref"><a href="#fn:think" class="footnote">2</a></sup> a stripped down Docker-like IDE+PL.</p>
+
+<h1 id="diagrams---rects-ellipses-lines-text">Diagrams - Rects, Ellipses, Lines, Text</h1>
+
+<p>I want an IDE+PL that supports higher level programming.</p>
+
+<p>I want to draw diagrams of parts of my apps.</p>
+
+<p>I want to write parts of my apps in text<sup id="fnref:text" role="doc-noteref"><a href="#fn:text" class="footnote">3</a></sup>.</p>
+
+<p>How many 1,000’s of Docker components can I use before my computer begins to slow down?</p>
+
+<h1 id="heavy-weight">Heavy-Weight?</h1>
+
+<p>Is Docker big and heavy?</p>
+
+<p>Or do we just need to wait for bigger and better hardware?</p>
+
+<p>We don’t bother to write in assembler anymore, while, at first, it seemed that compilers and HLLs were just passing, very inefficient, fads.</p>
+
+<p>Should all apps be Docker’ed?</p>
+
+<p>How many 1,000’s of Docker components can I use before my computer begins to slow down?</p>
+
+<p>I used to build distributed credit card terminal apps that used as little as 12K (K not M) of RAM on 8-bit machines.</p>
+
+<p>A typical app needed some 300 components.</p>
+
+<p>Components were slightly more expensive than functions, but a lot less expensive than threads and complete operating systems.</p>
+
+<p>What is the status of Docker today?  What is the trend?  What is the footprint?</p>
+
+<h2 id="existing-pls">Existing PLs</h2>
+
+<p>Shall we forget about existing PLs, like Python, JS, etc.?</p>
+
+<p>Exising PLs are, IMO, already at the end of their lifetimes.</p>
+
+<p>We need to write apps using concurrent components, and, existing PLs don’t support this kind of thing.</p>
+
+<p>Existing PLs support concurrency by using libraries based on OS threads.  This, IMO, is like assembler programming for concurrency.</p>
+
+<p>Assembler was tamed by</p>
+<ol>
+  <li>structuring control-flow</li>
+  <li>structuring data (aka scoping).</li>
+</ol>
+
+<p>Docker appears to structure data (isolating environment variables, etc.).</p>
+
+<p>Docker appears to leave control-flow unstructured and flat<sup id="fnref:mp" role="doc-noteref"><a href="#fn:mp" class="footnote">4</a></sup>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:hack" role="doc-endnote">
+      <p>Hack and hacker used to be badges of honour.  Today they are more likely to indicate criminal behaviour. <a href="#fnref:hack" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:think" role="doc-endnote">
+      <p>I think that I want a stripped down Docker.  I would be happy to be convinced that I’m wrong. <a href="#fnref:think" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:text" role="doc-endnote">
+      <p>It is silly to use the power of diagrams to duplicate the kind of programming that text is already good at (e.g. numeric equations, sequential programming).  Diagrams should only be used for the kinds of things that text is not very good at, e.g. expressing networks of components, concurrent coordination of synchronous sub-programs, etc. <a href="#fnref:text" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mp" role="doc-endnote">
+      <p>A sure way to shoot yourself in the foot is to create a spaghetti-based message-passing system.  Message-passing needs to be structured using hierarchy, composition, isolation, etc.  I don’t know of any PL that helps you do this kind of structuring. You are left to fend for yourself using assembler primitives such as threads and rendezvous. <a href="#fnref:mp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/05/24/The-Trouble-With-UNIX.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

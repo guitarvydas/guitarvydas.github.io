@@ -1,0 +1,76 @@
+I"�<h1 id="ry-vs-dry">RY vs. DRY</h1>
+
+<p>DRY means “Don’t Repeat Yourself”.</p>
+
+<p>Programmers learn to manually perform DRY.</p>
+
+<p>Most people, though, find RY - Repeat Yourself - to be the first programming idiom that they use.</p>
+
+<p>Grab a piece of working code, then hack on it.</p>
+
+<p>Later, RY brings trouble.  Programs built using RY tend to become large and unwieldy.</p>
+
+<p>RY programs are hard to maintain.</p>
+
+<p>One bug-fix might affect a piece of code that has been copy/pasted in a number of places.  Each copied piece must be repaired.</p>
+
+<p>Programmers use <em>libraries</em> to manually manage DRY.  Instead of copying pieces of code, the code is moved to a library.  Programs reference the library (instead of cut/pasting the code).</p>
+
+<p>PLs are designed to enable manual DRY.  Code that is (manually) moved to a library is replaced by a single-line reference to the library (a CALL).</p>
+
+<h1 id="ides-for-ry">IDEs for RY</h1>
+<p>IDEs could be designed to support automation of DRY.</p>
+
+<p>Currently, we use CUT/PASTE edit operations to implement RY (and, later, DRY).</p>
+
+<p>Instead, we could use some other gesture to copy/paste likenesses of code.</p>
+
+<p>Our IDEs+PLs could support <code class="language-plaintext highlighter-rouge">like</code> operators, meaning “this code is like that code over there”.</p>
+
+<p>The shared code might appear in gray font, with some transparency.</p>
+
+<p>If one hacks on the code, the new changes appear in a solid colour and no transparency.</p>
+
+<p>The system (IDE + PL) remembers what the original code is and what the changes (diffs) to it are. The programmer sees the code in whole and doesn’t need to remember to move it to a library.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Github</code> and <code class="language-plaintext highlighter-rouge">diff</code> already do something like this, except backwards.  Programmers started out using under-powered hardware and developed manual ways of doing things that could be automated today.</p>
+
+<h1 id="paul-bennett-framing-software-reuse">Paul Bennett “Framing Software Reuse”</h1>
+
+<p>Paul Bennett discusses <em>multiple use</em> of code, as opposed to simple <em>reuse</em>.</p>
+
+<h1 id="chanchal-roy-cordy-nicad">Chanchal Roy, Cordy “NiCAD”</h1>
+
+<p>Roy proposes a system for clone detection.</p>
+
+<p>If we had IDEs+PLs that allowed us to say that a piece of code is <em>like</em> another piece of code, we would not need to detect clones (we would simply tell the system about the clones we intend to build).</p>
+
+<h1 id="word-processors">Word Processors</h1>
+
+<p>In word processors, such as Microsoft Word, select/control-C/control-V means COPY/PASTE.</p>
+
+<p>This keyboard/mouse gesture could be repurposed to mean COPY-LIKENESS and remember (using diff) where the code came from.</p>
+
+<h1 id="collaborative-editing">Collaborative Editing</h1>
+
+<p>Many online word processors support collaborative editing and change management.</p>
+
+<p>This same set of techniques could be applied to code editing, even when only a single programmer is involved.</p>
+
+<h1 id="m4">M4</h1>
+
+<p>The UNIX tool <code class="language-plaintext highlighter-rouge">m4</code> contains a number of text-editing features (called <code class="language-plaintext highlighter-rouge">macros</code> and <code class="language-plaintext highlighter-rouge">include</code>) that could be used to implement IDEs.</p>
+
+<h1 id="pls-with-regex-and-strings">PLs With REGEX and Strings</h1>
+
+<p>PLs that contain REGEX and that make string manipulation easy are good candidates for implementing new-breed IDEs.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

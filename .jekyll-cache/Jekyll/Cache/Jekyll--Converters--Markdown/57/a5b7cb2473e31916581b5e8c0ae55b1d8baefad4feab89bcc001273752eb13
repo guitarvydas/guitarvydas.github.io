@@ -1,0 +1,71 @@
+I"w<p>One of the first things I learned in computing was how to build a language.</p>
+
+<p>I sight-read Frits van der Wateren’s Lisp 1.5 into my machine (translating from MC6800 to Z80 opcodes on-the-fly).</p>
+
+<p>Then, I implemented the Lisp compiler in John R. Allen’s book “Anatomy of Lisp”<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>I compiled the <code class="language-plaintext highlighter-rouge">iota</code> function - my machine had <em>just enough</em> memory to house the compiler plus the source code for <code class="language-plaintext highlighter-rouge">iota</code> plus the compiled version of <code class="language-plaintext highlighter-rouge">iota</code> to run the function.  I saw that, indeed, the compiled version ran much, much faster than that interpreted version.  I saw that the compiled version didn’t garbage collect as often as the interpreted version.</p>
+
+<p>Then, DDJ came out with the SmallC source code. “Open Source” was not in vogue at the time, so it was a pleasant surprise to get my hands on actual source code to an actual compiler. I hadn’t even heard of C before that time.</p>
+
+<p>My friend - Chris Lewis - and I typed <em>all</em> of the source code for SmallC into a PDP11 (at UofT’s CSRI) during one evening. At around 2am, I tried the “smoke test”. I ran the compiler. I used a very simple test, something like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = b + c;
+</code></pre></div></div>
+<p>and SmallC printed out the assembly code for the statement (it included the original C source code as a comment), something like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>; a = b + c;
+MOV L,(name of b)
+CLR H
+MOV C,(name of c)
+CLR B
+DAD B
+MOV (name of a),L
+MOV (name of a + 1),H
+</code></pre></div></div>
+<p>[That says: move b into register L, zero out register H, move c into register C, zero out the B register, 16-bit add<sup id="fnref:dad" role="doc-noteref"><a href="#fn:dad" class="footnote">2</a></sup> registers BC plus HL and put the result into HL, move the bottom byte of HL into *a, move the top byte of HL in *(a+1). (H means “high” and L means “low”.  HL combines two byte registers into one 16-bit register.  BC combines two byte registers, B and C, into one 16-bit register.]</p>
+
+<p>This was eye-opening, for me. I immediately saw what a program that writes programs could do for me.  Since then, I’ve been attracted to programs that write programs, e.g. compilers, lisp macros, etc.</p>
+
+<h1 id="practice-practice-practice">Practice, Practice, Practice</h1>
+<p>Q: Violinist: “How do I get into Carnegie Hall?”.</p>
+
+<p>A: “Practice”.</p>
+
+<p>Q: Who originated the concept of Ice Wine?</p>
+
+<p>A: Germany.</p>
+
+<p>Q: Why is Ontario’s, Canada, Ice Wine better than German Ice Wine?</p>
+
+<p>A: Practice.</p>
+
+<p>[Background: To qualify for ice-wine status, you need to pick frozen grapes after 3 days of steady -8C weather. In Niagara, Ontario, Canada, each year brings 3 days of -8C weather.  In Germany, this only happens about twice a decade. Q: Why does anybody choose to live in Ontario, Canada?]</p>
+
+<p>Build many notations, several a day, and you will become better at it.</p>
+
+<p>Corollary: Build one language+compiler every year or so, and, you will learn slowly, at best.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://github.com/guitarvydas/frits-van-der-wateren-lisp">Frits van der Wateren Lisp (by permission)</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/18/Learning-About-Compilers-Quickly.html">Learning About Compilers Quickly</a></p>
+
+<p><a href="https://altairclone.com/downloads/manuals/8080%20Programmers%20Manual.pdf">8080 Assembly Manual</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Warning - the code in the book is not perfectly correct. My copy of the book has pencilled annotations on what needed to be fixed. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dad" role="doc-endnote">
+      <p>It was called double-add! <a href="#fnref:dad" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

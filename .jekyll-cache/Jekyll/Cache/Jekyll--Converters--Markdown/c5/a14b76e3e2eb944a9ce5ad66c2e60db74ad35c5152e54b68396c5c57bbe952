@@ -1,0 +1,102 @@
+I"�<p>The only thing wrong with mutable state is that it is not isolated.</p>
+
+<p>Mutable state is not the problem, isolation is the problem.</p>
+
+<h1 id="encapsulation">Encapsulation</h1>
+
+<p>OOP-style encapsulation is not enough.</p>
+
+<h1 id="unix-live-free-and-die">UNIX Live Free and Die</h1>
+
+<p>UNIX-like processes that die and are automagically cleaned up are another way to get isolation.</p>
+
+<p>Even lowly C programs running under UNIX are isolated.</p>
+
+<p>[…]<sup id="fnref:die" role="doc-noteref"><a href="#fn:die" class="footnote">1</a></sup></p>
+
+<h1 id="leaking-state">Leaking State</h1>
+<p>Leaking state should not be allowed.</p>
+
+<h1 id="leaking-dependencies">Leaking Dependencies</h1>
+<p>Leaking depedencies should not be allowed.</p>
+
+<h1 id="non-locality">Non-Locality</h1>
+
+<p>I define non-local as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Non-locality is: more than an eye-full.
+</code></pre></div></div>
+
+<p>Imagine if all code was only 5 lines long.</p>
+
+<p>Imagine if all code was only one window long.</p>
+
+<p>Imagine if all code was only one screen long.</p>
+
+<p>Imagine if all code fit on one piece of paper (i.e. a printed page).</p>
+
+<p>etc. etc.</p>
+
+<p>For example, 26 global variables, named A-Z, are more than I need for only 5 lines of code.</p>
+
+<h1 id="the-unit-of-understandability">The Unit of Understandability</h1>
+
+<p>7±2.</p>
+
+<h1 id="problem-how-to-keep-software-units-small">Problem: How To Keep Software Units Small?</h1>
+
+<p>The problem becomes: how do we keep all software units down to 7±2 lines in length?</p>
+
+<h1 id="hierarchy">Hierarchy</h1>
+
+<p>I favor hierarchy.</p>
+
+<p>Hierarchical variables.</p>
+
+<p>Hierarchical types.</p>
+
+<p>Hierarchical functions.</p>
+
+<p>Hierarchical return values.</p>
+
+<p>Hierarchical parameters.</p>
+
+<p>Hierarchical sub-systems (e.g. a <em>system</em> can be more than 7±2 lines of code, as long as any sub-unit of code - isolated code - is only 7±2 lines long).</p>
+
+<p>etc. etc.</p>
+
+<p><em>Flat-anything</em> is bad.</p>
+
+<p><em>Non-fractal</em> anything is bad.</p>
+
+<h1 id="trees">Trees</h1>
+
+<p>Trees are hierarchical.</p>
+
+<h2 id="graphs-and-dags">Graphs and DAGs</h2>
+
+<p>Graphs and DAGs are not purely hierarchical, since they allow cross-talk between nodes.</p>
+
+<h1 id="libraries-of-code">Libraries of Code</h1>
+
+<p>Libraries create dependencies.</p>
+
+<p>Avoid libraries. (!)</p>
+
+<p>Avoid creating and using libraries as we understand them at present.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:die" role="doc-endnote">
+      <p>Stolen from a license-plate I saw in a UNIX lab. “UNIX Live Free or Die”. <a href="#fnref:die" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

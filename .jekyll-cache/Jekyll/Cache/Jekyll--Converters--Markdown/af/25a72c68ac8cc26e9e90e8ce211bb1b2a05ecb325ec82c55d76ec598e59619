@@ -1,0 +1,86 @@
+I"N<p>Each component has a <em>namespace</em> which is distinct from the namespaces in other components.</p>
+
+<p>Component naming is relative - there is no “global” namespace.</p>
+
+<p>For emphasis, I break namespaces into 5 sub-categories:</p>
+<ul>
+  <li>/i for inputs</li>
+  <li>/o for outputs</li>
+  <li>/x for connections</li>
+  <li>/c for components (child components)</li>
+  <li>/n for all other names.</li>
+</ul>
+
+<p>I choose to emphasize that the input namespace is distinct from the output namespace in all components.</p>
+
+<p>Likewise, /x and /c are distinct namespaces.</p>
+
+<p>Input names and output names can appear to be the same, but do not cause name-clashes (because they are in separate namespaces).</p>
+
+<p>I, arbitrarily, choose the following syntax:</p>
+<ul>
+  <li>a namespace reference consists of two parts - (1) the component and (2) the namespace within the comonent</li>
+  <li>a name reference consists of “:” followed by the name.</li>
+</ul>
+
+<p>For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp/i:a
+</code></pre></div></div>
+
+<p>refers to the “a” input port of the component “comp”.</p>
+
+<p>Further examples:</p>
+<ul>
+  <li>comp/o:a - “a” output port of component “comp”</li>
+  <li>comp/x:1 - A connection within the component “comp”.  We <em>gensym</em> the name of the connection to be “1”. The user doesn’t actually care.</li>
+  <li>comp/c:sub - The component “sub” in the namespace “c” of component “comp”.</li>
+  <li>comp/n:xyz - The symbol “xyz” in the namespace “n” of component “comp”.</li>
+</ul>
+
+<h1 id="optimization-and-hiding">Optimization and Hiding</h1>
+<p>Later, we might wish to adopt a UNIX-like naming scheme where all parts of a path use the “/” operator.</p>
+
+<p>For example, we might want to rewrite:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp/c:sub/i:a
+</code></pre></div></div>
+<p>to look like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comp/c/sub/i/a
+</code></pre></div></div>
+
+<p>but, that is a syntactical bauble that can be applied later<sup id="fnref:syntax" role="doc-noteref"><a href="#fn:syntax" class="footnote">1</a></sup>.</p>
+
+<p>For now, for clarity, I will use the form: <code class="language-plaintext highlighter-rouge">comp/c:sub/i:a</code>.</p>
+
+<h1 id="abbreviating-">Abbreviating ./</h1>
+
+<p>I will use the abbreviation <code class="language-plaintext highlighter-rouge">.</code> to mean the <em>current component</em>.</p>
+
+<p>For example <code class="language-plaintext highlighter-rouge">./i:a</code> means <code class="language-plaintext highlighter-rouge">comp/i:a</code> when it appears inside of the component “comp”.</p>
+
+<p>This is purely meant for human consumption - writability and readability.</p>
+
+<p>Automation will transform:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root comp
+./i:a
+</code></pre></div></div>
+<p>into</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root comp
+comp/i:a
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:syntax" role="doc-endnote">
+      <p>Syntax is cheap. <a href="#fnref:syntax" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

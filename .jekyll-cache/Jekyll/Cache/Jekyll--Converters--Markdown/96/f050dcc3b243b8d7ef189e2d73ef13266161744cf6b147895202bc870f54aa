@@ -1,0 +1,106 @@
+I"�<h1 id="wish-list-for-structured-software-architecture">Wish List for Structured Software Architecture</h1>
+
+<ul>
+  <li>scalability</li>
+  <li>understandability - It is the Software Architect’s responsibility to make a design readable and understandable.</li>
+  <li>coordinated operation of multiple asynchronous processes</li>
+</ul>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html">DI</a>.</p>
+
+<p>[DI means Design Intent.]</p>
+
+<h1 id="scalability">Scalability</h1>
+
+<p>A Component is scalable if</p>
+<ul>
+  <li>it does not leak information, and,</li>
+  <li>it has no dependencies.</li>
+</ul>
+
+<p>A Component does not leak information if its data flows are explicit and constrained.</p>
+
+<p>A Component does not leak control flow if it is fully <a href="https://guitarvydas.github.io/2020/12/09/Isolation.html">isolated</a>.<sup id="fnref:oop" role="doc-noteref"><a href="#fn:oop" class="footnote">1</a></sup></p>
+
+<h1 id="strict-lines-of-communication">Strict Lines of Communication</h1>
+
+<p>A Component can:</p>
+<ul>
+  <li>receive commands from a parent</li>
+  <li>send commands to children</li>
+  <li>receive data from children</li>
+  <li>send filtered data to parent.</li>
+</ul>
+
+<p>Components are defined recursively.</p>
+
+<h2 id="lines-of-communication">Lines of Communication</h2>
+
+<p>A Component can communicate (Send) to:</p>
+<ul>
+  <li>its parent</li>
+  <li>any of its direct children.</li>
+</ul>
+
+<p>A Component can:</p>
+<ul>
+  <li>receive commands from a parent</li>
+  <li>send commands to children</li>
+  <li>receive information from children</li>
+  <li>send filtered informationto parent.</li>
+</ul>
+
+<p>Component actions (message sending/receiving) are defined recursively.</p>
+
+<p>A <em>command</em> can contain information.</p>
+
+<h2 id="children">Children</h2>
+
+<p>A Component can contain any number of children components.</p>
+
+<p>Components that contain no children are called <em>links</em>.</p>
+
+<h3 id="di-hierarchy">DI Hierarchy</h3>
+
+<p>DI means Design Intent.</p>
+
+<p>To provide scalability, as defined above, the DI</p>
+
+<ul>
+  <li>must be arranged in a tree hierarchy, and,</li>
+  <li>nodes in the hierarchy must only communicate only along edges of the tree.</li>
+</ul>
+
+<p>The hierarchy must be a strict <em>tree</em>.</p>
+
+<p>A Graph<sup id="fnref:graph" role="doc-noteref"><a href="#fn:graph" class="footnote">2</a></sup> cannot express a scalable architecture hierarchy, since graphs allow any node to be connected to any other node in a spaghetti-like manner.</p>
+
+<p>A DAG cannot express a scalable architecture<sup id="fnref:graph:1" role="doc-noteref"><a href="#fn:graph" class="footnote">2</a></sup>. DAGs allow spaghetti connections.</p>
+
+<h3 id="structured-programming">Structured Programming</h3>
+
+<p><em>Structured Programming</em> constrained control flow by prescribing</p>
+<ul>
+  <li>1 input (control flow - entry point)</li>
+  <li>1 output (control flow - exit point).</li>
+</ul>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:oop" role="doc-endnote">
+      <p>Note that OOP provides encapsulation of data, but is not fully isolated, because it leaks control flow (inheritance, overriding of methods, specializatino of methods).  OTOH, UNIX processes, running with hardware MMUs, are fully isolated - one app cannot leak memory or control flow to another app (except through operating system traps). <a href="#fnref:oop" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:graph" role="doc-endnote">
+      <p>Graphs and DAGs can be used to express the insides of nodes, but not a higher-level DI hierarchy. <a href="#fnref:graph" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:graph:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+:ET
