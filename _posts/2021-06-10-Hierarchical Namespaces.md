@@ -12,9 +12,9 @@ Namespaces shall be hierarchical.
 Namespaces can contain namespaces.
 
 A fully qualified name consists of 3 parts[^3parts]:
-1 component
-2 namespace within the component, i.e. i/o/x/c/n (input, output, connection, component, other names, resp.)
-3 name (a string or a symbol).
+1. component
+2. namespace within the component, i.e. i/o/x/c/n (input, output, connection, component, other names, resp.)
+3. name (a string or a symbol).
 
 Corrollary: Each _software component_ contains 5 namespaces. Names are unique within a namespace, but may duplicate names in other namespaces, e.g. a _software component_ might contain an input called "a" and an output called "a" without any name-clashing problems (the first "a" is in the input namespace, whereas the second "a" is in the output namespace).
 
