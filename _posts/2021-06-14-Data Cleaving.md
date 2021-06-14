@@ -20,8 +20,8 @@ Q: Does the _setter_ check the validity of the information? Or, is that operatio
 Using fractal thinking, it becomes "obvious" what a _setter_ should do.
 
 _Setting_ becomes 2 operations:
-# 1a. Validate
-# 1b. Raw set
+## 1a. Validate
+## 1b. Raw set
 
 The operations can be pipelined to make a [type stack](https://guitarvydas.github.io/2020/12/09/Type-Stacks.html).
 
@@ -42,8 +42,8 @@ Typically, we want to _query_ the data in some manner.
 _Querying_ can be a simple _get_, or, it can be a more involved operation, maybe a  _rule_ involving the value of the data, or a _rule_ involving many values of many data.
 
 _Getting_, also breaks down, fractally, into two operations
-# 2a. Raw get
-# 2b. Query
+## 2a. Raw get
+## 2b. Query
 
 The fractal concept has no _bottom_. Each of the above operations can be further sub-divided, recursively[^recur].
 
@@ -61,7 +61,7 @@ Likwise, _query_ might be further broken down into
 
 Many PLs provide _getters_ and _setters_ but don't further specify _how_ the data is validaed nor _why_ the data is fetched. These, otherwise simple, categorizations are hidden in code. The reader needs to _reverse-engineer_ the _validation_ and _querying_ intent from the code.
 
-This kind of code conflation is accidental complexity - the Designer _knew_ how and why he was doing certain operations, but lacked the PL syntax to communicate the Design Intent to future readers of the code.
+This kind of code conflation creates complexity. The Designer _knew_ how and why he was doing certain operations, but lacked the PL syntax to communicate the Design Intent to future readers of the code.
 
 [_Aside: I argue, in other essays that Architects should invent SCNs to describe their DI._]
 
