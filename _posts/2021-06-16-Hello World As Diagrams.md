@@ -4,7 +4,8 @@ title:  "Hello World As Diagrams (Working Paper)"
 ---
 
 # Hello World
-(transcribe diagrams from Draw.io to .md)
+(transcribe diagrams from Draw.io to .md, using hierarchical namespaces (see refs))
+
 [HW](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-hw.svg)
 [hwsub](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-hwsub.svg)
 [code](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-hwhello.svg)
@@ -19,7 +20,7 @@ title:  "Hello World As Diagrams (Working Paper)"
 
 # Step 2
 (merge diagram 3 into diagram 2)
-[Step 2a](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-2a.svg
+[Step 2a](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-2a.svg)
 [Step 2b](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-2b.svg)
 [Step 2c](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-2c.svg)
 [Step 2d](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-2d.svg)
@@ -39,6 +40,8 @@ title:  "Hello World As Diagrams (Working Paper)"
 [elided](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-relative%20-%20rough%20in.svg)
 [full](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-relative%20-%20full.svg)
 # See Also
+
+[hierarchical namespaces[(https://guitarvydas.github.io/2021/06/10/Hierarchical-Namespaces.html)
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
