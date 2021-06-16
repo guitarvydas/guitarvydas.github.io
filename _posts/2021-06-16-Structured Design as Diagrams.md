@@ -11,7 +11,7 @@ title:  "Structured Design as Diagrams"
 # Sequencing Containment Diagram
 [Containment / Composition](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-trees-4.svg)
 # Structure Sharing
-[Containment / Composition](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-trees-5.svg)
+[Structure Sharing](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-trees-5.svg)
 # Scalability
 [Scalability](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-trees-6.svg)
 # Structured Programming
