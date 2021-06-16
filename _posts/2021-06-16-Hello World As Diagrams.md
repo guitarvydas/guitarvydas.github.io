@@ -41,7 +41,7 @@ title:  "Hello World As Diagrams (Working Paper)"
 [full](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-16-Hello%20World%20as%20Diagrams-relative%20-%20full.svg)
 # See Also
 
-[hierarchical namespaces[(https://guitarvydas.github.io/2021/06/10/Hierarchical-Namespaces.html)
+[hierarchical namespaces](https://guitarvydas.github.io/2021/06/10/Hierarchical-Namespaces.html)
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
