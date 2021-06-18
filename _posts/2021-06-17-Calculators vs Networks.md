@@ -2,8 +2,8 @@
 layout: post
 title:  "Calculators vs Networks"
 ---
-[Calculators & Networks](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-17-Networks-Calculator%20vs%20Network.svg)
-[Containment](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-17-Networks-Containment.svg)
+![Calculators & Networks](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-17-Networks-Calculator%20vs%20Network.svg)
+![Containment](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-06-17-Networks-Containment.svg)
 
 N.B. Sharing component _c_ is an optimization.
 
