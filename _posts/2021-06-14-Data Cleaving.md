@@ -59,7 +59,7 @@ Likwise, _query_ might be further broken down into
 
 # Conflation of Get and Set
 
-Many PLs provide _getters_ and _setters_ but don't further specify _how_ the data is validaed nor _why_ the data is fetched. These, otherwise simple, categorizations are hidden in code. The reader needs to _reverse-engineer_ the _validation_ and _querying_ intent from the code.
+Many PLs provide _getters_ and _setters_ but don't further specify _how_ the data is validated nor _why_ the data is fetched. These, otherwise simple, categorizations are hidden in code. The reader needs to _reverse-engineer_ the _validation_ and _querying_ intent from the code.
 
 This kind of code conflation creates complexity. The Designer _knew_ how and why he was doing certain operations, but lacked the PL syntax to communicate the Design Intent to future readers of the code.
 
