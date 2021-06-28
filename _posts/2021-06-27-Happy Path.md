@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Happy Path"
+title:  "Happy Path (Part 1)"
 ---
 # Happy Path
 A _happy path_ is defined as the control flow followed by a program to handle the backbone of an application.
