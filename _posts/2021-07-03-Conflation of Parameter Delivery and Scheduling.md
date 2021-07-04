@@ -19,7 +19,6 @@ fn(a,b)
 It:
 1. Delivers _two_ parameters to _fn_ - both, at the _same time_, and, it
 2. Schedules the function _fn_.
-```
 
 # Scheduling
 
@@ -35,7 +34,7 @@ That works when building calculators, but doesn't work so well when building int
 
 Most of the popular GPLs (general purpose language) make it easy to build calculators, but don't make it easy to build internet software. 
 
-Yes, it is _possible_ to internet software using calculator languages, but it could be easier.
+Yes, it is _possible_ to build internet software using calculator languages, but it could be easier.
 
 # ASCs - Asynchronous Software Components
 
