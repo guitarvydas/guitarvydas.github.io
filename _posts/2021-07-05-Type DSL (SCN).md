@@ -7,7 +7,7 @@ title:  "Type DSL (SCN)"
 
 In this essay, I describe a mini-DSL that is used in a larger project[^1]. 
 
-[^1:] A Diagram to Code transpiler called Arrowgrams.
+[^1]: A Diagram to Code transpiler called Arrowgrams.
 
 This SCN is used to define and implement the types used in the larger project
 
@@ -47,9 +47,9 @@ Comments begin with "%" and continue to the end of the line.
 
 Here `...` represents single names[^2][^3].
 
-[^2:] and the last "..." means "more of the same".
+[^2]: and the last "..." means "more of the same".
 
-[^3:] I employ the principles of "layering" even here. This definition is not rigorous, but one can interpolate its meaning. This definition avoids creating a wall of detail.
+[^3]: I employ the principles of "layering" even here. This definition is not rigorous, but one can interpolate its meaning. This definition avoids creating a wall of detail.
 
 Spaces separate names (commas and semi-colons are not used).
 
@@ -60,7 +60,7 @@ SCN principle: some of the above constructs have become obsolete over time. I le
 # Example Specification
 The spec below[^6] can be found in [exprtypes.dsl](https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl).
 
-[^6:] Motivation: "esa" means Encapsulated Software Artefact.  "When" and "situations" can be thought of as "passes".
+[^6]: Motivation: "esa" means Encapsulated Software Artefact.  "When" and "situations" can be thought of as "passes".
 
 I've removed all comments from the SCN below, for clarity. The comments remain in the original source (in the above github).
 
@@ -78,11 +78,11 @@ Of note: All types in the type system are defined in terms of 2 basic types.
 
 Of note: There are no variable names in this specification. Type names are unique. In places where the same name might appear more than once, a new typename is created. See `methodDeclaration` which ultimately contains two `:strings`.  The first is called `esaKind` and the second is called `name`. The SCN engine sorts out the types for `esaKind` and `name`. The SCN engine does the work automatically. The Architect needs only ensure that coincident types have unique names. Usually the layered name (`esaKind` in this case) is a more meaningful description, from an Architectural perspective, than the final name (`:string` in this case).
 
-[^4:] As it happens, ":bag" is not used at all. I might choose to deprecate ":bag" in future versions of this SCN.  This would have the satisfying property of making the SCN _even simpler_ - 5 rules instead of 6. (Currently, I believe that we need only two types - _thing_ and _list of thing_ - at the Architectural level.  All other types are implementation details and should not appear anywhere but at the bottom-most layer of a design).
+[^4]: As it happens, ":bag" is not used at all. I might choose to deprecate ":bag" in future versions of this SCN.  This would have the satisfying property of making the SCN _even simpler_ - 5 rules instead of 6. (Currently, I believe that we need only two types - _thing_ and _list of thing_ - at the Architectural level.  All other types are implementation details and should not appear anywhere but at the bottom-most layer of a design).
 
 The builtin type ":map" is meant to be a collection. It's name is historical. I might choose to call it something different in future versions[^5]. Again, this is not an exercise in perfecting the SCN, but an exercise in getting things done. I will leave ":map" alone for now.
 
-[^5:] Currently, I use the syntax [xyz] to signify  a collection of xyz.  Brackets `[]` mean "collection of".
+[^5]: Currently, I use the syntax [xyz] to signify  a collection of xyz.  Brackets `[]` mean "collection of".
 
 The type system defined below is not necessarily "easy" to understand. Future maintainers must, still, understand what is going on, much like they already do when maintaining any code base. The type system, though, has much of the GPL details elided and is "easier to read" than a wall of GPL code.  This type system shows only Architectural details (at this level).  The Type SCN focuses the Architects' efforts on software architecture only, instead of on the conflation of architecture+implementation.
 
@@ -163,7 +163,7 @@ methodName =| name
 filler =| name
 ```
 
-A working diagram is in (exprtypes.drawio)[https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.drawio]
+A working diagram is in [exprtypes.drawio](https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.drawio).
 
 # Philosophy
 
@@ -343,7 +343,7 @@ The Software Architect should not be forced to apply DRY principles manually.  `
 
 # Larger Project
 
-This type SCN is part of a larger project (Arrowgrams)[https://github.com/bmfbp/bmfbp/tree/main].
+This type SCN is part of a larger project [Arrowgrams](https://github.com/bmfbp/bmfbp/tree/main).
 
 The goal of the larger project was to compile diagrams into executable code.  The diagrams were drawn in [draw.io](https://app.diagrams.net), exported as a subset of SVG, then compiled into Common Lisp code.
 
