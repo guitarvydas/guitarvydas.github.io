@@ -3,8 +3,6 @@ layout: post
 title:  "Indentation to Braces (Case Study)"
 ---
 
-# See Also
-
 # Introduction
 In this essay, I show how to build a little tranpsiler for debugging and code generation using a strategy I call the SCN Workbench[^scn].
 
