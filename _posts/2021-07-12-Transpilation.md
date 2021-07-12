@@ -3,8 +3,7 @@ layout: post
 title:  "Transpilation"
 ---
 
-
-[FDD](https://guitarvydas.github.io/assets/2021-04-23-FDD/index.html)
+[Transpilation](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2012-07-12-Transpilation/index.html)
 
 
 <script src="https://utteranc.es/client.js" 
