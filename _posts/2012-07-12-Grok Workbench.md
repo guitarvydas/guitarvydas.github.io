@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Transpilation"
+title:  "Grok Workbench"
 ---
 
-[Transpilation](https://guitarvydas.github.io/assets/2012-07-12-Transpilation/index.html)
+[Transpilation](https://guitarvydas.github.io/assets/2012-07-12-Grok Workbench/index.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
