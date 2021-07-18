@@ -1,0 +1,80 @@
+I"%<h1 id="introduction">Introduction</h1>
+
+<p>To: FBP’ers</p>
+
+<p>Your job is <em>NOT</em> to build more FBP components.</p>
+
+<p>Your job is to teach others how to build FBP solutions.</p>
+
+<p>You know how to program in FBP.  Most people don’t know, but they think they know.</p>
+
+<h1 id="brief-example">Brief Example</h1>
+
+<p>Example: functions cannot describe what happens when a component consumes input but produces no output. There is no f(x) for this situation.</p>
+
+<p>Async thinking has no problem with this concept.</p>
+
+<p>In an async solution, one might use “consume-but-produce-nothing Components” - but, that kind of solution is not expressible in functional (synchronous) thinking</p>
+
+<p>It’s “magic”.</p>
+
+<p>If you use f(x) notation, you end up not being able to even <em>think</em> about this kind of solution.</p>
+
+<p>It’s akin to having Natural Numbers with no 0 - you think that you can talk about numbers, but certain kinds of things just can’t be expressed.</p>
+
+<p>Corollary: Asking programmers to specify Async Components and FBP workflow is asking them for Rube Goldberg ideas derived from synchronous-only thinking.</p>
+
+<h1 id="discussion">Discussion</h1>
+
+<p>Programming in FBP is <em>VASTLY</em> different from sequential programming, yet, the words used to explain both are frighteningly similar.  This means that it is virtually impossible to explain how to use FBP using only words (I’ve been trying, I’m up to 330+ blog posts, but have yet to find the sweet spot).</p>
+
+<p>Henry Ford is attributed with saying “If I had asked people what they wanted, they would have said faster horses”.</p>
+
+<p>The first use of electric motors was to power textile mills, by pumping water uphill to make artificial streams that ran the water-wheels that ran the textile mills.</p>
+
+<p>At first, it was thought that computers were only good for building ballistics calculators.</p>
+
+<p>I would suggest that, instead of the question “what components do you want?” and “what workflow do you want?”, the question becomes “what applications are wildly popular?”. Then, re-implement one such application in FBP.</p>
+
+<p>“Give a man a fish, he eats for a day. Teach a man to fish, he eats for a lifetime.”</p>
+
+<h1 id="callreturn">CALL/RETURN</h1>
+
+<p>To emphasize the vast chasm in belief structures, imagine CALL/RETURN.</p>
+
+<p>CALL/RETURN restricts the programming domain in several ways:</p>
+<ol>
+  <li>CALL/RETURN performs scheduling (the caller is suspended, the callee runs immediately).</li>
+  <li>Parameters are delivered in a synchronous block - all at the same time.</li>
+  <li>Return Value(s) are delivered in a synchronous block - all at the same time.</li>
+  <li>The Callee springs to life then dies.</li>
+  <li>We (the Royal We) add a kludge, called “Exceptions” to the syntax of CALL/RETURN to compensate for the shortcomings of the kludge that we call CALL/RETURN.</li>
+  <li>CALL/RETURN is implemented - cast in hardware - using a global variable.</li>
+</ol>
+
+<p>We (the Royal We) use an artificial kludge to take control back in situation #1. Operating systems like to think that they control scheduling, but CALL/RETURN violates that notion. Operating systems use “preemption” to wrench scheduling control away from the caller. Preemption comes with its own baggage cart of accidental complexity.</p>
+
+<p>Asynch Components (which includes FBP) drive a stake through the heart of CALL/RETURN. Once you know how to program asynchronously, you can’t unknow how. Until you know this, though, you are only looking at shadows on the wall (often called “thread libraries”, “lazy evaluation”, etc.) and you couch <em>everything</em> in the language of not-knowing.</p>
+
+<p>Note that Relational Programming and FP are - slowly - learning how to expunge CALL/RETURN from notations.</p>
+
+<p>Note that internet programming and distributed programming (e.g. blockchain, p2p) are - slowly - exposing the fallacy of CALL/RETURN.</p>
+
+<p>Thinking-in-async is very, very, very different from thinking-in-sync.  Async solutions are very, very, very different from sync solutions for the <em>exact same</em> problem.</p>
+
+<h1 id="attributions">Attributions</h1>
+
+<p>I would like to thank Ken Khan for pointing out the “horses” statement to me.</p>
+
+<p>The story about the first use of electric motors comes from Tom Goodwin’s book “Digital Darwinism”.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">CALL/RETURN Spaghetti</a><br />
+<a href="https://guitarvydas.github.io">blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -55,24 +55,12 @@
 
 <p>Namespaces can contain namespaces.</p>
 
-<p>A fully qualified name consists of 3 parts[^3parts]:</p>
-<ul>
-  <li>
-    <ol>
-      <li>component</li>
-    </ol>
-  </li>
-  <li>
-    <ol>
-      <li>namespace within the component, i.e. i/o/x/c/n (input, output, connection, component, other names, resp.)</li>
-    </ol>
-  </li>
-  <li>
-    <ol>
-      <li>name (a string or a symbol).</li>
-    </ol>
-  </li>
-</ul>
+<p>A fully qualified name consists of 3 parts<sup id="fnref:3parts" role="doc-noteref"><a href="#fn:3parts" class="footnote">1</a></sup>:</p>
+<ol>
+  <li>component</li>
+  <li>namespace within the component, i.e. i/o/x/c/n (input, output, connection, component, other names, resp.)</li>
+  <li>name (a string or a symbol).</li>
+</ol>
 
 <p>Corrollary: Each <em>software component</em> contains 5 namespaces. Names are unique within a namespace, but may duplicate names in other namespaces, e.g. a <em>software component</em> might contain an input called “a” and an output called “a” without any name-clashing problems (the first “a” is in the input namespace, whereas the second “a” is in the output namespace).</p>
 
@@ -97,6 +85,13 @@
 <script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
 </script>
 
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:3parts" role="doc-endnote">
+      <p>The fact that fully qualified names have 3 parts is not to be confused with the use of triples. Triples are a more general construct. <a href="#fnref:3parts" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </div><a class="u-url" href="/2021/06/10/Hierarchical-Namespaces.html" hidden></a>
 </article>

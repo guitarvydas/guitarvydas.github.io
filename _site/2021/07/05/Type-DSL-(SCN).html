@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Type DSL (SCN) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Type DSL (SCN)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/05/Type-DSL-(SCN).html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/05/Type-DSL-(SCN).html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-05T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Type DSL (SCN)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/05/Type-DSL-(SCN).html","@type":"BlogPosting","description":"Introduction","dateModified":"2021-07-05T00:00:00-04:00","datePublished":"2021-07-05T00:00:00-04:00","headline":"Type DSL (SCN)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/05/Type-DSL-(SCN).html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Type DSL (SCN)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-05T00:00:00-04:00" itemprop="datePublished">Jul 5, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>In this essay, I describe a mini-DSL that is used in a larger project<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>This SCN is used to define and implement the types used in the larger project</p>
+
+<p>The implementation is complicated-enough that the code to implement the types obscures the bare essence of the type system.</p>
+
+<p>The intent of this sub-project is to build the type system in layers, each layer revealing only the bare essence (at that layer) and eliding details in lower layers.</p>
+
+<p>Details are elided, but not discarded.</p>
+
+<p>This technique differs from the more common technique of using a GPL (General Purpose Language), like Python, etc.</p>
+
+<p>In essence, there is nothing new here, I simply rearrange existing technologies and emphasize layering using FDD (Failure Driven Design) and PEG.</p>
+
+<p>This essay consists of 2 major parts</p>
+<ol>
+  <li>Type SCN</li>
+  <li>Philosopy.</li>
+</ol>
+
+<p>I present the SCN first, then discuss the philosophy behind the design.</p>
+
+<h2 id="scns">SCNs</h2>
+
+<p>I call mini-DSLs “SCNs”. SCN means “Solution Centric Notation”.</p>
+
+<h2 id="type-scn">Type SCN</h2>
+
+<p>The bare essence of this type system is built on only 6 primitive kinds of definitions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = { ... ... ...}         --&gt; class with fields def
+id = :bag ...               --&gt; bag def
+id = :string ...            --&gt; string def
+id = :map ...               --&gt; map def
+id = | ... | ... | ...      --&gt; compound type def
+id = '...' |  '...' | ...   --&gt; enum def
+</code></pre></div></div>
+
+<p>Comments begin with “%” and continue to the end of the line.</p>
+
+<p>Here <code class="language-plaintext highlighter-rouge">...</code> represents single names<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup><sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup>.</p>
+
+<p>Spaces separate names (commas and semi-colons are not used).</p>
+
+<p>Originally, the syntax was parsed manually. To aid such manual parsing, I designed the syntax to contain <em>left handles</em>.  Every construct begins with “id =” and the next token (the third token) uniquely determines the kind of construct being used, e.g. <code class="language-plaintext highlighter-rouge">{</code>, <code class="language-plaintext highlighter-rouge">:bag</code>, <code class="language-plaintext highlighter-rouge">:string</code>, <code class="language-plaintext highlighter-rouge">:map</code>, <code class="language-plaintext highlighter-rouge">|</code> and <code class="language-plaintext highlighter-rouge">'</code>.</p>
+
+<p>SCN principle: some of the above constructs have become obsolete over time. I leave those constructs in, since the definition is “good enough” to get the job done, and, in some way shows the provenance from original ideas to final reality.  Future maintainers might choose to prune the definition, but no time is wasted in doing so at the moment.</p>
+
+<h1 id="example-specification">Example Specification</h1>
+<p>The spec below<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">4</a></sup> can be found in <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl">exprtypes.dsl</a>.</p>
+
+<p>I’ve removed all comments from the SCN below, for clarity. The comments remain in the original source (in the above github).</p>
+
+<p>Note that the full type system for this sub-project can be described using a simple SCN consisting of about 6 main rules.</p>
+
+<p>[N.B. This is code that forms a sub-portion of a larger project, copied verbatim.]</p>
+
+<p><u>Reading 1</u>: the first line declares a type called “esaprogram”. The type contains 4 fields “typeDecls”, “situations”, “classes” and “whenDeclarations”.</p>
+
+<p><u>Reading 2</u>: the line <code class="language-plaintext highlighter-rouge">name = :string</code> declares that “name” has a type that is a foreign type. It is a foreign (external) type called “:string”. The type system says nothing about the foreign type “:string”.  No methods for the foreign type “:string” are defined. The foreign type “:string” is built-in to the transpiler.  The name “:string” is historical. I might choose to call it “:foreign” today.</p>
+
+<p>Of note: All types in the type system boil down into one of the builtin types, “:string” and “:map”<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">5</a></sup>.</p>
+
+<p>Of note: All types in the type system are defined in terms of 2 basic types.</p>
+
+<p>Of note: There are no variable names in this specification. Type names are unique. In places where the same name might appear more than once, a new typename is created. See <code class="language-plaintext highlighter-rouge">methodDeclaration</code> which ultimately contains two <code class="language-plaintext highlighter-rouge">:strings</code>.  The first is called <code class="language-plaintext highlighter-rouge">esaKind</code> and the second is called <code class="language-plaintext highlighter-rouge">name</code>. The SCN engine sorts out the types for <code class="language-plaintext highlighter-rouge">esaKind</code> and <code class="language-plaintext highlighter-rouge">name</code>. The SCN engine does the work automatically. The Architect needs only ensure that coincident types have unique names. Usually the layered name (<code class="language-plaintext highlighter-rouge">esaKind</code> in this case) is a more meaningful description, from an Architectural perspective, than the final name (<code class="language-plaintext highlighter-rouge">:string</code> in this case).</p>
+
+<p>The builtin type “:map” is meant to be a collection. It’s name is historical. I might choose to call it something different in future versions<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">6</a></sup>. Again, this is not an exercise in perfecting the SCN, but an exercise in getting things done. I will leave “:map” alone for now.</p>
+
+<p>The type system defined below is not necessarily “easy” to understand. Future maintainers must, still, understand what is going on, much like they already do when maintaining any code base. The type system, though, has much of the GPL details elided and is “easier to read” than a wall of GPL code.  This type system shows only Architectural details (at this level).  The Type SCN focuses the Architects’ efforts on software architecture only, instead of on the conflation of architecture+implementation.</p>
+
+<p>The SCN transpiles the specification to a GPL. In this case, <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.dsl">exprtypes.dsl</a> is transpiled into <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.lisp">exprtypes.lisp</a>. It should be possible to transpile to some other base language (I call it a <em>toolbox language</em>), such as Python.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>esaprogram = { typeDecls situations classes whenDeclarations  }
+
+typeDecls = :map typeDecl
+situations = :map situationDefinition
+classes = :map esaclass
+whenDeclarations = :map whenDeclaration
+
+typeDecl = { name typeName }
+situationDefinition =| name
+esaclass = { name fieldMap methodsTable }
+
+whenDeclaration = { situationReferenceList esaKind methodDeclarationsAndScriptDeclarations }
+situationReferenceList = :map situationReferenceName
+situationReferenceName =| name
+
+methodDeclarationsAndScriptDeclarations = :map declarationMethodOrScript
+declarationMethodOrScript =| methodDeclaration | scriptDeclaration
+
+methodDeclaration = { esaKind name formalList returnType }
+
+scriptDeclaration = { esaKind name formalList returnType implementation }
+
+returnType = { returnKind name }
+returnKind = 'map' | 'simple' | 'void'
+formalList = :map name
+
+esaKind =| name
+typeName =| name
+
+expression = { ekind object }
+ekind = 'true' | 'false' | 'object' | 'calledObject'
+object = { name fieldMap }
+fieldMap = :map field
+field = { name fkind actualParameterList } 
+fkind = 'map' | 'simple'
+actualParameterList = :map expression
+name = :string
+
+methodsTable = :map declarationMethodOrScript
+
+
+externalMethod = { name formalList returnType }
+internalMethod = { name formalList returnType implementation }
+implementation = :map statement
+
+statement =| letStatement | mapStatement | exitMapStatement | setStatement | createStatement | ifStatement | loopStatement | exitWhenStatement | callInternalStatement | callExternalStatement | returnTrueStatement | returnFalseStatement | returnValueStatement
+
+letStatement = { varName expression implementation }
+mapStatement = { varName expression implementation }
+exitMapStatement = { filler } 
+setStatement = { lval expression }
+createStatement = { varName indirectionKind name implementation }
+ifStatement = { expression thenPart elsePart }
+loopStatement = { implementation }
+exitWhenStatement = { expression }
+returnTrueStatement = { methodName }
+returnFalseStatement = { methodName }
+returnValueStatement = { methodName name }
+callInternalStatement = { functionReference } 
+callExternalStatement = { functionReference }
+
+lval =| expression
+varName =| name
+functionReference =| expression
+thenPart =| implementation
+elsePart =| implementation
+
+indirectionKind = 'indirect' | 'direct'
+
+methodName =| name
+filler =| name
+</code></pre></div></div>
+
+<p>A working diagram is in <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler/exprtypes.drawio">exprtypes.drawio</a>.</p>
+
+<h1 id="philosophy">Philosophy</h1>
+
+<h2 id="previous-attempts">Previous Attempts</h2>
+
+<h3 id="gpls">GPLs</h3>
+
+<p>Most current GPLs provide only 2 layers:</p>
+<ol>
+  <li>User definitions layer</li>
+  <li>Implementation layer.</li>
+</ol>
+
+<h3 id="oop">OOP</h3>
+
+<p>OOP is an attempt to provide more layers in data design, but OOP provides the programmer(s) only with the basic tools (the “assembler”) for doing so. Some programmers design and display their systems in layers, most don’t.</p>
+
+<p>In this approach, we define a <em>notation</em> for our top layer, then apply various tools to implement the <em>notation</em> in layers.</p>
+
+<p>The intent is that every layer contain only the bare essence of what is needed, eliding details to other layers.</p>
+
+<p>Most PLs already have these capabilities (esp. when mixed with AOP).</p>
+
+<h2 id="syntax-is-cheap">Syntax is cheap.</h2>
+
+<p>I augment the use of GPLs with the use of PEG parsing technologies.</p>
+
+<p>I invent syntaxes and use them as light-weight notations.</p>
+
+<p>I favour the creation of many syntaxes for a single project, instead of sticking to the syntax given by a single GPL.</p>
+
+<h2 id="architecture">Architecture</h2>
+
+<p>This essay describes a way of writing concrete Software Architecture.</p>
+
+<p>The goal of Software Architecture is <a href="https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html">Design Intent</a>.</p>
+
+<h2 id="common-lisp">Common Lisp</h2>
+
+<p>Common Lisp is a GPL that contains everything-but-the-kitchen-sink and I often use it as my <em>toolbox language</em>.</p>
+
+<h2 id="javascript">JavaScript</h2>
+
+<p>JavaScript is a close second to CL.</p>
+
+<h2 id="python">Python</h2>
+
+<p>Python is more popular than either of the above languages, at the moment, but Python emphasizes a syntax geared towards human-readability (which makes it harder - not impossible - to automatically emit code from a transpiler).</p>
+
+<h2 id="portability">Portability</h2>
+
+<p>SCNs can produce portable code - code in any GPL - if appropriate technology is used (e.g. PEG parser generators)</p>
+
+<h2 id="meta-programming">Meta-Programming</h2>
+
+<p>Portability is also called <code class="language-plaintext highlighter-rouge">meta-programming</code>. The concept is that a single description source can be used to create code in any language.</p>
+
+<p>This is what <code class="language-plaintext highlighter-rouge">compiler technologies</code> already do. Compilers input a GPL text and output assembler code of various forms.</p>
+
+<p>Compilers are limited forms of meta-programming.</p>
+
+<p>Compiler technologies include techniques for optimizing code.  These techniques could be directly applied to optimizing code generated by SCN transpilers.</p>
+
+<h2 id="macros">Macros</h2>
+
+<p>Macros, such as Lisp macros, M4, and C macros, are meta-programming wannabes.</p>
+
+<h2 id="functions-referential-transparency">Functions, Referential Transparency</h2>
+
+<p>Referentially-transparent functions are restricted forms of macros. See the above discussion of meta-programming.</p>
+
+<h2 id="referential-transparency-for-hardware">Referential Transparency for Hardware</h2>
+
+<p>TTL hardware designers used the phrase “pin compatible” to refer to component substitution.</p>
+
+<p>Hardware often used <em>sockets</em> to house hardware ICs.</p>
+
+<p>One could literally pull out an IC and plug another one into the socket.</p>
+
+<p>One could buy <em>chip pullers</em> which made it easier to pull chips (ICs) out of sockets.</p>
+
+<h2 id="pragmas-and-ifdef">Pragmas and #ifdef,</h2>
+
+<p>Pragmas and C’s #ifdef are limited forms of meta-programming. See the above discussion.</p>
+
+<h2 id="cl-features">CL *features*</h2>
+<p>CL’s <a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/v_featur.htm">*features*</a> feature is a limited form of meta-programming.  See the above discussion.</p>
+
+<h2 id="machine-readability-vs-human-readability">Machine readability vs. human readability</h2>
+
+<p>I suggest that, for building SCN transpilers, it is more convenient to use a language - a <code class="language-plaintext highlighter-rouge">toolbox language</code> - that is “harder” to read and emphasizes machine-readability over human-readability.</p>
+
+<h2 id="peg">PEG</h2>
+
+<p>PEG means “parsing expression grammar”.</p>
+
+<p>PEG is a pattern matcher notation, like REGEXP.</p>
+
+<p>PEG is better than REGEXP for certain kinds of patterns, e.g. multi-line structures, vs. single-line matches.</p>
+
+<p>PEG makes it possible to treat syntax as a commodity. Syntax is cheap.</p>
+
+<p>I consider this “Type SCN” (mini-DSL) to be a notation.</p>
+
+<p>This essay shows how I use PEG to implement the notation.</p>
+
+<p>The Type SCN remains a “hard” problem. PEG makes it possible to split the problem into two halves</p>
+<ol>
+  <li>The Notation</li>
+  <li>The (Architectural) Use of the Notation.</li>
+</ol>
+
+<p>Using PEG makes it possible to automate the notation, wheres the <em>thinking</em> part - Architecture - is not automated.</p>
+
+<p>The <em>thinking</em> part is, though, “easier” to think about because it is not tangled up with implementation details.</p>
+
+<h2 id="no-variable-names">No Variable Names</h2>
+
+<p>Note that the SCN notation, above, uses no variables names.</p>
+
+<p>I use identifiers for types and do not require variable names.</p>
+
+<p>In the infrequent case that type names clash, new names are invented for the types to keep them unique from one another.  The SCN engine sorts out the final types for all names.</p>
+
+<p>I use names that are essentially complete phrases that, hopefully, express my DI .  [<em>Note that, I am the Architect, readers need to read and understand what I was thinking. I believe that any problem solution has many possible forms.  No solution is “perfect”, the only goal is to allow my readers to understand what I chose to do.</em>]</p>
+
+<h2 id="foreign-types--dataless-programming-languages">Foreign Types &amp; Dataless Programming Languages</h2>
+
+<p>Programming a computer involves two domains:</p>
+<ol>
+  <li>The Data</li>
+  <li>The Control Flow.</li>
+</ol>
+
+<p>Most GPLs conflate both domains into a single language.</p>
+
+<p>I try to keep the two domains separate</p>
+<ol>
+  <li>The Data domain is not allowed to express control flow construction.</li>
+  <li>The Control Flow domain is not allowed express data construction.</li>
+</ol>
+
+<p>Note that <em>some</em> operations, such as setters and getters, fall into the Data domain but are more like control flow constructs (for example, if-then-else oriented only at data description).</p>
+
+<p><em>Case</em> on <em>type</em> falls into the data domain (in fact, <em>case</em> on <em>type</em> is the main feature of method dispatch in OO).</p>
+
+<p>Other kinds of control flow fall into The Control Flow domain.  An SCN for control flow needs to be <em>dataless</em>.</p>
+
+<p>It <em>is</em> possible to define languages that are dataless. A <em>dataless</em> language can move data around using <em>handles</em>, but cannot “look into” data objects nor describe how they are constructed. We have seen versions of these concepts in windowing systems, where the contents of <em>window</em> data structures are opaque (handles to opaque data structures).</p>
+
+<p>S/SL - Syntax / Semantic Language - is a dataless language. S/SL deals only with the domain of control flow for parsing, leaving all data access and construction to foreign modules (called <em>mechanisms</em>).</p>
+
+<h2 id="fdd---failure-driven-development">FDD - Failure Driven Development</h2>
+
+<p>I use the tenets of FDD: “automate as much as possible”. I automate code generation in preference to writing code manually.</p>
+
+<h2 id="pattern-matching-and-fp-haskell-elm">Pattern Matching (and FP, Haskell, Elm)</h2>
+
+<p>Parsing is pattern matching.</p>
+
+<p>FP uses pattern matching.</p>
+
+<p>Parsing is <em>solely</em> focused on Pattern Matching.</p>
+
+<p>Haskell is an FP GPL.  Haskell is <em>not</em> only focused on Pattern Matching.</p>
+
+<p>Likewise, Elm uses pattern matching, but provides other kinds of functionality, in addition to pattern matching.</p>
+
+<h2 id="other-philosophical-points">Other Philosophical Points</h2>
+
+<h3 id="diff">Diff</h3>
+
+<p>With respect to automating code generation, <code class="language-plaintext highlighter-rouge">diff</code> could be used to help create variants of code instead of simply recording differences.</p>
+
+<h3 id="dry">DRY</h3>
+
+<p>DRY means “Don’t Repeat Yourself”.</p>
+
+<p>The Software Architect should not be forced to apply DRY principles manually.  <code class="language-plaintext highlighter-rouge">Diff</code> should automate the process of DRY detection.</p>
+
+<h1 id="github">GitHub</h1>
+
+<p><a href="https://github.com/bmfbp/bmfbp/tree/main/build_process/esa-transpiler2">esa-transpiler2</a></p>
+
+<h1 id="larger-project">Larger Project</h1>
+
+<p>This type SCN is part of a larger project <a href="https://github.com/bmfbp/bmfbp/tree/main">Arrowgrams</a>.</p>
+
+<p>The goal of the larger project was to compile diagrams into executable code.  The diagrams were drawn in <a href="https://app.diagrams.net">draw.io</a>, exported as a subset of SVG, then compiled into Common Lisp code.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a><br />
+<a href="https://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>A Diagram to Code transpiler called Arrowgrams. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>and the last “…” means “more of the same”. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>I employ the principles of “layering” even here. This definition is not rigorous, but one can interpolate its meaning. This definition avoids creating a wall of detail. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Motivation: “esa” means Encapsulated Software Artefact.  “When” and “situations” can be thought of as “passes”. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>As it happens, “:bag” is not used at all. I might choose to deprecate “:bag” in future versions of this SCN.  This would have the satisfying property of making the SCN <em>even simpler</em> - 5 rules instead of 6. (Currently, I believe that we need only two types - <em>thing</em> and <em>list of thing</em> - at the Architectural level.  All other types are implementation details and should not appear anywhere but at the bottom-most layer of a design). <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Currently, I use the syntax [xyz] to signify  a collection of xyz.  Brackets <code class="language-plaintext highlighter-rouge">[]</code> mean “collection of”. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/05/Type-DSL-(SCN).html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

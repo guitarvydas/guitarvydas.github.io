@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Flows (Abridged) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Flows (Abridged)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Computer software deals with two kinds of information: data control." />
+<meta property="og:description" content="Computer software deals with two kinds of information: data control." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/06/27/Flows-Abridged.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/06/27/Flows-Abridged.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-27T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Flows (Abridged)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/06/27/Flows-Abridged.html","@type":"BlogPosting","description":"Computer software deals with two kinds of information: data control.","dateModified":"2021-06-27T00:00:00-04:00","datePublished":"2021-06-27T00:00:00-04:00","headline":"Flows (Abridged)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/06/27/Flows-Abridged.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Flows (Abridged)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-06-27T00:00:00-04:00" itemprop="datePublished">Jun 27, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Computer software deals with two kinds of information:</p>
+<ol>
+  <li>data</li>
+  <li>control.</li>
+</ol>
+
+<h1 id="issues">Issues</h1>
+<h2 id="separation-of-concerns">Separation of Concerns</h2>
+<p>See S/SL (in References) for an example of a data-less language.</p>
+
+<h2 id="locality-of-reference">Locality of Reference</h2>
+<p>Information leaks are currently called “dependencies”[^locality].</p>
+
+<p>An insidious form of information leak is the use of <em>functions</em>!</p>
+
+<h1 id="scoping-nesting">Scoping (Nesting)</h1>
+
+<p>In computer science, it has often been the case that problems have been solved through the use of nesting - aka <em>scoping</em>.</p>
+
+<h2 id="structured-programming">Structured Programming</h2>
+
+<p>Structured programming prescribes <em>nesting</em> of control-flow as a solution to the problem of <em>spaghetti</em> control-flow.</p>
+
+<h2 id="global-variables">Global Variables</h2>
+
+<p>The problem of <em>global variables</em> was solved using <em>nesting</em>.</p>
+
+<p>The “real” problem is one of <em>spaghetti dependencies</em>.  How to stop programs from becoming “too large”?</p>
+
+<h2 id="object-oriented-programming">Object Oriented Programming</h2>
+
+<p>OOP is a solution for structuring data and divorcing data from implementation details.</p>
+
+<p><em>Inheritance</em> is a useful way to organize data.</p>
+
+<p><em>Inheritance</em> is a poor way to organize code.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>Syntax is, currently, used for dealing with control-flow descriptions.</p>
+
+<p>Two languages for any program -</p>
+
+<ol>
+  <li>a data description language</li>
+  <li>a control-flow description language</li>
+</ol>
+
+<h2 id="pattern-matching">Pattern Matching</h2>
+<p>The trend in FP is to use <em>pattern matching</em> to separate control information from data information.</p>
+
+<p>Pattern matching is well-understood, albeit under a different name - “parsing”.</p>
+
+<h2 id="denotational-semantics">Denotational Semantics</h2>
+
+<p>Denotational Semantics is the field of describing programming languages using functional notation.</p>
+
+<p>Control-flow, in Denotational Semantics, is most often handled through the use of <code class="language-plaintext highlighter-rouge">GOTOs</code> (rebranded as CPS, first-class-functions, continuations, etc.).</p>
+
+<h2 id="data-flow">Data Flow</h2>
+
+<p>“Data flow” refers to a style of control-flow, not to data structuring.</p>
+
+<p>FP requires that <em>all</em> inputs arrive at a component (a <em>function</em>) at the same time.  FP assumes that there is a single <em>happy path</em>.</p>
+
+<h2 id="control-flow">Control Flow</h2>
+
+<p>The current model for control-flow - syntax - is based on assumptions related to 1950’s computer hardware - e.g. a single CPU[^cpu] and expensive memory.</p>
+
+<h2 id="deep-recursion-long-running-loops">Deep Recursion, Long-Running Loops</h2>
+
+<h2 id="state">State</h2>
+
+<p>Programmers conflate the various uses of <em>state</em> and lump them together.</p>
+
+<p>I discuss this further in https://guitarvydas.github.io/2021/03/30/State,-Analysis-of.html.</p>
+
+<h2 id="statecharts">StateCharts</h2>
+
+<p>I discuss StateCharts further in https://guitarvydas.github.io/2020/12/09/StateCharts.html and https://guitarvydas.github.io/2021/02/25/statecharts-(again).html.</p>
+
+<p>Note that many “successes” in programming have been built on top of the <em>state</em> paradigm, e.g. operating systems, YACC, LEX, REGEXP, etc.</p>
+
+<h2 id="threads">Threads</h2>
+
+<p><em>Threads</em> are more like assembly-level operations provided on a single CPU than a high-level concept useful for programming distributed systems.</p>
+
+<h2 id="dataless">Dataless</h2>
+
+<p>See the References section for S/SL - a dataless language that was, ostensibly, used for constructing compilers (aka “big” programs).</p>
+
+<h2 id="gotos-cps">GOTOs, CPS</h2>
+
+<p>The problem with GOTOs was not the GOTOs themselves, but the unstructured use of GOTOs.</p>
+
+<h2 id="scalability">Scalability</h2>
+
+<p>Components are scalable only if they are not inter-related.</p>
+
+<p>Scalable components cannot have dependencies on one another.</p>
+
+<p>https://guitarvydas.github.io/2021/06/17/Dags.html</p>
+
+<h2 id="type-checking">Type Checking</h2>
+
+<p>Currently, most PLs provide a handful of hard-wired types and a way for programmers to define further types.</p>
+
+<h3 id="hard-wired">Hard-Wired</h3>
+
+<h3 id="programmer-defined">Programmer-Defined</h3>
+
+<h3 id="input-validation">Input Validation</h3>
+
+<h3 id="tell">Tell</h3>
+
+<p>The fact that three forms of type checking exist is a <em>tell</em> that the concepts of type checking are non-uniform.</p>
+
+<h2 id="absolute-naming">Absolute Naming</h2>
+
+<p>Most PLs create names that are <em>absolute</em> and global to the whole application.</p>
+
+<h1 id="solutions">Solutions</h1>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<p>At present, I believe that dependencies are the first-order problem.</p>
+
+<p>… <em>dependency debt</em>.</p>
+
+<h3 id="visualizing-dependencies">Visualizing Dependencies</h3>
+
+<p>I believe that diagrams show dependencies more readily than textual code.</p>
+
+<h2 id="little-things">Little Things</h2>
+
+<p>The Little Things matter.</p>
+
+<p>https://guitarvydas.github.io/2021/04/26/What-If-Making-A-Compiler-Was-Easy.html</p>
+
+<h2 id="asynchronous-components">Asynchronous Components</h2>
+
+<p>Software components are <em>asynchronous</em> by default.</p>
+
+<p>Synchronous components are the exception, not the rule.</p>
+
+<h3 id="lifetimes">Lifetimes</h3>
+
+<p>Software components “live forever” (like web servers).</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>Software components can be supplied inputs at different points in their lifetimes.</p>
+
+<h3 id="outcomes">Outcomes</h3>
+
+<p>Software components can produce outputs at various points in their lifetimes.</p>
+
+<h3 id="exceptions">Exceptions</h3>
+
+<p>Exceptions are not exceptional.</p>
+
+<p>Exceptions produced by components are the same as all other outcomes produced by components.</p>
+
+<p>The problems and the solutions dictate which outcomes are considered to be erroneous.  <em>Software Architects</em> design solutions that produce the desired outcomes, picking from a multitude of choices.  Few problems have exactly one solution - it is the Architects’ responsibility to make vaarious trade-offs and to make the design clear to readers.</p>
+
+<p>https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html</p>
+
+<h2 id="ports">Ports</h2>
+
+<p>Software components have input <em>and</em> output ports.</p>
+
+<p>Most current PLs have APIs that imply synchronous operation.</p>
+
+<h3 id="one-universal-type">One Universal Type</h3>
+
+<p>Components are plugged together port-to-port where ports have a <em>single</em>, universal, simple type, e.g. a <em>message</em>.</p>
+
+<p>Types checking is done in a pipeline, from simple to more complex.</p>
+
+<p>Not <em>all</em> software components need to fit this simple - one-in-two-out - model.</p>
+
+<h2 id="layering">Layering</h2>
+
+<p>Components are built in layers.</p>
+
+<p>No layer contains more units than can be comprehended, e.g. 7±2.</p>
+
+<p>Components can, themselves, contain layers, recursively.</p>
+
+<h2 id="loops">Loops</h2>
+
+<p>Long running loops and deep recursion are not allowed.</p>
+
+<h2 id="diagrams">Diagrams</h2>
+
+<p>Diagrams are a way to visualize multiple outcomes.</p>
+
+<p>Diagrams are a way to show nesting and locality of reference.</p>
+
+<p>Diagrams can visualize information leakage.</p>
+
+<p>Diagrams make it difficult to draw leaky components, especially when <em>everything</em> (e.g. function calls) is made explicit.</p>
+
+<h3 id="example-diagram-scenario">Example Diagram Scenario</h3>
+
+<p>A software component is represented as a box.</p>
+
+<p>Software components are asynchronous.</p>
+
+<p>Lines represent message flow paths.</p>
+
+<p>Software components contain input and output ports.</p>
+
+<p>Input ports are small green circles.</p>
+
+<p>Output ports are small yellow circles.</p>
+
+<p>A Dispatcher routine invokes <em>ready</em> components in a random order.</p>
+
+<h2 id="relative-naming">Relative Naming</h2>
+
+<p>All names are relative to components.</p>
+
+<h3 id="namespaces">Namespaces</h3>
+
+<p>Components have 5 namespaces:</p>
+
+<ol>
+  <li>
+    <p>inputs</p>
+  </li>
+  <li>
+    <p>ouputs</p>
+  </li>
+  <li>
+    <p>contained components</p>
+  </li>
+  <li>
+    <p>connections between components</p>
+  </li>
+  <li>
+    <p>other</p>
+  </li>
+</ol>
+
+<h3 id="example">Example</h3>
+
+<p>A component refers to a component that is contained in it by using a name (e.g. “inner”) or and index (1, 2, 3, …), for example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./c/inner/abc
+./c/1/abc
+</code></pre></div></div>
+
+<p>Likewise, it can refer to a named input “in” as, for example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./i/in
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/06/27/Flows-Abridged.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

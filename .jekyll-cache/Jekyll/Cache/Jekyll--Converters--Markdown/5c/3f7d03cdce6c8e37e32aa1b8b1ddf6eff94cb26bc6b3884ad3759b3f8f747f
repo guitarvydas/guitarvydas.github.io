@@ -1,0 +1,78 @@
+I"�<p>Programs have <em>data</em>.</p>
+
+<p>Let’s apply the fractal principle to <em>data</em> and see what emerges.</p>
+
+<p>Let’s divide <em>data</em> into two divisions and dig into the divisions more deeply.</p>
+
+<p>Several PLs provide <em>getters</em> and <em>setters</em> for data.</p>
+
+<h1 id="1-set">1. Set</h1>
+<p>A <em>setter</em> function creates a piece of data and sets it to some value.</p>
+
+<p>Q: Does the <em>setter</em> check the validity of the information? Or, is that operation moved elsewhere?</p>
+
+<p>Using fractal thinking, it becomes “obvious” what a <em>setter</em> should do.</p>
+
+<p><em>Setting</em> becomes 2 operations:</p>
+<h2 id="1a-validate">1a. Validate</h2>
+<h2 id="1b-raw-set">1b. Raw set</h2>
+
+<p>The operations can be pipelined to make a <a href="https://guitarvydas.github.io/2020/12/09/Type-Stacks.html">type stack</a>.</p>
+
+<p><em>Setting</em> should not be conflated with <em>validation</em>.</p>
+
+<p>We are familiar with the concept of <em>validation</em> - many web-based forms use some kind of input validation.</p>
+
+<h1 id="2-query">2. Query</h1>
+<p>The concept of <em>getters</em> is not specific enough.</p>
+
+<p>A person reading the code can see that data is being fetcheded, but not <em>why</em> the data is fetched.</p>
+
+<p>We <em>get</em> data for a reason.</p>
+
+<p>Typically, we want to <em>query</em> the data in some manner.</p>
+
+<p><em>Querying</em> can be a simple <em>get</em>, or, it can be a more involved operation, maybe a  <em>rule</em> involving the value of the data, or a <em>rule</em> involving many values of many data.</p>
+
+<p><em>Getting</em>, also breaks down, fractally, into two operations</p>
+<h2 id="2a-raw-get">2a. Raw get</h2>
+<h2 id="2b-query">2b. Query</h2>
+
+<p>The fractal concept has no <em>bottom</em>. Each of the above operations can be further sub-divided, recursively<sup id="fnref:recur" role="doc-noteref"><a href="#fn:recur" class="footnote">1</a></sup>.</p>
+
+<p>For example, <em>raw get</em> might further be broken into</p>
+<ol>
+  <li>getting from memory</li>
+  <li>getting from a database.</li>
+</ol>
+
+<p>Likwise, <em>query</em> might be further broken down into</p>
+<ol>
+  <li>querying information from memory</li>
+  <li>inferring new information based on information from memory.</li>
+</ol>
+
+<h1 id="conflation-of-get-and-set">Conflation of Get and Set</h1>
+
+<p>Many PLs provide <em>getters</em> and <em>setters</em> but don’t further specify <em>how</em> the data is validated nor <em>why</em> the data is fetched. These, otherwise simple, categorizations are hidden in code. The reader needs to <em>reverse-engineer</em> the <em>validation</em> and <em>querying</em> intent from the code.</p>
+
+<p>This kind of code conflation creates complexity. The Designer <em>knew</em> how and why he was doing certain operations, but lacked the PL syntax to communicate the Design Intent to future readers of the code.</p>
+
+<p>[<em>Aside: I argue, in other essays that Architects should invent SCNs to describe their DI.</em>]</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:recur" role="doc-endnote">
+      <p>We stop sub-diving a problem when the sub-divisions are “good enough” to solve a problem, not when we “hit bottom”. <a href="#fnref:recur" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

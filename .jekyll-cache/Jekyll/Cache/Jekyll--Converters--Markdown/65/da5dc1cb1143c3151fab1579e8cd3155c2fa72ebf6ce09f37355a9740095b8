@@ -1,0 +1,69 @@
+I"�<p>What does the following line of code do?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn(a)
+</code></pre></div></div>
+<p>It:</p>
+<ol>
+  <li>Delivers the parameter “a” to the function <em>fn</em>, and, it</li>
+  <li>Schedules the function <em>fn</em>.</li>
+</ol>
+
+<p>What does the following line of code do?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn(a,b)
+</code></pre></div></div>
+<p>It:</p>
+<ol>
+  <li>Delivers <em>two</em> parameters to <em>fn</em> - both, at the <em>same time</em>, and, it</li>
+  <li>Schedules the function <em>fn</em>.</li>
+</ol>
+
+<h1 id="scheduling">Scheduling</h1>
+
+<p>Normally, we use an operating system to determine scheduling, but, in the case of a function CALL, we override the operating system.</p>
+
+<p>If the operating system really, really, really wants to override the override, it resorts to preemption and yanks the CPU out from under the CALLer.</p>
+
+<h1 id="simultaneous-parameter-delivery">Simultaneous Parameter Delivery</h1>
+
+<p>Is it true that we <em>always</em> want to deliver parameters all-at-once?</p>
+
+<p>That works when building calculators, but doesn’t work so well when building internet software.</p>
+
+<p>Most of the popular GPLs (general purpose language) make it easy to build calculators, but don’t make it easy to build internet software.</p>
+
+<p>Yes, it is <em>possible</em> to build internet software using calculator languages, but it could be easier.</p>
+
+<h1 id="ascs---asynchronous-software-components">ASCs - Asynchronous Software Components</h1>
+
+<p>It is possible to build languages tuned for building asynchronous applications.</p>
+
+<p>I think we need to think about:</p>
+<ol>
+  <li>Asynchronous operation.</li>
+  <li>Components that run forever.</li>
+  <li>Sending Messages.</li>
+  <li>Structuring designs using hierarchy.</li>
+  <li>Relativity.</li>
+</ol>
+
+<h2 id="relativity">Relativity</h2>
+<p>Components can only reference (call, query, etc.) components that are “nearby”. UNIX gives us a notation for this “./hello”, “../world”, etc.</p>
+<h2 id="scalability">Scalability</h2>
+<p>Any component that is tangled up with another component is <em>dependent</em> on the other component and is, therefore, not scalable on its own.</p>
+
+<p>Humanity has solved this problem before.  The most obvious example is the hierarchical organization of businesses. Humanity has even invented a phrase for non-scalability, e.g. “Going Over the Boss’s Head”</p>
+<h2 id="asynchronous-operation">Asynchronous Operation</h2>
+<p>Humanity has invented notations for asynchronous operations and teaches this notation to 5-year old kids.</p>
+
+<p>Humanity calls this notation <em>sheet music</em>.</p>
+
+<p>The notation is hard-real-time.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

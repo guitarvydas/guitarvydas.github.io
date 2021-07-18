@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Software Components - A Language For Distributed Processing | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Software Components - A Language For Distributed Processing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I discuss various issues regarding Software Components." />
+<meta property="og:description" content="I discuss various issues regarding Software Components." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/18/Software-Components-A-Language-For-Distributed-Processing.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/18/Software-Components-A-Language-For-Distributed-Processing.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-18T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Components - A Language For Distributed Processing" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/18/Software-Components-A-Language-For-Distributed-Processing.html","@type":"BlogPosting","description":"I discuss various issues regarding Software Components.","dateModified":"2021-07-18T00:00:00-04:00","datePublished":"2021-07-18T00:00:00-04:00","headline":"Software Components - A Language For Distributed Processing","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/18/Software-Components-A-Language-For-Distributed-Processing.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Components - A Language For Distributed Processing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-18T00:00:00-04:00" itemprop="datePublished">Jul 18, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I discuss various issues regarding Software Components.</p>
+
+<p>I would suggest browsing the table of contents instead of reading this document in a serial fashion.</p>
+
+<ul>
+  <li><a href="#old">Old</a></li>
+  <li><a href="#new">New</a></li>
+  <li><a href="#optimization">Optimization</a></li>
+  <li><a href="#run-forever">Run Forever</a></li>
+  <li><a href="#single-thread">Single Thread</a></li>
+  <li><a href="#message-routing">Message Routing</a></li>
+  <li><a href="#visibility">Visibility</a></li>
+  <li><a href="#hierarchy">Hierarchy</a></li>
+  <li><a href="#layering">Layering</a></li>
+  <li><a href="#recursive-definition--elision">Recursive Definition, Elision</a></li>
+  <li><a href="#layered-components">Layered Components</a>
+    <ul>
+      <li><a href="#leaf-nodes---bottom">Leaf Nodes - Bottom</a></li>
+      <li><a href="#compound-components---composition">Compound Components - Composition</a></li>
+    </ul>
+  </li>
+  <li><a href="#compound-or-leaf">Compound or Leaf</a></li>
+  <li><a href="#state">State</a></li>
+  <li><a href="#isolation">Isolation</a></li>
+  <li><a href="#black-boxes">Black Boxes</a></li>
+  <li><a href="#lego--like-pluggability">LEGO®-Like Pluggability</a></li>
+  <li><a href="#pluggability-api">Pluggability API</a></li>
+  <li><a href="#transport-layer">Transport layer</a></li>
+  <li><a href="#tagged-message">Tagged message</a></li>
+  <li><a href="#referential-transparency">Referential Transparency</a></li>
+  <li><a href="#micro-services">Micro-Services</a></li>
+  <li><a href="#looping">Looping</a></li>
+  <li><a href="#dispatcher">Dispatcher</a></li>
+  <li><a href="#run-to-completion--finish-promptly">Run To Completion, Finish Promptly</a></li>
+  <li><a href="#memory-sharing">Memory sharing</a></li>
+  <li><a href="#time-sharing">Time sharing</a></li>
+  <li><a href="#preemption">Preemption</a></li>
+  <li><a href="#looping-and-recursion">Looping and Recursion</a></li>
+  <li><a href="#see-also">See Also</a></li>
+</ul>
+
+<h1 id="old">Old</h1>
+<ul>
+  <li>calculators</li>
+  <li>loop/recursion</li>
+  <li>stack</li>
+  <li>synchronous operation</li>
+  <li>always return a result</li>
+</ul>
+
+<h1 id="new">New</h1>
+<ul>
+  <li>components</li>
+  <li>ports</li>
+  <li>asynchronous operation</li>
+  <li>can consume inputs and produce nothing</li>
+  <li>Looping/recursion not allowed.</li>
+</ul>
+
+<h1 id="optimization">Optimization</h1>
+
+<p>Components should be as small as functions in present-day GPLs<sup id="fnref:gpl" role="doc-noteref"><a href="#fn:gpl" class="footnote">1</a></sup>.</p>
+
+<h1 id="run-forever">Run Forever</h1>
+
+<p>Components run forever by default.</p>
+
+<p>(Think <em>servers</em>).</p>
+
+<h1 id="single-thread">Single Thread</h1>
+
+<p>Components each have a single thread of control.</p>
+
+<p>An analogy would be to imagine a network of small computers connected together by thin wires.  Each computer performs some function. The system of connected computers forms an application.</p>
+
+<p>Components communicate via message passing (<em>send()</em> messages to the parent, <em>send()</em> messages to children).</p>
+
+<h1 id="message-routing">Message Routing</h1>
+
+<p>The <em>parent</em> of a component decides how to route messages between its children.</p>
+
+<p>For example, if a component wishes to send a message to its sibling, it sends the message to its parent, then the parent routes the message to the sibling.</p>
+
+<h1 id="visibility">Visibility</h1>
+
+<p>Components cannot name (“see”) their siblings.</p>
+
+<p>Most GPLs allow explicit naming of callees.  This is not allowed in a component-based system.</p>
+
+<h1 id="hierarchy">Hierarchy</h1>
+
+<p>Message passing fails if it is done in a “flat” manner.</p>
+
+<p>Components must be arranged in a hierarchical manner and messages can only be sent “up” and “down” the hierarchy.</p>
+
+<p>An analogy would be the scoping rules that fixed the global variable problem.</p>
+
+<p>Hierarchy is scope.  Scope is hierarchy.</p>
+
+<p>Analogy: most PCs used flat file systems until UNIX popularized the hierarchical arrangement of file systems.</p>
+
+<p>Hierarchical components do for software what UNIX file systems did for operating systems.</p>
+
+<h1 id="layering">Layering</h1>
+<p>Components are connected strictly in layers.</p>
+
+<p>A component can <em>send()</em> results to its paren.</p>
+
+<p>A component can <em>send()</em> commands to its direct children.</p>
+
+<p>Otherwise, there is no cross-talk - components cannot talk to (nor see) their peers.</p>
+
+<h1 id="recursive-definition-elision">Recursive Definition, Elision</h1>
+
+<p>Components can be built from:</p>
+
+<ul>
+  <li>other components</li>
+  <li>leaf nodes.</li>
+</ul>
+
+<p>Ports must support fan-out, to enable elision and layering.</p>
+
+<h1 id="layered-components">Layered Components</h1>
+<h2 id="leaf-nodes---bottom">Leaf Nodes - Bottom</h2>
+<p>FBP, no inherent structure, +state<br />
+Actors, no inherent structure, +state<br />
+FP and calculators, no inherent structure<br />
+Relational and miniKanren - no inherent structure.</p>
+
+<p>[N.B it is <em>possible</em> to organize programs in a hierarchical manner using the above systems, but this is not enforced.]</p>
+
+<h2 id="compound-components---composition">Compound Components - Composition</h2>
+
+<p>All non-leaf components are composed of other components.</p>
+
+<p>A component can contain a network of other components (leaf and compound components).</p>
+
+<h1 id="compound-or-leaf">Compound or Leaf</h1>
+
+<p>A component is either</p>
+
+<ul>
+  <li>a compound component, or,</li>
+  <li>a leaf component</li>
+</ul>
+
+<h1 id="state">State</h1>
+
+<p>Components can contain <em>state</em>.</p>
+
+<p>State is not a problem.  Unrestricted use of state is a problem.</p>
+
+<h1 id="isolation">Isolation</h1>
+
+<p>Components are isolated from one another.</p>
+
+<p>It is not possible to know how a component is implemented.</p>
+
+<p>It is not possible to know if a component uses state or doesn’t use state, except by observing its behavior from the outside.</p>
+
+<p>For example: If a component contains a “memory leak”, this will not affect other components.</p>
+
+<h1 id="black-boxes">Black Boxes</h1>
+
+<p>Components are black boxes.</p>
+
+<h1 id="lego-like-pluggability">LEGO®-Like Pluggability</h1>
+
+<p>Components can be plugged together like LEGO® pieces.</p>
+
+<h1 id="pluggability-api">Pluggability API</h1>
+
+<p>Components support a single API and exactly one type</p>
+
+<ul>
+  <li>the <em>tagged message</em></li>
+</ul>
+
+<p>Note that this does not mean that more elaborate typing is impossible.  Components can be joined together in a pipeline of ever-more-detailed types.</p>
+
+<h1 id="transport-layer">Transport layer</h1>
+
+<p>The single-type API is like a <em>transport layer</em> in computer networks.</p>
+
+<p>Messages can be <em>sent()</em> using the simple API, but their content is defined by higher levels (inside receiving components).</p>
+
+<p>Note that UNIX® pipelines work this way.  The “transport layer” is a line of text. /bin/*sh can plumb commands together easily. The inner layers of commands define the structure contained in lines, e.g. fields, etc.</p>
+
+<h1 id="tagged-message">Tagged message</h1>
+
+<p>A message consists of two portions:</p>
+
+<ol>
+  <li>Tag</li>
+  <li>Data.</li>
+</ol>
+
+<p>The <em>tag</em> is (probably) an integer that that further defines a message.</p>
+
+<p>The <em>data</em> is anything.</p>
+
+<p>Analogy: <em>tags</em> are like <em>pins</em> on hardware ICs.  <em>Data</em> is like the signal received/sent by hardware ICs.</p>
+
+<h1 id="referential-transparency">Referential Transparency</h1>
+
+<p>Since components are black boxes, they can be substituted only if their pins match the component-to-be-replaced.</p>
+
+<p>In hardware, this is called <em>pin-compatibility</em>.</p>
+
+<h1 id="micro-services">Micro-Services</h1>
+
+<p>Components can act like servers.</p>
+
+<h1 id="looping">Looping</h1>
+
+<p>Components can send messages to themselves.</p>
+
+<p>This allows creation of loops, but is not built into the underlying programming language.</p>
+
+<p>[<em>Existing languages can be modified so that their compilers break each iteration of a loop.</em>]</p>
+
+<h1 id="dispatcher">Dispatcher</h1>
+
+<p>Only the <em>Dispatcher</em> can invoke components.</p>
+
+<p>Components do not have access to <em>call/return</em>[^inner call] at the inter-component level.</p>
+
+<p>Components cannot directly affect dispatching of other components.</p>
+
+<h1 id="run-to-completion-finish-promptly">Run To Completion, Finish Promptly</h1>
+
+<p>Components must run to completion.</p>
+
+<p>Components must finish “quickly”.</p>
+
+<p>This is similar to the use of mutual multitasking.</p>
+
+<p>Mutual multitasking was discredited when it was used for building operating systems.</p>
+
+<p>Operating systems are apps with a special purpose.</p>
+
+<p>Most apps don’t present the set of problems faced by operating system apps (e.g. time-sharing and memory-sharing are needed by operating systems, but not needed by most apps).</p>
+
+<p>Preemptive multitasking is considered to be the exception, not the rule.</p>
+
+<h1 id="memory-sharing">Memory sharing</h1>
+
+<p><em>Memory Sharing</em> is a technique driven by early versions of computers, where memory was in short supply and expensive.</p>
+
+<p>It has become apparent that memory sharing is loaded with difficulties.</p>
+
+<p>Memory sharing, and <em>mutable state</em>, should only be used in situations that require it.</p>
+
+<p>At present, most Operating Systems supply memory sharing primitives to every application, regardless of whether the applications need to use memory sharing.</p>
+
+<p>I suggest that Operating Systems need to be fundamentally redesigned (or, better, discarded completely).</p>
+
+<h1 id="time-sharing">Time sharing</h1>
+
+<p><em>Time Sharing</em> is a technique driven by early versions of computers, where CPU power was in short supply and expensive.</p>
+
+<p>It has become apparent that time sharing is loaded with difficulties.</p>
+
+<p>Time sharing should only be used in situations that require it.</p>
+
+<p>At present, most Operating Systems supply time sharing primitives to every application, regardless of whether the applications need to use time sharing.</p>
+
+<p>I suggest that Operating Systems need to be fundamentally redesigned (or, better, discarded completely).</p>
+
+<h1 id="preemption">Preemption</h1>
+
+<p>Preemption is a epicycle added to operating systems.  Preemption is a brute-force technique that yanks the CPU out from under an application.</p>
+
+<p>Preemption was added to operating systems because long running loops were thought to be essential.</p>
+
+<p>Removing long-running loops (and deep recursion) would obviate the need for preemption.  Message-based systems could create loops by sending messages to themselves.</p>
+
+<p>Preemption is built into most operating systems and becomes part of every application that uses the operating system(s).</p>
+
+<p>Full preemption causes its own set of problems, commonly known as <em>accidental complexity</em>.</p>
+
+<p>Full preemption is required by only a few applications, e.g. operating systems (Linux, Windows, MacOSX, etc.)</p>
+
+<p>Early on, mutual multitasking was tried as an alternative to full preemption.  This technique was discredited for the wrong reasons - it was used to implement operating systems (the only kind of app that requires preemption) and failed to provide isolation between applications running under those operating systems.  Those applications did not “play well together”, since they used long-running loops</p>
+
+<p>Looping (and deep recursion) is an outdated concept.</p>
+
+<p><em>Infinite loops</em> are application bugs like any other bug.</p>
+
+<p>If apps were bug-free and did not contain long-running loops (or deep recursion), operating systems would not be needed.</p>
+
+<p>One of the causes of needing loops in programs is that apps are treated as functions, instead of as a series of (small) steps.</p>
+
+<p>We witness the demise of loops with the rise of distributed computing, e.g. internet, blockchain, etc.  The main contribution of the seminal <a href="http://pmg.csail.mit.edu/papers/osdi99.pdf">pBFT</a> paper was to unroll functions into a series of steps that could be executed in a distributed network of computers<sup id="fnref:fig1" role="doc-noteref"><a href="#fn:fig1" class="footnote">2</a></sup>.</p>
+
+<h1 id="looping-and-recursion">Looping and Recursion</h1>
+
+<p>Many of the emerging GPLs do not provide Loops as an explicit concept. For example, GPLs based on FP and Relational concepts. In general, these kinds of GPLs provide Universal Quantification (forall), but do not provide explicit looping.</p>
+
+<p>Looping and recursion are low-level implementation details.</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">The Algol Bottleneck</a><br />
+<a href="https://guitarvydas.github.io/2020/12/09/Type-Stacks.html">Type Stacks</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:gpl" role="doc-endnote">
+      <p>GPL means General purpose Programming Language. <a href="#fnref:gpl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fig1" role="doc-endnote">
+      <p>Note that the pBFT technique was described in Fig. 1 of the paper as a diagram instead of as a function. <a href="#fnref:fig1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/18/Software-Components-A-Language-For-Distributed-Processing.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

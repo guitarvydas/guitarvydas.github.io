@@ -1,0 +1,20 @@
+I"�<p>FP emphasizes <em>immutability</em> of data, but the data is only <em>immutable</em> “in the small”.</p>
+
+<p>Data - even in FP - is <em>mutable</em> when the whole system is taken into account.</p>
+
+<p>For example, imagine how miniKanren operates - it produces an initial match query, then passes the resulting datum on to subsequent queries which transmogrify the datum.</p>
+
+<p>At the atomic level, it appears that no operation can modify (mutate) the datum.</p>
+
+<p>At a system-level, though, the datum is actually modified, often by appending new information to the datum.</p>
+
+<p>[Aside: you don’t need FP to create this kind of “immutable” data. In other essays, I argue that factbases should only be extended and that facts should not be deleted from factbases.  FBs <em>acrete</em> data, and never delete it.  Deletion of data is only an optimization.]</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

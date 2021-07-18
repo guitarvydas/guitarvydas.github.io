@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Indentation to Braces (Case Study) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Indentation to Braces (Case Study)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction In this essay, I show how to build a little tranpsiler for debugging and code generation using a strategy I call the SCN Workbench1. SCN means Solution Centric Notation. &#8617;" />
+<meta property="og:description" content="Introduction In this essay, I show how to build a little tranpsiler for debugging and code generation using a strategy I call the SCN Workbench1. SCN means Solution Centric Notation. &#8617;" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/10/Indentation-to-Braces-(Case-Study).html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/10/Indentation-to-Braces-(Case-Study).html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-10T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Indentation to Braces (Case Study)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/10/Indentation-to-Braces-(Case-Study).html","@type":"BlogPosting","description":"Introduction In this essay, I show how to build a little tranpsiler for debugging and code generation using a strategy I call the SCN Workbench1. SCN means Solution Centric Notation. &#8617;","dateModified":"2021-07-10T00:00:00-04:00","datePublished":"2021-07-10T00:00:00-04:00","headline":"Indentation to Braces (Case Study)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/10/Indentation-to-Braces-(Case-Study).html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Indentation to Braces (Case Study)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-10T00:00:00-04:00" itemprop="datePublished">Jul 10, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+<p>In this essay, I show how to build a little tranpsiler for debugging and code generation using a strategy I call the SCN Workbench<sup id="fnref:scn" role="doc-noteref"><a href="#fn:scn" class="footnote">1</a></sup>.</p>
+
+<p>This tool accepts 3 inputs:</p>
+<ol>
+  <li>Source code</li>
+  <li>Pattern matcher (aka grammar)</li>
+  <li>Output formatter (aka semantics).</li>
+</ol>
+
+<p>The goal is to convert a notation to code, i.e. to build a transpiler.</p>
+
+<p>The bare essence of the notation contains 2 lines, but blossoms into more than 100 lines when converted to code.</p>
+
+<p>This is a case where the details overwhelm the basic simplicity of what is being done.</p>
+
+<h1 id="disclaimer">Disclaimer</h1>
+
+<p>I am currently debugging and re-writing the actual notation, but, the little helper transpiler works.</p>
+
+<p>This note is about the little transpiler, not the final notation.</p>
+
+<h1 id="bare-essence">Bare Essence</h1>
+
+<p>I want to build code to understand relative ids using UNIX-like “../” syntax.</p>
+
+<p>The bare essence of what is needed is:</p>
+<ul>
+  <li>set(rid val)<br />
+c.ns[name] &lt;= val</li>
+  <li>get(rid).<br />
+result &lt;= c.ns[name]</li>
+</ul>
+
+<p>(where <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">ns</code> are fields of the relative id).</p>
+
+<p>Because I am debugging this concept, I’m lacing the code with error checks, checking for blunders and typos.</p>
+
+<p>The error-check-laced pseudo-code is about 50 lines. The final code is about twice that.</p>
+
+<h1 id="layered-notation">Layered Notation</h1>
+<p>The notation is intended to be layered.</p>
+
+<p>For purposes of this essay, we can ignore the actual meaning of the notation and look only at the <em>shape</em> of the notation.</p>
+
+<p>At present the notation looks like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getter (rid)
+  result &lt;= c.ns[name]
+    where deconstruct rid =&gt; (_, ns, name)
+    synonym c, component
+    where component = @ea (rid)
+
+setter (rid val)
+  c.ns[name] &lt;= val
+    where deconstruct rid =&gt; (_, ns, name)
+    synonym ns, namespace, "namespace within component"
+    synonym c, component
+    where component = @ea (rid)
+    design rule "must not already have a value"
+
+def (rid)
+  @define all paths (rid)
+  where
+    define all paths (rid)
+      ea (rid)
+
+where
+  ea (rid)
+    ea-raw (rid) | design rule "must be a component" =&gt; result
+
+  ea-raw (rid)
+    typecase (rid.path)
+    case string
+      lookup (rid.path) =&gt; result
+      design rule (result) "must not be empty"
+    case _
+      @getter (ref) =&gt; child
+      child.static =&gt; result
+	before 
+	  where ref = rid.path
+	  synonym ref, component-reference, "recursive reference to a component"
+	  design rule (ref) "must contain a component namespace reference"
+
+
+
+design rules
+
+  rid must contain a component namespace reference (rid)
+    "c" === rid.ns
+
+  must be a component
+    typeof (in) === "component"
+
+  must not already have a value
+    component.ns[name] === no-value
+</code></pre></div></div>
+
+<h2 id="shape---first-impressions">Shape - First Impressions</h2>
+
+<p>The first things to notice about the notation is that</p>
+<ul>
+  <li>it describes the problem in layers</li>
+  <li>layers are written as indented code (Python-esque).</li>
+</ul>
+
+<p>The first goal is to convert this notation into something more machine-readable.</p>
+
+<p>For purposes of this essay, let’s say that we want to convert the notation into:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getter (rid)
+ {
+ result &lt;= c.ns[name]
+  {
+  where deconstruct rid =&gt; (_, ns, name)
+  synonym c, component
+  where component = @ea (rid)
+
+ }
+}
+setter (rid val)
+ {
+ c.ns[name] &lt;= val
+  {
+  where deconstruct rid =&gt; (_, ns, name)
+  synonym ns, namespace, "namespace within component"
+  synonym c, component
+  where component = @ea (rid)
+  design rule "must not already have a value"
+ }
+}
+def (rid)
+ {
+ @define all paths (rid)
+ where
+  {
+  define all paths (rid)
+   {
+   ea (rid)
+   }
+}
+}
+where
+ {
+ ea (rid)
+  {
+  ea-raw (rid) | design rule "must be a component" =&gt; result
+  }
+ ea-raw (rid)
+  {
+  typecase (rid.path)
+  case string
+   {
+   lookup (rid.path) =&gt; result
+   design rule (result) "must not be empty"
+    }
+  case _
+   {
+   @getter (ref) =&gt; child
+   child.static =&gt; result
+    }
+}
+ before 
+  {
+  where ref = rid.path
+  synonym ref, component-reference, "recursive reference to a component"
+  design rule (ref) "must contain a component namespace reference"
+ }
+}
+design rules
+ {
+ rid must contain a component namespace reference (rid)
+  {
+  "c" === rid.ns
+  }
+ must be a component
+  {
+  typeof (in) === "component"
+  }
+ must not already have a value
+  {
+  component.ns[name] === no-value
+ }
+}
+</code></pre></div></div>
+<p>The above is less-readable from a human perspective, but more-readable from a machine-perspective.</p>
+
+<p>In particular, the new version can be pattern-matched, using an automated pattern matcher like PEG.</p>
+
+<h1 id="the-transpiler">The Transpiler</h1>
+
+<p>The task of converting indented notation to braced-notation could be done in a number of ways, in fact a small Python program could do the job.</p>
+
+<p>It is over-kill to use a parser for this task, but I will show how to do this nonetheless.</p>
+
+<p>This example is small-enough to understand and will show the basics of using the SCN Workbench.</p>
+
+<p>One of the aspects of FDD and notation-based thinking is to pick small, do-able tasks and to knock them off while reserving brain-power for the really big problem(s).</p>
+
+<h2 id="the-pattern-matcher">The Pattern Matcher</h2>
+<p>The pattern match is written using a pattern-matching DSL[ohm].</p>
+
+<p>The pattern matching DSL looks a lot like REGEXP, except that:</p>
+<ul>
+  <li>it matches across lines</li>
+  <li>the pattern match specification uses more than one line, whereas REGEXPs are usually a single line in length (or less).</li>
+</ul>
+
+<p>I will present the pattern below, then discuss the details of the pattern.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ToBrace {
+
+main = line+
+line = indent? spc? toEOL* newline+
+indent = (indentDoubleSpace | indentChar)+
+indentChar = ("#" | "*" | "\t")
+indentDoubleSpace = "  "
+toEOL = ~newline any
+
+newline = "\n"
+spc = " "
+}
+</code></pre></div></div>
+<p>Patterns consist of <em>rules</em>.  A <em>rule</em> is usually about 1 line long.</p>
+
+<p><em>Rules</em> in a pattern can refer to other <em>rules</em>.</p>
+
+<p>The naming of the <em>rules</em> is arbitrary, e.g. “main” is not special.</p>
+
+<p>The first rule is taken to be the starting rule.</p>
+
+<ol>
+  <li>The rule <em>main</em> matches one-or-more <em>lines</em>.</li>
+  <li>The rule <em>line</em> matches an optional <em>indent</em>, followed by an optional <em>spc</em> (my abbreviation for space), zero-or-more characters matched by the <em>toEOL</em> rule and then one or more newlines</li>
+  <li>An <em>indent</em> consists of an <em>indentDoubleSpace</em> or an <em>indentChar</em>, one or more times <code class="language-plaintext highlighter-rouge">+</code>.</li>
+  <li>An <em>indentChar</em> is either a “#” or a “*” or a tab (“\t”).</li>
+  <li>An <em>indentDoubleChar</em> is two spaces.</li>
+  <li>A <em>toEOL</em> character is any character that is not a newline.</li>
+  <li>A <em>newline</em> is “\n”</li>
+  <li>A <em>spc</em> is “ “.</li>
+</ol>
+
+<p>It should be possible to write this rule as a REGEXP, or to write Python code to pattern-match lines.</p>
+
+<p>Again, the point of this exercise is like a ‘hello world’ example: something painfully simple that shows the mechanics of the tool.</p>
+
+<p>Parsing becomes more interesting when applied to larger examples, like a complete SCN.</p>
+
+<p>Parsing matches structure, whereas REGEXP only matches lines.  This difference will become apparent later.</p>
+
+<p>[^ohm] In this case, I use a DSL called Ohm-JS and build it into my SCN Workbench.</p>
+
+<h2 id="the-outputter">The Outputter</h2>
+<p>The output spec consists of rules, also.</p>
+
+<p>There must be exactly one output rule for each rule in the above pattern-match.</p>
+
+<p>Each rule returns a string which is ultimately output by the workbench.</p>
+
+<p>Each rule consists of</p>
+<ul>
+  <li>a name</li>
+  <li>a set of parameters (enclosed in [])</li>
+  <li>a “=” character</li>
+  <li>an optional block of code (enclosed in double-braces ``, which are similar to Liquid syntax[^braces])</li>
+  <li>an output descriptor (<code class="language-plaintext highlighter-rouge">[[ ... ]]</code>)</li>
+</ul>
+
+<p>The actual syntax and meaning of this format can be found in <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">the Glue tool</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main [@lines] =  [[${lines}${emitclosebrace (0)}]]
+line [@block @spc @chars @nl] = [[${emitopenbrace (block)}${emitclosebrace (block)}${spaces (block)}${chars}\n${shiftblock (block)}]]
+indent [indents] = [[${convertIndentationToBlockNumber (indents)}]]
+indentChar [c] = [[${c}]]
+indentDoubleSpace [cc] = [[.]]
+toEOL [c] = [[${c}]]
+newline [c] = [[${c}]] 
+spc [c] = [[${c}]]
+</code></pre></div></div>
+
+<p>Reading (in order of simplicity):</p>
+<ol>
+  <li>The rule <em>indentChar</em> gets one matched character from the pattern matcher and returns it</li>
+  <li>The rule <em>indentDoubleSpace</em> gets two matched space characters from the pattern matcher, ignores them and returns a single “.” character.</li>
+  <li>The rule <em>toEOL</em>  gets one matched character from the pattern matcher and returns it.</li>
+  <li>The rule <em>newline</em>  gets one matched character from the pattern matcher and returns it.</li>
+  <li>The rule <em>spc</em>  gets one matched character from the pattern matcher and returns it.</li>
+  <li>The rule <em>indent</em> gets one match (called indents) from the pattern matcher and returns a number calculated by the function “convertIndentationToBlockNumber”.</li>
+  <li>The rule <em>line</em> gets 4 match captures, each from a compound match (?, *, +) an rearranges them while calling support functions “emitopenbrace()”, “emitclosebrace()”, “spaces()” and “shiftBlock()”.</li>
+  <li>The rule <em>main</em> gets one <code class="language-plaintext highlighter-rouge">+</code> parameter (called lines) from the pattern matcher and rearranges the output as: a call to the external function <em>resetBlock</em>, then uses JS back-tick syntax to create a string consisting of the lines and the result from calling the external function emitclosebrace.  External functions are not built into the tool - they are supplied by the programmer (in this case, I’ve put the support functions in a file call “support.js”).
+    <h2 id="the-workbench">The Workbench</h2>
+    <p>The workbench is a simple HTML file that contains a textarea for all 3 input files (source, pattern (grammar), outputter (semantics)) and 1 textarea for the result.</p>
+  </li>
+</ol>
+
+<p>The “generate” button calls the JS function “generate()” which simply reads the textareas and calls the “transpiler()” function.</p>
+
+<h2 id="transpiler">Transpiler()</h2>
+
+<p>The “transpiler()” function is, itself, quite simple. It</p>
+<ol>
+  <li>Builds a transpiler (using Ohm-JS and Glue)</li>
+  <li>Invokes the transpiler on the input source</li>
+  <li>Outputs the result into the textarea called “transpiled”. Outputs some information into the field called “status”.</li>
+</ol>
+
+<h1 id="result">Result</h1>
+<p>Below, I’ve included the result of invoking the SCN Workbench on the above indented code example.</p>
+
+<p>Note that this result contains superfluous blank lines. Our machine will skip over these blank lines, so, they only matter in terms of human-readability.</p>
+
+<p>Likewise, the formatting might be wrong in places. This doesn’t affect machine-readability.</p>
+
+<p>Is it worth the time to get rid of the blank lines and fixing formatting? It depends…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getter (rid)
+ {
+ result &lt;= c.ns[name]
+  {
+  where deconstruct rid =&gt; (_, ns, name)
+  synonym c, component
+  where component = @ea (rid)
+
+ }
+}
+setter (rid val)
+ {
+ c.ns[name] &lt;= val
+  {
+  where deconstruct rid =&gt; (_, ns, name)
+  synonym ns, namespace, "namespace within component"
+  synonym c, component
+  where component = @ea (rid)
+  design rule "must not already have a value"
+
+ }
+}
+def (rid)
+ {
+ @define all paths (rid)
+ where
+  {
+  define all paths (rid)
+   {
+   ea (rid)
+
+   }
+}
+}
+where
+ {
+ ea (rid)
+  {
+  ea-raw (rid) | design rule "must be a component" =&gt; result
+
+  }
+ ea-raw (rid)
+  {
+  typecase (rid.path)
+  case string
+   {
+   lookup (rid.path) =&gt; result
+   design rule (result) "must not be empty"
+
+    }
+  case _
+   {
+   @getter (ref) =&gt; child
+   child.static =&gt; result
+
+    }
+}
+ before 
+  {
+  where ref = rid.path
+  synonym ref, component-reference, "recursive reference to a component"
+  design rule (ref) "must contain a component namespace reference"
+
+ }
+}
+design rules
+ {
+ rid must contain a component namespace reference (rid)
+  {
+  "c" === rid.ns
+
+  }
+ must be a component
+  {
+  typeof (in) === "component"
+
+  }
+ must not already have a value
+  {
+  component.ns[name] === no-value
+
+ }
+}
+
+</code></pre></div></div>
+<h2 id="github">Github</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a><br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:scn" role="doc-endnote">
+      <p>SCN means Solution Centric Notation. <a href="#fnref:scn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/10/Indentation-to-Braces-(Case-Study).html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

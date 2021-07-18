@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Elements of DI (WIP) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Elements of DI (WIP)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="values object collection of object components parameter delivery (inputs) invocation (N.B. separate from input/output delivery) result delivery (outputs) run forever by default message passing RID - relative ID’s (hierarchical organization of components and hierarchical message passing) Sections type description signatures implementation foreign functions design rules Dispatcher" />
+<meta property="og:description" content="values object collection of object components parameter delivery (inputs) invocation (N.B. separate from input/output delivery) result delivery (outputs) run forever by default message passing RID - relative ID’s (hierarchical organization of components and hierarchical message passing) Sections type description signatures implementation foreign functions design rules Dispatcher" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/16/Elements-of-DI.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/16/Elements-of-DI.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-16T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Elements of DI (WIP)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/16/Elements-of-DI.html","@type":"BlogPosting","description":"values object collection of object components parameter delivery (inputs) invocation (N.B. separate from input/output delivery) result delivery (outputs) run forever by default message passing RID - relative ID’s (hierarchical organization of components and hierarchical message passing) Sections type description signatures implementation foreign functions design rules Dispatcher","dateModified":"2021-07-16T00:00:00-04:00","datePublished":"2021-07-16T00:00:00-04:00","headline":"Elements of DI (WIP)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/16/Elements-of-DI.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Elements of DI (WIP)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-16T00:00:00-04:00" itemprop="datePublished">Jul 16, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul>
+  <li>values
+    <ul>
+      <li>object</li>
+      <li>collection of object</li>
+    </ul>
+  </li>
+  <li>components
+    <ul>
+      <li>parameter delivery (inputs)</li>
+      <li>invocation (N.B. separate from input/output delivery)</li>
+      <li>result delivery (outputs)</li>
+      <li>run forever by default</li>
+    </ul>
+  </li>
+  <li>message passing</li>
+  <li>RID - relative ID’s (hierarchical organization of components and hierarchical message passing)</li>
+  <li>Sections
+    <ul>
+      <li>type description</li>
+      <li>signatures</li>
+      <li>implementation</li>
+      <li>foreign functions</li>
+      <li>design rules</li>
+    </ul>
+  </li>
+  <li>Dispatcher</li>
+</ul>
+
+<h1 id="di">DI</h1>
+<p>DI means Design Intent (often called Architecture)</p>
+
+<h1 id="scn">SCN</h1>
+
+<p>SCN means Solution Centric Notation.</p>
+
+<p>A notation is like a light-weight DSL.</p>
+
+<p>A DSL is like a GPL, but specialized.</p>
+
+<p>A DSL is targetted at a specific sub-problem, but generalized. For example REGEXP is a DSL for pattern-matching strings.  For example SQL is a DSL for database querying.</p>
+
+<p>A <em>notation</em> is specialized to a specific problem / project.  A <em>notation</em> is not generalized.  More than one <em>SCN</em> might be used in a project.  For example, the <a href="https://github.com/bmfbp/bmfbp">Arrowgrams</a> project contains an SCN for PROLOG-like fact (triple) matching, another SCN for <a href="https://github.com/guitarvydas/parsing-assembler">parsing</a>, another SCN for <a href="https://github.com/guitarvydas/scanner">scanning</a> (lexing), another SCN for inter-component message passing <a href="https://github.com/guitarvydas/cl-event-passing">cl-event-passing</a>, another SCN for <a href="https://github.com/guitarvydas/stack-dsl">type definition</a>, etc, etc.<sup id="fnref:lisp" role="doc-noteref"><a href="#fn:lisp" class="footnote">1</a></sup></p>
+
+<p>[DSL means Domain Specific Language, GPL means General purpose Programming Language].</p>
+
+<h1 id="example">Example</h1>
+
+<p>I’m working on this at the moment, it is unfinished and not debugged, but gives some of the flavor of what a DSL for DI might be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># types
+  rid = {
+    path
+    ns
+    name
+  }
+
+  thing = compound { val component }
+
+  val = any
+
+  component = :foreign
+  parent-component = component
+  child = component
+
+  any = :foreign
+
+  string = :foreign
+  path = :foreign
+  ns = :foreign
+  name = :foreign
+
+  yesno = 'yes' | 'no'
+  
+# end types
+
+# signatures
+
+// RID means Relative ID
+def-component% &lt;rid
+def-input% &lt;rid
+def-output% &lt;rid
+get% &lt;rid &gt;val
+set% &lt;rid &lt;val
+
+# layer effective address
+// ea means Effective Address - the resolved path part of a RID
+ea% &lt;path &gt;component
+def-ea% &lt;path &gt;component
+# end layer effective address
+
+# end signatures
+
+# foreign functions
+// foreign functions are defined elsewhere (in the base language)
+// synchronous and always return a value
+is leaf &lt;rid &gt;yesno
+lookup component at top level &lt;path &lt;ns &lt;name &gt;component
+lookup contained component &lt;path &lt;ns &lt;name &gt;component
+lookup or create component at top level &lt;path &lt;ns &lt;name &gt;component
+lookup or create contained component &lt;path &lt;ns &lt;name &gt;component
+create input pin raw &lt;path &lt;ns &lt;name
+create output pin raw &lt;path &lt;ns &lt;name
+raw get &lt;parent &lt;rid.ns &lt;rid.name
+raw set &lt;parent &lt;rid.ns &lt;rid.name &lt;v
+# end foreign functions
+
+# implementation
+
+def-top-level-component% &lt;name
+  component = @lookup or create component at top level &lt;name
+  component
+
+def-contained-component% &lt;rid
+  outer = def-ea% &lt;rid.path
+    design rule `must use component namespace' &lt;rid
+  component = @lookup or create contained component &lt;path.path &lt;path.ns &lt;path.name
+  component
+
+def-input% &lt;rid
+  outer = ea% &lt;rid.path
+    design rule `must use input namespace' &lt;rid
+    design rule `input pin must not be defined more than once` &lt;outer &lt;rid.ns &lt;rid.name
+  @create-input-pin-raw &lt;outer &lt;rid.ns &lt;rid.name
+  nothing   
+
+def-output% &lt;rid
+  outer = ea% &lt;rid.path
+    design rule `must use output namespace' &lt;path
+    design rule `output pin must not be defined more than once` &lt;outer &lt;rid.ns &lt;rid.name
+  @create-output-pin-raw &lt;out &lt;rid.ns &lt;rid.name
+  nothing   
+
+get% &lt;rid &gt;val
+  parent = ea% &lt;rid.path
+    design rule `must be a valid namespace' &lt;rid
+    design rule `value must exist' &lt;parent &lt;rid.ns &lt;rid.name
+  v = @raw-get &lt;parent &lt;rid.ns &lt;rid.name
+  v
+   
+set% &lt;rid &lt;val
+  parent = ea% &lt;rid.path
+    design rule `must be a valid namespace' &lt;rid
+    design rule `value must not exist' &lt;parent &lt;rid.ns &lt;rid.name
+  @raw-set &lt;parent &lt;rid.ns &lt;rid.name &lt;v
+  nothing   
+
+add-connection% &lt;rid &lt;rid1 &lt;rid1
+  parent = ea% &lt;rid.path
+    design rule `must use connection namespace' &lt;rid
+    design rule `must use i/o namespace' &lt;rid1
+    design rule `must use i/o namespace' &lt;rid2
+  @raw-add-connection &lt;rid.name &lt;parent &lt;rid1 &lt;rid2
+
+# layer `effective address'
+ea% &lt;path &gt;component
+    design rule `must use component namespace' &lt;path.ns
+  [ @is leaf &lt;path
+    yes -&gt; component = @lookup component at top level &lt;path
+    no  -&gt;
+      outer = ea% &lt;path.path
+        design rule `must be a component' &lt;outer
+        design rule `value must exist' &lt;outer &lt;path.ns &lt;path.name
+      component = @lookup contained component &lt;outer &lt;path.ns &lt;path.name
+  ]
+  component
+
+
+def-ea% &lt;path &gt;component
+  [ @is leaf &lt;path.path
+    yes -&gt; component = @lookup or create component at top level &lt;path.path &lt;path.ns &lt;path.name
+    no  -&gt;
+      outer = ea% &lt;path.path
+      component = @lookup or create contained component &lt;outer &lt;path.ns &lt;path.name
+  ]
+  component
+# end layer `effective address'
+
+
+# end implementation
+
+# design rules
+`must use component namespace' &lt;rid
+`must use input namespace' &lt;rid
+`must use output namespace' &lt;rid
+`input pin must not be defined more than once` &lt;component &lt;ns &lt;name
+`output pin must not be defined more than once` &lt;component &lt;ns &lt;name
+`must be a valid namespace' &lt;rid
+`value must exist' &lt;path &lt;ns &lt;name
+`value must not exist' &lt;path &lt;ns &lt;name
+`must be a component' &lt;any
+`must use connection namespace' &lt;rid
+`must use i/o namespace' &lt;rid
+# end design rules
+
+</code></pre></div></div>
+
+<p>This is an expression language - everything returns a value.  Statements are processed in sequence and the value is the last statement encountered.</p>
+
+<p>”#” is used to distinguish sections</p>
+
+<p>Long names that include spaces are written `…’ (syntax borrowed from M4).</p>
+
+<p>”&lt;” means input.</p>
+
+<p>”&gt;” means output.</p>
+
+<p>Indentation denotes layering.</p>
+
+<p>”@” means call a foreign function (synchronous call).</p>
+
+<p>Foreign functions are implemented elsewhere in some other language.  Akin to <em>imports</em> in some languages.</p>
+
+<p>”[]” means <em>choice</em> (if-then-else or case).  The first item after “[” is an expression that produces a value that is cased-on.</p>
+
+<p>“x -&gt; …” means “case x”.</p>
+
+<p>The type DSL is documented elsewhere <a href="https://guitarvydas.github.io/2021/07/05/Type-DSL-(SCN).html">Type SCN</a>.</p>
+
+<p>Note that design-rules are relegated to lower levels (deeper indentation). Design rules are like error checks and type checks, but specific to the project-at-hand.  Using current GPLs, these checks would be wound into the code.  It is <em>possible</em> to separate design-rule checks from code in current GPLs, but this is not frequently done.</p>
+
+<p>Note that using an <em>SCN</em> does <u>not</u> make the logic a no-brainer to understand.  The goal is simply to unwind architecture-thinking from details-thinking.  At present, code maintainers must understand the code they are working on, anyway. This costs time. Splitting the code into DI (Architecture) and Implementation should reduce the effort required to understand a project (but may not save time - understanding still requires thought).  Using an SCN enables higher-level thinking for the architect(s) of a project.</p>
+
+<h1 id="layers">Layers</h1>
+
+<p>Building a project in layers, e.g. using an SCN, enables the stratification of the development process.</p>
+
+<p>An <em>architect</em> can write out a design in DI, an <em>implementation engineer</em> can work out the details, a <em>test engineer</em> can examine the project from a testability perspective, a <em>coder</em> can implement the code, etc., etc.</p>
+
+<h1 id="software-development-roles">Software Development Roles</h1>
+
+<p>Further discussion of a protoype set of <a href="https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html">roles</a> and stratification of the software development process.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:lisp" role="doc-endnote">
+      <p>most of the SCNs in Arrowgrams were built on top of Common Lisp and the ESRAP (PEG) parsing library and Lisp macros.  Arrowgrams was a bootstrap project.  Since then, I discovered Ohm-JS and, maybe, would have used it instead of some of the other technologies.  This was a chicken-before-the-egg problem: we had to use <em>something</em> to implement the bootstrapped version. <a href="#fnref:lisp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/16/Elements-of-DI.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

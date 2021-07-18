@@ -1,0 +1,43 @@
+I"<h1 id="machine-readability">Machine Readability</h1>
+<h2 id="no-order">No Order</h2>
+<ul>
+  <li>Relational Languages do not imply sequential operation</li>
+  <li>No “declaration before use”
+    <h2 id="not-syntax-driven">Not Syntax Driven</h2>
+    <p>The syntax of relations is very simple <code class="language-plaintext highlighter-rouge">relation (subject, object)</code>.  Relations can be emitted (output) in any order.</p>
+    <h3 id="this-is-important-because">This is Important Because…</h3>
+    <p>Emitting machine-readable code is harder when output must be put in some order.</p>
+  </li>
+</ul>
+
+<p>E.G. C requires declaration-before-use, e.g.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void func (a) {
+  x = 5;
+}
+int x; 
+</code></pre></div></div>
+<p>is illegal and must be rewritten as</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int x; 
+void func (a) {
+  x = 5;
+}
+</code></pre></div></div>
+
+<p>In this case, the emitter must make sure that <code class="language-plaintext highlighter-rouge">int x;</code> occurs prior to the function definition.</p>
+
+<p>In more complicated examples, this requires the use of various buffers to memorize code sequences, with a final pass that orders the outputting of buffers</p>
+
+<p>Relations, though, can be emitted in any order - the engine takes care of figuring out the order (for searching).</p>
+<h1 id="separation-of-architecture-from-implementation">Separation of Architecture from Implementation</h1>
+<h2 id="engine">Engine</h2>
+<h3 id="exhaustive-search">Exhaustive Search</h3>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -1,0 +1,193 @@
+I"�<p>#</p>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<p>At present, I believe that dependencies are the first-order problem.</p>
+
+<p><em>Hidden</em> dependencies exacerbate the problem.</p>
+
+<p>Languages must be designed to allow construction of independent units. (For example, calling functions by-name should be disallowed).</p>
+
+<p>Package managers and build managers (like <em>make</em>) facilitate our use of dependencies, instead of making such dependencies more obvious (and painful to use).</p>
+
+<p>Libraries that depend on other libraries (ad infinitum) contain <em>hidden</em> dependencies and build up <em>dependency debt</em>.</p>
+
+<h3 id="visualizing-dependencies">Visualizing Dependencies</h3>
+
+<p>I believe that diagrams show dependencies more readily than textual code.</p>
+
+<p>Whiteboards are found in every software shop.</p>
+
+<p>This observation is a <em>tell</em> - it indicates that <em>something</em> about current PLs is inadequate.</p>
+
+<p>(My suggestions follow).</p>
+
+<h2 id="little-things">Little Things</h2>
+
+<p>The Little Things matter.</p>
+
+<p>If you think of parsers as needing tokenizers (scanners), it changes the way you approach a solution.</p>
+
+<p>How does your approach change if you though that parsers were as easy-to-use as REGEXPs?</p>
+
+<p>https://guitarvydas.github.io/2021/04/26/What-If-Making-A-Compiler-Was-Easy.html</p>
+
+<h2 id="asynchronous-components">Asynchronous Components</h2>
+
+<p>Software components are <em>asynchronous</em> by default.</p>
+
+<p>Synchronous components are the exception, not the rule.</p>
+
+<h3 id="lifetimes">Lifetimes</h3>
+
+<p>Software components “live forever” (like web servers).</p>
+
+<p>Components that wake up and die are the exception, not the rule.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>Software components can be supplied inputs at different points in their lifetimes.</p>
+
+<p>Components that need <em>all</em> inputs at once are the exception, not the rule.</p>
+
+<p>Componenets that need <em>all</em> inputs delivered in single blocks are the exception, not the rule.</p>
+
+<h3 id="outcomes">Outcomes</h3>
+
+<p>Software components can produce outputs at various points in their lifetimes.</p>
+
+<p>Components that provide <em>all</em> outputs at the same time are the exception, not the rule.</p>
+
+<p>Components that provide <em>all</em> outputs in single blocks are the exception, not the rule.</p>
+
+<h3 id="exceptions">Exceptions</h3>
+
+<p>Exceptions are not exceptional.</p>
+
+<p>Exceptions produced by components are the same as all other outcomes produced by components.</p>
+
+<p>The problems and the solutions dictate which outcomes are considered to be erroneous.  <em>Software Architects</em> design solutions that produce the desired outcomes, picking from a multitude of choices.  Few problems have exactly one solution - it is the Architects’ responsibility to make vaarious trade-offs and to make the design clear to readers.</p>
+
+<p>https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html</p>
+
+<h2 id="ports">Ports</h2>
+
+<p>Software components have input <em>and</em> output ports.</p>
+
+<p>Most current PLs have APIs that imply synchronous operation.</p>
+
+<h3 id="one-universal-type">One Universal Type</h3>
+
+<p>Components are plugged together port-to-port where ports have a <em>single</em>, universal, simple type, e.g. a <em>message</em>.</p>
+
+<p>The above does not imply that type-checking is discarded.</p>
+
+<p>Types checking is done in a pipeline, from simple to more complex.</p>
+
+<p>Type checkers are, currently, interpreters that filter incoming information and raise errors.</p>
+
+<p>Type checkers become regular software components, with one input and two outcomes (data to be checked, data that satisfies the check, error condition, respectively).</p>
+
+<p>Multiple checks can be inserted into the pipeline, suiting the problem-at-hand.</p>
+
+<p>Not <em>all</em> software components need to fit this simple - one-in-two-out - model.</p>
+
+<h2 id="layering">Layering</h2>
+
+<p>Components are built in layers.</p>
+
+<p>No layer contains more units than can be comprehended, e.g. 7±2.</p>
+
+<p>Components can, themselves, contain layers, recursively.</p>
+
+<h2 id="loops">Loops</h2>
+
+<p>Long running loops and deep recursion are not allowed.</p>
+
+<p>Long running loops and deep recursion can be broken into smaller steps by sending <em>continue</em> messages to the looping component(s) (or self-sending such messages).</p>
+
+<p>Compilers can insert <em>yields</em> into loops (say, the bottom of a loop) and new syntax can be used to flag deep recursion for automated breaking-up.</p>
+
+<p>This is, essentially, mutual multitasking.</p>
+
+<p>Most programmers quote Windows 3.11 as a failed attempt at mutual multitasking, but do not balk at the idea that applications may contain bugs (esp. early in the development of the application).</p>
+
+<p>Preemptive multitasking is a special technique - an exception, not the rule - that needs to be employed when building operating systems.  There are very few programs that need to use this technique, e.g. the software called <em>Linux</em>, <em>Windows</em>, <em>MacOS</em>, etc.</p>
+
+<p>Applications do not need preemptive multitasking internally.  There is no need to pay the cost of preemption[^2] when it is not needed.</p>
+
+<p>[^2:] Preemption does have costs, e.g. (1) hardware facilities, (2) accidental complexities, (3) overkill use of libraries (often called “operating systems”), etc.</p>
+
+<h2 id="diagrams">Diagrams</h2>
+
+<p>Diagrams are a way to visualize multiple outcomes.</p>
+
+<p>Diagrams are a way to show nesting and locality of reference.</p>
+
+<p>Diagrams can visualize information leakage.</p>
+
+<p>Diagrams make it difficult to draw leaky components, especially when <em>everything</em> (e.g. function calls) is made explicit.</p>
+
+<h3 id="example-diagram-scenario">Example Diagram Scenario</h3>
+
+<p>A software component is represented as a box.</p>
+
+<p>Software components are asynchronous.</p>
+
+<p>Lines represent message flow paths.</p>
+
+<p>Software components contain input and output ports.</p>
+
+<p>Input ports are small green circles.</p>
+
+<p>Output ports are small yellow circles.</p>
+
+<p>A Dispatcher routine invokes <em>ready</em> components in a random order.</p>
+
+<h2 id="relative-naming">Relative Naming</h2>
+
+<p>All names are relative to components.</p>
+
+<h3 id="namespaces">Namespaces</h3>
+
+<p>Components have 5 namespaces:</p>
+
+<ol>
+  <li>
+    <p>inputs</p>
+  </li>
+  <li>
+    <p>ouputs</p>
+  </li>
+  <li>
+    <p>contained components</p>
+  </li>
+  <li>
+    <p>connections between components</p>
+  </li>
+  <li>
+    <p>other</p>
+  </li>
+</ol>
+
+<h3 id="example">Example</h3>
+
+<p>A component refers to a component that is contained in it by using a name (e.g. “inner”) or and index (1, 2, 3, …), for example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./c/inner/abc
+./c/1/abc
+</code></pre></div></div>
+
+<p>Likewise, it can refer to a named input “in” as, for example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./i/in
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

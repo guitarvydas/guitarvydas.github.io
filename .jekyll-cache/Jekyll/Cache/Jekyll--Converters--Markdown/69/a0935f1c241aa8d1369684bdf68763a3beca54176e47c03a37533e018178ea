@@ -1,0 +1,406 @@
+I"�U<p>Computer software deals with two kinds of information:</p>
+<ol>
+  <li>data</li>
+  <li>control.</li>
+</ol>
+
+<p>The term control-flow is used to describe the flow of control information.  Interestingly the term “data-flow” does not refer to the structuring of data information, but to a single kind of control-flow.</p>
+
+<p>Currently, PLs[^pl] deal with mostly one kind of information - data - and tend to ignore the other kind of information - control.</p>
+
+<p>Typical PLs, such as Python, conflate control information with data information. The language supports creation of <em>data structures</em> as first-class entities, but tends to hide <em>control structures</em> behind various forms of syntax, like <em>for</em> loops and <em>if</em> statements.</p>
+
+<p>Some languages, like Scheme, provide Continuations that tend to combine data and control into a single datum.</p>
+
+<p>Operating systems wrap control-flow into ad-hoc Continuations called <em>threads</em>[^stack].</p>
+
+<p>Object-Oriented programming dealt with structured data design, but created unstructured control-flow design[^override].</p>
+
+<p>The reaction to the problems caused by this perspective was to remove all semblance of control, culminating in FP[^fp] languages.</p>
+
+<p>[^pl:] PL means Programming Language</p>
+
+<p>[^fp:] FP means Functional Programming.</p>
+
+<p>[^override:] Overrides and <em>super</em> create control-flow dependencies that break the encapsulation of control information.  Inheritance is useful for data construction, but anathema to structured control-flow construction..  Getters and Setters are data-access operations, which can be separated from control-flow operations. <em>Blocks</em> are closures.</p>
+
+<p>[^stack:] Operating system threads conflate various issues that make Operating Systems appear to be high-art and magic. The (hidden) use of a global variable via the CALL and RETURN instructions is an example of such conflation.  The Stack is a global variable (an optimized list). Relational and FP languages attempt to escape the use of The Stack.</p>
+
+<h1 id="issues">Issues</h1>
+<h2 id="separation-of-concerns">Separation of Concerns</h2>
+<p>Ideally, control-flow design should be separated from data design.</p>
+
+<p>Data structuring is devoid of control information.</p>
+
+<p>Control-flow structuring should, likewise, be dataless - devoid of data information[^ssl].</p>
+
+<p>[^ssl:]  See S/SL (in References) for an example of a data-less language.</p>
+
+<h2 id="locality-of-reference">Locality of Reference</h2>
+<p>Ideally, the description languages for data construction and for control-flow construction should provide locality-of-reference.</p>
+
+<p>Simplifying, this means that all aspects of a design aspect should be visible to the reader in a single glance.</p>
+
+<p>This used to mean that all information related to a portion of the design fit on a 24x80 display.  Today, it means that the information must fit in a <em>window</em>.</p>
+
+<p>“Locality of Reference” also implies that there be no information leaks.</p>
+
+<p>Currently, such leaks are called “dependencies”[^locality].</p>
+
+<p>[^locality:] If you can’t see it all in one window, then it is not-local.  Libraries, as we know them, have this problem. <em>Import</em> and <em>export</em> syntax is often used to reduce the impact of such non-local references.</p>
+
+<p>Dependency-managers hide such data leaks (and non-locality of reference).</p>
+
+<p>Dependency managers allow programmers to cope with information leaks, but build up a <em>dependency debt</em> that usually needs to be addressed in the future.</p>
+
+<p>An insidious form of information leak is the use of <em>functions</em>!  Programmers write code that contains hard-wired calls to specific functions with hard-wired input parameters and hard-wired outcomes (return values and exceptions, all strongly typed).  DLLs[^dll] are an attempt to break out of such hard-wiring using indirection.  [IMO, the solution lies in the use of indirection and structuring of control flows (e.g. structuring component-based systems as trees).]</p>
+
+<p>[^dll:] DLL means “Dynamic Link Library”, often seen with file extensions such as <code class="language-plaintext highlighter-rouge">.DLL</code>, <code class="language-plaintext highlighter-rouge">.so</code> and <code class="language-plaintext highlighter-rouge">.dylib</code>.</p>
+
+<p>Concatenative languages deal with hard-wired parameters and return values, but tend not deal with hard-wired function names and type names.</p>
+
+<h1 id="scoping-nesting">Scoping (Nesting)</h1>
+
+<p>In computer science, it has often been the case that problems have been solved through the use of nesting - aka <em>scoping</em>.</p>
+
+<h2 id="structured-programming">Structured Programming</h2>
+
+<p>Structured progamming was invented to alleviate the problems of <em>spaghetti</em> control-flow arising from the use of <em>assembly language</em> to program computers.</p>
+
+<p>Basically, structured programming prescribed <em>nesting</em> of control-flow as a solution to the problem of <em>spaghetti</em> control-flow.</p>
+
+<p>Today, most PLs provide <em>only</em> structured programming constructs like <code class="language-plaintext highlighter-rouge">if-the-else</code>, <code class="language-plaintext highlighter-rouge">while</code>, etc. and eschew unrestrained control-flow constructs like <code class="language-plaintext highlighter-rouge">GOTO</code>.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">GOTO</code> is needed in Denotational Semantics and has been rebranded as <code class="language-plaintext highlighter-rouge">CPS</code>.  CPS arises from the concept of first-class functions.  Functions are only loosely-structured, using packages and dependency managers. Types, likewise, are only loosely-structured in this way.</p>
+
+<p>Further elaboration can be found at https://en.wikipedia.org/wiki/Structured_programming.</p>
+
+<h2 id="global-variables">Global Variables</h2>
+
+<p>The problem of <em>global variables</em> was solved using <em>nesting</em>.</p>
+
+<p>The terms <em>scoping</em> and <em>local variables</em> tend to be used instead of the term <em>nesting</em>.</p>
+
+<p>The problem of <em>global variables</em> was, in fact, a problem of locality-of-reference.  <em>Global variables</em> were not considered to be a problem until programs grew to be “too large” (i.e. they didn’t fit on one 24x80 screen or one window).</p>
+
+<p>The “real” problem is one of <em>spaghetti dependencies</em>.  How to stop programs from becoming “too large”?</p>
+
+<h2 id="object-oriented-programming">Object Oriented Programming</h2>
+
+<p>OOP prevented a solution for structuring data and divorcing data from implementation details.</p>
+
+<p>In the process, OOP included control-flow in with data and conflated data-relative operations, such as <em>getters</em> and <em>setters</em> with non-data-relative operations.</p>
+
+<p><em>Inheritance</em> is a useful way to organize data.</p>
+
+<p><em>Inheritance</em> is a poor way to organize code.  In fact, I argue that one should use the opposite of inheritance - I call it <em>composition</em> - to organize code.  <em>Composition</em> is seen in StateCharts - the parent statemachine can override operations of children statemachines, which is exactly the opposite of inheritance (where children methods can override parent methods).</p>
+
+<p>Note that this is <em>not</em> a binary programming choice - one or the other (inheritance vs. composition).  Conflating the two possibilities leads to accidental complexity.  PLs should allow for orthogonal desription of data structures vs. control-flows.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>Syntax is, currently, the manner for dealing with control-flow descriptions.</p>
+
+<p>I believe that control-flow description is orthogonal to data description.</p>
+
+<p>From this perspective, one should use two languages for any program -</p>
+
+<ol>
+  <li>a data description language</li>
+  <li>a control-flow description language</li>
+</ol>
+
+<p>and, that neither language should contain syntax for the other kind of description.  One could use a third language to plumb programs together, for example, like <code class="language-plaintext highlighter-rouge">/bin/bash</code>. (I contend that syntax is cheap, languages for plumbing programs together can be designed to be “better”, and more austere, than <code class="language-plaintext highlighter-rouge">bash</code>)</p>
+
+<h2 id="pattern-matching">Pattern Matching</h2>
+<p>The trend in FP is to use <em>pattern matching</em> to separate control information from data information.</p>
+
+<p>Separation of concerns is achieved by relegating all control-flow to an engine that is not part of the description language.</p>
+
+<p>Pattern matching is well-understood, albeit under a different name - “parsing”.</p>
+
+<h2 id="denotational-semantics">Denotational Semantics</h2>
+
+<p>Denotational Semantics is the field of describing programming languages using functional notation.</p>
+
+<p>Control-flow, in Denotational Semantics, is most often handled through the use of <code class="language-plaintext highlighter-rouge">GOTOs</code> (rebranded as CPS, first-class-functions, continuations, etc.).</p>
+
+<h2 id="data-flow">Data Flow</h2>
+
+<p>As mentioned earlier, “data flow” refers to a style of control-flow, not to data structuring.</p>
+
+<p>In the data-flow style, the operation of a component is suspended until all of its inputs have arrived.  The classic example is a <code class="language-plaintext highlighter-rouge">+</code> operator, <code class="language-plaintext highlighter-rouge">result = b + c</code>.  <code class="language-plaintext highlighter-rouge">Result</code> is computed only when, both inputs, <code class="language-plaintext highlighter-rouge">b</code> and <code class="language-plaintext highlighter-rouge">c</code> are available.</p>
+
+<p>In contrast, FP requires that <em>all</em> inputs arrive at a component (a <em>function</em>) at the same time.  The component is never suspended and it operates immediately and returns its results all at the same time.  Complications caused by this perspective are being resolved through the use of features like <em>futures</em>. Note that FP assumes that there is a single <em>happy path</em>, i.e. the function succeeds in returning a value(s) and everything else is considered to be an <em>exception</em>.  Programmers are discovering the limitations of this model as they delve into distributed programming, e.g. internet, blockchain, p2p, etc.</p>
+
+<h2 id="control-flow">Control Flow</h2>
+
+<p>The current model for control-flow - syntax - is based on assumptions related to 1950’s computer hardware - e.g. a single CPU[^cpu] and expensive memory.</p>
+
+<p>These assumptions are being broken as programming evolves towards distributed architectures and internet solutions.</p>
+
+<p>[^cpu:] Hence, the name <em>central</em> processing unit.</p>
+
+<h2 id="deep-recursion-long-running-loops">Deep Recursion, Long-Running Loops</h2>
+
+<p>The 1950’s model of computing has resulted in the notion that programs can contain deep recursion and long-running loops.</p>
+
+<p>Neither of these constructs is appropriate for distributed programming.  Programmers <em>can</em> create distributed programs, but ths is harder due to accidental complexities introduced by the underlying assumptions.</p>
+
+<p>Notably, the assumptions have led programmers to using full-preemption and operating systems.</p>
+
+<p>Full preemption has caused many accidental complexities, e.g. the Mars Pathfinder disaster https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft[^1].</p>
+
+<p>[^1:] This problem was later repaired with the band-aid called “priority inheritance”.</p>
+
+<h2 id="state">State</h2>
+
+<p>Programmers conflate the various uses of <em>state</em> and lump them together.</p>
+
+<p>I discuss this further in https://guitarvydas.github.io/2021/03/30/State,-Analysis-of.html.</p>
+
+<h2 id="statecharts">StateCharts</h2>
+
+<p>State machines suffered, early on, from a problem called <em>state explosion</em>.</p>
+
+<p>An small example of <em>state explosion</em> is demonstrated in <em>Fig. 20</em> of the paper below.</p>
+
+<p>StateCharts - developed by David Harel - solve the <em>state explosion</em> problem using nesting.</p>
+
+<p>I discuss StateCharts further in https://guitarvydas.github.io/2020/12/09/StateCharts.html and https://guitarvydas.github.io/2021/02/25/statecharts-(again).html.</p>
+
+<p>Note that many “successes” in programming have been built on top of the <em>state</em> paradigm, e.g. operating systems, YACC, LEX, REGEXP, etc.</p>
+
+<h2 id="threads">Threads</h2>
+
+<p><em>State</em> has been conflated with several issues, including control-flow, the global stack, etc.</p>
+
+<p><em>Threads</em> are one way to lasoo these issues and hide them.</p>
+
+<p>Notably, <em>threads</em> isolate the stack used by one program from other programs (using hardware assist, wrapped by libraries called <em>operating systems</em>).</p>
+
+<p>As programmers approach distributed architectures, the limitations of <em>threads</em> become more apparent.</p>
+
+<p><em>Threads</em> are more like assembly-level operations provided on a single CPU than a high-level concept useful for programming distributed systems.</p>
+
+<h2 id="dataless">Dataless</h2>
+
+<p>See the References section for S/SL - a dataless language that was, ostensibly, used for constructing compilers (aka “big” programs).</p>
+
+<h2 id="gotos-cps">GOTOs, CPS</h2>
+
+<p>As mentioned earlier, CPS is a re-branding of the concept of GOTOs.  In fact, CPS is more “powerful” than GOTOs.</p>
+
+<p>The problem with GOTOs was not the GOTOs themselves, but the unstructured use of GOTOs.</p>
+
+<p>PL designers conflated two issues - data construction and control-flow construction - which resulted in accidental complexities.</p>
+
+<p>Creating languages that address both problems at once creates difficulties and unnecessary complexity.</p>
+
+<h2 id="scalability">Scalability</h2>
+
+<p>Components are scalable only if they are not inter-related.</p>
+
+<p>Scalable components cannot have dependencies on one another.</p>
+
+<p>https://guitarvydas.github.io/2021/06/17/Dags.html</p>
+
+<h2 id="type-checking">Type Checking</h2>
+
+<p>Currently, most PLs provide a handful of hard-wired types and a way for programmers to define further types.</p>
+
+<h2 id="input-validation">Input Validation</h2>
+
+<p>Programmers are accustomed to writing specialized code to further validate data.</p>
+
+<p>This is but another form of type checking.</p>
+
+<p>The fact that three forms of type checking exist (hard-wired, programmer-defined, input validation) is a <em>tell</em> that the concepts of type checking are overkill and non-uniform.</p>
+
+<h2 id="absolute-naming">Absolute Naming</h2>
+
+<p>Currently, most PLs create names that are <em>absolute</em> and global to the whole application.</p>
+
+<p>Modules, packages, etc. have been invented to constrain the use of such names.</p>
+
+<h1 id="solutions">Solutions</h1>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<p>At present, I believe that dependencies are a first-order problem.</p>
+
+<p>Hidden dependencies exacerbate the problem.</p>
+
+<p>Languages must be designed to allow construction of independent units. (For example, calling functions by-name should be disallowed).</p>
+
+<p>Package managers and build managers (like <em>make</em>) facilitate our use of dependencies, instead of making such dependencies more obvious.</p>
+
+<p>Libraries that depend on other libraries (ad infinitum) contain <em>hidden</em> dependencies build up <em>dependency debt</em>.</p>
+
+<h3 id="visualizing-dependencies">Visualizing Dependencies</h3>
+
+<p>I believe that diagrams show dependencies more readily than textual code.</p>
+
+<p>Whiteboards are found in every software shop.</p>
+
+<p>This observation is a <em>tell</em> - it indicates that <em>something</em> about current PLs is inadequate.</p>
+
+<p>(My suggestions follow).</p>
+
+<h2 id="asynchronous-components">Asynchronous Components</h2>
+
+<p>Software components are <em>asynchronous</em> by default.</p>
+
+<p>Synchronous components are the exception, not the rule.</p>
+
+<h3 id="lifetimes">Lifetimes</h3>
+
+<p>Software components “live forever” (like web servers).</p>
+
+<p>Components that wake up and die are the exception, not the rule.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>Software components can be supplied inputs at different points in their lifetimes.</p>
+
+<p>Components that need <em>all</em> inputs at once are the exception, not the rule.</p>
+
+<p>Componenets that need <em>all</em> inputs delivered in single blocks are the exception, not the rule.</p>
+
+<h3 id="outcomes">Outcomes</h3>
+
+<p>Software components can produce outputs at various points in their lifetimes.</p>
+
+<p>Components that provide <em>all</em> outputs at the same time are the exception, not the rule.</p>
+
+<p>Components that provide <em>all</em> outputs in single block are the exception, not the rule.</p>
+
+<h3 id="exceptions">Exceptions</h3>
+
+<p>Exceptions are not exceptional.</p>
+
+<p>Exceptions produced by components are the same as all other outcomes produced by components.</p>
+
+<p>The problems and the solutions dictate which outcomes are considered to be erroneous.  <em>Software Architects</em> design solutions that produce the desired outcomes.</p>
+
+<h2 id="ports">Ports</h2>
+
+<p>Software components have input <em>and</em> output ports.</p>
+
+<p>Most current PLs have APIs that imply synchronous operation.</p>
+
+<h3 id="one-universal-type">One Universal Type</h3>
+
+<p>Components are plugged together port-to-port where ports have a universal, simple type, e.g. <em>message</em>.</p>
+
+<p>The above does not imply that type-checking is discarded.</p>
+
+<p>Types checking is done in a pipeline, from simple to more complex.</p>
+
+<p>Type checkers are, already, interpreters that filter incoming information and raise errors.</p>
+
+<p>Type checkers become regular software components, with one input and two outcomes (data to be checked, data that satisfies the check, error condition, respectively).</p>
+
+<p>Multiple checks can be inserted into the pipeline, suiting the problem-at-hand.</p>
+
+<p>Not <em>all</em> software components need to fit this simple - one-in-two-out - model.</p>
+
+<h2 id="layering">Layering</h2>
+
+<p>Components are built in layers.</p>
+
+<p>No layer contains more units than can be comprehended, e.g. 7±2.</p>
+
+<p>Components can, themselves, contain layers, recursively.</p>
+
+<h2 id="loops">Loops</h2>
+
+<p>Long running loops and deep recursion are not allowed.</p>
+
+<p>Long running loops and deep recursion can be broken into smaller steps by sending <em>continue</em> messages to the looping component(s) (or self-sending such messages).</p>
+
+<p>Compilers can insert <em>yields</em> into loops (say, the bottom of a loop) and new syntax can be used to flag deep recursion for automated breaking-up.</p>
+
+<p>This is, essentially, mutual multitasking.</p>
+
+<p>Most programmers quote Windows 3.11 as a failed attempt at mutual multitasking, but do not balk at the idea that applications may contain bugs (esp. early on).</p>
+
+<p>Preemptive multitasking is a special technique - an exception, not the rule - that needs to be employed when building operating systems.  There are very few programs that need to use this technique, e.g. the software called <em>Linux</em>, <em>Windows</em>, <em>MacOS</em>, etc.</p>
+
+<p>Applications do not need preemptive multitasking internally.  There is no need to pay the cost of preemption[^2] when it is not needed.</p>
+
+<p>[^2:] Preemption does have costs, e.g. (1) hardware facilities, (2) accidental complexities, (3) overkill use of l libraries (often called “operating systems”), etc.</p>
+
+<h2 id="diagrams">Diagrams</h2>
+
+<p>Diagrams are a way to visualize multiple outcomes.</p>
+
+<p>Diagrams are a way to show nesting and locality of reference.</p>
+
+<p>Diagrams can visualize information leakage.</p>
+
+<p>Diagrams make it difficult to draw leaky components, especially when <em>everything</em> (e.g. function calls) is made explicit.</p>
+
+<h3 id="example-diagram-scenario">Example Diagram Scenario</h3>
+
+<p>A software component is represented as a box.</p>
+
+<p>Software components are asynchronous.</p>
+
+<p>Lines represent message flow paths.</p>
+
+<p>Software components contain input and output ports.</p>
+
+<p>Input ports are small green circles.</p>
+
+<p>Output ports are small yellow circles.</p>
+
+<p>A Dispatcher routine invoked <em>ready</em> components in a random order.</p>
+
+<h2 id="relative-naming">Relative Naming</h2>
+
+<p>All names are relative to components.</p>
+
+<h3 id="namespaces">Namespaces</h3>
+
+<p>Components have 5 namespaces:</p>
+
+<ol>
+  <li>
+    <p>inputs</p>
+  </li>
+  <li>
+    <p>ouputs</p>
+  </li>
+  <li>
+    <p>contained components</p>
+  </li>
+  <li>
+    <p>connections between components</p>
+  </li>
+  <li>
+    <p>other</p>
+  </li>
+</ol>
+
+<h3 id="example">Example</h3>
+
+<p>A component refers to a component that is contained in it by using a name (e.g. “inner”) or and index (1, 2, 3, …), for example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./c/inner/abc
+./c/1/abc
+</code></pre></div></div>
+
+<p>Likewise, it can refer to a named input “in” as, for example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./i/in
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

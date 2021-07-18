@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Case Study - A Language of Types | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Case Study - A Language of Types" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this essay, I discuss a simple language for constructing type systems." />
+<meta property="og:description" content="In this essay, I discuss a simple language for constructing type systems." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/09/A-Language-of-Types-(Case-Study).html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/09/A-Language-of-Types-(Case-Study).html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-09T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Case Study - A Language of Types" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/09/A-Language-of-Types-(Case-Study).html","@type":"BlogPosting","description":"In this essay, I discuss a simple language for constructing type systems.","dateModified":"2021-07-09T00:00:00-04:00","datePublished":"2021-07-09T00:00:00-04:00","headline":"Case Study - A Language of Types","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/09/A-Language-of-Types-(Case-Study).html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Case Study - A Language of Types</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-09T00:00:00-04:00" itemprop="datePublished">Jul 9, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this essay, I discuss a simple language for constructing type systems.</p>
+
+<p>The language boils down into some 5 operations.</p>
+
+<p>The language has been used to create a diagram transpiler and a runtime for transpiled diagrams.</p>
+
+<p>I will discuss each “type operation” below</p>
+
+<h1 id="scn">SCN</h1>
+
+<p>In the following, I use the term “SCN” to mean Solution-Centric Notation, a form of mini-DSL.</p>
+
+<h1 id="github">Github</h1>
+
+<p>A manifestation of this language can be found in <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler2/exprtypeslisp.html">exprtypes.html</a> with support code in <a href="https://github.com/guitarvydas/stack-dsl">stack-dsl</a>.</p>
+
+<p>The SCN was first built in CL (Common Lisp) using the <a href="https://scymtym.github.io/esrap/">esrap</a> PEG parsing library.</p>
+
+<p>Later, the SCN was re-written in Ohm-JS and Glue and resides in <a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler2/exprtypeslisp.html">exprtypes.html</a>, as mentioned above.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/07/09/Arrowgrams.html">Overiew of Arrowgrams</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/07/05/Type-DSL-(SCN).html">Overview of Type SCN</a></p>
+
+<h1 id="type-scn-operations">Type SCN Operations</h1>
+
+<p>The bare essence of this type system is built on only 6 primitive kinds of definitions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = { ... ... ...}         --&gt; class with fields def
+id = | ... | ... | ...      --&gt; compound type def
+id = '...' |  '...' | ...   --&gt; enum def
+id = :bag id2               --&gt; bag def
+id = :string                --&gt; string def
+id = :map id2               --&gt; map def
+</code></pre></div></div>
+
+<p>Comments begin with “%” and continue to the end of the line.</p>
+
+<p>Here <code class="language-plaintext highlighter-rouge">...</code> represents single names<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">1</a></sup>.</p>
+
+<p>Spaces separate names (commas and semi-colons are not used).</p>
+
+<p>Originally, the syntax was parsed manually. To aid such manual parsing, I designed the syntax to contain <em>left handles</em>.  Every construct begins with “id =” and the next token (the third token) uniquely determines the kind of construct being used, e.g. <code class="language-plaintext highlighter-rouge">{</code>, <code class="language-plaintext highlighter-rouge">:bag</code>, <code class="language-plaintext highlighter-rouge">:string</code>, <code class="language-plaintext highlighter-rouge">:map</code>, <code class="language-plaintext highlighter-rouge">|</code> and <code class="language-plaintext highlighter-rouge">'</code>.</p>
+
+<p>SCN principle: some of the above constructs have become obsolete over time. I leave those constructs in, since the definition is “good enough” to get the job done, and, in some way shows the provenance from original ideas to final reality.  Future maintainers might choose to prune the definition, but no time is wasted in doing so at the moment.</p>
+
+<h2 id="type-operation---class-with-fields">Type Operation - Class With Fields</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = { ... ... ...}         --&gt; class with fields def
+</code></pre></div></div>
+
+<p>This operation create a type with named fields.</p>
+
+<p>Each name is a type unto itself.</p>
+
+<p>Name clashes are not allowed. (The same field name must not be used more than once in a given definition)</p>
+
+<p>Name clashes are resolved - by the programmer - by inventing new type names and equating them to other types, for example</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = { b b }
+</code></pre></div></div>
+<p>would be resolved by manually writing the above as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = { y z }
+y =| b
+z =| b
+</code></pre></div></div>
+<p>It has been found, in practice, that name clashes occur infrequently</p>
+
+<h2 id="type-operation---compound-type">Type Operation - Compound Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = | id2 | id3 | ...      --&gt; compound type def
+</code></pre></div></div>
+<p>This operation creates a type that is the union of the given types (in this case, id2, id3, etc.)</p>
+
+<h3 id="type-operation---equating-types">Type Operation - Equating Types</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = | id2
+</code></pre></div></div>
+<p>Types can be equated by writing degenerate compound type definitions.</p>
+
+<h2 id="type-operation---enum-type">Type Operation - Enum Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = 'k1' |  'k2' | ...   --&gt; enum def
+</code></pre></div></div>
+
+<p>This operation creates an enum type that holds exactly one of the above constants.</p>
+
+<h2 id="type-operation---foreign-string-type">Type Operation - Foreign :string Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = :string            --&gt; string def
+</code></pre></div></div>
+<p>A builtin type, currently called “:string”<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>, is a <em>handle</em> to some opaque type that is implemented in the supporting toolbox language (aka base language).</p>
+
+<h2 id="type-operation---foreign-map-type">Type Operation - Foreign :map Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = :map id2              --&gt; map def
+</code></pre></div></div>
+<p>This operation creates an ordered list of type id2. The “ordered list type” (currently called “:map” for historical reasons<sup id="fnref:map" role="doc-noteref"><a href="#fn:map" class="footnote">3</a></sup>) is built into the type transpiler, whereas the object type, id2, can be any type defined in the specification (or can be one of the builtin types.)</p>
+
+<p>For example, a list of a list of X might be defined as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = :map b
+b = :map X
+X = ...
+</code></pre></div></div>
+<h2 id="type-operation---foreign-bag-type">Type Operation - Foreign :bag Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id = :bag id2               --&gt; bag def
+</code></pre></div></div>
+<p>This operation creates an unordered list of type id2, akin to “:map” above.</p>
+
+<p>It is not clear whether this type is actually needed, since unordering is “just” an optimization.</p>
+
+<p>I <em>strongly</em> suggest that Architecture (DI) and Optimization be separated and not be conflated together.</p>
+
+<h1 id="transpiling-to-primitive-engine-operations">Transpiling to Primitive Engine Operations</h1>
+<p>The Type SCN is transpiled into a set of primitive operations<sup id="fnref:op" role="doc-noteref"><a href="#fn:op" class="footnote">4</a></sup>.</p>
+
+<p>The operations are implemented / interpreted by an engine.</p>
+
+<p>Currently, the engine is written in CL (Common Lisp), but I believe that any toolbox language could be used (e.g. Python, JS, etc.)</p>
+
+<h2 id="engine-primitive-operators">Engine Primitive Operators</h2>
+<h3 id="pushing-data-onto-a-stack">Pushing Data Onto A Stack</h3>
+<p>Typecheck that source (the datum) meets requirements of destination (the stack).</p>
+
+<p>Note that “typecheck” means to simply compare names. (Shallow compare, no need for deep compare).</p>
+
+<h3 id="setting-a-field">Setting a Field</h3>
+<p>Typecheck that source (the datum) meets requirements of destination (field of type).</p>
+<h3 id="appending-to-a-list">Appending to a List</h3>
+<p>Typecheck that source (the datum) meets requirements of destination (element type of the list).</p>
+<h3 id="output">Output</h3>
+<p>Pop datum from stack. Push popped value onto output stack (of same type).</p>
+<h3 id="new">New</h3>
+<p>Create and push an empty stack entry.</p>
+<h3 id="pop">Pop</h3>
+<p>Remove one item from the given stack. Check for underrun.</p>
+<h3 id="coercion">Coercion</h3>
+<p>From a builtin type to a SCN-defined type.</p>
+
+<p>Programmer-specified coercion.</p>
+
+<h2 id="low-level-routines--scripts">Low-Level Routines / Scripts</h2>
+
+<h2 id="signatures">Signatures</h2>
+
+<p>NIY: Each routine specifies a post-condition which describes the change in the various stack depths.</p>
+
+<p>NIY: A routine must consume (pop) all of its input parameters and push one (or more) output results.  [<em>This is not currently implemented.  I only check stack depth when an app completes operation (an app must leave stack depths as it found them, with no net change).  In practice, this simple check turned out to be sufficient.</em>]</p>
+
+<p>[<em>In future variants: an operation could be added to the engine to push/modify stack signatures upon routine entry.</em>]</p>
+
+<p>A <em>signature</em> is:</p>
+<ol>
+  <li>a set of input parameters</li>
+  <li>a set of output parameters.</li>
+</ol>
+
+<p>Signatures can be checked at runtime (dynamic checking). I imagine that signatures could also be pre-checked (static checking).</p>
+
+<p>Signatures annotate sequences of operations (aka “functions”, aka “routines”). I call these sequences “scripts”.</p>
+
+<h2 id="scripts-and-methods">Scripts and Methods</h2>
+
+<p>Operations are performed in groups, much like groups of assembler operations perform the bodies of functions.</p>
+
+<p>Operation sequences can be specified:</p>
+<ol>
+  <li>internally to the SCN (<em>scripts</em>)</li>
+  <li>externally outside of the the SCN (<em>foreign</em>).</li>
+</ol>
+
+<p>This concept is “nothing new”.  It is akin to writing the code for a function in the same file as it is to be used, versus, writing the code for the function in some other file, then importing the file.  I call these <em>scripts</em> and <em>methods</em> respectively. (In other words: imported functions are called <em>methods</em>, non-imported functions are called <em>scripts</em>).</p>
+
+<p>To further belabor the point: code can be written in the SCN, <em>or</em>, code can be written in any other language, say, Python. Code written in the SCN would be called a <em>script</em> whereas code written in Python would be called a <em>method</em>.</p>
+
+<p>Code written in the SCN must not name-clash with code written in Python (for now).</p>
+
+<p>Imagine (for now) that <em>all</em> code is transpiled into the target language, say Python, and glued together to make the final app.</p>
+
+<h2 id="watermarking">Watermarking</h2>
+<h3 id="memorizing-stack-depths">Memorizing Stack Depths</h3>
+<p>The engine memorizes all stack depths before executing an app.</p>
+
+<p>NIY: The engine memorizes all stack depths before executing a primitive operation.</p>
+
+<h3 id="checking-stack-depths">Checking Stack Depths</h3>
+<p>After executing an app, the engine checks that all stacks have returned to their pre-operation depths.<br />
+NIY: After executing a primitive operation, the engine checks that all stacks have returned to their pre-operation depths modified as appropriate by the script’s signature.</p>
+
+<p>In the current code this check is implemented by “%memoStacks()” and “%memoCheck()”<sup id="fnref:c" role="doc-noteref"><a href="#fn:c" class="footnote">5</a></sup></p>
+
+<h1 id="type-checking">Type Checking</h1>
+<h2 id="type-descriptors">Type Descriptors</h2>
+<p>A type is defined by</p>
+<ol>
+  <li>its name</li>
+  <li>information dependent on the type of the type (e.g. a list of fields, a list of enums, etc.)</li>
+</ol>
+
+<h2 id="type-checking-1">Type Checking</h2>
+<p>A Type is equivalent to another Type if it has the same name.</p>
+
+<p>We can avoid the need for deep type checks by recognizing that</p>
+<ol>
+  <li>each type has a unique name</li>
+  <li>type checking needs only to be done during push, set-field and append operations.</li>
+</ol>
+
+<h2 id="stacks">Stacks</h2>
+<p>Each type, including the builtin types, is assigned 2 stacks</p>
+<ol>
+  <li>An input stack</li>
+  <li>An output stack.</li>
+</ol>
+
+<p>The input stack is used for sending parameters (of the given type) into a routine and for temporaries storage.</p>
+
+<p>The output stack is used for returning a value (of the given type) from a routine.</p>
+
+<p>In popular GPLs (General Purpose Languages) <em>all</em> types use <a href="https://guitarvydas.github.io/2020/12/25/The-Stack.html">the same stack</a> (and <a href="https://guitarvydas.github.io/2020/12/27/The-Stack-2.html">desired result</a>). This concept was borne out of the 1950’s tendency to optimize storage - a concern that is no longer an issue.</p>
+
+<p>The multiple stacks - 2 for each type - can be implemented using a heap.</p>
+
+<p>[<em>In future variants: it might be desirable to separate temporary storage from input parameters, requiring 3 stacks for every type. It is possible to reduce the number of stacks to 1 per type, but that is only an optimization and will unnecessarily hide architectural details.</em>]</p>
+
+<p>Each stack contains a type descriptor that describes the type of element(s) in the stack.</p>
+
+<h1 id="common-lisp-implementations">Common Lisp Implementations</h1>
+<h2 id="type-operation---class-with-fields-1">Type Operation - Class With Fields</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typeDecl = { name typeName }
+</code></pre></div></div>
+<p>is transpiled into</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(proclaim '(optimize (debug 3) (safety 3) (speed 0)))(in-package "CL-USER")
+
+(defclass typeDecl (stack-dsl::%compound-type)
+(
+(%field-type-name :accessor %field-type-name :initform "name")
+(name :accessor name)
+
+(%field-type-typeName :accessor %field-type-typeName :initform "typeName")
+(typeName :accessor typeName)
+)
+(:default-initargs :%type "typeDecl"))
+(defclass typeDecl-stack (stack-dsl::%typed-stack) () ())
+(defmethod initialize-instance :after ((self typeDecl-stack) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%type-list self) "typeDecl"))
+
+
+(stack-dsl::%ensure-existence 'name)
+(stack-dsl::%ensure-existence 'typeName)
+(stack-dsl::%ensure-existence 'typeDecl)
+
+(defclass %map-stack (stack-dsl::%typed-stack) ())
+(defclass %bag-stack (stack-dsl::%typed-stack) ())
+(defmethod initialize-instance :after ((self %map-stack) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%element-type self) "%map"))(defmethod initialize-instance :after ((self %bag-stack) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%element-type self) "%bag"))
+
+(defclass environment ()
+((%water-mark :accessor %water-mark :initform nil)
+(input-name :accessor input-name :initform (make-instance 'name))
+(output-name :accessor output-name :initform (make-instance 'name))
+(input-typeName :accessor input-typeName :initform (make-instance 'typeName))
+(output-typeName :accessor output-typeName :initform (make-instance 'typeName))
+(input-typeDecl :accessor input-typeDecl :initform (make-instance 'typeDecl))
+(output-typeDecl :accessor output-typeDecl :initform (make-instance 'typeDecl))
+))
+
+(defmethod %memoStacks ((self environment))
+(setf (%water-mark self)
+(list
+(stack-dsl::%stack (input-name self))
+(stack-dsl::%stack (output-name self))
+(stack-dsl::%stack (input-typeName self))
+(stack-dsl::%stack (output-typeName self))
+(stack-dsl::%stack (input-typeDecl self))
+(stack-dsl::%stack (output-typeDecl self))
+
+)))
+  
+
+(defparameter *stacks* '(
+input-name
+output-name
+input-typeName
+output-typeName
+input-typeDecl
+output-typeDecl
+
+))
+
+(defmethod %memoCheck ((self environment))
+ (let ((wm (%water-mark self)))
+  (let ((r (and
+	   
+(let ((in-eq (eq (nth 0 wm) (stack-dsl::%stack (input-name self))))
+      (out-eq (eq (nth 1 wm) (stack-dsl::%stack (output-name self)))))
+  (and in-eq out-eq))
+(let ((in-eq (eq (nth 2 wm) (stack-dsl::%stack (input-typeName self))))
+      (out-eq (eq (nth 3 wm) (stack-dsl::%stack (output-typeName self)))))
+  (and in-eq out-eq))
+(let ((in-eq (eq (nth 4 wm) (stack-dsl::%stack (input-typeDecl self))))
+      (out-eq (eq (nth 5 wm) (stack-dsl::%stack (output-typeDecl self)))))
+  (and in-eq out-eq)))))
+   (unless r (error "stack depth incorrect")))))
+</code></pre></div></div>
+
+<p>Of note:</p>
+<ul>
+  <li>typeDecl is defined as a class</li>
+  <li>the typeDecl class contains two fields “name” and “typeName”</li>
+  <li>the class definition of typeDecl contains information <em>about</em> the type - a type descriptor, e.g. its name “typeDecl”</li>
+  <li>each field contains a type descriptor that describes the element types of the corresponding fields</li>
+  <li>two subordinate classes are declared - input-typeDecl and output-typeDecl</li>
+  <li>a stack class - typeDecl-stack<sup id="fnref:dash" role="doc-noteref"><a href="#fn:dash" class="footnote">6</a></sup> - is declared</li>
+  <li>various bookkeeping functions are declared (“%ensureExistence”, “%memoStacks” and “%memoCheck”)</li>
+  <li>various bookkeeping variables are declared (“*stacks*”)</li>
+  <li>a bookkeeping class is declared (“environment”).</li>
+</ul>
+
+<p>The bookkeeping details matter little. The details depend on the transpiler implementor (in this case, me). The details add a lot of <a href="https://guitarvydas.github.io/2021/03/17/Details-Kill.html">noise</a> to the implementation</p>
+
+<h2 id="type-operation---compound-type-1">Type Operation - Compound Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>statement =| letStatement | mapStatement 
+</code></pre></div></div>
+<p>is transpiled into</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass statement (stack-dsl::%compound-type) () (:default-initargs :%type "statement"))
+(defmethod initialize-instance :after ((self statement) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%type-list self) '( "letStatement" "mapStatement")))
+(defclass statement-stack (stack-dsl::%typed-stack) () (:default-initargs :%element-type "statement"))
+...
+</code></pre></div></div>
+<p>Note that the types “letStatement” and “mapStatement” are defined elsewhere.</p>
+
+<p>[This example has been elided for brevity, the actual code contains more alternations].</p>
+
+<h3 id="type-operation---equating-types-1">Type Operation - Equating Types</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>situationDefinition =| name
+</code></pre></div></div>
+<p>is transpiled into</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass situationDefinition (stack-dsl::%compound-type) () (:default-initargs :%type "situationDefinition"))
+(defmethod initialize-instance :after ((self situationDefinition) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%type-list self) '( "name")))
+(defclass situationDefinition-stack (stack-dsl::%typed-stack) () (:default-initargs :%element-type "situationDefinition"))
+...
+</code></pre></div></div>
+<h2 id="type-operation---enum-type-1">Type Operation - Enum Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>returnKind = 'map' | 'simple' | 'void'
+</code></pre></div></div>
+<p>is transpiled into:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass returnKind (stack-dsl::%enum) () (:default-initargs :%type "returnKind"))
+(defmethod initialize-instance :after ((self returnKind) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%value-list self) '("map" "simple""void")))
+(defclass returnKind-stack (stack-dsl::%typed-stack) ())
+(defmethod initialize-instance :after ((self returnKind-stack) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%element-type self) "returnKind"))
+...
+</code></pre></div></div>
+
+<p>N.B. they types “map”, “simple” and “void” are defined elsewhere.</p>
+<h2 id="type-operation---foreign-string-type-1">Type Operation - Foreign :string Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name = :string
+</code></pre></div></div>
+<p>transpiles into</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass name (stack-dsl::%string) () (:default-initargs :%type "name"))
+(defclass name-stack (stack-dsl::%typed-stack) ())
+(defmethod initialize-instance :after ((self ~a-stack) &amp;key &amp;allow-other-keys)
+  (setf (stack-dsl::%element-type self) "name"))
+...
+</code></pre></div></div>
+
+<h2 id="type-operation---foreign-map-type-1">Type Operation - Foreign :map Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation = :map statement
+</code></pre></div></div>
+<p>transpiles into:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass implementation (stack-dsl::%map) () (:default-initargs :%type "implementation"))
+(defmethod initialize-instance :after ((self implementation) &amp;key &amp;allow-other-keys)  ;; type for items in map
+  (setf (stack-dsl::%element-type self) "statement"))
+(defclass implementation-stack(stack-dsl::%typed-stack) ())
+(defmethod initialize-instance :after ((self implementation-stack) &amp;key &amp;allow-other-keys)
+    (setf (stack-dsl::%element-type self) "implementation"))
+</code></pre></div></div>
+<h2 id="type-operation---foreign-bag-type-1">Type Operation - Foreign :bag Type</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation = :map statement
+</code></pre></div></div>
+<p>transpiles into:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+(defclass implementation (stack-dsl::%bag) () (:default-initargs :%type "implementation"))
+(defmethod initialize-instance :after ((self implementation) &amp;key &amp;allow-other-keys)  ;; type for items in map
+  (setf (stack-dsl::%element-type self) "statement"))
+(defclass implementation-stack(stack-dsl::%typed-stack) ())
+(defmethod initialize-instance :after ((self implementation-stack) &amp;key &amp;allow-other-keys)
+    (setf (stack-dsl::%element-type self) "implementation"))
+...
+</code></pre></div></div>
+<p>Note: :bag does not appear in exprtypes.dsl. As mentioned earlier, “:bag” can be deprecated and replace by “:map”.</p>
+<h1 id="relationship-to-fdd-failure-driven-development">Relationship to FDD (Failure Driven Development)</h1>
+<p><a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">FDD</a> is based on the notion that most software fails, especially during development.</p>
+
+<p>When our application “works”, we move on to another project.</p>
+
+<p>From this perspective, one wants to recognize, fix and continue from failure as quickly as possible.</p>
+
+<p>One of the techniques for handling FDD is automation.</p>
+
+<p>Automate as much as possible. Push a button to rebuild everything.</p>
+
+<p>Fix, push a button, continue.</p>
+
+<p>I consider Type Systems as tools for thought - way to brainstorm and perfect applications.</p>
+
+<p>Defining a Type SCN is a crucial step in automating design. (The other crucial step would be to define a Control Flow SCN).</p>
+
+<h1 id="relationship-to-transpilation">Relationship to Transpilation</h1>
+
+<p>Transpilation - converting one source file into different source - is an enabling technology for automation.</p>
+
+<h1 id="relationship-to-di">Relationship to DI</h1>
+
+<p>This Type SCN fits the goals of <a href="https://guitarvydas.github.io/assets/2021-04-11-DI/index.html">DI</a>.</p>
+
+<h1 id="relationship-to-architecture">Relationship to Architecture</h1>
+
+<p>I feel that the phrase “Software Architecture” has been watered down and means many different things.</p>
+
+<p>I use the phrase “DI”.</p>
+
+<p>See the above section about DI.</p>
+
+<h1 id="relationship-to-concatenative-languages">Relationship to Concatenative Languages</h1>
+<p>This Type Language is</p>
+<ul>
+  <li>stack based</li>
+  <li>has no syntax for parameters</li>
+  <li>treats input parameters and output parameters equivalently</li>
+  <li>treats exceptions as just another output parameter</li>
+  <li>allows checking of stack depths.</li>
+</ul>
+
+<h1 id="relationship-to-type-checking">Relationship to Type Checking</h1>
+<p>Type checking engine &lt;= type checker VM code<br />
+Type checking engine &lt;= VM code executed at “runtime”.<br />
+The definition of “runtime” is relative.  In this case, we mean “runtime” of the type-checker, not “runtime” of the final app.<br />
+Currently, type-checking is a block of “ad-hoc” code.</p>
+
+<p>A type checker is an “interpreter” (!).</p>
+
+<p>Type-checker code transpiles an app into a more-efficient app by pre-checking static types.</p>
+
+<p>Type-checking is a continuum. At one end of the continuum is what we call “dynamic type checking” - checking that is done at runtime (of the app). At the other end of the continuum is what we call “static type checking” - checking that is performed before the app is executed.</p>
+
+<p>Static type checking optimizes the app, so that the app does not need to check types when it is executed (app runtime).</p>
+
+<p>Then, there is the concept of “strong typing” vs. “weak typing”. This concept is <em>orthogonal</em> to the concept of <em>when</em> the typecheck is performed (static vs. dynamic). “No typing” is just an extreme form of “weak typing”. [<em>Corrolary: Dynamic Typing does not necessarily mean “no typing”.</em>]</p>
+
+<p>Type Checking conflates too many operations, in my opinion.  This notation splits the simple part of checking numbers of input parameters and output parameters away from the larger notion of type checking.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2020/12/27/The-Stack-2.html">An earlier essay on this subject</a><br />
+<a href="https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html">toolbox language</a><br />
+<a href="https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html">toolbox language 2</a><br />
+<a href="https://guitarvydas.github.io/assets/2021-04-11-DI/index.html">DI</a><br />
+<a href="https://guitarvydas.github.io/2020/12/09/DI-Design-Intent.html">DI Basic Tenet</a><br />
+<a href="https://guitarvydas.github.io/2021/05/28/DIL-(Design-Intent-Language).html">DIL</a><br />
+<a href="https://github.com/bmfbp/bmfbp/blob/main/build_process/esa-transpiler2/exprtypeslisp.html">exprtypes.html</a><br />
+<a href="https://scymtym.github.io/esrap/">esrap</a> <br />
+<a href="https://guitarvydas.github.io/2021/07/05/Type-DSL-(SCN).html">Overview of Type SCN</a><br />
+<a href="https://guitarvydas.github.io/2021/07/09/Arrowgrams.html">Overiew of Arrowgrams</a><br />
+<a href="https://guitarvydas.github.io/2020/12/25/The-Stack.html">the same stack</a><br />
+<a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">FDD</a><br />
+<a href="https://guitarvydas.github.io/2020/12/27/The-Stack-2.html">desired result</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:2" role="doc-endnote">
+      <p>and the last “…” means “more of the same”. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>I would suggest a different name, such as “:foreign” for future versions of this SCN. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:map" role="doc-endnote">
+      <p>I tried to avoid the use of the word “list” since it tends to mean a specific implementation.  Probably “:collection” might be a better name than “:map”, albeit longer and “harder to type”. <a href="#fnref:map" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:op" role="doc-endnote">
+      <p>Much like how a compiler compiles a programming language into a set of assembler operations. <a href="#fnref:op" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:c" role="doc-endnote">
+      <p>”%” is just another legal character in identifiers. The current implementation uses CL (Common Lisp) which allows many characters as parts of identifiers. In come other PLs, “%” is an operator and cannot be used as part of an identifier - in which case we need to transliterate (name-mangle) identifiers that contain “%” characters into something acceptable. <a href="#fnref:c" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dash" role="doc-endnote">
+      <p>Note that “-“ is just another valid character for identifiers.  The full name is “typeDecl-stack” in this case. In some languages, we might need to employ name-mangling in the transpiler to produce “typeDecl_stack” as the identifier. <a href="#fnref:dash" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/09/A-Language-of-Types-(Case-Study).html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

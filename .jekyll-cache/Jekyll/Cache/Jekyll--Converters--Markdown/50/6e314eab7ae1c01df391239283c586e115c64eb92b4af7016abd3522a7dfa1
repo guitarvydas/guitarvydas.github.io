@@ -1,0 +1,206 @@
+I"�,<p>It seems that just about every problem in programming is solved by applying nesting (aka scoping).</p>
+
+<p>Think: Nested Russian Dolls.</p>
+
+<p>Nesting leads to isolation.</p>
+
+<p>Nesting is the same as <em>containment</em>.</p>
+
+<p>[<em>A motivating example, can be found in the “Scanner” section, below.</em>]</p>
+
+<h1 id="restricted-pathways">Restricted Pathways</h1>
+<p>Properly-nested components communicate only along well-defined pathways.</p>
+
+<p>Pathways cannot cross the boundaries of a container, except via well-defined <em>ports</em>.</p>
+
+<p>Spaghetti-anything implies that the principles of nesting have been broken.</p>
+
+<p>Thinking about - and specifying - nesting leads to development of languages, DSLs, mini-DSLs (SCNs), APIs, etc.</p>
+
+<p>“Opcodes” hide the details of silicon from us and allow us to use ICs and CPUs.</p>
+
+<p>“Structured Programming” prescribed a method to de-spaghetti-fy the use of GOTOs<sup id="fnref:goto" role="doc-noteref"><a href="#fn:goto" class="footnote">1</a></sup>.</p>
+
+<p>“Local Variables” prescribed a way to use variables that didn’t get one into trouble as a project scaled upwards. We learned how to stop using global variables and how to nest variables (scoping).<sup id="fnref:globals" role="doc-noteref"><a href="#fn:globals" class="footnote">2</a></sup></p>
+
+<p>OOP taught us how to nest data even further. [<em>Aside: before OOP, came modules.</em>]</p>
+
+<p>Likewise, State is not a problem, but, unnested (unrestricted) use of state is a problem. Assign-once and FP try to attack the problem by eliminating state, instead of isolating it (nesting it).</p>
+
+<p>Time is considered to be a problem akin to the problem of global variables.</p>
+
+<h1 id="diagrams">Diagrams</h1>
+
+<p>Nesting is containment.</p>
+
+<p>Diagrams can show containment conveniently.</p>
+
+<h1 id="time">Time</h1>
+
+<p>Time is considered to be a problem akin to global variables.</p>
+
+<p>“This happens before that” does not mean the same as “that happens before this”.</p>
+
+<p>Mathematics and FP conquer the problem of time by eliminating it.</p>
+
+<p>History is time.</p>
+
+<p>Time is integral to reality.</p>
+
+<p>Eliminating time from a notation is but a band-aid.</p>
+
+<p>Q: How can we nest time?</p>
+
+<p>A: An interesting starting point would be Harel StateCharts.</p>
+
+<p>A: We might differentiate between the uses of state. OOP deals with case-on-type. StateCharts and state machines deal with history.</p>
+
+<p>We often schmoo both kinds of things into the same paradigm, when using GPLs. We use variables to encode history AND we use variables to encode type.</p>
+
+<p>We have used unrestricted variables to encode history. This practice has given State a bad name.</p>
+
+<p>OOP showed us how to encapsulate data.</p>
+
+<p>Harel StateCharts showed us how to encapsulate state (and control-flow<sup id="fnref:cf" role="doc-noteref"><a href="#fn:cf" class="footnote">3</a></sup>)</p>
+
+<h1 id="scanner---motivating-example">Scanner - Motivating Example</h1>
+<p>This is a simplified example…</p>
+
+<p>What does the following expression mean?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-y
+</code></pre></div></div>
+
+<p>In most GPLs, this means “subtract y from x”, but, in some PLs (e.g. Lisp and Rebol) this means “the variable x-y”. In these languages, “-“ is just another character and has no further meaning, “x-y” is similar in meaning to “xay” or “x_y”.</p>
+
+<p>In languages that allow “-“ to be used as a normal character, we need to write</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x - y
+</code></pre></div></div>
+<p>to mean “subtract y from x”.  I.E. we need to surround the “-“ with breaking-spaces.</p>
+
+<p>How can you parse this?</p>
+
+<p>The meaning of “x-y” is context-dependent (a fancy way of saying “it depends on the parsing history”).</p>
+
+<p>What does “-“ mean? We don’t know until we see the context that it is used in.</p>
+
+<p>If we see “x” followed by “-“ followed by “y”, it means the variable called “x-y”.</p>
+
+<p>If, on the other hand, we see “x” followed by a space followed by “-“ followed by a space followed by “y, it means (the variable) “x” then (the function) “-“ then (the variable) “y”.</p>
+
+<p>Actually, there is no problem in parsing the above, if you use state machines.</p>
+
+<p>If you disallow the use of state machines, recognizing the above becomes harder (not impossible, just harder).</p>
+
+<p>Indecision:</p>
+<ul>
+  <li>Computers and internet and blockchain and p2p, etc, etc, are all time-based constructs.</li>
+  <li>Theory has shown us that we can express many ideas, succinctly, without the use of state machines.</li>
+</ul>
+
+<p>So, should we disallow the use of state machines, or should we allow the use of state machines?</p>
+
+<p>The answer is: both.</p>
+
+<p>This all comes back to nesting and layering.</p>
+
+<p>If you try to define <em>just one</em> language to do <em>everything</em>, you will run into trouble when you try to do certain things<sup id="fnref:seq" role="doc-noteref"><a href="#fn:seq" class="footnote">4</a></sup>.</p>
+
+<p>What is needed is a way to use layers and to define the restrictions at each layer - e.g. this layer uses no state machines, this other layer uses state machines, etc, etc.</p>
+
+<h1 id="language-layering---language-nesting">Language Layering - Language Nesting</h1>
+
+<p>We need PLs that nest inside each other like Russian nesting Dolls.</p>
+
+<p>We have already had a taste of this kind of thing, using UNIX shells as one language and PLs (say Python, JS, etc.) as another language.</p>
+
+<p>In my opinion, UNIX shells “went too far” and tried to give us abilities that were already available in other PLs (like variables, string concatenation, etc.).</p>
+
+<p>UNIX shell language gives us</p>
+<ol>
+  <li>pipes</li>
+  <li>isolation</li>
+  <li>a bunch of other stuff (featuritis).</li>
+</ol>
+
+<p>Q: How do we create nested languages?</p>
+
+<p>A: We have already seen this in programs like the C preprocessor, languages with pragmas, etc.</p>
+
+<h2 id="multiple-syntaxes">Multiple Syntaxes</h2>
+
+<p>What we want is a syntax for state machines and another syntax for data definition, and, we want these syntaxes to be orthogonal, and, we want to lay them over each other like cartoon acetates and layers in PhotoShop.</p>
+
+<h2 id="source-to-source-transpilation">Source-to-Source Transpilation</h2>
+
+<p>We already kindof use multiple syntaxes for programming.</p>
+
+<p>We write code in PL syntax, and use compilers to transpile the syntax from PL syntax into assembler syntax.</p>
+
+<p>We want syntax-to-syntax transpilers.</p>
+
+<p>We want syntax-to-syntax transpilers that are easy-to-write, easy-to-read, easy-to-use, etc., etc.</p>
+
+<h1 id="nesting-recipe">Nesting Recipe</h1>
+
+<p>The recipe for nesting is:</p>
+
+<p>Ensure strict lines of communication where a Child component can only send messages to its Parent component (the Parent decides whether to route the message upwards to its parent, or, downwards to another child).</p>
+
+<h2 id="nesting-in-business">Nesting in Business</h2>
+
+<p>Nesting is kinda like departments in business, where it is frowned-upon to go over your boss’ head.</p>
+
+<h1 id="scalability">Scalability</h1>
+
+<p>Nesting is a necessity for scalability.</p>
+
+<p>You can’t scale something if it depends on something else.</p>
+
+<p>Corollary: You can only scale something by dragging in all of the things that it depends on.</p>
+
+<p>Symptom: If your scaling chunk-size is big, then the chunk contains too many dependencies.</p>
+
+<p>Memory: you can’t share memory across isolated chunks.</p>
+
+<p>CPU: you can’t share CPUs across isolated chunks (CPU sharing is called “time sharing”).</p>
+
+<p>Internet: composed of many chunks, where each chunk is a complete computer (with its own CPU(s), with its own memory, etc, etc).</p>
+
+<p>PL: Does your PL (programming language) allow you to express the code for scalable chunks, or, does it only allow you to express the code inside-of a chunk? Thread libraries are just that: libraries. PLs that have threading glue-ons are no better than thread libraries.<sup id="fnref:threads" role="doc-noteref"><a href="#fn:threads" class="footnote">5</a></sup></p>
+
+<p>What about SQL? SQL is a DSL for data construction and querying. I think that SQL suffers from the same problem that threads do. SQL is not neatly integrated, layered, into most PLs.  SQL also suffers from featuritis - opening a distributed database is different from simply querying a database. What happens if you can’t open a database due to networking issues? That kind of issue should be relegated to a distributed-control-flow language.</p>
+
+<p>CALL/RETURN: CALL/RETURN implies synchronous operation. Synchronous operation implies dependency. Hence, CALL/RETURN impedes scalability.<sup id="fnref:callreturn" role="doc-noteref"><a href="#fn:callreturn" class="footnote">6</a></sup></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/07/06/Asynchronous-Thinking.html">Asynchronous Thinking</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:goto" role="doc-endnote">
+      <p>GOTOs are not a problem. Unrestricted use of GOTOs is a problem. The structured use of GOTOs was a breakthrough idea. GOTOs are needed in Denotational Semantics (GOTOs have been re-branded as CPS). <a href="#fnref:goto" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:globals" role="doc-endnote">
+      <p>In fact, global variables are not the problem - unrestricted (unnested) use of global variables is the problem. Scoping gives us locality-of-reference. We can reason about program more easily if we can “see” all of the variables in one eye-full. <a href="#fnref:globals" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cf" role="doc-endnote">
+      <p>Control-Flow is not the same as data.  OO style encapsulation does not work well for control-flow. <a href="#fnref:cf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:seq" role="doc-endnote">
+      <p>E.G. building a music sequencer instead of a calculator. <a href="#fnref:seq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:threads" role="doc-endnote">
+      <p>Threads (and threading libraries, and derivatives) are kludges meant as band-aids to allow us to continue using the synchronous paradigm for programming asynchronous components. <a href="#fnref:threads" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:callreturn" role="doc-endnote">
+      <p>Note that FP and Relational Programming are backing into ways for removing CALL/RETURN. HTML can be considered in this light, too (ignoring JS). <a href="#fnref:callreturn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
