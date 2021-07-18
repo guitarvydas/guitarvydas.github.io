@@ -266,9 +266,8 @@ Many of the emerging GPLs do not provide Loops as an explicit concept. For examp
 Looping and recursion are low-level implementation details.
 
 # See Also
-
+[The Algol Bottleneck](https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html)
 [Type Stacks](https://guitarvydas.github.io/2020/12/09/Type-Stacks.html)
-
 [Blog](https://guitarvydas.github.io)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
