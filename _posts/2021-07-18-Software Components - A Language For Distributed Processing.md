@@ -6,7 +6,37 @@ I discuss various issues regarding Software Components.
 
 I would suggest browsing the table of contents instead of reading this document in a serial fashion.
 
-[TOC]
+- [Old](#old)
+- [New](#new)
+- [Optimization](#optimization)
+- [Run Forever](#run-forever)
+- [Single Thread](#single-thread)
+- [Message Routing](#message-routing)
+- [Visibility](#visibility)
+- [Hierarchy](#hierarchy)
+- [Layering](#layering)
+- [Recursive Definition, Elision](#recursive-definition--elision)
+- [Layered Components](#layered-components)
+  * [Leaf Nodes - Bottom](#leaf-nodes---bottom)
+  * [Compound Components - Composition](#compound-components---composition)
+- [Compound or Leaf](#compound-or-leaf)
+- [State](#state)
+- [Isolation](#isolation)
+- [Black Boxes](#black-boxes)
+- [LEGO®-Like Pluggability](#lego--like-pluggability)
+- [Pluggability API](#pluggability-api)
+- [Transport layer](#transport-layer)
+- [Tagged message](#tagged-message)
+- [Referential Transparency](#referential-transparency)
+- [Micro-Services](#micro-services)
+- [Looping](#looping)
+- [Dispatcher](#dispatcher)
+- [Run To Completion, Finish Promptly](#run-to-completion--finish-promptly)
+- [Memory sharing](#memory-sharing)
+- [Time sharing](#time-sharing)
+- [Preemption](#preemption)
+- [Looping and Recursion](#looping-and-recursion)
+- [See Also](#see-also)
 
 
 # Old
