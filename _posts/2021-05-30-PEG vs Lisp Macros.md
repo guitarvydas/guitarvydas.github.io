@@ -100,7 +100,7 @@ If you have to use only one language (something that I advise against), Lisp is 
 
 Lisp is OK, but a bunch of nicely fitting sub-languages would be better.
 
-Back to the original question - how is PEG related to Lisp macros?  If you've built big applications using Lisp macros, then you've tasted the concept of _separaction of concerns_. Probably, you've separated DI from implementation and elided the differences using macros.  
+Back to the original question - how is PEG related to Lisp macros?  If you've built big applications using Lisp macros, then you've tasted the concept of _separation of concerns_. Probably, you've separated DI from implementation and elided the differences using macros.  
 
 This is workable, but not my ideal. 
 
