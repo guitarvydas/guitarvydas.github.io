@@ -47,7 +47,7 @@ I've encoded all non-printables in URI format (using JavaScript's `encodeURIComp
 
 Tokens are meant to be _machine-readable_. Human-readability is not of concern at this point in the design. [_Aside: actually, I use an ASCII encoding, to help with debug-ability._]
 
-Tokens are fully describe by their code. Each token carries its originating _text_ following the whitespace. This text can be ignored by subsequent filters, but might be useful during the final filter in the chain, which, presumably outputs the token in some more-readable format.
+Tokens are fully described by their code. Each token carries its originating _text_ following the whitespace. This text can be ignored by subsequent filters, but might be useful during the final filter in the chain, which, presumably outputs the token in some more-readable format.
 
 _Some_ tokens include a sub-kind, encoded as a second letter. In the above, there is one example of a token with a sub-kind, the "colon" token `D: ...` [_Aside: in this case, the text is redundant and contains a single colon - this can be optimized-away at a later date (or, more likely, just left alone, since the optimization will probably not have a significant effect on performance on modern hardware)._]
 
