@@ -10,6 +10,7 @@ In software development (which is a creative endeavour), _brainstorming_ can be 
 - B-Rhymes.com and Rhymezone.com
 - diagrams
 - markdown / org-mode
+- do something
 
 # Scapple
 Scapple is a product that appears to be mind-mapping software, at first glance.  The UX of Scapple offers significantly less friction than that of most mind-mappers. Friction inhibits creativity.
@@ -57,11 +58,33 @@ It is possible to use this hierarchical elision as a way to show/hide layers of 
 
 [Emacs' markdown editor is implemented using emacs' org-mode.]
 
+# Do Something
+Just working on the details of a solution tends to bring up 
+- new ideas 
+- new perspectives on the problem.
+
+Designers need to feel free to change their minds.
+
+Designers should use technologies that they are "not wedded to" and should feel that they can throw all of the written code away at any time, replacing it with new code.
+
+I call this FDD - Failure Driven Design.
+Most languages encourage designers to keep the code they've already written.
+
+This is the antithesis of FDD and brainstorming.
+
+Thinking is hard work, code is cheap. 
+
+We need to keep the thinking and throw away the code.
+
+[_I discuss how to do this in the FDD essay._]
+
+[_Note that, Implementors might choose to keep their code. Designers should not be compelled to keep their code.  At present, our GPLs are more suited for Implementors than for Designers._]
 
 # See Also
 [Scapple](https://www.literatureandlatte.com/scapple)
 [B-rhymes](http://www.b-rhymes.com)
 [Rhymezone](https://rhymezone.com)
+[Failure Driven Design](https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html)
 [Blog](https://guitarvydas.github.io)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
