@@ -14,13 +14,16 @@ Highlighted:
 
 - it's (x,y), width and height
 
-  [diagram](https://github.com/guitarvydas/guitarvydas.github.io/assets/2021-07-25-diagram.png)
+  
+  
+  ![2021-07-25-diagram.png](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-diagram.png?raw=true)
 
 # Facts
 
 The diagram converted to a textual factbase for PROLOG. [_In this example, I will use PROLOG (SWIPL), but the work can be done in just about any language, e.g. Python, miniKanren, clojure (see also, core.logic), Datalog, JavaScript, etc.  PROLOG provides automated backtracking which can be replaced by loops/recursion in other languages._]
 
-![image-20210725074924599](/Users/tarvydas/Library/Application Support/typora-user-images/image-20210725074924599.png)
+![2021-07-25-facts.png](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-facts.png?raw=true)
+
 
 The diagram facts are stored in the file `diagram.pl`.
 
@@ -39,7 +42,7 @@ Facts that are doubles, like `rect`, are written as triples with an empty 3rd it
 
 We emphasize *machine-readability*.  Normalization and repetition is better for machines, but looks like noise to humans.  For example, human readers can infer the names and don't need empty 3rd items, but, such redundancy makes it easier for machines to parse.
 
-![image-20210725081800577](/Users/tarvydas/Library/Application Support/typora-user-images/image-20210725081800577.png)
+![2021-07-25-rect and name facts.png](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-rect%20and%20name%20facts.png?raw=true)
 
 # Bounding Boxes
 
@@ -108,13 +111,14 @@ The PROLOG code says:
 
     We see the result for object *h*.
 
-![image-20210725083525381](/Users/tarvydas/Library/Application Support/typora-user-images/image-20210725083525381.png)
+![2021-07-25-bounding box for h.png](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-bounding%20box%20for%20h.png?raw=true)
+
 
 ## Details
 
 The details of running this simple query are shown below, if you want to follow along.
 
-![image-20210725085608631](/Users/tarvydas/Library/Application Support/typora-user-images/image-20210725085608631.png)
+![2021-07-25-details bounding box for h.png](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-details%20bounding%20box%20for%20h.png?raw=true)
 
 [_N.B. The details should be boring to human readers. Repetition and simplicity are keys to machine readability and writing code that writes code.  The code for the above has been put into a bash script called bb.bash to emphasize the fact that this process can be automated._ ]
 
