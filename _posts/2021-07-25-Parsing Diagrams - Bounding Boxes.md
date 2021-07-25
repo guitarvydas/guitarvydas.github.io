@@ -14,7 +14,7 @@ Highlighted:
 
 - it's (x,y), width and height
 
-  ![diagram](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-diagram.png)
+  [diagram](https://github.com/guitarvydas/guitarvydas.github.io/assets/2021-07-25-diagram.png)
 
 # Facts
 
