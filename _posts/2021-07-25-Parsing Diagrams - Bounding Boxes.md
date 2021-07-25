@@ -137,6 +137,32 @@ Details: `bagof` runs makebb(ID) for every ID.  It collects the results in a bag
 
 [^1]: This code produces a side effect. We could get rid of the side effect and make this more FP'ish, but why bother?  We don't need FP to express 14 lines of code. [_N.B. We will endeavour to keep things simple, by minimizing the code line count._]
 
+# Simplicity
+
+Simplicity is defined as *lack of nuance.*
+
+# Lack of Detail (at this layer)
+
+It might appear that this treatment does not include enough details for converting diagrams to code.
+
+This is a hallmark of the *layered* approach - each layer can be understood in its entirety without confronting all of the details.
+
+As we will see in subsequent essays, we *will* add enough details - in layers - to compile this diagram to code.
+
+The only difference between this *layered* approach and other approaches is *where* the details appear.
+
+There is no need to *flatten* the information contained in this diagram.  Details will be supplied in lower layers, but will not affect the appearance of this layer.  
+
+The goal is to make *every* layer as simplistic as this one.
+
+# Factbase Growth
+
+There is no current need to prune the factbase.
+
+Pruning is an optimization, only.
+
+Unneeded facts are skipped by the factbase engine.  The rules use only the facts that are needed.
+
 # See Also
 
 [Blog](https://guitarvydas.github.io)
