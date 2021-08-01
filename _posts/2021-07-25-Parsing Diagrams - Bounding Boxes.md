@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Diagram Parsing - Bounding Boxes"
+title:  "Parsing Diagrams - Bounding Boxes"
 ---
 Parsing a simple diagram and creating bounding boxes for all rectangles on the diagram.
 
