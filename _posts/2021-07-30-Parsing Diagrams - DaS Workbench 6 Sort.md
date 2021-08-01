@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Parsing Diagrams - DaS Workbench 5 Factbase Emitter"
+title:  "Parsing Diagrams - DaS Workbench 6 Sort"
 ---
 
 # Sort
