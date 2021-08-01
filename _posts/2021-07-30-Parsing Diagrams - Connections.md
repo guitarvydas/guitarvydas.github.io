@@ -3,10 +3,6 @@ layout: post
 title:  "Parsing Diagrams - Connections"
 ---
 
-# asdf
-
-asdf
-
 # Diagram
 
 Ports can be connected to one another. 
