@@ -2,7 +2,9 @@
 layout: post
 title:  "Markdown To Code"
 ---
-[Slides Markdown To Code](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-03-Markdown%20To%20Code/index.html)
+Slides: Markdown To Code
+
+https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-03-Markdown%20To%20Code/index.html
 
 # See Also
 
