@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Diagrams To Code"
+title:  "Diagrams To Code Drawio To Triplets"
 ---
 
 [Slides Diagrams To Code Drawio To Triplets](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-04-Diagrams%20To%20Code%20Drawio%20to%20Triples/index.html)
