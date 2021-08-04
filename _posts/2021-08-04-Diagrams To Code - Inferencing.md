@@ -3,7 +3,9 @@ layout: post
 title:  "Diagrams To Code - Inferencing"
 ---
 
-[Slides Diagrams To Code - Inferencing](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Diagrams%20as%20Syntax%20-%20Inferencing/index.html)
+[FDD](https://guitarvydas.github.io/assets/2021-04-23-FDD/index.html)
+
+[Slides Diagrams To Code - Inferencing](https://guitarvydas.github.io/assets/Diagrams%20as%20Syntax%20-%20Inferencing/index.html)
 
 # See Also
 

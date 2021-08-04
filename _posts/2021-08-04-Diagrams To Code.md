@@ -3,7 +3,7 @@ layout: post
 title:  "Diagrams To Code"
 ---
 
-[Slides Diagrams To Code](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-04-Diagrams%20To%20Code/index.html)
+[Slides Diagrams To Code](https://guitarvydas.github.io/assets/2021-08-04-Diagrams%20To%20Code/index.html)
 
 # See Also
 
