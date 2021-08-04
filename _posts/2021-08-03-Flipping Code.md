@@ -6,17 +6,8 @@ title:  "Flipping Code"
 We show how to flip large chunks of text in a transpiler, using a small change in the code.
 
 # Desired Output
-## Input
-We're working a code markdown to bash converter.
-
-At this point, the input looks like:
 ```
 # _containment_
-
-## _fb pipeline_
-	allContains1
-	printAllDeepContains
-	printAllDirectContains
 
 
 
@@ -33,7 +24,18 @@ At this point, the input looks like:
 	load fb
 	load onSameDiagram
 	load contains3
+
+
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
 ```
+## Input
+We're working a code markdown to bash converter.
+
+At this point, the input looks like:
 ## Desired
 
 The lines in the `_fb pipeline_` are meant to be *bash* and the `###` chunks are meant to be *bash* functions.
@@ -44,6 +46,11 @@ For example, we want and intermediate result of:
 ```
 # _containment_
 
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
 
 
 ## _details_
@@ -59,13 +66,6 @@ For example, we want and intermediate result of:
 	load fb
 	load onSameDiagram
 	load contains3
-
-
-## _fb pipeline_
-	allContains1
-	printAllDeepContains
-	printAllDirectContains
-
 ```
 
 This can be done with a minor tweak in the *emit* code...
