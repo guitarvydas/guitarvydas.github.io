@@ -3,7 +3,7 @@ layout: post
 title:  "Diagrams To Code - Inferencing"
 ---
 
-[Slides Diagrams To Code Drawio To Triplets](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-04-Diagrams%20To%20Code%20Drawio%20to%20Triples/index.html)
+[Slides Diagrams To Code - Inferencing](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Diagrams%20as%20Syntax%20-%20Inferencing/index.html)
 
 # See Also
 
