@@ -7,7 +7,7 @@ title:  "Basic Circuits"
 
 A *closed circuit* is one which allows electricity to flow and, in this case, to light the lightbulb.
 
-[_A battery symbol resembles a stack of cells, the broad line indicating +ve and the short line indicating -ve)]
+A battery symbol resembles a stack of cells, the broad line indicating +ve and the short line indicating -ve).
 
 <img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-10-8%20bit-closed%20circuit.png?raw=true" alt="2021-08-10-8 bit-closed circuit.png" style="zoom:67%;" />
 
