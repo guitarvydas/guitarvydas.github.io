@@ -38,7 +38,7 @@ A `CONS` cell is 32 bits (4 bytes) - one `CAR` and one `CDR`.
 
 ## Magic Marker
 
-Address are all mod(4).
+Addresses are all mod(4).
 
 Hence, the bottom 2 bits are "free".
 
