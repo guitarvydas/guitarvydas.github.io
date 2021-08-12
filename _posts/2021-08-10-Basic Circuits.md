@@ -31,6 +31,12 @@ The squiggly line is a *resistor*. Electricity flows in a circuit like water flo
 
 Transistors can't handle as much electricity flow as switches can, so we insert a transistor to limit the electricity.  [_Aside: in fact, the lamp used in transistor circuits is usually a LED (light emitting diode) which needs less electricity than an incandescant lamp does._]
 
+asdf
+
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss 
+
+asdf
+
 
 
 # See Also
