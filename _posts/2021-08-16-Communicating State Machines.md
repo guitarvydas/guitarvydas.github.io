@@ -19,6 +19,10 @@ I think that flow-based vs. EE-thinking is just a difference in notation, e.g. f
 
 # See Also
 
+[Statecharts](https://guitarvydas.github.io/2020/12/09/StateCharts.html)
+
+[Statecharts again](https://guitarvydas.github.io/2021/02/25/statecharts-(again).html)
+
 [The Bare Essence](https://guitarvydas.github.io/2021/08/16/Bare-Essence.html)
 
 [Blog](https://guitarvydas.github.io)
