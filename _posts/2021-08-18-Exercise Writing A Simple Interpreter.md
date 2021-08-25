@@ -147,6 +147,36 @@ Note that Lisp does something similar when reading text.  Lisp reads input text 
 
 Many interpreted languages do something similar.
 
+Note that, when strings are tokenized, it doesn't matter how long (or short) a name is. It will be read only once and immediately converted into a *token*.  
+
+All *tokens* are the same length.
+
+## Appendix - Multiple Names For Items
+
+It should be simple to add another level of indirection to *tokens*. Each *token* can represent a list of possible strings.  This arrangement would allow the IDE to show different names for any one named-item.  Experts might prefer to use single-character names in an algorithm, but novices (and anyone seeing the code for the first time, anyone trying to understand the algorithm) might see longer names at first.  The IDE might even allow users to "annotate" items with longer names (or complete phrases) as they go down the learning curve.
+
+### Example
+
+An example of this might be the equation for a line, which is commonly written in textbooks as:
+
+```
+y = mx + b
+```
+
+Experts might wish to view the equation using single-character names as:
+
+```
+y = m * x + b
+```
+
+whereas learners might wish to see embellishments, such as
+
+```
+y = slope * x + intercept
+```
+
+
+
 # Appendix Readability (Discussion)
 
 Note that the syntax above is 
