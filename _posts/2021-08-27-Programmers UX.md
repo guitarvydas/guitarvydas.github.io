@@ -74,17 +74,17 @@ Diagrams can make such details explicit - e.g. sequencing can be shown as arrows
 
 Often, a major success factor in general programming language design, comes from localizing objects.
 
-An example of locality of reference is the use of scope variables in place of global variables.
+An example of locality of reference is the use of scoped variables in place of global variables.
 
-An example of locality of reference is the use of structured programming in place of ad-hoc GOTO programming (if, while, etc., constructs that constrained the use of GOTOs.).
+An example of locality of reference is the use of structured programming in place of ad-hoc GOTO programming (if, while, etc., constructs constrain the use of GOTOs.).
 
 Diagrammatic programming can have the same effect, but at the level of _software achitecture_.
 
 ## Nesting
 
-Nesting can show how software modules are constructed
+Nesting can show how software modules are constructed.
 
-Nesting can show flows that break through the boundaries of components.  This is also known as _dependency_.
+Nesting can show flows that break through the boundaries of components.  This is also known as _dependency_. Dependency affects scalability.
 
 ## Ports
 
