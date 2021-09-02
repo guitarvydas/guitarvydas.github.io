@@ -2,7 +2,14 @@
 layout: post
 title:  "SCN Development for ZodeTrip"
 ---
+# Introduction
+
+In this note, I show how to develop an SCN (see below - like a DSL) for a game development system.
+
+`SCN` means *Solution Centric Notation*.  Basically a mini-DSL. See below.
+
 # Initial Grammar
+
 ```
 zodeSCN{
   main = room+
@@ -115,6 +122,20 @@ How would you make a list of keywords and include them in the `id` rule (hint: u
 
 # Commentary
 
+## Syntaxes are Pattern-Matching Skins
+
+A *grammar* is a pattern matcher.
+
+Pattern matchers are popular today, often found in FP languages.
+
+Grammars are the mothers of all pattern-matchers.
+
+Treating syntaxes as light-weight skins produces a different, more productive, kind of programming.
+
+PEG technology and cheap/fast CPUs and cheap memory makes it possible to re-think the use of syntax as something light-weight instead of something shrouded in mystery that is accessible only to compiler gurus.
+
+## 2 Syntaxes
+
 Some languages, like C and Lisp, collapse `end room` into single characters `}`and `)`.
 
 Gedanken: Which style gives more lucid error checking? 
@@ -126,6 +147,18 @@ Gedanken: Which is more  *writable*?
 Gedanken: What if we had 2 syntaxes, one with `end room` and another with `}`?
 
 Gedanken: How easy is it to create separate syntaxes, for example to parse the `end room` syntax and to write it back out in `}` syntax?
+
+# SCN
+
+`SCN` means *Solution Centric Notation*.  In my vocabulary, a *notation* is like a mini-DSL.
+
+When I build an SCN, I cheat and let the underlying language (the *toolbox language*) handle all of the heavy lifting.  I use a grammar like a *skin* instead of as a full-blown programming language.  
+
+Lisp (and Scheme, and Racket) makes a great *toolbox language*.  
+
+*Assembler* is the mother of all *toolbox languages*.
+
+We don't want to get our hands dirty with *assembler*, so we create syntactic skins.  [_This used to be difficult in the 1950's, but is easy in the 2020's_.]
 
 # See Also
 
