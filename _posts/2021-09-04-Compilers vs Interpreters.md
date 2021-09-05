@@ -97,7 +97,7 @@ Many programmers feel that type systems allow them to design programs "correctly
 
 This is the same effect as when HLLs[^1] introduced syntax checking vs. ad-hoc assembler code.
 
-[^1:] HLL means High-Level Language.
+[^1]: HLL means High-Level Language.
 
 `Structured Programming` brought ordering and encapsulation to syntax, reducing the ad-hoc nature of code even more.
 
