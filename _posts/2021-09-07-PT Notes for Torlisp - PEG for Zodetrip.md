@@ -7,7 +7,7 @@ title:  "PT Notes for Torlisp - PEG for Zodetrip"
 
 Use "#lang peg" to convert portions of Zodetrip.rkt.
 
-[_Zodetrip was discussed in an earlier Torlisp meeting.  Zodetripe is a game jam entry written in racket, by Jos'h Fulller_]
+[_Zodetrip was discussed in an earlier Torlisp meeting.  Zodetrip is a game jam entry written in racket, by Jos'h Fulller_]
 
 # Progress
 
