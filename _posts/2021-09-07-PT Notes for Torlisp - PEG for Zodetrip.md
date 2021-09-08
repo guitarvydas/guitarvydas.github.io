@@ -14,11 +14,16 @@ Use "#lang peg" to convert portions of Zodetrip.rkt.
 Small amounts of progress, not finished yet.
 
 - Step 1: (done) chop zodetrip.rkt into separate files (modules)
+
 - currently trying to determine is knowledge of racket macros will be necessary
+
 - Step 2: (in progress) convert keying function to "#lang peg" (requires knowledge of how to emit _case_ from _peg_)
+
 - fallout:
-  - 1. [keying rough-in slides](https://guitarvydas.github.io/2021/09/07/Keying-For-Zodetrip.html)
-    2. [racket macros slides (unhygenic vs hygenic example)](https://guitarvydas.github.io/2021/09/07/Racket-Macros.html)
+
+  ​		[keying rough-in slides](https://guitarvydas.github.io/2021/09/07/Keying-For-Zodetrip.html)
+
+  1. [racket macros slides (unhygenic vs hygenic example)](https://guitarvydas.github.io/2021/09/07/Racket-Macros.html)
 
 # Github
 
