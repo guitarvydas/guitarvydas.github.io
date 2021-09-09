@@ -2,8 +2,8 @@
 layout: post
 title:  "Racket Macros"
 ---
- 
-[Example of Unhygenic and Hygenic Macro](https://guitarvydas.github.io/assets/macros/index.html)
+
+[Example of Unhygienic and Hygienic Macro](https://guitarvydas.github.io/assets/macros/index.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
