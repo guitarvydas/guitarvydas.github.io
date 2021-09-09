@@ -9,7 +9,7 @@ I try to deconstruct the operation of a "Real Macro" as given in [Scheme Program
 
 [_This is a WIP - I am not convinced that I fully understand what is going on_].
 
-[Slides](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-09-08-Macros/index.html)
+[Slides](https://guitarvydas.github.io/assets/2021-09-08-Macros/index.html)
 
 # See Also
 
