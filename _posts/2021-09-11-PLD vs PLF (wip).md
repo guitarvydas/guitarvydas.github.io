@@ -93,6 +93,10 @@ PLF vs PLD
 .. design is about fewer details,  smartness is about juggling large soup of details 
 .. classes are compile time, prototypes are runtime
 
+# locality of reference
+
+
+
 # See Also
 
 [Blog](https://guitarvydas.github.io)
