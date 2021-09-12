@@ -1,4 +1,6 @@
 ---
+
+
 layout: post
 title:  "Racket Switch Macro"
 ---
@@ -21,6 +23,12 @@ Racket macros are written in Racket and operate on `syntax` objects.
 
 `STX` usually denotes a `syntax object`.
 
+I use `___` for elision, avoiding `...`, since that is used as syntax in Racket macros.
+
+`#'` creates a syntax object from a Racket expression.
+
+Macros are *functions* that execute at compile-time.  Macros manipulate the original source code and expand into final source-code.
+
 
 # Top Layer
 ```
@@ -37,9 +45,7 @@ Racket macros are written in Racket and operate on `syntax` objects.
      ___
 
   (syntax-case stx ()
-    ((_ x clause ...)
-     (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
-       #'(case x case-clause ...)))))
+     ___
 
 (define x 5)
 
@@ -71,6 +77,105 @@ The macro uses 2 auxiliary functions, `transform-clause` and `transform-clauses`
 The main body of the macro is in the `(syntax-case stx () ___)` clause.   [_For now, don't worry about the meaning of () as the second part of the syntax-case_].
 
 `Test2` is the test of the macro.  `Test1` is the equivalent code using the builtin `case` form.
+
+# Layer 1
+
+```  (syntax-case stx ()
+    ((_ x clause ...)
+     (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
+       #'(case x case-clause ...)))))
+```
+
+The `_` is a short-hand for the macro name, in this case `switch`.
+
+Looking at `test2`, the compiler (macro expander) sees a `switch` expression:
+
+```
+  (switch ___)
+```
+
+and binds the three variables:
+
+```
+  x <= x
+  clause <= 
+          [3 (displayln "sw x is 3")]
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]
+  ... <=
+```
+
+
+
+This says that when the compiler matches an expression starting with `switch`, it will bind the second item (of the expression) to `x`, the third item to `clause` and lump all of the rest of the items into `...`.
+
+`x` and `clause` and `...` can only be used in syntax manipulation expressions.
+
+`clause` is used in the `#'(clause ...)` expression which forms the argument to the auxilliary function `transform-clauses`.
+
+`with-syntax` does more (recursive) pattern-matching.  The result of `transform-clauses`is matched and bound to `case-clause`.
+
+The final `#'(case x case-clause)` expression uses the two bound syntax variables, `x` and `case-clause` and returns a syntax expression that forms a `case` expression.
+
+That returned expresssion is fed to the macro-expander part of the compiler which feeds into the rest of the downstream compilation.  Hence, whereever `(switch ___ ___ )` appears in the code, it will be replaced by the expanded macro (a `case` expression, in this instance).
+
+# Layer 2
+
+```
+  (define (transform-clauses cls)
+    (syntax-case cls ()
+      ((cl)
+       (with-syntax ((case-clause (transform-clause #'cl)))
+         #'(case-clause)))
+      ((cl rest ...)
+       (with-syntax ((case-clause (transform-clause #'cl))
+                     ((case-rest ...) (transform-clauses #'(rest ...))))
+         #'(case-clause case-rest ...)))))
+```
+
+The auxiliary function `transform-clauses` takes one parameter, named `cls`, and performs a syntax-based pattern-match.  
+
+`Cls` is of type `syntax`.
+
+The first clause `(cls)`matches the degenerate case of a single clause.  It calls `transform-clause` and returns that syntactic value.  To perform the return, it pattern-matches the result of `transform-clause`, binds the match to `case-clause`, then returns `case-clause` as a `#'` syntax object.
+
+The other clause `(cl rest ...)` matches the case of multiple clauses, binding the matches into variables `cl`, `rest` and `...`.
+
+```
+cl <=
+          [3 (displayln "sw x is 3")]
+rest <=
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+```
+
+The macro expansion is performed recursively until the degenerate case (`[default ___]`) is reached.
+
+```
+cl <=
+          [4 (displayln "sw x is 4")]
+rest <=
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+```
+
+```
+cl <=
+          [5 (displayln "sw x is 5")]
+rest <=
+          [default (displayln "sw none of the above")]))
+```
+
+```
+cl <=
+          [default (displayln "sw none of the above")]))
+rest <=
+
+```
+
+
 
 # Complete Version
 
