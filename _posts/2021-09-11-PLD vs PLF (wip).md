@@ -89,11 +89,26 @@ PLF vs PLD
 .. Das is deeper syntax than only text
 ... SVG
 .. languages need not be restricted to non overlapping cells of small bitmaps
+
+.... keyboard keys are bound to bitmaps
+
 .. backtracking to parser chars, but to parser diagrams
 .. design is about fewer details,  smartness is about juggling large soup of details 
 .. classes are compile time, prototypes are runtime
 
 # locality of reference
+
+# C vs Assembler
+
+# Pascal vs C
+
+# Smalltalk vs Assembler
+
+# Assembler vs Identifiers
+
+Why Spaces Are Not Allowed in Identifiers
+
+|abc def|
 
 
 
