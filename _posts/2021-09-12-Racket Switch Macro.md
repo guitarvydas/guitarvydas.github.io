@@ -15,7 +15,7 @@ Deconstruction of `switch` macro in Racket.
 
 The Racket compiler allows programmers to define macros which get inserted into the compilation phase.
 
-<img src="/Users/tarvydas/Library/Application Support/typora-user-images/image-20210912174055684.png" alt="image-20210912174055684" style="zoom:67%;" />
+<img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-09-12-Racket%20Compiler.png?raw=true" alt="2021-09-12-Racket Compiler.png" style="zoom:67%;" />
 
 Racket macros are written in Racket and operate on `syntax` objects.
 
