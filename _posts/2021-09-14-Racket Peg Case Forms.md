@@ -5,7 +5,31 @@ title:  "Racket Peg Case Forms"
 
 # Introduction
 
-I show one way to use PEG in Racket, to emit a _case_ form.
+We show one way to use PEG in Racket, to emit a _case_ form.
+
+# Sample
+
+We transpile
+
+```
+1 'a $ 2 'b $ 3 'c $ 4 'd $ else 'e
+```
+
+and expect to get Racket case code:
+
+```
+(lambda (k) 
+  (case k 
+    ((1) 'a) 
+    ((2) 'b) 
+    ((3) 'c) 
+    ((4) 'd) 
+    (else 'e)))
+```
+
+This constituted an experiment, so we explicitly wrote the case labels and we used `$` to separate the cases.  
+
+Other variations of the syntax should be possible.
 
 # PEG Code
 The essential grammar is:
