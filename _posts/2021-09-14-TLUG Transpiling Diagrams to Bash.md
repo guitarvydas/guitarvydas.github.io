@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "TLUG - Transpiling Diagrams to Bash"
+title:  "Transpiling Diagrams to Bash"
 ---
 
 [Transpiling Diagrams to Bash](https://guitarvydas.github.io/assets/2021-09-14-TLUG%20Transpiling%20Diagrams%20to%20Bash)
 
-[Lightning talk for Toronto Lisp Users Group, Sept. 14, 2021]
+[Lightning talk for Greater Toronto Linux Users Group, Sept. 14, 2021]
 
 # See Also
 
