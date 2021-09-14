@@ -175,7 +175,47 @@ rest <=
 
 ```
 
+# Layer 3
 
+```
+  (define (transform-clause cl)
+    (syntax-case cl (default)
+      ((default expr) #'(else expr))
+      ((val ... expr) #'((val ...) expr))))
+```
+
+The auxiliary function `transform-clause` converts one clause into its final form, e.g.
+
+```
+         [3 (displayln "sw x is 3")]
+```
+
+gets bound to variables
+
+``` 
+val <= 3 
+... <=
+expr <= (displayln "sw x is 3")
+
+```
+
+and is expanded into
+
+```
+         #'((3) (displayln "sw x is 3"))
+```
+
+while the `default` clause is bound to variable:
+
+```
+expr <= (displayln "sw none of the above")
+```
+
+and expands into
+
+```
+#'(else (displayln "sw none of the above"))
+```
 
 # Complete Version
 
