@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "PLD vs PLD (notes)"
+title:  "PLD vs PLF (notes)"
 ---
 
 In this essay, I use the abbreviations:
