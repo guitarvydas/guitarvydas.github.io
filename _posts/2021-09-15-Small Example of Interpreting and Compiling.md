@@ -30,6 +30,9 @@ The task of building a _transpiler_ is the same as building a _compiler_, but th
 
 Ohm-JS is a PEG parser application that 
 
+1. provides separation of concerns (grammar and semantics are specified separately, whereas most PEG ports spec the semantics directly into the grammar), and,
+2. provides an IDE for grammars (aka Ohm-Editor), making grammar development/testing simple.
+
 # The ABC Language
 The ABC "language" allows:
 - only single-letter variable names
@@ -158,7 +161,8 @@ main ();
 ```
 
 To run this second step, use the bash script:
-- ./run2.bash
+
+`./run2.bash`
 
 # Step 3 - Interpreter
 
@@ -166,13 +170,13 @@ The interpreter executes ABC operations as the parse tree is walked.
 
 Simple _assignment_ statements, like
 
-- b = 2
+`b = 2`
 
 fetch the variable name (_b_ in this case), fetch the RHS value (_2_ in this case) and then put the fetche value into the symbol table under the fetched name. 
 
 A VM-based interpreter would create a _stack_ data structure and would leave the fetched value on the _stack_.
 
-The TopLevel function simply returns the whole symbol table, in this case.  This is a convenient operation in JavaScript and might be implemented differently when another underlying language were used.
+The TopLevel function simply returns the whole symbol table, in this case.  This is a convenient operation in JavaScript and might be implemented differently if another underlying language were used.
 
 The _tree walking_ is performed by calling the _interpret()_ function on matching nodes.
 
@@ -214,11 +218,11 @@ exports.interpret = {
 ```
 To run this (third) step use the bash script
 
-- ./run3.bash
+`/run3.bash`
 
-  You should see
+You should see
 
-  - { interpreted: { b: 2, c: 3, a: 5 } }
+`{ interpreted: { b: 2, c: 3, a: 5 } }`
 
 # Step 4 - Transpiler
 
@@ -228,11 +232,11 @@ In this case, the TopLevel returns a string of JS code.
 
 The transpiler converts ABC statements into JS statements. It should be obvious how to change this code to return a string of Python, WASM, etc. code.[^3]
 
-In this case, each action creates a string of code (JS code in this case).  I used JS _template strings` as a convenience.
+In this case, each action creates a string of code (JS code in this case).  I used JS _template strings_ as a convenience.
 
 Each _return_ statement returns a string.
 
-The TopLevel function receives an array of strings (thanks to the Ohm-JS `+` operator).  The strings in this array are glued together into one large string (using the .join() JS method) and returned.
+The TopLevel function receives an array of strings (due to the `+` suffix operator in the grammar).  The strings in this array are glued together into one large string (using the .join() JS method) and returned.
 
 [^3]: See below for examples of emitting WASM, Python, JS and Lisp for a more interesting example language (the _arithmetic_ language in the Ohm-JS example set).
 
@@ -273,17 +277,17 @@ exports.transpile = {
 ```
 To run this (third) step use the bash script
 
-- ./run4.bash
+`./run4.bash`
 
-  You should see (interpreted and transpiled code)
+You should see (interpreted and transpiled code)
 
-  - { b: 2, c: 3, a: 5 }
+```
+{ b: 2, c: 3, a: 5 }
+var b = 2;
+var c = 3;
+var a = b + c;
 
-    var b = 2;
-
-    var c = 3;
-
-    var a = b + c;
+```
 
 # Appendix Github
 [abc](https://github.com/guitarvydas/abc)
