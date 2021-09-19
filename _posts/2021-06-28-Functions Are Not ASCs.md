@@ -17,13 +17,11 @@ It should be possible to implement "better" (smaller, faster) components using _
 
 The main issue is how to structure message-sending components to avoid spaghetti designs.[^3]
 
-[^1:] PL means Programming Language.
+[^1]: PL means Programming Language.
+[^2]: Operating system processes - threads - are ad-hoc implementations of closures.
+[^3]: The answer to how to create systems of structured components, is, as always, to use hierarchy and scoping.
 
-[^2:] Operating system processes - threads - are ad-hoc implementations of closures.
-
-[^3:] The answer to how to create systems of structured components, is, as always, to use hierarchy and scoping.
-
-[^4:] Operating systems are not needed.
+[^4]: Operating systems are not needed.
 # See Also
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)

@@ -5,7 +5,7 @@ title:  "What Is A Program?"
 
 From my perspective, a *computer* is a *machine* that can be used to augment human capabilities.
 
-As such, we want to learn how to control such machines.
+We want to learn how to control such machines.
 
 This leads to the question of "what is a programming language?". 
 
@@ -70,7 +70,9 @@ Sequencing means function-of-time.
 
 Music is a hard-realtime activity.
 
-[_We teach this hard-realtime notation to 5-year-olds, yet, programmers continue to struggle with the concepts of realtime._]
+[_We teach this hard-realtime notation to 5-year-olds[^realtime], yet, programmers continue to struggle with the concepts of realtime._]
+
+[^realtime]: Piano lessons and sheet music, for example.
 
 ## DAWs
 
@@ -88,7 +90,7 @@ Textual progamming languages tend to map this 4D space to 2D space (`x,y,z,t` ma
 
 Actually, textual GPLs tend to map 4D to 1½D.  X tends to represented as character offsets and Y tends to be represented as line numbers.  
 
-In this kind of mapping, character cell are not allowed to overlap.
+In this kind of mapping, character cells are not allowed to overlap.
 
 This perspective is a hold-over from paper-based typesetting.
 

@@ -41,7 +41,7 @@ The Components do not get to decide who runs next[^3].
 
 Components create messages and leav it to the Dispatcher to decide which Component will run next.
 
-[^3:] Note that with CALL/RETURN, the CALLer gets to determine who runs next, by CALLing a function.
+[^3]: Note that with CALL/RETURN, the CALLer gets to determine who runs next, by CALLing a function.
 
 ## Distributed Computing (Internet)
 
@@ -55,7 +55,7 @@ The internet does not use stacks.
 
 [_Nodes on the internet might use GPLs and stacks, but the internet itself does not imply the use of stacks_.]
 
-[^1:] GPL means General Purpose Language.
+[^1]: GPL means General Purpose Language.
 
 ## CPS vs ASC
 
@@ -77,7 +77,7 @@ The receiver reacts to the messages (maybe using a _case_ statement).
 
 CPS includes control flow, hence, CPS is not a basic operation that can be used for distributed computing[^2].
 
-[^2:] You can continue to cling to the CPS paradigm and fake it out using messages, though.
+[^2]: You can continue to cling to the CPS paradigm and fake it out using messages, though.
 
 ### RPC
 
