@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Parsing Diagrams - DaS Workbench 3 Attribute Elider Phase | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Parsing Diagrams - DaS Workbench 3 Attribute Elider Phase" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Attribute Elider" />
+<meta property="og:description" content="Attribute Elider" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-3-Attribute-Elider-Phase.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-3-Attribute-Elider-Phase.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-30T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parsing Diagrams - DaS Workbench 3 Attribute Elider Phase" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-3-Attribute-Elider-Phase.html","@type":"BlogPosting","description":"Attribute Elider","dateModified":"2021-07-30T00:00:00-04:00","datePublished":"2021-07-30T00:00:00-04:00","headline":"Parsing Diagrams - DaS Workbench 3 Attribute Elider Phase","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-3-Attribute-Elider-Phase.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Parsing Diagrams - DaS Workbench 3 Attribute Elider Phase</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-30T00:00:00-04:00" itemprop="datePublished">Jul 30, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="attribute-elider">Attribute Elider</h1>
+
+<p>The job of this phase is to filter out attributes that are not needed by subsequent passes.</p>
+
+<p>This <em>sounds</em> like it is too specific and needs to be generalized.</p>
+
+<p>In contrast, though, if the code is simple-enough, then it can be written-afresh for every solution.  Programmers are used to writing fresh bits of code, say in Python, for every solution.  Abstraction and generalization cannot be planned ahead-of-time - one needs at least 3 iterations before a piece of code can be generalized<sup id="fnref:mmm" role="doc-noteref"><a href="#fn:mmm" class="footnote">1</a></sup>.</p>
+
+<p>There seems to be a very fine psychological line between writing code that feel you need to keep vs. writing code that you don’t mind discarding and re-implementing.  The coding process can be untangled into 2 portions - (1) thinking-about-the-problem vs. (2) implementing (DI/Architecting vs. Implementation resp.).  Once code is untangled from Architecture, it becomes possible to imagine re-implementing code while keeping what has been learned<sup id="fnref:cl" role="doc-noteref"><a href="#fn:cl" class="footnote">2</a></sup>.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30-attribute%20elider.png?raw=true" alt="2021-07-30-attribute elider.png" /></p>
+
+<h2 id="grok">Grok</h2>
+
+<p>The grok grammar for this pass is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AppAttributeelider{
+  Diagrams = Diagram+
+  Diagram = "&lt;diagram" Attribute* "&gt;" GraphModel "&lt;/diagram&gt;"
+  Attribute = NameAttribute | DiagramIDAttribute | OtherAttribute
+  NameAttribute = "name" "=" string
+  DiagramIDAttribute = "id" "=" string
+  OtherAttribute = alnum+ "=" attributeValue
+  string= "\"" notDQ* "\""
+  notDQ = ~"\"" any
+  encodedChar = ~"&lt;" any
+  attributeValue = number | string		  
+  number = digit+
+
+  GraphModel = "&lt;mxGraphModel" Attribute+ "&gt;" Root "&lt;/mxGraphModel&gt;" 
+  Root = "&lt;root&gt;" Cell+ "&lt;/root&gt;"
+  Cell = CellWithContent | CellWithoutContent
+  CellWithoutContent = "&lt;mxCell" CellAttribute+ "/&gt;"
+  CellWithContent = "&lt;mxCell" CellAttribute+ "&gt;" Geometry? "&lt;/mxCell&gt;"	     
+  Geometry = "&lt;mxGeometry" GAttribute+ "/&gt;"
+  CellAttribute =   KindAttribute 
+                  | ValueAttribute 
+		  | EdgeAttribute
+		  | VertexAttribute
+		  | SourceAttribute
+		  | TargetAttribute
+		  | IDAttribute
+		  | RedAttribute
+		  | OtherCellAttribute
+  KindAttribute = "kind" "=" string
+  ValueAttribute = "value" "=" string
+  SourceAttribute = "source" "=" string
+  TargetAttribute = "target" "=" string
+  IDAttribute = "id" "=" string
+  EdgeAttribute = "edge" "=" quote "1" quote
+  VertexAttribute = "vertex" "=" quote "1" quote
+  RedAttribute = "fillColor" "=" quote "#f8cecc" quote
+  OtherCellAttribute = alnum+ "=" attributeValue
+
+  GAttribute = 
+                OtherGAttribute 
+  OtherGAttribute = alnum+ "=" attributeValue
+
+  quote = "\""
+}
+
+</code></pre></div></div>
+
+<p>Here, the pattern matching recognizes several attributes of interest and groups all other attributes in the <code class="language-plaintext highlighter-rouge">OtherCellAttribute</code> match.</p>
+
+<p>Note that the increase in code is offset by the decrease in “error checking”.  When the workflow reaches this point, it is known that the input code can be easily pattern matched.  Errors in the code format are picked off by earlier passes (as Ohm-JS syntax errors) or (as a last resort) the grammar engine of this pass.</p>
+
+<h2 id="emit">Emit</h2>
+
+<p>Again, the emit code seems to be larger than in the previous pass, but the amount of programming work was trivial - the pattern matcher has done the “heavy lifting” for us.</p>
+
+<p>In this code, we simply return attributes that are of interest (value, source, target, id, etc.) and return nothing (<code class="language-plaintext highlighter-rouge">[[]]</code> - empty strings) for the catch-all rule <code class="language-plaintext highlighter-rouge">OtherCellAttribute</code>.</p>
+
+<p>If we were to add another attribute-of-interest, we would need to modify the <em>grok</em> grammar and the <em>emit</em> code.  This is not ideal, but if this situation were to happen often, we could write another PEG parser for a new notation that outputs combined <em>grok</em> and <em>emit</em> code for the attributes-of-interest.  As of now, this has not been required.</p>
+
+<p>The code for attribute-of-interest returns a unity transform of the attributes and requires little work.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Diagrams [@ds] = [[${ds}]]
+Diagram [k @a k2 graphmodel k3] = [[${k}${a}${k2}\n${graphmodel}\n${k3}\n]]
+Attribute [a] = [[${a}]]
+NameAttribute [an k s] = [[\ ${an}${k}${s}]]
+DiagramIDAttribute [an k s] = [[\ ${an}${k}${s}]]
+OtherAttribute [@an k s] = [[\ ${an}${k}${s}]]
+string [q1 @cs q2] = [[${q1}${cs}${q2}]]
+notDQ [c] = [[${c}]]
+encodedChar [c] = [[${c}]]
+attributeValue [x] = [[${x}]]
+number [n] = [[${n}]]
+
+GraphModel [k1 @as k2 root k3] = [[${k1}${as}${k2}${root}${k3}]]
+Root [k1 @cells k2] = [[${k1}${cells}${k2}]]
+Cell [c] = [[${c}]]
+CellWithoutContent [k1 @as k2] = [[${k1}${as}${k2}]]
+CellWithContent [k1 @as k2 @geometry k3] = [[${k1}${as}${k2}${geometry}${k3}]]
+Geometry [k1 @as k2] = [[${k1}${as}${k2}]]
+
+CellAttribute [a] = [[${a}]]
+KindAttribute [kind eq s] = [[\ ${kind}${eq}${s}]]
+ValueAttribute [v eq s] = [[\ ${v}${eq}${s}]]
+SourceAttribute [v eq s] = [[\ ${v}${eq}${s}]]
+TargetAttribute [v eq s] = [[\ ${v}${eq}${s}]]
+IDAttribute [v eq s] = [[\ ${v}${eq}${s}]]
+EdgeAttribute [v eq q1 s q2] = [[\ ${v}${eq}${q1}${s}${q2}]]
+VertexAttribute [v eq q1 s q2] = [[\ ${v}${eq}${q1}${s}${q2}]]
+RedAttribute [id k q1 s q2] = [[\ fillColor="red"]]
+OtherCellAttribute [@an k s] = [[]]
+
+GAttribute [a] = [[${a}]]
+OtherGAttribute [@an k s] = [[\ ${an}${k}${s}]]
+
+quote [c] = [[${c}]]
+
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:mmm" role="doc-endnote">
+      <p>The magic number of 3 has been observed by me and is mentioned in The Mythical Man Month.  “Second system syndrome” happens on the 2nd iteration.  The first iteration tends to contain design errors and design oversights, the second iteration tends to be overly-general and a 3rd iteration is required to expunge the excesses contained in the second iteration.  The practical answer to all of this is to keep the code as small as possible, allowing it to be discarded and written anew.  The only reason to keep code is that it contains expensive work.  Code is cheap, thinking is hard. <a href="#fnref:mmm" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cl" role="doc-endnote">
+      <p>This is one of the reasons that I use Common Lisp.  When using CL, my code tends to be very small and I feel no compulsion to keep it.  The opposite happened to me when I wrote code in C - the coding and the debugging costs were high, which discouraged me from discarding the code and starting afresh.  This can be viewed as a UX issue (programmer UX): small differences in coding noise create a tipping-point for enormous decisions regarding keeping code or discarding it.  CL allows you to build code and data quickly and to optimize it later (if necessary), whereas C  (Rust, Python, etc.) encourages optimization-based thinking with high costs for coding and data creation.  In such languages, optimization-concerns are inextricably wound together with architecture-concerns. <a href="#fnref:cl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/30/Parsing-Diagrams-DaS-Workbench-3-Attribute-Elider-Phase.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Parsing Diagrams - DaS Workbench 5 Factbase Emitter | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Parsing Diagrams - DaS Workbench 5 Factbase Emitter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Factbase Emitter" />
+<meta property="og:description" content="Factbase Emitter" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-5-Factbase-Emitter.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-5-Factbase-Emitter.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-30T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parsing Diagrams - DaS Workbench 5 Factbase Emitter" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-5-Factbase-Emitter.html","@type":"BlogPosting","description":"Factbase Emitter","dateModified":"2021-07-30T00:00:00-04:00","datePublished":"2021-07-30T00:00:00-04:00","headline":"Parsing Diagrams - DaS Workbench 5 Factbase Emitter","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/30/Parsing-Diagrams-DaS-Workbench-5-Factbase-Emitter.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Parsing Diagrams - DaS Workbench 5 Factbase Emitter</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-30T00:00:00-04:00" itemprop="datePublished">Jul 30, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="factbase-emitter">Factbase Emitter</h1>
+
+<p>This phase emits relations (triples) from the original .drawio diagram.</p>
+
+<p>This phase does not collect names, since that was already done in the previous phase.</p>
+
+<p>This phase does no design-rule checking (aka error checking), since that was all handled in previous passes.  We can pay attention only to the issue(s) of code creation.</p>
+
+<p>This phase uses the name table created by the previous phase.  See the function <code class="language-plaintext highlighter-rouge">refID()</code> in <code class="language-plaintext highlighter-rouge">support.js</code>.</p>
+
+<p>One of the simplicities of emitting a factbase of triples is that no order is required - we can just emit code as we walk the input.</p>
+
+<p>This is the ideal for machine-readable code generation - no output order required.</p>
+
+<p>If we were, say, to emit code in C<sup id="fnref:python" role="doc-noteref"><a href="#fn:python" class="footnote">1</a></sup>, then we would have to worry about ordering and declaration before use in the resulting code.  We would probably need to store code in buffers and a graph instead of creating code on-the-spot. The final graph would be walked, in some traversal order, to produce the final output string.</p>
+
+<p>[<em>The macro processor M4 provides the ability to emit code into various buffers.</em>]</p>
+
+<p>We have avoided the need for buffering and graphing, by splitting the final emitter into two phases (name collector, emitter) and emitting code into an unordered factbase of triples.</p>
+
+<p>We happen to create triples in PROLOG syntax, although it should be easy to create triples in some other syntax (skin).</p>
+
+<h2 id="grok"><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20to%20fb.png?raw=true" alt="2021-07-30 to fb.png" />Grok</h2>
+
+<p>The grok grammar is the same as for the preceding pass (name collector).  The input to this phase is exactly the same as the input to the preceding phase.</p>
+
+<h2 id="emit">Emit</h2>
+
+<p>The work is done in the <em>emit</em> code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Diagrams [@ds] = [[${nameMangle (ds)}]]
+Diagram [k @a k2 graphmodel k3] = [[${a}${graphmodel}]]
+Attribute [a] = [[${a}]]
+NameAttribute [an k s] = [[name(${getDiagramID()}, ${s}).\n]]
+DiagramIDAttribute [an k s] = [[${pushDiagramID (s)}diagram(${getDiagramID()}, "").\n]]
+OtherAttribute [@an k s] = [[\ ${an}${k}${s}]]
+string [q1 @cs q2] = [[${q1}${cs}${q2}]]
+unqstring [q1 @cs q2] = [[${cs}]]
+notDQ [c] = [[${c}]]
+attributeValue [x] = [[${x}]]
+number [n] = [[${n}]]
+
+GraphModel [k1 @as k2 root k3] = [[${root}]]
+Root [k1 @cells k2] = [[${cells}]]
+Cell [c] = [[cell(${getCellID()},"").\ncontains(${getDiagramID()}, ${getCellID()}).\n${c}]]
+CellWithoutContent [k1 @as k2] = [[${as}]]
+CellWithContent [k1 @as k2 @geometry k3] = [[${as}${geometry}]]
+Geometry [k1 @as k2] = [[${as}]]
+
+CellAttribute [a] = [[${a}]]
+EllipseAttribute [kind eq q1 s q2] = [[ellipse(${getCellID()}, "").\n]]
+TextAttribute [kind eq q1 s q2] = [[text(${getCellID()}, "").\n]]
+KindAttribute [kind eq s] = [[kind(${getCellID()}, ${s}).\n]]
+ValueAttribute [v eq s] = [[value(${getCellID ()}, ${s}).\n]]
+SourceAttribute [v eq s] = [[source(${getCellID ()}, ${refCellID(stripQuotes (s))}).\n]]
+TargetAttribute [v eq s] = [[target(${getCellID ()}, ${refCellID(stripQuotes (s))}).\n]]
+IDAttribute [id eq s] = [[${pushCellID (s)}]]
+EdgeAttribute [v eq q1 s q2] = [[edge(${getCellID()}, "").\n]]
+VertexAttribute [v eq q1 s q2] = [[vertex(${getCellID()}, "").\n]]
+RedAttribute [id k q1 s q2] = [[fillColor(${getCellID()}, "red").\n]]
+OtherCellAttribute [@an k s] = [[]]
+
+GAttribute [a] = [[${a}]]
+ASGAttribute [kas k s] = [[]]
+RelativeGAttribute [r k s] = [[]]
+xGAttribute [an k s] = [[${an}(${getCellID()}, ${s}).\n]]
+yGAttribute [an k s] = [[${an}(${getCellID()}, ${s}).\n]]
+widthGAttribute [an k s] = [[${an}(${getCellID()}, ${s}).\n]]
+heightGAttribute [an k s] = [[${an}(${getCellID()}, ${s}).\n]]
+OtherGAttribute [@an k s] = [[${an}(${getCellID()}, ${s}).\n]]
+
+quote [c] = [[${c}]]
+
+</code></pre></div></div>
+
+<p>The code is straight-forward.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NameMangle()</code> is used to convert <code class="language-plaintext highlighter-rouge">-</code> characters into <code class="language-plaintext highlighter-rouge">__</code> characters to appease PROLOG syntax requirements<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.</p>
+
+<p>Furthermore, the grammar parses strings and includes the double-quotes in the parsed text.  <code class="language-plaintext highlighter-rouge">StripQuotes()</code> is used to remove the double quotes during table lookup.  It would have been possible to leave the quotes in, but removing the quotes helped debug-ability (human readability vs. machine readability).</p>
+
+<p>A representative example line of code from the emit section is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VertexAttribute [v eq q1 s q2] = [[vertex(${getCellID()}, "").\n]]
+</code></pre></div></div>
+
+<p>Here, after matching a <code class="language-plaintext highlighter-rouge">VertexAttribute</code> rule, we are given 5 sub-matches.  We simply emit <code class="language-plaintext highlighter-rouge">vertex(..., "")</code> while pulling the most-recent cell ID from the table (using <code class="language-plaintext highlighter-rouge">getCellID()</code>).</p>
+
+<p>The only subtlety in the code is the use of the push-down scope stack (<code class="language-plaintext highlighter-rouge">scopeAdd()</code>).  We push the cell ID onto the scope stack when we encounter an <code class="language-plaintext highlighter-rouge">mxCell</code> element.</p>
+
+<p>The ID is pushed in the preamble code, surrounded by double-brace-brackets ``.  This code is evaluated before the rest of the CST is walked (“downwards”).</p>
+
+<p>All subsequent attributes are applied to this ID.</p>
+
+<p>The scope stack is automatically popped under-the-hood by the <em>glue</em> engine.</p>
+
+<p>We do something similar with the diagram ID, in the <code class="language-plaintext highlighter-rouge">diagram</code> rule.</p>
+
+<p>In general the scopeStack is used to track scoping in a stack-like manner and to tie this information to the grammar. Attribute grammars were invented to do this, e.g. to <em>set</em> attributes on the “way down” and to <em>use</em> those attributes on the “way back up”. Function calls also do this kind of thing but cause it to happen in every call instead of being used sparingly.  Note that this is a form of “dynamic scoping” instead of “static scoping”.  Pre-CL Lisps used dynamic binding for all scoped variables, then, programmers switched to using static scoping for all variables.  A mix of the two techniques gives more flexibility in the end.  A grammar defines a static AST at compile time, but at runtime, the grammar results in a dynamic traversal of a CST.  [<em>Note that the rules of Common Lisp make it possible to create dynamically scoped variables in addition to the default statically scoped variables.</em>]</p>
+
+<h2 id="result">Result</h2>
+
+<p>The result of the emitter phase is listed below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diagram(id1, "").
+name(id1, "Page__1").
+cell(id2,"").
+contains(id1, id2).
+cell(id3,"").
+contains(id1, id3).
+cell(id4,"").
+contains(id1, id4).
+value(id4, "m").
+vertex(id4, "").
+x(id4, 120).
+y(id4, 80).
+width(id4, 440).
+height(id4, 210).
+cell(id5,"").
+contains(id1, id5).
+value(id5, "n").
+vertex(id5, "").
+x(id5, 180).
+y(id5, 120).
+width(id5, 320).
+height(id5, 140).
+cell(id6,"").
+contains(id1, id6).
+value(id6, "b").
+ellipse(id6, "").
+vertex(id6, "").
+x(id6, 540).
+y(id6, 175).
+width(id6, 30).
+height(id6, 30).
+cell(id7,"").
+contains(id1, id7).
+source(id7, id8).
+target(id7, id9).
+edge(id7, "").
+cell(id8,"").
+contains(id1, id8).
+value(id8, "a").
+ellipse(id8, "").
+vertex(id8, "").
+x(id8, 110).
+y(id8, 175).
+width(id8, 30).
+height(id8, 30).
+cell(id9,"").
+contains(id1, id9).
+value(id9, "c").
+ellipse(id9, "").
+vertex(id9, "").
+x(id9, 174).
+y(id9, 175).
+width(id9, 30).
+height(id9, 30).
+cell(id10,"").
+contains(id1, id10).
+source(id10, id11).
+target(id10, id6).
+edge(id10, "").
+cell(id11,"").
+contains(id1, id11).
+value(id11, "d").
+ellipse(id11, "").
+vertex(id11, "").
+x(id11, 474).
+y(id11, 175).
+width(id11, 30).
+height(id11, 30).
+
+</code></pre></div></div>
+
+<p>This result lists triples in an unsorted factbase.</p>
+
+<p>PROLOG grammar requires that facts be grouped together, though.  The final phase sorts the list (in alphabetical order) making it acceptable to PROLOG.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:python" role="doc-endnote">
+      <p>It is even “harder” to emit Python code, since, we have to wrorry about creating indentation in the output string. <a href="#fnref:python" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>Note that we convert a single dash into two underscores.  This ensures that the converted dashes cannot conflict with existing legal uses of the underscore character.  The human-readability of the emitted code is only important during bootstrapping and debugging.  After that, we only need to generate machine-readable code (we could use Drawio’s “unreadable” ids - the machine doesn’t care about the appearance of ids). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/30/Parsing-Diagrams-DaS-Workbench-5-Factbase-Emitter.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

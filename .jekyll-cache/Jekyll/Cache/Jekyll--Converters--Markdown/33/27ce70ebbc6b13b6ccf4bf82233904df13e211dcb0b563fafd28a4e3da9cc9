@@ -1,0 +1,121 @@
+I"�<h1 id="introduction">Introduction</h1>
+
+<p>We examine the ATOM structure in Frits van der Wateren Lisp 1.5.  Motorola 8-bit CPU, MC6800.</p>
+
+<p>The code snippet is listed below.</p>
+
+<h1 id="cell-diagram-for-plus-atom">Cell Diagram for PLUS Atom</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-11-PLUS-Cell%20Diagram.png?raw=true" alt="2021-08-11-PLUS-Memory Layout.png" style="zoom:67%;" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">FDB</code> means initialize double bytes (addresses).</p>
+
+<p><code class="language-plaintext highlighter-rouge">FCC</code> means initialize single bytes.</p>
+
+<h1 id="memory-layout-for-plus-atom">Memory Layout for PLUS Atom</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-11-PLUS-Memory%20Layout.png?raw=true" alt="2021-08-11-PLUS-Memory Layout.png" style="zoom:67%;" /></p>
+
+<h1 id="comments">Comments</h1>
+
+<h1 id="strings-are-tokenized">Strings Are Tokenized</h1>
+
+<p>At the low-levels, this Lisp does not deal with strings.</p>
+
+<p>This Lisp deals only with 4-byte cells, which have been chosen to fit the 8-bit CPU.</p>
+
+<p>In this 8-bit CPU, an address is 16 bits, which is 2 bytes.</p>
+
+<p><code class="language-plaintext highlighter-rouge">CAR</code> is 16 bits (2 bytes).</p>
+
+<p><code class="language-plaintext highlighter-rouge">CDR</code> is 16 bits (2 bytes).</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CONS</code> cell is 32 bits (4 bytes) - one <code class="language-plaintext highlighter-rouge">CAR</code> and one <code class="language-plaintext highlighter-rouge">CDR</code>.</p>
+
+<h2 id="magic-marker">Magic Marker</h2>
+
+<p>Addresses are all mod(4).</p>
+
+<p>Hence, the bottom 2 bits are “free”.</p>
+
+<p>The Magic Marker, called “M”, is set to 000000001 in the address to signify a print-name.</p>
+
+<h2 id="assembler-directives">Assembler Directives</h2>
+
+<p>The assembler program converts human-readable mnemonics into binary form.</p>
+
+<p>The assembler is line-oriented, i.e. one statement per line.</p>
+
+<p>The assembler assumes that all addresses/offset are byte-oriented.</p>
+
+<p>Addresses/offsets are integers in the range 0-65535.</p>
+
+<p>Labels begin in column 1, all other statements begin after column 1.</p>
+
+<p>The assembler makes 2 passes over the code:</p>
+
+<ol>
+  <li>Determine the location of all labels</li>
+  <li>Convert mnemonics into binary.</li>
+</ol>
+
+<h3>*</h3>
+
+<p><code class="language-plaintext highlighter-rouge">*</code> <em>here</em> - denotes the current binary offset of the <em>beginning</em> of the line.</p>
+
+<p>‘*’ in column 1 creates a comment (to end of line).</p>
+
+<p>The assembler uses a small set of <em>directives</em> that emit no binary.</p>
+
+<h3 id="equ">EQU</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">EQU</code> directive equates a label to a value.</p>
+
+<p>Usually, the value is <code class="language-plaintext highlighter-rouge">*</code>, in which case the directive sets the value of the label to the current location of the line in the binary.</p>
+
+<p>Example: <code class="language-plaintext highlighter-rouge">OBL28 EQU *</code> means to set the label <code class="language-plaintext highlighter-rouge">OBL28</code> to be the offset of the current line.</p>
+
+<p>Example: <code class="language-plaintext highlighter-rouge">*+4</code> means  <em>the offset of here plus 4</em></p>
+
+<h3 id="fdb">FDB</h3>
+
+<p><code class="language-plaintext highlighter-rouge">FDB</code> initializes “double” words, i.e. 2 bytes.</p>
+
+<p>FDB uses comma-separated arguments and created 2 bytes for each given argument.</p>
+
+<p>Example: <code class="language-plaintext highlighter-rouge">FDB *+4,OBL29</code> means to initialize 4 continguous bytes.  2 bytes hold <em>here</em> plus 4, the next two bytes are initialized to the integer offset of <code class="language-plaintext highlighter-rouge">OBL29</code>.</p>
+
+<h3 id="fcc">FCC</h3>
+
+<p><code class="language-plaintext highlighter-rouge">FCC</code> initializes single bytes.</p>
+
+<p>Strings of byte-sized characters (ASCII) are surrounded by single quotes.</p>
+
+<p>Example: <code class="language-plaintext highlighter-rouge">FCC 'PL' </code>means to initialize 2 bytes, the first to the ASCII value of P (0x50 hex, or 80 decimal) and the second byte is initialized to the ASCII value of L (0x4C hex, or 76 decimal).</p>
+
+<h1 id="code">Code</h1>
+
+<p><a href="https://github.com/guitarvydas/frits-van-der-wateren-lisp/blob/master/LISP.TXT">Frits van der Wateren Lisp 1.5</a></p>
+
+<h2 id="code-snippet-for-plus-atom">Code Snippet For PLUS ATOM</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBL28   EQU   *
+   FDB   *+4,OBL29
+   FDB   *+12+M,*+4
+   FDB   SUBR,*+4
+   FDB   PLUS,NIL
+   FCC   'PL'
+   FDB   *+2
+   FCC   'US'
+   FDB   NIL
+OBL29   EQU   *
+</code></pre></div></div>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

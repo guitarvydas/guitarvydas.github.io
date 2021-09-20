@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Parsing Diagams - Containment | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Parsing Diagams - Containment" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Diagram" />
+<meta property="og:description" content="Diagram" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/27/Parsing-Diagrams-Containment.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/27/Parsing-Diagrams-Containment.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-27T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parsing Diagams - Containment" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/27/Parsing-Diagrams-Containment.html","@type":"BlogPosting","description":"Diagram","dateModified":"2021-07-27T00:00:00-04:00","datePublished":"2021-07-27T00:00:00-04:00","headline":"Parsing Diagams - Containment","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/27/Parsing-Diagrams-Containment.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Parsing Diagams - Containment</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-27T00:00:00-04:00" itemprop="datePublished">Jul 27, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="diagram">Diagram</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-28%20Containment.png?raw=true" alt="2021-07-28 Containment.png" /></p>
+
+<h1 id="desired-result">Desired Result</h1>
+
+<p>In the end we want to infer the following facts:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d contains e
+d contains g
+e contains f
+g contains h
+f contains m
+h contains n
+</code></pre></div></div>
+
+<h1 id="inferring-containment">Inferring Containment</h1>
+
+<p>I chose to do this inference in 3 steps<sup id="fnref:optimization" role="doc-noteref"><a href="#fn:optimization" class="footnote">1</a></sup>.</p>
+
+<h2 id="step-1---raw-containment">Step 1 - Raw Containment</h2>
+
+<p>In this step, we infer <em>all</em> containment, direct and indirect.</p>
+
+<p>The main body of code for this inference is only a few lines:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>containment(R1,R2):-
+    rect(R1,_),
+    rect(R2,_),
+    completelyInside(R2,R1),
+    format("contains1(~w,~w).~n",[R1,R2]).
+
+</code></pre></div></div>
+
+<p>The rule <code class="language-plaintext highlighter-rouge">completelyInside</code> uses grade-school math to calculate whether a bounding box is completely inside another bounding box.</p>
+
+<p>The first 8 lines are PROLOG house-keeping, setting up variables <code class="language-plaintext highlighter-rouge">Bl, Bt, Br, Bb, Al, At, Ar, Ab</code> (left, top, right, bottom of B and A, resp. In an OO language, we might say B.Bl, B.Bt, etc. and forego the the first 8 lines).</p>
+
+<p>The interesting part of the rule is the set of 8 comparisons, AND’ed together at the bottom of the rule.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% succeeds only if B's bounding box is fully inside A's bounding box, inclusively
+completelyInside(B,A):-
+    l(B,Bl),
+    t(B,Bt),
+    r(B,Br),
+    b(B,Bb),
+    l(A,Al),
+    t(A,At),
+    r(A,Ar),
+    b(A,Ab),
+    Bl &gt;= Al,
+    Bl =&lt; Ar,
+    Br &gt;= Al,
+    Br =&lt; Ar,
+    Bt &gt;= At,
+    Bt =&lt; Ab,
+    Bb &gt;= At,
+    Bb =&lt; Ab.
+    
+
+</code></pre></div></div>
+
+<p>The screenshot, below, shows how to run step 1 manually and the result.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-28%20Containment%20Step%201.png?raw=true" alt="2021-07-28 Containment Step 1.png" /></p>
+
+<p>The automated version of this rule follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>allContains1:-
+    bagof(R1,(rect(R1,_),rect(R2,_),R1 \= R2,containment(R1,R2)),_).
+
+containment(R1,R2):-
+    rect(R1,_),
+    rect(R2,_),
+    completelyInside(R2,R1),
+    format("contains1(~w,~w).~n",[R1,R2]).
+
+% succeeds only if B's bounding box is fully inside A's bounding box, inclusively
+completelyInside(B,A):-
+    l(B,Bl),
+    t(B,Bt),
+    r(B,Br),
+    b(B,Bb),
+    l(A,Al),
+    t(A,At),
+    r(A,Ar),
+    b(A,Ab),
+    Bl &gt;= Al,
+    Bl =&lt; Ar,
+    Br &gt;= Al,
+    Br =&lt; Ar,
+    Bt &gt;= At,
+    Bt =&lt; Ab,
+    Bb &gt;= At,
+    Bb =&lt; Ab.
+    
+</code></pre></div></div>
+
+<p>This code adds the rule <code class="language-plaintext highlighter-rouge">allContains1</code>.  The rest of the setup is done in <code class="language-plaintext highlighter-rouge">run.bash</code> (see below).</p>
+
+<p>The main job of <code class="language-plaintext highlighter-rouge">allContains1</code> is to loop<sup id="fnref:loop" role="doc-noteref"><a href="#fn:loop" class="footnote">2</a></sup> over all rectangles while avoiding duplicates.</p>
+
+<h2 id="step-2">Step 2</h2>
+
+<p>In this step, we ascertain which containments are indirect (I call them ‘deepcontains’ in this code).</p>
+
+<p>PROLOG works best when it performs <em>positive</em> work.  Negation is trickier in PROLOG.  When we eye-ball the code it is “obvious” that <code class="language-plaintext highlighter-rouge">f</code> contains <code class="language-plaintext highlighter-rouge">m</code> and so on, where <code class="language-plaintext highlighter-rouge">f</code> is the smallest rectangle that encloses <code class="language-plaintext highlighter-rouge">m</code>.  This relationship is harder (less obvious) to express in PROLOG.  We are trying to write code that a machine can execute, hence, we break the work up into small, understandable pieces.</p>
+
+<p>Most of the interesting work is done in the rule <code class="language-plaintext highlighter-rouge">deepcontains1</code> and the rest of the code is setup for printing the results.</p>
+
+<p>DeepContains1 consists of two OR’ed together options:</p>
+
+<ol>
+  <li>Look for a Parent that contains, both, a Child and a GrandChild where the Child contains the GrandChild.  If found, consider the Parent to deeply contain the GrandChild.</li>
+  <li>Look for chains where Parents contain Children that contain Children that contain GrandChildren and so on.  This is a <em>recursive</em> option.  When such a chain is found, consider the Parent to deeply contain the GrandChild.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deepcontains1(Parent,GrandChild):-
+    contains1(Parent,GrandChild),
+    contains1(Child,GrandChild),
+    contains1(Parent,Child).
+deepcontains1(Parent,GrandChild):-
+    contains1(Parent,GrandChild),
+    contains1(Child,GrandChild),
+    deepcontains1(Parent,Child).
+
+deepcontains(R,Bag):-
+    setof(X,deepcontains1(R,X),Bag).
+
+printContains(R):-
+    deepcontains(R,Bag),
+    printContainsSingle(R,Bag).
+
+printContainsSingle(_,[]).
+printContainsSingle(R,[H|T]):-
+    format("deepcontains(~w,~w).~n", [R,H]),
+    printContainsSingle(R,T).
+
+printAllDeepContains:-
+    bagof(R,(rect(R,_),printContains(R)),_).
+
+</code></pre></div></div>
+
+<p>The results of this inference produces the new facts:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deepcontains(d,f).
+deepcontains(d,h).
+deepcontains(d,m).
+deepcontains(d,n).
+deepcontains(e,m).
+deepcontains(g,n).
+
+</code></pre></div></div>
+
+<h2 id="step-3">Step 3</h2>
+
+<p>At this point, we have</p>
+
+<ol>
+  <li>All containments, direct and indirect</li>
+  <li>All indirect (deep) containments.</li>
+</ol>
+
+<p>We simply write a rule that filters out the indirect containments from the list of all containments and create facts (that are called<code class="language-plaintext highlighter-rouge">contains</code>) that only apply to direct containments.</p>
+
+<p>Again, in PROLOG, it is easier to write positive rules (rules that find something) instead of negative rules.  We would normally say that the list of direct containments is the set of containments with the deep (indirect) containments removed, but, it is easier to invent a new fact (<code class="language-plaintext highlighter-rouge">contains</code>) and generate it, instead of removing exiting facts<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">3</a></sup>.</p>
+
+<p>My code for this step is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factContains(ParentR,ChildR):-
+    contains1(ParentR,ChildR),
+    \+ deepcontains(ParentR,ChildR).
+
+allContainedChildren(R,Bag):-
+    bagof(Child,factContains(R,Child),Bag).
+
+allContains(CBag):-
+    bagof([R,Bag],allContainedChildren(R,Bag),CBag).
+
+printContainedChildren(R):-
+    allContainedChildren(R,Children),
+    printContainedChild(R,Children).
+
+printContainedChild(_,[]).
+printContainedChild(R,[H|T]):-
+    format("contains(~w,~w).~n",[R,H]),
+    printContainedChild(R,T).
+
+printAllDirectContains:-
+    bagof(R,(rect(R,_),printContainedChildren(R)),_).
+
+</code></pre></div></div>
+
+<p>And, the final resulting facts are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contains(d,e).
+contains(d,g).
+contains(e,f).
+contains(f,m).
+contains(g,h).
+contains(h,n).
+
+</code></pre></div></div>
+
+<p>Which matches the desired result.</p>
+
+<h2 id="runbash">Run.bash</h2>
+
+<p>To automate all 3 steps, we write a simple <em>bash</em> script:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+sort diagram.pl &gt;fb.pl
+
+./bb.bash &gt;fb-bb.pl
+cat fb.pl fb-bb.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+swipl -g 'consult(fb).' \
+      -g 'consult(contain1).' \
+      -g 'allContains1.' \
+      -g 'halt.' \
+      &gt; fb-contains1.pl
+cat fb.pl fb-contains1.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+swipl -g 'consult(fb).' \
+      -g 'consult(contain2).' \
+      -g 'printAllDeepContains.'\
+      -g 'halt.' \
+      &gt; fb-deepcontains.pl
+cat fb.pl fb-deepcontains.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+swipl -g 'consult(fb).' \
+      -g 'consult(contain3).' \
+      -g 'printAllDirectContains.'\
+      -g 'halt.' \
+      &gt; fb-directcontains.pl
+cat fb.pl fb-directcontains.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+</code></pre></div></div>
+
+<p>The main feature of the above code is that it <em>does not</em> try to do everything at once.</p>
+
+<p>The work is done in 3 distinct phases, each phase producing an augmented factbase (fb.pl).</p>
+
+<p>There are at least 2 reasons for this approach</p>
+
+<ol>
+  <li>Architecture - the architecture for this solution remains clean and tidy and understandable.</li>
+  <li>Isolation.  Once a phase works, we leave it alone and don’t invite new bugs by creating hidden dependencies.</li>
+</ol>
+
+<p>Each phase augments the factbase (<code class="language-plaintext highlighter-rouge">cat</code>).</p>
+
+<p>We cow-tow to PROLOG’s adjacency requirements<sup id="fnref:req" role="doc-noteref"><a href="#fn:req" class="footnote">4</a></sup> by <code class="language-plaintext highlighter-rouge">sort</code>ing the factbase each time around.</p>
+
+<h1 id="big-o">Big-O</h1>
+
+<p>Note that big-O (O(n)) analysis is ignored here.</p>
+
+<p>The <em>only</em> thing that matters is the final “user experience” (in this case, the programmer).</p>
+
+<p>Is it “fast enough” for use?</p>
+
+<p>Does it cause friction and impede free-thinking?</p>
+
+<p>We are dealing with small diagrams.</p>
+
+<p>Only the final speed matters.</p>
+
+<p>If an operation takes 1msec to run or 10msec to run, we don’t care.</p>
+
+<p>The machine (computer) certainly doesn’t care.</p>
+
+<h1 id="keeping-it-small">Keeping it small</h1>
+
+<p>One of the aspects of this approach is to keep all steps very small,</p>
+
+<ul>
+  <li>for understandability,</li>
+  <li>for isolation, and</li>
+  <li>for UX.</li>
+</ul>
+
+<p>A lot of computer science is devoted to handling accidental complexities which arise from “doing everything at once”.</p>
+
+<p>Keeping everything small avoids such issues.</p>
+
+<p>For example, global variables are only a problem in code that contains more than 7±2 lines (total).  Scoping was added to make variables “local” to code and to improve locality-of-reference for when code becomes too large to understand in one gulp<sup id="fnref:lib" role="doc-noteref"><a href="#fn:lib" class="footnote">5</a></sup>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:optimization" role="doc-endnote">
+      <p>It is probably possible to do this in 1 step and to make the code more efficient. Such optimizations are left up to Optimization Engineers, and do not concern Architects.  The main goal of Architecture is to show <em>one way</em> of coding this <em>and</em> to make the description understandable. Corollary: if you are itching to make this code more efficient, then the Architecture is understandable. <a href="#fnref:optimization" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:loop" role="doc-endnote">
+      <p><em>Bagof</em> is, in essence, a loop.  The PROLOG engine decides how to implement the loop (recursion) efficiently (maybe for each use). <a href="#fnref:loop" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>Again, PROLOG gurus might re-write this set of rules differently, maybe using PROLOG’s <em>retract</em> clause, but, we are writing an Architecture that can be understood by more programmers than just PROLOG gurus. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:req" role="doc-endnote">
+      <p>Swipl does allow non-sorted rules, but needs extra syntactic noise. It is simple-enough to call UNIX sort after every phase. <a href="#fnref:req" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lib" role="doc-endnote">
+      <p>It was thought that <em>libraries</em> were a solution, but libraries tend to contain hidden dependencies, e.g. Call/Return using a hardware-assisted, hidden global variable (SP). That problem (the use of a global SP) was eliminated by adding an epicycle called <em>threads</em>.  This new epicycle caused new accidental complexities, e.g. preemption, which led to thread safety problems … and so on.) <a href="#fnref:lib" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/27/Parsing-Diagrams-Containment.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -57,7 +57,7 @@ We should just hit a switch and get Python code, or Javascript code, or HTML cod
 
 That's called _portability_.
 
-[^1]Or, any language, like Javascript, HTML, Haskell, etc.
+[^1]:Or, any language, like Javascript, HTML, Haskell, etc.
 
 Have we seen this already?
 

@@ -80,7 +80,8 @@ The main body of the macro is in the `(syntax-case stx () ___)` clause.   [_For 
 
 # Layer 1
 
-```  (syntax-case stx ()
+```
+(syntax-case stx ()
     ((_ x clause ...)
      (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
        #'(case x case-clause ...)))))

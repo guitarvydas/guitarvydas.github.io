@@ -1,0 +1,135 @@
+I"<<h1 id="introduction">Introduction</h1>
+
+<p>A very, very simple transpiler from code-markdown to bash.</p>
+
+<p>Transpile</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+## _fb pipeline_
+	script1
+	script2
+	script3
+
+
+
+## _details_
+### script1
+	echo hello
+	echo world 
+	echo from script 1
+### script2
+	echo hello
+	echo world 
+	echo from script 2
+### script3
+	echo hello
+	echo world 
+	echo from script 3
+</code></pre></div></div>
+<p>to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# _containment_
+
+clear
+set -e
+trap 'catch' ERR
+
+catch () {
+    echo '*** FATAL ERROR ***'
+    exit 1
+}
+
+# _details_
+script1 () {
+	echo hello
+	echo world 
+	echo from script 1
+
+}
+script2 () {
+	echo hello
+	echo world 
+	echo from script 2
+
+}
+script3 () {
+	echo hello
+	echo world 
+	echo from script 3
+
+}
+
+# _fb pipeline_
+	script1
+	script2
+	script3
+</code></pre></div></div>
+
+<h2 id="preamble">Preamble</h2>
+<p>The preamble traps errors and prints a FATAL<br />
+```</p>
+
+<p>clear<br />
+set -e<br />
+trap ‘catch’ ERR</p>
+
+<p>catch () {<br />
+    echo ‘<em>** FATAL ERROR **</em>’<br />
+    exit 1<br />
+}<br />
+``<br />
+Any sub-script that exits with a non-0 exit code, will be caught by the above.</p>
+
+<h1 id="why">Why?</h1>
+<h2 id="layers---important-stuff-at-the-top">Layers - Important Stuff At The Top</h2>
+<p>We <em>want</em> to build software in layers.</p>
+
+<p>We <em>want</em> the important stuff to be at the top of the script file, but, declaration-before-use requires that we define the details first and put the important stuff at the bottom of the script.</p>
+
+<p>We <em>want</em> to use md-mode to elide details, so that we can look at the script in layers. We press <code class="language-plaintext highlighter-rouge">TAB</code> to expand layers only if we want to see the details.</p>
+
+<p>We consider variables, traps, etc. to be at lower layers.</p>
+
+<p>We <em>want</em> the transpiler to transpile our .md script into valid <em>bash</em> code.</p>
+
+<p>This is an examplar - we show how to build a simple transpiler. We hope that the reader can build further transpilers that have more layers than what we show.</p>
+
+<p>This is an examplar - we show some of the intermediate steps:</p>
+<ol>
+  <li>Convert md to structured pseudo-code (braces) <a href="https://guitarvydas.github.io/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html">md2pseudo</a></li>
+  <li>Convert the pseudo-code to bash-like code <a href="https://github.com/guitarvydas/md2bash">md 2 bash</a></li>
+  <li>Insert swipl stuff (in a later essay).</li>
+</ol>
+
+<p>Also, we show how easy it is to flip parsed code at will <a href="https://guitarvydas.github.io/2021/08/03/Flipping-Code.html">flip</a>.</p>
+
+<h2 id="emacs-md-mode">Emacs md-mode</h2>
+<p>Note that the above input syntax is editable by emacs md-mode.</p>
+
+<p>Emacs md-mode provides the <code class="language-plaintext highlighter-rouge">TAB</code> key to allow eliding layers.</p>
+
+<h1 id="usage-and-testing">Usage and Testing</h1>
+
+<ol>
+  <li>Load md2bash.html into a browser.</li>
+  <li>Scroll all the way down to the bottom and press <code class="language-plaintext highlighter-rouge">generate</code>.</li>
+  <li>Copy the resulting code from the bottom textarea (“transpiled to bash”), and paste it into a file <code class="language-plaintext highlighter-rouge">test.bash</code>.</li>
+  <li>chmod a+x test.bash</li>
+  <li>./test.bash</li>
+</ol>
+
+<h1 id="github">Github</h1>
+
+<p><a href="https://github.com/guitarvydas/md2bash">md2bash</a></p>
+
+<h1 id="see-also">See also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a><br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

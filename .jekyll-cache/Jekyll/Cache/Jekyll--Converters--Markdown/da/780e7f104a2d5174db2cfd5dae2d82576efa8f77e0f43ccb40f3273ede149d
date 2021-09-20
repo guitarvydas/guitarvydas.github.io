@@ -1,0 +1,213 @@
+I"‘<h1 id="diagram">Diagram</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-29%20Parsing%20Diagrams%20Ports.png?raw=true" alt="2021-07-29 Parsing Diagrams Ports.png" /></p>
+
+<p>Rectangles represent software components.</p>
+
+<p>Circles represent ports.</p>
+
+<ul>
+  <li>Green circles represent input ports.</li>
+  <li>Yellow circles represent output ports.</li>
+</ul>
+
+<p>Port circles are situated on the edges of component rectangles.</p>
+
+<p>[<em>Ports will be connected together as discussed in a future essay</em>.]</p>
+
+<p>[<em>Design Rule checking - aka error checking - is briefly touched upon below, and will be discussed in detail in a future essay.</em>]</p>
+
+<h1 id="contains-relationships">Contains Relationships</h1>
+
+<p>The diagram editor only knows about rectangles and circles (and colors)<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>We create a compiler phase that associates circles with rectangles.</p>
+
+<p>In this case, we say that a circle is contained by a rectangle if exactly 3 sides of the bounding box of the circle are inside the rectangle.</p>
+
+<p>The code (PROLOG) below emits <code class="language-plaintext highlighter-rouge">contains</code> relationships for each circle that meets the above conditions.</p>
+
+<p>Again, to emphasize the point, this is not rocket science, but is grade-school math.</p>
+
+<p>We want something that is easy to write and easy to understand.</p>
+
+<p>Optimization Engineers can rewrite the code if necessary (albeit unlikely with modern hardware).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>containsport(R,C):-
+    rightsideinsideBB(C,R).
+containsport(R,C):-
+    leftsideinsideBB(C,R).
+containsport(R,C):-
+    bottomsideinsideBB(C,R).
+containsport(R,C):-
+    topsideinsideBB(C,R).
+
+rightsideinsideBB(Circle,Rect):-
+    rect(Rect,''),
+    ellipse(Circle,''),
+    l(Rect,Rl),   t(Rect,Rt),   r(Rect,Rr),   b(Rect,Rb),
+    l(Circle,Cl), t(Circle,Ct), r(Circle,Cr), b(Circle,Cb),
+    Cl =&lt; Rl,
+    Ct &gt;= Rt, Ct =&lt; Rb,
+    Cr &gt;= Rl, Cr =&lt; Rr,
+    Cb &gt;= Rt, Cb =&lt; Rb.
+leftsideinsideBB(Circle,Rect):-
+    rect(Rect,''),
+    ellipse(Circle,''),
+    l(Rect,Rl),   t(Rect,Rt),   r(Rect,Rr),   b(Rect,Rb),
+    l(Circle,Cl), t(Circle,Ct), r(Circle,Cr), b(Circle,Cb),
+    Cl =&lt; Rr, Cl &gt;= Rl,
+    Ct &gt;= Rt, Ct =&lt; Rb,
+    Cr &gt;= Rr,
+    Cb &gt;= Rt, Cb =&lt; Rb.
+bottomsideinsideBB(Circle,Rect):-
+    rect(Rect,''),
+    ellipse(Circle,''),
+    l(Rect,Rl),   t(Rect,Rt),   r(Rect,Rr),   b(Rect,Rb),
+    l(Circle,Cl), t(Circle,Ct), r(Circle,Cr), b(Circle,Cb),
+    Cl &gt;= Rl, Cl =&lt; Rr,
+    Ct =&lt; Rt,
+    Cr &gt;= Rl, Cr =&lt; Rr,
+    Cb &gt;= Rt, Cb =&lt; Rb.
+topsideinsideBB(Circle,Rect):-
+    rect(Rect,''),
+    ellipse(Circle,''),
+    l(Rect,Rl),   t(Rect,Rt),   r(Rect,Rr),   b(Rect,Rb),
+    l(Circle,Cl), t(Circle,Ct), r(Circle,Cr), b(Circle,Cb),
+    Cl &gt;= Rl, Cl =&lt; Rr,
+    Ct &gt;= Rt, Ct =&lt; Rb,
+    Cr &gt;= Rl, Cr =&lt; Rr,
+    Cb &gt;= Rb.
+
+allPortContains(B):-
+    bagof([R,C],containsport(R,C),B).
+
+printAllPortContains:-
+    allPortContains(B),
+    printPortContains(B).
+printAllPortContains.
+
+printPortContains([]).
+printPortContains([H|T]) :-
+    format("contains(~w,~w).~n",H),
+    printPortContains(T).
+
+</code></pre></div></div>
+
+<h1 id="port-direction-relationships">Port Direction Relationships</h1>
+
+<p>Circles colored green are given <code class="language-plaintext highlighter-rouge">input</code> relationships.</p>
+
+<p>Circles colored yellow are given <code class="language-plaintext highlighter-rouge">output</code> relationships.</p>
+
+<p>The code below creates these relationships.  The rule <code class="language-plaintext highlighter-rouge">portdirection</code> recognizes the relationships. The rest of the code prints the relationships.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>portdirection([P,'input']):-
+    ellipse(P,''),
+    color(P,"green").
+portdirection([P,'output']):-
+    ellipse(P,''),
+    color(P,"yellow").
+allDirections(Bag):-
+    bagof(Pair,portdirection(Pair),Bag).
+
+printDirection([]).
+printDirection([H|T]):-
+    format("portdirection(~w,~w).~n", H),
+    printDirection(T).
+
+printAllDirections:-
+    allDirections(Bag),
+    printDirection(Bag).
+printAllDirections.
+
+</code></pre></div></div>
+
+<h1 id="design-rules---error-checks">Design Rules - Error Checks</h1>
+
+<p>We want to check for certain error conditions.</p>
+
+<p>General type-checking is insufficient for our purposes.</p>
+
+<p>We use the phrase <code class="language-plaintext highlighter-rouge">design rules</code> to mean error checks that are problem-specific.</p>
+
+<p>We want to be able to compose design rule checks and snap them onto the code base.</p>
+
+<p>This issue will be discussed in another essay.</p>
+
+<h1 id="runbash">Run.bash</h1>
+
+<p>The script <code class="language-plaintext highlighter-rouge">run.bash</code>, at this point, is composed of 4 elements</p>
+
+<ol>
+  <li>Infer rectangles as components.</li>
+  <li>Infer circles as ports.</li>
+  <li>Infer the direction of ports, base on their color (<code class="language-plaintext highlighter-rouge">input</code> and <code class="language-plaintext highlighter-rouge">output</code> ; green and yellow, resp.)</li>
+  <li>Perform a design-rule check, quitting the script (the diagram compiler) if any orphan ports are found.</li>
+</ol>
+
+<p>The top-level script is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+./runrects.bash
+mv fb.pl rects-fb.pl
+./runports.bash
+cat rects-fb.pl fb.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+./rundesignrule.bash
+
+</code></pre></div></div>
+
+<p>and the <code class="language-plaintext highlighter-rouge">runports.bash</code> script is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+sort ports.pl &gt;fb.pl
+
+./bb.bash &gt;fb-bb.pl
+cat fb.pl fb-bb.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+swipl -g 'consult(fb).' \
+      -g 'consult(containsport).' \
+      -g 'printAllPortContains.' \
+      -g 'halt.' \
+      &gt; fb-portcontains.pl
+
+cat fb.pl fb-portcontains.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+swipl -g 'consult(fb).' \
+      -g 'consult(portdirection).' \
+      -g 'printAllDirections.' \
+      -g 'halt.' \
+      &gt; fb-directions.pl
+
+cat fb.pl fb-directions.pl &gt;temp.pl
+sort temp.pl &gt;fb.pl
+
+</code></pre></div></div>
+
+<p>Reiterating: each phase of the diagram compiler produces a PROLOG-edible fb.pl file.</p>
+
+<p>[<em>Many PROLOG gurus would try to combine all of the phases into one.  This would be an optimization, and an obfuscation.  It is easier to think of each phase as a single, drop-dead simple entity.   The DI (architecture) should retain this simplicity</em>.]</p>
+
+<h1 id="appendix---github">Appendix - Github</h1>
+
+<p>https://github.com/guitarvydas/diagram-parsing</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The diagram editor edits diagrams. The diagram editor should not know about details of the application, e.g. that rectangles represent components and that circles represent ports. The diagram editor should allow drawing any kind of diagram.  Later phases can check the validity of a diagram, much like the phases of compilers for text languages.  Knowledge of the application should not be wound into the diagram editor. This is a <em>separation of concerns</em> issue.Â <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

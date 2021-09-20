@@ -1,0 +1,110 @@
+I"]<h1 id="introduction">Introduction</h1>
+
+<p>We show one way to use PEG in Racket, to emit a <em>case</em> form.</p>
+
+<h1 id="sample">Sample</h1>
+
+<p>We transpile</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 'a $ 2 'b $ 3 'c $ 4 'd $ else 'e
+</code></pre></div></div>
+
+<p>and expect to get Racket case code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(lambda (k) 
+  (case k 
+    ((1) 'a) 
+    ((2) 'b) 
+    ((3) 'c) 
+    ((4) 'd) 
+    (else 'e)))
+</code></pre></div></div>
+
+<p>This constituted an experiment, so we explicitly wrote the case labels and we used <code class="language-plaintext highlighter-rouge">$</code> to separate the cases.</p>
+
+<p>Other variations of the syntax should be possible.</p>
+
+<h1 id="peg-code">PEG Code</h1>
+<p>The essential grammar is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang peg
+pclause &lt;- s-exp _ s-exp;
+pelseclause &lt;- 'else' _ (s-exp);
+pclauses &lt;- (pelseclause / pclause) (_ '$' _ pclauses)?;
+pcasetest &lt;- pclauses;
+</code></pre></div></div>
+<p>The essential action code is appended to the grammar:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang peg
+pclause &lt;- caselabel:s-exp _ e:s-exp -&gt; (list (list caselabel) e);
+pelseclause &lt;- 'else' _ (e:s-exp) -&gt; (list 'else e);
+pclauses &lt;- cl1:(pelseclause / pclause) (_ '$' _ cl2:pclauses)? -&gt; (if cl2 (cons cl1 cl2) (list cl1));
+pcasetest &lt;- cls:pclauses -&gt; (list 'lambda '(k) (cons 'case (cons 'k cls)));
+</code></pre></div></div>
+
+<p>To make this work, we need to add some Racket code.  <code class="language-plaintext highlighter-rouge">#lang peg</code> requires that such code appear before any PEG code.</p>
+
+<p>The full code is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang peg
+(require "../racket-peg/s-exp.rkt");
+(define (compile-snippet e) (eval e));
+(define (ptest k)
+  (let ((pexpr (peg pcasetest "1 'a $ 2 'b $ 3 'c $ 4 'd $ else 'e")))
+    (let ((e (compile-snippet pexpr)))
+      (println (e k)))));
+pclause &lt;- caselabel:s-exp _ e:s-exp -&gt; (list (list caselabel) e);
+pelseclause &lt;- 'else' _ (e:s-exp) -&gt; (list 'else e);
+pclauses &lt;- cl1:(pelseclause / pclause) (_ '$' _ cl2:pclauses)? -&gt; (if cl2 (cons cl1 cl2) (list cl1));
+pcasetest &lt;- cls:pclauses -&gt; (list 'lambda '(k) (cons 'case (cons 'k cls)));
+</code></pre></div></div>
+
+<p>Note that order matters in PEG. <code class="language-plaintext highlighter-rouge">Pelseclause</code> must be tried before <code class="language-plaintext highlighter-rouge">pclause</code> in the rule <code class="language-plaintext highlighter-rouge">pclauses</code>.</p>
+
+<p>Note that I prefixed every rule with the letter <code class="language-plaintext highlighter-rouge">p</code> to keep it distinct from the raw Racket code (below). Such prefixing is not necessary - I used prefixing only during bootstrapping wherein I wanted to keep the raw Racket code alongside of the PEG code.</p>
+
+<p>To test this, simply run (ptest 3) and (ptest 99).</p>
+
+<h1 id="raw-scheme-code">Raw Scheme Code</h1>
+<p>Without <code class="language-plaintext highlighter-rouge">#lang peg</code>, but using the peg library, the raw Racket code is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang racket
+
+(require peg)
+(require "../racket-peg/s-exp.rkt")
+
+(define-peg clause
+  (and (name caselabel s-exp) _ (name e s-exp))
+  (list (list caselabel) e))
+
+(define-peg elseclause
+  (and "else" _ (name e s-exp))
+  (list 'else e))
+
+(define-peg clauses
+  (and (name cl1 (or elseclause clause))
+      (? _ #\$ _ (name cl2 clauses)))
+    (if cl2
+      (cons cl1 cl2)
+      (list cl1)))
+
+(define-peg casetest
+  (name cls clauses)
+  (list 'lambda '(k) (cons 'case (cons 'k cls))))
+
+(define (compile-snippet e) (eval e))
+
+(define (test k)
+  (let ((pexpr (peg casetest "1 'a $ 2 'b $ 3 'c $ 4 'd $ else 'e")))
+    ;(println pexpr)
+    (let ((e (compile-snippet pexpr)))
+      (println (e k)))))
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

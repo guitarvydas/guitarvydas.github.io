@@ -1,0 +1,27 @@
+I"c<p>Call / Return breaks isolation, because it makes ad-hoc scheduling decisions.</p>
+
+<p>Call makes a scheduling decision:</p>
+<ul>
+  <li>Call implies that the caller will suspend immediately.</li>
+  <li>Call implies that the callee is immediately scheduled to run and runs immediately.</li>
+  <li>Call implies that the caller executes a WAIT (for the callee).</li>
+</ul>
+
+<p>Return is a scheduling decision.</p>
+<ul>
+  <li>The callee dies and immediately resumes the caller.</li>
+</ul>
+
+<p>Operating systems deal with such ad-hoc scheduling decisions using a sledge-hammer called <em>preemption</em>.</p>
+
+<p>Call/Return is baked into the hardware of modern CPUs.  This was not always the case.  Even <em>stacks</em> were not automatically-managed in earlier CPUs.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

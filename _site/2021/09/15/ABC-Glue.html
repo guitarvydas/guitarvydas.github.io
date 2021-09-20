@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>ABC Glue | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="ABC Glue" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This note is a follow-on to abc." />
+<meta property="og:description" content="This note is a follow-on to abc." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/15/ABC-Glue.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/15/ABC-Glue.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-15T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ABC Glue" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/15/ABC-Glue.html","@type":"BlogPosting","description":"This note is a follow-on to abc.","dateModified":"2021-09-15T00:00:00-04:00","datePublished":"2021-09-15T00:00:00-04:00","headline":"ABC Glue","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/15/ABC-Glue.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ABC Glue</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-15T00:00:00-04:00" itemprop="datePublished">Sep 15, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This note is a follow-on to <a href="https://guitarvydas.github.io/2021/09/15/Small-Example-of-Interpreting-and-Compiling.html">abc</a>.</p>
+
+<p>I show how to build a transpiler for the ABC language in about 20 lines of code.</p>
+
+<p>I use:</p>
+<ul>
+  <li>the <em>ftranspile()</em> function (from <em>transpiler.js</em>)</li>
+  <li>abc.glue - a specification of the transpiler in the <em>Glue</em> SCN<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</li>
+</ul>
+
+<p><em>Ftranspile()</em> and <em>glue</em> are auxiliary libraries built on top of Ohm-JS.</p>
+
+<h1 id="the-abc-language">The ABC Language</h1>
+<p>This is the most-trivial language that I could imagine, that also shows how to get started using Ohm-JS.</p>
+
+<p>The ABC language is discussed in the ABC note (see below).</p>
+<h1 id="test-sample-program">Test Sample Program</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b = 2
+c = 3
+a = b + c
+</code></pre></div></div>
+<h1 id="grammar">Grammar</h1>
+<p>The file <em>abc.ohm</em> contains the grammar</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABCgrok {
+TopLevel = Assignment+
+
+  Assignment =   Variable "=" Expression -- complex
+               | Variable "=" number -- simple
+  Expression = Variable "+" Variable
+
+    Variable = "a" .. "z"
+    number = dig+
+    dig = "0" .. "9"
+}
+</code></pre></div></div>
+<p>I have added an explicit digit rule (dig) instead of using the Ohm-JS library.</p>
+<h1 id="glue-aka-action-aka-semantics">Glue (aka action (aka semantics))</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TopLevel [@assignments] = [[${console.log (assignments)}]]
+Assignment_complex [v keq e] = [[var ${v} = ${e};\n]]
+Assignment_simple [v keq n] = [[var ${v} = ${n};\n]]
+Expression [v1 kplus v2] = [[${v1} + ${v2}]]
+Variable [c] = [[${c}]]
+number [digits] = [[${digits}]]
+dig [c] = [[${c}]]
+</code></pre></div></div>
+<p>Each rule in the <em>glue</em> specification corresponds to a rule in the grammar.</p>
+
+<p>The left-hand-side parameters name each of the sub-matches in the grammar.</p>
+
+<p>Parameters that correspond to iteration nodes in the grammar (<code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">?</code>) are prefixed with an at symbol <code class="language-plaintext highlighter-rouge">@</code>.</p>
+
+<p>The right-hand-side of each specification rule consists of JS <em>template strings</em> enclosed in double-brackets <code class="language-plaintext highlighter-rouge">[[]]</code>.</p>
+
+<p><em>Glue</em> also supports raw preamble code enclosed in double-braces ``, but this feature is not use in this example.</p>
+<h1 id="future">Future</h1>
+<p>Ftranspile() should be a command that runs from the command line.</p>
+
+<p>The syntax for glue was chosen arbitrarily for experimentation.  I intend to upgrade the syntax (using glue 0.1 as a preprocessor) but haven’t gotten around to it yet.  Having glue run from the command line would allow creating glue pipelines with newer syntax (decommissioning 0.1 is unnecessary, using pipelines).</p>
+
+<p>[<em>Aside: ftranspile() is a first step in creating a command-line version of glue.</em>]</p>
+
+<p><em>Glue</em> rules should return JS objects instead of returning only strings.</p>
+<h1 id="to-run">To Run</h1>
+<p>To run this version, use the bash script</p>
+
+<p><code class="language-plaintext highlighter-rouge">./run.bash</code></p>
+
+<p>You should see the result</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var b = 2;
+var c = 3;
+var a = b + c;
+</code></pre></div></div>
+
+<h1 id="github">Github</h1>
+<p>The details of this solution can be perused in <a href="https://github.com/guitarvydas/abc-glue">abc-glue</a></p>
+<h1 id="ohm-js">Ohm-JS</h1>
+<p><a href="https://github.com/harc/ohm">ohm-js</a></p>
+<h1 id="glue">Glue</h1>
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">glue tool</a></p>
+<h1 id="ftranspile">FTranspile</h1>
+<p>[<em>yet to be documented</em>]</p>
+<h1 id="abc">ABC</h1>
+<p><a href="https://guitarvydas.github.io/2021/09/15/Small-Example-of-Interpreting-and-Compiling.html">abc</a></p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>SCN means Solution Centric Notation. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/09/15/ABC-Glue.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

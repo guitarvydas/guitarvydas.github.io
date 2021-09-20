@@ -1,0 +1,237 @@
+I"7<h1 id="goal-of-daswb---diagrams-as-syntax-workbench">Goal of DaSWB - Diagrams as Syntax WorkBench</h1>
+
+<p>The DaS Workbench (“Diagrams as Syntax Workbench”) transpiles a raw .drawio file into code.</p>
+
+<p>In this example, we will use the drawing <code class="language-plaintext highlighter-rouge">final.drawio</code> and transpile it into PROLOG facts.</p>
+
+<h1 id="decoding">Decoding</h1>
+
+<p>Drawio (aka diagrams.net) stores diagrams as compressed XML in <code class="language-plaintext highlighter-rouge">mxFile</code> format.</p>
+
+<p>The first step of transpiling the .drawio file into code is to uncompress the data.</p>
+
+<p>The uncompression is done automatically, using a bit of JavaScript code.  The support code can be found in support.js.</p>
+
+<p>The uncompressed code is deposited into the textarea with id =”decodertranspiled” seen below:</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20Decode.png?raw=true" alt="2021-07-30 Decode.png" /></p>
+
+<p>The textarea is currently only 1 line high, but all of the code can be copied (e.g. using ⌘-a, ⌘-c).</p>
+
+<p>Paste the code into an editor and pretty-print it as HTML (convert “&lt;” into newline-“&lt;”, then format).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;diagram id="kCBzqsQgc0aW30EmMs_m" name="Page-1"&gt;
+
+  &lt;mxGraphModel dx="673" dy="353" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0"&gt;
+    &lt;root&gt;
+      &lt;mxCell id="0"/&gt;
+      &lt;mxCell id="1" parent="0"/&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-2" value="m" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="120" y="80" width="440" height="210" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-3" value="n" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="180" y="120" width="320" height="140" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-4" value="b" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;align=center;strokeColor=#d6b656;textOpacity=50;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="540" y="175" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="JY7Yr9pDnzS2nqslWDs0-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Nl1LcCOVLVZGkuQ6EcLl-6" target="Nl1LcCOVLVZGkuQ6EcLl-7"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-6" value="a" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;align=center;strokeColor=#82b366;textOpacity=50;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="110" y="175" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-7" value="c" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;align=center;strokeColor=#82b366;textOpacity=50;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="174" y="175" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="JY7Yr9pDnzS2nqslWDs0-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Nl1LcCOVLVZGkuQ6EcLl-9" target="Nl1LcCOVLVZGkuQ6EcLl-4"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="Nl1LcCOVLVZGkuQ6EcLl-9" value="d" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;align=center;strokeColor=#d6b656;textOpacity=50;" parent="1" vertex="1"&gt;
+	&lt;mxGeometry x="474" y="175" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+    &lt;/root&gt;
+  &lt;/mxGraphModel&gt;
+
+&lt;/diagram&gt;
+
+</code></pre></div></div>
+
+<p>We see that drawio saves each diagram element as an <code class="language-plaintext highlighter-rouge">mxCell</code> element with a unique (albeit unmemorable) id.</p>
+
+<h2 id="grok-and-emit">Grok and Emit</h2>
+
+<p>Transpiling the .drawio file consists of repeatedly applying a 2-step process:</p>
+
+<ol>
+  <li><strong>Grok</strong> - understand the input.</li>
+  <li><strong>Emit</strong> - rearrange the input into some other format.</li>
+</ol>
+
+<p>Grok is pattern-matching. Formally, this is known as <em>parsing</em>. At the time of writing, PEG parsers seem to be the easiest parsers to build and use. We happen to use a PEG library called Ohm-JS.</p>
+
+<p>The Emit phase just outputs the matched code, possibly rearranged and embellished. We happen to use JS “template” (backtick) strings, which form the basis of the <em>glue</em> tool.</p>
+
+<p>Ohm-JS performs the <em>grok</em> phase using a REGEXP-like syntax<sup id="fnref:syntax" role="doc-noteref"><a href="#fn:syntax" class="footnote">1</a></sup>.</p>
+
+<p>Ohm-JS leaves the <em>emit</em> phase up to the programmer. In this case, we’ve written a simplistic tool, called <em>glue</em>, that generates JS template strings from a specification.</p>
+
+<h3 id="grok">Grok</h3>
+
+<p>For the decompressor, the <em>grok</em> code is quite simple:</p>
+
+<ul>
+  <li>it pattern-matches an mxfile header,</li>
+  <li>then matches one or more compressed diagrams,</li>
+  <li>then matches a trailer.</li>
+</ul>
+
+<p>The actual code for grok is an Ohm-JS grammar.</p>
+
+<p>You can see this code by copying the code from the textarea labelled “grok (decoder)”.  For discussion, the code appears below:</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20grok%20decoder.png?raw=true" alt="2021-07-30 grok decoder.png" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AppDiagramsEncodedNet{
+  TabbedDiagrams = Header Diagram+ Trailer
+  Header = "&lt;" "mxfile" encodedChar+
+  Trailer = "&lt;/mxfile&gt;"
+  Diagram = "&lt;diagram" Attribute* "&gt;" encodedChar+ "&lt;/diagram&gt;"
+  Attribute = alnum+ "=" attributeValue
+  string= "\"" notDQ* "\""
+  notDQ = ~"\"" any
+  encodedChar = ~"&lt;" any		   
+  attributeValue = number | string
+  number = digit+
+}
+
+</code></pre></div></div>
+
+<p>Ohm-JS grammars are based on PEG grammars.  The syntax is very similar to REGEXP, except that matches are arranged in <em>rules</em> and <em>rules</em> can call one another.</p>
+
+<p>The above says:</p>
+
+<ul>
+  <li>The pattern-matcher (grok grammar) is named “AppDiagramEncodedNet”</li>
+  <li>The block of pattern matching rules is eclosed in brace brackets {}</li>
+  <li>Example: the <em>rule</em> named “TabbedDiagrams” consists of calls to 3 other rules:
+    <ul>
+      <li>Header</li>
+      <li>Diagram</li>
+      <li>Trailer</li>
+    </ul>
+  </li>
+  <li>The Header and Trailer rules must match <em>exactly</em> once.</li>
+  <li>The <em>rule</em> Diagram is to be matched one or more times (specified by the <code class="language-plaintext highlighter-rouge">+</code> operator).</li>
+  <li>An equals sign <code class="language-plaintext highlighter-rouge">=</code> separates the rule name from the rule body.</li>
+  <li>The other rules are similar
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">"..."</code> matches a literal string</li>
+      <li><code class="language-plaintext highlighter-rouge">*</code> matches zero or more times</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">|</code> specifies alternation, e.g. `(A</td>
+              <td>B) means to match an A or a B</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>Note that rule names are case-sensitive</li>
+  <li>Note that rules with names beginning with capital letters work differently than rules with lower-case first-letter names in Ohm-JS
+    <ul>
+      <li>Capitalized rules skip spaces</li>
+      <li>Non-capitalized rules do not skip spaces (the default for most other PEG libraries).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Any</code> is a special operator in Ohm-JS, meaning to match any single character.</li>
+  <li><code class="language-plaintext highlighter-rouge">~</code> is an Ohm-JS operator that succeeds only if the immediately subsequent pattern fails, e.g. <code class="language-plaintext highlighter-rouge">~"\\"" any</code> means to match one character that isn’t a double-quote</li>
+  <li>Backslashes are used to escape certain characters</li>
+  <li>Further details about Ohm-JS syntax is found in the Ohm-JS documentation.</li>
+</ul>
+
+<h3 id="emit">Emit</h3>
+
+<p>Likewise, we can examine the emit code by copying the “emit (decoder):” textarea and viewing it.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20emit%20decoder.png?raw=true" alt="2021-07-30 emit decoder.png" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TabbedDiagrams [h @d t] = [[${d}]]
+Header [k k2 @ec] = [[${k}${k2}${ec}]]
+Trailer [k] = [[${k}]]
+Diagram [k @a k2 @ec k3] = [[${k}${a}${k2}\n${decodeMxDiagram(ec)}\n${k3}\n]]
+Attribute [@an k s] = [[\ ${an}${k}${s}]]
+string [q1 @cs q2] = [[${q1}${cs}${q2}]]
+notDQ [c] = [[${c}]]
+encodedChar [c] = [[${c}]]
+attributeValue[x] = [[${x}]]
+number [n] = [[${n}]]
+
+</code></pre></div></div>
+
+<p>The above code is arranged as rules, with <em>exactly</em> the same names as the pattern matching rules.</p>
+
+<p>After pattern matching has finished (and succeeded), the above rules are called to emit code for each match.</p>
+
+<p>The right-hand side of the rules contain</p>
+
+<ol>
+  <li>a rule name</li>
+  <li>a list of parameters to the rule - essentially variables corresponding to each match ; the <code class="language-plaintext highlighter-rouge">@</code> symbol means that the grammar contained one of the operators <code class="language-plaintext highlighter-rouge">?</code>, <code class="language-plaintext highlighter-rouge">*</code> or <code class="language-plaintext highlighter-rouge">+</code> for a given match<sup id="fnref:param" role="doc-noteref"><a href="#fn:param" class="footnote">2</a></sup>.</li>
+</ol>
+
+<p>The left-hand side of the rules contain rewriting commands in the form of JS template strings surrounded by double-brackets <code class="language-plaintext highlighter-rouge">[[]]</code>.</p>
+
+<p>For example, the first rule <code class="language-plaintext highlighter-rouge">TabbedDiagrams</code> expects 3 matches and assigns them to the variables <code class="language-plaintext highlighter-rouge">h, d and t</code>.  The second parameter matches 1-or-more times (using the <code class="language-plaintext highlighter-rouge">+</code> operator in the grok grammar).  The first rule returns the value of the <code class="language-plaintext highlighter-rouge">d</code> parameter and ignores the <code class="language-plaintext highlighter-rouge">h and t</code> parameters.  The <code class="language-plaintext highlighter-rouge">d</code> parameter is created recursively from the subsequent rules and matches[^@].</p>
+
+<p>[^@]: The “@” parameter operator signifies recursive deconstruction of the parameter <code class="language-plaintext highlighter-rouge">d</code>.</p>
+
+<p>The aim of this first rule is to return the <em>diagram</em> portion of the source text and to drop the header and trailers from the source.</p>
+
+<p>The other <em>emit</em> rules work in a similar fashion.</p>
+
+<p>The goal of this grok/emit phase is <em>only</em> to recognize incoming .drawio files and to break them up into headers and diagrams.  More interesting manipulations of the incoming .drawio files remains the domain of subsequent phases.</p>
+
+<p>The syntax for these rules is further described in the glue manual.</p>
+
+<h1 id="next">Next</h1>
+
+<p>After decompressing the .drawio file, we’ll perform a few cleanups, then convert the code into PROLOG.</p>
+
+<p>It is possible to convert the code into just about any GPL, not just PROLOG.  PROLOG was chosen because it has a fairly clean syntax for representing triples.  Triples can be reprented as Lisp sexps, or user-defined data structures, etc.</p>
+
+<p>We will not go into as much syntactic detail in subsequent articles.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://github.com/guitarvydas/diagram-parsing/blob/master/daswb.html">daswb.html</a></p>
+
+<p><a href="https://www.diagrams.net">drawio / diagrams.net</a></p>
+
+<p><a href="https://github.com/harc/ohm">Ohm-JS source and documentation</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a></p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:syntax" role="doc-endnote">
+      <p>If you don’t already know REGEXP syntax, skip it and go directly to learning PEG syntax.  You probably don’t even need to know PEG syntax to read the rest of these artcles. <a href="#fnref:syntax" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:param" role="doc-endnote">
+      <p>unlike parameters in most languages, it is possible to use operators in the parameter list (this choice was inspired by relational programming) <a href="#fnref:param" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

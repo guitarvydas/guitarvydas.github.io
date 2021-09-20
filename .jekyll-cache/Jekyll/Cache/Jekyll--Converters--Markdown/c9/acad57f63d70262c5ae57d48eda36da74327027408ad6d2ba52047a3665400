@@ -1,0 +1,349 @@
+I"cG<h1 id="general-challenge">General Challenge</h1>
+<p>Implement a language for Software Architecture that is based on diagrams that include:</p>
+<ul>
+  <li>rectangles</li>
+  <li>ellipses</li>
+  <li>text</li>
+  <li>lines / edges.</li>
+</ul>
+
+<p>(i.e. a subset of SVG).</p>
+
+<p>Hint: Do not implement Recursion and Looping.  Recursion and Looping are Implementation details and should not appear in a Software Architecture diagram.</p>
+
+<h1 id="specific-challenge">Specific Challenge</h1>
+
+<p>Transpile the given drawio diagram to bash, grash and as many other languages as possible.</p>
+
+<h1 id="info-diagram-conventions">Info: Diagram Conventions</h1>
+<p>Boxes are software components.</p>
+
+<p>All software components are asynchronous, except red boxes.</p>
+
+<p>Red boxes are synchronous components.</p>
+
+<p>Circles are ports.</p>
+
+<p>Green circles are input ports.</p>
+
+<p>Yellow circles are output ports.</p>
+
+<p>Ports have names.</p>
+
+<p>Boxes have names.</p>
+
+<p>Names of boxes are qualified, e.g. <em>parent</em>/<em>child</em>.</p>
+
+<p>Boxes can contain other boxes.</p>
+
+<p>Circles must touch the edge of the box that they belong to.</p>
+
+<p>Diagrams are drawn using <a href="https://www.diagrams.net">Drawio</a>.</p>
+
+<p>Design (DI (Design Intent), Architecture) is primary. Efficiency is secondary.</p>
+
+<p>Boxes communicate only via ports (e.g. no shared memory, etc.).</p>
+
+<p>Boxes may Send() data to a port that is not connected and the data will be dropped (e.g. garbage collected later).</p>
+
+<p>Boxes may have inputs that are not connected. Such inputs never fire.</p>
+
+<p>Boxes have queues for input messages.  Boxes must complete processing one message before grabbing another one.</p>
+
+<p>Call/Return doesn’t work for this.  Closures work for this<sup id="fnref:threads" role="doc-noteref"><a href="#fn:threads" class="footnote">1</a></sup>.</p>
+
+<h1 id="info-receiving-and-sending">Info: Receiving and Send()ing</h1>
+
+<p>Components are asynchronous by default.</p>
+
+<p>Components can only communicate by using Send().</p>
+
+<p>Send() works like messages in a message-passing system.</p>
+
+<h1 id="diagram-helloworld">Diagram HelloWorld</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-20-HelloWorld.png?raw=true" alt="2021-08-20-HelloWorld.png" style="zoom:67%;" /></p>
+
+<p>There are 3 components in this diagram:</p>
+
+<ol>
+  <li>hwapp123 - the top-level app, asynchronous ; 1 input <code class="language-plaintext highlighter-rouge">in</code>, 1 output <code class="language-plaintext highlighter-rouge">out</code></li>
+  <li>hwapp123/hwsub23 - a mid-level app, asynchronous (not strictly necessary, included for fun) ; 1 input <code class="language-plaintext highlighter-rouge">A</code> and 1 output <code class="language-plaintext highlighter-rouge">B</code></li>
+  <li>hwsub23/hwhello - a synchronous component that calls the command <code class="language-plaintext highlighter-rouge">hello</code> whenever an input (any input) is received on its input pin <code class="language-plaintext highlighter-rouge">in</code> ; 1 input <code class="language-plaintext highlighter-rouge">in</code> 1 output <code class="language-plaintext highlighter-rouge">out</code> (not actually used in this example)</li>
+</ol>
+
+<p>See the Appendix for how this diagram maps to a <em>bash</em> script.</p>
+
+<p>A <em>Dispatcher</em> runs the transpiled diagram. In this case, we use the Linux dispatcher and don’t really need to worry about creating a <em>Dispatcher()</em> routine.</p>
+
+<p>The flow of data/control is:</p>
+
+<ol>
+  <li>an input (any line of text) is placed into the pipe attached to hwapp123/in</li>
+  <li>hwapp123 forwards this input to its child hwapp123/hwsub23/A (the <code class="language-plaintext highlighter-rouge">A</code> input of component hwapp123/hwsub23)</li>
+  <li>hwsub23 forwards this input to its child hwsub23/hwhello on pin <code class="language-plaintext highlighter-rouge">in</code></li>
+  <li>hwhello prints its input on the console and sends some result to its output pin <code class="language-plaintext highlighter-rouge">out</code>.  In this simple case, it does not Send() anything</li>
+  <li>hwapp123/hwsub23 finishes.  It Sends() nothing.</li>
+  <li>hwapp123 finishes.  It Sends() nothing.</li>
+</ol>
+
+<h2 id="raw-drawio-file">Raw Drawio File</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;mxfile host="Electron" modified="2021-08-17T04:03:24.475Z" agent="5.0 (Macintosh; Intel Mac OS X 11_3_1) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36" etag="iuNCdEX2bBK_Gqinlbdj" version="14.6.13" type="device"&gt;&lt;diagram id="YtQpuq6dlgVgQ-RkE8U0" name="HelloWorld"&gt;7VlNc5swEP01PiYDkiHiGH+kPaTTmXg6SY8yCFCLESMLg/vrK4H4CsQhEzvxjGMfzK5Wi/TevhUkEzjf5N84TsIfzCPRBBhePoGLCQCmadjyR3n2pefKNMzSE3Dq6ajGsaL/iHYa2ptSj2w7gYKxSNCk63RZHBNXdHyYc5Z1w3wWde+a4ID0HCsXR33vI/VEWG/MaAa+ExqE+tbI0gMbXAVrxzbEHstaLricwDlnTJRXm3xOIoVehUs57+6F0XphnMRizISVM9tZV7PF/YP/OP2VLNDjw/JKZ9nhKNUbDjOcJCaAetFiXyHBWRp7RCUzJ3CWhVSQVYJdNZpJ8qUvFJtID+8IF1SieBvRIJY+wVSAT6NoziLGi4zQt9RX+reCs7+kNWIXHzWDxaLlLz/Sr5ct70LyF/Ewa5RlfRK2IYLvZYieAKaaGF2aCFmlnTU821VM2KK4noh1bQV17gZ+eaEZeAMb4AAbd2G2TdeXwItjX1sdZhyzz4xlDjBjolMxAweY0XRIYkKZgb2PGCZHqFAblg0EzrDmx5WgET6aOOQS1x0ibo2saZH4CARBx3pOUNX0WgRBwxkgyDwVQdM+Qe8nxcPbsI59K0Mb6nnqrseAfGrfdAF3+oCb9gDg0DoR3lYPbxr3wJZ55DlNXgcab5Py8PZprgB/XtieRZA3HUK9V+kIrGHRoiTa4meXs2MUP0LPmADX/e4EB5oTPFXp233cPfkMo03GRcgCFuNo2XhnjQwULk3MPVN9peDkDxFirx/IcCpYlzGSU/HUuv6tUl1b2lrkOnNh7Csjltt9ahutWcpsphVWNa/cn9rUYdIkBizlLjmAlZaRwDwg4tBzERiuAk4iLOiuu5CjM3rTExdLxenU5fs+KI6N19Xl2WvbOp26bATOTV3Ol7pGq6s63V+Vl/WZ6qpW2ZLX7SUcXcDpvvCcgbjqyvpS1wh1gbGHl/2p8uq/xc4u4ey6OT95mfalPkgg++zIAOCr143vdWhsrzOG6+CDeh3qCewyXoNrmXyEvqTZ/Jm8GGv9twEu/wM=&lt;/diagram&gt;&lt;/mxfile&gt;
+</code></pre></div></div>
+<h2 id="uncompressed-file">Uncompressed File</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;diagram id="YtQpuq6dlgVgQ-RkE8U0" name="HelloWorld"&gt;
+
+  &lt;mxGraphModel dx="1106" dy="-101" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0"&gt;
+    &lt;root&gt;
+      &lt;mxCell id="0"/&gt;
+      &lt;mxCell id="1" parent="0"/&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-1" value="hwapp123" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="240" y="885" width="640" height="240" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-2" value="hwapp123/hwsub23" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="296.5" y="915" width="510" height="180" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-3" value="hwsub23/hwhello" style="rounded=1;whiteSpace=wrap;html=1;opacity=50;align=center;verticalAlign=top;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="395.5" y="950" width="309" height="110" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-4" value="hello" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;opacity=50;align=center;verticalAlign=middle;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="467" y="990" width="169" height="35" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-5" value="in" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;align=center;strokeColor=#82b366;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="388" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S9Bv5-BDLRfW4UpD8WRE-7" target="S9Bv5-BDLRfW4UpD8WRE-12"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-7" value="out" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;align=center;strokeColor=#d6b656;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="682" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S9Bv5-BDLRfW4UpD8WRE-10" target="S9Bv5-BDLRfW4UpD8WRE-5"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-10" value="A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;align=center;strokeColor=#82b366;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="290" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S9Bv5-BDLRfW4UpD8WRE-12" target="S9Bv5-BDLRfW4UpD8WRE-16"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-12" value="B" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;align=center;strokeColor=#d6b656;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="790" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-16" value="out" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;align=center;strokeColor=#d6b656;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="860" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S9Bv5-BDLRfW4UpD8WRE-18" target="S9Bv5-BDLRfW4UpD8WRE-10"&gt;
+	&lt;mxGeometry relative="1" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+      &lt;mxCell id="S9Bv5-BDLRfW4UpD8WRE-18" value="in" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;align=center;strokeColor=#82b366;textOpacity=50;" vertex="1" parent="1"&gt;
+	&lt;mxGeometry x="230" y="992.5" width="30" height="30" as="geometry"/&gt;
+      &lt;/mxCell&gt;
+    &lt;/root&gt;
+  &lt;/mxGraphModel&gt;
+
+&lt;/diagram&gt;
+
+</code></pre></div></div>
+
+<h1 id="appendix-drawio-uncompressor">Appendix Drawio Uncompressor</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> function decodeMxDiagram (encoded) {
+    var data = window.atob (encoded);
+    var inf = pako.inflateRaw (
+	     Uint8Array.from (data, c=&gt;c.charCodeAt (0)), {to: 'string'})
+    var str = decodeURIComponent (inf);
+    return str;
+}
+</code></pre></div></div>
+
+<h1 id="appendix-concurrency-call--return-spaghetti">Appendix Concurrency (Call / Return Spaghetti)</h1>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">Call Return Spaghetti</a></p>
+
+<h1 id="hints">Hints</h1>
+
+<h2 id="bounding-boxes">Bounding Boxes</h2>
+
+<p>It is easier to determine containment if you first create a bounding box (left, top, right, bottom) for each graphical object of interest (except lines).</p>
+
+<h2 id="grash">Grash</h2>
+
+<p><a href="https://github.com/guitarvydas/vsh/tree/master/grash">Grash</a> (GRAphical SHell) is a small C program (approx. 250 lines) that works like /bin/bash but has most of the features stripped out.</p>
+
+<p>Grash only creates forks and execs named programs using pipes.</p>
+
+<h2 id="vsh">VSH</h2>
+
+<p>A prototype graphical shell replacement <a href="https://github.com/guitarvydas/vsh">2012 version of Vsh</a>.</p>
+
+<h2 id="peg">PEG</h2>
+<p>PEG means Parsing Expression Grammar</p>
+
+<p><a href="https://bford.info/pub/lang/peg/">Bryan Ford’s Thesis</a>.</p>
+
+<p>PEG libraries are available in many languages, for example:</p>
+
+<ul>
+  <li>Racket <a href="https://docs.racket-lang.org/peg/index.html">#lang peg</a></li>
+  <li>JavaScript, e.g. <a href="https://pegjs.org">peg.js</a></li>
+  <li>Common Lisp <a href="https://scymtym.github.io/esrap/">ESRAP</a></li>
+  <li>etc.</li>
+</ul>
+
+<h2 id="ohm-js">Ohm-JS</h2>
+
+<p>My favourite PEG library is <a href="https://github.com/harc/ohm">Ohm-JS</a>, since it separates the grammar from the rest of the code and has a helpful <a href="https://ohmlang.github.io/editor/">IDE</a>.</p>
+
+<p>Separating the grammar from the rest of the code is important from a DI (Design Intent / Architecture) perspective.  All other PEG libraries that I’ve seen conflate details with the grammar (e.g. variables, semantic code inserted into the grammar).</p>
+
+<h1 id="appendix-example-bash-output">Appendix Example Bash Output</h1>
+
+<p>This example consists of 3 (small) <em>bash</em> files.  Double-underscore <code class="language-plaintext highlighter-rouge">__</code> replaces <code class="language-plaintext highlighter-rouge">/</code> in the file names.</p>
+
+<p>Plus a script to run the whole thing.</p>
+
+<p>You should be able to create the 4 files and run the example from the command line.</p>
+
+<h2 id="hwapp123">hwapp123</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# hwapp123
+# inputs: 3 ("in"): &lt;line of characters&gt;
+# outputs: 4 ("out"): &lt;line of characters&gt;
+BIN=.
+port_in=/dev/fd/3
+port_out=/dev/fd/4
+${BIN}/hwapp123__hwsub23 3&lt;${port_in} 4&gt;${port_out} &amp;
+
+</code></pre></div></div>
+
+<h2 id="hwapp123__hwsub23">hwapp123__hwsub23</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# hwapp123__hwsub23
+# inputs: 3 ("A"): &lt;line of characters&gt;
+# outputs: 4 ("B"): &lt;line of characters&gt;
+BIN=.
+A=/dev/fd/3
+B=/dev/fd/4
+${BIN}/hwsub23__hwhello 3&lt;${A} 4&gt;${B} &amp;
+
+</code></pre></div></div>
+
+<h2 id="hwsub23__hwhello">hwsub23__hwhello</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# hwsub23__hwhello
+# inputs: 3 ("in"): &lt;line of characters&gt;
+# outputs: 4 ("out"): &lt;line of characters&gt;
+BIN=.
+cat - &lt;/dev/fd/3 &gt;/dev/fd/4
+
+</code></pre></div></div>
+
+<h2 id="runbash">run.bash</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+pipeOut=pipe_$RANDOM
+mkfifo  ${pipeOut}
+pipeIn=pipe_$RANDOM
+mkfifo  ${pipeIn}
+
+./hwapp123 3&lt;${pipeIn} 4&gt;${pipeOut} &amp;
+
+echo '&lt;dont care&gt;' &gt;${pipeIn} &amp;
+cat &lt;${pipeOut}
+
+rm ${pipeOut} ${pipeIn}
+</code></pre></div></div>
+
+<h1 id="appendix---finesse-points">Appendix - Finesse Points</h1>
+
+<p>None of the following points affect this exercise.</p>
+
+<p>Skip these points on first reading.</p>
+
+<p>There are a number of details which appear to help in creating larger projects (i.e. not this example).</p>
+
+<h2 id="namespaces">Namespaces</h2>
+
+<p>Components will have several namespaces</p>
+
+<ul>
+  <li><em>i</em> for input ports</li>
+  <li><em>o</em> for output ports</li>
+  <li><em>x</em> for connections</li>
+  <li><em>c</em> for sub-components</li>
+  <li><em>n</em> for everything else.</li>
+</ul>
+
+<p>The above ports for the component hwapp123/hwsub23 might, then, be named:</p>
+
+<ul>
+  <li>hwapp123/c/hwsub23/i/A</li>
+  <li>hwapp123/c/hwsub23/o/B.</li>
+</ul>
+
+<h2 id="send-upwards-and-downwards-never-sideways">Send() Upwards and Downwards, Never Sideways</h2>
+
+<p>In creating pluggable components, one must ensure that no dependencies exist.</p>
+
+<p>Rules-of-thumb:</p>
+
+<ul>
+  <li>components cannot name each other directly</li>
+  <li>components can only send messages upwards to their parent components or downwards to their children components (in general, sending a message upwards transmits filtered/consolidated data, sending messages downwards transmits commands (parent sends commands to children - think business hierarchy and ORG charts)).</li>
+</ul>
+
+<h2 id="structured-message-passing">Structured Message Passing</h2>
+
+<p>Message passing will fail to scale if it is <em>flat</em> (strongly connected graph).</p>
+
+<p>Structured message-passing is to message-passing as structured programming is to programming.</p>
+
+<p>Form hierarchical trees, not graphs.</p>
+
+<h2 id="connections">Connections</h2>
+
+<p>Connections contain</p>
+
+<ul>
+  <li>the sender</li>
+  <li>the receiver.</li>
+</ul>
+
+<p>Senders and receivers are <em>ports</em> that belong to components on the same diagram.</p>
+
+<p>We usually don’t care about connection names, since we can see them on the diagram(s).</p>
+
+<p>Yet, it is sometimes useful to give names to connections to allow operating on them (e.g. in human-written scripts).</p>
+
+<p>Invent names of the form “xNN”.</p>
+
+<p>Named connections are not required for this exercise.</p>
+
+<h1 id="appendix-langjam">Appendix LangJam</h1>
+
+<p>https://github.com/langjam/langjam</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:threads" role="doc-endnote">
+      <p>Operating System Threads are big closures in disguise. <a href="#fnref:threads" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Code Markdown to Structured Pseudo-code | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Code Markdown to Structured Pseudo-code" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Convert very simple markdown syntax to very simple pseudo-code." />
+<meta property="og:description" content="Convert very simple markdown syntax to very simple pseudo-code." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-03T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Code Markdown to Structured Pseudo-code" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html","@type":"BlogPosting","description":"Convert very simple markdown syntax to very simple pseudo-code.","dateModified":"2021-08-03T00:00:00-04:00","datePublished":"2021-08-03T00:00:00-04:00","headline":"Code Markdown to Structured Pseudo-code","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Code Markdown to Structured Pseudo-code</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-03T00:00:00-04:00" itemprop="datePublished">Aug 3, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Convert very simple markdown syntax to very simple pseudo-code.</p>
+
+<p>Code markdown is line-oriented whereas pseudo-code is structure-oriented (braces indicate inclusion).</p>
+
+<h1 id="basic-premise">Basic Premise</h1>
+<p>Use <code class="language-plaintext highlighter-rouge">markdown-mode</code> of emacs to write code and elide details.</p>
+
+<h2 id="elision-in-emacs-org-mode">Elision in Emacs Org-Mode</h2>
+<p>Position mouse over a line containing an octothorpe <code class="language-plaintext highlighter-rouge">#</code>.</p>
+
+<p>Press <code class="language-plaintext highlighter-rouge">TAB</code> key.</p>
+
+<p>This will open/close a layer.</p>
+
+<p>Pressing <code class="language-plaintext highlighter-rouge">TAB</code> key again and again will toggle between elided and non-elided forms of the text.</p>
+
+<h1 id="italicized-identifiers">Italicized Identifiers</h1>
+
+<p>Possible convention, italicized identifiers can include spaces (but not underscores - this can be changed later to be some other character or sequence) and are considered to be comments.</p>
+
+<h1 id="example">Example</h1>
+<h2 id="input">Input</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+
+
+## _details_
+### allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+### printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+### printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+</code></pre></div></div>
+<h2 id="output">Output</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{_containment_
+
+{_fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+
+
+}
+{_details_
+{allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+}
+{printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+}
+{printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+}}}
+</code></pre></div></div>
+
+<h1 id="algorithm">Algorithm</h1>
+
+<p>A section beginning with an octothorpe <code class="language-plaintext highlighter-rouge">#</code> is composed of 3 parts:</p>
+<ol>
+  <li>The octothorpe <code class="language-plaintext highlighter-rouge">#</code></li>
+  <li>The first text up to \n</li>
+  <li>The rest of the text up to the next octothorpe (incl. \n’s).</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># a b 
+## c d
+## e f
+</code></pre></div></div>
+
+<p>is converted to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ a b { c d } { e f }}
+</code></pre></div></div>
+<p>using a simple algorithm, see md2brace.html and support.js.</p>
+
+<ol>
+  <li>Set two counters to 0. (depth and openbrackets).</li>
+  <li>When a <code class="language-plaintext highlighter-rouge">#</code> is encountered, determine new depth as the number of <code class="language-plaintext highlighter-rouge">#</code>s. If newdepth &gt; depth, emit an open brace <code class="language-plaintext highlighter-rouge">{</code>, if newdepth === depth emit close and open <code class="language-plaintext highlighter-rouge">}\n{</code>, otherwise panic. Set depth to newdepth, increment openbrackets by number of <code class="language-plaintext highlighter-rouge">{</code> that were added.</li>
+  <li>At the end, emit one ‘}’ for each openbracket.</li>
+</ol>
+
+<p>No judgement is made about the contents of a,b,c,d,e,f. (That is left up to other tools).</p>
+
+<h1 id="github">Github</h1>
+
+<p><a href="https://github.com/guitarvydas/md2brace">md2brace</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a><br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

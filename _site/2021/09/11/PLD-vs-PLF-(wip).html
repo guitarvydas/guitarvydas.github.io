@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>PLD vs PLF (notes) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="PLD vs PLF (notes)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this essay, I use the abbreviations: PLD to mean Programming Language Design, and, PLF to mean Programming Language Fundamentals." />
+<meta property="og:description" content="In this essay, I use the abbreviations: PLD to mean Programming Language Design, and, PLF to mean Programming Language Fundamentals." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/11/PLD-vs-PLF-(wip).html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/11/PLD-vs-PLF-(wip).html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-11T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PLD vs PLF (notes)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/11/PLD-vs-PLF-(wip).html","@type":"BlogPosting","description":"In this essay, I use the abbreviations: PLD to mean Programming Language Design, and, PLF to mean Programming Language Fundamentals.","dateModified":"2021-09-11T00:00:00-04:00","datePublished":"2021-09-11T00:00:00-04:00","headline":"PLD vs PLF (notes)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/11/PLD-vs-PLF-(wip).html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">PLD vs PLF (notes)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-11T00:00:00-04:00" itemprop="datePublished">Sep 11, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this essay, I use the abbreviations:</p>
+<ul>
+  <li>PLD to mean Programming Language Design, and,</li>
+  <li>PLF to mean Programming Language Fundamentals.</li>
+</ul>
+
+<p>Both, PLF and PLD are necessary for creating a popular programming language.</p>
+
+<p>if-then-else<br />
+counting parameters</p>
+<h1 id="parameter-counting---lisp-vs-pascal">parameter counting - lisp vs pascal</h1>
+<hr />
+<p>/* C */<br />
+void fn (int x, int y) {<br />
+}</p>
+
+<p>void tester () {<br />
+  fn (1, 2);<br />
+  fn (1);<br />
+}<br />
+—<br />
+// JavaScript<br />
+function fn (x, y) {<br />
+}</p>
+
+<p>fn (1, 2);<br />
+fn (1);</p>
+
+<hr />
+<h1 id="syntax-for-end-if">syntax for <code class="language-plaintext highlighter-rouge">end if</code></h1>
+<p>– (fn x) fn(x), (if x y) if x then y end if</p>
+<h1 id="assembler">assembler</h1>
+<p>– no syntax<br />
+syntax, the realm of syntax<br />
+JS vs C<br />
+fn(x,y) fn(x,y), JS doesn’t count args<br />
+variable args<br />
+AGDA syntax vs. Smalltalk syntax<br />
+Architecture vs Engineering (vs construction)<br />
+type checking<br />
+– another layer of checking, like application of syntax<br />
+interpretation vs compilation<br />
+– all languages must be interpreted<br />
+– compilation is an optimization the pre-interprets some of the code<br />
+– the optimization called “compilation” might require some changes to the language to allow the optimization</p>
+<h1 id="error-messages-and-warnings">error messages and warnings</h1>
+<hr />
+<p>(defun fn (x y)<br />
+  (declare (ignore x y)))</p>
+
+<p>(fn 1 2)</p>
+
+<h2 id="fn-1">(fn 1)</h2>
+<p>While evaluating the form starting at line 6, column 0<br />
+  of #P”/Users/tarvydas/Desktop/junk.lisp”:</p>
+
+<p>debugger invoked on a SB-INT:SIMPLE-PROGRAM-ERROR in thread<br />
+#&lt;THREAD “main thread” RUNNING {1001570143}&gt;:<br />
+  invalid number of arguments: 1</p>
+
+<p>Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.</p>
+
+<p>restarts (invokable by number or by possibly-abbreviated name):<br />
+  0: [REPLACE-FUNCTION] Call a different function with the same arguments<br />
+  1: [CALL-FORM       ] Call a different form<br />
+  2: [RETRY           ] Retry EVAL of current toplevel form.<br />
+  3: [CONTINUE        ] Ignore error and continue loading file “/Users/tarvydas/Desktop/junk.lisp”.<br />
+  4: [ABORT           ] Abort loading file “/Users/tarvydas/Desktop/junk.lisp”.<br />
+  5:                    Exit debugger, returning to top level.</p>
+
+<p>(FN 1) [external]<br />
+   source: (DEFUN FN (X Y) (DECLARE (IGNORE X Y)))<br />
+0] <br />
+——–</p>
+
+<h1 id="plf-vs-pld">PLF vs PLD</h1>
+<p>PLF vs PLD<br />
+.. plf is rigor<br />
+.. pld is ux<br />
+… is there Science for UX?<br />
+.. at, ae ai aa arch, eng implement<br />
+.. how is an arch diff from an eng?<br />
+.. how is an eng diff from an implementors?<br />
+.. read and write syntax<br />
+.. Das is deeper syntax than only text<br />
+… SVG<br />
+.. languages need not be restricted to non overlapping cells of small bitmaps</p>
+
+<p>…. keyboard keys are bound to bitmaps</p>
+
+<p>.. backtracking to parser chars, but to parser diagrams<br />
+.. design is about fewer details,  smartness is about juggling large soup of details <br />
+.. classes are compile time, prototypes are runtime</p>
+
+<h1 id="locality-of-reference">locality of reference</h1>
+
+<h1 id="c-vs-assembler">C vs Assembler</h1>
+
+<h1 id="pascal-vs-c">Pascal vs C</h1>
+
+<h1 id="smalltalk-vs-assembler">Smalltalk vs Assembler</h1>
+
+<h1 id="assembler-vs-identifiers">Assembler vs Identifiers</h1>
+
+<p>Why Spaces Are Not Allowed in Identifiers</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>abc def</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/09/11/PLD-vs-PLF-(wip).html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

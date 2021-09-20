@@ -1,0 +1,116 @@
+I"w<p>Convert very simple markdown syntax to very simple pseudo-code.</p>
+
+<p>Code markdown is line-oriented whereas pseudo-code is structure-oriented (braces indicate inclusion).</p>
+
+<h1 id="basic-premise">Basic Premise</h1>
+<p>Use <code class="language-plaintext highlighter-rouge">markdown-mode</code> of emacs to write code and elide details.</p>
+
+<h2 id="elision-in-emacs-org-mode">Elision in Emacs Org-Mode</h2>
+<p>Position mouse over a line containing an octothorpe <code class="language-plaintext highlighter-rouge">#</code>.</p>
+
+<p>Press <code class="language-plaintext highlighter-rouge">TAB</code> key.</p>
+
+<p>This will open/close a layer.</p>
+
+<p>Pressing <code class="language-plaintext highlighter-rouge">TAB</code> key again and again will toggle between elided and non-elided forms of the text.</p>
+
+<h1 id="italicized-identifiers">Italicized Identifiers</h1>
+
+<p>Possible convention, italicized identifiers can include spaces (but not underscores - this can be changed later to be some other character or sequence) and are considered to be comments.</p>
+
+<h1 id="example">Example</h1>
+<h2 id="input">Input</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+
+
+## _details_
+### allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+### printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+### printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+</code></pre></div></div>
+<h2 id="output">Output</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{_containment_
+
+{_fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+
+
+}
+{_details_
+{allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+}
+{printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+}
+{printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+}}}
+</code></pre></div></div>
+
+<h1 id="algorithm">Algorithm</h1>
+
+<p>A section beginning with an octothorpe <code class="language-plaintext highlighter-rouge">#</code> is composed of 3 parts:</p>
+<ol>
+  <li>The octothorpe <code class="language-plaintext highlighter-rouge">#</code></li>
+  <li>The first text up to \n</li>
+  <li>The rest of the text up to the next octothorpe (incl. \n’s).</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># a b 
+## c d
+## e f
+</code></pre></div></div>
+
+<p>is converted to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ a b { c d } { e f }}
+</code></pre></div></div>
+<p>using a simple algorithm, see md2brace.html and support.js.</p>
+
+<ol>
+  <li>Set two counters to 0. (depth and openbrackets).</li>
+  <li>When a <code class="language-plaintext highlighter-rouge">#</code> is encountered, determine new depth as the number of <code class="language-plaintext highlighter-rouge">#</code>s. If newdepth &gt; depth, emit an open brace <code class="language-plaintext highlighter-rouge">{</code>, if newdepth === depth emit close and open <code class="language-plaintext highlighter-rouge">}\n{</code>, otherwise panic. Set depth to newdepth, increment openbrackets by number of <code class="language-plaintext highlighter-rouge">{</code> that were added.</li>
+  <li>At the end, emit one ‘}’ for each openbracket.</li>
+</ol>
+
+<p>No judgement is made about the contents of a,b,c,d,e,f. (That is left up to other tools).</p>
+
+<h1 id="github">Github</h1>
+
+<p><a href="https://github.com/guitarvydas/md2brace">md2brace</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a><br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

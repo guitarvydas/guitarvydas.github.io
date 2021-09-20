@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Addressing | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Addressing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Absolute Addressing" />
+<meta property="og:description" content="Absolute Addressing" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/08/12/Addressing.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/08/12/Addressing.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-12T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Addressing" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/08/12/Addressing.html","@type":"BlogPosting","description":"Absolute Addressing","dateModified":"2021-08-12T00:00:00-04:00","datePublished":"2021-08-12T00:00:00-04:00","headline":"Addressing","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/08/12/Addressing.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Addressing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-12T00:00:00-04:00" itemprop="datePublished">Aug 12, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="absolute-addressing">Absolute Addressing</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-Absolute%20Addressing.png?raw=true" alt="Addressing-Absolute Addressing.png" style="zoom: 67%;" /></p>
+
+<p>Simplest case - the CPU directly addresses memory.</p>
+
+<p>Memory is implemented, in hardware, as an array of bytes/words.</p>
+
+<p>Every program has 3 spaces:</p>
+
+<ul>
+  <li>code</li>
+  <li>initialized data</li>
+  <li>stack.</li>
+</ul>
+
+<p>Local variables (scoped data) and temporaries are usually placed on the stack.</p>
+
+<p>Global variables are usually placed in the initialized data area.</p>
+
+<p>Code can be in read/write RAM, or, code can be placed in read-only ROM, or, code space can be protected from writes by hardware (not shown).</p>
+
+<h1 id="relative-addressing">Relative Addressing</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-Relative%20Addressing.png?raw=true" alt="Addressing-Relative Addressing.png" style="zoom:67%;" /></p>
+
+<p>Compilers determine what kind of code is created for a program.</p>
+
+<p>For relative addressing, compilers emit references to data as offsets from some distinguished register (usually chosen by the compiler-writer).</p>
+
+<p>Locals are referenced as offsets from the SP register (Stack Pointer).</p>
+
+<h1 id="pic---position-independent-code">PIC - Position Independent Code</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-PIC.png?raw=true" alt="Addressing-PIC.png" style="zoom:67%;" /></p>
+
+<p>To allow code to be repositioned in memory (e.g. when loaded by the operating system), compilers are made to emit all offsets (data and control flow) relative to some register, e.g. the PC (program counter).</p>
+
+<p>Control-flow instructions, like <em>branches</em>, do not refer to absolute locations, but are made relative to some register.  For example, <code class="language-plaintext highlighter-rouge">BR label</code> (branch to <em>label</em>) is compiled as <code class="language-plaintext highlighter-rouge">BR offset+PC</code> (where offset is the integer offset of the label relative to the current code position).</p>
+
+<p>Note that relative addressing makes writing compilers a bit harder, since the compiler programs need to calculate offsets instead of emitting absolute labels.</p>
+
+<p>Some CPU instruction sets make it hard/impossible to use relative addresses.</p>
+
+<p>Some CPUs take longer to calculate and use a relative address than to use an absolute address.</p>
+
+<p>Some CPU architectures provide compiler-writers with special registers that are set for every function call to point to a fixed data location and all label offsets are calculated relative to those registers.  Unlike the PC, the special offset-registers don’t change value during function execution.</p>
+
+<h1 id="rtos---embedded-operating-system">RTOS - Embedded Operating System</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-RTOS.png?raw=true" alt="Addressing-RTOS.png" style="zoom:67%;" /></p>
+
+<p>In a simple embedded operating system that supports threads, memory is divided up between threads.</p>
+
+<p>Each thread is given its own code/data/stack area.</p>
+
+<p>Obviously, a buggy program might overwrite data/code/stack of some other thread, crashing the whole system (or worse, continue running and cause mysterious bugs and crashes later).</p>
+
+<h1 id="mmu---memory-management-unit">MMU - Memory Management Unit</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-MMU.png?raw=true" alt="Addressing-MMU.png" style="zoom:67%;" /></p>
+
+<p>Some hardware designs provide hardware memory protection and segmentation using MMUs (Memory Management Units ; extra ICs and/or built-into the CPU).</p>
+
+<p>MMUs hold a mapping table for the current thread and map addresses when memory is accessed.</p>
+
+<p>This makes it possible to use absolute addressing (again), since the hardware will map absolute addresses into actual addresses.</p>
+
+<p>The Operating System must keep a unique mapping table for each process and must load the mapping table into the MMU hardware before resuming a process.</p>
+
+<p>Larger Operating Systems will “optimize” memory by writing out a thread’s memory to disk when it is suspended and by reading back in a thread’s memory when it is resumed.  This is called <em>swapping</em> and <em>paging</em>.</p>
+
+<p>Q: What is the time cost of using a mapped address instead of an absolute address?</p>
+
+<p>Q: What is the cost ($) of using an MMU chip or a CPU-with-MMU in a design?</p>
+
+<h1 id="virtual-memory">Virtual Memory</h1>
+
+<p>Virtual memory is a variant of the way in which MMUs are used.</p>
+
+<p>Not all of a thread’s memory is read back in from disk at once.</p>
+
+<p>When the thread tries to access a block of its own memory that is not already in-core, the MMU signals an interrupt.  The operating system fields the interrupt and pages-in the appropriate block of memory, then resumes the thread and allows it to continue running.</p>
+
+<p>This is an optimization based on the hope that a thread will block before it accesses all of its memory. Since it is orders-of-magnitude more costly (in time, say), to access memory on a disk, the operating system hopes to save time by not paging in all memory until it is actually needed.</p>
+
+<h1 id="blocking">Blocking</h1>
+
+<p>A thread blocks by <em>yielding</em> to the Dispatcher (the operating system).</p>
+
+<ul>
+  <li>
+    <p>Blocking can be voluntary, i.e. when a thread asks for some I/O that takes a long time, or,</p>
+  </li>
+  <li>
+    <p>Blocking can be involuntary, i.e. when the operating system decides that a thread has run “long enough”.  Usually, the operating system sets a hardware timer and waits for a timeout or a voluntary block.</p>
+  </li>
+</ul>
+
+<h1 id="complexity">Complexity</h1>
+
+<p>As can be seen, multi-threading is quite simple.</p>
+
+<p>Each extra layer of hardware-assist adds more complexity to the code.  Most often, the code is squirreled away into a library that we call the <em>operating system</em>.</p>
+
+<p>Q: What is the trade-off between complexity and hardware-assist?</p>
+
+<p>Q: Is it better to have 1,000 8-bit, simple CPUs on a chip running simple operating systems, or is it better to have an MMU and more complication in the operating system?</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/08/12/Addressing.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

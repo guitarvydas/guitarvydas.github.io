@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>markdown for design and implementation (WIP) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="markdown for design and implementation (WIP)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Overview" />
+<meta property="og:description" content="Overview" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/08/09/md-editor.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/08/09/md-editor.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-09T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="markdown for design and implementation (WIP)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/08/09/md-editor.html","@type":"BlogPosting","description":"Overview","dateModified":"2021-08-09T00:00:00-04:00","datePublished":"2021-08-09T00:00:00-04:00","headline":"markdown for design and implementation (WIP)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/08/09/md-editor.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">markdown for design and implementation (WIP)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-09T00:00:00-04:00" itemprop="datePublished">Aug 9, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="overview">Overview</h1>
+
+<ul>
+  <li>
+    <p>use .md to describe design, user another .md to describe implementation (multiple views)</p>
+  </li>
+  <li>add <code class="language-plaintext highlighter-rouge">@</code> syntax to create and ref other .md files</li>
+  <li>implementation is <em>bash</em> or <em>python</em> or <em>whatever</em></li>
+  <li>observation:
+    <ul>
+      <li>disease: trying to fit everything onto one notation</li>
+      <li>cure: use multiple views and multiple notations, all very similar to .md and to <em>bash</em></li>
+    </ul>
+  </li>
+  <li>diagram:
+    <ul>
+      <li>only one way to view a design/implementation</li>
+      <li>currently using <em>drawio</em> https://www.diagrams.net</li>
+    </ul>
+  </li>
+  <li>text:
+    <ul>
+      <li>only one way to view a design/implementation</li>
+      <li><em>bash</em> is textual</li>
+      <li><em>python</em> is textual</li>
+      <li><em>JavaScript</em> is textual</li>
+      <li>.md is textual</li>
+    </ul>
+  </li>
+  <li>asynchronous
+    <ul>
+      <li>all components are asynchronous</li>
+      <li>all components are concurrent (<em>can</em> be run in parallel, but not necessarily)
+        <ul>
+          <li>note that all <em>parallel</em> designs are subsets of <em>concurrent</em> designs</li>
+          <li>parallelism is an implementation detail</li>
+          <li>concurrency is a design paradigm, though</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="refinement">Refinement</h1>
+
+<p>The “most interesting” question is: “what happens to my original idea(s) when I refine the idea(s)”</p>
+
+<p>[This also applies to TODOs - how do you refine/embellish a TODO item?].</p>
+
+<p>For example, I have an item and I begin to envision doing it in two steps.</p>
+
+<p>Do I re-write the item, or, do I “push into” the item (open a new file, zoom in on a diagram element, etc.)?</p>
+
+<p>How does the editor “remember” what was there and how does it represent the newer version?</p>
+
+<p>This step is <em>recursive</em>.  Once I’ve broken an item down into two parts, what happens if I want to break down one of the parts into two more parts? And so on…</p>
+
+<h1 id="edit-operations">Edit operations</h1>
+
+<ul>
+  <li>add node</li>
+  <li>connect node</li>
+  <li>ref to other .md file</li>
+  <li>butted rectangles means sequence (synch)</li>
+  <li>SVG rect, ellipse, text, line</li>
+  <li>line beginning with <code class="language-plaintext highlighter-rouge">@</code> means other-file with given name (includes spaces) e.g. <code class="language-plaintext highlighter-rouge">@ all containment</code> means other-file called <code class="language-plaintext highlighter-rouge">all containment.md</code></li>
+  <li>rename <code class="language-plaintext highlighter-rouge">@</code>node (hence, rename file)</li>
+  <li>push selection to new .md file (invent <code class="language-plaintext highlighter-rouge">@</code> name, allow change later)</li>
+</ul>
+
+<h1 id="stubs">Stubs</h1>
+
+<p>Not all steps are automated, some require human intervention.</p>
+
+<p>Begin with outline of steps, all non-automated, i.e. implementation is English text.</p>
+
+<p>Refine steps by replacing them with automation.</p>
+
+<h1 id="round-trip">Round Trip</h1>
+
+<p>Q: How does refining a step reflect back to the original design?</p>
+
+<p>Q: Is the original design the master document?</p>
+
+<p>Q: Do we combine the original design with implementation to produce an app?</p>
+
+<ul>
+  <li>initial version: git-like folding of implementation onto design, complain if mis-match (conflict) ie. implementation does not fit neatly over design</li>
+  <li>AOP for aspects of implementation?, Lisp-like :before and :after</li>
+  <li>Paul Bassett’s “Framing Software Reuse” for creating app from design+implementation?</li>
+</ul>
+
+<h1 id="implementation">Implementation</h1>
+
+<p>Q: Use bash’s <code class="language-plaintext highlighter-rouge">#!~/bin/ag</code> as first line of implementation?</p>
+
+<h1 id="example">Example</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-09-apps-hello%20mdd.png?raw=true" alt="2021-08-09-apps-hello mdd.png" /></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/08/09/md-editor.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

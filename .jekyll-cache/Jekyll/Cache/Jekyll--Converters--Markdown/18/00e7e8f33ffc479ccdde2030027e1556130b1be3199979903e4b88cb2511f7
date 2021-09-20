@@ -1,0 +1,128 @@
+I"B<p>Every interpreter interprets some data structure.</p>
+
+<p>If the interpreter interprets a tree data structure, it is a tree-walk interpreter.</p>
+
+<p>Originally, interpreters interpreted source code as strings.</p>
+
+<p>Strings are considered to be “inefficient”, since they are usually variable length. CPU power is required to parse (and re-parse) the variable-length strings.</p>
+
+<p>Language designers tried to improve machine runtime efficiency by reading the strings only once, storing info into hash tables, and then compiling the source code into  bytecodes (a linear array of bytes – a data structure – without the need to re-scan strings).</p>
+
+<p>This technique was later re-branded as VM’s (virtual machines).</p>
+
+<p>A CPU chip is an interpreter (!).  A CPU interprets opcodes (stored as words in memory) and hides the details of what is really going on underneath.  CPU chips are implemented using various forms of rust (oxides).</p>
+
+<p>Software people tend to draw a line between interpreters of opcodes vs. interpreters of other kinds of data structures (which, of course, are interpreted by the CPU interpreter hardware).</p>
+
+<p>Programmers tend to think in terms of</p>
+<ol>
+  <li>compilation – to some convenient data structure, such as CPU opcodes</li>
+  <li>interpretation – of some data structure.</li>
+</ol>
+
+<p>The thing that programmers call interpreters are usually scripts that boil down to CPU opcodes.  The inefficiency of software-interpreters is that they use scripts of CPU opcodes to parse and evaluate data structures built on top of CPU opcodes.  You get towers of data structures which boil down to oxides.  “Efficiency” comes from removing as many levels from the towers as possible before running the oxide-based interpreter.</p>
+
+<p>Compilers remove some of the runtime overhead of interpretation before running an app on a CPU (which is an interpreter, itself).</p>
+
+<h1 id="jit">JIT</h1>
+
+<p>JIT is considered to be a compiler.</p>
+
+<p>JIT interprets the input source only once and compiles that source to opcodes on-the-fly.</p>
+
+<p>Traditional compilers compile all of the source code before-hand.  JIT compilers compile the souce code in snippets, on-the-fly – as the code is encountered.  One of the advantages of JIT is that it doesn’t need to waste time compiling code snippets that aren’t encountered when the app is run.</p>
+
+<p>JIT was originally explored in Lisp (fast-calls).</p>
+
+<p>Java popularized JIT (as well as garbage collection, as well as OOP, etc.).</p>
+
+<p>In fact, the language Self, explored JIT which then made its way into Java.</p>
+
+<h1 id="compilers-are-optimizations">Compilers Are Optimizations</h1>
+
+<p>The things we call <em>compilers</em> are merely optimizations of language interpreters.</p>
+
+<p>Imagine that <em>every</em> language starts out in interpreted form.</p>
+
+<p><em>Compilers</em> are just sets of optimizations to those interpreted forms.</p>
+
+<p>The <em>optimizations</em> consist of mutations to the languages that allow the languages to be pre-interpreted.  [<em>Not all languages lend themselves to pre-interpretation. The programming community has discovered what language features aid pre-interpretation (e.g. type systems).  This can be likened to how the programming community discovered what language features aided syntax checking (e.g. <code class="language-plaintext highlighter-rouge">end if</code> vs. <code class="language-plaintext highlighter-rouge">}</code>)</em>]</p>
+
+<p>The pre-interpretation step calculates various properties of the languages, e.g.</p>
+<ol>
+  <li>Syntax checking.</li>
+  <li>Type checking.</li>
+</ol>
+
+<p>The pre-interpreters perform the checks once for each application, then delete portions of the applications, allowing the runtime-interpreters to run more quickly and to use less storage.</p>
+
+<p>The assumption is that pre-interpretation will be executed much less frequently than the runtime-interpretation of the applications.</p>
+
+<p>Pre-checking various parts of the applications <em>should</em> result in more efficient operation of the pruned applications.</p>
+
+<p>The pre-interpreters are called <em>compilers</em>.</p>
+
+<h1 id="oop--classes-vs-prototypes">OOP – Classes vs. Prototypes</h1>
+
+<p>Class-based OOP is an optimized version of prototype-based OOP.</p>
+
+<p>Classes allow for easier pre-interpretation of programs. Programs based on prototype-based OOP are harder to pre-interpret.</p>
+
+<h1 id="typing">Typing</h1>
+<h2 id="static-types-vs-dynamic-types">Static Types vs. Dynamic Types</h2>
+
+<p>Most modern GPLs, focus on static type systems as an aid to pre-interpretation.</p>
+
+<p>Dynamically-typed languages, such as early Lisps (before Common Lisp), focused on full type-checking that was done at runtime, but was difficult to pre-interpret.</p>
+
+<p>It turns out that static typing allows the pre-interpreter to create faster/smaller code.</p>
+
+<p>Type-checking at runtime does not mean that the languages are untyped.</p>
+
+<p>Type-checking at runtime usually implies that extra time/space is expended at runtime to determine the types of data, each time the data is encountered.</p>
+
+<p>One of the <em>optimizations</em> consists of annotating data in a way that allows the pre-interpreter to check consistency and to discard runtime checks.  This kind of <em>optimization</em> is called <em>type checking</em>.</p>
+
+<h2 id="typed-language-vs-untyped-languages">Typed language vs. Untyped Languages</h2>
+
+<p>Some languages are loosely-typed or completely untyped.</p>
+
+<p>These languages allow implicit coercion between very disparate types of data (e.g. strings vs. numbers) at runtime. Coercions are usually done “under the hood” by the interpreters, taking the burden of annotating data off of programmers.</p>
+
+<p>Type annotations usually involve extra code size and verbiage.</p>
+
+<h1 id="type-systems-as-design-aids">Type Systems as Design Aids</h1>
+
+<p>Many programmers feel that type systems allow them to design programs “correctly”.</p>
+
+<p>This is the same effect as when HLLs<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> introduced syntax checking vs. ad-hoc assembler code.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Structured Programming</code> brought ordering and encapsulation to syntax, reducing the ad-hoc nature of code even more.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Locality of Reference</code> further tightened code and removed particular kinds of ad-hoc code (e.g. global vs. local variables).</p>
+
+<p>Type annotations (and type inferencing) provide more details that allow the pre-interpreters to weed out larger classes of programming errors.</p>
+
+<p>The cost of type annotations is borne by the programmers using the typed languages, in the form of more text and more details and more (explicit) precision.</p>
+
+<p>Type inferencing is an attempt to reduce the cognitive load on programmers.</p>
+
+<p>Type checking can automatically check for a wider class of programming errors, but, at this time, cannot check that a program “does what the customer wants”.  Type checking can, at best, check that a program “does what the programmer wants”, which is not always the same as checking against customers’ desires and requirements.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>HLL means High-Level Language. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

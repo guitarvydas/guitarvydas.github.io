@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Jetbrains MPS - Before I Look At It | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Jetbrains MPS - Before I Look At It" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JetBrains MPS claims to be a tool for building DSLs." />
+<meta property="og:description" content="JetBrains MPS claims to be a tool for building DSLs." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-24T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Jetbrains MPS - Before I Look At It" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html","@type":"BlogPosting","description":"JetBrains MPS claims to be a tool for building DSLs.","dateModified":"2021-07-24T00:00:00-04:00","datePublished":"2021-07-24T00:00:00-04:00","headline":"Jetbrains MPS - Before I Look At It","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Jetbrains MPS - Before I Look At It</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-24T00:00:00-04:00" itemprop="datePublished">Jul 24, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>JetBrains MPS claims to be a tool for building DSLs.</p>
+
+<p>I haven’t looked at it yet, but I’m going to.</p>
+
+<p>Let me see if I can capture my thoughts and biases before I become polluted with actual details:</p>
+
+<ul>
+  <li>I think that the current programming culture makes things more complicated than necessary.
+    <ul>
+      <li>I’m going to scan MPS for unnecessary complexity
+        <ul>
+          <li>Can I begin using MPS after reading only 1 page or 2 pages of documentation?
+            <ul>
+              <li>I come pre-loaded with DSL-building knowledge - does that help or get in the way,  Maybe I’m “set in my own ways” and will miss a different kind of simplicity</li>
+              <li>I read a paper once that showed
+                <ul>
+                  <li>a) experts (10+ years) evolve patterns and rely on them</li>
+                  <li>b) experts can be reduced to being novices if different patterns are used (or, if there are no patterns)</li>
+                  <li>experts do/grok things significantly faster than novices (but see (a) and (b) above)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>I am wary of claims of <em>projectional editing</em> that aren’t based on a set of <em>atoms</em>.  I guess I’ll be looking for atoms.</p>
+  </li>
+  <li>
+    <p>Is MPS “better” than what we’ve got?</p>
+  </li>
+  <li>
+    <p>Can you build DSLs (SCNs) in a few minutes/hours and spend the left-over time thinking about the <em>problem</em> instead of worrying about the details of how to make a DSL, how to optimize it, how to DRY<sup id="fnref:DRY" role="doc-noteref"><a href="#fn:DRY" class="footnote">1</a></sup>, etc., etc.</p>
+  </li>
+  <li>
+    <p>I think that the current culture is based on a foundation of mathematical thinking, but, mathematics does not describe computing well (it’s a mapping from 2D space to 4D space (x,y,z,t)). Mathematics <em>can</em> be used to describe computing, but leads to tortuous mappings from 4D space to 2D space.  Mathematicians are a lot like assembler programmers of old (see below).</p>
+  </li>
+  <li>
+    <p>Can you use the DSL to build more DSLs?  (Pipeline of DSLs).</p>
+  </li>
+  <li>
+    <p>Are the Atoms expressible as XML? (XML is triples.)</p>
+  </li>
+  <li>
+    <p>DRY - is DRY automated, or does the programmer need to worry about DRY?</p>
+  </li>
+  <li>
+    <p>Newbies think that a good example of visual programming is a “plus” box, <code class="language-plaintext highlighter-rouge">a = b + c</code>.  This kind of thing is already handled well in existing, textual, GPLs.  Diagrams cannot improve on it.  Diagrams need to be used for “something else”. I focus on DI (Design Intent). Text is a poor representation for DI and for networks of components. Diagrams can show this kind of construction better than text can.</p>
+  </li>
+  <li>
+    <p>Round trip - Newbies think that round-trip is a good idea.  [Round trip means the ability to recover a diagram from code and v.v.].  IMO, this is a bad idea.</p>
+
+    <ul>
+      <li>
+        <p>It is hard to build round-tripping into an IDE.  A waste of human brain-power.  It is better to use that left-over brain-power for other things (like DI).</p>
+      </li>
+      <li>
+        <p>Round-tripping was used in the transition from assembler to HLLs.  Assembler gurus claimed that they could produce code that was better than that produced by compilers of the day.  They were right, but, very few programmers possessed such skill.  Then, GCC came along and created code that was as efficient as that produced by assembler gurus.  After the gurus went into retirement, no one bothered to write code in assembler any more.  In fact, no one bothered to look at the code produced by the HLL compilers (an over-simplification: <em>systems</em> <em>programmers</em> still look at and use assembler.  Average programmers don’t.).</p>
+
+        <p>Ingredients:</p>
+
+        <ul>
+          <li>machine-readable code</li>
+          <li>time (a few years elapsed before compilers could match manually written guru code).</li>
+        </ul>
+
+        <p>I’m not even sure that there were any popular round-trip tools that converted between assembler and HLLs.  If there were any such tools, they vanished.  One of the reasons that round-tripping is hard is because compilers generally eradicate information (for example, variable names).  Compilation is mostly one-way - HLL to assembler.  Going from assembler back to HLL is, theoretically, possible,  but hard because the thrown-away information needs to be reconstructed.  The academic field of <em>design recovery</em><sup id="fnref:dri" role="doc-noteref"><a href="#fn:dri" class="footnote">2</a></sup> was an attempt at reconstructing DI from code.  It is a lot easier to go one-way, e.g. from DI to code, than to reconstruct information and to recover DI (in a meaninful way).  Actually, it’s not so easy to go from DI to code, but it is a <em>lot</em> harder to go backwards - hardly worth the effort.</p>
+
+        <p>Worst of all, round-tripping is a crutch.  If you <em>think</em> that you need round-tripping, then you don’t believe that the diagram(s) <em>can</em> express what needs to be done.  Having used diagrams-to-code for several decades, I feel that the <em>only</em> things that diagrams can’t express easily are the bits of accidental complexity cruft built into text-only representations, like epicycles, to handle the “edge cases” that text doesn’t handle very well (for example, the current manifestation of multitasking and the common belief that multitasking is just a hard problem. Yet, we teach hard real-time multitasking to 5 year-olds<sup id="fnref:mt" role="doc-noteref"><a href="#fn:mt" class="footnote">3</a></sup>).</p>
+
+        <p>The belief that diagrams can’t work makes you stop polishing the new notation long before it is finished (as finished, as, say, JS or Python).</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Not Just Text - text is good for some things, but programmers (and programmers’ bosses) tend to use diagrams first. I would expect to build SCNs (mini-DSLs) using diagams <em>and</em> text.</p>
+  </li>
+  <li>
+    <p>Layers. I would want to build a solution using layers, choosing any SCN (mini-DSL) that is appropriate for describing each layer.</p>
+  </li>
+  <li>Containment.  Some of the biggest <em>wins</em> in programming language design have employed containment in some form, e.g. Structured Programming, local variables, etc. Diagrams show containment easily - box B is inside box A. Text is hard-pressed to show containment and resorts to nested curlies {} and/or indentation.  Markdown employs a primitive form of layering (depth/layering is represented by octothorpes <code class="language-plaintext highlighter-rouge">#</code>). My Chrome and Safari browsers show HTML layering using diagrams. Emacs’ <code class="language-plaintext highlighter-rouge">org-mode</code> provides layer-based ellision, but only on lines of text.</li>
+</ul>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:DRY" role="doc-endnote">
+      <p>DRY means Don’t Repeat Yourself.  Present-day programmers are thought to worry about DRY and to apply its principles manually.  DRY should be automated, as part of the IDE and editor and language, etc. Programmers use <em>diff</em> for <em>git</em> but don’t appear to use <em>diff</em> for DRY automation.  [<em>I suspect that part of the problem is the emphasis on human-readable languages instead of machine-readable languages.</em>] <a href="#fnref:DRY" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dri" role="doc-endnote">
+      <p>We used <em>design recovery</em> to fix Y2K problems.  This work would have been much easier if the code were written to express Design instead of written only to express computer manipulation. <a href="#fnref:dri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mt" role="doc-endnote">
+      <p>Music notation is a hard real-time notation, complete with timed events and looping. <a href="#fnref:mt" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

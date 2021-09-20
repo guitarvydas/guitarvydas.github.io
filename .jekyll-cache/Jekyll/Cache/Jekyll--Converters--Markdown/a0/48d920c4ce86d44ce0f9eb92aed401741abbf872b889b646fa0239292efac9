@@ -1,0 +1,199 @@
+I" <h1 id="exercise">Exercise</h1>
+<p>Write a simple interpreter that parses a simple language and calls functions to do the actual work.</p>
+
+<h2 id="syntax">Syntax</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fork
+krof
+dup N
+push N
+exec1st args
+exec args
+redir N
+pipes N
+</code></pre></div></div>
+<p>N is a small integer.</p>
+
+<p>Args is a string of characters, possibly including spaces, until end-of-line (‘\n’).</p>
+<h2 id="functions">Functions</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void push (string)
+int pop ()
+void gdup (string)
+void redirect (string)
+doFork (...)
+doExec (...)
+</code></pre></div></div>
+<h1 id="appendix-answer-a-simple-interpreter-in-c">Appendix Answer: A Simple Interpreter In C</h1>
+<p>This interpreter is also implemented in <a href="https://github.com/guitarvydas/vsh/tree/master/grash">grash</a> with some embelishments.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+char *parse (char *cmd, char *line) {
+  /* if command matches, return pointer to first non-whitespace char of args */
+  while (*cmd)
+    if (*cmd++ != *line++)
+      return NULL;
+  while (*line == ' ') line++;
+  return line;
+}
+...
+int comment (char *line) {
+  /* return 1 if line begins with # or is empty, otherwise 0 */
+  return line[0] == '#' || line[0] == '\n' || line[0] == '\0';
+}
+...
+void interpret (char *line, int argc, char **argv) {
+  char *p;
+
+  line = trim_white_space(line);
+
+  if (comment (line))
+    return;
+...
+    p = parse ("krof", line);
+    if (p)
+      exit(0);
+    p = parse ("dup", line);
+    if (p) {
+      gdup (p);
+      return;
+    }
+...
+    p = parse ("push", line);
+    if (p) {
+      push (p);
+      return;
+    }
+    p = parse ("exec1st", line);
+    if (p) {
+      doExec (p, argc, argv, 1);
+      return;
+    }
+    p = parse ("exec", line);
+    if (p) {
+      doExec (p, argc, argv, 0);
+      return;
+    }
+    p = parse ("redir", line);
+    if (p) {
+      redirect (p);
+      return;
+    }
+    quit("can't happen");
+    break;
+...
+    p = parse ("pipes", line);
+    if (p) {
+      mkPipes (p);
+      return;
+    }
+    p = parse ("fork", line);
+    if (p) {
+      doFork ();
+      return;
+    }
+    p = parse ("krof", line);
+    if (p) {
+	  ...
+    }
+...
+}
+</code></pre></div></div>
+
+<h1 id="appendix-simplicity-discussion">Appendix Simplicity (Discussion)</h1>
+
+<ol>
+  <li>The syntax was chosen to be small and easy to implement.</li>
+  <li>Each command in the syntax takes exactly 0 parameters or 1 parameter.  (Where “args” is considered to be a single parameter.)</li>
+  <li>Simplicity is defined as “lack of nuance”.  Every command takes a fixed number of arguments.  There are no commands that a variable number of arguments. There are no edge cases to consider.</li>
+  <li>The “args” parameter is not parsed and offers no resistance to the implementation of the interpreter.</li>
+</ol>
+
+<h1 id="appendix-optimization-discussion">Appendix Optimization (Discussion)</h1>
+
+<p>The parser does brute-force matching of strings.</p>
+
+<p>Brute-force matching of strings is “inefficient”.</p>
+
+<p>How “inefficient” can the parser be before optimization begins to matter?</p>
+
+<p>The answer depends on</p>
+
+<ol>
+  <li>how often the parser will run</li>
+  <li>the size of the inefficient code relative to the other code.</li>
+</ol>
+
+<p>As it stands, the syntax is very small and the inefficiency of using brute-force string matching is small compared to the other work being performed.</p>
+
+<p>Specifically, in the case of <em>grash</em>, the main work consists of spawning operating system processes.   How much does it cost to spawn a process vs. how much does it cost to use brute-force string matching?</p>
+
+<p>At present, it seems that spawning processes is much more costly than string-matching this syntax.  We could use a profiler to determine the exact ratio.</p>
+
+<p>Optimizing this code should not stand in the way of just getting it to run correctly.</p>
+
+<p>Later, when the code is put into production, Production Engineers can measure actual use-cases and determine whether optimization is necessary.</p>
+
+<h2 id="tokenizing-scanners">Tokenizing Scanners</h2>
+
+<p>Most compiler-writers assume that their compilers will be used often and that the inefficiency of string-matching will be noticed by users of the compilers.</p>
+
+<p>The first kind of optimization is to <em>tokenize</em> the incoming strings, using a hash table.  Tokenizing scans each incoming string once, and converts the string into a <em>token</em>.  <em>Tokens</em> are, basically, fixed-sized integers that are used as codes to represent the strings.  This allows later compiler passes to handle strings without performing more brute-force string matching - they simply perform brute-force code (integer) matching, which tends to be much more speedy than string-matching.</p>
+
+<p>Strings appear only once in the compiler - in the hash table that maps tokens to strings.  This, also, constitutes a size saving (in general).</p>
+
+<p>Note that Lisp does something similar when reading text.  Lisp reads input text using its <em>reader</em>.  In the process, Lisp tokenizes all incoming strings and calls these tokenize strings <em>symbols</em> instead of <em>tokens</em>.</p>
+
+<p>Many interpreted languages do something similar.</p>
+
+<p>Note that, when strings are tokenized, it doesn’t matter how long (or short) a name is. It will be read only once and immediately converted into a <em>token</em>.</p>
+
+<p>All <em>tokens</em> are the same length.</p>
+
+<h2 id="appendix---multiple-names-for-items">Appendix - Multiple Names For Items</h2>
+
+<p>It should be simple to add another level of indirection to <em>tokens</em>. Each <em>token</em> can represent a list of possible strings.  This arrangement would allow the IDE to show different names for any one named-item.  Experts might prefer to use single-character names in an algorithm, but novices (and anyone seeing the code for the first time, anyone trying to understand the algorithm) might see longer names at first.  The IDE might even allow users to “annotate” items with longer names (or complete phrases) as they go down the learning curve.</p>
+
+<h3 id="example">Example</h3>
+
+<p>An example of this might be the equation for a line, which is commonly written in textbooks as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = mx + b
+</code></pre></div></div>
+
+<p>Experts might wish to view the equation using single-character names as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = m * x + b
+</code></pre></div></div>
+
+<p>whereas learners might wish to see embellishments, such as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = slope * x + intercept
+</code></pre></div></div>
+
+<h1 id="appendix-readability-discussion">Appendix Readability (Discussion)</h1>
+
+<p>Note that the syntax above is</p>
+
+<ol>
+  <li>machine-readable</li>
+  <li>not very human-readable.</li>
+</ol>
+
+<p>Many GPLs strive for human-readability.</p>
+
+<p>Human-readability issues - like syntax, indentation, etc. - tend to cloud the ability to automatically manipulate programs.</p>
+
+<p>To ease automatic manipulation of programs, it is less trouble to use machine-readable languages, like assembler, Lisp, etc.</p>
+
+<p>The concept of <em>macros</em> was invented using machine-readable languages.</p>
+
+<p>Human-readability tends to inhibit out-of-the-box thinking and the use of multiple paradigms in a single project.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

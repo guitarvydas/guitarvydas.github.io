@@ -1,0 +1,218 @@
+I"<h1 id="language-jam-langjam">Language Jam (langjam)</h1>
+<h3 id="theme">Theme</h3>
+<p>First Class Comments</p>
+<h3 id="restrictions">Restrictions</h3>
+<p>48 hours to implement and document</p>
+<h3 id="my-approach">My Approach</h3>
+<h4 id="goal">Goal</h4>
+<p>Executable diagrams</p>
+<h4 id="readmemd">README.md</h4>
+<p><a href="https://github.com/langjam/jam0001/blob/main/guitarvydas/README.md">README.md</a></p>
+<h4 id="sequence-diagram">Sequence Diagram</h4>
+
+<h4 id="tools">Tools</h4>
+<ul>
+  <li>Ohm-JS</li>
+  <li>SWIPL (PROLOG</li>
+  <li>/bin/bash commands: cat, tsort, mv, sed, (and scripts)
+    <h4 id="2-kinds-of-diagrams">2 Kinds of Diagrams</h4>
+    <ol>
+      <li><em>Sequence diagram</em> (Pert Chart) (boxes joined by arrows denoting ordering)</li>
+      <li><em>Details diagram</em> (snippets of /bin/bash code in red boxes)</li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="sequence-diagram-1">Sequence Diagram</h4>
+
+<p><img src="https://raw.githubusercontent.com/guitarvydas/jam0001/guitarvydas/guitarvydas/sequence.png" alt="img" style="zoom:67%;" /></p>
+
+<h4 id="details-diagram">Details Diagram</h4>
+
+<p><img src="https://raw.githubusercontent.com/guitarvydas/jam0001/guitarvydas/guitarvydas/details.png" alt="img" style="zoom:67%;" /></p>
+
+<h4 id="sequence-transpiler">Sequence Transpiler</h4>
+
+<p>5 Ohm-JS passes -&gt; sort -&gt; PROLOG -&gt; JSON -&gt; Ohm-JS to /bin/bash</p>
+
+<h4 id="details-transpiler">Details Transpiler</h4>
+
+<p>6 Ohm-JS passes -&gt; sort -&gt; PROLOG -&gt; JSON -&gt; Ohm-JS to /bin/bash</p>
+
+<h5 id="passes">Passes</h5>
+
+<p>Each pass consists of 2 specifications:</p>
+
+<ol>
+  <li>grammar (*.ohm)</li>
+  <li>action code (aka <em>semantics</em>) (*.glue)</li>
+</ol>
+
+<p>Each pass <em>augments</em> the factbase (fb.pl), there is no need to remove<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> facts.</p>
+
+<h5 id="sequence-transpiler-passes">Sequence Transpiler Passes</h5>
+
+<ol>
+  <li>compressed .drawio file -&gt; uncompressed .XML</li>
+  <li>normalize attributes (e.g. style=”…”)</li>
+  <li>cull attributes, discard attributes that are concerned only with graphical representation (keep: value, source, target, edge, vertex, id, green, yellow, red)</li>
+  <li>symbol table - map long id names to short id names (not strictly necessary, but aids human readability duing bootstrap)</li>
+  <li>culled .XML -&gt; factbase (fb.pl)</li>
+  <li>sort - needed only to appease PROLOG (original PROLOG required that all clauses be grouped together, while modern PROLOG relaxes this constraint.  The <em>sort</em> pass appeases original PROLOG.)</li>
+</ol>
+
+<h5 id="details-transpiler-passes">Details Transpiler Passes</h5>
+
+<ol>
+  <li>compressed .drawio file -&gt; uncompressed .XML</li>
+  <li>normalize attributes (e.g. style=”…”)</li>
+  <li>cull attributes, discard attributes that are concerned only with graphical representation (keep: value, source, target, edge, vertex, id, green, yellow, red)</li>
+  <li>symbol table - map long id names to short id names (not strictly necessary, but aids human readability duing bootstrap)</li>
+  <li>culled .XML -&gt; factbase (fb.pl)</li>
+  <li>fold newlines, create one newline-less string for each snippet of code (helps sort)</li>
+  <li>sort - needed only to appease PROLOG (original PROLOG required that all clauses be grouped together, while modern PROLOG relaxes this constraint.  The <em>sort</em> pass appeases original PROLOG.)</li>
+</ol>
+
+<h5 id="sequence-json">Sequence JSON</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"diagram":"id1", "toplevelcomponent":"id4"}
+
+{
+  "children": ["process A", "process B" ],
+  "connections": [
+    {
+      "name":"x2",
+      "source": {"component":"process A", "port":"fb"},
+      "target": {"component":"process B", "port":"in"}
+    }
+  ],
+  "diagram":"id1",
+  "id":"id4",
+  "inputs": [],
+  "name":"topLevel",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id5",
+  "inputs": [],
+  "name":"process A",
+  "outputs": ["fb" ],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id6",
+  "inputs": ["in" ],
+  "name":"process B",
+  "outputs": [],
+  "synccode":""
+}
+
+
+</code></pre></div></div>
+
+<h5 id="details-json">Details JSON</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"diagram":"id1", "toplevelcomponent":"id4"}
+
+{
+  "children": ["process A", "process__B" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id4",
+  "inputs": [],
+  "name":"top level",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": ["code1" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id5",
+  "inputs": [],
+  "name":"process A",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id6",
+  "inputs": [],
+  "name":"code1",
+  "outputs": [],
+  "synccode":"@~@echo hello@~@echo ... from process A@~@"
+}
+{
+  "children": ["code2" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id7",
+  "inputs": [],
+  "name":"process__B",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id8",
+  "inputs": [],
+  "name":"code2",
+  "outputs": [],
+  "synccode":"@~@echo ... from process B@~@echo goodbye@~@"
+}
+
+</code></pre></div></div>
+
+<h3 id="relationship-to-lisp">Relationship to Lisp</h3>
+
+<ul>
+  <li>PEG parsing &lt;- generalization of Lisp macros</li>
+  <li>PEG parsing in a separate pre-pass accomplishes the same result as hygenic macros, except with less complication (YMMV)
+    <h3 id="fallout">Fallout</h3>
+  </li>
+  <li>created <em>ftranspile()</em> and <em>stranpsile()</em> functions to abstract (hide) transpiler functionality</li>
+</ul>
+
+<h3 id="continuing-work">Continuing Work</h3>
+
+<ul>
+  <li>“eat your own dogfood” - compiled diagram of diagram compiler</li>
+  <li>simplification of code</li>
+</ul>
+
+<p><a href="https://github.com/guitarvydas/firstclasscomments">firstclasscomments</a></p>
+
+<h3 id="github">Github</h3>
+<p><a href="https://github.com/langjam">lamgjam</a></p>
+<h3 id="winners">Winners</h3>
+<p><a href="https://youtu.be/j7VAw8UfMeA">Winners</a></p>
+<h1 id="peg-for-zodetrip">PEG for Zodetrip</h1>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Removing facts is an optimization that is not needed on current hardware.  Diagrams remain small, so runtime is imperceptable. Keeping facts allows for future flexibility (e.g. querying the fact base and making inferences that were not foreseen during original development). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

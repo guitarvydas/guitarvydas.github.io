@@ -1,0 +1,134 @@
+I"�<p>ASON contains many different datatypes.</p>
+
+<p>To parse ASON, I suggest:</p>
+<ol>
+  <li>Convert the input to basic tokens</li>
+  <li>Filter the tokens in layers to produce more-detailed tokens.</li>
+</ol>
+
+<h1 id="simple-example">Simple Example</h1>
+<p>Let’s begin with a painfully simple example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    name: "John Smith"
+</code></pre></div></div>
+
+<p>This example contains:</p>
+<ol>
+  <li>some leading whitespace</li>
+  <li>an ident (“name”)</li>
+  <li>a colon (“:”)</li>
+  <li>more whitespace</li>
+  <li>a string (“John Smith”)</li>
+  <li>a newline (whitespace).</li>
+</ol>
+
+<p>I suggest creating a separate token for each of the above.</p>
+
+<h1 id="tokens-for-simple-example">Tokens For Simple Example</h1>
+<p>Below, is the output from a first-pass tokenizer:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>W %2520%2520%2520%2520
+N name
+D: :
+W %2520
+S %22John%252520Smith%22
+W %250A
+</code></pre></div></div>
+
+<p>[<em>Note that this is only the way I chose to do this - there might be many possible solutions to this tokenizing problem</em>]</p>
+
+<p>Each token appears on a separate line.</p>
+
+<p>Whitespaces, in lines, are ignored (but act as separators).</p>
+
+<p>I’ve encoded the token “kind” as the first letter on a line.</p>
+
+<p>I’ve encoded all non-printables in URI format (using JavaScript’s <code class="language-plaintext highlighter-rouge">encodeURIComponent()</code>). Notably, strings don’t include the quotes (‘”’).</p>
+
+<p>Tokens are meant to be <em>machine-readable</em>. Human-readability is not of concern at this point in the design. [<em>Aside: actually, I use an ASCII encoding, to help with debug-ability.</em>]</p>
+
+<p>Tokens are fully described by their code. Each token carries its originating <em>text</em> following the whitespace. This text can be ignored by subsequent filters, but might be useful during the final filter in the chain, which, presumably outputs the token in some more-readable format.</p>
+
+<p><em>Some</em> tokens include a sub-kind, encoded as a second letter. In the above, there is one example of a token with a sub-kind, the “colon” token <code class="language-plaintext highlighter-rouge">D: ...</code> [<em>Aside: in this case, the text is redundant and contains a single colon - this can be optimized-away at a later date (or, more likely, just left alone, since the optimization will probably not have a significant effect on performance on modern hardware).</em>]</p>
+
+<h1 id="filters">Filters</h1>
+
+<p>After tokenizing, filters can be built in layers. I won’t show this at the moment and will discuss details in future essays.</p>
+
+<h2 id="filter-example-simple">Filter Example (Simple)</h2>
+<p>To give a flavor for what filtering might accomplish, examine the above lines 2 and 3.</p>
+
+<p>We see an ident token followed by a colon.</p>
+
+<p>In ASON, this is written as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:
+</code></pre></div></div>
+<p>and, in ASON, this signifies a <em>setter</em>, or a “define word”.</p>
+
+<p>A filter might collapse those two tokens (lines 2 &amp; 3 in the above list) down into one token, for example</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>e! name
+</code></pre></div></div>
+<p>resulting in only 5 tokens:</p>
+<ol>
+  <li>some leading whitespace</li>
+  <li>a defineword (“name”)</li>
+  <li>more whitespace</li>
+  <li>a string (“John Smith”)</li>
+  <li>a newline (whitespace).</li>
+</ol>
+
+<p>Ideally, we will reduce the number of tokens at each stage of filtering.</p>
+
+<p>One of the first filters will be a whitespace-remover.</p>
+
+<h2 id="filter-stages---ordering">Filter Stages - Ordering</h2>
+
+<p>Assigning an order to the filters is somewhat tricky and I will defer discussion of this issue for later.</p>
+
+<p>As an example of the kind of trickiness that needs to be handled, consider the issue of strings.</p>
+
+<p>Strings might contain things that look like other kinds of tokens, for example, a string might contain an email address.</p>
+
+<p>It would be wrong to convert email addresses into tokens if those email addresses are embedded in strings.</p>
+
+<p>In the token+filter approach, this problem can easily be solved by filtering strings into tokens before filtering email addresses into tokens.</p>
+
+<p>For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  name: "John Smith johnsmith@altscript.com"
+  email: johnsmith@altscript.com
+</code></pre></div></div>
+<p>Should become the token stream:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>W %2520%2520
+N name
+D: :
+W %2520
+S %22John%252520Smith%252520johnsmith%252540altscript.com%22
+W %250A%2520%2520
+N email
+D: :
+W %2520
+N johnsmith
+D@ @
+N altscript
+D. .
+N com
+W %250A
+</code></pre></div></div>
+
+<p>and then collapsed into:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G defineWord name
+S %22John%252520Smith%252520johnsmith%252540altscript.com%22
+g defineWord
+G defineWord email
+d@ johnsmith altscript.com
+</code></pre></div></div>
+<p>Don’t worry about the unfamiliar token kinds - they will be discussed elsewhere. The thing to notice is that the string is just a string token (“S”) and contains something that looks like an email address, whereas the email datatype is filtered into a “d@” token.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://altscript.com">ASON</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

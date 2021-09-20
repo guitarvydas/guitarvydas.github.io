@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Code Markdown to Bash | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Code Markdown to Bash" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-To-Bash.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-To-Bash.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-03T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Code Markdown to Bash" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-To-Bash.html","@type":"BlogPosting","description":"Introduction","dateModified":"2021-08-03T00:00:00-04:00","datePublished":"2021-08-03T00:00:00-04:00","headline":"Code Markdown to Bash","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/08/03/Code-Markdown-To-Bash.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Code Markdown to Bash</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-03T00:00:00-04:00" itemprop="datePublished">Aug 3, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>A very, very simple transpiler from code-markdown to bash.</p>
+
+<p>Transpile</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+## _fb pipeline_
+	script1
+	script2
+	script3
+
+
+
+## _details_
+### script1
+	echo hello
+	echo world 
+	echo from script 1
+### script2
+	echo hello
+	echo world 
+	echo from script 2
+### script3
+	echo hello
+	echo world 
+	echo from script 3
+</code></pre></div></div>
+<p>to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+# _containment_
+
+clear
+set -e
+trap 'catch' ERR
+
+catch () {
+    echo '*** FATAL ERROR ***'
+    exit 1
+}
+
+# _details_
+script1 () {
+	echo hello
+	echo world 
+	echo from script 1
+
+}
+script2 () {
+	echo hello
+	echo world 
+	echo from script 2
+
+}
+script3 () {
+	echo hello
+	echo world 
+	echo from script 3
+
+}
+
+# _fb pipeline_
+	script1
+	script2
+	script3
+</code></pre></div></div>
+
+<h2 id="preamble">Preamble</h2>
+<p>The preamble traps errors and prints a FATAL<br />
+```</p>
+
+<p>clear<br />
+set -e<br />
+trap ‘catch’ ERR</p>
+
+<p>catch () {<br />
+    echo ‘<em>** FATAL ERROR **</em>’<br />
+    exit 1<br />
+}<br />
+``<br />
+Any sub-script that exits with a non-0 exit code, will be caught by the above.</p>
+
+<h1 id="why">Why?</h1>
+<h2 id="layers---important-stuff-at-the-top">Layers - Important Stuff At The Top</h2>
+<p>We <em>want</em> to build software in layers.</p>
+
+<p>We <em>want</em> the important stuff to be at the top of the script file, but, declaration-before-use requires that we define the details first and put the important stuff at the bottom of the script.</p>
+
+<p>We <em>want</em> to use md-mode to elide details, so that we can look at the script in layers. We press <code class="language-plaintext highlighter-rouge">TAB</code> to expand layers only if we want to see the details.</p>
+
+<p>We consider variables, traps, etc. to be at lower layers.</p>
+
+<p>We <em>want</em> the transpiler to transpile our .md script into valid <em>bash</em> code.</p>
+
+<p>This is an examplar - we show how to build a simple transpiler. We hope that the reader can build further transpilers that have more layers than what we show.</p>
+
+<p>This is an examplar - we show some of the intermediate steps:</p>
+<ol>
+  <li>Convert md to structured pseudo-code (braces) <a href="https://guitarvydas.github.io/2021/08/03/Code-Markdown-to-Structured-Pseudo-code.html">md2pseudo</a></li>
+  <li>Convert the pseudo-code to bash-like code <a href="https://github.com/guitarvydas/md2bash">md 2 bash</a></li>
+  <li>Insert swipl stuff (in a later essay).</li>
+</ol>
+
+<p>Also, we show how easy it is to flip parsed code at will <a href="https://guitarvydas.github.io/2021/08/03/Flipping-Code.html">flip</a>.</p>
+
+<h2 id="emacs-md-mode">Emacs md-mode</h2>
+<p>Note that the above input syntax is editable by emacs md-mode.</p>
+
+<p>Emacs md-mode provides the <code class="language-plaintext highlighter-rouge">TAB</code> key to allow eliding layers.</p>
+
+<h1 id="usage-and-testing">Usage and Testing</h1>
+
+<ol>
+  <li>Load md2bash.html into a browser.</li>
+  <li>Scroll all the way down to the bottom and press <code class="language-plaintext highlighter-rouge">generate</code>.</li>
+  <li>Copy the resulting code from the bottom textarea (“transpiled to bash”), and paste it into a file <code class="language-plaintext highlighter-rouge">test.bash</code>.</li>
+  <li>chmod a+x test.bash</li>
+  <li>./test.bash</li>
+</ol>
+
+<h1 id="github">Github</h1>
+
+<p><a href="https://github.com/guitarvydas/md2bash">md2bash</a></p>
+
+<h1 id="see-also">See also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Tool</a><br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/08/03/Code-Markdown-To-Bash.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

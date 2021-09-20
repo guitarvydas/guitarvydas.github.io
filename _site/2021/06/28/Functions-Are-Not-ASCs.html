@@ -53,21 +53,14 @@
 
 <p>Functions rely on other - synchronous - functions (and libraries).</p>
 
-<p>The smallest unit of componentization in current PLs[^1] is the <em>thread</em>.</p>
+<p>The smallest unit of componentization in current PLs<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> is the <em>thread</em>.</p>
 
-<p><em>Threads</em> typically imply the use of <em>operating systems</em>[^4].</p>
+<p><em>Threads</em> typically imply the use of <em>operating systems</em><sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">2</a></sup>.</p>
 
-<p>It should be possible to implement “better” (smaller, faster) components using <em>messages</em> and <em>closures</em>[^2].</p>
+<p>It should be possible to implement “better” (smaller, faster) components using <em>messages</em> and <em>closures</em><sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup>.</p>
 
-<p>The main issue is how to structure message-sending components to avoid spaghetti designs.[^3]</p>
+<p>The main issue is how to structure message-sending components to avoid spaghetti designs.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">4</a></sup></p>
 
-<p>[^1:] PL means Programming Language.</p>
-
-<p>[^2:] Operating system processes - threads - are ad-hoc implementations of closures.</p>
-
-<p>[^3:] The answer to how to create systems of structured components, is, as always, to use hierarchy and scoping.</p>
-
-<p>[^4:] Operating systems are not needed.</p>
 <h1 id="see-also">See Also</h1>
 
 <p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
@@ -76,6 +69,22 @@
 <script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
 </script>
 
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>PL means Programming Language. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Operating systems are not needed. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Operating system processes - threads - are ad-hoc implementations of closures. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>The answer to how to create systems of structured components, is, as always, to use hierarchy and scoping. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </div><a class="u-url" href="/2021/06/28/Functions-Are-Not-ASCs.html" hidden></a>
 </article>

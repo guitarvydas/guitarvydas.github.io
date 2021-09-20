@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Multitasking Faking | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Multitasking Faking" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/08/11/Multitasking-Faking.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/08/11/Multitasking-Faking.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-11T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Multitasking Faking" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/08/11/Multitasking-Faking.html","@type":"BlogPosting","description":"Introduction","dateModified":"2021-08-11T00:00:00-04:00","datePublished":"2021-08-11T00:00:00-04:00","headline":"Multitasking Faking","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/08/11/Multitasking-Faking.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Multitasking Faking</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-11T00:00:00-04:00" itemprop="datePublished">Aug 11, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>We examine how multitasking is implemented on a single CPU system.</p>
+
+<p>This same strategy applies to multi-core systems (albeit, with more details).</p>
+
+<h1 id="single-cpu---global-everything">Single CPU - Global Everything</h1>
+
+<p>On a single CPU, hardware provides us with</p>
+
+<ol>
+  <li>memory (RAM)</li>
+  <li>registers.</li>
+</ol>
+
+<p>Memory and registers are globals, shared by all functions on the CPU.</p>
+
+<p>Notably, there are two most-interesting registers:</p>
+
+<ul>
+  <li>PC - the program counter - memory address of the function (code) currently being executed.</li>
+  <li>SP - the stack pointer - memory address of the top of the “stack”.</li>
+</ul>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Multiptasking-Single%20CPU.png?raw=true" alt="Multiptasking-Single CPU.png" style="zoom:67%;" /></p>
+
+<h1 id="cons-car-and-cdr">CONS, CAR and CDR</h1>
+
+<p>[<em>You don’t need to understand Lisp for this, although, for convenience, I use Lisp-y terminology.</em>]</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CDR</code> is a pointer to the next cell.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CAR</code> is data.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CONS</code> is a cell containing one <code class="language-plaintext highlighter-rouge">CAR</code> and one <code class="language-plaintext highlighter-rouge">CDR</code>.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CONS</code> cell can be implemented (specified) as a <em>user-defined data structure</em> or a <em>class</em>.</p>
+
+<h1 id="stack">Stack</h1>
+
+<p>The <em>stack</em> is simply an optimized list.</p>
+
+<p>The <em>stack</em> is an array of <code class="language-plaintext highlighter-rouge">CAR</code>s, with no <code class="language-plaintext highlighter-rouge">CDR</code>s.</p>
+
+<p>There is no need to <em>point</em> to the next cell, since all cells are continguous (i.e. an array).  Hence, the <code class="language-plaintext highlighter-rouge">CDR</code> is optimized-away.</p>
+
+<p>Hardware implements access to the <em>stack</em> using a special register called <code class="language-plaintext highlighter-rouge">SP</code>.</p>
+
+<p>There is typically only one <code class="language-plaintext highlighter-rouge">SP</code> in a CPU and it is shared (global) by all code<sup id="fnref:code" role="doc-noteref"><a href="#fn:code" class="footnote">1</a></sup> on that CPU.</p>
+
+<h1 id="globals">Globals</h1>
+
+<p>In a single CPU, all memory and all registers are <em>global</em> to all functions (code) on that CPU.</p>
+
+<h1 id="synopsis---faking-multitasking">Synopsis - Faking Multitasking</h1>
+
+<p>We fake out multitasking by creating a component for each process, with its own virtual memory and virtual register set.</p>
+
+<p>We call such components <em>threads</em>.</p>
+
+<p>We use libraries, called <em>operating systems</em>, to help handle the repetitive, detailed work under-the-hood.</p>
+
+<p>We supercede operating systems’ scheduling decisions when we use CALL and RETURN assembler instructions.</p>
+
+<p>We treat all components as being synchronous.</p>
+
+<h1 id="too-few-cpus---faking-multitasking">Too Few CPUs - Faking Multitasking</h1>
+
+<p>We only need to fake multitasking when we have fewer CPUs than we have components (threads).</p>
+
+<p>In the 1950’s, CPUs were expensive.  We time-sliced CPUs to save money.</p>
+
+<p>Today, CPU’s are cheap.  IoT (internet of things) goes to the extreme of providing on CPU for <em>each</em> thread (one thread per device).</p>
+
+<h1 id="faking-multitasking-threads">Faking Multitasking Threads</h1>
+
+<p>To fake out multitasking, most operating systems wrap all of the globals inside an envelope and create a fresh envelope for each <em>process</em>.</p>
+
+<p>Operating systems tweak the MMU<sup id="fnref:mmu" role="doc-noteref"><a href="#fn:mmu" class="footnote">2</a></sup> to fake out a fresh memory space for each process.</p>
+
+<p>Operating systems tweak the PC<sup id="fnref:pc" role="doc-noteref"><a href="#fn:pc" class="footnote">3</a></sup> register to fake out unique running functions for each process.</p>
+
+<p>Operating systems tweak the SP<sup id="fnref:sp" role="doc-noteref"><a href="#fn:sp" class="footnote">4</a></sup> register to fake out a unique stack for each process.</p>
+
+<p>The SP is made to point to the memory space of the process, which is determined by the MMU, which is tweaked by the operating system to match each process.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Multiptasking-Multiple%20Processes.png?raw=true" alt="Multiptasking-Multiple Processes.png" style="zoom:67%;" /></p>
+
+<h2 id="programmable-calculators">Programmable Calculators</h2>
+
+<p>The current FP<sup id="fnref:fp" role="doc-noteref"><a href="#fn:fp" class="footnote">5</a></sup> fad treats all computers as programmable calculators.</p>
+
+<p>Computers are capable of being more than just programmable calculators.  For example, computers can sequence the operation of devices.</p>
+
+<p>The programmable-caculator fiction has some conveniences.</p>
+
+<p>For example, this fiction allows the use of a notation called <em>mathematics</em>.</p>
+
+<p>This notation relies on one feature - the feature of substituting one piece of notation for another, e.g. replacing one function by another function that has exactly the same input(s) and output(s)<sup id="fnref:rt" role="doc-noteref"><a href="#fn:rt" class="footnote">6</a></sup>.</p>
+
+<p>This feature comes with some restrictions:</p>
+
+<ul>
+  <li>side-effects are not allowed</li>
+  <li>every function must return a value(s)</li>
+  <li>when a function is invoked, the calling function schedules itself to sleep until the called function has finished its work and has returned a value(s).  This is called synchronous operation.</li>
+</ul>
+
+<p>The notation makes certain types of things hard to express, e.g.</p>
+
+<ul>
+  <li>multitasking</li>
+  <li>functions that run forever (for example <em>servers</em>)</li>
+  <li>one-way functionality (also called <em>history</em>)<sup id="fnref:ip" role="doc-noteref"><a href="#fn:ip" class="footnote">7</a></sup></li>
+  <li>asynchronous operation (e.g. distributed processing, like internet, blockchain, p2p, etc.)</li>
+</ul>
+
+<p>[<em>Note that the notation called “mathematics” can express these things, but results in complicated expressions of these concepts that tend not to be popular.  We teach hard realtime notation to 5-year-olds (e.g. piano lessons) but need university training to understand multitasking when expressed in mathematical terminology.</em>]</p>
+
+<h1 id="conflating-control-flow-and-data">Conflating Control Flow and Data</h1>
+
+<p>A computer deals with 2 concepts:</p>
+
+<ol>
+  <li>memory</li>
+  <li>control-flow.</li>
+</ol>
+
+<p>One way to imagine these concepts is to think of asynchronous components that send messages<sup id="fnref:msg" role="doc-noteref"><a href="#fn:msg" class="footnote">8</a></sup> to one another.</p>
+
+<p>Each component has its own memory which is not shared with other components.</p>
+
+<p>Unique memory is contained in each component.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">Dispatcher</code> determines which component is allowed to run (i.e. gets control of the CPU and all of its globals).</p>
+
+<p>Currently, we use various general-purpose programming languages to program the internals of components and use operating systems to dispatch components (which are called threads / processes).</p>
+
+<h1 id="ad-hoc-dispatch---callreturn">Ad-Hoc Dispatch - CALL/RETURN</h1>
+
+<p>Currently, functions perform ad-hoc dispatch by calling other functions (e.g. using the built-in CALL and RETURN assembler instructions).</p>
+
+<p>Functions perform a rendezvous-dance with callees and supercede dispatching decisions made by the operating system.</p>
+
+<p>Operating systems are built to wrench dispatching control away from functions using <em>preemption</em>.</p>
+
+<h1 id="rendezvous">Rendezvous</h1>
+
+<p>Rendezvous is a subset of message-passing.</p>
+
+<p>Rendezvous is a method for converting asynchronous processes into synchronous processes.</p>
+
+<p>In a rendezvous, a component can send exactly one message.</p>
+
+<p>The sending component must wait until the receiver accepts the message and sends back a completion event.</p>
+
+<p>Rendezvous treats all message queues between components, as being 1 item in length.</p>
+
+<h1 id="dispatcher">Dispatcher</h1>
+
+<p>We fake out multitasking by providing a single routine which I call the <em>dispatcher</em>.</p>
+
+<p>Each CPU is, in essence, its own dispatcher.</p>
+
+<p>We need to provide explicit dispatchers only when we fake out multitasking.</p>
+
+<h1 id="interpretation">Interpretation</h1>
+
+<p>A hardware CPU is an interpreter.</p>
+
+<p>It is hard-wired to interpret assembly instructions.</p>
+
+<p>In the simplest cases, i.e. without operating systems, CPUs interpret instructions for a single thread.</p>
+
+<p>If more threads on a single CPU are needed, we add complexity by adding operating systems to fake out multitasking.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:code" role="doc-endnote">
+      <p>“All code” means any code, functional or procedural. <a href="#fnref:code" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mmu" role="doc-endnote">
+      <p>MMU means Memory Management Unit.  Sometimes a special IC or built into the CPU itself. <a href="#fnref:mmu" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:pc" role="doc-endnote">
+      <p>PC means Program Counter (a register). <a href="#fnref:pc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sp" role="doc-endnote">
+      <p>SP means Stack Pointer (a register). <a href="#fnref:sp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fp" role="doc-endnote">
+      <p>FP means Functional Programming. <a href="#fnref:fp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:rt" role="doc-endnote">
+      <p>This is called Referential Transparency in Computer Science.  It used to be called pin-for-pin-compatibility by hardware designers (esp. when ICs were expensive and were pushed into sockets instead of being soldered into circuits). <a href="#fnref:rt" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ip" role="doc-endnote">
+      <p>See “Order Out Of Chaos” by Ilya Prigogene to see why it is necessary to think in terms of one-way history. <a href="#fnref:ip" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:msg" role="doc-endnote">
+      <p>I believe that message sending needs to be structured to be useful, like Structured Programming, scoped variables instead of globals, etc.  I discuss this elsewhere. <a href="#fnref:msg" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/08/11/Multitasking-Faking.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

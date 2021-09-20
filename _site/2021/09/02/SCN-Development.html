@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>SCN Development for ZodeTrip | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="SCN Development for ZodeTrip" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/02/SCN-Development.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/02/SCN-Development.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-02T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SCN Development for ZodeTrip" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/02/SCN-Development.html","@type":"BlogPosting","description":"Introduction","dateModified":"2021-09-02T00:00:00-04:00","datePublished":"2021-09-02T00:00:00-04:00","headline":"SCN Development for ZodeTrip","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/02/SCN-Development.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SCN Development for ZodeTrip</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-02T00:00:00-04:00" itemprop="datePublished">Sep 2, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>In this note, I show how to develop an SCN (see below - like a DSL) for a game development system.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SCN</code> means <em>Solution Centric Notation</em>.  Basically a mini-DSL. See below.</p>
+
+<h1 id="initial-grammar">Initial Grammar</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zodeSCN{
+  main = room+
+  room = "room:" ws* id ws+ statement+ ";room"
+  statement = widthStatement | heightStatement | tilesStatement | enterStatement
+  widthStatement = "width" ws+ number eol
+  heightStatement = "height" ws+ number eol
+  tilesStatement = "tiles" ws* "(" numberList ")" eol
+  enterStatement = "enter:" ws* tellStatement ";enter" eol
+  tellStatement = "tell" ws+ string eol
+
+  numberList = (number ws*)+
+  number = negativeNumber | positiveNumber
+  negativeNumber = "-" smallinteger
+  positiveNumber = smallinteger
+
+  smallinteger = dig+
+  dig = "0" .."9"
+  ws = " " | "\t" | "\n"
+  id = firstIDChar followIDChar*
+  firstIDChar = "a" .. "z" | "A" .. "Z"
+  followIDChar = "0" .. "9" | firstIDChar
+  string = quote notQuote* quote
+  quote = "\""
+  notQuote = ~quote any
+  eol = ws+
+}
+
+</code></pre></div></div>
+
+<h2 id="ohm-js-vs-other-peg-libraries">Ohm-JS vs Other PEG Libraries</h2>
+
+<p>Ohm-JS rule names are case-sensitive.</p>
+
+<p>In Ohm-JS, lower-case rule names work just like other PEGs (modulo minor syntactic differences).</p>
+
+<p>In Ohm-JS, upper-case rule names skip <code class="language-plaintext highlighter-rouge">space</code>s, so most of the <code class="language-plaintext highlighter-rouge">ws</code> stuff above could go away.</p>
+
+<p>The other big difference between Ohm-JS and other PEG libraries is how matches are tagged.  I will explain this later.  Let’s just work on the grammar first.</p>
+
+<h1 id="initial-test-code">Initial Test Code</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room: default
+  width 3
+  height 3
+  tiles (-1 -1 -1  -1 -1 -1  -1 -1 -1)
+  enter:
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+  ;enter
+;room
+</code></pre></div></div>
+
+<h1 id="ohm-editor">Ohm Editor</h1>
+
+<h1 id="exercise-1"><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Ohm%20Editor%20for%20ZodeTrip%20Screen%20Shot%202021-09-02%20at%208.09.14%20AM.png?raw=true" alt="Ohm Editor for ZodeTrip Screen Shot 2021-09-02 at 8.09.14 AM.png" style="zoom:67%;" />Exercise 1</h1>
+
+<p>Convert the grammar from Ohm-JS style to racket (#peg) style.</p>
+
+<p>Use the same test grammar and make sure that you get the same result.</p>
+
+<p>Gedanken: Do you find Ohm-Editor to be convenient, even when using a different #peg syntax?</p>
+
+<h1 id="exercise-2">Exercise 2</h1>
+
+<p>Convert the grammar so that</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room:
+ ...
+;room
+
+</code></pre></div></div>
+
+<p>becomes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room
+ ...
+end room
+</code></pre></div></div>
+
+<p>Write new test code and test the new grammar.</p>
+
+<h1 id="exercise-3">Exercise 3</h1>
+
+<p>Convert</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enter:
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+;enter
+</code></pre></div></div>
+
+<p>into</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enter
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+end enter
+</code></pre></div></div>
+
+<h1 id="exercise-4">Exercise 4</h1>
+
+<p>Gedanken: At present, the <code class="language-plaintext highlighter-rouge">id</code> rule will accept keywords like <code class="language-plaintext highlighter-rouge">tell</code>, etc.</p>
+
+<p>How would you make a list of keywords and include them in the <code class="language-plaintext highlighter-rouge">id</code> rule (hint: using negative lookahead)?</p>
+
+<h1 id="commentary">Commentary</h1>
+
+<h2 id="syntaxes-are-pattern-matching-skins">Syntaxes are Pattern-Matching Skins</h2>
+
+<p>A <em>grammar</em> is a pattern matcher.</p>
+
+<p>Pattern matchers are popular today, often found in FP languages.</p>
+
+<p>Grammars are the mothers of all pattern-matchers.</p>
+
+<p>Treating syntaxes as light-weight skins produces a different, more productive, kind of programming.</p>
+
+<p>PEG technology and cheap/fast CPUs and cheap memory makes it possible to re-think the use of syntax as something light-weight instead of something shrouded in mystery that is accessible only to compiler gurus.</p>
+
+<h2 id="2-syntaxes">2 Syntaxes</h2>
+
+<p>Some languages, like C and Lisp, collapse <code class="language-plaintext highlighter-rouge">end room</code> into single characters <code class="language-plaintext highlighter-rouge">}</code>and <code class="language-plaintext highlighter-rouge">)</code>.</p>
+
+<p>Gedanken: Which style gives more lucid error checking?</p>
+
+<p>Gedanken: Is it harder in the grammar to ask for <code class="language-plaintext highlighter-rouge">end room</code> instead of single characters?</p>
+
+<p>Gedanken: Which is more  <em>writable</em>?</p>
+
+<p>Gedanken: What if we had 2 syntaxes, one with <code class="language-plaintext highlighter-rouge">end room</code> and another with <code class="language-plaintext highlighter-rouge">}</code>?</p>
+
+<p>Gedanken: How easy is it to create separate syntaxes, for example to parse the <code class="language-plaintext highlighter-rouge">end room</code> syntax and to write it back out in <code class="language-plaintext highlighter-rouge">}</code> syntax?</p>
+
+<h1 id="scn">SCN</h1>
+
+<p><code class="language-plaintext highlighter-rouge">SCN</code> means <em>Solution Centric Notation</em>.  In my vocabulary, a <em>notation</em> is like a mini-DSL.</p>
+
+<p>When I build an SCN, I cheat and let the underlying language (the <em>toolbox language</em>) handle all of the heavy lifting.  I use a grammar like a <em>skin</em> instead of as a full-blown programming language.</p>
+
+<p>Lisp (and Scheme, and Racket) makes a great <em>toolbox language</em>.</p>
+
+<p><em>Assembler</em> is the mother of all <em>toolbox languages</em>.</p>
+
+<p>We don’t want to get our hands dirty with <em>assembler</em>, so we create syntactic skins.  [<em>This used to be difficult in the 1950’s, but is easy in the 2020’s</em>.]</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/09/02/SCN-Development.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

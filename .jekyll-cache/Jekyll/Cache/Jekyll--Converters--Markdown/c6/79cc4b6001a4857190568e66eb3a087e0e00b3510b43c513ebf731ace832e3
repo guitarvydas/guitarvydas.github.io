@@ -1,0 +1,120 @@
+I"�<h1 id="das">DaS</h1>
+<p>DaS means Diagrams as Syntax.</p>
+
+<h1 id="das-is-not-textual-programming">DaS Is Not Textual Programming</h1>
+<p>DaS Is Not Textual Programming</p>
+
+<h1 id="das-is-not-visual-programming">DaS Is Not Visual Programming</h1>
+<p>DaS Is Not Visual Programming</p>
+
+<h1 id="das-is-a-hybrid">DaS Is A Hybrid</h1>
+
+<p>There is a gap between textual and visual programming.</p>
+
+<p>DaS sits in that gap.</p>
+
+<p>DaS is a hybrid - diagrams + text.</p>
+
+<p>In DaS, we do not consider pixels.</p>
+
+<h1 id="primitive-das-objects">Primitive DaS Objects</h1>
+<ul>
+  <li>rectangles</li>
+  <li>ellipses</li>
+  <li>text</li>
+  <li>lines.</li>
+</ul>
+
+<p>Every object has an (x,y) coordinate.</p>
+
+<p>Objects can overlap.</p>
+
+<h1 id="comparison-to-textual-programming">Comparison To Textual Programming</h1>
+
+<p>In textual programming, using text editors, the basic object (the basic unit) is the <em>character</em>.</p>
+
+<p>In textual programming, <em>characters</em> do not overlap.</p>
+
+<p>In textual programming, <em>characters</em> have <em>(line,offset)</em> grid positions instead of <em>(x,y)</em> positions that may overlap.</p>
+
+<h1 id="svg">SVG</h1>
+
+<p>SVG already contains the basics needed to create DaS editors, i.e. rectangles, ellipses, text and lines.</p>
+
+<p>Most people use SVG to create complex visual drawings.</p>
+
+<p>For DaS, we need only a small subset of SVG and simple editors.</p>
+
+<p>Currently, I use https://www.diagrams.net for drawings and compile the .drawio format directly into factbases, e.g. https://github.com/guitarvydas/diagrams-as-syntax.</p>
+
+<h1 id="ignore-attributes">Ignore Attributes</h1>
+
+<p>Most drawings contain a lot of graphical details (e.g. polylines, fonts, stroke-width, etc.).</p>
+
+<p>Most of these can be ignored.</p>
+
+<p>I pick off only the “interesting” bits for DaS, e.g. rectangles, ellipses, text and lines and retain some graphical attributes.</p>
+
+<h1 id="inferencing">Inferencing</h1>
+
+<p>Inferencing can be used to compile diagrams to code.</p>
+
+<p>Often grade-school math is enough.</p>
+
+<h2 id="inclusion">Inclusion</h2>
+
+<p>How do you tell if a box is inside another box?</p>
+
+<p>Grade-school math.  (Compare x’s and y’s).</p>
+
+<h2 id="intersection">Intersection</h2>
+
+<p>How do you tell if a graphical object intersects another graphical object?</p>
+
+<p>Grade-school math.  Intersection (made easier if all lines are vertical and horizontal).</p>
+
+<h2 id="bounding-boxes">Bounding Boxes</h2>
+
+<p>How do you tell if an ellipse intersects a rectangle?</p>
+
+<p>Create bounding boxes for both, then apply grade-school math.</p>
+
+<h2 id="bounding-boxes-for-lines">Bounding Boxes for Lines</h2>
+
+<p>Don’t do this.</p>
+
+<p>From the transpiler’s perspective, we only need to know where the line starts and where it ends.</p>
+
+<p>The gnarly details are handled by the editor, but are not needed by the transpiler.</p>
+
+<p>How do we know where a line starts and ends? Use its <em>(x,y)</em> start and end points, apply grade-school math (intersection). Some editors (like Drawio) give you from/to information, so, in some cases you don’t even need to calculate this information.</p>
+
+<h1 id="examples">Examples</h1>
+<h2 id="box-and-arrow">Box and Arrow</h2>
+
+<p>Box-and-arrow diagrams use rectangles, text and lines.</p>
+
+<p>I use circles to represent ports situated on boxes.</p>
+
+<p>I use color=”green” for input ports.</p>
+
+<p>I use color=”yellow” for output ports.</p>
+
+<p>I use stroke-width=3 for composite components. In most cases, I don’t wish to specify how a component is implemented (composite or leaf) on a diagram, so I usually ignore stroke-width.</p>
+
+<h2 id="statecharts">Statecharts</h2>
+
+<p>Harel’s Statecharts use ellipses, text and lines.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/StateCharts.html">StateCharts</a><br />
+<a href="https://guitarvydas.github.io/2021/02/25/statecharts-(again).html">StateCharts Again</a></p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

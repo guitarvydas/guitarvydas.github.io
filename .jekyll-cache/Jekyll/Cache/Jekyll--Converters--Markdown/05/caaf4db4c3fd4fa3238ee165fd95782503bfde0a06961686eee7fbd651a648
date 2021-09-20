@@ -1,0 +1,69 @@
+I"D<p>My inspiration for using components came from Harel’s Statecharts paper (plus the immediate need to control a 4-headed 68000).</p>
+
+<p>I wrote a textual statemachine compiler for that project.</p>
+
+<p>After that, I discovered that Harel’s Statecharts were really 2 technologies:</p>
+<ol>
+  <li>HSM - hierarchical state machines (no concurrency, no orthogonal states).</li>
+  <li>concurrent components.</li>
+</ol>
+
+<p>I kept cycling on that idea and figured out how to compile diagrams to code.</p>
+
+<p>Using PEG and PROLOG, it is easy to compile diagrams<sup id="fnref:furtherReading" role="doc-noteref"><a href="#fn:furtherReading" class="footnote">1</a></sup>.</p>
+
+<p>Diagrams make the most sense when the boxes depict concurrent software components.</p>
+
+<p>Using synchronous languages for diagrams tends to fail.</p>
+
+<p>My diagrams are based on the EE paradigm.</p>
+
+<p>I think in terms of discrete events and communicating state machines,</p>
+
+<p>One needs the equivalent of structured programming for message-passing.</p>
+
+<p>That’s something that is missing from the Actor model.</p>
+
+<p>Enabling a paradigm is not the same as encouraging the use of a paradigm<sup id="fnref:asm" role="doc-noteref"><a href="#fn:asm" class="footnote">2</a></sup>.</p>
+
+<p>Trees scale.</p>
+
+<p>Graphs (which imply inter-dependencies) do not scale well.</p>
+
+<p>We used to build POS embedded applications with some 300 components on 8-bit CPUs with very little memory (12K and up) (for IVI, since bought up by Ingenico).</p>
+
+<p>Obviously, a system of 300+ components must be structured in some kind of hierarchy, to be understandable.</p>
+
+<p>Again, having concurrent nodes in the hierarchy makes things more manageable. Current GPLs encourage anti-concurrent design<sup id="fnref:threadLibraries" role="doc-noteref"><a href="#fn:threadLibraries" class="footnote">3</a></sup>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/08/16/Communicating-State-Machines.html">Communicating State Machines</a><br />
+<a href="https://guitarvydas.github.io/2021/03/16/Triples.html">Triples</a><br />
+<a href="https://guitarvydas.github.io/2021/04/26/Factbases-101.html">Factbases 101</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=QOYAHoLiyg0">PROLOG For Programmers</a></p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a></p>
+
+<p><a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy50fIg">Videos</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:furtherReading" role="doc-endnote">
+      <p>For more on this subject, search my blog for keywords such as <em>factbases</em> and <em>triples</em>. <a href="#fnref:furtherReading" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:asm" role="doc-endnote">
+      <p>If it were good enough to simply enable a paradigm, then we’d be coding everything, OOP and FP, in assembler.  The paradigm needs to be encouraged (enforced), like what Smalltalk did for OOP. <a href="#fnref:asm" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:threadLibraries" role="doc-endnote">
+      <p>Any language that uses a thread library treats concurrency as an after-thoughts and a second-class entity. <a href="#fnref:threadLibraries" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

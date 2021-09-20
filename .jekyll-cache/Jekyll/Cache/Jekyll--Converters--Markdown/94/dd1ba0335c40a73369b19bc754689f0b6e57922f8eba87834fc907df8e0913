@@ -1,0 +1,78 @@
+I"H<p>I recently finished the language jam.</p>
+
+<p>The theme was “first class comments”.</p>
+
+<p>This immediately brings up the question <code class="language-plaintext highlighter-rouge">what are comments used for?</code></p>
+
+<p>I see 3 use-cases, at the moment:</p>
+<ol>
+  <li>Explain the Code.</li>
+  <li>Explain the Architecture.</li>
+  <li>Pragmas.</li>
+</ol>
+
+<p>In my opinion, #1 is redundant - the code already explains what the code is supposed to do.</p>
+
+<p>#3 is already handled by compilers in various ways.</p>
+
+<p>That leaves #2 - Explaining the Architecture.</p>
+
+<p>How do you explain the Architecture in a first-class way?</p>
+
+<p>I think that explaining-the-Architecture is a language unto itself.</p>
+
+<p>The goals of an Implementation Language - like Haskell, Python, etc. - are quite different from the goals of a language targeted at explaining Architecture.</p>
+
+<p>Furthermore, I think that <em>diagrams</em> are a simple step towards explaining Architecture.</p>
+
+<p>Data-point in support of that last sentence - just about everyone who isn’t interested in the details of an implementation, sketches the Architecture on a whiteboard or on a napkin.</p>
+
+<p>FYI, I call this DI - Design Intent.</p>
+
+<p>So, what does it mean to have a way to express DI in a first-class manner?</p>
+
+<p>To me, this means:</p>
+<ol>
+  <li>Draw sensible<sup id="fnref:sensible" role="doc-noteref"><a href="#fn:sensible" class="footnote">1</a></sup> diagrams.</li>
+  <li>Compile the diagrams to executable code.</li>
+</ol>
+
+<p>So, that is what I tried to do in 48 hours in my entry in the langjam.</p>
+
+<p>I created 2 diagram conventions (one for expressing sequencing DI and one for expressing details).</p>
+
+<p>I created compilers for the diagrams (starting with .drawio diagrams, using Ohm-JS, PROLOG and my JS-emitting <code class="language-plaintext highlighter-rouge">glue</code> tool).</p>
+
+<p>To keep things simple-enough to be working in 48 hours, I emitted <code class="language-plaintext highlighter-rouge">bash</code> code.</p>
+
+<p>Actually, there was an ulterior motive to using bash. I know, from experience, that to build sensible diagrams, you need to start with the idea that everything-is-concurrent-by-default. Bash (and /bin/sh, etc.) is an easy way to get default concurrency (but not without warts, since bash insists on creating rendezvous-style concurrency, which is least helpful for everything-is-concurrent-by-default thinking).</p>
+
+<p>I got it working and posted in time.</p>
+
+<p>Everything is “simple” (simple means “lack of nuance”).  There are some 6+ passes of Ohm-JS, but each is very simplistic. There is some PROLOG, but it is used mostly for querying and exhaustive search, all of which could be done in a more bug-ridden form as nested loops in any other language.  There is some JS, but, I generated most of it using my <code class="language-plaintext highlighter-rouge">glue</code> tool. And there is a factbase (triples) which fits neatly onto JSON and onto PROLOG.</p>
+
+<p>Post-jam: I’m currently working on an eat-your-own-dogfood version of the diagrams.</p>
+
+<h1 id="github">Github</h1>
+
+<p><a href="https://github.com/guitarvydas/jam0001/tree/main/guitarvydas">my code</a></p>
+
+<p><a href="https://github.com/langjam/jam0001/issues/280">langjam github and voting</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:sensible" role="doc-endnote">
+      <p>What is a sensible diagram? Some agreed-upon convention(s) for diagramming. Something that is not ad-hoc. Something that is layered and not dripping with details (at any one layer). <a href="#fnref:sensible" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Racket Switch Macro | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Racket Switch Macro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/12/Racket-Switch-Macro.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/12/Racket-Switch-Macro.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-12T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Racket Switch Macro" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/12/Racket-Switch-Macro.html","@type":"BlogPosting","description":"Introduction","dateModified":"2021-09-12T00:00:00-04:00","datePublished":"2021-09-12T00:00:00-04:00","headline":"Racket Switch Macro","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/12/Racket-Switch-Macro.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Racket Switch Macro</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-12T00:00:00-04:00" itemprop="datePublished">Sep 12, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>Deconstruction of <code class="language-plaintext highlighter-rouge">switch</code> macro in Racket.</p>
+
+<p><a href="https://stackoverflow.com/questions/32793972/racket-switch-statement-macro">switch macro discussion on Stack Overflow</a></p>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>The Racket compiler allows programmers to define macros which get inserted into the compilation phase.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-09-12-Racket%20Compiler.png?raw=true" alt="2021-09-12-Racket Compiler.png" style="zoom:67%;" /></p>
+
+<p>Racket macros are written in Racket and operate on <code class="language-plaintext highlighter-rouge">syntax</code> objects.</p>
+
+<p>[<em>aside: The Racket compiler manipulates <code class="language-plaintext highlighter-rouge">syntax</code> objects.  The Lisp (a precursor to Racket) compiler manipulates <code class="language-plaintext highlighter-rouge">lists</code>.</em>]</p>
+
+<p><code class="language-plaintext highlighter-rouge">STX</code> usually denotes a <code class="language-plaintext highlighter-rouge">syntax object</code>.</p>
+
+<p>I use <code class="language-plaintext highlighter-rouge">___</code> for elision, avoiding <code class="language-plaintext highlighter-rouge">...</code>, since that is used as syntax in Racket macros.</p>
+
+<p><code class="language-plaintext highlighter-rouge">#'</code> creates a syntax object from a Racket expression.</p>
+
+<p>Macros are <em>functions</em> that execute at compile-time.  Macros manipulate the original source code and expand into final source-code.</p>
+
+<h1 id="top-layer">Top Layer</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang racket
+;; see https://stackoverflow.com/questions/32793972/racket-switch-statement-macro
+
+(require (for-syntax syntax/parse))
+
+(define-syntax (switch stx)
+  (define (transform-clause cl)
+     ___
+
+  (define (transform-clauses cls)
+     ___
+
+  (syntax-case stx ()
+     ___
+
+(define x 5)
+
+(define (test1)
+  ;; uses builtin 'case'
+  (case x
+    ((3) (displayln "x is 3"))
+    ((4) (displayln "x is 4"))
+    ((5) (displayln "x is 5"))
+    (else (displayln "none of the above"))))
+
+(define (test2)
+  ;; uses macro 'switch'
+  (switch x
+          [3 (displayln "sw x is 3")]
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+
+(test1)
+(test2)
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">require</code> is used to set up the compiler for macro processing [<em>don’t worry about what this means for now</em>.]</p>
+
+<p>The macro is called <code class="language-plaintext highlighter-rouge">switch</code> and is defined in the <code class="language-plaintext highlighter-rouge">define-syntax</code> form.</p>
+
+<p>The macro uses 2 auxiliary functions, <code class="language-plaintext highlighter-rouge">transform-clause</code> and <code class="language-plaintext highlighter-rouge">transform-clauses</code>.</p>
+
+<p>The main body of the macro is in the <code class="language-plaintext highlighter-rouge">(syntax-case stx () ___)</code> clause.   [<em>For now, don’t worry about the meaning of () as the second part of the syntax-case</em>].</p>
+
+<p><code class="language-plaintext highlighter-rouge">Test2</code> is the test of the macro.  <code class="language-plaintext highlighter-rouge">Test1</code> is the equivalent code using the builtin <code class="language-plaintext highlighter-rouge">case</code> form.</p>
+
+<h1 id="layer-1">Layer 1</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(syntax-case stx ()
+    ((_ x clause ...)
+     (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
+       #'(case x case-clause ...)))))
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">_</code> is a short-hand for the macro name, in this case <code class="language-plaintext highlighter-rouge">switch</code>.</p>
+
+<p>Looking at <code class="language-plaintext highlighter-rouge">test2</code>, the compiler (macro expander) sees a <code class="language-plaintext highlighter-rouge">switch</code> expression:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  (switch ___)
+</code></pre></div></div>
+
+<p>and binds the three variables:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  x &lt;= x
+  clause &lt;= 
+          [3 (displayln "sw x is 3")]
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]
+  ... &lt;=
+</code></pre></div></div>
+
+<p>This says that when the compiler matches an expression starting with <code class="language-plaintext highlighter-rouge">switch</code>, it will bind the second item (of the expression) to <code class="language-plaintext highlighter-rouge">x</code>, the third item to <code class="language-plaintext highlighter-rouge">clause</code> and lump all of the rest of the items into <code class="language-plaintext highlighter-rouge">...</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">clause</code> and <code class="language-plaintext highlighter-rouge">...</code> can only be used in syntax manipulation expressions.</p>
+
+<p><code class="language-plaintext highlighter-rouge">clause</code> is used in the <code class="language-plaintext highlighter-rouge">#'(clause ...)</code> expression which forms the argument to the auxilliary function <code class="language-plaintext highlighter-rouge">transform-clauses</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">with-syntax</code> does more (recursive) pattern-matching.  The result of <code class="language-plaintext highlighter-rouge">transform-clauses</code>is matched and bound to <code class="language-plaintext highlighter-rouge">case-clause</code>.</p>
+
+<p>The final <code class="language-plaintext highlighter-rouge">#'(case x case-clause)</code> expression uses the two bound syntax variables, <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">case-clause</code> and returns a syntax expression that forms a <code class="language-plaintext highlighter-rouge">case</code> expression.</p>
+
+<p>That returned expresssion is fed to the macro-expander part of the compiler which feeds into the rest of the downstream compilation.  Hence, whereever <code class="language-plaintext highlighter-rouge">(switch ___ ___ )</code> appears in the code, it will be replaced by the expanded macro (a <code class="language-plaintext highlighter-rouge">case</code> expression, in this instance).</p>
+
+<h1 id="layer-2">Layer 2</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  (define (transform-clauses cls)
+    (syntax-case cls ()
+      ((cl)
+       (with-syntax ((case-clause (transform-clause #'cl)))
+         #'(case-clause)))
+      ((cl rest ...)
+       (with-syntax ((case-clause (transform-clause #'cl))
+                     ((case-rest ...) (transform-clauses #'(rest ...))))
+         #'(case-clause case-rest ...)))))
+</code></pre></div></div>
+
+<p>The auxiliary function <code class="language-plaintext highlighter-rouge">transform-clauses</code> takes one parameter, named <code class="language-plaintext highlighter-rouge">cls</code>, and performs a syntax-based pattern-match.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Cls</code> is of type <code class="language-plaintext highlighter-rouge">syntax</code>.</p>
+
+<p>The first clause <code class="language-plaintext highlighter-rouge">(cls)</code>matches the degenerate case of a single clause.  It calls <code class="language-plaintext highlighter-rouge">transform-clause</code> and returns that syntactic value.  To perform the return, it pattern-matches the result of <code class="language-plaintext highlighter-rouge">transform-clause</code>, binds the match to <code class="language-plaintext highlighter-rouge">case-clause</code>, then returns <code class="language-plaintext highlighter-rouge">case-clause</code> as a <code class="language-plaintext highlighter-rouge">#'</code> syntax object.</p>
+
+<p>The other clause <code class="language-plaintext highlighter-rouge">(cl rest ...)</code> matches the case of multiple clauses, binding the matches into variables <code class="language-plaintext highlighter-rouge">cl</code>, <code class="language-plaintext highlighter-rouge">rest</code> and <code class="language-plaintext highlighter-rouge">...</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cl &lt;=
+          [3 (displayln "sw x is 3")]
+rest &lt;=
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+</code></pre></div></div>
+
+<p>The macro expansion is performed recursively until the degenerate case (<code class="language-plaintext highlighter-rouge">[default ___]</code>) is reached.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cl &lt;=
+          [4 (displayln "sw x is 4")]
+rest &lt;=
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cl &lt;=
+          [5 (displayln "sw x is 5")]
+rest &lt;=
+          [default (displayln "sw none of the above")]))
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cl &lt;=
+          [default (displayln "sw none of the above")]))
+rest &lt;=
+
+</code></pre></div></div>
+
+<h1 id="layer-3">Layer 3</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  (define (transform-clause cl)
+    (syntax-case cl (default)
+      ((default expr) #'(else expr))
+      ((val ... expr) #'((val ...) expr))))
+</code></pre></div></div>
+
+<p>The auxiliary function <code class="language-plaintext highlighter-rouge">transform-clause</code> converts one clause into its final form, e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         [3 (displayln "sw x is 3")]
+</code></pre></div></div>
+
+<p>gets bound to variables</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val &lt;= 3 
+... &lt;=
+expr &lt;= (displayln "sw x is 3")
+
+</code></pre></div></div>
+
+<p>and is expanded into</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         #'((3) (displayln "sw x is 3"))
+</code></pre></div></div>
+
+<p>while the <code class="language-plaintext highlighter-rouge">default</code> clause is bound to variable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expr &lt;= (displayln "sw none of the above")
+</code></pre></div></div>
+
+<p>and expands into</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#'(else (displayln "sw none of the above"))
+</code></pre></div></div>
+
+<h1 id="complete-version">Complete Version</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#lang racket
+;; see https://stackoverflow.com/questions/32793972/racket-switch-statement-macro
+
+(require (for-syntax syntax/parse))
+
+(define-syntax (switch stx)
+  (define (transform-clause cl)
+    (syntax-case cl (default)
+      ((default expr) #'(else expr))
+      ((val ... expr) #'((val ...) expr))))
+
+  (define (transform-clauses cls)
+    (syntax-case cls ()
+      ((cl)
+       (with-syntax ((case-clause (transform-clause #'cl)))
+         #'(case-clause)))
+      ((cl rest ...)
+       (with-syntax ((case-clause (transform-clause #'cl))
+                     ((case-rest ...) (transform-clauses #'(rest ...))))
+         #'(case-clause case-rest ...)))))
+
+  (syntax-case stx ()
+    ((_ x clause ...)
+     (with-syntax (((case-clause ...) (transform-clauses #'(clause ...))))
+       #'(case x case-clause ...)))))
+
+(define x 5)
+
+(define (test1)
+  ;; uses builtin 'case'
+  (case x
+    ((3) (displayln "x is 3"))
+    ((4) (displayln "x is 4"))
+    ((5) (displayln "x is 5"))
+    (else (displayln "none of the above"))))
+
+(define (test2)
+  ;; uses macro 'switch'
+  (switch x
+          [3 (displayln "sw x is 3")]
+          [4 (displayln "sw x is 4")]
+          [5 (displayln "sw x is 5")]
+          [default (displayln "sw none of the above")]))
+
+(test1)
+(test2)
+</code></pre></div></div>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/09/12/Racket-Switch-Macro.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

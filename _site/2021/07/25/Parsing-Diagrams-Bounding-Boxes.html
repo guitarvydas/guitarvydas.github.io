@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Parsing Diagrams - Bounding Boxes | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Parsing Diagrams - Bounding Boxes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Parsing a simple diagram and creating bounding boxes for all rectangles on the diagram." />
+<meta property="og:description" content="Parsing a simple diagram and creating bounding boxes for all rectangles on the diagram." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/07/25/Parsing-Diagrams-Bounding-Boxes.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/07/25/Parsing-Diagrams-Bounding-Boxes.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-25T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parsing Diagrams - Bounding Boxes" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/07/25/Parsing-Diagrams-Bounding-Boxes.html","@type":"BlogPosting","description":"Parsing a simple diagram and creating bounding boxes for all rectangles on the diagram.","dateModified":"2021-07-25T00:00:00-04:00","datePublished":"2021-07-25T00:00:00-04:00","headline":"Parsing Diagrams - Bounding Boxes","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/07/25/Parsing-Diagrams-Bounding-Boxes.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Parsing Diagrams - Bounding Boxes</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-07-25T00:00:00-04:00" itemprop="datePublished">Jul 25, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Parsing a simple diagram and creating bounding boxes for all rectangles on the diagram.</p>
+
+<h1 id="diagram">Diagram</h1>
+
+<p>Screenshot of app.diagrams.net (drawio) showing a simple diagram.</p>
+
+<p>Highlighted:</p>
+
+<ul>
+  <li>
+    <p>the box H</p>
+  </li>
+  <li>
+    <p>it’s (x,y), width and height</p>
+
+    <p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-diagram.png?raw=true" alt="2021-07-25-diagram.png" /></p>
+  </li>
+</ul>
+
+<h1 id="facts">Facts</h1>
+
+<p>The diagram converted to a textual factbase for PROLOG. [<em>In this example, I will use PROLOG (SWIPL), but the work can be done in just about any language, e.g. Python, miniKanren, clojure (see also, core.logic), Datalog, JavaScript, etc.  PROLOG provides automated backtracking which can be replaced by loops/recursion in other languages.</em>]</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-facts.png?raw=true" alt="2021-07-25-facts.png" /></p>
+
+<p>The diagram facts are stored in the file <code class="language-plaintext highlighter-rouge">diagram.pl</code>.</p>
+
+<h1 id="rect-and-name-facts">Rect and Name Facts</h1>
+
+<p>Add <code class="language-plaintext highlighter-rouge">rect</code> and <code class="language-plaintext highlighter-rouge">name</code> facts.</p>
+
+<p>Triples are</p>
+
+<ul>
+  <li>relation</li>
+  <li>subject</li>
+  <li>object.</li>
+</ul>
+
+<p>We use triples strictly. <br />
+Facts that are doubles, like <code class="language-plaintext highlighter-rouge">rect</code>, are written as triples with an empty 3rd item.</p>
+
+<p>We emphasize <em>machine-readability</em>.  Normalization and repetition is better for machines, but looks like noise to humans.  For example, human readers can infer the names and don’t need empty 3rd items, but, such redundancy makes it easier for machines to parse.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-rect%20and%20name%20facts.png?raw=true" alt="2021-07-25-rect and name facts.png" /></p>
+
+<h1 id="bounding-boxes">Bounding Boxes</h1>
+
+<p>A bounding box is a simple rectangle that encompasses a graphical object.</p>
+
+<p>A bounding box consists of four numbers:</p>
+
+<ul>
+  <li>left</li>
+  <li>top</li>
+  <li>right</li>
+  <li>bottom.</li>
+</ul>
+
+<p>Diagrams.net gives us x, y, width and height.</p>
+
+<p>To make a bounding box from the information we simply calculate:</p>
+
+<ul>
+  <li>left is X</li>
+  <li>top is Y</li>
+  <li>right is X+Width</li>
+  <li>bottom is Y+Height.</li>
+</ul>
+
+<p>[<em>(0,0) is at the top-left</em>]</p>
+
+<p>We can write code to calculate the bounding box.</p>
+
+<p>Below is the SWIPL PROLOG code.  Explanation of the code follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>makebb(ID):-
+    rect(ID,_),
+    x(ID,X),
+    y(ID,Y),
+    w(ID,Width),
+    h(ID,Height),
+    format("l(~w, ~w).~n", [ID,X]),
+    format("t(~w, ~w).~n", [ID,Y]),
+    W is X + Width,
+    format("r(~w, ~w).~n", [ID,W]),
+    H is Y + Height,
+    format("b(~w, ~w).~n", [ID,H]).
+  
+
+</code></pre></div></div>
+
+<p>The PROLOG code says:</p>
+
+<ul>
+  <li>
+    <p>All <code class="language-plaintext highlighter-rouge">,</code>-separated clauses are <em>and</em>‘ed together</p>
+  </li>
+  <li>
+    <p>ID must be a rect</p>
+  </li>
+  <li>
+    <p>ID must have x, y, w and h facts</p>
+  </li>
+  <li>
+    <p>Assign the values of x, y, w and h into PROLOG variables X, Y, Width and Height</p>
+  </li>
+  <li>
+    <p>Print 4 lines of output using the <em>format</em> directive</p>
+
+    <ul>
+      <li>
+        <p>left is just X</p>
+      </li>
+      <li>
+        <p>top is just Y</p>
+      </li>
+      <li>
+        <p>right is X + Width</p>
+      </li>
+      <li>
+        <p>bottom is Y + Height.</p>
+
+        <p>We see the result for object <em>h</em>.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-bounding%20box%20for%20h.png?raw=true" alt="2021-07-25-bounding box for h.png" /></p>
+
+<h2 id="details">Details</h2>
+
+<p>The details of running this simple query are shown below, if you want to follow along.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-25-details%20bounding%20box%20for%20h.png?raw=true" alt="2021-07-25-details bounding box for h.png" /></p>
+
+<p>[<em>N.B. The details should be boring to human readers. Repetition and simplicity are keys to machine readability and writing code that writes code.  The code for the above has been put into a bash script called bb.bash to emphasize the fact that this process can be automated.</em> ]</p>
+
+<h1 id="bounding-boxes-for-all-objects">Bounding Boxes For All Objects</h1>
+
+<p>We add the following code to the swipl query to loop over every <code class="language-plaintext highlighter-rouge">rect</code> printing the bounding box for each. Again, note that this could be done in any language.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+makeAllBB:-
+    bagof(ID,makebb(ID),_).
+
+</code></pre></div></div>
+
+<p>Details: <code class="language-plaintext highlighter-rouge">bagof</code> runs makebb(ID) for every ID.  It collects the results in a bag (warning: comp sci term).  We discard the results using the <code class="language-plaintext highlighter-rouge">_</code> character.  We don’t care about the actual results, only the print-out<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<h1 id="simplicity">Simplicity</h1>
+
+<p>Simplicity is defined as <em>lack of nuance.</em></p>
+
+<h1 id="lack-of-detail-at-this-layer">Lack of Detail (at this layer)</h1>
+
+<p>It might appear that this treatment does not include enough details for converting diagrams to code.</p>
+
+<p>This is a hallmark of the <em>layered</em> approach - each layer can be understood in its entirety without confronting all of the details.</p>
+
+<p>As we will see in subsequent essays, we <em>will</em> add enough details - in layers - to compile this diagram to code.</p>
+
+<p>The only difference between this <em>layered</em> approach and other approaches is <em>where</em> the details appear.</p>
+
+<p>There is no need to <em>flatten</em> the information contained in this diagram.  Details will be supplied in lower layers, but will not affect the appearance of this layer.</p>
+
+<p>The goal is to make <em>every</em> layer as simplistic as this one.</p>
+
+<h1 id="factbase-growth">Factbase Growth</h1>
+
+<p>There is no current need to prune the factbase.</p>
+
+<p>Pruning is an optimization, only.</p>
+
+<p>Unneeded facts are skipped by the factbase engine.  The rules use only the facts that are needed.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>This code produces a side effect. We could get rid of the side effect and make this more FP’ish, but why bother?  We don’t need FP to express 14 lines of code. [<em>N.B. We will endeavour to keep things simple, by minimizing the code line count.</em>] <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/07/25/Parsing-Diagrams-Bounding-Boxes.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

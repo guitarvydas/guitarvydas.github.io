@@ -1,0 +1,109 @@
+I"�<h1 id="overview">Overview</h1>
+
+<ul>
+  <li>
+    <p>use .md to describe design, user another .md to describe implementation (multiple views)</p>
+  </li>
+  <li>add <code class="language-plaintext highlighter-rouge">@</code> syntax to create and ref other .md files</li>
+  <li>implementation is <em>bash</em> or <em>python</em> or <em>whatever</em></li>
+  <li>observation:
+    <ul>
+      <li>disease: trying to fit everything onto one notation</li>
+      <li>cure: use multiple views and multiple notations, all very similar to .md and to <em>bash</em></li>
+    </ul>
+  </li>
+  <li>diagram:
+    <ul>
+      <li>only one way to view a design/implementation</li>
+      <li>currently using <em>drawio</em> https://www.diagrams.net</li>
+    </ul>
+  </li>
+  <li>text:
+    <ul>
+      <li>only one way to view a design/implementation</li>
+      <li><em>bash</em> is textual</li>
+      <li><em>python</em> is textual</li>
+      <li><em>JavaScript</em> is textual</li>
+      <li>.md is textual</li>
+    </ul>
+  </li>
+  <li>asynchronous
+    <ul>
+      <li>all components are asynchronous</li>
+      <li>all components are concurrent (<em>can</em> be run in parallel, but not necessarily)
+        <ul>
+          <li>note that all <em>parallel</em> designs are subsets of <em>concurrent</em> designs</li>
+          <li>parallelism is an implementation detail</li>
+          <li>concurrency is a design paradigm, though</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="refinement">Refinement</h1>
+
+<p>The “most interesting” question is: “what happens to my original idea(s) when I refine the idea(s)”</p>
+
+<p>[This also applies to TODOs - how do you refine/embellish a TODO item?].</p>
+
+<p>For example, I have an item and I begin to envision doing it in two steps.</p>
+
+<p>Do I re-write the item, or, do I “push into” the item (open a new file, zoom in on a diagram element, etc.)?</p>
+
+<p>How does the editor “remember” what was there and how does it represent the newer version?</p>
+
+<p>This step is <em>recursive</em>.  Once I’ve broken an item down into two parts, what happens if I want to break down one of the parts into two more parts? And so on…</p>
+
+<h1 id="edit-operations">Edit operations</h1>
+
+<ul>
+  <li>add node</li>
+  <li>connect node</li>
+  <li>ref to other .md file</li>
+  <li>butted rectangles means sequence (synch)</li>
+  <li>SVG rect, ellipse, text, line</li>
+  <li>line beginning with <code class="language-plaintext highlighter-rouge">@</code> means other-file with given name (includes spaces) e.g. <code class="language-plaintext highlighter-rouge">@ all containment</code> means other-file called <code class="language-plaintext highlighter-rouge">all containment.md</code></li>
+  <li>rename <code class="language-plaintext highlighter-rouge">@</code>node (hence, rename file)</li>
+  <li>push selection to new .md file (invent <code class="language-plaintext highlighter-rouge">@</code> name, allow change later)</li>
+</ul>
+
+<h1 id="stubs">Stubs</h1>
+
+<p>Not all steps are automated, some require human intervention.</p>
+
+<p>Begin with outline of steps, all non-automated, i.e. implementation is English text.</p>
+
+<p>Refine steps by replacing them with automation.</p>
+
+<h1 id="round-trip">Round Trip</h1>
+
+<p>Q: How does refining a step reflect back to the original design?</p>
+
+<p>Q: Is the original design the master document?</p>
+
+<p>Q: Do we combine the original design with implementation to produce an app?</p>
+
+<ul>
+  <li>initial version: git-like folding of implementation onto design, complain if mis-match (conflict) ie. implementation does not fit neatly over design</li>
+  <li>AOP for aspects of implementation?, Lisp-like :before and :after</li>
+  <li>Paul Bassett’s “Framing Software Reuse” for creating app from design+implementation?</li>
+</ul>
+
+<h1 id="implementation">Implementation</h1>
+
+<p>Q: Use bash’s <code class="language-plaintext highlighter-rouge">#!~/bin/ag</code> as first line of implementation?</p>
+
+<h1 id="example">Example</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-08-09-apps-hello%20mdd.png?raw=true" alt="2021-08-09-apps-hello mdd.png" /></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>PT Notes for Torlisp - Language Jam | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="PT Notes for Torlisp - Language Jam" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Language Jam (langjam) Theme First Class Comments Restrictions 48 hours to implement and document My Approach Goal Executable diagrams README.md README.md Sequence Diagram" />
+<meta property="og:description" content="Language Jam (langjam) Theme First Class Comments Restrictions 48 hours to implement and document My Approach Goal Executable diagrams README.md README.md Sequence Diagram" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/07/PT-Notes-for-Torlisp-Language-Jam.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/07/PT-Notes-for-Torlisp-Language-Jam.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-07T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PT Notes for Torlisp - Language Jam" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/07/PT-Notes-for-Torlisp-Language-Jam.html","@type":"BlogPosting","description":"Language Jam (langjam) Theme First Class Comments Restrictions 48 hours to implement and document My Approach Goal Executable diagrams README.md README.md Sequence Diagram","dateModified":"2021-09-07T00:00:00-04:00","datePublished":"2021-09-07T00:00:00-04:00","headline":"PT Notes for Torlisp - Language Jam","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/07/PT-Notes-for-Torlisp-Language-Jam.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">PT Notes for Torlisp - Language Jam</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-07T00:00:00-04:00" itemprop="datePublished">Sep 7, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="language-jam-langjam">Language Jam (langjam)</h1>
+<h3 id="theme">Theme</h3>
+<p>First Class Comments</p>
+<h3 id="restrictions">Restrictions</h3>
+<p>48 hours to implement and document</p>
+<h3 id="my-approach">My Approach</h3>
+<h4 id="goal">Goal</h4>
+<p>Executable diagrams</p>
+<h4 id="readmemd">README.md</h4>
+<p><a href="https://github.com/langjam/jam0001/blob/main/guitarvydas/README.md">README.md</a></p>
+<h4 id="sequence-diagram">Sequence Diagram</h4>
+
+<h4 id="tools">Tools</h4>
+<ul>
+  <li>Ohm-JS</li>
+  <li>SWIPL (PROLOG</li>
+  <li>/bin/bash commands: cat, tsort, mv, sed, (and scripts)
+    <h4 id="2-kinds-of-diagrams">2 Kinds of Diagrams</h4>
+    <ol>
+      <li><em>Sequence diagram</em> (Pert Chart) (boxes joined by arrows denoting ordering)</li>
+      <li><em>Details diagram</em> (snippets of /bin/bash code in red boxes)</li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="sequence-diagram-1">Sequence Diagram</h4>
+
+<p><img src="https://raw.githubusercontent.com/guitarvydas/jam0001/guitarvydas/guitarvydas/sequence.png" alt="img" style="zoom:67%;" /></p>
+
+<h4 id="details-diagram">Details Diagram</h4>
+
+<p><img src="https://raw.githubusercontent.com/guitarvydas/jam0001/guitarvydas/guitarvydas/details.png" alt="img" style="zoom:67%;" /></p>
+
+<h4 id="sequence-transpiler">Sequence Transpiler</h4>
+
+<p>5 Ohm-JS passes -&gt; sort -&gt; PROLOG -&gt; JSON -&gt; Ohm-JS to /bin/bash</p>
+
+<h4 id="details-transpiler">Details Transpiler</h4>
+
+<p>6 Ohm-JS passes -&gt; sort -&gt; PROLOG -&gt; JSON -&gt; Ohm-JS to /bin/bash</p>
+
+<h5 id="passes">Passes</h5>
+
+<p>Each pass consists of 2 specifications:</p>
+
+<ol>
+  <li>grammar (*.ohm)</li>
+  <li>action code (aka <em>semantics</em>) (*.glue)</li>
+</ol>
+
+<p>Each pass <em>augments</em> the factbase (fb.pl), there is no need to remove<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> facts.</p>
+
+<h5 id="sequence-transpiler-passes">Sequence Transpiler Passes</h5>
+
+<ol>
+  <li>compressed .drawio file -&gt; uncompressed .XML</li>
+  <li>normalize attributes (e.g. style=”…”)</li>
+  <li>cull attributes, discard attributes that are concerned only with graphical representation (keep: value, source, target, edge, vertex, id, green, yellow, red)</li>
+  <li>symbol table - map long id names to short id names (not strictly necessary, but aids human readability duing bootstrap)</li>
+  <li>culled .XML -&gt; factbase (fb.pl)</li>
+  <li>sort - needed only to appease PROLOG (original PROLOG required that all clauses be grouped together, while modern PROLOG relaxes this constraint.  The <em>sort</em> pass appeases original PROLOG.)</li>
+</ol>
+
+<h5 id="details-transpiler-passes">Details Transpiler Passes</h5>
+
+<ol>
+  <li>compressed .drawio file -&gt; uncompressed .XML</li>
+  <li>normalize attributes (e.g. style=”…”)</li>
+  <li>cull attributes, discard attributes that are concerned only with graphical representation (keep: value, source, target, edge, vertex, id, green, yellow, red)</li>
+  <li>symbol table - map long id names to short id names (not strictly necessary, but aids human readability duing bootstrap)</li>
+  <li>culled .XML -&gt; factbase (fb.pl)</li>
+  <li>fold newlines, create one newline-less string for each snippet of code (helps sort)</li>
+  <li>sort - needed only to appease PROLOG (original PROLOG required that all clauses be grouped together, while modern PROLOG relaxes this constraint.  The <em>sort</em> pass appeases original PROLOG.)</li>
+</ol>
+
+<h5 id="sequence-json">Sequence JSON</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"diagram":"id1", "toplevelcomponent":"id4"}
+
+{
+  "children": ["process A", "process B" ],
+  "connections": [
+    {
+      "name":"x2",
+      "source": {"component":"process A", "port":"fb"},
+      "target": {"component":"process B", "port":"in"}
+    }
+  ],
+  "diagram":"id1",
+  "id":"id4",
+  "inputs": [],
+  "name":"topLevel",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id5",
+  "inputs": [],
+  "name":"process A",
+  "outputs": ["fb" ],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id6",
+  "inputs": ["in" ],
+  "name":"process B",
+  "outputs": [],
+  "synccode":""
+}
+
+
+</code></pre></div></div>
+
+<h5 id="details-json">Details JSON</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"diagram":"id1", "toplevelcomponent":"id4"}
+
+{
+  "children": ["process A", "process__B" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id4",
+  "inputs": [],
+  "name":"top level",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": ["code1" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id5",
+  "inputs": [],
+  "name":"process A",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id6",
+  "inputs": [],
+  "name":"code1",
+  "outputs": [],
+  "synccode":"@~@echo hello@~@echo ... from process A@~@"
+}
+{
+  "children": ["code2" ],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id7",
+  "inputs": [],
+  "name":"process__B",
+  "outputs": [],
+  "synccode":""
+}
+{
+  "children": [],
+  "connections": [],
+  "diagram":"id1",
+  "id":"id8",
+  "inputs": [],
+  "name":"code2",
+  "outputs": [],
+  "synccode":"@~@echo ... from process B@~@echo goodbye@~@"
+}
+
+</code></pre></div></div>
+
+<h3 id="relationship-to-lisp">Relationship to Lisp</h3>
+
+<ul>
+  <li>PEG parsing &lt;- generalization of Lisp macros</li>
+  <li>PEG parsing in a separate pre-pass accomplishes the same result as hygenic macros, except with less complication (YMMV)
+    <h3 id="fallout">Fallout</h3>
+  </li>
+  <li>created <em>ftranspile()</em> and <em>stranpsile()</em> functions to abstract (hide) transpiler functionality</li>
+</ul>
+
+<h3 id="continuing-work">Continuing Work</h3>
+
+<ul>
+  <li>“eat your own dogfood” - compiled diagram of diagram compiler</li>
+  <li>simplification of code</li>
+</ul>
+
+<p><a href="https://github.com/guitarvydas/firstclasscomments">firstclasscomments</a></p>
+
+<h3 id="github">Github</h3>
+<p><a href="https://github.com/langjam">lamgjam</a></p>
+<h3 id="winners">Winners</h3>
+<p><a href="https://youtu.be/j7VAw8UfMeA">Winners</a></p>
+<h1 id="peg-for-zodetrip">PEG for Zodetrip</h1>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Removing facts is an optimization that is not needed on current hardware.  Diagrams remain small, so runtime is imperceptable. Keeping facts allows for future flexibility (e.g. querying the fact base and making inferences that were not foreseen during original development). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/09/07/PT-Notes-for-Torlisp-Language-Jam.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

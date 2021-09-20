@@ -1,0 +1,124 @@
+I"\"<p>The goal of the style-expander phase is to convert HTML <code class="language-plaintext highlighter-rouge">style</code> attributes from:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;"
+</code></pre></div></div>
+
+<p>to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rounded="1" whiteSpace="wrap" html="1" verticalAlign="top"
+</code></pre></div></div>
+
+<p>[<em>This is probably not legal HTML code, but is useful for later phases. It is OK to produce illegal HTML at this point, as long as subsequent phases can *grok* it.</em>]</p>
+
+<p>This conversion can probably be done in any other programming language, but I chose to do this using <em>grok</em> and <em>emit</em> (based on Ohm-JS).</p>
+
+<p>It is considered to be better style to create “structured” pattern matches, using a PEG parser engine, than to write the pattern matches in ad-hoc code.</p>
+
+<p>Note that FP languages use pattern matching. PEG parsing is a superset of what is currently available in popular FP languages, but the programming style should be familiar to anyone already using pattern-matching FP languages.</p>
+
+<h1 id="style-expansion-in-daswb">Style Expansion in DasWB</h1>
+
+<p>The pertinent textareas are highlighted below</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20screendshot%20style%20expander.png?raw=true" alt="2021-07-30 screendshot style expander.png" /></p>
+
+<p>We can view the output, as before, by copying the text area “diagrams net style expanded”<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> and dropping it into a text editor.</p>
+
+<h2 id="grok">Grok</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AppStyleexpander{
+  Diagrams = Diagram+
+  Diagram = "&lt;diagram" Attribute* "&gt;" GraphModel "&lt;/diagram&gt;"
+  Attribute = alnum+ "=" attributeValue
+  string= "\"" notDQ* "\""
+  notDQ = ~"\"" any
+  encodedChar = ~"&lt;" any		   
+
+  GraphModel = "&lt;mxGraphModel" Attribute+ "&gt;" Root "&lt;/mxGraphModel&gt;" 
+  Root = "&lt;root&gt;" Cell+ "&lt;/root&gt;"
+  Cell = CellWithContent | CellWithoutContent
+  CellWithoutContent = "&lt;mxCell" CellAttribute+ "/&gt;"
+  CellWithContent = "&lt;mxCell" CellAttribute+ "&gt;" Geometry? "&lt;/mxCell&gt;"	     
+  Geometry = "&lt;mxGeometry" Attribute+ "/&gt;"
+  CellAttribute = StyleAttribute | OtherCellAttribute
+  StyleAttribute = "style" "=" string
+  OtherCellAttribute = alnum+ "=" attributeValue
+
+  attributeValue = number | string
+  number = digit+
+
+}
+
+</code></pre></div></div>
+
+<p>The grok pattern matcher (grammar) looks at the decompressed version of the .drawio file and includes a bit more detail than before.</p>
+
+<p>Here, we match diagrams and break them down into <code class="language-plaintext highlighter-rouge">GraphModel</code> and <code class="language-plaintext highlighter-rouge">Cell</code>s.</p>
+
+<p>The<code class="language-plaintext highlighter-rouge">style</code> attribute can only occur<sup id="fnref:style" role="doc-noteref"><a href="#fn:style" class="footnote">2</a></sup> in <code class="language-plaintext highlighter-rouge">Cell</code>s.  Such attributes are deconstructed by the rule <code class="language-plaintext highlighter-rouge">StyleAttribute</code>.</p>
+
+<h2 id="emit">Emit</h2>
+
+<p>Again, the emit rules match the grok rules 1:1.</p>
+
+<p>The only job of this phase is to latch onto <code class="language-plaintext highlighter-rouge">style</code> attributes and to process them using the <code class="language-plaintext highlighter-rouge">expandStyle()</code> <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup>function.</p>
+
+<p>Note that we are using the pattern matcher to help us identify <code class="language-plaintext highlighter-rouge">style</code> attributes embedded in <code class="language-plaintext highlighter-rouge">mxCell</code>s.  Everything else is matched, but is emitted verbatim.</p>
+
+<p>Again, the task of this phase is very small.  The goal is to do one thing well, eschew dependencies, then put it into our workflow and forget about it (build and forget). Nothing we do in subsequent phases should affect the operation of this code<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">4</a></sup>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Diagrams [@ds] = [[${ds}]]
+Diagram [k @a k2 graphmodel k3] = [[${k}${a}${k2}\n${graphmodel}\n${k3}\n]]
+Attribute [@an k s] = [[\ ${an}${k}${s}]]
+string [q1 @cs q2] = [[${q1}${cs}${q2}]]
+notDQ [c] = [[${c}]]
+encodedChar [c] = [[${c}]]
+
+GraphModel [k1 @as k2 root k3] = [[${k1}${as}${k2}${root}${k3}]]
+Root [k1 @cells k2] = [[${k1}${cells}${k2}]]
+Cell [c] = [[${c}]]
+CellWithoutContent [k1 @as k2] = [[${k1}${as}${k2}]]
+CellWithContent [k1 @as k2 @geometry k3] = [[${k1}${as}${k2}${geometry}${k3}]]
+Geometry [k1 @as k2] = [[${k1}${as}${k2}]]
+
+CellAttribute [a] = [[\ ${a}]]
+StyleAttribute [id k s] = [[\ ${expandStyle(s)}]]
+OtherCellAttribute [@an k s] = [[\ ${an}${k}${s}]]
+
+attributeValue [x] = [[${x}]]
+number [n] = [[${n}]]
+</code></pre></div></div>
+
+<p>As can be seen by examing the code, above, <code class="language-plaintext highlighter-rouge">emit</code> does almost nothing in this case and produces an identity transform (i.e. output == input).</p>
+
+<p>In the single case where a <code class="language-plaintext highlighter-rouge">StyleAttribute</code> is found, we process the attribute by calling <code class="language-plaintext highlighter-rouge">expandStyle()</code> and return the resulting string (which should be a string of single attribute/value pairs).</p>
+
+<p><code class="language-plaintext highlighter-rouge">Emit</code> simply builds a string.  It glues together matched bits of patterns and returns a single string as the result. DasWB pokes this string into the appropriate textarea.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://github.com/guitarvydas/diagram-parsing/blob/master/daswb.html">daswb.html</a></p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>id=”styleexpandertranspiled” <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:style" role="doc-endnote">
+      <p>We assume that we are starting with valid HTML code produced by drawio.  We <em>could</em> add more design rule checking to validate input, if necessary.  A feature of the this method is that error checking does not need to be wound into the code.  Error checks can be plugged into the workflow as pre-filters.  The code remains understandable and the error checks remain understandable.  Components are <em>not</em> abstracted to allow for any kind of input - the Architect ensures that error checks are plugged into the workflow as required by the problem/solution.  Design rule checking (aka error checking) components are pluggable components, like everything else. <a href="#fnref:style" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>ExpandStyle() can be found in <code class="language-plaintext highlighter-rouge">support.js</code>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>This is a place where hidden dependencies must be eschewed.  For example, Call/Return creates hidden dependencies, which means that we should not use libraries based on Call/Return (i.e. just about any code library).  In this particular case, we write out our results and augment <code class="language-plaintext highlighter-rouge">fb.pl</code> between phases.  The phases of DaSWB cannot CALL each other, but, we can make a pipeline of isolated phases, joining them together with the file <code class="language-plaintext highlighter-rouge">fb.pl</code>. (Other techniques for isolation could be used, but are unnecessary at this point. (N.B. most GPLs, like Python, Rust, JS, etc. make it difficult to achieve true isolation (because of the use of CALL/RETURN) without using intermediate files.)). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

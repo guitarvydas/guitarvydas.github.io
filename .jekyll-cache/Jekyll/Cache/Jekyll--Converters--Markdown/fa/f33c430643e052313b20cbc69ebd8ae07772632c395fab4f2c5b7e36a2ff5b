@@ -1,0 +1,172 @@
+I"�<p>Theoretically, debuggers for statically typed languages should be equal to debuggers for dynamically-typed languages.</p>
+
+<p>Historically, though, dynamic languages are easier to debug.</p>
+
+<p>Program development breaks down, roughly, into two aspects</p>
+
+<ol>
+  <li>getting the requirements right, and,</li>
+  <li>mapping the requirements to code.</li>
+</ol>
+
+<p>Strong typing is aimed at solving (2), but (1) is still done in a mostly ad-hoc manner (strong typing helps with <em>thinking about</em> (1), but does not solve (1)).</p>
+
+<p>Debugging can be helpful in iterating designs as needed by (1) and continues to be an important tool in Designers’ toolbelts.</p>
+
+<h1 id="repl">REPL</h1>
+
+<p>REPL means Read-Eval-Print-Loop.</p>
+
+<p>The REPL concept was invented using dynamically-typed languages (Lisp).</p>
+
+<p>In a REPL, the full language is exposed to the programmer.</p>
+
+<p>REPL commands are indistinguishable from the language itself.</p>
+
+<p>One doesn’t need to learn a new language for debugging.</p>
+
+<h1 id="debugger-dsl">Debugger DSL</h1>
+
+<p>The “language” used to enter debugger commands is a DSL, but, not often thought-of that way.</p>
+
+<p>For example, Lisp can be used in a Lisp REPL.  Lisp is the language <em>and</em> Lisp is the debugger DSL.</p>
+
+<p>On the other hand, <em>gdb</em> can be used to debug C.  C is the language, but the debugger DSL is some other language, i.e. not C.</p>
+
+<p>The ideal situation is to be able to use the same language for programming and for debugging.</p>
+
+<h1 id="history---we-have-always-done-it-this-way">History - We Have Always Done It This Way</h1>
+
+<p>Historically, we have built debuggers separately from language compilers/interpreters.</p>
+
+<p>The <em>reason</em> for doing this is optimization.</p>
+
+<p>The hardware of yesteryear was not capable of running statically-typed languages as debugger DSLs.</p>
+
+<p>And, it was thought that debuggers were not as important as the languages themselves.</p>
+
+<h1 id="creating-repls-for-statically-typed-languages">Creating REPLs For Statically Typed Languages</h1>
+
+<p>The answer to creation of debuggers for statically typed languages is quite simple</p>
+
+<p>a) build the whole language (compiler) <em>into</em> the REPL</p>
+
+<p>b) have the compiler leave enough information lying around for the REPL</p>
+
+<ul>
+  <li>typical compilers destroy information, such as scoping and variable names</li>
+  <li>such information must be retained<sup id="fnref:retain" role="doc-noteref"><a href="#fn:retain" class="footnote">1</a></sup></li>
+  <li>the debugger/REPL must display data in a way that mimics the definition of data in the language -being-debugged</li>
+  <li>the debugger/REPL must accept commands that appear to be written in the language-being-debugged.</li>
+</ul>
+
+<h1 id="lisp">Lisp</h1>
+
+<p>Lisp is thought of as an interpreted language, but has (long ago) graduated to being a compiled language.</p>
+
+<p>Modern Lisps tend to run the full compiler in the REPL, as needed in point (a).</p>
+
+<p>Modern Lisps tend to compile <em>all</em> code, even code typed in at the REPL.</p>
+
+<p>When a programmer inserts breakpoints into code, Lisps tend to recompile the code into interpreted form for easier debugging.</p>
+
+<h1 id="static-typing-vs-dynamic-typing">Static Typing vs. Dynamic Typing</h1>
+
+<p>Static typing is a subset of dynamic typing.</p>
+
+<p>Any fully-typed language checks the types of all of the program constituents.</p>
+
+<p>Static type checkers are arranged to do this checking <em>before</em> the code in question runs.</p>
+
+<p>Dynamic type checkers do the same checking, but at runtime.</p>
+
+<p>Dynamically typed languages are often conflated with languages that are not strongly typed, but <em>dynamic typing</em> is actually the <em>same</em> as <em>static typing</em>, just done at a different time.</p>
+
+<h1 id="interpretation">Interpretation</h1>
+
+<p>Any strongly typed language <em>can</em> be interpreted.</p>
+
+<p>Any statically typed, strongly typed language can be, both, compiled and interpreted.</p>
+
+<p>A compiler merely creates a minimized form of the code, and removes the need for runtime type-checking.</p>
+
+<p>Corrolary: a compiler is an interpreter.</p>
+
+<p>An interpreter is useful as a REPL.</p>
+
+<p>Every language should come with a</p>
+
+<ul>
+  <li>compiler, and</li>
+  <li>an interpreter.</li>
+</ul>
+
+<h1 id="compilation">Compilation</h1>
+
+<p>Compilation is an optimization.</p>
+
+<p>Compilation is nice-to-have, but not necessary.</p>
+
+<p>Compilation makes the final app run faster/smaller.</p>
+
+<h1 id="history-again">History, Again</h1>
+
+<p>Historically, building compilers and interpreters has taken a long time (years, each).</p>
+
+<p>Languages that were knocked-off in a week, say JavaScript, took many more years to hone (witness the succession of versions of the language).</p>
+
+<p>Historically, it was considered “enough” to build only a compiler or to build only an interpreter for a language.</p>
+
+<h1 id="an-interpreter-and-compiler-for-every-language">An Interpreter And Compiler For Every Language</h1>
+
+<p>We have more efficient hardware now.</p>
+
+<p>We have better language-building tools now.</p>
+
+<p>We <em>should</em> demand that every language have a compiler <em>and</em> an interpreter out of the chute.  They should be provably the same and give decent error messages<sup id="fnref:error" role="doc-noteref"><a href="#fn:error" class="footnote">2</a></sup> (at least the interpreter should do so).</p>
+
+<p>An interpreter should be considered to be most important, a compiler is but an optimization.  Some languages cannot be compiled and, hence, only provide an interpreter.</p>
+
+<p>Corrolary: <em>Every language must have an interpreter. If the language has a compiler, too, that should be considered to be a bonus.</em></p>
+
+<p>[^]:</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">Failure Driven Development</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Homoiconicity">Homoiconicity</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/16/Triples.html">Triples</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/17/Factbases.html">Triples and Factbases</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/16/Toolbox-Languages.html">Toolbox Languages</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/28/Toolbox-Languages-(2).html">Toolbox Languages 2</a></p>
+
+<p>essay on Low Friction Design</p>
+
+<p>essay on Agile</p>
+
+<p>essay on UML</p>
+
+<p><a href="https://guitarvydas.github.io/2021/07/26/Lisp.html">Lisp</a></p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:retain" role="doc-endnote">
+      <p>This is actually done by many compilers of today. When one invokes the the HTML/JS console in a web browser, there is usually enough information available to the debugger to show data frames in an understandable manner. <a href="#fnref:retain" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:error" role="doc-endnote">
+      <p>A stack backtrace is not an error message.  It is a core dump. <a href="#fnref:error" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

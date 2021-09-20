@@ -53,9 +53,9 @@ Software should be hierarchical.
 
 Calling functions by-name[^abs] should not be allowed.
 
-[^c] I quit Core Physics soon after some hippy tried to tell me about tachyons, i.e. that there are things that exceed the speed of light.
+[^c]: I quit Core Physics soon after some hippy tried to tell me about tachyons, i.e. that there are things that exceed the speed of light.
 
-[^abs] Absolute name.  Currently we think of functions as points in a global namespace. Function names, variable names, type names, etc. should be _relative_ not _absolute_.  Namespaces should be hierarchical. We should refer to objects like we refer to UNIX directories - hierarchically.  I think that Java started to creep this notion in, but it didn't go all the way.  Relative names should be the rule in our programming languages.  Local variables and parameters are relative (relative to the containing function). Inheritance doesn't work well because it allows relative boundaries to be crossed (I favor composition, not inheritance).
+[^abs]: Absolute name.  Currently we think of functions as points in a global namespace. Function names, variable names, type names, etc. should be _relative_ not _absolute_.  Namespaces should be hierarchical. We should refer to objects like we refer to UNIX directories - hierarchically.  I think that Java started to creep this notion in, but it didn't go all the way.  Relative names should be the rule in our programming languages.  Local variables and parameters are relative (relative to the containing function). Inheritance doesn't work well because it allows relative boundaries to be crossed (I favor composition, not inheritance).
 
 # See Also
 

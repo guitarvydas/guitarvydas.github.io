@@ -1,0 +1,124 @@
+I"<p>In this essay, I use the abbreviations:</p>
+<ul>
+  <li>PLD to mean Programming Language Design, and,</li>
+  <li>PLF to mean Programming Language Fundamentals.</li>
+</ul>
+
+<p>Both, PLF and PLD are necessary for creating a popular programming language.</p>
+
+<p>if-then-else<br />
+counting parameters</p>
+<h1 id="parameter-counting---lisp-vs-pascal">parameter counting - lisp vs pascal</h1>
+<hr />
+<p>/* C */<br />
+void fn (int x, int y) {<br />
+}</p>
+
+<p>void tester () {<br />
+  fn (1, 2);<br />
+  fn (1);<br />
+}<br />
+—<br />
+// JavaScript<br />
+function fn (x, y) {<br />
+}</p>
+
+<p>fn (1, 2);<br />
+fn (1);</p>
+
+<hr />
+<h1 id="syntax-for-end-if">syntax for <code class="language-plaintext highlighter-rouge">end if</code></h1>
+<p>– (fn x) fn(x), (if x y) if x then y end if</p>
+<h1 id="assembler">assembler</h1>
+<p>– no syntax<br />
+syntax, the realm of syntax<br />
+JS vs C<br />
+fn(x,y) fn(x,y), JS doesn’t count args<br />
+variable args<br />
+AGDA syntax vs. Smalltalk syntax<br />
+Architecture vs Engineering (vs construction)<br />
+type checking<br />
+– another layer of checking, like application of syntax<br />
+interpretation vs compilation<br />
+– all languages must be interpreted<br />
+– compilation is an optimization the pre-interprets some of the code<br />
+– the optimization called “compilation” might require some changes to the language to allow the optimization</p>
+<h1 id="error-messages-and-warnings">error messages and warnings</h1>
+<hr />
+<p>(defun fn (x y)<br />
+  (declare (ignore x y)))</p>
+
+<p>(fn 1 2)</p>
+
+<h2 id="fn-1">(fn 1)</h2>
+<p>While evaluating the form starting at line 6, column 0<br />
+  of #P”/Users/tarvydas/Desktop/junk.lisp”:</p>
+
+<p>debugger invoked on a SB-INT:SIMPLE-PROGRAM-ERROR in thread<br />
+#&lt;THREAD “main thread” RUNNING {1001570143}&gt;:<br />
+  invalid number of arguments: 1</p>
+
+<p>Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.</p>
+
+<p>restarts (invokable by number or by possibly-abbreviated name):<br />
+  0: [REPLACE-FUNCTION] Call a different function with the same arguments<br />
+  1: [CALL-FORM       ] Call a different form<br />
+  2: [RETRY           ] Retry EVAL of current toplevel form.<br />
+  3: [CONTINUE        ] Ignore error and continue loading file “/Users/tarvydas/Desktop/junk.lisp”.<br />
+  4: [ABORT           ] Abort loading file “/Users/tarvydas/Desktop/junk.lisp”.<br />
+  5:                    Exit debugger, returning to top level.</p>
+
+<p>(FN 1) [external]<br />
+   source: (DEFUN FN (X Y) (DECLARE (IGNORE X Y)))<br />
+0] <br />
+——–</p>
+
+<h1 id="plf-vs-pld">PLF vs PLD</h1>
+<p>PLF vs PLD<br />
+.. plf is rigor<br />
+.. pld is ux<br />
+… is there Science for UX?<br />
+.. at, ae ai aa arch, eng implement<br />
+.. how is an arch diff from an eng?<br />
+.. how is an eng diff from an implementors?<br />
+.. read and write syntax<br />
+.. Das is deeper syntax than only text<br />
+… SVG<br />
+.. languages need not be restricted to non overlapping cells of small bitmaps</p>
+
+<p>…. keyboard keys are bound to bitmaps</p>
+
+<p>.. backtracking to parser chars, but to parser diagrams<br />
+.. design is about fewer details,  smartness is about juggling large soup of details <br />
+.. classes are compile time, prototypes are runtime</p>
+
+<h1 id="locality-of-reference">locality of reference</h1>
+
+<h1 id="c-vs-assembler">C vs Assembler</h1>
+
+<h1 id="pascal-vs-c">Pascal vs C</h1>
+
+<h1 id="smalltalk-vs-assembler">Smalltalk vs Assembler</h1>
+
+<h1 id="assembler-vs-identifiers">Assembler vs Identifiers</h1>
+
+<p>Why Spaces Are Not Allowed in Identifiers</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>abc def</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

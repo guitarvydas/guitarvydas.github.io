@@ -1,0 +1,68 @@
+I"Ó<h1 id="design-rules">Design Rules</h1>
+
+<p>Design rules are also known as type checks.</p>
+
+<p>Design rules can be more specific than general type checks.</p>
+
+<p>Design rules relate to the solution instead of being generalized to handle many possibilities.</p>
+
+<p>As an example, we have written a design rule that checks for orphan ports.  Ports that are not contained within any rectangle are flagged as errors.</p>
+
+<p>The essence of a design rule that checks for orphans is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>orphanport(ID):-
+    ellipse(ID,_),
+    \+ contains(_,ID).
+</code></pre></div></div>
+
+<p>(i.e. any ellipse that is not contained by a diagram object is an orphan).</p>
+
+<p>The rest of the code prints error messages and appeases PROLOG:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:- dynamic contains/2.
+orphanport(ID):-
+    ellipse(ID,_),
+    \+ contains(_,ID).
+
+printOrphans:-
+    bagof(E,orphanport(E),B),
+    printOrphan(B).
+printOrphans.
+
+
+printOrphan([]).
+printOrphan([H|T]):-
+    format("Design Rule FATAL Error: orphan port ~w~n", H),
+    printOrphan(T).
+</code></pre></div></div>
+
+<h1 id="rundesignrulebash">Rundesignrule.bash</h1>
+
+<p>A <em>bash</em> script runs this design rule and exits if the word <code class="language-plaintext highlighter-rouge">FATAL</code> is in the output.</p>
+
+<p>The bash script is run by the main bash script <code class="language-plaintext highlighter-rouge">run.bash</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+
+swipl -g 'consult(fb).' \
+      -g 'consult(designrule).' \
+      -g 'printOrphans.' \
+      -g 'halt.' \
+      &gt; errors.txt
+if grep 'FATAL' errors.txt
+then
+    echo quitting
+    exit 1
+fi
+
+</code></pre></div></div>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

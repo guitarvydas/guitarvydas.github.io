@@ -1,0 +1,121 @@
+I"+<p>We show how to flip large chunks of text in a transpiler, using a small change in the code.</p>
+
+<h1 id="desired-output">Desired Output</h1>
+<h2 id="input">Input</h2>
+<p>We’re working a code markdown to bash converter.</p>
+
+<p>At this point, the input looks like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+
+
+## _details_
+### allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+### printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+### printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+</code></pre></div></div>
+<h2 id="desired">Desired</h2>
+
+<p>The lines in the <code class="language-plaintext highlighter-rouge">_fb pipeline_</code> are meant to be <em>bash</em> and the <code class="language-plaintext highlighter-rouge">###</code> chunks are meant to be <em>bash</em> functions.</p>
+
+<p><em>Bash</em> requires declaration before use, so, at this stage, we want the <code class="language-plaintext highlighter-rouge">fb pipeline</code> lines to come <em>last</em>.</p>
+
+<p>For example, we want and intermediate result of:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># _containment_
+
+
+
+## _details_
+### allContains1
+	load fb
+	load onSameDiagram
+	load contain1
+### printAllDeepContains
+	load fb
+	load onSameDiagram
+	load contains2
+### printAllDirectContains
+	load fb
+	load onSameDiagram
+	load contains3
+
+
+## _fb pipeline_
+	allContains1
+	printAllDeepContains
+	printAllDirectContains
+
+</code></pre></div></div>
+
+<p>This can be done with a minor tweak in the <em>emit</em> code…</p>
+
+<h1 id="grok">Grok</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pseudo {
+  Main = "{" id Commands Details "}"
+  Commands = "{" id Block+ "}"
+  Details = "{" id Block+ "}"
+  Block =   "{" id (id | Block)+ "}" -- rec
+          | id+           -- flat
+
+  id = italicid | ident
+  underscore = "_"
+  newline = "\n"
+  spc = " "
+  notEOL = ~newline any
+  italicid = underscore ident underscore
+  ident = firstChar followChar*
+  firstChar = letter
+  followChar = alnum | " "
+}
+</code></pre></div></div>
+<h1 id="emit">Emit</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Main [lb id commands details rb] = [[# ${id}\n${commands}\n${details}]]
+Commands [lb id @choices rb] = [[# ${id}\n${choices}]]
+Details [lb id @choices rb] = [[# ${id}${choices}]]
+Block_rec [lb id @b rb] = [[${lb}${id}${b}${rb}]]
+Block_flat [@ids] = [[${ids}]]
+
+id [name] = [[${name}\n]]
+underscore [c] = [[${c}]]
+newline [c] = [[${c}]]
+spc [c] = [[${c}]]
+notEOL [c] = [[${c}]]
+italicid [u1 id u2] = [[${u1}${id}${u2}]]
+ident [f @cs] = [[${f}${cs}]] 
+firstChar [c] = [[${c}]]
+followChar [c] = [[${c}]]
+</code></pre></div></div>
+<h1 id="the-flip">The Flip</h1>
+<p>Change 1 line:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Main [lb id commands details rb] = [[# ${id}\n${commands}\n${details}]]
+</code></pre></div></div>
+<p>to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Main [lb id commands details rb] = [[# ${id}\n${details}\n${commands}]]
+</code></pre></div></div>
+
+<h2 id="github">Github</h2>
+<p><a href="https://github.com/guitarvydas/md2bash/tree/flip">The Flip</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -1,0 +1,23 @@
+I"1<h1 id="sort">Sort</h1>
+
+<p>This phase performs a simple alphabetic sort to appease PROLOG.</p>
+
+<p>PROLOG requires that facts be grouped together.  Alphabetic sorting is not required, but is easy to perform and creates an acceptable grouping.</p>
+
+<p>[<em>In fact, modern PROLOG engines allow un-grouped facts.  This requires a bit of extra syntax. It would have been possible to leave the factbase un-grouped, but, the object of this set of essays is to show that it is easy to compose pipelines of grok/emit phases, so we chose to insert this simple sorting phase.</em>]</p>
+
+<p>This phase simply accepts the input (the result of the preceding phase) and calls JS <code class="language-plaintext highlighter-rouge">sort()</code> to produce the final output string.</p>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/2021-07-30%20sort.png?raw=true" alt="2021-07-30 sort.png" /></p>
+
+<p>[<em>This is probably something a Production Engineer would attack early, but, in Software Architecture, we strive for obvious-ness instead of machine-level efficiency.  Again, the use of a grok/emit pipeline makes it easy to construct architectures without worrying about fine-grained details.</em>]</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

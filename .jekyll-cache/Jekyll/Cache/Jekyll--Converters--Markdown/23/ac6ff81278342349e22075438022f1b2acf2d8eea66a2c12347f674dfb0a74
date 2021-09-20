@@ -1,0 +1,160 @@
+I"c<h1 id="introduction">Introduction</h1>
+
+<p>In this note, I show how to develop an SCN (see below - like a DSL) for a game development system.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SCN</code> means <em>Solution Centric Notation</em>.  Basically a mini-DSL. See below.</p>
+
+<h1 id="initial-grammar">Initial Grammar</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zodeSCN{
+  main = room+
+  room = "room:" ws* id ws+ statement+ ";room"
+  statement = widthStatement | heightStatement | tilesStatement | enterStatement
+  widthStatement = "width" ws+ number eol
+  heightStatement = "height" ws+ number eol
+  tilesStatement = "tiles" ws* "(" numberList ")" eol
+  enterStatement = "enter:" ws* tellStatement ";enter" eol
+  tellStatement = "tell" ws+ string eol
+
+  numberList = (number ws*)+
+  number = negativeNumber | positiveNumber
+  negativeNumber = "-" smallinteger
+  positiveNumber = smallinteger
+
+  smallinteger = dig+
+  dig = "0" .."9"
+  ws = " " | "\t" | "\n"
+  id = firstIDChar followIDChar*
+  firstIDChar = "a" .. "z" | "A" .. "Z"
+  followIDChar = "0" .. "9" | firstIDChar
+  string = quote notQuote* quote
+  quote = "\""
+  notQuote = ~quote any
+  eol = ws+
+}
+
+</code></pre></div></div>
+
+<h2 id="ohm-js-vs-other-peg-libraries">Ohm-JS vs Other PEG Libraries</h2>
+
+<p>Ohm-JS rule names are case-sensitive.</p>
+
+<p>In Ohm-JS, lower-case rule names work just like other PEGs (modulo minor syntactic differences).</p>
+
+<p>In Ohm-JS, upper-case rule names skip <code class="language-plaintext highlighter-rouge">space</code>s, so most of the <code class="language-plaintext highlighter-rouge">ws</code> stuff above could go away.</p>
+
+<p>The other big difference between Ohm-JS and other PEG libraries is how matches are tagged.  I will explain this later.  Let’s just work on the grammar first.</p>
+
+<h1 id="initial-test-code">Initial Test Code</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room: default
+  width 3
+  height 3
+  tiles (-1 -1 -1  -1 -1 -1  -1 -1 -1)
+  enter:
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+  ;enter
+;room
+</code></pre></div></div>
+
+<h1 id="ohm-editor">Ohm Editor</h1>
+
+<h1 id="exercise-1"><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Ohm%20Editor%20for%20ZodeTrip%20Screen%20Shot%202021-09-02%20at%208.09.14%20AM.png?raw=true" alt="Ohm Editor for ZodeTrip Screen Shot 2021-09-02 at 8.09.14 AM.png" style="zoom:67%;" />Exercise 1</h1>
+
+<p>Convert the grammar from Ohm-JS style to racket (#peg) style.</p>
+
+<p>Use the same test grammar and make sure that you get the same result.</p>
+
+<p>Gedanken: Do you find Ohm-Editor to be convenient, even when using a different #peg syntax?</p>
+
+<h1 id="exercise-2">Exercise 2</h1>
+
+<p>Convert the grammar so that</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room:
+ ...
+;room
+
+</code></pre></div></div>
+
+<p>becomes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>room
+ ...
+end room
+</code></pre></div></div>
+
+<p>Write new test code and test the new grammar.</p>
+
+<h1 id="exercise-3">Exercise 3</h1>
+
+<p>Convert</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enter:
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+;enter
+</code></pre></div></div>
+
+<p>into</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enter
+     tell "Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!"
+end enter
+</code></pre></div></div>
+
+<h1 id="exercise-4">Exercise 4</h1>
+
+<p>Gedanken: At present, the <code class="language-plaintext highlighter-rouge">id</code> rule will accept keywords like <code class="language-plaintext highlighter-rouge">tell</code>, etc.</p>
+
+<p>How would you make a list of keywords and include them in the <code class="language-plaintext highlighter-rouge">id</code> rule (hint: using negative lookahead)?</p>
+
+<h1 id="commentary">Commentary</h1>
+
+<h2 id="syntaxes-are-pattern-matching-skins">Syntaxes are Pattern-Matching Skins</h2>
+
+<p>A <em>grammar</em> is a pattern matcher.</p>
+
+<p>Pattern matchers are popular today, often found in FP languages.</p>
+
+<p>Grammars are the mothers of all pattern-matchers.</p>
+
+<p>Treating syntaxes as light-weight skins produces a different, more productive, kind of programming.</p>
+
+<p>PEG technology and cheap/fast CPUs and cheap memory makes it possible to re-think the use of syntax as something light-weight instead of something shrouded in mystery that is accessible only to compiler gurus.</p>
+
+<h2 id="2-syntaxes">2 Syntaxes</h2>
+
+<p>Some languages, like C and Lisp, collapse <code class="language-plaintext highlighter-rouge">end room</code> into single characters <code class="language-plaintext highlighter-rouge">}</code>and <code class="language-plaintext highlighter-rouge">)</code>.</p>
+
+<p>Gedanken: Which style gives more lucid error checking?</p>
+
+<p>Gedanken: Is it harder in the grammar to ask for <code class="language-plaintext highlighter-rouge">end room</code> instead of single characters?</p>
+
+<p>Gedanken: Which is more  <em>writable</em>?</p>
+
+<p>Gedanken: What if we had 2 syntaxes, one with <code class="language-plaintext highlighter-rouge">end room</code> and another with <code class="language-plaintext highlighter-rouge">}</code>?</p>
+
+<p>Gedanken: How easy is it to create separate syntaxes, for example to parse the <code class="language-plaintext highlighter-rouge">end room</code> syntax and to write it back out in <code class="language-plaintext highlighter-rouge">}</code> syntax?</p>
+
+<h1 id="scn">SCN</h1>
+
+<p><code class="language-plaintext highlighter-rouge">SCN</code> means <em>Solution Centric Notation</em>.  In my vocabulary, a <em>notation</em> is like a mini-DSL.</p>
+
+<p>When I build an SCN, I cheat and let the underlying language (the <em>toolbox language</em>) handle all of the heavy lifting.  I use a grammar like a <em>skin</em> instead of as a full-blown programming language.</p>
+
+<p>Lisp (and Scheme, and Racket) makes a great <em>toolbox language</em>.</p>
+
+<p><em>Assembler</em> is the mother of all <em>toolbox languages</em>.</p>
+
+<p>We don’t want to get our hands dirty with <em>assembler</em>, so we create syntactic skins.  [<em>This used to be difficult in the 1950’s, but is easy in the 2020’s</em>.]</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

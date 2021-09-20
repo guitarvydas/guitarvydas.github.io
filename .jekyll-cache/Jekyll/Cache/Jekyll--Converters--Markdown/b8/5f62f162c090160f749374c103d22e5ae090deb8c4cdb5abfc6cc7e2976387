@@ -1,0 +1,118 @@
+I"�<h1 id="absolute-addressing">Absolute Addressing</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-Absolute%20Addressing.png?raw=true" alt="Addressing-Absolute Addressing.png" style="zoom: 67%;" /></p>
+
+<p>Simplest case - the CPU directly addresses memory.</p>
+
+<p>Memory is implemented, in hardware, as an array of bytes/words.</p>
+
+<p>Every program has 3 spaces:</p>
+
+<ul>
+  <li>code</li>
+  <li>initialized data</li>
+  <li>stack.</li>
+</ul>
+
+<p>Local variables (scoped data) and temporaries are usually placed on the stack.</p>
+
+<p>Global variables are usually placed in the initialized data area.</p>
+
+<p>Code can be in read/write RAM, or, code can be placed in read-only ROM, or, code space can be protected from writes by hardware (not shown).</p>
+
+<h1 id="relative-addressing">Relative Addressing</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-Relative%20Addressing.png?raw=true" alt="Addressing-Relative Addressing.png" style="zoom:67%;" /></p>
+
+<p>Compilers determine what kind of code is created for a program.</p>
+
+<p>For relative addressing, compilers emit references to data as offsets from some distinguished register (usually chosen by the compiler-writer).</p>
+
+<p>Locals are referenced as offsets from the SP register (Stack Pointer).</p>
+
+<h1 id="pic---position-independent-code">PIC - Position Independent Code</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-PIC.png?raw=true" alt="Addressing-PIC.png" style="zoom:67%;" /></p>
+
+<p>To allow code to be repositioned in memory (e.g. when loaded by the operating system), compilers are made to emit all offsets (data and control flow) relative to some register, e.g. the PC (program counter).</p>
+
+<p>Control-flow instructions, like <em>branches</em>, do not refer to absolute locations, but are made relative to some register.  For example, <code class="language-plaintext highlighter-rouge">BR label</code> (branch to <em>label</em>) is compiled as <code class="language-plaintext highlighter-rouge">BR offset+PC</code> (where offset is the integer offset of the label relative to the current code position).</p>
+
+<p>Note that relative addressing makes writing compilers a bit harder, since the compiler programs need to calculate offsets instead of emitting absolute labels.</p>
+
+<p>Some CPU instruction sets make it hard/impossible to use relative addresses.</p>
+
+<p>Some CPUs take longer to calculate and use a relative address than to use an absolute address.</p>
+
+<p>Some CPU architectures provide compiler-writers with special registers that are set for every function call to point to a fixed data location and all label offsets are calculated relative to those registers.  Unlike the PC, the special offset-registers don’t change value during function execution.</p>
+
+<h1 id="rtos---embedded-operating-system">RTOS - Embedded Operating System</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-RTOS.png?raw=true" alt="Addressing-RTOS.png" style="zoom:67%;" /></p>
+
+<p>In a simple embedded operating system that supports threads, memory is divided up between threads.</p>
+
+<p>Each thread is given its own code/data/stack area.</p>
+
+<p>Obviously, a buggy program might overwrite data/code/stack of some other thread, crashing the whole system (or worse, continue running and cause mysterious bugs and crashes later).</p>
+
+<h1 id="mmu---memory-management-unit">MMU - Memory Management Unit</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Addressing-MMU.png?raw=true" alt="Addressing-MMU.png" style="zoom:67%;" /></p>
+
+<p>Some hardware designs provide hardware memory protection and segmentation using MMUs (Memory Management Units ; extra ICs and/or built-into the CPU).</p>
+
+<p>MMUs hold a mapping table for the current thread and map addresses when memory is accessed.</p>
+
+<p>This makes it possible to use absolute addressing (again), since the hardware will map absolute addresses into actual addresses.</p>
+
+<p>The Operating System must keep a unique mapping table for each process and must load the mapping table into the MMU hardware before resuming a process.</p>
+
+<p>Larger Operating Systems will “optimize” memory by writing out a thread’s memory to disk when it is suspended and by reading back in a thread’s memory when it is resumed.  This is called <em>swapping</em> and <em>paging</em>.</p>
+
+<p>Q: What is the time cost of using a mapped address instead of an absolute address?</p>
+
+<p>Q: What is the cost ($) of using an MMU chip or a CPU-with-MMU in a design?</p>
+
+<h1 id="virtual-memory">Virtual Memory</h1>
+
+<p>Virtual memory is a variant of the way in which MMUs are used.</p>
+
+<p>Not all of a thread’s memory is read back in from disk at once.</p>
+
+<p>When the thread tries to access a block of its own memory that is not already in-core, the MMU signals an interrupt.  The operating system fields the interrupt and pages-in the appropriate block of memory, then resumes the thread and allows it to continue running.</p>
+
+<p>This is an optimization based on the hope that a thread will block before it accesses all of its memory. Since it is orders-of-magnitude more costly (in time, say), to access memory on a disk, the operating system hopes to save time by not paging in all memory until it is actually needed.</p>
+
+<h1 id="blocking">Blocking</h1>
+
+<p>A thread blocks by <em>yielding</em> to the Dispatcher (the operating system).</p>
+
+<ul>
+  <li>
+    <p>Blocking can be voluntary, i.e. when a thread asks for some I/O that takes a long time, or,</p>
+  </li>
+  <li>
+    <p>Blocking can be involuntary, i.e. when the operating system decides that a thread has run “long enough”.  Usually, the operating system sets a hardware timer and waits for a timeout or a voluntary block.</p>
+  </li>
+</ul>
+
+<h1 id="complexity">Complexity</h1>
+
+<p>As can be seen, multi-threading is quite simple.</p>
+
+<p>Each extra layer of hardware-assist adds more complexity to the code.  Most often, the code is squirreled away into a library that we call the <em>operating system</em>.</p>
+
+<p>Q: What is the trade-off between complexity and hardware-assist?</p>
+
+<p>Q: Is it better to have 1,000 8-bit, simple CPUs on a chip running simple operating systems, or is it better to have an MMU and more complication in the operating system?</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET
