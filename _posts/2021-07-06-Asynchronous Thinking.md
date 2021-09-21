@@ -5,17 +5,7 @@ title:  "Asynchronous Thinking"
 
 # Introduction
 
-To: FBP'ers
-
-Your job is _NOT_ to build more FBP components.
-
-Your job is to teach others how to build FBP solutions.
-
-You know how to program in FBP.  Most people don't know, but they think they know.
-
-# Brief Example
-
-Example: functions cannot describe what happens when a component consumes input but produces no output. There is no f(x) for this situation.
+Functions cannot describe what happens when a component consumes input but produces no output. There is no f(x) for this situation.
 
 Async thinking has no problem with this concept. 
 
@@ -31,7 +21,7 @@ Corollary: Asking programmers to specify Async Components and FBP workflow is as
 
 # Discussion
 
-Programming in FBP is _VASTLY_ different from sequential programming, yet, the words used to explain both are frighteningly similar.  This means that it is virtually impossible to explain how to use FBP using only words (I've been trying, I'm up to 330+ blog posts, but have yet to find the sweet spot).
+Programming asynchronously is _VASTLY_ different from sequential programming, yet, the words used to explain both are frighteningly similar.  This means that it is virtually impossible to explain how to use asynchronocity using only words (I've been trying, I'm up to 330+ blog posts, but have yet to find the sweet spot).
 
 Henry Ford is attributed with saying "If I had asked people what they wanted, they would have said faster horses".
 
@@ -39,7 +29,7 @@ The first use of electric motors was to power textile mills, by pumping water up
 
 At first, it was thought that computers were only good for building ballistics calculators.
 
-I would suggest that, instead of the question "what components do you want?" and "what workflow do you want?", the question becomes "what applications are wildly popular?". Then, re-implement one such application in FBP.
+I would suggest that, instead of the question "what components do you want?" and "what workflow do you want?", the question becomes "what applications are wildly popular?". Then, re-implement one such application using asynchronous methods.
 
 "Give a man a fish, he eats for a day. Teach a man to fish, he eats for a lifetime."
 
@@ -57,7 +47,7 @@ CALL/RETURN restricts the programming domain in several ways:
 
 We (the Royal We) use an artificial kludge to take control back in situation #1. Operating systems like to think that they control scheduling, but CALL/RETURN violates that notion. Operating systems use "preemption" to wrench scheduling control away from the caller. Preemption comes with its own baggage cart of accidental complexity.
 
-Asynch Components (which includes FBP) drive a stake through the heart of CALL/RETURN. Once you know how to program asynchronously, you can't unknow how. Until you know this, though, you are only looking at shadows on the wall (often called "thread libraries", "lazy evaluation", etc.) and you couch *everything* in the language of not-knowing.
+Asynch Components drive a stake through the heart of CALL/RETURN. Once you know how to program asynchronously, you can't unknow how. Until you know this, though, you are only looking at shadows on the wall (often called "thread libraries", "lazy evaluation", etc.) and you couch *everything* in the language of not-knowing.
 
 Note that Relational Programming and FP are - slowly - learning how to expunge CALL/RETURN from notations.
 
