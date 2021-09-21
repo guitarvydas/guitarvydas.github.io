@@ -7,7 +7,7 @@ title:  "Construction Industry Takeaways"
 - It is not enough to reuse Architecture.
 - We should reuse organizational principles from other professions.
 
-For example, Architecture/Engineering/Construction organizatal structure could be borrowed from construction industries.
+For example, Architecture/Engineering/Construction organizational structure could be borrowed from construction industries.
 
 Most software organizations don't yet understand that Engineering is not Coding.
 # Software Development Roles

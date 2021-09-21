@@ -30,23 +30,23 @@ In S/SL, there is no data.
 
 There are only _handles_[^enums] to data.
 
-One can declare the existence of data and can move it around, but one _cannot_ specify the implementation of the data in S/SL.
+One can declare the existence of data and can move it around, but one cannot *specify* the implementation of the data in S/SL.
 
 [^enums]: Similar to the concept of enums.
 
 # Typeless Language
 S/SL has no built-in types[^builtintypes].
 
-In S/SL, you can declare _handles_[^enums] to types, but you _cannot_ specify how the types are implemented.
+In S/SL, you can declare _handles_[^enums] to types, but you cannot *specify* how the types are implemented.
 
 # Inputs
 Inputs are declared as _handles_.
 # Outputs
 Outputs are declared as _handles_.
 # Errors
-Erros are declared as _handles_.
+Errors are declared as _handles_.
 
-[^buildinttypes]: This is not entirely true, but is a useful approximation for this essay.
+[^builtintypes]:This is not entirely true, but is a useful approximation for this essay.
 
 # Restricted API To/From Link Functions
 
@@ -83,7 +83,7 @@ Many current PLs implement error handling using `throw`, resulting in backtraces
 Error handles could be used to invoke `throw`, or, better, could be used to provide useful debugging error messages.
 
 # Encouraging Behavior vs Possible Behavior
-There seems to be a fine line between PLs that encourage certain paradigms vs. making those behavior possible.
+There seems to be a fine line between PLs that encourage certain paradigms vs. making those behaviors possible.
 
 For example, it is _possible_ to write CPS in assembly code, but few programmers bother to do so.
 
