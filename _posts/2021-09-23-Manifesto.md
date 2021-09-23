@@ -17,7 +17,7 @@ The main themes of these essays are:
 - <u>Computers Are More Than Just Calculators</u>.  Computers are machines that can perform sequences of operations (functions of time) and control other machines, as well as calculating things.
 
 [^1]:I spent most of my working life designing and building embedded computing solutions.
-[^2]: The fact that current technologies (libraries, objects, functions, etc.) don't give us snap-ability raises interesting questions. For example, our view of a flat soup of *types* inhibits snap-ability.
+[^2]: The fact that current technologies (libraries, objects, functions, etc.) don't give us snap-ability raises interesting questions. For example, our view of a flat soup of multiple types inhibits snap-ability.
 [^3]: PEG is Parsing Expression Grammars.  I like Ohm-JS the best, at present, https://github.com/harc/ohm
 
 ## Highlights
