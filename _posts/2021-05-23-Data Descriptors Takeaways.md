@@ -13,7 +13,7 @@ The takeaway is not necessarily _how_ it was done but _that_ it was done.
 DD's showed that normalization encourages higher level thinking.
 
 # See Also
-Data Descriptors paper (Holt)
+[Data Descriptors paper](https://dl.acm.org/doi/10.1145/24039.24051)
 
 # See Also
 

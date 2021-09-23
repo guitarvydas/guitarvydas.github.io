@@ -24,7 +24,7 @@ Control flow spaghetti was discarded in lieue of structured control-flow concept
 
 # Package Managers
 
-Packaging, package managers, are attempts for providing nesting for symbols.
+Packaging, package managers, are attempts at providing nesting for symbols.
 
 The fact that there is more than one kind of package manager implies that the concept has not been normalized, yet.
 
@@ -43,7 +43,7 @@ In this case, isolation is implicitly provided by the physical hardware.
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
-  
+
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 

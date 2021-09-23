@@ -1,19 +1,15 @@
 ---
 layout: post
-title:  "Object Oriented Takeaways"
+title:  "Writing Less Code Takeaways"
 ---
 
-- Encapsulation
+## Writing Less Code
 
-# Isolation
+Refactoring
 
-Encapsulation is a subset of Isolation.
-
-Isolation prevents _all_ dependencies from leaking out.  Using Isolation, data must be passed via ports.
-
-Encapsulation allowed _some_ dependencies to leak out, e.g. control flow (In method overriding).
-
-[Example: C provided full isolation under UNIX®.]
+- Lisp is one way to write *less* code.
+- Diagrams are a way to write *less* code
+[^]: 
 
 # See Also
 

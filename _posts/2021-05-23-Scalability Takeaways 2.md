@@ -8,7 +8,7 @@ A scalable component is one which coordinates children components and filters th
 - output: filtered data to parent
 - contains: child components.
 
-Children can _send_ information to parents.
+Children can _send_ information to parents and commands/requests to their own children.
 
 Children must not leak information in any other direction.
 

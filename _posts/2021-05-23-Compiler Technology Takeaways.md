@@ -21,8 +21,8 @@ CPUs are horribly complex under-the-hood[^rust].  Opcodes provide a normalized v
 [^rust]: Transistors are built using oxides, e.g. various forms of rust.  Most programmers don't care about what is inside those little black boxes we call ICs.  Triples provide the interface between physical rust and software.
 
 # See Also
-- PEG
-- Ohm-JS
+- [PEG](https://bford.info/packrat/)
+- [Ohm-JS](https://github.com/harc/ohm)
 - [Jeri Homebrew NMOS Transistor](https://www.youtube.com/watch?v=w_znRopGtbE)
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)

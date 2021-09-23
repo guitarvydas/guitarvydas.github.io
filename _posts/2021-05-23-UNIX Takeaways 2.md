@@ -21,7 +21,7 @@ UNIX commands use a very simple, low-level type for communication between compon
 
 This simplicity allows components to be plugged together.
 
-Note that more elaborate types can be used, but the fundamental (atomic) type for plugging components together remains constant (a line of text).
+Note that more elaborate types *can* be used, but the fundamental (atomic) type for *plugging* components together remains constant (a line of text).
 
 More elaborate types can be enforced by components in UNIX pipelines.
 
@@ -30,7 +30,7 @@ More elaborate types can be checked in layers in a type pipeline.  Each successi
 1. passes data down the pipe (after checking it)
 2. signals an error, e.g. by withholding (1) and sending an error object (/message) on a side-channel.
 
-This structure inherently needs multiple outputs (e.g. at least stdout and stderr (I favor having more than 2)) which is not well-served by functional notation (which is fundamentally a 1-in-1-out notation[^bags])
+This structure inherently needs multiple outputs (e.g. at least stdout and stderr (I favor having more than 2 outputs)) which is not well-served by functional notation (which is fundamentally a 1-in-1-out notation[^bags])
 
 [^bags]: Over time, the limits of functional notation have been addressed by playing whack-a-mole - adding bags onto the side of the otherwise-pure syntax, e.g. exceptions.
 
@@ -59,7 +59,7 @@ Q: Should PLs be hierarchical, not flat?  Should variables be hierarchical?  (Sy
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
-  
+
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

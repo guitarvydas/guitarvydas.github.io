@@ -17,7 +17,7 @@ CPS was borne out of /CC functions in Scheme.
 
 First Class functions & CPS are very useful in Denotational Semantics (to express control-flow).
 
-Otherwise, 1st class functions and CPS should not be used in lieue of more structured versions.  What are these more structured versions?  "GOTO Considered Harmful" might provide clues.
+Otherwise, 1st class functions and CPS should not be used in lieue of more structured expressions of control flow.  What are these more structured versions?  [GOTO Statement Considered Harmful](http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html) might provide clues.
 
 Current usage of 1st class functions is Structured only because of the severe restrictions imposed by FP - one-in, one-out[^exceptions] model of computing (aka "synchronous calculator").
 

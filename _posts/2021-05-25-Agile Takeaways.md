@@ -20,7 +20,7 @@ Many programmers focus on the _rituals_ of Agile, without addressing the _goals_
 # Anti-Takeways from Agile
 ## Sprints Are Too Long
  2/3-week sprints are too long.
- 
+
  We should be striving for continuous improvement in the process of gathering requirements.
 ### 2 Hour Sprints 
  We should be striving for 2-hour sprints.
@@ -53,15 +53,15 @@ Choosing a PL before fully understanding a problem leads to later inflexibility.
 
 The only "good" reason to hire programmers experienced in a certain language is to maintain and upgrade existing code.
 ## Tell: Choosing Only One Programming Language
-Some aspects of the problem-solution must be force-fit into a language, if the language does not fit the problem, e.g. Relational Programming languages do not fit output formattting (well).
+If the programming language does not fit the problem, aspects of the problem-solution must be force-fit into the programming language, e.g. Relational Programming languages do not fit output formattting (well).
 
 The use of only one programming language is a _tell_.  
 
-All aspects of the solution might not suit themselves to the chosen language.
+All aspects of the solution might not suit themselves to a single, chosen language.
 
 (Sometimes, all aspects of the solution do fit a given language. This is an exception, not the rule).
 
-The use of a single programming language - for design - is indicative of the "programmers are interchangeable" mind-set, instead of the "best-of" mind-set. For example, Apple Computers let the cost of their computers be determined by a "best-of features" mind-set, instead of allowing cost to drive which features are included.
+The use of a single programming language - for design - is indicative of the "programmers are interchangeable" mind-set, instead of the "best-of" mind-set. For example, Apple Computers lets the cost of their computers be determined by a "best-of features" mind-set, instead of allowing cost to drive which features are included.
 
 Note that I argue that PLs are cheap to build[^cheap], today.
 
@@ -76,7 +76,7 @@ Each facet might be best expressed in a different syntax.
 
 Hence, an app should employ multiple syntaxes.
 
-[I argue that SCNs - Solution Centric Notations - should be used. I argue that SCNs are cheap to build (hours instead of years).  I argue that multiple SCNs can be tuned for a specific problem.  I argue that SCNs are so cheap, that one can build SCNs for a specific _problem_ instead of resorting to one off-the-shelf PL].
+[I argue that SCNs - Solution Centric Notations - should be used. SCNs are cheap to build (hours instead of years).  Multiple SCNs can be tuned for a specific problem.  SCNs are so cheap, that one can build SCNs for a specific _problem_ instead of resorting to one off-the-shelf PL].
 
 ## Diagrammatic Syntaxes
 There is no reason to use only text-based notations for a given problem.

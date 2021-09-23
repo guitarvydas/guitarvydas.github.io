@@ -5,11 +5,11 @@ title:  "DI Refactoring"
 
 ## Tipping Point
 
-I have found that there is a psychological tipping point that affects DI Refactoring[^di].
+There is a psychological tipping point that affects DI Refactoring[^di].
 
 At some point, there is too much code and the solution becomes "too big to re-engineer".
 
-At that point, Coding overrides Solving.  We retain the code and throw away possible improvements.
+At that point, *coding* overrides *solving*.  We retain the code and throw away possible improvements.
 
 What is that "tipping point"?
 

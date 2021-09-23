@@ -20,11 +20,15 @@ My favorite variant of PEG is Ohm-JS.
 
 Ohm-JS claims to simplify PEG parsing, through various complicated means (upper-case vs. lower-case rules).
 
-The real gem in Ohm-JS is the Ohm-editor.
+The real gems in Ohm-JS are:
+
+1. Separation of Concerns (grammar separated from semantics, unlike in other variants of PEG)
+
+2. the Ohm-editor.
 
 The Ohm-editor simplifies the act of building parsers.
 
-If I were to use some other PEG library, I would use the Ohm-editor first.
+If I were to use any other PEG library, I would use the Ohm-editor first.
 
 ### Text Manipulation
 
@@ -50,7 +54,7 @@ Everything is a fractal.
 
 Everything can be further sub-divided.
 
-That includes everything I say.  Nothing I say is _absolute_, it is _relative_, and, it can be broken down.
+That includes everything I write.  Nothing I write is _absolute_, it is _relative_, and, it can be broken down.
 
 
 # See Also

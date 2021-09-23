@@ -82,7 +82,7 @@ Elm claims to have good error messages.
 
 Compiler technologies researched error handling in the 1970's. (At the least, maybe earlier).
 
-For example, you do not expect a compiler to give multiple-line warnings, multiple-line error messages and to stop after the first error.  
+For example, you do not expect a compiler to produce multi-line warnings, multi-line error messages and to stop after the first error.  
 
 C gave reasonable error messages.  SBCL does not give reasonable error messages. JavaScript avoids the issue of errors and simply doesn't check for many classes of problems.
 

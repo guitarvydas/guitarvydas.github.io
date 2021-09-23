@@ -13,9 +13,9 @@ Separation of concerns:
 # See Also
 
 - PEG
-- PROLOG
-- Ohm-JS in Small Pieces
-- REGEX (an example of search DSL ⨯ matching-engine)
+- PROLOG, miniKanren, etc.
+- [Ohm-JS in Small Pieces](https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html)
+- REGEX (an example of a search DSL ⨯ matching-engine)
 - Parsing
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)

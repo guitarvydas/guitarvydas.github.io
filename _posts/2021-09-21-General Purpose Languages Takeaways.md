@@ -1,20 +1,12 @@
 ---
 layout: post
-title:  "Object Oriented Takeaways"
+title:  "General Purpose Languages - Takeaways"
 ---
 
-- Encapsulation
+## Writing Code in General Purpose Languages
+Python, Perl, etc. are _someone else's_ ideas of how to structure a solution. 
 
-# Isolation
-
-Encapsulation is a subset of Isolation.
-
-Isolation prevents _all_ dependencies from leaking out.  Using Isolation, data must be passed via ports.
-
-Encapsulation allowed _some_ dependencies to leak out, e.g. control flow (In method overriding).
-
-[Example: C provided full isolation under UNIX®.]
-
+These ideas do not necessarily fit _your_ problem-at-hand.
 # See Also
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)

@@ -1,19 +1,15 @@
 ---
 layout: post
-title:  "Object Oriented Takeaways"
+title:  "Music Lesson Takeaways"
 ---
 
-- Encapsulation
+## Music Notation
 
-# Isolation
+5-year olds are taught hard-realtime notation (music notation), but concurrency is still considered to be difficult in programming circles.
 
-Encapsulation is a subset of Isolation.
+# Tell
 
-Isolation prevents _all_ dependencies from leaking out.  Using Isolation, data must be passed via ports.
-
-Encapsulation allowed _some_ dependencies to leak out, e.g. control flow (In method overriding).
-
-[Example: C provided full isolation under UNIX®.]
+This is a *tell* that our notation for multitasking is unsuitable and doesn't capture the simplicity of concurrency.
 
 # See Also
 
