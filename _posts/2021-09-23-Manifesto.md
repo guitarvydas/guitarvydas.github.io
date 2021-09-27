@@ -24,6 +24,7 @@ The main themes of these essays are:
 
 If I were to highlight certain articles, I would choose:
 
+- [Software Development Roles](https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html)
 - [Call return spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html)
 - [Failure Driven Design](https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html)
 - [Asynchronous Thinking](https://guitarvydas.github.io/2021/07/06/Asynchronous-Thinking.html)

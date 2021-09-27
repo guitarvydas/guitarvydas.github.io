@@ -7,7 +7,7 @@ title:  "Delegation is for Control Flow as Inheritance is for Data Construction 
 
 - case on type ==> OO (data)[^case]
 
-[^case] Bertrand Meyer pointed out that OO is _case_ on _type_)
+[^case]: Bertrand Meyer pointed out that OO is _case_ on _type_)
 
 - case on state ==> State Machine (control flow)
 - inheritance ==> data
