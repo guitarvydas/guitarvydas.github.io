@@ -109,6 +109,8 @@ Isolation can be seen in UNIX threads.
 
 Isolation can be seen in Worlds (http://vpri.org/pdf/rn2008001_worlds.pdf).
 
+Isolation can be seen in distributed programming (e.g. networks of rPIs).
+
 [FYI - Functions do not enforce Isolation, OO does not enforce Isolation, and so on.]
 
 [^1]: Term borrowed from Daniel Dennett.
