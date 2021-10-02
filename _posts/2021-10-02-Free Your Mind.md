@@ -11,7 +11,7 @@ Period.
 
 # Async vs. Sync
 
-Trying to program computers using synchronous methods is a tactic.
+Trying to program computers using synchronous methods is a *tactic*.
 
 Over-using the synchronous tactic will cause accidental complexity, for example callback-hell, etc.
 
@@ -22,7 +22,7 @@ Most people (non-programmers) already understand asynchronous processes.
 For example, *cooking recipes* are often arranged in an asynchronous manner:
 
 1. Boil the potatoes. 
-2. 2 While the potatoes are boiling, chop up ..."
+2. While the potatoes are boiling, chop up ..."
 
 Five (5) year-old children are taught hard realtime notations
 
@@ -35,15 +35,29 @@ CEOs understand asynchrony inherently and use *whiteboards* to communicate their
 
 Asynchrony is about control-flow.
 
-Control-flow cannot be expressed as OO.
+OO does not express Control-flow conveniently.
 
-Control-flow cannot be expressed as FP.
+FP does not express Control-flow conveniently.
 
-Control-flow cannot be expressed as rendezvous multi-tasking (Rendezvous is another express-async-as-sync tactic).
+Rendezvous multi-tasking does not express Control-flow conveniently (Rendezvous is merely another tactic for making async problems into sync problems).
 
-[*Actually, the above is not strictly true - it is possible to express control-flow in these paradigms, but it isn't as easy as it would be in control-flow-based paradigms.*]
+# Multiple Syntaxes
 
-[This leads into the notion of decoupling syntaxes - one syntax for data structuring, another syntax for control-flow structuring.]
+This leads into the notion of decoupling syntaxes - one syntax for data structuring, another syntax for control-flow structuring. [Two Syntaxes For Every Language II](https://guitarvydas.github.io/2021/10/02/Two-Syntaxes-For-Every-Language-II.html) and so on.
+
+Different syntaxes for Implementation vs. Use[^1]
+
+[^1]: Use is also known as scripting.
+
+# One Language To Rule Them All
+
+One Language to Rule Them All is a bad idea.
+
+This approach closes the mind.
+
+The idea of GPL (General Purpose Language) falls into this category.  Use SCNs[^2] instead of GPLs.
+
+[^2]: SCN is Solution-Centric-Notation.
 
 # How to Express Async?
 
@@ -69,15 +83,18 @@ Control-flow cannot be expressed as rendezvous multi-tasking (Rendezvous is anot
 
 ## Diagrams (DaS)
 
-Diagrams of asynchronous components form a control-flow-based paradigm.
+Diagrams of asynchronous components can form control-flow-based paradigms.
 
-Diagrams built using the synchronous paradigm tend to fail - they are harder to build and less meaningful.
+Diagrams built using the synchronous paradigm tend to fail.  Such diagrams are harder to build and are often less meaningful.  This (synchrony) has led to the notion that node-and-arrow diagrams don't work.
 
 # See Also
 
 [Blog](https://guitarvydas.github.io)
 [Table of Contents](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
 [Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+
+[SCN](https://guitarvydas.github.io/2021/04/10/SCN.html)
+
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 
