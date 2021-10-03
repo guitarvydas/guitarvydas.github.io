@@ -15,7 +15,7 @@ There are only 2 things that are important for programming computers:
 
 Programming Languages fall in between 1 & 2.
 
-One can do away with programming languages and replace them with simpler "notations" using [Ohm-JS](https://guitarvydas.github.io/2021/08/30/Ohm-JS.html) (based on PEG).
+One can do away with programming languages and replace them with simpler "notations" using Ohm-JS (PEG).
 
 I think of notations as very simple DSLs.
 
@@ -23,44 +23,44 @@ It should take only 10's of minutes to produce a notation.
 
 Notations can be tuned to a particular problem (this is something that Physicists do). 
 
-Multiple Notations can be used on a single problem.  [_Not one language, but multiple "languages" (notations)._]
+Multiple Notations can be used on a single problem. 
 
 Notations can be transpiled into other languages (I call them Toolbox Languages), like Python, JavaScript, Common Lisp, etc. 
 
-Notations are like "new" compilers - instead of compiling to assembler, notations transpile to Toolbox Languages.
+Notations are like "new" compilers - instead of compiling to assembler, notations compile to Toolbox Languages.
 
 # Operating Systems
 Operating systems are merely libraries.
 
 One feature that OSs provide is multitasking. 
 
-The kind of multitasking OSs provide is rife with accidental complexity - "we're going to make this square peg fit our notation even if it kills us".
+The kind of multitasking they provide is rife with accidental complexity - "we're going to make this square peg fit our notation even if it kills us".
 
-For example, current OSs introduce issues of thread safety. 
+For example, current OSs incur issues with thread safety. 
 
 Thread safety is accidental complexity caused by the use of memory sharing. Memory Sharing is used only due to old-fashioned premature optimization (CPUs and Memory used to be expensive in the 1950's). 
 
 If we build computing devices using many rPIs, each running exactly one program (no Linux), then thread safety becomes a non-issue. 
 
-*Poof*.
+Poof.
 
 Another feature that OSs provide is honest-to-goodness big lumps of library code, like file handling. 
 
-That stuff can simply be moved into LEGO® components that replace the concept of libraries. 
+That stuff can simply be moved into LEGO(R) components that replace the concept of libraries. 
 
 No OS needed for this, either. 
 
-*Poof*.
+Poof.
 
 OSs provide the concept of DLLs (shared libraries).  We use those every day in another form - HTTP servers (servlets).
 
 Servlets currently aren't as "efficient" as DLLs, but they would be if we insisted on using them instead of DLLs.  
 
-[The "*build it and they will come*" syndrome has happened many times in computering - from Assembler to HLLs (gcc), C++ used to be too inefficient to use on ubiquitous computing platforms of the day (e.g. 8-bit micros), etc, etc].
+[The "build it and they will come" syndrome has happened many times in computering - from Assembler to HLLs (gcc), C++ used to be too inefficient to use on ubiquitous computing platforms of the day (e.g. 8-bit micros), etc, etc].
 
 [Note that DLLs are not "free".  The OS must load them and fix up all of the holes. Then, the DLLs need to be mapped into the address space of the application(s) using them.] 
 
-*Poof*.
+Poof.
 
 # Paradigms
 
@@ -72,7 +72,7 @@ Let's take OO for example. OO was popularized by Smalltalk but quickly branched 
 
 The underlying principles are mostly the same, but the syntax is different in each variant.
 
-Another example: FP first appeared in 1956 in the form of Lisp.  Today, FP looks nothing like Lisp, but, the underlying principle (the Paradigm) is the same.  (I might argue that today's syntax first appeared APL, but that's an aside).  The major delta between 1956 and now is "merely" syntax (there have been improvements - more experience - with the paradigm, but the new syntax obscures the improvements).
+Another example: FP first appeared in 1956 in the form of Lisp.  Today, FP looks nothing like Lisp, but, the underlying principle (the Paradigm) is the same.  (I might argue that today's syntax first appeared APL, but that's an aside).  The major delta between 1956 and now is "just" syntax (there have been improvements - more experience - with the paradigm, but the new syntax obscures the improvements).
 
 I argue that it is easy to create syntax and just as easy to throw it away as new experience is gained with the paradigm.
 
@@ -80,16 +80,16 @@ I argue that this same strategy - inventing syntax - should be applied to proble
 
 [It is a good idea to keep a checklist handy of what we've learned to be good and what we've learned to be bad, as one invents new syntax].
 
-# LEGO® Block Software
+# LEGO(R) Block Software
 
-The keys to making LEGO® block software are:
+The keys to making LEGO(R) block software are:
 
 - isolation
 - concurrency.
 
 Isolation gives you "build and forget".  No dependencies.
 
-Concurrency means that blocks can run in any order, and, therefore, can be snapped together in any other order to make different apps.
+Concurrency means that blocks can run in any order (and, therefore, can be snapped together in any order to make different apps).
 
 [It might be helpful to think of building everything using networks of rPIs or to think that EVERY function runs in its own thread. (That's not actually far-fetched if you know about anonymous functions and callbacks).]
 
@@ -99,19 +99,17 @@ Isolation is a Universal Acid[^1]: - it eats through old-fashioned ideas.
 
 Isolation implies concurrency. 
 
-Software Components in an app must be written in such a way that order *cannot* matter. 
+Software Components in an app must be written in such a way that order cannot matter. 
 
-Components from one app can be re-ordered to form new apps.
+Components from one app can be re-ordered to form a new app.
 
 # Sightings of Isolation
 
-Isolation can be seen in UNIX pipelines (and threads).
+Isolation can be seen in UNIX threads.
 
 Isolation can be seen in Worlds (http://vpri.org/pdf/rn2008001_worlds.pdf).
 
-Isolation can be seen in distributed programming (e.g. networks of rPIs).
-
-[FYI - Functions do not enforce Isolation, OO does not enforce Isolation, etc., etc.]
+[FYI - Functions do not enforce Isolation, OO does not enforce Isolation, and so on.]
 
 [^1]: Term borrowed from Daniel Dennett.
 

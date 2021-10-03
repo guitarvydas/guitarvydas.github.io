@@ -19,16 +19,21 @@ I argue that we should deprecate the notion of GPLs and OSs and free our minds t
 - <u>Concrete</u>
     *Code*
          PFR
-		 code related to "CALL RETURN Spaghetti", in JS, in CL, in Python
+    	 code related to "CALL RETURN Spaghetti", in JS, in CL, in Python
     ​     PE - Architecture Diagram
-    
+
     *Essays*
         Free Your Mind
         We Don't Need Programming Languages Nor Operating Systems
         Control Flow is Orthogonal to Data Structuring
-	    LEGO Software
+        LEGO Software
+		Concurrency
         DaS II
         Typed Packet
+
+- Github
+
+    https://github.com/guitarvydas/wheelreinvention
 
 # Concrete Tools + Drawings
 
