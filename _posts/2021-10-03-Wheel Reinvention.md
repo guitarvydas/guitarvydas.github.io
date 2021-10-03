@@ -2,7 +2,7 @@
 
 The wheels that need the most reinventing are our habits based on old biases, e.g. languages and operating systems.  The old biases - CPUs are expensive, memory is scarce and expensive - are no longer true. 
 
-In this week-long jam (the Wheel Reinvention Jam), I accomplished a lot of what I set out to do:
+In this week-long jam (the Wheel Reinvention Jam), I accomplished a lot of what I set out to do (I certainly have not finished and will continue):
 - to think about and list the lessons we've learned from building GPLs and OSs (General Purpose Programming Languages, and, Operating Systems,resp.)
 - to work on concrete tools that were suggested by the lists.
 
@@ -38,7 +38,7 @@ I argue that we should deprecate the notion of GPLs and OSs and free our minds t
 
 - "Parsing" GREP + "parsing sed" (Parsing Find and Replace)
 - Based on Ohm-JS
-- currently blocked on syntactic silliness, e.g. `await` (due to my unfamiliarity with JS)
+- currently blocked on syntactic silliness, e.g. `await` (due to my unfamiliarity with JS) (I welcome help)
 - [WIP](https://github.com/guitarvydas/firstclasscomments).  (Firstclasscomments is an extension of my langjam entry, which shows how to compile diagrams to code).
 
 DLLs can be subsumed by HTTP servers.
@@ -49,7 +49,7 @@ GREP and SED and AWK can be subsumed by something that does better-pattern-match
 
 OTOH, REGEXPs can be specified in one line of code, and, anything "better" requires more lines of code.  
 
-Ohm-JS (PEG) seems like a viable choice for this kind of thing.
+Ohm-JS (based on PEG) seems like a viable choice for this kind of thing.
 
 Currently, DLLs and libraries are "more efficient" than (localhost) HTTP servers.  In fact, the concepts of DLL and library are "optimizations" of the more general concept of "server".  If we replace DLLs and libraries with localhost servers, someone will come up with a way to optimize and speed up localhost servers. 
 
@@ -65,7 +65,7 @@ DLLs and libraries are merely premature optimizations of a more general concept.
 
 ### Architecture Diagram of PE
 
-[Architecute Ideas for PE](https://github.com/guitarvydas/wheelreinvention/blob/master/PE-Programming-Enironment-Sketch-Page-1.png)
+[Architecture Ideas for PE](https://github.com/guitarvydas/wheelreinvention/blob/master/PE-Programming-Enironment-Sketch-Page-1.png)
 
 [Current Technologies that can be applied to PE](https://github.com/guitarvydas/wheelreinvention/blob/master/PE-technologies.png)
 
