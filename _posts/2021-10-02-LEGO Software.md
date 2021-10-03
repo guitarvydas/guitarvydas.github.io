@@ -28,7 +28,7 @@ Build the rest of the types up from the bottom (if you squint, you will see that
 
 There must be ONE type for interchange.  
 
-Hmm, maybe void* is that type (basically a non-type until you put more type-filters in the pipeline).
+Hmm, maybe "array of bytes" is that type (basically a non-type until you put more type-filters in the pipeline).
 
 # Type Checkers Are Interpreters
 
@@ -44,7 +44,7 @@ If you chop up the type-checking interpreter into smaller pieces and pipe them a
 
 For example, the first piece of type-checking might be to recognize basic types like int8, int16, char, string, lambda, etc, etc.  The second piece might be an arg counter for lambdas (pass all non-lambdas through, unchecked)[^1]
 
-[^1]:[I've been forcing myself to learn Javascript and, I fell that the worst missing feature is arg counting)]  
+[^1]:[I've been forcing myself to learn Javascript and, I feel that the worst missing feature is arg counting)]  
 
 # Type Checking is Like Syntax Checking
 
