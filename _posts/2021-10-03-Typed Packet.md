@@ -72,9 +72,30 @@ Note the similarities between this scheme and network packets.
 
 A useful starting point might be the OSI Model for data packets.
 
+# Validotor Components
+
+Some Components "do something" and others simply perform type-checking.
+
+Today, we chop type-checking up into two pieces:
+
+1. input validtation
+2. type checking.
+
 # Efficiency
 
 This scheme appears to be inefficient, except when compared to passing JSON character data around in a network.
+
+# Optimization
+
+Is it possible to optimize this model?
+
+We simply perform type-checks in the PE[^1] (at "compile time") as we hook Components up.
+
+This kind of optimization is nothing new.  
+
+We simply move "compile time" into the PE.
+
+[^1]: Programming Environment.
 
 # See Also
 

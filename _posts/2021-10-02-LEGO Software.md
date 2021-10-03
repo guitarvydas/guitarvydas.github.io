@@ -32,15 +32,13 @@ Hmm, maybe "array of bytes" is that type (basically a non-type until you put mor
 
 # Type Checkers Are Interpreters
 
-Note that a type-checker is an interpreter.  
+Note that a type-checker is an interpreter.
 
-That interpreter is, currently, a big lump of code that we put into pipeline that we call *compiletime | runtime*.
+That interpreter is, currently, a big lump of code that we put into pipeline that we call *compiletime --> runtime*.
 
 # Layered Type Checkers
 
-If you chop up the type-checking interpreter into smaller pieces and pipe them all together, you would get the same effect
-
-
+If you chop up the type-checking interpreter into smaller pieces and pipe them all together, you would get the same effect.
 
 For example, the first piece of type-checking might be to recognize basic types like int8, int16, char, string, lambda, etc, etc.  The second piece might be an arg counter for lambdas (pass all non-lambdas through, unchecked)[^1]
 
