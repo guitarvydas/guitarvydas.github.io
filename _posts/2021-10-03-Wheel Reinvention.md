@@ -94,11 +94,19 @@ Operating Systems are subsumed by CAD-like tools in the PE for plumbing Componen
 
 ### Essays
 [Free Your Mind](https://guitarvydas.github.io/2021/10/02/Free-Your-Mind.html)
+
 [We Don't Need Programming Languages Nor Operating Systems](https://guitarvydas.github.io/2021/09/29/Programming-Languages-and-OSs-Not-Needed.html)
+
 [Control Flow is Orthogonal to Data Structuring](https://guitarvydas.github.io/2021/10/01/Control-Flow-is-Orthogonal-to-Data-Structuring.html)
+
 [LEGO Software](https://guitarvydas.github.io/2021/10/02/LEGO-Software.html)
+
+[Concurrency](https://guitarvydas.github.io/2021/10/01/Concurrency.html)
+
 [Two Syntaxes For Every Language II](https://guitarvydas.github.io/2021/10/02/Two-Syntaxes-For-Every-Language-II.html)
+
 [DaS II](https://guitarvydas.github.io/2021/10/02/DaS-II.html)
+
 [Typed Packet](https://guitarvydas.github.io/2021/10/03/Typed-Packet.html)
 
 ## General

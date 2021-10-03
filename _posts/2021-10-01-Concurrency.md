@@ -19,9 +19,9 @@ A simple concurrent system is:
 
 Every other feature of concurrency is an optimization of this model.
 
-Memory Sharing
-
-Multiple Cores
+- Memory Sharing
+- Timesharing (CPU sharing)
+- Multiple Cores.
 
 # Premature Optimization
 
