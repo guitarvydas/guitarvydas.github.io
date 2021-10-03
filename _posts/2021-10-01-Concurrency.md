@@ -13,7 +13,7 @@ A simple concurrent system is:
 
 ## Diagram
 
-<img src="/Users/tarvydas/quicklisp/local-projects/wheelreinvention/Concurrency.png" alt="Concurrency" style="zoom:67%;" />
+<img src="https://github.com/guitarvydas/wheelreinvention/blob/master/Concurrency.png?raw=true" alt="Concurrency.png" style="zoom:67%;" />
 
 ## Everything Else is an Optimization
 
