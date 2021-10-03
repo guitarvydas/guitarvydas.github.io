@@ -15,7 +15,7 @@ Trying to program computers using synchronous methods is a *tactic*.
 
 Over-using the synchronous tactic will cause accidental complexity, for example callback-hell, etc.
 
-# Step 1 Before Step2
+# Step 1 Before Step 2
 
 Most people (non-programmers) already understand asynchronous processes.
 
@@ -31,6 +31,8 @@ Five (5) year-old children are taught hard realtime notations
 
 CEOs understand asynchrony inherently and use *whiteboards* to communicate their intentions.
 
+CEOs don't want to be bothered by the enigneering details.  This *does not* mean that they are ignoring the details, just deferring them (to Architects and Engineers).  Our notations *can* deal with *all* of the details while presenting less detail at each step - using layers.  *Provenance* can be accomplished in layers.
+
 # Control-Flow
 
 Asynchrony is about control-flow.
@@ -39,13 +41,18 @@ OO does not express Control-flow conveniently.
 
 FP does not express Control-flow conveniently.
 
-Rendezvous multi-tasking does not express Control-flow conveniently (Rendezvous is merely another tactic for making async problems into sync problems).
+Rendezvous multi-tasking does not express Control-flow conveniently (rendezvous is merely another tactic for reducing async problems into sync problems by essentially ignoring the async portion).
+
+CPS (Continuation Passing Style) does not express Control-flow conveniently.  CPS is, basically, GOTO in disguise.  Yes, GOTO *can* express control-flow, but it isn't convenient.  Yes, CPS *can* express control-flow, but it isn't convenient.
 
 # Multiple Syntaxes
 
 This leads into the notion of decoupling syntaxes - one syntax for data structuring, another syntax for control-flow structuring. [Two Syntaxes For Every Language II](https://guitarvydas.github.io/2021/10/02/Two-Syntaxes-For-Every-Language-II.html) and so on.
 
-Different syntaxes for Implementation vs. Use[^1]
+Different syntaxes for:
+
+- Implementation, vs.,
+- Use[^1]
 
 [^1]: Use is also known as scripting.
 
@@ -85,7 +92,7 @@ The idea of GPL (General Purpose Language) falls into this category.  Use SCNs[^
 
 Diagrams of asynchronous components can form control-flow-based paradigms.
 
-Diagrams built using the synchronous paradigm tend to fail.  Such diagrams are harder to build and are often less meaningful.  This (synchrony) has led to the notion that node-and-arrow diagrams don't work.
+Diagrams built using the synchronous paradigm tend to fail.  Such diagrams are harder to build and are often less meaningful.  This (synchrony) has led to the (untrue) notion that node-and-arrow diagrams don't work.
 
 # See Also
 

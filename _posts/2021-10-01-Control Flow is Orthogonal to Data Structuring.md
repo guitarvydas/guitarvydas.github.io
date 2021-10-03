@@ -4,7 +4,7 @@ title:  "Control Flow is Orthogonal to Data Structuring"
 ---
 
 # Function Call
-Is one of the choices in describing Control Flow.
+Is *one* of the choices in describing Control Flow.
 
 # Asynchronous vs. Synchronous
 One of the choices in describing Control Flow.
@@ -23,7 +23,7 @@ One of the choices in describing Data Structuring.
 - a Promise is a thread 
 - a Closure is a snapshot of the data in a thread
 - a Continuation is a snapshot of a thread - containing data and code (control flow)
-- Operating System Thread is a Continuation (see Greenspun's 10th Law)
+- an Operating System Thread is merely a Continuation (see Greenspun's 10th Rule)
 
 # Control Flow
 
@@ -38,10 +38,10 @@ One of the choices in describing Data Structuring.
 
 # Registers
 
-- shared, global variables implemented in hardware, made available to software
-- PC is a global variable (shared by all threads on that CPU)
-- SP is a global variable (shared by all threads on that CPU)
-- MMU is a global variable (shared by all threads on that CPU)
+- registers are *shared*, *global* variables implemented in hardware, made available to software
+- the PC register is a global variable (shared by all threads on that CPU)
+- the SP register is a global variable (shared by all threads on that CPU)
+- the MMU is a global variable (shared by all threads on that CPU)
 
 # See Also
 

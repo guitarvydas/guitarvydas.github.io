@@ -15,7 +15,7 @@ There are only 2 things that are important for programming computers:
 
 Programming Languages fall in between 1 & 2.
 
-One can do away with programming languages and replace them with simpler "notations" using [Ohm-JS](https://guitarvydas.github.io/2021/08/30/Ohm-JS.html) (aka PEG).
+One can do away with programming languages and replace them with simpler "notations" using [Ohm-JS](https://guitarvydas.github.io/2021/08/30/Ohm-JS.html) (based on PEG).
 
 I think of notations as very simple DSLs.
 
@@ -23,7 +23,7 @@ It should take only 10's of minutes to produce a notation.
 
 Notations can be tuned to a particular problem (this is something that Physicists do). 
 
-Multiple Notations can be used on a single problem. 
+Multiple Notations can be used on a single problem.  [_Not one language, but multiple "languages" (notations)._]
 
 Notations can be transpiled into other languages (I call them Toolbox Languages), like Python, JavaScript, Common Lisp, etc. 
 
@@ -46,7 +46,7 @@ If we build computing devices using many rPIs, each running exactly one program 
 
 Another feature that OSs provide is honest-to-goodness big lumps of library code, like file handling. 
 
-That stuff can simply be moved into LEGO(R) components that replace the concept of libraries. 
+That stuff can simply be moved into LEGO® components that replace the concept of libraries. 
 
 No OS needed for this, either. 
 
@@ -80,9 +80,9 @@ I argue that this same strategy - inventing syntax - should be applied to proble
 
 [It is a good idea to keep a checklist handy of what we've learned to be good and what we've learned to be bad, as one invents new syntax].
 
-# LEGO(R) Block Software
+# LEGO® Block Software
 
-The keys to making LEGO(R) block software are:
+The keys to making LEGO® block software are:
 
 - isolation
 - concurrency.
@@ -111,7 +111,7 @@ Isolation can be seen in Worlds (http://vpri.org/pdf/rn2008001_worlds.pdf).
 
 Isolation can be seen in distributed programming (e.g. networks of rPIs).
 
-[FYI - Functions do not enforce Isolation, OO does not enforce Isolation, and so on.]
+[FYI - Functions do not enforce Isolation, OO does not enforce Isolation, etc., etc.]
 
 [^1]: Term borrowed from Daniel Dennett.
 

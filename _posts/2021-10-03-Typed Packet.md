@@ -44,9 +44,11 @@ See, also, network packet layout.
 
 The *physical layer* carries *bytes* from one Component to another.
 
+I am advocating that we treat Software Components like network nodes (in the small).
+
 Each packet has a header and a trailer, in the form of flexi-tags.
 
-- header (array of bytes terminated by low bit set)
+- header (array of bytes terminated by low bit set (or something like that))
 - payload - array of bytes
 - trailer - must match the head (exactly)
 
