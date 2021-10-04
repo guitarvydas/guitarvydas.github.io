@@ -14,7 +14,7 @@ Once inside a REPL, a programmer can query (and change) the state of a computati
 
 # Interpretation vs. Compilation
 
-*All* languages can be interpreted.
+*All* programming languages can be interpreted.
 
 Only *some* languages can be compiled.
 
@@ -34,7 +34,17 @@ The workflow could be changed to:
 2. debug the program in the REPL
 3. compile the debugged program for production.
 
-[^1]: The REPL happened to be a Lisp REPL, but that is beside the point of this article.  I think that pre-CL Lisp was easier to debug than Common Lisp.
+# How To Build Interpreters For Existing Languages?
+
+## Ohm-JS?
+
+Q: Can Ohm-JS (+ CL, Pyton, etc.) be used to build interpreters for all existing compile-only languages?
+
+## Denotational Semantics?
+
+Q: Can Denotational Semantics produce interpreters for languages and tie compilers back to the original language semantics?  Can the Denotational Semantics of a language be used to produce, both, the interpreter and the compiler?
+
+[^1]: The REPL happened to be a Lisp REPL, but that is beside the point of this article.  I think that pre-CL Lisp was easier to debug than is Common Lisp. OTOH Lispworks (for CL) defines what a debugger should be capable of.
 
 # See Also
 
