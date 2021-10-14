@@ -10,7 +10,7 @@ Problems have a number of degrees of freedom - dimensions.
 
 Our reality appears to have 4 dimensions (4D) - x,y,z,t.
 
-Trying to squeeze more than one dimension into a notation results in what we perceive as complexity.
+Trying to squeeze more than one dimension into a single notation results in what we perceive as complexity.
 
 Flattening 4D (reality) down to 2D (pen and paper) results in "complexity" - some things become merely harder to express. We need more than one 2D notation to express 4D concepts, each in a seemingly "simple" way.
 
