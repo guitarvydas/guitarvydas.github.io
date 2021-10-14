@@ -175,7 +175,7 @@ The _multi-language/multi-paradigm_ mentality says that it is OK to use PROLOG e
 
 # Normalization
 
-To do this effectively, we must employ a common _normalized form_ for information (I favor [triples](https://guitarvydas.github.io/2021/03/16/Triples.html) and [factbases](https://guitarvydas.github.io/2021/01/17/Factbases.html]), [factbases 101](https://guitarvydas.github.io/2021/04/26/Factbases-101.html))
+To do this effectively, we must employ a common _normalized form_ for information (I favor [triples](https://guitarvydas.github.io/2021/03/16/Triples.html) and [factbases](https://guitarvydas.github.io/2021/01/17/Factbases.html), [factbases 101](https://guitarvydas.github.io/2021/04/26/Factbases-101.html))
 
 
 # See Also
