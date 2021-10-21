@@ -101,7 +101,7 @@ A compiler is just a pre-processor which compresses code into some more convenie
 We have learned how to build better checking into our compilers.
 
 1. We use syntactic sugar (which causes us to build parser apps), and,
-2. We use type-checking, but, the cost is that we need to modify the languages. For example, it is possible to write better (more complete) type-checking for a Haskell program than for a C program, but the programmer has to follow the rules of Haskell when writing code. [*Q: Is it worth it to use a very-high-level language like Haskell instead of C or assembler?  What are the trade-offs? *(Big-time efficiency, doesn't come from switching languages, it comes from switching designs.)*]
+2. We use type-checking, but, the cost is that we need to modify the languages. For example, it is possible to write better (more complete) type-checking for a Haskell program than for a C program, but the programmer has to follow the rules of Haskell when writing code. [*Q: Is it worth it to use a very-high-level language like Haskell instead of C or assembler?  What are the trade-offs? (Big-time efficiency gains don't come from switching languages, they come from switching designs.)*]
 
 A compiler is merely an app.
 
