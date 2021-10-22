@@ -3,7 +3,7 @@ layout: post
 title:  "Compilers Are Interpreters"
 ---
 
-<a href="https://guitarvydas.github.io/assets/Compilers Are Interpreters.pdf">'a</a>
+<a href="https://guitarvydas.github.io/assets/Compilers Are Interpreters.pdf">Compilers Are Interpreters</a>
 
 # See Also
 
