@@ -3,12 +3,12 @@ layout: post
 title:  "Compilers Are Interpreters"
 ---
 
-<a href="https://guitarvydas.github.io/assets/Compilers Are Intepreters.pdf">'a</a>
+<a href="https://guitarvydas.github.io/assets/Compilers Are Interpreters.pdf">'a</a>
 
 # See Also
 
 [Blog](https://guitarvydas.github.io)
-[Table of Contents as of Sept 23, 2021](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
+[Table of Contents as of Sept 17, 2021](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
 [Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
