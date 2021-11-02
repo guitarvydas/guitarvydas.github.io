@@ -1,0 +1,205 @@
+I"6&<h1 id="wheel-reinvention">Wheel Reinvention</h1>
+
+<p>The wheels that need the most reinventing are our habits based on old biases, e.g. languages and operating systems.  The old biases - CPUs are expensive, memory is scarce and expensive - are no longer true.</p>
+
+<p>In this week-long jam (the Wheel Reinvention Jam), I accomplished a lot of what I set out to do (I certainly have not finished and will continue):</p>
+<ul>
+  <li>to think about and list the lessons we’ve learned from building GPLs and OSs (General Purpose Programming Languages, and, Operating Systems,resp.)</li>
+  <li>to work on concrete tools that were suggested by the lists.</li>
+</ul>
+
+<p>I argue that we should deprecate the notion of GPLs and OSs and free our minds to think of bigger and better ways to control computers.</p>
+
+<h1 id="wrapup">Wrapup</h1>
+<ul>
+  <li>
+    <p><u>General</u><br />
+  Overview<br />
+  List Programming The Good Parts<br />
+  List Programming The Bad Parts<br />
+  Other Technologies<br />
+  New Perspectives</p>
+  </li>
+  <li>
+    <p><u>Concrete</u><br />
+  <em>Code</em><br />
+       PFR<br />
+  	 code related to “CALL RETURN Spaghetti”, in JS, in CL, in Python<br />
+  ​     PE - Architecture Diagram</p>
+
+    <p><em>Essays</em><br />
+      Free Your Mind<br />
+      We Don’t Need Programming Languages Nor Operating Systems<br />
+      Control Flow is Orthogonal to Data Structuring<br />
+      LEGO Software<br />
+      Concurrency<br />
+      DaS II<br />
+      Typed Packet</p>
+  </li>
+  <li>
+    <p>Github</p>
+
+    <p>https://github.com/guitarvydas/wheelreinvention</p>
+  </li>
+</ul>
+
+<h1 id="concrete-tools--drawings">Concrete Tools + Drawings</h1>
+
+<h4 id="pfr">PFR</h4>
+
+<p><code class="language-plaintext highlighter-rouge">pfr grammar-file replacement-script &lt;input-file</code></p>
+
+<ul>
+  <li>“Parsing” GREP + “parsing sed” (Parsing Find and Replace)</li>
+  <li>Based on Ohm-JS</li>
+  <li>currently blocked on syntactic silliness, e.g. <code class="language-plaintext highlighter-rouge">await</code> (due to my unfamiliarity with JS) (I welcome help)</li>
+  <li><a href="https://github.com/guitarvydas/firstclasscomments">WIP</a>.  (Firstclasscomments is an extension of my langjam entry, which shows how to compile diagrams to code).</li>
+</ul>
+
+<p>DLLs can be subsumed by HTTP servers.</p>
+
+<p>Libraries can be subsumed by HTTP servers.</p>
+
+<p>GREP and SED and AWK can be subsumed by something that does better-pattern-matching than simple REGEXPs.</p>
+
+<p>OTOH, REGEXPs can be specified in one line of code, and, anything “better” requires more lines of code.</p>
+
+<p>Ohm-JS (based on PEG) seems like a viable choice for this kind of thing.</p>
+
+<p>Currently, DLLs and libraries are “more efficient” than (localhost) HTTP servers.  In fact, the concepts of DLL and library are “optimizations” of the more general concept of “server”.  If we replace DLLs and libraries with localhost servers, someone will come up with a way to optimize and speed up localhost servers.</p>
+
+<p>“Build it and they will come”.</p>
+
+<p>DLLs and libraries are merely premature optimizations of a more general concept.</p>
+
+<h4 id="call-return-spaghetti-code">CALL RETURN Spaghetti Code</h4>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">CALL RETURN Spaghetti</a></p>
+
+<p><a href="https://github.com/guitarvydas/callreturnspaghetti">code (sync versions in JS, Python, CL, async versions in JS and CL)</a></p>
+
+<h3 id="architecture-diagram-of-pe">Architecture Diagram of PE</h3>
+
+<p><a href="https://github.com/guitarvydas/wheelreinvention/blob/master/PE-Programming-Enironment-Sketch-Page-1.png">Architecture Ideas for PE</a></p>
+
+<p><a href="https://github.com/guitarvydas/wheelreinvention/blob/master/PE-technologies.png">Current Technologies that can be applied to PE</a></p>
+
+<p>PE means Programming Environment (a generalization of IDE).</p>
+
+<p>Basically, I argue that everything that is currently “done at compile time” should be done in the PE.</p>
+
+<p>That includes macros, includes, OO inheritance, type checking, syntax checking, like-except, DRY, etc., etc.</p>
+
+<p>Everything else can be done at runtime.</p>
+
+<p>For example, code, dynamic type checking, dynamic object construction (aka Prototype inheritance) can be done at runtime.</p>
+
+<p>Languages are subsumed by the PE.</p>
+
+<p>Code is contained in LEGO®-like Components.</p>
+
+<p>Operating Systems are subsumed by the PE.</p>
+
+<p>Operating Systems are subsumed by CAD-like tools in the PE for plumbing Components together.  For example, if an app needs input from the keyboard, we plug a <em>keyboard</em> Component into the app (via the PE).  If the app needs input from a mouse, we plug a <em>mouse</em> Component into the app (via the PE).  If an app needs to handle files, we plug a <em>file system</em> Component into the app. And so on.</p>
+
+<h3 id="essays">Essays</h3>
+<p><a href="https://guitarvydas.github.io/2021/10/02/Free-Your-Mind.html">Free Your Mind</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/09/29/Programming-Languages-and-OSs-Not-Needed.html">We Don’t Need Programming Languages Nor Operating Systems</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/01/Control-Flow-is-Orthogonal-to-Data-Structuring.html">Control Flow is Orthogonal to Data Structuring</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/02/LEGO-Software.html">LEGO Software</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/01/Concurrency.html">Concurrency</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/02/Two-Syntaxes-For-Every-Language-II.html">Two Syntaxes For Every Language II</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/02/DaS-II.html">DaS II</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/10/03/Typed-Packet.html">Typed Packet</a></p>
+
+<h2 id="general">General</h2>
+
+<p>I wrote my “thinking” and notes in Scrivener.</p>
+
+<p>Below, I include screenshots of the outlines…</p>
+
+<p>The originals can be found in github <a href="https://github.com/guitarvydas/wheelreinvention">wheel reinvention</a>.</p>
+
+<h4 id="overview">Overview</h4>
+
+<p><img src="https://github.com/guitarvydas/wheelreinvention/blob/master/Overview%20-%20Screen%20Shot%202021-10-01%20at%2012.09.26%20AM.png?raw=true" alt="Overview - Screen Shot 2021-10-01 at 12.09.26 AM.png" style="zoom:67%;" /></p>
+
+<h4 id="programming---the-good-parts">Programming - The Good Parts</h4>
+
+<p><img src="https://github.com/guitarvydas/wheelreinvention/blob/master/Programming%20-%20The%20Good%20Parts%20-%20Screen%20Shot%202021-10-01%20at%2012.09.41%20AM.png?raw=true" alt="Programming - The Good Parts - Screen Shot 2021-10-01 at 12.09.41 AM.png" style="zoom:67%;" /></p>
+
+<h4 id="programming---the-bad-parts">Programming - The Bad Parts</h4>
+
+<p><img src="https://github.com/guitarvydas/wheelreinvention/blob/master/Programming%20-%20The%20Bad%20Parts%20-%20Screen%20Shot%202021-10-01%20at%2012.09.55%20AM.png?raw=true" alt="Programming - The Bad Parts - Screen Shot 2021-10-01 at 12.09.55 AM.png" style="zoom:67%;" /></p>
+
+<h4 id="other-technologies">Other Technologies</h4>
+
+<p><img src="https://github.com/guitarvydas/wheelreinvention/blob/master/Other%20Technologies%20-%20Screen%20Shot%202021-10-01%20at%2012.10.09%20AM.png?raw=true" alt="Other Technologies - Screen Shot 2021-10-01 at 12.10.09 AM.png" style="zoom:67%;" /></p>
+
+<h4 id="new-perspectives">New Perspectives</h4>
+
+<p><img src="https://github.com/guitarvydas/wheelreinvention/blob/master/New%20Perspectives%20-%20Screen%20Shot%202021-10-01%20at%2012.10.49%20AM.png?raw=true" alt="New Perspectives - Screen Shot 2021-10-01 at 12.10.49 AM.png" style="zoom:67%;" /></p>
+
+<h1 id="what-matters">What Matters?</h1>
+
+<p>There is only one thing that matters:<br />
+	1.	controlling machines<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<p>We resort to things that we call:</p>
+<ul>
+  <li>paradigms</li>
+  <li>experience.</li>
+</ul>
+
+<p>Programming languages are merely syntactic sugar for the above.</p>
+
+<p>Can we create a toolbox of paradigms, then drape syntactic sugar over the paradigms?</p>
+
+<p>Yes.</p>
+
+<h1 id="programming-languages">Programming Languages</h1>
+
+<p>The concept of programming languages, especially GPLs (General Purpose Languages), should be deprecated.</p>
+
+<p>GPLs are obviated by Ohm-JS(PEG)-based notations.</p>
+
+<h1 id="operating-systems">Operating Systems</h1>
+
+<p>OSs are merely glorified libraries (which can be obviated by using better library technology (e.g. LEGO®-like blocks).</p>
+
+<h1 id="other-biases">Other Biases</h1>
+
+<p>There are many other biases, such as</p>
+
+<ul>
+  <li>the idea that GPLs (General Purpose Programming Languages) must be based on grids of non-overlapping bitmaps (aka Characters, Text).</li>
+  <li>2D notation.<br />
+  Until now, we had only paper (pencil-and-paper) to use when evolving ideas.<br />
+  Now, we have 3D workstations.</li>
+</ul>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Machines that we call “computers”. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

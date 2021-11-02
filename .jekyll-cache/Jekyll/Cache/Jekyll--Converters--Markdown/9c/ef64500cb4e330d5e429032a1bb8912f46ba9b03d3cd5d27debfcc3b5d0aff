@@ -1,0 +1,117 @@
+I"'<h1 id="elephant-in-the-room">Elephant in the Room</h1>
+
+<p>Computers are asynchronous.</p>
+
+<p>Period.</p>
+
+<h1 id="async-vs-sync">Async vs. Sync</h1>
+
+<p>Trying to program computers using synchronous methods is a <em>tactic</em>.</p>
+
+<p>Over-using the synchronous tactic will cause accidental complexity, for example callback-hell, etc.</p>
+
+<h1 id="step-1-before-step-2">Step 1 Before Step 2</h1>
+
+<p>Most people (non-programmers) already understand asynchronous processes.</p>
+
+<p>For example, <em>cooking recipes</em> are often arranged in an asynchronous manner:</p>
+
+<ol>
+  <li>Boil the potatoes.</li>
+  <li>While the potatoes are boiling, chop up …”</li>
+</ol>
+
+<p>Five (5) year-old children are taught hard realtime notations</p>
+
+<ul>
+  <li>piano lessons</li>
+  <li>music scores.</li>
+</ul>
+
+<p>CEOs understand asynchrony inherently and use <em>whiteboards</em> to communicate their intentions.</p>
+
+<p>CEOs don’t want to be bothered by the enigneering details.  This <em>does not</em> mean that they are ignoring the details, just deferring them (to Architects and Engineers).  Our notations <em>can</em> deal with <em>all</em> of the details while presenting less detail at each step - using layers.  <em>Provenance</em> can be accomplished in layers.</p>
+
+<h1 id="control-flow">Control-Flow</h1>
+
+<p>Asynchrony is about control-flow.</p>
+
+<p>OO does not express Control-flow conveniently.</p>
+
+<p>FP does not express Control-flow conveniently.</p>
+
+<p>Rendezvous multi-tasking does not express Control-flow conveniently (rendezvous is merely another tactic for reducing async problems into sync problems by essentially ignoring the async portion).</p>
+
+<p>CPS (Continuation Passing Style) does not express Control-flow conveniently.  CPS is, basically, GOTO in disguise.  Yes, GOTO <em>can</em> express control-flow, but it isn’t convenient.  Yes, CPS <em>can</em> express control-flow, but it isn’t convenient.</p>
+
+<h1 id="multiple-syntaxes">Multiple Syntaxes</h1>
+
+<p>This leads into the notion of decoupling syntaxes - one syntax for data structuring, another syntax for control-flow structuring. <a href="https://guitarvydas.github.io/2021/10/02/Two-Syntaxes-For-Every-Language-II.html">Two Syntaxes For Every Language II</a> and so on.</p>
+
+<p>Different syntaxes for:</p>
+
+<ul>
+  <li>Implementation, vs.,</li>
+  <li>Use<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></li>
+</ul>
+
+<h1 id="one-language-to-rule-them-all">One Language To Rule Them All</h1>
+
+<p>One Language to Rule Them All is a bad idea.</p>
+
+<p>This approach closes the mind.</p>
+
+<p>The idea of GPL (General Purpose Language) falls into this category.  Use SCNs<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup> instead of GPLs.</p>
+
+<h1 id="how-to-express-async">How to Express Async?</h1>
+
+<h2 id="statecharts">Statecharts</h2>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/StateCharts.html">Statecharts Presentation  (Papers We Love)</a></p>
+
+<p><a href="https://www.inf.ed.ac.uk/teaching/courses/seoc/2005_2006/resources/statecharts.pdf">Harel’s Original Paper</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/02/25/statecharts-(again).html">Statecharts Again</a></p>
+
+<h2 id="drakon">Drakon</h2>
+
+<p><a href="http://drakon-editor.sourceforge.net">Drakon Editor</a></p>
+
+<h2 id="fbp">FBP</h2>
+
+<p><a href="https://jpaulm.github.io/fbp/">Flow Based Programming</a></p>
+
+<h2 id="ascs---asynchronous-software-components">ASCs - Asynchronous Software Components</h2>
+
+<p>(see my <a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Blog</a>, search for “Isolation”, Software Components”, “Software Components 101”, “ASC”, “DaS”, etc., etc.)</p>
+
+<h2 id="diagrams-das">Diagrams (DaS)</h2>
+
+<p>Diagrams of asynchronous components can form control-flow-based paradigms.</p>
+
+<p>Diagrams built using the synchronous paradigm tend to fail.  Such diagrams are harder to build and are often less meaningful.  This (synchrony) has led to the (untrue) notion that node-and-arrow diagrams don’t work.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/10/SCN.html">SCN</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Use is also known as scripting. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>SCN is Solution-Centric-Notation. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

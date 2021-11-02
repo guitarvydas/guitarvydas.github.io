@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>VMs and JIT | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="VMs and JIT" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Node.js and JRE are apps that run at “runtime” and read/load/run the JS/Java code." />
+<meta property="og:description" content="Node.js and JRE are apps that run at “runtime” and read/load/run the JS/Java code." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/10/21/VMs-and-JIT.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/10/21/VMs-and-JIT.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-21T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VMs and JIT" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/10/21/VMs-and-JIT.html","@type":"BlogPosting","description":"Node.js and JRE are apps that run at “runtime” and read/load/run the JS/Java code.","dateModified":"2021-10-21T00:00:00-04:00","datePublished":"2021-10-21T00:00:00-04:00","headline":"VMs and JIT","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/10/21/VMs-and-JIT.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">VMs and JIT</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-21T00:00:00-04:00" itemprop="datePublished">Oct 21, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Node.js and JRE are apps that run at “runtime” and read/load/run the JS/Java code.</p>
+
+<p>JDK is optimized by breaking it into 2 pieces - the dev stuff and runtime stuff.  If you don’t need the dev stuff, you can save memory by not loading it.</p>
+
+<p>Let’s pick on JRE<sup id="fnref:beam" role="doc-noteref"><a href="#fn:beam" class="footnote">1</a></sup>:</p>
+
+<p>JRE runs some .java app.</p>
+
+<p>How?</p>
+
+<h1 id="vm">VM</h1>
+
+<p>The VM is an app that reads the .java code and executes it (in other words, it “interprets” the code).</p>
+
+<p>There is a way to optimize execution, so that it takes less time:</p>
+<ol>
+  <li>convert the .java code into some intermediate form</li>
+  <li>define an API for the intermediate form</li>
+  <li>write an app that understands and runs all code written in the intermediate form.</li>
+</ol>
+
+<p>The intermediate form (2) is called VM (Virtual Machine) <em>bytecodes</em>.</p>
+
+<p>Specific calls to the VM API are done using short codes called <em>bytecodes</em>.</p>
+
+<p>App (3) is the VM.</p>
+
+<p>Most often the VM <em>looks</em> like an assembler-runner (interpreter).  The API <em>looks</em> like assembly instructions for a ficticious machine.</p>
+
+<p>A <em>compiler</em> is just an app that pre-processes code as in (1). In the end, <em>all</em> code is interpreted by the hardware CPU.</p>
+
+<p>We used to use <em>Assemblers</em> to do step (1), then, we discovered that syntactic sugar could make the code less onerous to read (for humans).</p>
+
+<p>This led us to building apps called <em>compilers</em> and replacing <em>assemblers</em> by these new-fangled apps.</p>
+
+<p>Then, we discovered that OO was a good way to organize syntactically-sugared code.</p>
+
+<p>Then, we discovered that we could do better with even <em>more</em> syntactic sugar and we invented type-checker apps and FP<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.</p>
+
+<h2 id="example">Example</h2>
+
+<p>For example “hello(‘xyz’);” is a string.</p>
+
+<p>The runner interprets the string each time - 13 characters, plus some sort of stop character or a string length.</p>
+
+<p>The runner doesn’t know how long the string is, so it must walk the string from front to back each time.</p>
+
+<p>We can “optimize” the string by pre-processing it.  If we do this right, the runner will have less work to do, and, will take less time to run the program.</p>
+
+<p>Let’s say that we use code <code class="language-plaintext highlighter-rouge">0x50</code> to mean “call function”, code <code class="language-plaintext highlighter-rouge">0x61</code> to mean push string onto the string stack (we invent a stack and build it into the VM) and <code class="language-plaintext highlighter-rouge">0x75</code> to mean push the address of a function onto the function call stack (again, built into the VM.  Most VMs use just one stack for, both, strings and function addresses, but that’s so 1950’s).</p>
+
+<p>We might compress the above function call as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x61 "xyz"   // hash string "xyz", and push its index (hascode) onto the string stack
+
+0x75 "hello" // find the function hello and push its address onto the function stack
+
+0x50         // call function (with one argument)
+</code></pre></div></div>
+
+<p>The runner can eat this stuff up faster than re-processing “hello(‘xyz’)” each time, so, we have achieved the goal of making our program run faster.</p>
+
+<p>The pre-processor is a <em>compiler</em>.</p>
+
+<p>The runner is a <em>VM</em>.</p>
+
+<p>We run 2 apps</p>
+
+<ol>
+  <li>
+    <p>First, we run the <em>compiler</em> app, then</p>
+  </li>
+  <li>
+    <p>We run the VM app (which eats our bytecodes and runs them).</p>
+  </li>
+</ol>
+
+<p>If we run the <em>compiler</em> at <em>VM</em> time (called “runtime”), then the <em>compiler</em> is called a <em>JIT</em> (just a name change (maybe a philosophical change, too (TL;DR)).</p>
+
+<p>I doubt that the Java VM uses the same codes as I used in this example.  You can see the actual codes decided upon by the Java VM inventors in the Java VM documentation.</p>
+
+<h1 id="jit">JIT</h1>
+
+<p>JIT - Just In Time compilation - is nothing new (it was invented in early Lisps, and was explored more deeply in the <em>Self</em> language).</p>
+
+<p>JIT is a bundled app that includes the <em>compiler</em> and the <em>VM</em>.  Instead of pre-processing code as in step (1), we defer the pre-processing until step (3) and do the work on an as-needed basis.  The first time we need to call a function, we interpret it <em>and</em> we compile it.  Then, when we come across the same function again, we just use the compiled version.</p>
+
+<p>This combination <em>can</em> run faster if the code contains lots of unused code - the <em>compiler</em> compiles only the bits that are really needed.</p>
+
+<p>Instead of writing the bytecodes out to a <code class="language-plaintext highlighter-rouge">.o</code> file, a JIT compiler does the work in-memory and makes the result available during the run.</p>
+
+<p>If you need to run the final app many, many times, it might be faster to pre-compile it only once instead of JIT’ing it every time you run the app.</p>
+
+<h1 id="takeaways">Takeaways</h1>
+
+<p>A compiler is just a pre-processor which compresses code into some more convenient, normal form that, hopefully, runs faster.</p>
+
+<p>We have learned how to build better checking into our compilers.</p>
+
+<ol>
+  <li>We use syntactic sugar (which causes us to build parser apps), and,</li>
+  <li>We use type-checking, but, the cost is that we need to modify the languages. For example, it is possible to write better (more complete) type-checking for a Haskell program than for a C program, but the programmer has to follow the rules of Haskell when writing code. [<em>Q: Is it worth it to use a very-high-level language like Haskell instead of C or assembler?  What are the trade-offs? (Big-time efficiency gains don’t come from switching languages, they come from switching designs.)</em>]</li>
+</ol>
+
+<p>A compiler is merely an app.</p>
+
+<p>A VM is merely an app that loads and runs programs.</p>
+
+<p>JRE is Java’s VM.</p>
+
+<p>JDK is the JRE plus a bunch of dev-oriented apps.</p>
+
+<p>The JRE, JIT’ed or not, boils down to running the CPU’s API - called <em>opcodes</em>.</p>
+
+<p>The CPU <em>interprets</em> opcodes.</p>
+
+<p>Always.</p>
+
+<p>[<em>Corollary: every app is an interpreter.  This means that compilers are interpreters, too, but we don’t think of them that way. Less clutter in the brain means more space for higher level thinking.</em>]</p>
+
+<p>Assemblers are cave-man era compilers that translate text into <em>opcodes</em>.  (As always, there is more nuance and detail, but TL;DR).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents as of Sept 17, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:beam" role="doc-endnote">
+      <p>This discussion also applies to other VMs like Erlang’s <em>Beam</em>. <a href="#fnref:beam" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>IMO, FP goes “too far” and tosses the baby out with the bathwater, but that’s for another discussion. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/10/21/VMs-and-JIT.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

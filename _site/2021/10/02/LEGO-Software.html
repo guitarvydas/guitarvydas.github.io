@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>LEGO® Software | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="LEGO® Software" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="LEGO®:" />
+<meta property="og:description" content="LEGO®:" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/10/02/LEGO-Software.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/10/02/LEGO-Software.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-02T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="LEGO® Software" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/10/02/LEGO-Software.html","@type":"BlogPosting","description":"LEGO®:","dateModified":"2021-10-02T00:00:00-04:00","datePublished":"2021-10-02T00:00:00-04:00","headline":"LEGO® Software","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/10/02/LEGO-Software.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">LEGO® Software</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-02T00:00:00-04:00" itemprop="datePublished">Oct 2, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="lego">LEGO®:</h1>
+
+<p>Why does LEGO® work?</p>
+
+<p>Because of its API.</p>
+
+<p>What is LEGO®’s API?</p>
+
+<p>1) exactly one type<br />
+2) very simplistic.</p>
+
+<p>LEGO®’s’ API is: a round peg.</p>
+
+<p>The lesson for us is: chop types up into layers.</p>
+
+<p>Have one extremely simple type at the bottom (I favour the tagged event {tag, data}).</p>
+
+<p>Build the rest of the types up from the bottom (if you squint, you will see that UNIX /bin/*sh already does this - the API is “lines of text”.  Other tools, e.g. awk, build up more interesting types (e.g. fields) from that basic transport-layer type.</p>
+
+<p>Ohm-JS should make it easy to build languages of types. Hmm, somewhere I think I’ve written about this, probably https://guitarvydas.github.io/2020/12/09/Type-Stacks.html.</p>
+
+<h1 id="physical-layer-type">Physical Layer Type</h1>
+
+<p>There must be ONE type for interchange.</p>
+
+<p>Hmm, maybe “array of bytes” is that type (basically a non-type until you put more type-filters in the pipeline).</p>
+
+<h1 id="type-checkers-are-interpreters">Type Checkers Are Interpreters</h1>
+
+<p>Note that a type-checker is an interpreter.</p>
+
+<p>That interpreter is, currently, a big lump of code that we put into pipeline that we call <em>compiletime –&gt; runtime</em>.</p>
+
+<h1 id="layered-type-checkers">Layered Type Checkers</h1>
+
+<p>If you chop up the type-checking interpreter into smaller pieces and pipe them all together, you would get the same effect.</p>
+
+<p>For example, the first piece of type-checking might be to recognize basic types like int8, int16, char, string, lambda, etc, etc.  The second piece might be an arg counter for lambdas (pass all non-lambdas through, unchecked)<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<h1 id="type-checking-is-like-syntax-checking">Type Checking is Like Syntax Checking</h1>
+
+<p>Type checking is an error check like, “end if” syntax, but we’re not at the point yet where it is so simple that we tend to forget about it (like “end if” syntax).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>[I’ve been forcing myself to learn Javascript and, I feel that the worst missing feature is arg counting)] <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/10/02/LEGO-Software.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

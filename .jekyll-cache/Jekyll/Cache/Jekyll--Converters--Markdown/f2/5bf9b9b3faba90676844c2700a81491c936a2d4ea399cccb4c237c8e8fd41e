@@ -1,0 +1,92 @@
+I"�<ul>
+  <li>Isolation</li>
+  <li>Coordination Language</li>
+  <li>Concurrency</li>
+</ul>
+
+<h1 id="threads-are-isolation">Threads are Isolation</h1>
+
+<p>Programs are completely separated from each other and can communicate only over very restricted channels.</p>
+
+<p>Threads are <em>envelopes</em> that one can drop <em>calculators</em> into.</p>
+
+<h1 id="coordination-language">Coordination Language</h1>
+
+<p>PLs have traditionally been restricted to expressing the contstruction of synchronous calculators.</p>
+
+<p>Few PLs address the issues of distributed programming<sup id="fnref:alib" role="doc-noteref"><a href="#fn:alib" class="footnote">1</a></sup>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/sh</code> (<code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">|</code>) is a DSL for creating higher-level concurrent abstractions.</p>
+
+<h2 id="pid">PID</h2>
+
+<p>PIDs - process ID - are handles to first-class components.</p>
+
+<h1 id="concurrency">Concurrency</h1>
+
+<p>Concurrency is a programming paradigm.</p>
+
+<p>Parallelism is an application problem that needs to use the concurrent paradigm</p>
+
+<h1 id="anti-takeaways">Anti-Takeaways</h1>
+<h2 id="time-sharing">Time-Sharing</h2>
+<h2 id="memory-sharing">Memory Sharing</h2>
+<h2 id="closures">Closures</h2>
+<p>Threads are just closure-wannabees<sup id="fnref:ccs" role="doc-noteref"><a href="#fn:ccs" class="footnote">2</a></sup>.</p>
+
+<p>UNIX threads are just ad-hoc implementations of closures in C.</p>
+<h2 id="dependency-spaghetti">Dependency Spaghetti</h2>
+<h2 id="rendezvous">Rendezvous</h2>
+<p>Rendezvous is an attempt to corral concurrency by making <em>everything</em> synchronous.</p>
+<h2 id="syntax-for-distributed-programming-is-minimal">Syntax for Distributed Programming is Minimal</h2>
+<p>The UNIX shell syntax for distributed programming is muddied by the inclusion of many other features<sup id="fnref:soc" role="doc-noteref"><a href="#fn:soc" class="footnote">3</a></sup>.</p>
+
+<h2 id="continued-conflation-and-muddied-waters-between-programming-and-oss">Continued Conflation and Muddied Waters Between Programming and O/Ss</h2>
+<p>UNIX contains several fundamental advances in PL features (e.g. |, &amp;, fork, etc).</p>
+
+<p>These PL advances have, unfortunately, been conflated with Operating Systems and have largely been ignored in PL designs.</p>
+
+<p>N.B. Pipelines of functions are not the same as pipelines of isolated components.</p>
+
+<h2 id="union-of-coordination-and-string-processing-and-">Union of Coordination and String Processing and …</h2>
+<p>O/Ss are just libraries.</p>
+
+<p>Windows, MacOS, Linux are just applications.</p>
+
+<p>The <em>problems</em> that Windows, MacOS and Linux must solve are different from the problems that most apps need to solve.</p>
+
+<p>Not every app should have all of the operating system principles built-in, e.g. not every app needs memory sharing and time-sharing.</p>
+
+<p>Some apps use the concurrent programming paradigm.  This should not mean that they must include all of O/S-style threading.</p>
+<h1 id="pipelines-vs-isolation">Pipelines vs. Isolation</h1>
+<p>UNIX popularized pipelines of isolated components.</p>
+
+<p>These advances have been, unfortunately, overlooked due to</p>
+<ul>
+  <li>conflation with heavy technologies (e.g. O/Ss)</li>
+  <li>premature optimization (e.g. the ideas of <em>isolation</em> were burned into hardware before they were sufficiently explored, e.g. C had some useful ideas about <em>isolation</em> but these were missed in lieue of C’s system-language features)
+    <h1 id="see-also">See Also</h1>
+    <p><a href="https://vimeo.com/49718712">Concurrency is not Parallelism</a></p>
+  </li>
+</ul>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:alib" role="doc-endnote">
+      <p>Distributed programming is, currently, only addressed by second-class, assembler-like operations and libraries. <a href="#fnref:alib" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ccs" role="doc-endnote">
+      <p>Maybe I mean continuations?. <a href="#fnref:ccs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:soc" role="doc-endnote">
+      <p>Lack of Separation of Concerns <a href="#fnref:soc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

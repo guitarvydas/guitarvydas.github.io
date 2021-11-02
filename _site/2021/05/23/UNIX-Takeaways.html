@@ -86,7 +86,7 @@
 <p>UNIX threads are just ad-hoc implementations of closures in C.</p>
 <h2 id="dependency-spaghetti">Dependency Spaghetti</h2>
 <h2 id="rendezvous">Rendezvous</h2>
-<p>Attempt to corral concurrency by making <em>everything</em> synchronous.</p>
+<p>Rendezvous is an attempt to corral concurrency by making <em>everything</em> synchronous.</p>
 <h2 id="syntax-for-distributed-programming-is-minimal">Syntax for Distributed Programming is Minimal</h2>
 <p>The UNIX shell syntax for distributed programming is muddied by the inclusion of many other features<sup id="fnref:soc" role="doc-noteref"><a href="#fn:soc" class="footnote">3</a></sup>.</p>
 
@@ -94,6 +94,9 @@
 <p>UNIX contains several fundamental advances in PL features (e.g. |, &amp;, fork, etc).</p>
 
 <p>These PL advances have, unfortunately, been conflated with Operating Systems and have largely been ignored in PL designs.</p>
+
+<p>N.B. Pipelines of functions are not the same as pipelines of isolated components.</p>
+
 <h2 id="union-of-coordination-and-string-processing-and-">Union of Coordination and String Processing and …</h2>
 <p>O/Ss are just libraries.</p>
 
@@ -105,14 +108,14 @@
 
 <p>Some apps use the concurrent programming paradigm.  This should not mean that they must include all of O/S-style threading.</p>
 <h1 id="pipelines-vs-isolation">Pipelines vs. Isolation</h1>
-<p>UNIX popularize pipelines of isolated components.</p>
+<p>UNIX popularized pipelines of isolated components.</p>
 
 <p>These advances have been, unfortunately, overlooked due to</p>
 <ul>
   <li>conflation with heavy technologies (e.g. O/Ss)</li>
   <li>premature optimization (e.g. the ideas of <em>isolation</em> were burned into hardware before they were sufficiently explored, e.g. C had some useful ideas about <em>isolation</em> but these were missed in lieue of C’s system-language features)
     <h1 id="see-also">See Also</h1>
-    <p>Concurrency is not Parallelism - Rob Pike</p>
+    <p><a href="https://vimeo.com/49718712">Concurrency is not Parallelism</a></p>
   </li>
 </ul>
 
@@ -128,7 +131,7 @@
       <p>Distributed programming is, currently, only addressed by second-class, assembler-like operations and libraries. <a href="#fnref:alib" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:ccs" role="doc-endnote">
-      <p>Maybe I mean /CCs?. <a href="#fnref:ccs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p>Maybe I mean continuations?. <a href="#fnref:ccs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:soc" role="doc-endnote">
       <p>Lack of Separation of Concerns <a href="#fnref:soc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>

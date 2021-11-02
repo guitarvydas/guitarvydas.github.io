@@ -1,0 +1,113 @@
+I"{<h1 id="overview">Overview</h1>
+
+<p>A very, very simple example of a typed packet.</p>
+
+<h1 id="input">Input</h1>
+<p>input: 4 bytes</p>
+<h1 id="output">Output</h1>
+<p>output: int64</p>
+
+<h1 id="initial-verification">Initial Verification:</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if there are 4 bytes remaining in the stream
+then
+  grab the next 4 bytes
+else
+  declare error
+end if
+wrap header and trailer onto the 4 bytes
+</code></pre></div></div>
+
+<h1 id="tags">Tags</h1>
+
+<p>tag = flexible number of bytes, last byte has low bit set</p>
+
+<p>for example</p>
+
+<p><code class="language-plaintext highlighter-rouge">int8 =  00000001</code><br />
+<code class="language-plaintext highlighter-rouge">int16 = 00000011</code><br />
+<code class="language-plaintext highlighter-rouge">int32 = 00000101</code><br />
+<code class="language-plaintext highlighter-rouge">int64 = 00000111</code></p>
+
+<p>See early dynamically typed languages for ideas on how best to arrange tags.</p>
+
+<p>See, also, Huffman encoding.</p>
+
+<p>See, also, network packet layout.</p>
+
+<h1 id="physical-layer">Physical Layer</h1>
+
+<p>The <em>physical layer</em> carries <em>bytes</em> from one Component to another.</p>
+
+<p>Each packet has a header and a trailer, in the form of flexi-tags.</p>
+
+<ul>
+  <li>header (array of bytes terminated by low bit set)</li>
+  <li>payload - array of bytes</li>
+  <li>trailer - must match the head (exactly)</li>
+</ul>
+
+<h1 id="ecc">ECC</h1>
+
+<p>ECC means Error Correcting Code.</p>
+
+<p>We can check the packets using a variety of techniques, at a layer <em>above</em> the physical layer.</p>
+
+<h1 id="producing-output">Producing Output</h1>
+
+<p>In this example, we produce 6 bytes (header, 4 bytes, trailer)</p>
+
+<p><code class="language-plaintext highlighter-rouge">0x07, ??, ??, ??, ??, 0x07</code></p>
+
+<p>output of this stage = 6 bytes</p>
+
+<h1 id="network-packets">Network Packets</h1>
+
+<p>Note the similarities between this scheme and network packets.</p>
+
+<h1 id="osi-model">OSI Model</h1>
+
+<p>A useful starting point might be the OSI Model for data packets.</p>
+
+<h1 id="validotor-components">Validotor Components</h1>
+
+<p>Some Components “do something” and others simply perform type-checking.</p>
+
+<p>Today, we chop type-checking up into two pieces:</p>
+
+<ol>
+  <li>input validtation</li>
+  <li>type checking.</li>
+</ol>
+
+<h1 id="efficiency">Efficiency</h1>
+
+<p>This scheme appears to be inefficient, except when compared to passing JSON character data around in a network.</p>
+
+<h1 id="optimization">Optimization</h1>
+
+<p>Is it possible to optimize this model?</p>
+
+<p>We simply perform type-checks in the PE<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> (at “compile time”) as we hook Components up.</p>
+
+<p>This kind of optimization is nothing new.</p>
+
+<p>We simply move “compile time” into the PE.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Programming Environment. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>PFR and PF (Parsing Find and Replace) | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="PFR and PF (Parsing Find and Replace)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Overview PFR is a command-line find-and-replace utility that uses PEG parsing instead of REGEXP. PFR outputs the resulting (modified input) file to stdout." />
+<meta property="og:description" content="Overview PFR is a command-line find-and-replace utility that uses PEG parsing instead of REGEXP. PFR outputs the resulting (modified input) file to stdout." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/10/14/PFR-and-PF.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/10/14/PFR-and-PF.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-14T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PFR and PF (Parsing Find and Replace)" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/10/14/PFR-and-PF.html","@type":"BlogPosting","description":"Overview PFR is a command-line find-and-replace utility that uses PEG parsing instead of REGEXP. PFR outputs the resulting (modified input) file to stdout.","dateModified":"2021-10-14T00:00:00-04:00","datePublished":"2021-10-14T00:00:00-04:00","headline":"PFR and PF (Parsing Find and Replace)","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/10/14/PFR-and-PF.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">PFR and PF (Parsing Find and Replace)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-14T00:00:00-04:00" itemprop="datePublished">Oct 14, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="overview">Overview</h1>
+<p><u>PFR</u> is a command-line find-and-replace utility that uses PEG parsing instead of REGEXP.  <u>PFR</u> outputs the resulting (modified input) file to stdout.</p>
+
+<p><u>PF</u> is a command-line find utility that uses PEG parsing instead of REGEXP (like GREP, except with parsing). <u>PF</u> merely prints the names of the matching files on stdout.</p>
+
+<h1 id="usage">Usage</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pfr source-filename grammar-filename action-filename [support.js] [t] [v]
+pf source-filename grammar-filename
+</code></pre></div></div>
+
+<p>The 3 files contain text.</p>
+
+<p><em>Source-filename</em> refers to a file which contains arbitrary text which is to-be-parsed.</p>
+
+<p><em>Grammar-filename</em> refers to a file which contains a grammar specification in <em>Ohm-JS</em> format.</p>
+
+<p><em>Action-filename</em> refers to a file which contains an action specification in <em>Glue</em> format.</p>
+
+<p><em>Support.js</em> [optional] contains functions that are used by the action rules (only required if action rules call-out to support functions ; not needed in simple use-cases). Default: support.js is not used and not read.</p>
+
+<p><em>t</em> [optional] lower-case ‘t’ as the 5th argument turns on rule tracing.  Default: tracing disabled.</p>
+
+<p><em>v</em> [optional] lower-case ‘v’ as the 6th argument turns on display of generated action code.  Default: displaying disabled.</p>
+
+<h1 id="code">Code</h1>
+
+<p><a href="https://github.com/guitarvydas/parse">github</a></p>
+
+<p>PFR and PF are shell scripts (Bash) contained in that directory.  Put them on your PATH.</p>
+
+<h1 id="workflow">Workflow</h1>
+
+<p>[<em>This section doesn’t belong in the final PFR/PF man page, but the tools are young…</em>]</p>
+
+<p>A workflow that works best for me is:</p>
+
+<ol>
+  <li>
+    <p>Use the <a href="https://ohmlang.github.io/editor/">Ohm-Editor</a> to build and debug the grammar</p>
+  </li>
+  <li>
+    <p>Write a “vanilla” action spec that simply outputs what is input (“identity”) ; note that if you use <em>syntactic rules</em> instead of <em>lexical rules</em> in the grammar, the output will omit spacing (that’s OK, you just need to be aware of this ; the only way to get a pure identity grammar is to use syntactic rules only (not necessary))</p>
+  </li>
+  <li>
+    <p>Modify the <em>identity</em> action spec to suit your needs.</p>
+  </li>
+</ol>
+
+<h1 id="appendix---ohm-js-format">Appendix - Ohm-JS Format</h1>
+
+<p>See <a href="https://github.com/harc/ohm/blob/master/doc/syntax-reference.md">Ohm-JS Syntax</a>.</p>
+
+<h1 id="appendix---glue-format">Appendix - Glue Format</h1>
+
+<p>See <a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a>.</p>
+
+<p>See <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Overview</a>.</p>
+
+<h1 id="appendix---sample-grammars-and-actions">Appendix - Sample Grammars and Actions</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">ABC Glue</a> (uses the <code class="language-plaintext highlighter-rouge">ftranpile()</code> function - a precursor to <code class="language-plaintext highlighter-rouge">PFR</code> - with a simple<code class="language-plaintext highlighter-rouge">.ohm</code> file and a simple <code class="language-plaintext highlighter-rouge">.glue</code> file (action spec))</p>
+
+<p><a href="https://github.com/guitarvydas/firstclasscomments">first class comments</a> (this project was a quickie - one weekend - entry in the language jam ; the current versions of <code class="language-plaintext highlighter-rouge">sequence.js</code> and <code class="language-plaintext highlighter-rouge">details.js</code> contain the pre-cursor of <code class="language-plaintext highlighter-rouge">PFR</code> ; each of these contains references to multiple <code class="language-plaintext highlighter-rouge">.ohm</code> files and to multiple <code class="language-plaintext highlighter-rouge">.glue</code> files (action specs))</p>
+
+<p>A sample (very simple) grammar specification from ABC Glue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABCgrok {
+TopLevel = Assignment+
+
+  Assignment =   Variable "=" Expression -- complex
+               | Variable "=" number -- simple
+  Expression = Variable "+" Variable
+
+    Variable = "a" .. "z"
+    number = dig+
+    dig = "0" .. "9"
+}
+</code></pre></div></div>
+
+<p>In this example, there are 7 grammar rules</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TopLevel</code> is one-or-more Assignments</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_complex</code> is a <code class="language-plaintext highlighter-rouge">Variable</code>, <code class="language-plaintext highlighter-rouge">=</code>and an <code class="language-plaintext highlighter-rouge">Expression</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_simple</code> is a <code class="language-plaintext highlighter-rouge">Variable</code>, <code class="language-plaintext highlighter-rouge">=</code>and a <code class="language-plaintext highlighter-rouge">number</code></li>
+  <li>A <code class="language-plaintext highlighter-rouge">Variable</code> is a single lower case letter, from<code class="language-plaintext highlighter-rouge">a</code> through <code class="language-plaintext highlighter-rouge">z</code></li>
+  <li>A <code class="language-plaintext highlighter-rouge">number</code> is one-or-more <code class="language-plaintext highlighter-rouge">dig</code>s</li>
+  <li>A <code class="language-plaintext highlighter-rouge">dig</code> is a single character <code class="language-plaintext highlighter-rouge">0</code> through <code class="language-plaintext highlighter-rouge">9</code></li>
+</ul>
+
+<p>A sample action specification (aka Glue):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TopLevel [@assignments] = [[${console.log (assignments)}]]
+Assignment_complex [v keq e] = [[var ${v} = ${e};\n]]
+Assignment_simple [v keq n] = [[var ${v} = ${n};\n]]
+Expression [v1 kplus v2] = [[${v1} + ${v2}]]
+Variable [c] = [[${c}]]
+number [@digits] = [[${digits}]]
+dig [c] = [[${c}]]
+</code></pre></div></div>
+
+<p>One Action rule for each grammar rule.</p>
+
+<p>The Action rules must have the same name as the grammar rules.</p>
+
+<p>Each rule creates and returns one string (the string might be empty).</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TopLevel</code> accepts an <code class="language-plaintext highlighter-rouge">iterator</code> node called <code class="language-plaintext highlighter-rouge">assignments</code>, then calls <code class="language-plaintext highlighter-rouge">console.log()</code> to print out the assignments.</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_complex</code> takes three parameters <code class="language-plaintext highlighter-rouge">v</code>, <code class="language-plaintext highlighter-rouge">keq</code>and <code class="language-plaintext highlighter-rouge">e</code> which represent the sub-matches in the Assignment_complex grammar rule, then returns the string <code class="language-plaintext highlighter-rouge">var ${v} = ${e};</code> followed by a newline ; ${v} is expanded to be the text of the <code class="language-plaintext highlighter-rouge">var</code> parameter, ${e} is expanded to be the text of the <code class="language-plaintext highlighter-rouge">e</code> parameter, the parameter called <code class="language-plaintext highlighter-rouge">keq</code> is ignored)</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_simple </code>takes three parameters <code class="language-plaintext highlighter-rouge">v</code>, <code class="language-plaintext highlighter-rouge">keq</code>and <code class="language-plaintext highlighter-rouge">n</code> and returns the string <code class="language-plaintext highlighter-rouge">var ${v} = ${n}</code> followed by a newline, the parameter <code class="language-plaintext highlighter-rouge">keq</code> is ignored</li>
+  <li><code class="language-plaintext highlighter-rouge">Variable</code> takes three parameters <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">kplus</code> and <code class="language-plaintext highlighter-rouge">v2</code> and returns a plus statement (ignoring the parameter <code class="language-plaintext highlighter-rouge">kplus</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">number</code> takes an iteration node containing all of the <code class="language-plaintext highlighter-rouge">dig</code>s and returns a string containing the digits (the iteration node is collapsed automatically to make a single string)</li>
+  <li><code class="language-plaintext highlighter-rouge">dig</code> takes one parameter <code class="language-plaintext highlighter-rouge">c</code> and returns a string of length 1 containing the character.</li>
+</ul>
+
+<h1 id="future">Future</h1>
+
+<p>These commands should deal with <em>stdin</em>, <em>stdout</em> and <em>stderr</em> in the usual UNIX® style.  Instead, these commands currently require filenames on the command line.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://github.com/harc/ohm/blob/master/doc/syntax-reference.md">Ohm-JS Syntax</a>.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a>.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Overview</a>.</p>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents as of Sept 23, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2021/10/14/PFR-and-PF.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

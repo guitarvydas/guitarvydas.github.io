@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Manifesto | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Manifesto" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The main themes of these essays are:" />
+<meta property="og:description" content="The main themes of these essays are:" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/09/23/Manifesto.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/09/23/Manifesto.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-23T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Manifesto" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/09/23/Manifesto.html","@type":"BlogPosting","description":"The main themes of these essays are:","dateModified":"2021-09-23T00:00:00-04:00","datePublished":"2021-09-23T00:00:00-04:00","headline":"Manifesto","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/09/23/Manifesto.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Manifesto</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-23T00:00:00-04:00" itemprop="datePublished">Sep 23, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>The main themes of these essays are:</p>
+
+<ul>
+  <li><u>Notations</u> - dividing work up into small chunks and giving each chunk its own mini-language.</li>
+  <li><u>Software Architecture</u> - It is my feeling that most existing programming languages are geared towards implementation of details instead of description of Software Architecture.  For example, any language that requires the programmer to describe types or to use an operator, such as <code class="language-plaintext highlighter-rouge">+</code>, is a language of implementation details.  I favour the use of dataless languages for describing Software Architectures.  I use the name DI - Design Intent - when discussing pure Software Architecture devoid of implementation details.</li>
+  <li><u>DaS</u> - Diagrams as Syntax.  There is no good reason why programming languages should not be built using hybrids of diagrams and text.  In fact, most Software Architectures start out life as diagrams on whiteboards.  Parsing and compiling diagrams is at least as easy as parsing and compiling text.  I strive to show the basics of doing so.  (FYI - DaS is not “Visual Programming”).</li>
+  <li><u>Asynchronous Software Components</u> - Snapping software together like LEGO® blocks<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">1</a></sup>.</li>
+  <li><u>Concurrency</u> - Computers are concurrent.  Most people understand concurrency.  Children learn hard realtime notations at an early age, e.g. music lessons.  Programmers have tried to force computing into cubby-holes using only synchronous methods, which has caused a great deal of accidental complexity.</li>
+  <li><u>Removing Dependencies</u> - Programmers cannot “plug” components together if the components contain dependencies on other components.  We see problems manifest themselves with the use of code libraries and APIs.  Tools (like <code class="language-plaintext highlighter-rouge">npm</code> and <code class="language-plaintext highlighter-rouge">make</code>) that help manage dependencies only help in overlooking the elephant in the room.</li>
+  <li><u>Simplicity</u> - Formal methods and mathematical notation were supposed to make it “easier” to “reason about programs”.  I think that we’ve hit an asymptote where formal methods are actually making it harder - than necessary - to reason about programs.  Most programmers think that multitasking is a difficult problem, while I feel that it is easy<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.  I argue that the main reason for this problem of anti-simplicity is the (failed) idea that we need to use only a single programming language and that we must force-fit every problem into that single language.  I favour the use of multiple notations for a given problem.  I think that technologies like PEG<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup>, make it possible to invent notations rapidly and to change the way we think about programming.  I argue that we need to discard the notion of GPLs - General Purpose Languages - and focus on <em>paradigms</em> and on the <em>problems-at-hand</em>.</li>
+  <li><u>Isolation</u> - Isolation between components is more important than formal proofs, statelessness and all of the other buzzwords.  Isolation is not obvious to achieve - for example, calling a function by using its name is anti-isolationist.</li>
+  <li><u>Programs that write programs</u> - I think that we need to invent languages and syntaxes that cater to machine-readability, and, we need to extend compiler-ism into more general problem solving and computing.  Compilers are programs that write programs - their input is HLL syntax and their output is in the form of triples.  Compiler technology can be extended to transpiler technology, e.g. notations (little languages) that transpile to Python/JS/etc.</li>
+  <li><u>Computers are machines</u>.  Machines do the boring, repetitive work, humans do the thinking.</li>
+  <li><u>Computers Are More Than Just Calculators</u>.  Computers are machines that can perform sequences of operations (functions of time) and control other machines, as well as calculating things.</li>
+</ul>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>If I were to highlight certain articles, I would choose:</p>
+
+<ul>
+  <li><a href="https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html">Software Development Roles</a></li>
+  <li><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">Call return spaghetti</a></li>
+  <li><a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">Failure Driven Design</a></li>
+  <li><a href="https://guitarvydas.github.io/2021/07/06/Asynchronous-Thinking.html">Asynchronous Thinking</a></li>
+  <li><a href="https://guitarvydas.github.io/2020/12/25/The-ALGOL-Bottleneck.html">The ALGOL bottleneck</a></li>
+</ul>
+
+<p>but, then, I already know what I mean.</p>
+
+<p>YMMV.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents</a></p>
+
+<p><a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:2" role="doc-endnote">
+      <p>The fact that current technologies (libraries, objects, functions, etc.) don’t give us snap-ability raises interesting questions. For example, our view of a flat soup of multiple types inhibits snap-ability. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>I spent most of my working life designing and building embedded computing solutions. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>PEG is Parsing Expression Grammars.  I like Ohm-JS the best, at present, https://github.com/harc/ohm <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/09/23/Manifesto.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
