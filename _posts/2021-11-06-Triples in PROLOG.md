@@ -22,6 +22,12 @@ triple(relation,subject,object).
 
 I am going to try this new format for a while...
 
+I'm going to use the keyword `fact` to denote a triple.
+
+```
+fact(relation,subject,object).
+```
+
 # SWIPL Dicts
 
 SWIPL includes an extension to classical PROLOG, in the form of [dict objects](https://www.swi-prolog.org/pldoc/man?section=bidicts).
