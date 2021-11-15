@@ -19,8 +19,8 @@ Programmers do not create project plans for using REGEXP.  They just use REGEXP.
 At what point do you stop planning and Just Use the thing?
 
 I don’t know, but I see a chasm between: 
-1. straight-forward programming to solve a problem (using REGEXPs as a one tool, along with other tools)
-2. embarking on a mega-project to build a woo-woo scary app like a compiler[^1].
+1. straight-forward programming to solve a problem (using REGEXPs as one tool, along with other tools)
+2. embarking on a mega-project to build apparently woo-woo scary apps like compilers[^1].
 
 [^1]: Compilers are not difficult to build.  They are simply big apps that contain lots of detail.
 
