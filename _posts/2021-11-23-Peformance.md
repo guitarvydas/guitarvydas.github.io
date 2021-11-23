@@ -1,6 +1,6 @@
 
 # Synopsis
-This note advocates approaching computer-based product development as 2 issues \
+This note advocates approaching computer-based product development as 2 issues
 1. design
 2. production.
 
@@ -138,34 +138,36 @@ PEG parsing[^5] provides a way to create syntax *skins* over existing languages.
 Creating different languages (better yet: creating IDEs), makes it possible to fine-tune the different languages while eschewing language bloat.
 
 # Appendix - PEG Applied To WASM
-https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html
-https://github.com/guitarvydas/arithmetic
+POC for PEG-to-WASM...
+
+[WASM Arithmentic Transpiler](https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html)
+[WASM Arithmetic github[(https://github.com/guitarvydas/arithmetic)
 
 # Appendix - PEG Applied to Transpilation
-https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html
+[PEG vs Other Pattern Matchers](https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html)
 (see TOC for further discussion)
 # Appendix - PEG Applied to PEG
 https://guitarvydas.github.io/2021/07/12/Transpilation.html
 # Appendix - Two Syntaxes For Every Language
-https://guitarvydas.github.io/2021/11/14/Two-Syntaxes-For-Each-GPL.html
+[Two Syntaxes For Every GPL](https://guitarvydas.github.io/2021/11/14/Two-Syntaxes-For-Each-GPL.html)
 # Appendix - Software Development Roles
-https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html
+[Software Development Roles](https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html)
 # Appendix - Call Return Spaghetti
 Understanding concurrency.
 
 Breaking CALL/RETURN into separate parts.
 
-https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html
+[Call Return Spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html)
 # Appendix - Handmade Manifesto
  [Handmade Manifesto](https://handmade.network/manifesto)
  # Appendix - Ohm-JS
- https://github.com/harc/ohm
- https://ohmlang.github.io
- https://guitarvydas.github.io/2021/08/30/Ohm-JS.html
+[Ohm-JS](https://github.com/harc/ohm)
+[Ohm](https://ohmlang.github.io)
+[Musings About Ohm-JS](https://guitarvydas.github.io/2021/08/30/Ohm-JS.html)
  # Appendix - My Goals
- https://guitarvydas.github.io/2021/09/23/Manifesto.html
+ [Manifesto](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
  # Appendix - Worlds
- https://guitarvydas.github.io/assets/worlds.pdf
+[Worlds Paper Thoughts](https://guitarvydas.github.io/assets/worlds.pdf)
 # Appendix - References
-https://guitarvydas.github.io/2021/01/14/References.html
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
 [TOC as of Sept. 17, 2021](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
