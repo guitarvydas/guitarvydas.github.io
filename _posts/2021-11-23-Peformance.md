@@ -157,17 +157,22 @@ Understanding concurrency.
 
 Breaking CALL/RETURN into separate parts.
 
-[Call Return Spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html)
+[Call Return Spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html
+
 # Appendix - Handmade Manifesto
  [Handmade Manifesto](https://handmade.network/manifesto)
- # Appendix - Ohm-JS
+
+# Appendix - Ohm-JS
 [Ohm-JS](https://github.com/harc/ohm)
 [Ohm](https://ohmlang.github.io)
 [Musings About Ohm-JS](https://guitarvydas.github.io/2021/08/30/Ohm-JS.html)
- # Appendix - My Goals
+
+# Appendix - My Goals
  [Manifesto](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
- # Appendix - Worlds
+
+# Appendix - Worlds
 [Worlds Paper Thoughts](https://guitarvydas.github.io/assets/worlds.pdf)
+
 # Appendix - References
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [TOC as of Sept. 17, 2021](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
