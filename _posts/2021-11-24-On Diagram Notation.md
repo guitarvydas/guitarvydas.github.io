@@ -2,7 +2,11 @@
 layout: post
 title:  "On Diagram Notation"
 ---
-![[Diagram Notation 1.svg]]
+
+![img](https://raw.githubusercontent.com/guitarvydas/guitarvydas.github.io/9158b4ab99db47c180baadeb54442d0feec8b960/_posts/Diagram%20Notation.svg)
+
+
+
 # See Also
 
 [Blog](https://guitarvydas.github.io)
