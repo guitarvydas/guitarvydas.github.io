@@ -240,7 +240,7 @@ The Handmade Network's manifesto opposes language bloat.  The above begins to ad
 POC for PEG-to-WASM...
 
 [WASM Arithmentic Transpiler](https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html)
-[WASM Arithmetic github[(https://github.com/guitarvydas/arithmetic)
+[WASM Arithmetic github](https://github.com/guitarvydas/arithmetic)
 
 # Appendix - PEG Applied to Transpilation
 [PEG vs Other Pattern Matchers](https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html)
@@ -262,7 +262,7 @@ This article does not directly show *how* to build concurrent programs, but, if 
 
 [^21]: See Rob Pike's [Concurrency is not Parallelism](https://www.youtube.com/watch?v=oV9rvDllKEg)
 
-[Call Return Spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html
+[Call Return Spaghetti](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html)
 
 # Appendix - Handmade Manifesto
  [Handmade Manifesto](https://handmade.network/manifesto)
