@@ -1,0 +1,123 @@
+I"<h1 id="synopsis">Synopsis</h1>
+<p>Some problems are large and lend themselves to being viewed from more than one perspective.</p>
+
+<p>Mechanical Engineers know how to create objects using multiple perspectives.  They are taught to make drawings with 3 views:</p>
+<ul>
+  <li>Front view</li>
+  <li>Top view</li>
+  <li>Side view.</li>
+</ul>
+
+<p>Compiler building falls into the multiple-perspective category.  We break down the act of building compilers into at least a few categories, like</p>
+<ul>
+  <li>scanning</li>
+  <li>parsing</li>
+  <li>semantic checking</li>
+  <li>optimizing</li>
+  <li>code emitting</li>
+  <li>…</li>
+</ul>
+
+<p>Each <em>view</em> of a compiler app tends to need its own paradigm, its own notation, its own DSL.  We have DSL tools for building lexers (e.g. LEX), tools for building parsers (YACC, ANTLR), tools for building code emitters, etc.</p>
+<h1 id="complexity">Complexity</h1>
+<p>One kind of complexity comes from the act of squishing multiple views into a single paradigm, e.g. by using only a single General Programming Language, like Python, Javascript, C++, Haskell, etc.</p>
+
+<p>For example, it is <em>possible</em> to build scanners in Assembler, but it is more convenient to use DSLs<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> to describe scanners in higher-level concepts.</p>
+
+<h1 id="rapid-dsl-design-and-implementation">Rapid DSL Design and Implementation</h1>
+<p>Currently, it seems to take a long time (weeks, months, years) to build DSLs.</p>
+
+<p>Wouldn’t it be nice to be able to slap DSLs together in less than a day?</p>
+
+<p>If such rapidly-designed DSLs don’t work well, we should be able to</p>
+<ul>
+  <li>rapidly extend them, or,</li>
+  <li>throw them away and start again.</li>
+</ul>
+
+<h3 id="peg">PEG</h3>
+<p>Parsing Expression Grammars - PEG - are a technology that makes it much easier to design and build DSLs.</p>
+<h4 id="ohm-js-and-ohm-editor">Ohm-JS and Ohm-Editor</h4>
+<p>Currently, my favourite PEG is a language called <a href="https://ohmlang.github.io">Ohm</a>.</p>
+
+<p>I use the variant called <a href="https://github.com/harc/ohm">Ohm-JS</a>.</p>
+
+<p>I build up and test grammars using its <a href="https://ohmlang.github.io/editor/">Ohm-Editor</a>.</p>
+
+<h4 id="ohm-editor">Ohm-Editor</h4>
+<p>Ohm-editor is like a REGEX tester<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<p>Ohm-editor gives you a heads-up display of a grammar, test code snippets and the resulting AST<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> for a given code snippet.</p>
+
+<p>This combination makes it very easy to design and debug grammars.</p>
+
+<p>PEG makes it easy to specify grammars.  Ohm-JS + Ohm-Editor is a better PEG toolkit.</p>
+
+<h1 id="pfr-glue-transpilation-helper">PFR, Glue, Transpilation-Helper</h1>
+<p>I now build transpilers (source-to-source converters) instead of compilers.</p>
+
+<p>I found that Transpilation is a subset of what Ohm-JS can do.</p>
+
+<p>I found that JavaScript <em>template strings</em> are about all that is needed to build most transpilers.</p>
+
+<p>I built several transpilers using Ohm-JS and template strings.</p>
+
+<p>I found myself writing the same code over and over again and, finally, broke down and wrote a light-weight DSL in Ohm-JS for helping me write transpilers.</p>
+
+<p>That was Glue. It’s a light-weight DSL for writing Ohm-JS semantics code (that focuses on building strings).</p>
+
+<p>After several more iterations, I built <a href="https://guitarvydas.github.io/2021/10/14/PFR-and-PF.html">PFR</a>, which uses Ohm-JS (a subset of Ohm-JS) plus Glue to use the combined capabilities on the command line.</p>
+
+<p>I use bash (or any of the /bin/*sh family) to build pipelines of transpilers.</p>
+
+<p>I find this to be a productive workflow. For example, I am currently trying to bundle up d2f and f2j - diagram-to-factbase, factbase-to-JSON transpiler tools mostly consisting of bash scripts using PFR, and, some grammars and some semantics (Glue) files.</p>
+
+<p>I suggest that this is a very convenient workflow for building transpilers (but then, I’m biased :-).</p>
+<h1 id="appendix---history">Appendix - History</h1>
+<p>Parsers fall into two categories:</p>
+<ol>
+  <li>Bottom-Up</li>
+  <li>Top-Down (aka Recursive Descent).</li>
+</ol>
+
+<p>Recursive Descent parsers are easy to build manually.  As the name suggests, recursive functions are used.</p>
+
+<p>Bottom-up parsers are harder to build.</p>
+
+<p>Tools, like YACC, transform parser specifications into state machines.</p>
+
+<p>Bottom-up parsers can only parse restricted languages.</p>
+
+<p>Bottom-up parsers have the property that they can be analyzed mathematically and various properties can be “proven” about them and the languages that they can parse<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>.</p>
+
+<h3 id="ssl">S/SL</h3>
+<p><a href="https://archive.org/details/technicalreportc118univ">S/SL</a> (Syntax / Semantic Language) is a DSL for defining top-down parsers.</p>
+<h3 id="txl">TXL</h3>
+<p><a href="txl.ca">TXL</a> is a functional DSL for layering new syntaxes onto existing languages.</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents as of Sept 17, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Regular expressions are DSLs for describing scanners. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://regex101.com">REGEX tester</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Detail: Technically, the displayed tree is a CST.  ASTs break down into two kinds - (1) AST and (2) CST (abstract and concrete, resp.). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>The restricted languages are called LR(k) languages. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

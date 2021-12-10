@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>On Designing a DSL | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="On Designing a DSL" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Re: “Designing a DSL for accounting:…” (see appendix)." />
+<meta property="og:description" content="Re: “Designing a DSL for accounting:…” (see appendix)." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/11/13/On-Designing-a-DSL.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/11/13/On-Designing-a-DSL.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-13T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="On Designing a DSL" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/11/13/On-Designing-a-DSL.html","@type":"BlogPosting","description":"Re: “Designing a DSL for accounting:…” (see appendix).","dateModified":"2021-11-13T00:00:00-05:00","datePublished":"2021-11-13T00:00:00-05:00","headline":"On Designing a DSL","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/11/13/On-Designing-a-DSL.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">On Designing a DSL</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-11-13T00:00:00-05:00" itemprop="datePublished">Nov 13, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Re: “Designing a DSL for accounting:…” (see appendix).</p>
+
+<p>The article shows how to build a “project plan” for creating a new DSL.</p>
+
+<p>I think that that is too formal and propagates the notion that DSLs are difficult to build.</p>
+
+<p>Yet, many people build and use DSLs without realizing it.  For example, by using REGEXP.</p>
+
+<p>REGEXP is a DSL.</p>
+
+<p>Regular expressions are often used to specify patterns that make up other (usually trivial) DSLs.</p>
+
+<p>Programmers do not create project plans for using REGEXP.  They just use REGEXP.</p>
+
+<p>At what point do you stop planning and Just Use the thing?</p>
+
+<p>I don’t know, but I see a chasm between:</p>
+<ol>
+  <li>straight-forward programming to solve a problem (using REGEXPs as one tool, along with other tools)</li>
+  <li>embarking on a mega-project to build apparently woo-woo scary apps like compilers<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</li>
+</ol>
+
+<p>Currently, PEG falls into the scary realm and REGEXP doesn’t.</p>
+
+<p>I think that PEG should be non-scary, like REGEXP.</p>
+
+<p>The differences between PEG and REGEXP are:</p>
+
+<p>1) PEG needs many lines of code to describe a text-match and transformation</p>
+
+<p>2) PEG is more powerful than REGEXP, because PEG provides subroutines and REGEXP doesn’t.</p>
+
+<p>I think that the ideal situation for programming would be to use an IDE that works like a heads-up display.</p>
+
+<p>One window for the grammar, another for the glue-ing (transforming the matching bits) and various other windows for things like debugging, etc.</p>
+
+<p>When more than one DSL is used for one problem, the heads-up display would contain more windows.</p>
+
+<h1 id="batch-edit">Batch Edit</h1>
+<p>Thought: maybe I think of PEG in terms of “batch edit”.</p>
+
+<h1 id="appendix">Appendix</h1>
+<p><a href="https://click.convertkit-mail.com/e5u4m3mqx7u0u294r7f8/7qh7h8h4gg5knmbz/aHR0cHM6Ly90b21hc3NldHRpLm1lL2ZpbmFuY2lhbC1hY2NvdW50aW5nLWRzbC8_dXRtX3NvdXJjZT1uZXdzbGV0dGVyJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdzZXF1ZW5jZQ==,">Designing a DSL for accounting: …</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">Table of Contents as of Sept 17, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Compilers are not difficult to build.  They are simply big apps that contain lots of detail. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/11/13/On-Designing-a-DSL.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
