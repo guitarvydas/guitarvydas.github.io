@@ -1,5 +1,5 @@
 # Introduction - LangJam 0002
-Excerpts from Langjam 0002 https://github.com/guitarvydas/jam0002/tree/main/guitarvydas
+[Excerpts from Langjam 0002](https://github.com/guitarvydas/jam0002/tree/main/guitarvydas)
 
 # Theme
 
@@ -14,19 +14,7 @@ Transpile the diagrams to running C code.
 Write a multitasking kernel in C, for event-driven components.
 
 # How to Run This Project
-
-On Mac/Linux:
-
-./run.bash
-
-Files created:
-
--   producer.c
--   consumer.c
--   os.c
--   main.c
--   fb.pl
--   fb.json
+(elided)
 
 # At-A-Glance
 
@@ -80,29 +68,11 @@ Compiling diagrams to running code as easily as compiling text to running progra
 
 # Status
 
--   Plan written ([https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Plan.md](https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Plan.md)
--   Concurrency Pattern Diagrams drawn in draw.io (See below: Diagrams - Discussion) and exported as .SVG
--   C-- transpiler does some transpiling (.cmm files transpiled to -> .c files)
--   Code for very, very simple example written as 4 source files:
-    -   producer.cmm
-    -   consumer.cmm
-    -   os.cmm (Alpha, suspect, not finished compiling yet)
-    -   main.cmm (Alpha, suspect, not compiled yet)
-    -   types.h
-    -   mpos.h (Component message-passing O/S)
--   util.c - support routines for mpos - written, compiled, not tested
--   The above code is in Alpha (POC) state. The code is not fully tested (compile errors in os.c) due to time limitations, but should give the gist of what is intended / possible.
--   PFR tool - "Parsing Find Replace" (built before JAM, ported during JAM)
--   D2F tool - "Diagram to Factbase" (built before JAM, ported during JAM)
--   F2J tool - "Factbase to JSON" (built during JAM)
--   shell scripts to run the above tools (built during JAM)
--   README.md and doc/* (written during JAM)
+(elided)
 
 ## Plan
 
-see [https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Plan.md](https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Plan.md)
-
-obsidian://open?vault=doc&file=Plan
+(elided)
 
 ## Diagrams - Discussion
 
@@ -124,25 +94,7 @@ In this project, a FB (factbase) is a set of triples in the syntax of PROLOG[[1]
 
 ## This Project Uses Existing Technologies
 
-### Ohm-JS
-
-npm install ohm-js@next
-
-### atob
-
-npm install atob
-
-### pako
-
-npm install pako
-
-## Obsidian
-
-for documentation
-
-### Blogs / Articles / Youtube
-
-I leaned on previous work (see blog below).
+(elided)
 
 # C--
 
@@ -268,6 +220,8 @@ Ohm Editor: [https://ohmlang.github.io/editor/](https://ohmlang.github.io/editor
 Ohm: [https://ohmlang.github.io](https://ohmlang.github.io/)
 
 ## Diagrams
+
+https://guitarvydas.github.io/2021/11/24/On-Diagram-Notation.html
 
 See the latest TOC in the blog for related topics.
 
