@@ -16,7 +16,7 @@ DI expresses the Design of a Solution, and, does not delve into details, such as
 
 
 # Memory Re-Use
-Re-use of memory has caused many *accidentail complexities*.  
+Re-use of memory has caused many *accidental complexities*.  
 
 Memory re-use might be a necessary evil for constructing systems using present computer hardware, but, this detail - memory re-use - should not be tangled up in DI.
 
@@ -33,10 +33,14 @@ The third-best garbage-collector is: anything that impinges on the running code,
 
 Memory is now cheap.  Why bother reclaiming it?  
 
-Run-forever servers 
+# Servers Run Forever
+Servers are meant to `run forever`.
 
-# Glib?
+Rhetorical question: what does that mean to GC?  
 
+Rhetorical question: should every app pay to have run-forever-style GC?
+
+# Appendix - See Also
 
 [Blog](https://guitarvydas.github.io)
 [Table of Contents as of Dec. 01, 2021](https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html)

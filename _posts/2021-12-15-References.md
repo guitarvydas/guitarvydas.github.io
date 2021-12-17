@@ -1,3 +1,7 @@
+---
+layout: post
+title:  "References"
+---
 # References
 Peter Lee – Realistic Compiler Generation.  
 - Denotational Semantics in several passes.
@@ -149,5 +153,27 @@ Design of Everyday Things
 [Sleepwalkers](https://en.wikipedia.org/wiki/The_Sleepwalkers_(Koestler_book))
 - examines personalities of people involved in transition from Ptolomaic Universe to Copernican Universe
 - important because it shows how many people are "blind" to simpler theories (e.g. epicycles in Ptolomaic version)
-# Updates
+
+Songwriting
+- anything by Pat Pattison
+- [PatPattison.com](https://www.patpattison.com)
+- tension and release of tension via rhyme choice
+- good songs blend good lyric writing with good music writing (melody, chords)
+- important for understanding choice of words and phrasing (even in technical documentation, IMO)
+- [B-Rhymes](http://www.b-rhymes.com) (perfect rhymes are not always appropriate)
+# Appendix - Updates
 - Dec. 15, 2021 converted from Scrivener to markdown, and, added non-cs references
+
+# Appendix - See Also
+[Blog](https://guitarvydas.github.io)
+[Table of Contents as of Dec. 01, 2021](https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html)
+[Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
