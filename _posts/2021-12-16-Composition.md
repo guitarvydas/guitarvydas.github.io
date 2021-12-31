@@ -3,9 +3,11 @@ layout: post
 title:  "Composition"
 ---
 # Isolation
+[Isolation](./Composition-Isolation.svg)
 ![Isolation](./Composition-Isolation.svg)
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
+[Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
 # Appendix - See Also
 [Blog](https://guitarvydas.github.io)
 [Table of Contents as of Dec. 01, 2021](https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html)
