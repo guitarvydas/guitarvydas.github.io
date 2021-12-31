@@ -1,7 +1,9 @@
 ---
 layout: post
-title:  "Hierarchical Namespaces"
+title:  "FDD In Action"
 ---
+
+"FDD" means "Failure Driven Design".
 
 FDD can prevent future bugs.
 
@@ -97,6 +99,8 @@ Yes, I *could* have written the code correctly in the first place, but that woul
 
 I said what I wanted to say.  Now, using FDD, my only task is to make the computer (transpiler) *do* what I wanted...
 # See Also
+
+[FDD - Failure Driven Design](https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html)
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)

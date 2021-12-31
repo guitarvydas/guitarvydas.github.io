@@ -10,7 +10,7 @@ I mostly work on programmer-tools and lean towards:
 - Ohm-JS - syntax is cheap
 
 # Video
-[Overview video as of Dec. 23, 2021]https://github.com/guitarvydas/Overview/blob/master/Tool-Overview-2021-12-23-at-11.46.12-AM.mp4)
+[Overview video as of Dec. 23, 2021](https://github.com/guitarvydas/Overview/blob/master/Tool-Overview-2021-12-23-at-11.46.12-AM.mp4)
 
 As of Dec. 23, 2021.  
 
