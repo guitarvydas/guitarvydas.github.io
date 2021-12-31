@@ -91,11 +91,12 @@ I believe that Ohm-JS is better than REGEX.
 
 If we look at the [Ohm-JS IDE](https://ohmlang.github.io/editor/), we see the beginnings of what we want in one of the windows of our futuristic IDE.
 
-We would want to augment the IDE with an Ohm-JS replacement window (a replacment rules for every grammar rule in Ohm-JS.  See the [glue tool](https://guitarvydas.github.io/2021/04/11/Glue-Tool.html) for POC-level ideas for a replacement DSL for Ohm-JS programs.
+We would want to augment the IDE with an Ohm-JS replacement window (a replacement rule for every grammar rule in Ohm-JS.  See the [glue tool](https://guitarvydas.github.io/2021/04/11/Glue-Tool.html) for POC-level ideas for a replacement DSL for Ohm-JS programs.
 
-See [DaS Workbench] for POC-level ideas on multi-window, heads-up displays for pattern matching and replacement.   
+See [DaS Workbench](https://guitarvydas.github.io/2021/07/30/Parsing-Diagrams-DaS-Workbench-Overview.html) for POC-level ideas on multi-window, heads-up displays for pattern matching and replacement.   
 
-See [Transpilation](https://guitarvydas.github.io/2021/07/12/Transpilation.html) for POC-level ideas on how to transmogrify PEG into two separate parts.
+See [Transpilation](https://guitarvydas.github.io/2021/07/12/Transpilation.html) for POC-level ideas on how to transmogrify PEG into two separate parts 
+((1) grammar (2) formatting)
 
 
 
