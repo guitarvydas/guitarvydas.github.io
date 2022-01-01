@@ -20,15 +20,21 @@ Brief overview, follows...
 - Case on Type
 - Case on State
 - Case on Data Pattern
+
 # Iteration
+
 # Molecules
 - nested
 - spaghetti
+
 # Energy
 - Control Flow
 	- Synchronous Transfer of Control Flow
 	- Asynchronous Transfer of Control Flow
+
+
 # Composition (Molecules)
+
 # Data
 - Datum (singular)
 - Bag (plural, unordered)
