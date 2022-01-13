@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "SectorLisp"
+title:  "GC in SectorLisp"
 ---
+Another attempt to describe the behaviour of GC in SectorLisp. 
 
-[A youtube of my description of SectorLisp](https://youtu.be/nZWR2ftBoA0)
-[SectorLisp](https://justine.lol/sectorlisp2/)
+This time as an animation (video without sound).
 
-[My github SectorLisp](https://github.com/guitarvydas/sectorlisp)
+Feel free to fast-forward...
+
+[GC](https://youtu.be/TF0FzcBkV60)
+
+Thanks for the feedback...
 
 # See Also
 
@@ -20,4 +24,3 @@ title:  "SectorLisp"
         crossorigin="anonymous" 
         async> 
 </script> 
-
