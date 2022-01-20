@@ -11,10 +11,10 @@ To tack a cell onto the front of a list, mutation is not required, simply CONS a
 
 For example, if you have a list (B C), you can make 2 new lists (A B C) and (D B C) by CONS(A, (B C)) and CONS(D, (B C)).
 
-![List Sharing](Lisp-1-Sharing.svg)
-![Recursion](Lisp-2-Recursion.svg)
-![CDRing Down A List](Lisp-3-CDRing.svg)
-![TCO (Tail Call Optimization)](Lisp-4-TCO.svg)
+![List Sharing](./Lisp-1-Sharing.svg)
+![Recursion](./Lisp-2-Recursion.svg)
+![CDRing Down A List](./Lisp-3-CDRing.svg)
+![TCO (Tail Call Optimization)](./Lisp-4-TCO.svg)
 # See Also
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
