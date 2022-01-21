@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>FDD In Action | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="FDD In Action" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“FDD” means “Failure Driven Design”." />
+<meta property="og:description" content="“FDD” means “Failure Driven Design”." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-24T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="FDD In Action" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html","@type":"BlogPosting","description":"“FDD” means “Failure Driven Design”.","dateModified":"2021-12-24T00:00:00-05:00","datePublished":"2021-12-24T00:00:00-05:00","headline":"FDD In Action","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FDD In Action</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-12-24T00:00:00-05:00" itemprop="datePublished">Dec 24, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>“FDD” means “Failure Driven Design”.</p>
+
+<p>FDD can prevent future bugs.</p>
+
+<p>FDD is like “design rule” checking built into the dev app.</p>
+
+<p>I spent hours tracking down a hoary bug in my logic.</p>
+
+<p>I wrote:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (Kind, Edge, edge)
+… sourceof(Edge, Sender)
+… targetof(Edge, Receiver)
+… (direct_contains, Parent, Edge)
+</code></pre></div></div>
+<p>Which failed silently using PROLOG rules.</p>
+
+<p>The final clause “… (direct_contains, Parent, Edge)” was not fulfufilled due to a bug in my logic - the outer-most container did not have a Parent.</p>
+
+<p>Nothing could prevent me from making this mistake, but, it is possible to prevent <em>other</em> errors of this kind.</p>
+
+<h1 id="what-i-wanted-to-say">What I Wanted to Say</h1>
+<p>I wanted to say:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Forall “… (kind, Edge, edge)”, and, 
+ There must be a fact “… sourceof(Edge, Sender)”, and,
+ There must be a fact “… targetof(Edge, Receiver)”, and,
+ There must be a fact “… (direct_contains, Parent, Edge)”
+else
+ fail loudly
+</code></pre></div></div>
+
+<h1 id="what-i-really-said">What I Really Said</h1>
+
+<p>But, I wrote:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Forall “… (Kind, Edge, edge)”
+ And, if there is a fact “… sourceof(Edge, Sender)”,
+ And, if there is a fact “… targetof(Edge, Receiver)”,
+ And, ifthere is a fact “… (direct_contains, Parent, Edge)”
+ succeed
+</code></pre></div></div>
+<h1 id="whats-the-difference">What’s the Difference?</h1>
+<p>A subtle difference.</p>
+
+<p>The And version silently fails if ANY of the 4 clauses is false.</p>
+
+<p>Subtle bugs are the hardest to find.</p>
+
+<h1 id="preventing-errors-using-fdd">Preventing Errors Using FDD</h1>
+
+<p>Using FDD mentality, I can change the meaning of:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (kind, Edge, edge)
+… sourceof(Edge, Sender)
+… targetof(Edge, Receiver)
+… (direct_contains, Parent, Edge)
+</code></pre></div></div>
+
+<p>To mean what I wanted and simply push a button to regenerate the whole shebang, and, raise errors for any other latent bugs of this nature.</p>
+
+<h2 id="example-design-rule-check">Example Design Rule Check</h2>
+
+<p>I can choose syntax to map to meaning - I might change the generated code to match what I wanted to say.</p>
+
+<p>For example, I might generate code that matched the first clause, then asserted the rest of the clauses (with appropriate error messages), e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (kind, Edge, edge)
+(… sourceof(Edge, Sender)” -&gt; true ; format(user_error, “FAILURE sourceof(Edge,Sender) failed on ~w~n)”, [Edge])
+(… (targetof(Edge, Receiver) -&gt; true ; format(user_error, "FAILURE:targetof(Edge, Receiver) ~w~n)", [Edge])
+(… (direct_contains, Parent, Edge)” -&gt; true ; format(user_error, "FAILURE: direct_contains, Parent, Edge) ~w~n)", [Edge])
+</code></pre></div></div>
+<p>The above code looks horrible and hides the true essence of what I want to say, but, the machine doesn’t care and will check my other code for errors.</p>
+
+<p>I’m using PROLOG (swipl) as <em>assembler</em> and I’m emitting assembler code (PROLOG) to do what I want.</p>
+
+<p>I can modify the DSL syntax, push a button, and have ALL of my code checked.</p>
+
+<p>I don’t need to look at the generated assembler code (PROLOG)<sup id="fnref:30" role="doc-noteref"><a href="#fn:30" class="footnote">1</a></sup>.</p>
+
+<p>Yes, there might be cases where I want to say AND instead of “there must be a fact”.  I will modify (invent) the syntax to handle such cases.  I expect that most of my code is based on “there must be a fact” rules, with AND rules being the exception.  I intend to invent a syntax to express AND rules, and, I will use the FDD transpiler to find those cases for me (in the current code base).</p>
+
+<p>FDD lets me make sweeping changes such as this.</p>
+
+<p>I need to modify the transpiler, then I need to push a button (or invoke <code class="language-plaintext highlighter-rouge">./run.bash</code>).</p>
+
+<p>Not a lot of work, but it captures one of my pervasive errors in logic…</p>
+
+<p>Yes, I <em>could</em> have written the code correctly in the first place, but that would require a lot more thinking on my part (and, probably, a PhD degree).</p>
+
+<p>I said what I wanted to say.  Now, using FDD, my only task is to make the computer (transpiler) <em>do</em> what I wanted…</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">FDD - Failure Driven Design</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:30" role="doc-endnote">
+      <p>The only reason to look at the generated assembler is to debug the transpiler.  Once debugged, no one needs to look at the assembler. <a href="#fnref:30" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/12/24/FDD-In-Action.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

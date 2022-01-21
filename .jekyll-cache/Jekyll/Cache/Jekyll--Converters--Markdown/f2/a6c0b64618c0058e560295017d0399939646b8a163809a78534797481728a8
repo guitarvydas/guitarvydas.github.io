@@ -1,0 +1,106 @@
+I"<p>“FDD” means “Failure Driven Design”.</p>
+
+<p>FDD can prevent future bugs.</p>
+
+<p>FDD is like “design rule” checking built into the dev app.</p>
+
+<p>I spent hours tracking down a hoary bug in my logic.</p>
+
+<p>I wrote:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (Kind, Edge, edge)
+… sourceof(Edge, Sender)
+… targetof(Edge, Receiver)
+… (direct_contains, Parent, Edge)
+</code></pre></div></div>
+<p>Which failed silently using PROLOG rules.</p>
+
+<p>The final clause “… (direct_contains, Parent, Edge)” was not fulfufilled due to a bug in my logic - the outer-most container did not have a Parent.</p>
+
+<p>Nothing could prevent me from making this mistake, but, it is possible to prevent <em>other</em> errors of this kind.</p>
+
+<h1 id="what-i-wanted-to-say">What I Wanted to Say</h1>
+<p>I wanted to say:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Forall “… (kind, Edge, edge)”, and, 
+ There must be a fact “… sourceof(Edge, Sender)”, and,
+ There must be a fact “… targetof(Edge, Receiver)”, and,
+ There must be a fact “… (direct_contains, Parent, Edge)”
+else
+ fail loudly
+</code></pre></div></div>
+
+<h1 id="what-i-really-said">What I Really Said</h1>
+
+<p>But, I wrote:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Forall “… (Kind, Edge, edge)”
+ And, if there is a fact “… sourceof(Edge, Sender)”,
+ And, if there is a fact “… targetof(Edge, Receiver)”,
+ And, ifthere is a fact “… (direct_contains, Parent, Edge)”
+ succeed
+</code></pre></div></div>
+<h1 id="whats-the-difference">What’s the Difference?</h1>
+<p>A subtle difference.</p>
+
+<p>The And version silently fails if ANY of the 4 clauses is false.</p>
+
+<p>Subtle bugs are the hardest to find.</p>
+
+<h1 id="preventing-errors-using-fdd">Preventing Errors Using FDD</h1>
+
+<p>Using FDD mentality, I can change the meaning of:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (kind, Edge, edge)
+… sourceof(Edge, Sender)
+… targetof(Edge, Receiver)
+… (direct_contains, Parent, Edge)
+</code></pre></div></div>
+
+<p>To mean what I wanted and simply push a button to regenerate the whole shebang, and, raise errors for any other latent bugs of this nature.</p>
+
+<h2 id="example-design-rule-check">Example Design Rule Check</h2>
+
+<p>I can choose syntax to map to meaning - I might change the generated code to match what I wanted to say.</p>
+
+<p>For example, I might generate code that matched the first clause, then asserted the rest of the clauses (with appropriate error messages), e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… (kind, Edge, edge)
+(… sourceof(Edge, Sender)” -&gt; true ; format(user_error, “FAILURE sourceof(Edge,Sender) failed on ~w~n)”, [Edge])
+(… (targetof(Edge, Receiver) -&gt; true ; format(user_error, "FAILURE:targetof(Edge, Receiver) ~w~n)", [Edge])
+(… (direct_contains, Parent, Edge)” -&gt; true ; format(user_error, "FAILURE: direct_contains, Parent, Edge) ~w~n)", [Edge])
+</code></pre></div></div>
+<p>The above code looks horrible and hides the true essence of what I want to say, but, the machine doesn’t care and will check my other code for errors.</p>
+
+<p>I’m using PROLOG (swipl) as <em>assembler</em> and I’m emitting assembler code (PROLOG) to do what I want.</p>
+
+<p>I can modify the DSL syntax, push a button, and have ALL of my code checked.</p>
+
+<p>I don’t need to look at the generated assembler code (PROLOG)<sup id="fnref:30" role="doc-noteref"><a href="#fn:30" class="footnote">1</a></sup>.</p>
+
+<p>Yes, there might be cases where I want to say AND instead of “there must be a fact”.  I will modify (invent) the syntax to handle such cases.  I expect that most of my code is based on “there must be a fact” rules, with AND rules being the exception.  I intend to invent a syntax to express AND rules, and, I will use the FDD transpiler to find those cases for me (in the current code base).</p>
+
+<p>FDD lets me make sweeping changes such as this.</p>
+
+<p>I need to modify the transpiler, then I need to push a button (or invoke <code class="language-plaintext highlighter-rouge">./run.bash</code>).</p>
+
+<p>Not a lot of work, but it captures one of my pervasive errors in logic…</p>
+
+<p>Yes, I <em>could</em> have written the code correctly in the first place, but that would require a lot more thinking on my part (and, probably, a PhD degree).</p>
+
+<p>I said what I wanted to say.  Now, using FDD, my only task is to make the computer (transpiler) <em>do</em> what I wanted…</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html">FDD - Failure Driven Design</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html">Table of Contents</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:30" role="doc-endnote">
+      <p>The only reason to look at the generated assembler is to debug the transpiler.  Once debugged, no one needs to look at the assembler. <a href="#fnref:30" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

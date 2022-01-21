@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>IDEs Instead of Programming Languages and Operating Systems | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="IDEs Instead of Programming Languages and Operating Systems" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Goal The goal of programming is to control a computer. Secondary Goals Secondary Goal: Describe Architecture to Other People It is desirable to describe designs to other people." />
+<meta property="og:description" content="The Goal The goal of programming is to control a computer. Secondary Goals Secondary Goal: Describe Architecture to Other People It is desirable to describe designs to other people." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-18T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="IDEs Instead of Programming Languages and Operating Systems" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html","@type":"BlogPosting","description":"The Goal The goal of programming is to control a computer. Secondary Goals Secondary Goal: Describe Architecture to Other People It is desirable to describe designs to other people.","dateModified":"2021-12-18T00:00:00-05:00","datePublished":"2021-12-18T00:00:00-05:00","headline":"IDEs Instead of Programming Languages and Operating Systems","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">IDEs Instead of Programming Languages and Operating Systems</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-12-18T00:00:00-05:00" itemprop="datePublished">Dec 18, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="the-goal">The Goal</h1>
+<p>The goal of programming is to control a computer.</p>
+<h2 id="secondary-goals">Secondary Goals</h2>
+<h3 id="secondary-goal-describe-architecture-to-other-people">Secondary Goal: Describe Architecture to Other People</h3>
+<p>It is desirable to describe designs to other people.</p>
+
+<p>For example, in the construction industry,</p>
+<ul>
+  <li>Architects use drawings and 3D models to describe designs to Engineers</li>
+  <li>Engineers use blueprints to describe design details to Construction Workers (Implementors).</li>
+</ul>
+
+<p>Both of these kinds of communication - drawings, models - are used to describe aspects of the design to other people.</p>
+
+<h4 id="tertiary-goal-automated-checking-of-descriptions">Tertiary Goal: Automated Checking of Descriptions</h4>
+
+<p>In the Construction Industry, drawings are checked manually.</p>
+
+<p>Using computers, it becomes possible to write software that checks aspects of design documentation.</p>
+
+<p>Programmers and programming language designers strive to write software that checks design documents (usually in the form of textual “code”).</p>
+
+<p>IMO, language designers miss the fact that automated checking is only a tertiary goal.</p>
+
+<h3 id="secondary-goal-production-engineering">Secondary Goal: Production Engineering</h3>
+
+<p>Once a design has been vetted (by Architects, Engineers, Testers, etc.), the design can be optimized along a number of dimensions - this is called Production Engineering.</p>
+
+<p>Typically, Production Engineering in software tends towards making a low-cost version of the software, usually taking into account hardware costs that the software is to run on.</p>
+
+<p>Most popular so-called General Purpose programming Languages are actually DSLs for Production Engineering.  I include Haskell, Python, JavaScript, etc., etc., in this list of popular GPLs.</p>
+
+<p>In fact, any programming language that provides the <code class="language-plaintext highlighter-rouge">+</code> operator, or, <code class="language-plaintext highlighter-rouge">arrays</code> and <code class="language-plaintext highlighter-rouge">lists</code>, or, <code class="language-plaintext highlighter-rouge">user-defined types</code>, is usually designed as a DSL for Production Engineering.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Compilation</code> is geared towards Production Engineering.  All languages can be interpreted, but, only some languages can be compiled, after making various trade-offs in the languages themselves.  Interpretation helps with Design and Vetting, Compilation helps with Production Engineering. [Note that, neither is actually geared towards only DI<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">1</a></sup> - communicating designs to other people.]</p>
+
+<h1 id="programming-languages-are-ide-wannabes">Programming Languages Are IDE Wannabes</h1>
+<p>Programming languages (GPLs<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>) are only the tip of the iceberg for controlling computers.</p>
+
+<h1 id="operating-systems-are-ide-wannabes">Operating Systems Are IDE Wannabes</h1>
+<p>Operating systems are the only tip of the iceberg for controlling computers.</p>
+
+<h1 id="ide-evolution">IDE Evolution</h1>
+<p>What do we want in an IDE?</p>
+
+<p>Given that the primary purpose of programming is controlling computers, we want <em>anything</em> that helps us program computers.</p>
+
+<p>We <em>don’t</em> want to use only one-thing in a one-size-fits-all manner.</p>
+
+<p>We see this kind of desire leaking into GPL designs.</p>
+
+<p>For example, REGEXs<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup> have leaked into some GPLs, giving those GPLs two (2) syntaxes.</p>
+
+<p>As an example of the evolution of IDEs, consider technologies that we already know: C++ and REGEXs.</p>
+
+<p>We want an IDE that has multiple windows that can produce an executable module at the push of a button.</p>
+
+<p>Using only the above already-known technologies, we might expect:</p>
+<ul>
+  <li>a window for writing REGEXs, in REGEX DSL syntax,</li>
+  <li>a window for writing replacements after REGEX matching has been successful, in REGEX replacement DSL syntax</li>
+  <li>a window for writing Production Engineering code in C++ syntax, with some sort of bauble to show where the REGEX pattern matchers pattern replacers are to be inserted.</li>
+</ul>
+
+<p>To illustrate the point, imagine that we want to write a REGEX that replaces all “A”s with “AB”s</p>
+<ul>
+  <li>we might write /(A)/ in window 1</li>
+  <li>we might write /\1B/ in window 2</li>
+  <li>we might write some C++ in window 3.</li>
+</ul>
+
+<p>In fact, we would probably drop the “/” characters in windows 1 and 2.</p>
+
+<p>In the above example, parentheses are use to “remember” parts of the match, e.g. <code class="language-plaintext highlighter-rouge">(A)</code> remembers “A” (if matched) and gives it the name <code class="language-plaintext highlighter-rouge">\1</code><sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">4</a></sup>.</p>
+
+<p>A simple example of a REGEX visualizer is <a href="https://regex101.com">regex101</a>.</p>
+
+<p>We want something like the REGEX visualizer to become our windows 1 and 2 in our progamming IDE.</p>
+
+<p>Of course, one could re-imagine the above using languages, like Python and JavaScript, that have REGEXs built into them.</p>
+
+<h2 id="further-ideas">Further Ideas:</h2>
+
+<p>I believe that Ohm-JS is better than REGEX.</p>
+
+<p>If we look at the <a href="https://ohmlang.github.io/editor/">Ohm-JS IDE</a>, we see the beginnings of what we want in one of the windows of our futuristic IDE.</p>
+
+<p>We would want to augment the IDE with an Ohm-JS replacement window (a replacement rule for every grammar rule in Ohm-JS.  See the <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">glue tool</a> for POC-level ideas for a replacement DSL for Ohm-JS programs.</p>
+
+<p>See <a href="https://guitarvydas.github.io/2021/07/30/Parsing-Diagrams-DaS-Workbench-Overview.html">DaS Workbench</a> for POC-level ideas on multi-window, heads-up displays for pattern matching and replacement.</p>
+
+<p>See <a href="https://guitarvydas.github.io/2021/07/12/Transpilation.html">Transpilation</a> for POC-level ideas on how to transmogrify PEG into two separate parts <br />
+((1) grammar (2) formatting)</p>
+
+<h1 id="appendix---see-also">Appendix - See Also</h1>
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html">Table of Contents as of Dec. 01, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:3" role="doc-endnote">
+      <p>DI means Design Intent <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>GPL means General Purpose programming Language. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>REGEX means REGular EXpression.  A technology lifted from compiler design and made popular in languages like PERL, JavaScript, etc., etc. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Standard REGEX syntax is obtuse and, IMO, write-only.  I would suggest replacements to this syntax, but, I believe that REGEX will be superceded by PEG (Ohm-JS), and, it is not worth expending time on improving the syntax. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

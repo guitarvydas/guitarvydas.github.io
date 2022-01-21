@@ -1,0 +1,64 @@
+I"Ý<h1 id="privileges-for-functions">Privileges for Functions</h1>
+<p>At present, access control (privileges) are used only at the operating system and server levels.</p>
+
+<p>Access control makes sense at the program level.</p>
+
+<p>Certain functions should only be called during certain situations.</p>
+
+<p>Certain functions should only be called by privileged functions.</p>
+
+<h1 id="example">Example</h1>
+<h2 id="dispatcher">Dispatcher</h2>
+<p>A Software Component might support a <code class="language-plaintext highlighter-rouge">react</code> method, but,</p>
+<ul>
+  <li>that method must only be called by the Dispatcher, and must not be called by other Software Components</li>
+  <li>that method must only be called when the system is in <code class="language-plaintext highlighter-rouge">steady state</code>.
+    <h1 id="aop---aspect-oriented-programming---conundrum">AOP - Aspect Oriented Programming - Conundrum</h1>
+    <p>AOP was, probably, designed to handle such cases, as the above.</p>
+  </li>
+</ul>
+
+<p>Yet, AOP does not describe this specific problem.</p>
+
+<p>AOP is too general.</p>
+
+<p>The conundrum, here, is that the Dispatcher example is very specific to the problem-at-hand.</p>
+
+<p>The solution <em>can</em> be described using AOP, but AOP does not <em>enforce</em> that the solution be described in this way.</p>
+
+<p>In fact, the solution <em>can</em> be described in assembler.</p>
+
+<p>AOP is like an assembler for multiple views on a problem.</p>
+
+<p>Assembler needed to be <em>structured</em>.  Likewise, AOP needs to be <em>structured</em>.</p>
+
+<p>AOP is not common in popular languages.</p>
+
+<h1 id="oop-conundrum">OOP Conundrum</h1>
+<p>OO Programming suffers from the same sort of problem as described in the above AOP section.</p>
+
+<p>OO describes one aspect of a problem, but must be contorted to cover the various situations in a given problem.</p>
+
+<p>At first, popular OOP had single inheritance.  That wasnâ€™t enough, so multiple inheritance was invented.  Then, mixins were invented. And interfaces were invented.</p>
+
+<p>Each invention was good for specific use-cases, but none was general enough to cover all use-cases.</p>
+
+<p>I argue that there cannot be a <em>one-language-to-rule-them-all</em>.  We need <em>many</em> notations which can be blended together to form a viable solution.</p>
+
+<p>It is possible to describe a solution using only one notation, e.g. an elaborate type system, but such effort results in accidental complexity and wasted design time.</p>
+
+<h1 id="access-control">Access Control</h1>
+<p>In fact, it might turn out that access control is not appropriate for every use-case.</p>
+
+<p>The use-case(s) depends on the problem-at-hand.</p>
+
+<h1 id="appendix---see-also">Appendix - See Also</h1>
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html">Table of Contents as of Dec. 01, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

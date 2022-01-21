@@ -1,0 +1,53 @@
+I"�<h1 id="garbage-collection-is-an-implementation-detail">Garbage Collection is an Implementation Detail</h1>
+<p>Garbage collection is necessary only if memory is re-used.</p>
+
+<p>Re-use of memory is an optimization, hence, GC (Garbage Collection) is a memory optimization detail.</p>
+
+<p>At the <em>DI</em><sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">1</a></sup> level (aka Software Architecture), there should be no consideration of memory re-use.</p>
+
+<p>DI expresses the Design of a Solution, and, does not delve into details, such as memory re-use.</p>
+
+<h1 id="memory-re-use">Memory Re-Use</h1>
+<p>Re-use of memory has caused many <em>accidental complexities</em>.</p>
+
+<p>Memory re-use might be a necessary evil for constructing systems using present computer hardware, but, this detail - memory re-use - should not be tangled up in DI.</p>
+
+<p>Tangling Production Engineering concepts with DI results in Spaghetti Design.</p>
+
+<h1 id="the-best-garbage-collector-the-2nd-best-gc-the-3rd-best-gc-etc">The Best Garbage Collector, The 2nd-Best GC, The 3rd-Best GC, etc.</h1>
+<p>The best garbage collector is: no garbage collector.</p>
+
+<p>The second-best garbage collector is: the biblical flood, wipe the slate clean<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.</p>
+
+<p>The third-best garbage-collector is: anything that impinges on the running code, e.g. the Lisp GC, the Smalltalk GC, the Java GC, the Rust ownership model, reference-counting, etc., etc.</p>
+
+<p>Memory is now cheap.  Why bother reclaiming it?</p>
+
+<h1 id="servers-run-forever">Servers Run Forever</h1>
+<p>Servers are meant to <code class="language-plaintext highlighter-rouge">run forever</code>.</p>
+
+<p>Rhetorical question: what does that mean to GC?</p>
+
+<p>Rhetorical question: should every app pay to have run-forever-style GC?</p>
+
+<h1 id="appendix---see-also">Appendix - See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html">Table of Contents as of Dec. 01, 2021</a><br />
+<a href="https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:2" role="doc-endnote">
+      <p>DI means Design Intent. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>The Unix process model uses the biblical flood method.  When a process dies, the Dispatcher wipes the slate (the memory) clean and re-uses the memory for other processes. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

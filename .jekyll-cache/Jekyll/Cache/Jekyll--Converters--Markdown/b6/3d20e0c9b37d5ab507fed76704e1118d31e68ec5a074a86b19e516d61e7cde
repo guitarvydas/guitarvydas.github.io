@@ -1,0 +1,418 @@
+I"�V<h1 id="introduction---langjam-0002">Introduction - LangJam 0002</h1>
+<p><a href="https://github.com/guitarvydas/jam0002/tree/main/guitarvydas">Excerpts from Langjam 0002</a></p>
+
+<h1 id="theme">Theme</h1>
+
+<p>Patterns</p>
+
+<h1 id="goals-of-this-project">Goals of This Project</h1>
+
+<p>Draw diagrams of some common concurrency patterns.</p>
+
+<p>Transpile the diagrams to running C code.</p>
+
+<p>Write a multitasking kernel in C, for event-driven components.</p>
+
+<h1 id="how-to-run-this-project">How to Run This Project</h1>
+<p>(elided)</p>
+
+<h1 id="at-a-glance">At-A-Glance</h1>
+
+<p><img src="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/at-a-glance.svg" alt="" /></p>
+
+<h1 id="sub-goals">Sub-Goals</h1>
+
+<p>[see at-a-glance.svg for status, see below for discussions]</p>
+
+<h2 id="patterns-as-diagrams">Patterns as Diagrams</h2>
+
+<p>Some patterns (not all patterns) are easier to understand as diagrams.</p>
+
+<p>5 sample diagrams, discussed below.</p>
+
+<h2 id="reactive-component-based-operating-system">Reactive, Component-based Operating System</h2>
+
+<p>Concurrency is easy.</p>
+
+<p>An operating system for message-passing, reactive, concurrent components is approximately 1 page of code and uses techniques that are already well-understood.</p>
+
+<h2 id="dataless-c">Dataless C</h2>
+
+<p>Create programs in layers.</p>
+
+<ul>
+  <li>One layer for control-flow implementation, and,</li>
+  <li>another layer for data implementation details.</li>
+</ul>
+
+<p>[I chose to write the above O/S in C, the code is written in dataless C]</p>
+
+<h2 id="diagram-compiler">Diagram Compiler</h2>
+
+<p>Compiling diagrams to running code as easily as compiling text to running programs.</p>
+
+<h1 id="contents">Contents</h1>
+
+<ol>
+  <li>C– transpiler (C minus minus - dataless C)</li>
+  <li>5 Diagrams of various programming patterns (patterns.drawio)</li>
+  <li>tools - pfr, d2f, f2j (parsing find replace, diagram to facbtase, factbase to JSON, resp.)</li>
+  <li>run.bash</li>
+  <li>node_modules: Ohm-JS@next, atob, pako</li>
+  <li>POC .cmm code</li>
+  <li>README.md, doc/*.md</li>
+  <li>DaisyChain.drawio - single diagram to be compiled (from diagrams above)</li>
+  <li>os.cmm - multitasking kernel (alpha, POC) for event-driven C components</li>
+  <li>doc/internals-types.h.drawio - diagram of types.h</li>
+  <li>diagrams of message passing in 3 steps</li>
+  <li>internals-Before.svg</li>
+  <li>internals-After 1st Send().svg</li>
+  <li>internals-After 1s Dispatch.svg</li>
+</ol>
+
+<h1 id="status">Status</h1>
+
+<p>(elided)</p>
+
+<h2 id="plan">Plan</h2>
+
+<p>(elided)</p>
+
+<h2 id="diagrams---discussion">Diagrams - Discussion</h2>
+
+<p>I find it “easier to reason about programs” if I can see diagrams.</p>
+
+<p>In the vein of “graphic novels”, I want a “graphic spec”.</p>
+
+<p>Programs are patterns. Diagrams are patterns. Diagrams are programs.</p>
+
+<p>see <a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Diagrams.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Diagrams.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Diagrams</p>
+
+<h2 id="factbase">Factbase</h2>
+
+<p>A Factbase is a set of triples.</p>
+
+<p>In this project, a FB (factbase) is a set of triples in the syntax of PROLOG<a href="app://obsidian.md/index.html#fn-1-339486ff2eb30557">[1]</a> assertions. This allows SWIPL<a href="app://obsidian.md/index.html#fn-2-339486ff2eb30557">[2]</a> to be used to query the factbase<a href="app://obsidian.md/index.html#fn-3-339486ff2eb30557">[3]</a>.</p>
+
+<h2 id="this-project-uses-existing-technologies">This Project Uses Existing Technologies</h2>
+
+<p>(elided)</p>
+
+<h1 id="c">C–</h1>
+
+<p>C (and most languages, including C++, Haskell, Python, etc.) are dual purpose<a href="app://obsidian.md/index.html#fn-4-339486ff2eb30557">[4]</a>:</p>
+
+<ol>
+  <li>the language describes implementation details of <code class="language-plaintext highlighter-rouge">data</code></li>
+  <li>the language describes implementation details of <code class="language-plaintext highlighter-rouge">control flow</code></li>
+</ol>
+
+<p>C– is dataless C.</p>
+
+<ul>
+  <li>c– describes <em>only</em> the <code class="language-plaintext highlighter-rouge">control flow</code> of a program using <em>handles</em> to data.</li>
+  <li>Use “super-macros” to hide details of <code class="language-plaintext highlighter-rouge">data implementation</code>.</li>
+  <li>Super-macros are implemented using Ohm-JS.</li>
+</ul>
+
+<p>To make things painfully obvious, I’ve named ALL macros using “$” as the first character in the name<a href="app://obsidian.md/index.html#fn-5-339486ff2eb30557">[5]</a>.</p>
+
+<h2 id="building-a-language-by-cheating">Building a Language by Cheating</h2>
+
+<p>Transpile .cmm files to .c files.</p>
+
+<p>Let <em>gcc</em> do the heavy lifting.</p>
+
+<p>The .cmm transpiler does not do “type checking”. The transpiler emits .c code and lets <em>gcc</em> do the type checking.</p>
+
+<p>Designing the .cmm transpiler to be dataless makes punting of type checking easier.</p>
+
+<p>[Aside: If I had more time, I might investigate the use of the “#file” and “#line” directives in C. Rhetorical question: how did the original C++ compiler map C++ source code to C code and back? I know of only two languages that have remember source-code line numbers - C and Scheme (syntax objects). Rhetorical question: how is <a href="app://obsidian.md/index.html#line">#line</a> generalized to include DaS (Diagrams as Syntax)?]</p>
+
+<p>”$” is chosen for macro names so that when the .cmm transpiler fails to deal with a macro, the “$” is sent to <em>gcc</em>. <em>Gcc</em> will flag an error when it sees “$” in identifier names. During testing of the transpiler, some macros were not recognized nor translated. The “$” character caused <em>gcc</em> to flag an error, making such transpilation errors easier to detect.</p>
+
+<h1 id="software-components---lego-blocks">Software Components - LEGO® Blocks</h1>
+
+<p>There are 2 secrets to making pluggable components (IMO):</p>
+
+<ol>
+  <li>All components must be concurrent by default.</li>
+  <li>A very, very simple <em>type</em> needs to used for inter-component communication.</li>
+</ol>
+
+<h2 id="concurrency-simplified">Concurrency Simplified:</h2>
+
+<p>The secrets to simple concurrency are:</p>
+
+<ul>
+  <li>Make all components into (anonymous) lambdas</li>
+  <li>Create a Dispatcher() routine to invoke the concurrent components.</li>
+</ul>
+
+<h2 id="inter-component-communication">Inter-Component Communication</h2>
+
+<p>A very, very simple <em>type</em> needs to used for inter-component communication.</p>
+
+<p>UNIX® pipelines came close to this ideal - but no cigar.</p>
+
+<p>The inter-component type in UNIX® - lines of text - is too complicated (!) to be used as a universal inter-component communication type.</p>
+
+<p>We need to use <code class="language-plaintext highlighter-rouge">bytes</code> (or something equally low-level, maybe bits) as the basic type, without ascribing special status to newlines. We can build up more complicated types by creating type-pipelines. For example, imagine dropping bytes into one end of a pipeline and getting an object certified to be of “Type XYZ” out of the other end of the pipeline. This is nothing “new”, except that we choose to present successive types in layers instead of in an either-or blob of type-ridden code. I suspect that programmers think in layers, but hide the layers in the final result (or, they mask the layers by using the same “language” for each layer without intervening isolated components).</p>
+
+<p>The type pipeline verifies that a set of bits does, or does not, conform to the desired type. The pipeline contains at least two outputs:</p>
+
+<ol>
+  <li>The bits, if they conform to the desired type. (Silence, otherwise).</li>
+  <li>An escape-hatch - the bits, if they do not conform to the desired type. What comes out of this escape hatch? More inter-component messages (that may hold the bits in question). UNIX called this <code class="language-plaintext highlighter-rouge">stderr</code> and most modern GPLs use <code class="language-plaintext highlighter-rouge">throw</code> to provide escape hatches. A <code class="language-plaintext highlighter-rouge">throw</code> or output to <code class="language-plaintext highlighter-rouge">stderr</code> models all programming as being black-and-white - good or bad - but, in internet programming (IoT, distributed, etc., etc.) not all outcomes can be classified into only 2 categories, for example a <code class="language-plaintext highlighter-rouge">retry</code> is not bad, it is just a part of the problem that needs to be solved. (If the bits conform to the desired type, then nothing<a href="app://obsidian.md/index.html#fn-6-339486ff2eb30557">[6]</a> is produced by this output.)</li>
+</ol>
+
+<h1 id="diagrams---das">Diagrams - DaS</h1>
+
+<p>We use text for programming languages based on the biases (realities) of the 1950s, 1960s, 1970s, etc.</p>
+
+<p>In 2020+, there is no reason that we can’t <em>also</em> use diagrams as syntax.</p>
+
+<p>DaS means “Diagrams as Syntax”.</p>
+
+<p>DaS should not be confused with VPL (Visual Programming Languages).</p>
+
+<p>DaS is a hybrid of <em>simple</em> diagrams and text.</p>
+
+<p>Some things are better left as text, e.g. <code class="language-plaintext highlighter-rouge">a = b + c;</code>.</p>
+
+<p>Other things are better left as diagrams, e.g. network diagrams of LEGO®-like components.</p>
+
+<h1 id="ides-instead-of-gpls">IDEs Instead of GPLs</h1>
+
+<p>11th Rule (a) of Programming - GPLs (General purpose Programming Languages) are merely mediocre implementations of IDEs.</p>
+
+<p>The goal of programming is to make computers do what is needed. GPLs are merely stepping stones towards that goal.</p>
+
+<h1 id="ides-instead-of-operating-systems">IDEs Instead of Operating Systems</h1>
+
+<p>11th Rule (b) of Programming - OSs (Operating Systems) are merely mediocre implementations of IDEs.</p>
+
+<p>OSs are merely libraries.</p>
+
+<p>The goal of programming is to make computers do what is needed. OSs are merely stepping stones towards that goal.</p>
+
+<p>An IDE <em>should</em> let you build Software Components in many languages. At this moment, we tend to build an app using only a single language. UNIX® *sh pipelines allow the use of multiple languages, but, such pipelines leave a lot to be desired. The concept of transpiling apps to JavaScript dances with the idea of using multiple languages, but leaves a lot to be desired.</p>
+
+<h1 id="backgrounders">Backgrounders</h1>
+
+<p>[Note that urls beginning with “obsidian://open?vault=doc…” can be ignored. I believe that I pasted full URLs in all such places].</p>
+
+<h2 id="triples">Triples</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/03/16/Triples.html">https://guitarvydas.github.io/2021/03/16/Triples.html</a>  <br />
+<a href="https://guitarvydas.github.io/2021/11/06/Triples-in-PROLOG.html">https://guitarvydas.github.io/2021/11/06/Triples-in-PROLOG.html</a></p>
+
+<h2 id="factbases">Factbases</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/04/26/Factbases-101.html">https://guitarvydas.github.io/2021/04/26/Factbases-101.html</a></p>
+
+<h2 id="diagrams-to-code">Diagrams to Code</h2>
+
+<p>See the latest TOC in the blog.</p>
+
+<h2 id="ohm-js">Ohm-JS</h2>
+
+<p>DSL for building parsers.</p>
+
+<p>Based on PEG technology.</p>
+
+<p>IMO - Ohm-JS is the best-of-breed PEG-based technology.</p>
+
+<p>discord: ohmland</p>
+
+<p>github (ohm-js): <a href="https://github.com/harc/ohm/tree/master/doc">https://github.com/harc/ohm/tree/master/doc</a></p>
+
+<p>Ohm Editor: <a href="https://ohmlang.github.io/editor/">https://ohmlang.github.io/editor/</a></p>
+
+<p>Ohm: <a href="https://ohmlang.github.io/">https://ohmlang.github.io</a></p>
+
+<h2 id="diagrams">Diagrams</h2>
+
+<p>https://guitarvydas.github.io/2021/11/24/On-Diagram-Notation.html</p>
+
+<p>See the latest TOC in the blog for related topics.</p>
+
+<h2 id="efficiency">Efficiency</h2>
+
+<p>Computer programs fall - roughly - into two categories:</p>
+
+<ol>
+  <li>Computer programs that are products (e.g. games, apps, etc.).</li>
+  <li>Computer programs that help computer program developers create products</li>
+</ol>
+
+<p>The idea of “efficiency” is different for both categories.</p>
+
+<p>When designing products, the main criterions are cost and usability:</p>
+
+<ul>
+  <li>How fast will the app run?</li>
+  <li>How cheap can the hardware be?</li>
+</ul>
+
+<p>When using computer programs to help program developers, the main criteria are:</p>
+
+<ul>
+  <li>How fast will the app run on development hardware?</li>
+  <li>How will the app save development time?</li>
+  <li>If more than one human developer works on the same program, how quickly can the developers understand the program being developed?</li>
+</ul>
+
+<p>Most current GPLs are optimized for (1) while sacrificing (2).</p>
+
+<p>Many GPL features were invented in the early days of computing (1950, 1960, 1970, …) and do not correspond to the realities of 2020+.</p>
+
+<p>A very simple example of the trade-offs that favour (1) over (2) is the fact that most GPLs require declaration-before-use. Development turn-around time and understanding time would be enhanced by declaration-after-use, but most GPLs insist that the developers waste their (human) time organizing code to appease compilers.</p>
+
+<p>At first, development hardware was slow and 1-pass compilers seemed to be a good idea. As computer speeds increased, we developed better apps for business users (e.g. better word processors, spreadsheets, etc.) and products (e.g. phones, etc.), but failed to take full advantage of computer speed-ups for developers. Today, most GPLs still require developers to waste development time arranging code in declaration-before-use order.</p>
+
+<p>In early days, Early parsers were sneered at, but now we have PEG parsers - a technology which does not yet appear in most popular GPLs. (Why not?)</p>
+
+<p>We have backtracking languages like PROLOG (which brought about the invention of Relational technologies (like miniKanren)), but developers continue to use languages with features that were invented in the 1950’s/60’s/70’s</p>
+
+<h2 id="why-ohm-js-is-the-best-of-breed-peg-tool">Why Ohm-JS is the Best-of-Breed PEG Tool</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html">https://guitarvydas.github.io/2021/05/09/Ohm-Editor.html</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/08/30/Ohm-JS.html">https://guitarvydas.github.io/2021/08/30/Ohm-JS.html</a></p>
+
+<p>(see the latest TOC in the blog)</p>
+
+<h2 id="transpilation">Transpilation</h2>
+
+<p><a href="https://guitarvydas.github.io/assets/2012-07-12-Transpilation/index.html#25">https://guitarvydas.github.io/assets/2012-07-12-Transpilation/index.html#25</a></p>
+
+<h2 id="concurrency-is-not-parallelism">Concurrency is Not Parallelism</h2>
+
+<p>Concurrency is a paradigm.</p>
+
+<p>Parallelism is a tactic.</p>
+
+<p>All Parallel programs are concurrent.</p>
+
+<p>Not all concurrent programs are parallel.</p>
+
+<p>Rob Pike: Concurrency is not Parallelism:  <br />
+<a href="https://www.youtube.com/watch?v=oV9rvDllKEg">https://www.youtube.com/watch?v=oV9rvDllKEg</a></p>
+
+<h2 id="patterns">Patterns</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/11/24/On-Diagram-Notation.html">https://guitarvydas.github.io/2021/11/24/On-Diagram-Notation.html</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/27/Patterns.html">https://guitarvydas.github.io/2021/03/27/Patterns.html</a></p>
+
+<h2 id="blogs--articles--youtube">Blogs / Articles / Youtube</h2>
+
+<p><a href="https://guitarvydas.github.io/">https://guitarvydas.github.io</a></p>
+
+<h2 id="dataless-languages">Dataless Languages</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/03/02/Dataless-Programming-Language.html">https://guitarvydas.github.io/2021/03/02/Dataless-Programming-Language.html</a></p>
+
+<h2 id="future">Future</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Future.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Future.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Future</p>
+
+<h2 id="glue">Glue</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">https://guitarvydas.github.io/2021/04/11/Glue-Tool.html</a>  <br />
+<a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">https://guitarvydas.github.io/2021/09/15/ABC-Glue.html</a>  <br />
+<a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">https://guitarvydas.github.io/2021/03/24/Glue-Manual.html</a></p>
+
+<h2 id="obsidian">Obsidian</h2>
+
+<p><a href="https://obsidian.md/">https://obsidian.md</a></p>
+
+<h2 id="programming">Programming</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Programming.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Programming.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Programming</p>
+
+<h2 id="normalization">Normalization</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Normalization.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Normalization.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Normalization</p>
+
+<h2 id="macros-vs-dsls">Macros vs. DSLs</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Macros%20vs.%20DSLs.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Macros%20vs.%20DSLs.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Macros%20vs.%20DSLs</p>
+
+<h2 id="gotchas">Gotchas</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Gotchas.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Gotchas.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Gotchas</p>
+
+<h2 id="pattern-matching">Pattern Matching</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Pattern%20Matching.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Pattern%20Matching.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Pattern%20Matching</p>
+
+<h2 id="relation-to-projectional-editing">Relation to Projectional Editing</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Related%20-%20Projectional%20Editing.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Related%20-%20Projectional%20Editing.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Related%20-%20Projectional%20Editing</p>
+
+<h2 id="relation-to-software-architecture">Relation to Software Architecture</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Software%20Architecture.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Software%20Architecture.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Software%20Architecture</p>
+
+<p><a href="https://guitarvydas.github.io/assets/2021-04-11-DI/index.html#15">https://guitarvydas.github.io/assets/2021-04-11-DI/index.html#15</a></p>
+
+<h2 id="programming-languages-are-patterns">Programming Languages Are Patterns</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Programming%20Languages%20Are%20Patterns.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Programming%20Languages%20Are%20Patterns.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Programming%20Languages%20Are%20Patterns</p>
+
+<h2 id="functional-programming-vs-pattern-matching">Functional Programming vs. Pattern Matching</h2>
+
+<p><a href="https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Functional%20Programming%20vs.%20Pattern%20Matching.md">https://github.com/guitarvydas/jam0002/blob/main/guitarvydas/doc/Functional%20Programming%20vs.%20Pattern%20Matching.md</a></p>
+
+<p>obsidian://open?vault=doc&amp;file=Functional%20Programming%20vs.%20Pattern%20Matching</p>
+
+<h2 id="call-return-spaghetti">Call Return Spaghetti</h2>
+
+<p>Overview of reactive, component-based, concurrent functionality:  <br />
+<a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a></p>
+
+<h2 id="full-blown-diagram-compiler">Full-Blown Diagram Compiler</h2>
+
+<p>I didn’t finish the diagram compiler within the time limits for this JAM, but, I am working on a (WIP) diagram compiler project (paused for JAM) at <a href="https://github.com/guitarvydas/app">https://github.com/guitarvydas/app</a>. The techniques were touched upon in JAM0001 (<a href="https://github.com/guitarvydas/firstclasscomments">https://github.com/guitarvydas/firstclasscomments</a>).</p>
+
+<h2 id="swipl">SWIPL</h2>
+
+<p><a href="https://www.swi-prolog.org/">https://www.swi-prolog.org</a></p>
+
+<h2 id="blog">Blog</h2>
+
+<p><a href="https://guitarvydas.github.io/">https://guitarvydas.github.io</a></p>
+
+<hr />
+
+<ol>
+  <li>The only reason I used PROLOG is that I already knew how to use PROLOG. I believe that JavaScript, Python, C++, miniKanren, core.logic, etc. would be compatible.<a href="app://obsidian.md/index.html#fnref-1-339486ff2eb30557">↩︎</a></li>
+  <li>SWIPL is SWI PROLOG<a href="app://obsidian.md/index.html#fnref-2-339486ff2eb30557">↩︎</a></li>
+  <li>Querying is needed to make sense of the diagrams. I didn’t get to the point of querying diagrams within the time limits (but am working on a diagram compiler in another project.)<a href="app://obsidian.md/index.html#fnref-3-339486ff2eb30557">↩︎</a></li>
+  <li>In fact, these languages are designed to be GPLs (General purpose Programming Languages). The idea of using GPLs is rooted in the biases (realities) of the 1950’s, 1960’s, 1970’s. What we <em>really</em> want is IDEs for building computer systems. GPLs and O/Ss are IDE-wannabes.<a href="app://obsidian.md/index.html#fnref-4-339486ff2eb30557">↩︎</a></li>
+  <li>I think that the leading “$” could be dropped, but I haven’t tested this notion.<a href="app://obsidian.md/index.html#fnref-5-339486ff2eb30557">↩︎</a></li>
+  <li>Nothing means <em>nothing</em>. Not even “void”.<a href="app://obsidian.md/index.html#fnref-6-339486ff2eb30557">↩︎</a></li>
+</ol>
+:ET
