@@ -8,6 +8,7 @@ title:  "Composition"
 3 ![Isolation](./assets/isolation.svg)
 4 ![Isolation](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/isolation.svg)
 5 ![Isolation](/docs/assets/isolation.svg)
+6 ![Isolation](/docs/assets/isolation.svg)
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
 [Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
