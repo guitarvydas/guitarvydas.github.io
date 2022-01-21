@@ -11,6 +11,7 @@ title:  "Composition"
 6 ![Isolation](/docs/assets/isolation.svg)
 7 ![Isolation](c.png)
 8 (no content)
+9 (no content)
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
 [Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
