@@ -103,7 +103,7 @@ I said what I wanted to say.  Now, using FDD, my only task is to make the comput
 [FDD - Failure Driven Design](https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html)
 
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
-[Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
+[Table of Contents as of Dec. 01, 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
