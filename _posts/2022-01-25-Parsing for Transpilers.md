@@ -30,7 +30,9 @@ I used PEG at first, then found Ohm-JS.
 
 Ohm-JS simplifies the act of creating pattern-matchers - a subtle, but, vital aspect for development.  For example, LR(k) and LL(k) parsers make one "think compilers", and PEG, while freer, still feels like a compiler technology.
 
-REGEX broke free of compilerdom and enabled a new class of languages and thought patterns.
+REGEX broke free of compilerdom and enabled a new class of languages and thought patterns[^2].
+
+[^2]: Like *perl* and *grep* and regular expressions in Python and JavaScript.
 
 I believe that Ohm-JS can enable new thought patterns, even better than those enabled by REGEX.
 
@@ -50,7 +52,7 @@ Layering syntax over top of existing languages using Ohm is one way to accomplis
 Thinking this way has led me into down into new rabbit holes, e.g.
 - I conclude that syntax is frivolous, paradigms are essential,
 - I want toolbox languages that help me write code that writes code,
-- I conclude that we need to deprecate all programming languages and operating systems[^1]
+- I conclude that we need to deprecate all programming languages and operating systems[^1].
  
 [^1]: 11th Rule: Programming Languages are IDE wannabes.
 
@@ -66,7 +68,7 @@ The diagram, `helloworld.drawio` is
 - then inferenced
 - then transpiled into JSON
 - then transpiled into Python.
-# See Also
+## See Also
 (*The following tools are like POCs.  They work, but are fairly new and could use some polishing*).
 
 [PREP](https://www.youtube.com/watch?v=-I-KQjC0oBY)

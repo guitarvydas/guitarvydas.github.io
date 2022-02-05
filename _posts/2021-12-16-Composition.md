@@ -18,6 +18,7 @@ title:  "Composition"
 13 ![test 13](assets/d.png)
 13 ![test 13](assets/e.svg)
 14 ![test 14](/docs/assets/d.png)
+15 ![test 15](/assets/isolation.svg)
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
 [Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
