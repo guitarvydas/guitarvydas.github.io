@@ -2,15 +2,14 @@
 layout: post
 title:  "GC in SectorLisp"
 ---
-Another attempt to describe the behaviour of GC in SectorLisp. 
+Description of the behaviour of GC in SectorLisp. 
 
-This time as an animation (video without sound).
+(Both videos are silent).
 
-Feel free to fast-forward...
+[GC in 20 seconds](https://youtu.be/gn5E1jyzqro)
 
 [GC](https://youtu.be/TF0FzcBkV60)
 
-Thanks for the feedback...
 
 # See Also
 
