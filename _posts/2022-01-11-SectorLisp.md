@@ -6,7 +6,7 @@ title:  "SectorLisp"
 [A youtube of my description of SectorLisp](https://youtu.be/nZWR2ftBoA0)
 [SectorLisp](https://justine.lol/sectorlisp2/)
 
-[My github SectorLisp](https://github.com/guitarvydas/sectorlisp)
+[My github SectorLisp](https://github.com/guitarvydas/ptsectorlisp)
 
 # See Also
 
