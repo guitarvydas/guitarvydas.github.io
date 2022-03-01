@@ -116,7 +116,7 @@ I watched, at least:
   - Lisp is triples, fundamentally.
   - Assembler is triples.
 - TXL
-  - [TXL](txl.ca) is a pattern-matching tool that creates strongly-typed parse-trees and allows strongly-typed transformations between different kinds of trees, i.e. augmenting languages and tranforming between languages.
+  - [TXL](2021-12-31-TXL.md) is a pattern-matching tool that creates strongly-typed parse-trees and allows strongly-typed transformations between different kinds of trees, i.e. augmenting languages and tranforming between languages.
 - Projectional Editing - Lisp
   - Some Lisp editors are essentially Projectional Editors.
   - Lisp code is RPN triples, a form which lends itself to various syntaxes (I call them *skins*).

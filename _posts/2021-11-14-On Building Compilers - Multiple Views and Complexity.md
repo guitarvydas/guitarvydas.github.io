@@ -99,7 +99,7 @@ Bottom-up parsers have the property that they can be analyzed mathematically and
 ### S/SL
 [S/SL](https://archive.org/details/technicalreportc118univ) (Syntax / Semantic Language) is a DSL for defining top-down parsers.
 ### TXL
-[TXL](txl.ca) is a functional DSL for layering new syntaxes onto existing languages.
+[TXL](2021-12-31-TXL.md) is a functional DSL for layering new syntaxes onto existing languages.
 # See Also
 
 [Blog](https://guitarvydas.github.io)
