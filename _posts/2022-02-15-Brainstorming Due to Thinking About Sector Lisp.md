@@ -1,3 +1,7 @@
+---
+layout: post
+title:  "Brainstorming Due to Thinking About Sector Lisp"
+---
 - Sector Lisp is a pure version of FP (functional programming)
 - O/S (Operating System) processes are *lambda* wannabes 
 - Arrays are simply optimized lists - no CDRs
@@ -43,3 +47,16 @@ String functions become complicated (epicyclic) when mutation is desired.
 Shared memory, memory reuse -> epicycles (code bloat).
 
 ### Sub-Dividing Memory in a Binary Fashion
+
+# See Also
+
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 

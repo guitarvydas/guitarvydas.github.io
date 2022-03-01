@@ -1,3 +1,7 @@
+---
+layout: post
+title:  "WIP Notes About Tunney's BLC"
+---
 ## Introduction
 
 I'm trying to parse Tunney's blog post about [Binary Lambda Calculus](https://justine.lol/lambda/) down to the bit level.
@@ -81,3 +85,15 @@ Church numeral 0 is *defined* to be the unity function (lambda (x) x).
 
 "False" is *defined* to be the same as Church numeral 0.
 
+# See Also
+
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
