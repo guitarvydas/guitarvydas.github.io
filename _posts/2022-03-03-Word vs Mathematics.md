@@ -19,7 +19,7 @@ The *notation* part of mathematics boils down to a simple set of principles
 2. replace the pattern
 3. repeat.
 
-### Word
+### Word®
 
 Word® does *search and replace*.
 
@@ -39,13 +39,15 @@ PEG[^1] does recursive parsing and is "better" than REGEX in that regard.
 
 [^1]: Ohm-JS is currently my favourite form of PEG.
 
-## UNIX Immutability
+## UNIX® Immutability
 
 Immutability is, actually, *isolation*.
 
-You can re-arrange things if you can guarantee that this doesn't cause unintended side-effects.
+You can re-arrange things if you can guarantee that rearranging doesn't cause unintended side-effects.
 
-UNIX® providex *isolation*.  With C, yet.
+UNIX® provides *isolation*.  
+
+Using C, yet.
 
 UNIX® commands are completely stand-alone.  If you change the source for `cat.c`, the operation of `sed.c` doesn't change.
 

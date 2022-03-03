@@ -12,7 +12,7 @@ RTL works by treating *everything* as a register, then optimizing certain runs o
 
 I used *awk* to build a peephole optimizer for my 8080 C compiler.
 
-The algorithm for peepholing is trivial - search for a pattern, then replace (even Word can do this :-).
+The algorithm for peepholing is trivial - (1) search for a pattern, then, (2) replace (even Word® can do this :-).
 
 How do you search for a pattern?  Brute force.  Also known as inferencing / backtracking / PROLOG / miniKanren / core.logic / Relational Programming.
 
