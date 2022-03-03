@@ -38,7 +38,7 @@ See Holm's Prolog Control in 6 Slides.
 
 It should be possible to write a peephole optimizer for BLC (say, in awk, or JS, or perl, or Python, or ...) that finds certain runs of lambdas and replaces them by other code, more tuned to the target CPU architecture.
 
-To optimize code for speed, you need to de-optimize for size.  
+To optimize code for speed, you need to de-optimize for size (and scalability).
 
 This could be done by The Loader.  (Currently, this is done, in an ad-hoc manner, by The Compiler).
 
