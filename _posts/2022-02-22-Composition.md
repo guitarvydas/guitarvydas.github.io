@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Comosition"
+title:  "Composition"
 ---
 ![Composition](/assets/2022-02-23-composition.png)
 # See Also
