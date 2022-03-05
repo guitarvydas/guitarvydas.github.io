@@ -175,11 +175,14 @@ There are many other biases, such as
     Until now, we had only paper (pencil-and-paper) to use when evolving ideas.
     Now, we have 3D workstations.
 
-# See Also
-
 [Blog](https://guitarvydas.github.io)
 [Table of Contents](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
 [Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
+# See Also
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 

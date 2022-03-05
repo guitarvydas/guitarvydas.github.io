@@ -19,9 +19,10 @@ Functional notation is appropriate for reasoning about calculators, i.e. synchro
 The bug was later addressed by the addition of more complexity (priority inheritance) which repaired the immediate problem in the notation, but did not address the deeper problem (that of pushing a single notation beyond its boundaries of simplicity).
 
 # See Also
-
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
-[Table of Contents](https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

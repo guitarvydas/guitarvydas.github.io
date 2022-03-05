@@ -100,10 +100,11 @@ See [Transpilation](https://guitarvydas.github.io/2021/07/12/Transpilation.html)
 
 
 
-# Appendix - See Also
+# See Also
+
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
-[Table of Contents as of Dec. 01, 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
-[Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 

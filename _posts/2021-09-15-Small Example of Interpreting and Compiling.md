@@ -310,8 +310,8 @@ var a = b + c;
 
 [Ohm In Small Steps](https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf)
 
-[Blog](https://guitarvydas.github.io)
-[Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 

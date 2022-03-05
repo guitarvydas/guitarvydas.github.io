@@ -47,7 +47,12 @@ This could be done by The Loader.  (Currently, this is done, in an ad-hoc manner
 [BLC](https://justine.lol/lambda/)
 [Prolog Control in 6 Slides](https://www.t3x.org/bits/prolog6.html)
 [Ohm in Small Steps (Scheme to JS experiment)](https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf)
+# See Also
+
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

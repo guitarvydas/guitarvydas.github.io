@@ -1,4 +1,4 @@
----
+x---
 layout: post
 title:  "WIP Notes About Tunney's BLC"
 ---
@@ -87,8 +87,10 @@ Church numeral 0 is *defined* to be the unity function (lambda (x) x).
 
 # See Also
 
-[References](https://guitarvydas.github.io/2021/01/14/References.html)
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

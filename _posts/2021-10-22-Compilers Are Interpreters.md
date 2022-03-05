@@ -6,10 +6,9 @@ title:  "Compilers Are Interpreters"
 <a href="https://guitarvydas.github.io/assets/Compilers Are Interpreters.pdf">Compilers Are Interpreters</a>
 
 # See Also
-
+[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
-[Table of Contents as of Sept 17, 2021](https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html)
-[Videos](https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 

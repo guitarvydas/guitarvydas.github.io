@@ -78,8 +78,12 @@ The diagram, `helloworld.drawio` is
 [Ohm-jS](https://github.com/harc/ohm)
 [SWIPL](https://www.swi-prolog.org)
 
-[References](https://guitarvydas.github.io/2021/01/14/References.html)
+# See Also
+
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Blog](https://guitarvydas.github.io)
+[Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
+[References](https://guitarvydas.github.io/2021/01/14/References.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
