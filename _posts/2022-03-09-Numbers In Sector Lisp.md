@@ -71,6 +71,14 @@ Actually, `prep` uses *REGEX* to find chunks of text, then uses *grammars+glue* 
 
 https://justine.lol/sectorlisp2/
 
+## Disclaimer
+
+This example is chosen for its simplicity.
+
+This specific batch-edit could be done with `sed` or with a language that incorporates REGEX, like JavaScript.
+
+The interesting stuff comes when you need to match nested (structured) text.  That's when REGEX gets hard and you need to switch to a parser.
+
 ## See Also
 
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
