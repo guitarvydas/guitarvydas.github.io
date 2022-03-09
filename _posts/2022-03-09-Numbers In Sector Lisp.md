@@ -87,7 +87,7 @@ The interesting stuff comes when you need to match nested (structured) text.  Th
 [Blog](https://guitarvydas.github.io)
 [Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
-[Books](https://leanpub.com/u/paul-tarvydas)
+[Books](https://leanpub.com/u/paul-tarvydas.html)
 
 
 <script src="https://utteranc.es/client.js" 
