@@ -3,22 +3,8 @@ layout: post
 title:  "Composition"
 ---
 # Isolation
-1 [Isolation](isolation.svg)
-2 ![Isolation](isolation.svg)
-3 ![Isolation](./assets/isolation.svg)
-4 ![Isolation](https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/isolation.svg)
-5 ![Isolation](/docs/assets/isolation.svg)
-6 ![Isolation](/docs/assets/isolation.svg)
-7 ![Isolation](c.png)
-8 (no content)
-9 (no content)
-10 (no content)
-11 (no content)
-12 ![test](assets/isolation.svg)
-13 ![test 13](assets/d.png)
-13 ![test 13](assets/e.svg)
-14 ![test 14](/docs/assets/d.png)
-15 ![test 15](/assets/isolation.svg)
+[Isolation](isolation.svg)
+
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
 [Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
