@@ -3,7 +3,7 @@ layout: post
 title:  "Composition"
 ---
 # Isolation
-[Isolation](isolation.svg)
+[Isolation](./isolation.svg)
 
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
