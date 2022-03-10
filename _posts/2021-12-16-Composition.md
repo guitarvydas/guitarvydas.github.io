@@ -3,18 +3,18 @@ layout: post
 title:  "Composition"
 ---
 # Isolation
-[Isolation](./isolation.svg)
-![Isolation](./isolation.svg)
-[Isolation](./isolation.png)
-![Isolation](./isolation.png)
-[Isolation](./isolation.pdf)
-![Isolation](./isolation.pdf)
-[Isolation](/assets/isolation.svg)
-![Isolation](/assets/isolation.svg)
-[Isolation](/assets/isolation.png)
-![Isolation](/assets/isolation.png)
-[Isolation](/assets/isolation.pdf)
-![Isolation](/assets/isolation.pdf)
+a [Isolation](./isolation.svg)
+b ![Isolation](./isolation.svg)
+c [Isolation](./isolation.png)
+d ![Isolation](./isolation.png)
+e [Isolation](./isolation.pdf)
+f ![Isolation](./isolation.pdf)
+g [Isolation](/assets/isolation.svg)
+h ![Isolation](/assets/isolation.svg)
+i [Isolation](/assets/isolation.png)
+j ![Isolation](/assets/isolation.png)
+k [Isolation](/assets/isolation.pdf)
+L ![Isolation](/assets/isolation.pdf)
 
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
