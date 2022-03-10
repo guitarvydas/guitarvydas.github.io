@@ -9,6 +9,12 @@ title:  "Composition"
 ![Isolation](./isolation.png)
 [Isolation](./isolation.pdf)
 ![Isolation](./isolation.pdf)
+[Isolation](/assets/isolation.svg)
+![Isolation](/assets/isolation.svg)
+[Isolation](/assets/isolation.png)
+![Isolation](/assets/isolation.png)
+[Isolation](/assets/isolation.pdf)
+![Isolation](/assets/isolation.pdf)
 
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
