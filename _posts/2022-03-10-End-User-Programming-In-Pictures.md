@@ -7,19 +7,14 @@ title:  "End User Programming in Pictures"
 
 
 ![Chasm Between End-User Programming and Formalization](/assets/end-user-programming-Chasm.png)
-![Chasm Between End-User Programming and Formalization](/assets/end-user-programming-Chasm.PNG)
-![Chasm Between End-User Programming and Formalization](assets/end-user-programming-Chasm.png)
-![Chasm Between End-User Programming and Formalization](assets/end-user-programming-Chasm.PNG)
-
-![img](https://raw.githubusercontent.com/guitarvydas/guitarvydas.github.io/9158b4ab99db47c180baadeb54442d0feec8b960/_posts/Diagram%20Notation.svg)
 
 ## The Reality
 
-![Reality of End-User Programming vs. Details](assets/end-user-programming-Reality-End-User-Programming.png)
+![Reality of End-User Programming vs. Details](/assets/end-user-programming-Reality-End-User-Programming.png)
 
 ## Engineering
 
-![Chasm Between End-User Programming and Formalization](assets/end-user-programming-Engineering.png)
+![Chasm Between End-User Programming and Formalization](/assets/end-user-programming-Engineering.png)
 
 
 
