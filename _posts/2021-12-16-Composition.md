@@ -7,6 +7,8 @@ title:  "Composition"
 ![Isolation](./isolation.svg)
 [Isolation](./isolation.png)
 ![Isolation](./isolation.png)
+[Isolation](./isolation.pdf)
+![Isolation](./isolation.pdf)
 
 # Blocking Due To Call Return
 ![Blocking Due To Call Return](./Composition-Blocking%20Due%20To%20Call%20Return.svg)
