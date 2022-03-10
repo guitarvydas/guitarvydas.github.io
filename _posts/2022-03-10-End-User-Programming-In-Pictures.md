@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Numbers In Sector Lisp"
+title:  "End User Programming in Pictures"
 ---
 # End User Programming In Pictures
 ## The Chasm
 
-![Chasm Between End-User Programming and Formalization](assets/end-user-programming-Chasm.png)
+![Chasm Between End-User Programming and Formalization](/assets/end-user-programming-Chasm.png)
 
 
 ## The Reality
