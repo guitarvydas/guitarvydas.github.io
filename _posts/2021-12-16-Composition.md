@@ -3,17 +3,8 @@ layout: post
 title:  "Composition"
 ---
 # Isolation
-a [Isolation](./isolation.svg)
-b ![Isolation](./isolation.svg)
-c [Isolation](./isolation.png)
-d ![Isolation](./isolation.png)
-e [Isolation](./isolation.pdf)
-f ![Isolation](./isolation.pdf)
-g [Isolation](/assets/isolation.svg)
 h ![Isolation](/assets/isolation.svg)
-i [Isolation](/assets/isolation.png)
 j ![Isolation](/assets/isolation.png)
-k [Isolation](/assets/isolation.pdf)
 L ![Isolation](/assets/isolation.pdf)
 
 # Blocking Due To Call Return
