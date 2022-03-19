@@ -20,7 +20,7 @@ becomes
 (where "x" is any name),
 or
 ```
-callFuntionWithOneArg (a, b)
+callFunctionWithOneArg (a, b)
 ```
 where `a` is
 ``` 
@@ -39,7 +39,7 @@ Bizarrely, "power" implies closer-to-assembler-ness.
 
 When we take McCarthy's original FP *notation* and hack mutation and looping into it, we get a "more powerful" assembler, called Common Lisp.
 
-Elision, in some beholders' eyes, looks like obfuscation. People hate mathematics because it elides (aka obfuscates) certain concepts. Mathematicians love mathematical notation. That would be good enough as long as we're not forced to use mathematicians' favorite notation for *everything*.
+Elision, in some beholders' eyes, looks like obfuscation. People hate mathematics because it elides (aka obfuscates) certain concepts. Mathematicians love mathematical notation. That is good enough as long as we're not forced to use mathematicians' favorite notation for *everything*.
 
 For example, for certain problems, spreadsheet notation is perceived as being "better" than mathematical notation. If you want to understand the gory details of something, you use mathematical notation, if you want to understand income statements and balance sheets, you use spreadsheet notation.
 
