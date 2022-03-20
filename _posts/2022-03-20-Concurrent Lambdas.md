@@ -74,6 +74,21 @@ In my view,
 
 In my view, don't jam them all together, snap them together in new ways for every specific problem.
 
+### Deprecating Loop and Recursion
+Note that Looping doesn't even make sense in a distributed computing environment.  
+
+A language for distributed computing does not have Loop (or Recursion) as a fundamental concept.  
+
+A Component can always Send messages to itself if it wants to repeat a computation.
+
+Looping and Recursion imply the use of a Stack.  This doesn't make sense in a distributed environment.  
+
+A single CPU can have a single Shared Stack, but the idea of a Stack doesn't translate well into something that is sent on a thin wire.
+
+The concepts of Loop and Recursion and Stack are so in-grained in our thinking that we feel it necessary to (cleverly) invent epicycles, like preemption, to accomodate long-running Loops.
+
+These epicycles have caused us unanticipated grief in the past, e.g. priority inversion in the Mars Rover disaster (see my blog).
+
 ## On Diagrams
 Diagrams - to normal humans - imply concurrency.
 
