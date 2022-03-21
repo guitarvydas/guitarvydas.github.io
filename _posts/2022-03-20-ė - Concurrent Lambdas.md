@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Concurrent Lambdas Working Paper (March 20, 2022)"
+title:  "ė - Concurrent Lambdas Working Paper (March 20, 2022)"
 ---
 Looks like a function from the outside, but runs a dispatcher internally, allowing sensible diagrams to be drawn.
 
