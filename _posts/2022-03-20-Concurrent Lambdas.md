@@ -2,7 +2,7 @@
 layout: post
 title:  "Concurrent Lambdas Working Paper (March 20, 2022)"
 ---
-Looks like a function from the outside, but runs a dispatcher internally, allows sensible diagram to be drawn.
+Looks like a function from the outside, but runs a dispatcher internally, allowing sensible diagrams to be drawn.
 
 [lookup.asd](https://github.com/guitarvydas/dasl2/blob/dev/lisp/lookup.asd) (lisp project file)
 
@@ -21,6 +21,17 @@ Once you have worked out the mechanisms for internal concurrency, it becomes "ea
 	- `loop` { `call` body1(), `exit when` test(), `call` body2() }
 
 One should be able to "compose" pure functions with concurrent lambdas with state-machine-lambdas with loop-lambdas.
+
+## ė
+As a working title for this concept, I'm going to use `ė`.
+
+It is the Lithuanian letter "e" with a dot above it.
+
+It is pronounced like Canadian "eh" or the English-language letter "A" (hard, not soft).
+
+I almost chose another Greek letter, then realized that I could use any unicode character, then, almost chose a smily emoji, but, finally settled on `ė`.
+
+[The choice is almost arbitrary, but, `ė` ties my two inherited cultures together.]
 
 ## Syntax Is Cheap
 
@@ -107,6 +118,57 @@ There are 2 options:
 2. Find a way to optimize concurrency down to a lower level.  I propose Concurrent Lambdas (working name).  I think that every *function* should be concurrent (in fact, I'd be happier if every statement (line of code[^lines]) were concurrent, but, small steps first (`par` and thread libraries ain't it))).  In my view, Components send messages to one another - they cannot *call* each other directly.  For added flexibility, messages cannot be sent directly to peers, but must be sent upwards to the parent (Container) for routing.  Structured message-passing is hierarchical.
 
 [^lines]: In fact, lines of code are *so* mid-1900s. I advocate switching to diagrams.  Diagrams can contain text (i.e. text is a subset of diagramming).  A unit of programming is The Component (concurrent), not the line-of-code (or function).  N.B. It is silly to draw diagrams of things that are perfectly fine as text, e.g. "a = b + c", but, there are other concepts that can only be meaningful as diagrams (e.g. networks of Components (where Components are not restricted to being 1-in-1-out things (M-in-N-out, where N >= 0 and M >= 0 [sic - 0]))).  A network can be represented as text, but, I don't find that meaningful (except as assembly code and core dumps).
+
+## Drop-Dead Simplicity
+The mechanism for interal concurrency is ridiculously simple.  Like the concurrency used in early computers
+1. do something
+2. `exit when` some condition is met
+3. poll inputs
+4. loop back to (1)
+
+Preemption is a *tell* - a bad smell - that *something* is wrong / too-complicated.
+
+In fact, *preemption* allows us to disobey the principle of locality-of-reference.  *Blocking* is done in two disparate places:
+1. The Operating System
+2. CALL / RETURN.
+
+The O/S does preemption by pulling the rug out from under an app.  
+
+The only reason that the O/S needs to do this is to allow for long-running Loops.
+
+Preemption should be relegated to development systems.  
+
+Well-behaved apps (i.e. products) should not interfere with one another and, hence, don't need preemption.
+
+The only reason that product apps might mis-behave is that they are too complicated to understand (and tame).
+
+### First-Class Functions and Closures
+
+Operating systems implement closures in assembler and C.
+
+The reason for this is bigotry.
+
+Assembler and C programmers *thought* that Lisp (and dynamic languages) wasn't "as good" as C and assembler, so, they built part-of-lisp in raw assembler and C, the hard way.  Self-flagellation.
+
+I suggest that we put concurrency directly into first-class functions and closures and get rid of Operating Systems.
+
+## Concurrency Is Not Parallelism
+
+Concurrency is a life-style.  
+
+Parallelism is a greasy hamburger.
+
+[Rob Pike Concurrency Is Not Parallelism](https://www.youtube.com/watch?v=oV9rvDllKEg)
+
+It is possible to write programs that are concurrent but not parallel.
+
+It is not possible to write programs that are parallel without, first, being concurrent.
+
+Maybe concurrency is orthogonal to functions?  Like control-flow is orthogonal to data-flow.  (When you try to schmoo them together, you get a mess of complication).
+
+Concurrency is a paradigm.  
+
+Parallelism, though, is simply a problem-to-be-solved.  An optimization.
 
 ## See Also
 
