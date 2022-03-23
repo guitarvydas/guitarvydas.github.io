@@ -19,7 +19,7 @@ Global variables were tamed by scoping (restricting the interface to variables).
 1. functions
 2. bound variables
 
-(λ Calculus uses The Stack to create a dynamic chain of containers at runtime. Functions (and closures) are containers with very restricted interfaces (one group of data in, one group of data out (aka parameters and return value(s), resp.))).
+(Functions (and closures) are containers with very restricted interfaces (one group of data in, one group of data out (aka parameters and return value(s), resp.))).
 
 ## Portability, Retargeting
 Research on compilers in the mid-1970s resulted in things like:
