@@ -21,13 +21,13 @@ Programming languages are simply IDEs for programming machines.
 
 A concrete example of (2) - theoretically sound, but, inhumane, programming language is the λ Calculus.
 
-The following is *reverse* in λ Calculus[^jtar]:
+The following is *reverse* in λ Calculus[^jtar] :
 ```
 λa.a(ω(λbcde.d(bb)(λf.fce)))⊥
 ```
 (This becomes even harder to read when De Bruijn indexing is used).
 
-[^jtar] From [BLC](https://justine.lol/lambda/)
+[^jtar]: From [BLC](https://justine.lol/lambda/)
 
 Clearly, one wouldn't expect spreadsheet users to use λ Calculus instead of the high-school math functions that they are used to.
 
@@ -106,10 +106,6 @@ Note that if `var x` appears outside of the braces, the variable `x` is no longe
 It happens so often that we've given this condition a special name - *global variable*.
 
 ## See Also
-
-[Data Descriptors - a compile-time model of data and addressing](https://dl.acm.org/doi/10.1145/24039.24051)
-[OCG](https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&redir_esc=y)
-
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
 [Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
@@ -120,4 +116,5 @@ It happens so often that we've given this condition a special name - *global var
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
         theme="github-light" 
-        crossorigin="anonymous" 
+        crossorigin="anonymous" > 
+</script> 

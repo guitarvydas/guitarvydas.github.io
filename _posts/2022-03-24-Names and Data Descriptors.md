@@ -96,4 +96,5 @@ Nets are simply names in the *net* namespace.  Nets are used in asynchronous (e.
         repo="guitarvydas/guitarvydas.github.io" 
         issue-term="pathname" 
         theme="github-light" 
-        crossorigin="anonymous" 
+        crossorigin="anonymous" > 
+</script> 
