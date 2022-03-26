@@ -82,6 +82,7 @@ index and size can be *nothing* if these fields have not yet been assigned
 Nets are simply names in the *net* namespace.  Nets are used in asynchronous (e.g. bare-metal) implementations and can be ignored when the system is hosted on a synchronous language/operating system.
 
 ## See Also
+[Data Descriptors](https://guitarvydas.github.io/2022/03/26/Data-Descriptors.html)
 
 [Data Descriptors - a compile-time model of data and addressing](https://dl.acm.org/doi/10.1145/24039.24051)
 [OCG](https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&redir_esc=y)
