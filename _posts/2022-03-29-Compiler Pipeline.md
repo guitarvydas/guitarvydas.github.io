@@ -32,7 +32,7 @@ The stages in the pipeline are:
 - check that functions are called with appropriate number of args and types
 - reports errors, tries to recover and produce as many meaningful error messages as possible
 - aborts pipeline if any errors are found
-- augments the token stream with semantic information (e.g. location of variables - (parameters, temps, ))
+- augments the token stream with semantic information (e.g. location of variables - (parameters, temps, statics, etc.))
 
 ## Coder
 - if invoked, it is known that the input token stream represents a valid program
@@ -44,9 +44,11 @@ The stages in the pipeline are:
 - tokens are named with "t" as the first letter of the name
 - operations are named with "o" as the first letter of the name
 - objects are implemented in single-level Objects, called "mechanisms" (aka Modules)
-- objects are usually implemented as stacks (aka, "concatenative languages", aka, "stack machines", aka, "Forth-like", aka "De Bruijn indexing")
+- objects are usually implemented as stacks (aka, "concatenative languages", aka, "stack machines", aka, "Forth-like", aka mid-1900s version of "De Bruijn indexing")
 - operations on objects usually involve the top-of-stack and, maybe, other elements near the tops of stacks
+
 ## See Also
+
 [PT Pascal and S/SL](https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/)
 
 [Names and Data Descriptors](https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html)
