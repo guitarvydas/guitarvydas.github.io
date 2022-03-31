@@ -15,6 +15,10 @@ Everything is an *object*, including *functions*.
 - booleans - true/false - are probably atomic
 - strings are atomic - probably a blob of bytes
 - the two-slot tuple (struct) that represents objects is probably atomic
+- list cells are atomic
+
+- (arrays are made of atomic list cells)
+- (continguous arrays of objects can be optimized (to remove CDRs))
 
 ## Drawing - Atomic Structures
 ![atomic objects](/assets/js-object-atomic-structures.png)
