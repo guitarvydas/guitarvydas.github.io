@@ -77,7 +77,7 @@ Now, we can create models that have more possible dimensions.
 
 Now, we can tell machines how to transpile the models into lower-level models.
 
-Thinking *only* *about *models* is the lazy way out.  It's only half the job.  You need to explain to a machine how to convert the model into a lower-level form.
+Thinking *only* about *models* is the lazy way out.  It's only half the job.  You need to explain to a machine how to convert the model into a lower-level form.
 
 I use the word "notatation" to mean "models that can be compiled into lower-level form". 
 
