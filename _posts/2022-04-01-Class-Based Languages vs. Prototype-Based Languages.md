@@ -105,7 +105,7 @@ All Designs are done with Production Engineering languages and concepts.  The De
 
 Theorists tend to treat Design as a secondary issue.  
 
-People like Jef Raskin and Brent Victor point out that Design is important, too.
+People like Jef Raskin and Bret Victor point out that Design is important, too.
 
 Early lisp, and BASIC, were *dynamic* languages that emphasized Design (this used to be called "Rapid Prototyping").
 
