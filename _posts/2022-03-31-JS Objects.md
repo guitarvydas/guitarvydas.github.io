@@ -3,7 +3,10 @@ layout: post
 title:  "JS Objects"
 ---
 ## Synopsis
+
 This is my understanding of how JavaScript objects are stored, before optimization.
+
+[*This is WIP - I'm trying to understand JS by taking it apart and atom-izing it.*]
 
 ## Everything Is An Object
 
@@ -41,21 +44,28 @@ Function objects contain a "magic name" that points to a code blob.
 
 The name is entirely implementation-dependent.
 
+I invented the name `%code%` as a stand-in for the name of this magic slot. I treat `%` like just a character that can't be confused with any other character allowed in JavaScript programs.
+
 ![function objects](/assets/js-object-function-object-code-field.png)
 
 ## Function Call Syntax
-There are two ways to create an object
+There are two fundamental ways to create an object
 1. Object.create()
 2. new
+
+There are other ways to create objects, like `class`, but these are built upon the fundamental operations.  `Class` is like a molecule built out of atoms.
+
 ### Object.Create
-A method call on the top level Object object.
+Object.create() is a method call on the top level Object object.
+
 ### New
 `var x = new YYY (...)`
 The `new` statement calls a "regular" function in a special way...
 
+(`New` calls the function, but inserts pre- and post- code around the call.)
+
 All methods (functions) are called with a `this` parameter.
 
-Usually, 
 ```
 f.x (y)
 ```
@@ -63,7 +73,13 @@ is converted to
 ```
 call f.%own%.%code% with parameters (f, y)
 ```
+which becomes
+```
+f.%own%.%code%.call (f, y)
+```
 (where `%own%` and `%code%` are names that I invented to represent implementation-dependent ways of getting the function (code) to be called. It is easiest to imagine that the %code% blob is attached to the namespace of the object `f`, but, implementations might optimize this in different ways).
+
+[*Note that the syntax `f.x (y)` implies that f is passed as the `this` parameter, e.g. this becomes `f.x.call (f, y)`.  And, `z (q)` becomes `global.z.call (z, q)`.*]
 
 In the case of `new` though,
 ```
@@ -71,15 +87,23 @@ var x = new YYY (...)
 ```
 is converted to a several-step process
 1. temp = {} 
-2. temp2 = call YYY.%own%.%code% (temp, ...)
-3. temp2.%proto% = YYY.%proto%
-4. return temp2
+2. temp.%proto% = YYY.%proto%
+3. temp2 = YYY.%own%.%code%.call (temp, ...)
+4. var x = temp2
 
-This version is supported by compilation rules:
-1. if YYY.%own%.%code% uses a `return` statement, return whatever is specified
-2. if there is no `return` statement, silently insert `return this` into the exit point of the function (the compiler needs to catch every exit point ; in fact maybe it is just enough to insert a `return this` at the end of every function (the end of the function can only be reached if there are no other `return`s excecuted before reaching the end)).
+In JavaScript syntax, `this` is passed as an implicit parameter to every function.
 
-The above compilation rules are used by *every* function, but only make total sense when called by `new`.  In the common cases, all functions must include a `return` statement.  Any function that does not contain a `return` is deemed to be a `Constructor`.
+If a function does not execute a `return` statement, the function returns `undefined`, but, the function can mutate the `this` parameter.
+
+A `Constructor` is a just a normal function that returns `undefined`. When called, though, a constructor function is expected to modify the `this` parameter. In essence, the compiler hard-wires an extra parameter into every function call and hard-wires the parameter name to always be `this`, i.e. the syntax 
+```
+function f (x, y) { ... }
+```
+
+is macro-expanded to be
+```
+%callable% f (this, x, y) { ... }
+```
 
 The above only matters to compiler-writers.  For everyone else, the documentation contains hand-waving references to *functions* and *constructors*.  From a compiler-perspective, *functions* and *constructors* are the same.  The compiler doesn't need to remember which functions are Constructors, it simply treats all function calls as method calls and calls functions differently in the two cases (1. normal, and, 2. `new`).
 
@@ -93,9 +117,9 @@ This is very Lisp-y.
 
 In Lisp, functions are *always* anonymous (signified by the keyword `lambda`).
 
-In Lisp *every* symbol (a symbol is just a name, a "handle") contains a set of values.  One of the values might be a `lambda`.
+In Lisp *every* symbol (a symbol is just a name, a "handle") contains a set of attibutes.  One of the attribute values might be a `lambda`.
 
-In Lisp[^lisp2], it is *possible* to have a symbol that has more than one kind of value, e.g. a symbol might contain a datum plus a `lambda`
+In Lisp[^lisp2], it is *possible* to have a symbol that has more than one kind of value, e.g. a symbol might contain a datum attribute plus a `lambda` attribute.
 
 [^lisp2]: In Lisp2, to be exact.  Lisp1s don't allow multiple values for symbols.
 
@@ -106,7 +130,7 @@ In Lisp[^lisp2], it is *possible* to have a symbol that has more than one kind o
 ### Code Transformation
 
 ```
-function f (this, x) {
+function f (x) {
   return 1;
 }
 ```
@@ -114,14 +138,16 @@ function f (this, x) {
 is converted to
 
 ```
-function f (this, x) {
+%callable% f (this, x) {
   return 1;
-  return this;
+  return undefined;
 }
 ```
 
+(The second `return` is never reached, so the above function never actually returns `undefined`).
+
 #### Call Syntax Transformation
-There are two ways to call functions:
+There are several ways to call functions:
 ```
 y.f(3);
 ```
@@ -131,21 +157,32 @@ and
 var x = new f(3);
 ```
 
-[*I use `%` like a normal character, like JavaScript uses the `_` character*].
+and
+```
+y.f.call (y, 3);
+```
+
+[*In the following, I use `%` like a normal character, like JavaScript uses the `_` character*].
 
 The first version is converted to
 ```
-f.%own%.%code%(y, 3);
+f.%own%.%code%.call(y, 3);
 ```
 
 and, the second version is converted to
 ```
-var %temp% = {%proto%=null, %own%=null}
-var %temp2% = f.%own%.%code%(%temp%,3);
-%temp2%.%proto% = f.%proto%
-var x = %temp2%
+var %temp% = {};
+%temp%.%proto%=f.%proto%;
+%temp%.%own%=null;
+var %temp2% = f.%own%.%code%.call(%temp%,3);
+var x = %temp2%;
 ```
 
+## Stuff I Haven't Figured Out Yet
+
+Somewhere, JavaScript stores the name of the object's type.  I would guess that this is saved in the object's prototype, but I haven't figured this out yet.
+
+When you call `console.log (...object...)`, JavaScript tries to print the type name of the object.  In the case of `{}`, it prints nothing as the type name.
 
 ## See Also
 
