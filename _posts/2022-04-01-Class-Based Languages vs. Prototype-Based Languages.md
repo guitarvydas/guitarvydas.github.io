@@ -11,9 +11,6 @@ The main difference between JavaScript and classless Lisp[^classless] is the way
 
 To lookup a symbol, we start by looking at the `own` variables belonging to the symbol.  The `own` slot contains a table that maps names to values.
 
-```
-```
-
 In classless Lisp, a symbol value is looked-up once, with no iterations.  Either the symbol has a named slot or it doesn't.
 
 [^classless]: Early Lisps did not have classes. The class system is written in Lisp and is called CLOS.  This is similar to the way the JavaScript evolved.  JavaScript originally only had prototypes, not classes.  Later, class systems were written in JavaScript and, then, classes were promoted to the ESx standard.  Classes are an optimization ("static language" means pre-optimized, "dynamic language" means ) 
@@ -30,10 +27,8 @@ In JavaScript, the lookup is an upward-tree-walk.  If the named slot does not ex
 var a = new Ford ();
 var b = a.z;
 ```
-
-In classless Lisp, `b` would be *nothing* (undefined), since the `Ford` class has no `z` field.
  
-In JavaScript, though, `b` would be `300`, since an ancestor of the `Ford` class (aka prototype) has a `z` field which contains the value `300`.
+In JavaScript, `b` would be `300`, since an ancestor of the `Ford` class (aka prototype) has a `z` field which contains the value `300`.
 
 ## Set
 
@@ -44,8 +39,6 @@ var a = new Ford ();
 a.z = 7;
 var b = a.z;
 ```
-
-In classless Lisp, the second line `a.z = 7` would fail (raise an exception)  because the field `z` has not been pre-defined in the class `Ford`.
 
 In JavaScript, the second line causes a new slot, called `z` to be created in the `Ford` class (prototype), then `7` is assigned to that new field. 
 
@@ -68,7 +61,7 @@ In class-based systems, the lookup is pre-optimized-away.  All objects contain s
 
 There is a trade-off.  The JavaScript method is simpler but uses CPU time for lookups at runtime.  
 
-Class-based systems optimize for final app speed at the expense of doing more work during compilation. Class-based systems use up the same amount of CPU as prototype-based-systems, but class-based systems amortize the cost over the number of times that the final app is executed.
+Class-based systems optimize for final app speed at the expense of doing more work during compilation. Class-based systems use up CPU time, just like prototype-based-systems, but class-based systems amortize the cost over the number of times that the final app is executed.
 
 Class-based systems are less flexible than prototype-based systems, because the language needs to be constrained to help the compiler/optimizer figure things out.
 
@@ -99,7 +92,9 @@ A mid-level ideal would be to have *design rules* - like *lint* - report if un-c
 
 At present, we are stuck with a low-level approach.  
 
-All Designs are done with Production Engineering languages and concepts.  The Designer must specify all Engineering details, which constrains the thought-processes during Design.
+All Designs are done with Production Engineering languages and concepts.  The Designer must specify all Engineering details, which constrains the thought-processes during Design. 
+
+[*Optmization, e.g. compilation, also affects grain-size for scalability.*]
 
 ## Design vs. Production Engineering
 
@@ -113,7 +108,7 @@ The invention of JavaScript is a *tell* that programming has several orthogonal 
 
 Jef Raskin's book "The Humane Interface" contributed to the *science* of UX Design.
 
-Lisp explored the continuum between Design and Production Engineering, with features like gradual typing (after-the-fact typing, DECLARE), fast-calls, garbage collection, REPLs, etc.
+Lisp explored the continuum between Design and Production Engineering, with features like gradual typing (after-the-fact typing, DECLARE), fast-calls (which is a pre-cursor to JIT), garbage collection, REPLs, etc.
 
 ## Inheritance
 
@@ -121,11 +116,11 @@ In programming, one of the big wins is DRY - Don't Repeat Yourself.
 
 Humans don't like to repeat themselves.  
 
-In fact, we have found that - as we increase our understanding of a problem - we see patterns of similarities in the problem and we try to collapse such similarities together.  We have learned that, if the similarities are not collapsed, then updates require "more work" to perform and leave the potential for leaving dangling un-updated code blobs that result in mysterious bugs.
+In fact, we have found that, as we increase our understanding of a problem, we see patterns of similarities in the problem and we try to collapse such similarities together.  We have learned that, if the similarities are not collapsed, then updates require "more work" to perform and leave the potential for leaving dangling un-updated code blobs that result in mysterious bugs.
 
-Class-based inheritance is a way to get programmers to expend brain-power on pointing out similarities between similar data structures.
+Class-based inheritance is a (manual) way to get programmers to expend brain-power on pointing out similarities between similar data structures.
 
-Instead of having the compiler figure out the similarities in a Design, with something like *diff*, the programmer must appease the compiler by explicitly declaring such similarities using text-based inheritance syntax.  Currently, our programming languages expect programmers to help the compilers figure this stuff out.
+Instead of having the compiler automatically figure out the similarities in a Design, with something like *diff*, the programmer must appease the compiler by explicitly declaring such similarities using text-based inheritance syntax.  Currently, our programming languages expect programmers to help compilers figure this stuff out.
 
 I haven't explored it, but [NiCad](https://www.cs.usask.ca/~croy/papers/2011/CR-NiCad-Tool-ICPC11.pdf) sounds like a step in the direction of automating similarity-detection.
 
