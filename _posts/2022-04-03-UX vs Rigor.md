@@ -9,9 +9,9 @@ One view of programming:
 
 
 ## Continuum
-![Continuum Knob](/assets/knob.jpg)
+![Continuum Knob](/assets/knob.jpg)[^attr]
 
-By Mercado Viagens from Brasil - Various Electronic Components, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=68588072
+[^attr]:By Mercado Viagens from Brasil - Various Electronic Components, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=68588072
 
 Extremes:
 - A
