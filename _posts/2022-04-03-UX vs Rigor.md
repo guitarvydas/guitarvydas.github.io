@@ -9,7 +9,7 @@ One view of programming:
 
 
 ## Continuum
-![Continuum Knob](/assets/knob.jpg)[^attr]
+![Continuum Knob](/assets/knob.png)[^attr]
 
 [^attr]:By Mercado Viagens from Brasil - Various Electronic Components, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=68588072
 
