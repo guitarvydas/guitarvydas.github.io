@@ -274,9 +274,17 @@ It works going in the other direction, too.  Oxides are built out of molecules. 
 
 *Chips* are asynchronous.
 
+## Inner Concurrency
+
+Instead of Operating Systems calling functions, functions might have concurrency inside them.
+
+[*I'm currently working on presenting this concept.  I call it ė.*]
+
 ## See Also
 
 [CALL/RETURN Spaghetti - my view on breaking implicit dependencies](https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html)
+
+[Working Paper on ė](https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html)
 
 [Table of Contents as of Dec. 1, 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)

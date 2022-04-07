@@ -148,7 +148,7 @@ Operating systems implement closures in assembler and C.
 
 The reason for this is bigotry.
 
-Assembler and C programmers *thought* that Lisp (and dynamic languages) wasn't "as good" as C and assembler, so, they built part-of-lisp in raw assembler and C, the hard way.  Self-flagellation.
+Assembler and C programmers *thought* that Lisp and other dynamic languages weren't "as good" as C and assembler, so, they built part-of-lisp in raw assembler and C, the hard way, in an act of self-flagellation.
 
 I suggest that we put concurrency directly into first-class functions and closures and get rid of Operating Systems.
 
