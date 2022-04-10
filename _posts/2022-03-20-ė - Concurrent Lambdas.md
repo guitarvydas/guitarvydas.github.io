@@ -113,13 +113,15 @@ Layers: some programmers know best how to create GUIs, some know security, etc, 
 
 Unanswered question: how do we compose applications using many pieces and how do we compose applications that use pieces that are composed using other pieces (it's turtles all the way down)?  Synchronous code and libraries ain't the answer...  Depedencies are bad[^dep].
 
-[^dep] [Dependencies](https://guitarvydas.github.io/2022/03/29/Dependencies.html)
+[^dep]: [Dependencies](https://guitarvydas.github.io/2022/03/29/Dependencies.html)
 
 Programming languages are IDEs.
 
 Programming language IDEs were invented in the mid-1900s based on the pathetic hardware of the day.  The hardware has improved, but we continue to use mid-1900s style languages.
 
 #### Pseudo-Code
+
+[This is actual code from an actual project.  Don't worry about what is being implemented, look only at *how* it is being implemented (the syntax, the transpiler(s)).]
 
 ```
 implementation route
@@ -128,17 +130,17 @@ implementation route
     { synonym message = output_message
       { find connection in me given child X message.port => connection
         { lock receivers of connection
-	  { for every receiver in connection => dest
-	      { synonym params = {me, message, receiver}
-		{ cond
-		  { dest.component != me
-		    { @deliver_output_to_child_input <= params }
-		  }
-		  { dest.component == me
-		    { @deliver_output_to_me_output <= params }
-		  }
-		}
-	    }
+	      { for every receiver in connection => dest
+	        { synonym params = {me, message, receiver}
+		      { cond
+		        { dest.component != me
+		          { @deliver_output_to_child_input <= params }
+		        }
+		        { dest.component == me
+		          { @deliver_output_to_me_output <= params }
+		         }
+		      }
+	        }
           }
         }
       }
