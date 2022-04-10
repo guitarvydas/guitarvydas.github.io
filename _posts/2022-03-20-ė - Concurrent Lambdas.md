@@ -8,7 +8,113 @@ Looks like a function from the outside, but runs a dispatcher internally, allowi
 
 [working diagram rough cut](https://github.com/guitarvydas/dasl2/blob/dev/eval.drawio) see lookup tab(s)
 
+### Update 2022-04-10
+I am debugging this... [If you see my problem, please email me :-]
 
+I draw my "code" using draw.io, then hand-transpile it to text[^txt] then use Ohm-JS to transpile the pseudo-code to JavaScript...
+
+#### Code
+
+![Code for Routing](/assets/routing.png)
+
+[Beware. This program is currently being debugged and the above may contain inconsistencies.]
+
+#### Revelation
+
+- concentric boxes
+	- means synchronous execution
+	- means inheritance (downwards and upwards, e.g. return value bubbles back up to the output of the outer-most box without needing an explicit wire)
+- boxes with ports and wires
+	- means concurrent execution
+	- boxes are "black boxes" (you don't/can't care what is inside)
+	- scheduler/dispatcher for concurrency is built-into the emitted code as closures (anonymous lambdas)
+- what we call "parameters" 
+	- e.g. `f(x,y,z) ...`
+	- is not plural but singular - it is a single block of data which is de-structured into several sub-types
+	- the singular block of data is synchronous - all data in the block arrives "at the same time"
+	- the same with return values (one block of data, synchronous),
+	- asynch parameters can arrive "at any time" (the code must be written in the concurrent paradigm), e.g. `f(p,q,r)(u,v,w)(x,y,z)->(a,b,c)(d,e,f)`
+	- asynch sends (aka return values) can be produced "at any time"
+	- asynch sends do not cause blocking of the caller
+	- asynch sends can go to any receiver (not just back to the caller)
+	- asynch thinking allows for multiple input ports, multiple output ports, no input ports, no output ports (what is a `daemon`?) ; `functions`, though are limited to *exactly* one input port and *exactly* one output port and cause the caller to block ; (to re-iterate, my use of the term `port` implies a superset of what we commonly call `parameters` (one port === one block of parameters, regardless of how many parameters are in the block))
+#### Pseudo-Code
+```
+implementation route
+{ for every item in children of me => child
+  { for every item in outputQueue of child.runnable => output_message
+    { synonym message = output_message
+      { find connection in me given child X message.port => connection
+        { lock receivers of connection
+	  { for every receiver in connection => dest
+	      { synonym params = {me, message, receiver}
+		{ cond
+		  { dest.component != me
+		    { @deliver_output_to_child_input <= params }
+		  }
+		  { dest.component == me
+		    { @deliver_output_to_me_output <= params }
+		  }
+		}
+	    }
+          }
+        }
+      }
+    }
+    {@child.runnable.resetOutputQueue}
+  }
+}
+
+sync deliver_output_to_child_input <= me, receiver, message
+   // map message for receiver
+  { var input_message <= {receiver.etag, message.data}
+    { @receiver.enqueueInputMessage <= input_message } 
+  }
+
+sync deliver_output_to_me_output <= me, receiver, message
+  // map message for output
+  { var output_message <= {receiver.etag, message.data}
+    { @me.enqueueInputMessage <= output_message }
+  }
+
+```
+#### JavaScript
+```
+exports.route = function () {
+    var _me = this;
+    var _ret = null;
+
+    _me.children.forEach (child => {
+        child.runnable.outputQueue.forEach (output_message => {
+            var message = output_message;
+            var connection = this.find_connection_in__me (child, message.port);
+            // locking only matters on bare metal (async)
+            connection.receiver.forEach (dest => {
+                var params = [_me, message, receiver];
+                if ((dest.component !== _me)) {
+                    deliver_output_to_child_input (params);
+                } else if ((dest.component === _me)) {
+                    deliver_output_to_me_output (params);
+                }
+            });
+
+        });
+        child.runnable.resetOutputQueue ();
+    });
+    return _ret;
+}
+
+this.deliver_output_to_child_input = function (_me, receiver, message) {
+    var input_message = [receiver.etag, message.data];
+    receiver.enqueueInputMessage (input_message);
+}
+
+this.deliver_output_to_me_output = function (_me, receiver, message) {
+    var output_message = [receiver.etag, message.data];
+    _me.enqueueInputMessage (output_message);
+}
+
+```
 ### Future
 
 Once you have worked out the mechanisms for internal concurrency, it becomes "easy" to imagine other kinds of things, like internal state-tracking and Loop-ing...
