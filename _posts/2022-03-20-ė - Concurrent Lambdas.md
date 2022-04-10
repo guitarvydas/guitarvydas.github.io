@@ -119,6 +119,55 @@ Programming languages are IDEs.
 
 Programming language IDEs were invented in the mid-1900s based on the pathetic hardware of the day.  The hardware has improved, but we continue to use mid-1900s style languages.
 
+##### Loop vs. Concurrency
+
+Loop is, actually, more "complicated" than concurrency.
+
+```
+loop:
+  call function to test for termination
+  send message to leaf to perform 1 step
+  call leaf function
+  continue
+end loop
+```
+```
+concurency:
+  call function to test for termination
+  call container function to do work
+  continue
+end loop
+```
+
+The "difference" between traditional looping and concurrency is:
+- loop calls a Leaf function
+	- the Leaf function performs 1 step of the loop, then returns
+	- the Loop sends a `continue` message to its inner function, when looping,
+	- or, the loop exits when the termination condition is `true`, without sending a ` continue` message to its inner function (in fact, even if it did send a `continue` message in this case, the message would never be processed, since the Loop would exit and not call its inner function)
+- the concurrency loop calls a Container function
+	- The Container performs one step, recursively
+	- the Container is a recursive function that may contain nested functions
+	- nested functions can be Leafs, Loops or other Container functions
+	- somewhere in the bowels of the nested functions, the continuation flag is set/reset
+	- the nested functions send messages to other functions (but indirectly)
+	- the routing of messages is performed by the nested-functions' direct parents (always Containers)
+	- the concurrency loop does not need to send itself a `continue` message, the nested functions send messages as required and keep the loop going, or, one of the nested functions tells the loop to stop
+	- stopping concurrency does not happen immediately, but only at the top level
+	- the loop wrapper can stop looping if there are no messages (recursively) to be processed
+	- in general, a message is not processed in one fell swoop, but is processed in steps where the steps are meted out by the loop and the recursive tree of Containers
+	- The Container performs one step, recursively.  Each Container tells its Children to perform one step.  If the Child is a Container, then *it* tells its Children to perform one step, and so on.  If the Child is a Leaf, the Leaf performs its step and simply returns.
+
+A "game" world would be a Concurrency Loop that steps until it has changed the world.  It returns the modified World.  The game Loop would store this modified World for use in the next go-around.
+
+Makng *all* code concurrent makes it possible to optimize the code by splitting pieces onto other machines (distributed).
+
+Note that synchronous languages inhibit such splitting.  E.g. Python, JS, Haskell, libraries, etc.
+
+Splitting is possible using synchronous languages, but is more complicated (we invent bloatware like Linux, Window, MacOS, etc. to help with the splitting).
+
+Splitting is "natural" on the internet.  Synchrony inhibits splitting and, therefore, inhibits full realization of internetting.  We end up with contortions like callbacks and CPS.
+
+
 #### Pseudo-Code
 
 [This is actual code from an actual project.  Don't worry about what is being implemented, look only at *how* it is being implemented (the syntax, the transpiler(s)).]
