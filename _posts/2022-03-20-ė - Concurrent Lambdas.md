@@ -38,7 +38,9 @@ I draw my "code" using draw.io, then hand-transpile it to text[^txt] then use Oh
 	- asynch sends do not cause blocking of the caller
 	- asynch sends can go to any receiver (not just back to the caller)
 	- asynch thinking allows for multiple input ports, multiple output ports, no input ports, no output ports (what is a `daemon`?) ; `functions`, though are limited to *exactly* one input port and *exactly* one output port and cause the caller to block ; (to re-iterate, my use of the term `port` implies a superset of what we commonly call `parameters` (one port === one block of parameters, regardless of how many parameters are in the block))
+
 #### Pseudo-Code
+
 ```
 implementation route
 { for every item in children of me => child
@@ -78,7 +80,9 @@ sync deliver_output_to_me_output <= me, receiver, message
   }
 
 ```
+
 #### JavaScript
+
 ```
 exports.route = function () {
     var _me = this;
@@ -115,6 +119,7 @@ this.deliver_output_to_me_output = function (_me, receiver, message) {
 }
 
 ```
+
 ### Future
 
 Once you have worked out the mechanisms for internal concurrency, it becomes "easy" to imagine other kinds of things, like internal state-tracking and Loop-ing...
