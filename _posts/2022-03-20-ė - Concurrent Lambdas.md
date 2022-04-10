@@ -39,6 +39,86 @@ I draw my "code" using draw.io, then hand-transpile it to text[^txt] then use Oh
 	- asynch sends can go to any receiver (not just back to the caller)
 	- asynch thinking allows for multiple input ports, multiple output ports, no input ports, no output ports (what is a `daemon`?) ; `functions`, though are limited to *exactly* one input port and *exactly* one output port and cause the caller to block ; (to re-iterate, my use of the term `port` implies a superset of what we commonly call `parameters` (one port === one block of parameters, regardless of how many parameters are in the block))
 
+##### Loop
+```
+loop:
+  call function to test for termination
+  call function to do work
+  continue
+end loop
+```
+
+Note that the `do work ()` function might call a `done ()` function that affects the termination test - the next time around.
+
+Refinement, more detail:
+
+```
+begin ()
+loop:
+  call function to test for termination
+  call function to do work
+  continue
+end loop
+finish ()
+```
+
+Each Loop is made of 3 pieces
+1. beginning
+2. middle
+3. end.
+
+More refinement, even more detail:
+
+```
+anonymous wrapper {
+  define mutable boolean done_flag = false;
+  define conclude () { done_flag = true; }
+  begin ()
+  loop:
+    call function to test for termination (done_flag === true?)
+    call function to do work
+    continue
+  end loop
+  finish ()
+}
+```
+
+Mutability - bad in general, but, OK when restricted.
+
+Flag === mutable variable.
+
+The above **restricts** the use of the **flag**.  The flag cannot be mutated explicitly by the programmer.  The flag can only be implicitly mutated by the programming language (e.g. by calling `conclude ()` or whatever syntactic sugar is provided by the language).
+
+Note that the loop contains two (2) *function* calls.  These can be written in a functional manner.  
+
+The loop/flag is lifted out of the functional paradigm (leaving the functional paradigm simple, and, un-bloated) (See Tunney's Sector Lisp for beautifully simple use of the functional paradigm.  Tunney removed bloat and reduced the whole language to <512 bytes[sic]).
+
+Bloatware, like Linux, MacOS, Windows, etc. tries to enable mutation in a paradigm (functional) that resists mutation.  The result is bloatware.  Note that the above Loop is understandable and cannot need 1Mb of bloatware to support it.
+
+Note that *assembler* is full of flags and mutation and globals and otherwise disgusting concepts.  We wrap HLLs around assembler (e.g. Haskell, C++, Python, JS, etc.) to hide the disgusting concepts and to restrict their use.  But, then, we insert the disgusting concept of synchrony in at the lowest levels.
+
+Most of our programming languages allow bloated concepts like synchronization-everywhere, and, mutation, and, ...  I argue that we should lift these concepts out of the beautifully-simple paradigms, stop trying to force one language to do everything and use Ohm (a derivative of PEG) to wrap many syntaxes around the paradigms.  Then, we can choose syntaxes to suit our problems instead of having the language-designers tell us how to solve our problems.
+
+Creating syntax (a language) used to be hard.
+
+With Ohm, syntax is no longer hard.  
+
+Languages are like bowls of candies, grab a handful.
+
+The underlying paradigms are still "hard to understand", but we can drape them in less-hard-to-understand syntaxes.
+
+We can create a cookbook of various syntaxes for programmers who don't want to create their own syntaxes.
+
+Layers: some programmers know best how to create GUIs, some know security, etc, etc.  Give them each a bowl full of syntaxes.  Some programmers are good at creating syntaxes for other programmers - give *them* syntaxes for creating syntaxes.
+
+Unanswered question: how do we compose applications using many pieces and how do we compose applications that use pieces that are composed using other pieces (it's turtles all the way down)?  Synchronous code and libraries ain't the answer...  Depedencies are bad[^dep].
+
+[^dep] [Dependencies](https://guitarvydas.github.io/2022/03/29/Dependencies.html)
+
+Programming languages are IDEs.
+
+Programming language IDEs were invented in the mid-1900s based on the pathetic hardware of the day.  The hardware has improved, but we continue to use mid-1900s style languages.
+
 #### Pseudo-Code
 
 ```
