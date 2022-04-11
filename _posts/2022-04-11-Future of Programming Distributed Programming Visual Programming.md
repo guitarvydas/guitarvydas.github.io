@@ -9,7 +9,9 @@ working papers and opinions...
 
 [Deprecating Programming Languages and Operating Systems](https://guitarvydas.github.io/2022/04/11/Deprecating-Programming-Languages.html)
 
-[ė - Inner Concurrency](https://guitarvydas.github.io/2022/04/11/ė-Working-Paper-2.html)
+[ė - Inner Concurrency 2](https://guitarvydas.github.io/2022/04/11/ė-Working-Paper-2.html)
+
+[ė - Inner Concurrency 1]https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html)
 
 [Zero Dependency Software Components](https://guitarvydas.github.io/2022/04/11/zerodependencysoftwarecomponents.html)
 
@@ -22,7 +24,7 @@ working papers and opinions...
 
 ## See Also
 
-[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Table of Contents as of Dec. 01 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
 [Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)

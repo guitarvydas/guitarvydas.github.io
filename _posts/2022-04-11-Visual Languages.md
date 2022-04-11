@@ -11,7 +11,7 @@ Boxes, in box-and-wire notation, are usually understood to be asynchronous.
 
 ## See Also
 
-[Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
+[Table of Contents as of Dec. 01 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
 [Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
 [References](https://guitarvydas.github.io/2021/01/14/References.html)
