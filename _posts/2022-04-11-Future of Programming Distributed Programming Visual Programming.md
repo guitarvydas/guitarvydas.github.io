@@ -3,7 +3,7 @@ layout: post
 title:  "Future of Programming, Distributed Programming, Visual Programming"
 ---
 
-I argue that programming becomes easier when synchrony is removed.
+I argue that programming becomes easier when synchrony is expunged.
 
 working papers and opinions...
 
@@ -13,7 +13,7 @@ working papers and opinions...
 
 [Zero Dependency Software Components](https://guitarvydas.github.io/2022/04/11/zerodependencysoftwarecomponents.html)
 
-[Visual Languages]()
+[Visual Languages](https://guitarvydas.github.io/2022/04/11/Visual-Languages.html)
 
 [Smallest Unit Of Concurrency](https://guitarvydas.github.io/2022/04/11/Smallest-Unit-of-Concurrency.html)
 
