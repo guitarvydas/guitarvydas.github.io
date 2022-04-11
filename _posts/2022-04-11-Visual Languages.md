@@ -7,7 +7,9 @@ Visual Languages can be taken seriously.
 
 First, though, remove the pervasive synchrony present in most textual languages.
 
-Boxes, in box-and-wire notation, are usually understood to be asynchronous.
+Boxes, in box-and-wire notation, are usually understood to be asynchronous[^sync].
+
+[^sync]: Boxes *can* be implemented using synchronous languages, but, this leads to epicycles (AKA Accidental Complexity).
 
 ## See Also
 
