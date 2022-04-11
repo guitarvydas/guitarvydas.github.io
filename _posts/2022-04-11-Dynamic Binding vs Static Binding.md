@@ -15,11 +15,17 @@ Pour your Smarties out on the desk and sort them.  Red ones over here, green on
 
 If you can sort programming constructs like Smarties, you can pre-compile some of them and avoid doing them repeatedly at runtime.
 
-Design === being able to change your mind rapidly === dynamic typing.
+Design ≡ being able to change your mind rapidly ≡ dynamic typing.
 
-If you can sort programming constructs like Smarties, you can stupid mistakes earlier.
+If you can sort programming constructs like Smarties, you can catch stupid mistakes earlier.
 
 If you rely on static typing *only*, you inhibit Design.
+
+Static binding says that variable names are inconsequential.
+
+In the extreme - all syntax is inconsequential.
+
+Syntax is just a *skin* draped over loftier concepts like paradigms.
 
 ## See Also
 
