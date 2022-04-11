@@ -1,6 +1,6 @@
- ---
+---
 layout: post
-title:  "Dependencies"
+title: "Dependencies"
 ---
 ## Dependencies - The Problem of the 2000's
 Dependencies in programs are the "global variable" problem of the 2000's.
@@ -71,7 +71,9 @@ Commands/requests go *down* the tree.
 
 Summaries (data) come back *up* the tree.
 
-No one tree node is overwhelmed with too much data.  A node deals only with summary data.  Divide and conquer.
+No one tree node is overwhelmed with too much data.  A node deals only with summary data.  
+
+Divide and conquer.
 
 ## Asynchrony - Fire And Forget
 
