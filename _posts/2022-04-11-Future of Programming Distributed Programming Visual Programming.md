@@ -11,7 +11,7 @@ working papers and opinions...
 
 [ė - Inner Concurrency 2](https://guitarvydas.github.io/2022/04/11/ė-Working-Paper-2.html)
 
-[ė - Inner Concurrency 1]https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html)
+[ė - Inner Concurrency 1](https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html)
 
 [Zero Dependency Software Components](https://guitarvydas.github.io/2022/04/11/zerodependencysoftwarecomponents.html)
 

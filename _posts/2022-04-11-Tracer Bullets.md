@@ -28,7 +28,7 @@ Fields (1) and (2) are *real*.  Fields (3) and (4) are for debugging.
 
 ## See Also
 
-[Message Class]()
+[Message Class](https://guitarvydas.github.io/2022/04/11/Message-Class.html)
 
 [Table of Contents as of Dec. 01 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)

@@ -79,7 +79,7 @@ DLLs wouldn't be necessary if software components were flexible-by-default.
 
 ## See Also
 
-[Tracer Bullets]()
+[Tracer Bullets](https://guitarvydas.github.io/2022/04/11/Tracer-Bullets.html)
 
 [Table of Contents as of Dec. 01 2021](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
