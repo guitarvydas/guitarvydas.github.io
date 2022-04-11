@@ -11,6 +11,18 @@ Things have changed.
 
 Operating systems are libraries.
 
+## Syntax is Easy
+
+Ohm makes language-making easy now.
+
+Forget compilers.
+
+## Synchrony is Misapplied
+
+Synchrony is the bane of our existence. 
+
+Most of our current programming languages (Rust, Haskell, Python, JS, C, …) have implicit synchrony.
+
 ## See Also
 
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
