@@ -171,6 +171,7 @@ The goal of compilation is to strip out as much information as possible, to allo
 [Names and Data Descriptors](https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html)
 
 [Data Descriptors - a compile-time model of data and addressing](https://dl.acm.org/doi/10.1145/24039.24051)
+
 [OCG](https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&redir_esc=y)
 
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
