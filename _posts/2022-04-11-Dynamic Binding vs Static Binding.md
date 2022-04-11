@@ -9,7 +9,9 @@ Typing done at runtime.  Repeatedly.
 
 Dynamic typing is often confused with No Typing.  Not the same.
 
-Compiling is Production Engineering (which Kay mistakenly calls Software Engineering).
+Compiling is Production Engineering (which Kay mistakenly calls Software Engineering[^eng]).
+
+[^eng]: Engineering is more nuanced than just *optimization*.  First, comes figuring *what* all of the details are, then, comes *optimizing* those details.  Architects think about details, too, but, different details (like "how does this fit in the eco-system?" (sometimes AKA "UX")).
 
 Pour your Smarties out on the desk and sort them.  Red ones over here, green ones over there, …
 
