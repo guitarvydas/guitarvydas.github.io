@@ -9,8 +9,27 @@ The example is `cat`.  It copies the contents of a file to the console character
 
 ## Top Level
 
-![Top Level of The Simple Example (cat)](/assets/cat.png)
+![Top Level of The Simple Example (cat)](/assets/cat![[cat.png]].png)
 
+(obsidian:
+![cat.png](file:///Users/tarvydas/Desktop/blogs/guitarvydas.github.io/assets/cat.png)
+)
+
+The diagram represents a very simple system with three (3) components total
+- a Container
+- two (2) Leaf components.
+
+The Container is called `top`.
+
+The Leaf components are called `read` and `write`.
+
+`Top` runs the two leaves concurrently and routes messages between them.
+
+`Top` is called (invoked) like a normal function and can return values like a normal function.  (In this example, `Top` doesn't bother to return anything).
+
+When `Top` is invoked, it is passed two (2) parameters
+1. the filename to be read
+2. the filename to be written (which is ignored in this simple example, this example simply prints characters on the console and doesn't write them to a file).
 
 ## See Also
 
