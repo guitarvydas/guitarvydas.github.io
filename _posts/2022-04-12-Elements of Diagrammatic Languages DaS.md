@@ -132,11 +132,17 @@ alnum
 
 ### Methods
 
+
+
 ### Predicates
 
 ### Procedures
 
 ### Handlers
+
+`λ₂ (self, message) -> nothing`
+
+Handlers can invoke `Send ()` to create messages which are routed by the handlers' Containers.
 
 ### Data Descriptors
 
