@@ -2,22 +2,51 @@
 layout: post
 title:  "DaS - Elements of Diagrammatic Languages (WP1)"
 ---
+
 Thoughts April 12, 2022 ...
 
 ## Boxes
+
 ### 1Box
+
+![1 Box](/assets/daswp1-1box.png)
+
 ### 2Box
+![2 Box](/assets/daswp1-2box.png)
+
 ### NBox
+
+![N Box](/assets/daswp1-nbox.png)
+
 ### 0Box
+
+![0 Box](/assets/daswp1-0box.png)
+
 ### Concentric Boxes
+
 ### Independent Boxes
+
 ## Ports
+
 ### Input Ports
+
+![Input Ports](/assets/daswp1-inputport.png)
+
+
 ### Output Ports
+
+![Output Ports](/assets/daswp1-outputport.png)
+
 ## Connectors
+
 ### Message Connectors
+
+![Asynchronous Connectors](/assets/daswp1-connectors.png)
+
 ### Same-Page Connectors
+
 ## Text Phrase
+
 ### Example Phrases
 - ⟪WhenAll⟫
   | when all PredicateBox
