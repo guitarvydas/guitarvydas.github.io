@@ -1,0 +1,96 @@
+I"�<p>I’m experimenting with a <code class="language-plaintext highlighter-rouge">Message</code> class that has two main fields and two trace fields:</p>
+<ol>
+  <li>tag</li>
+  <li>data</li>
+  <li>come-from id</li>
+  <li>previous message.</li>
+</ol>
+
+<p>Since each message is defined as above, <code class="language-plaintext highlighter-rouge">previous message</code> becomes a nested list from the beginning of time.</p>
+
+<p>Currently, I output traces in Lisp syntax and use a Lisp pretty printer to view them (emacs <em>indent-region</em> in my case).</p>
+
+<p>Fields (1) and (2) are <em>real</em>.  Fields (3) and (4) are for debugging<sup id="fnref:deb" role="doc-noteref"><a href="#fn:deb" class="footnote">1</a></sup>.</p>
+
+<h2 id="tag-in-practice">Tag In Practice</h2>
+
+<p>I found that, in practice, I wanted to tag messages - always.</p>
+
+<p>One untagged input (like Unix stdin) was not good enough in practice.</p>
+
+<p>I wanted to know <em>why</em> a message was being received.</p>
+
+<p>A <em>tag</em> is a simple code - a number, a symbol.</p>
+
+<p>I tried using untagged messages, but, then when I put tags back in, I had to hack on the kernel.</p>
+
+<p>This made me think that tags are <em>atoms</em> and need to be explicitly taken into account in the kernel.</p>
+
+<p>I dunno, maybe some day when I have copious free time, I will reconsider the pervasity of tags and normalize them out of the kernel.</p>
+
+<h2 id="messages-in-general">Messages In General</h2>
+
+<p>Tagless messages have an appeal.</p>
+
+<p>Messages should be layered envelopes like network packets.</p>
+
+<p>Each Layer in the code picks off one layer of wrapping and passes the data on.</p>
+
+<h3 id="osi-layer-model">OSI Layer Model</h3>
+
+<p>The OSI 7-layer model in-the-small, applied to software components.</p>
+
+<p>Will it turn out to be 7 layers for component-driven software?</p>
+
+<p>I don’t know yet.</p>
+
+<p>My current guess is that it won’t turn out to be hard-wired to any specific number and will depend on the problem-being-solved.</p>
+
+<p>Maybe a cookbook of layer-patterns can be created for programmers who don’t want to invent new layer patterns.</p>
+
+<h2 id="tag-handlers">Tag Handlers</h2>
+
+<p>A tag handler is a pure λ that takes two (2) parameters</p>
+<ul>
+  <li>me (self, this)</li>
+  <li>message.</li>
+</ul>
+
+<p>The uber-controller contains one λ for each possible message tag.</p>
+
+<p>The uber-controller decodes tags, then, calls the appropriate λ to handle the message.</p>
+
+<p>Tag handler λs can call <code class="language-plaintext highlighter-rouge">Send()</code> to send messages upwards for routing, but, handlers cannot invoke other handlers directly.</p>
+
+<p>Only the parent Container can route messages.  This provides <em>flexibility</em> and allows components to be used in differing situations.</p>
+
+<h2 id="libary-functions-are-inflexible">Libary Functions Are Inflexible</h2>
+
+<p>We <em>thought</em> that library functions work this way, but they aren’t flexible enough.</p>
+
+<p>For example, any library function that invokes another function by-name (which is the usual case), is inflexible and has the name of the other function baked into it.</p>
+
+<p>DLLs are a partial solution to this problem of flexibility.</p>
+
+<p>DLLs wouldn’t be necessary if software components were flexible-by-default.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2022/04/11/Tracer-Bullets.html">Tracer Bullets</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 01 2021</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<p>&lt;script src=”https://utteranc.es/client.js” <br />
+        repo=”guitarvydas/guitarvydas.github.io”</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:deb" role="doc-endnote">
+      <p>See “Tracer Bullets” for description about what (3) and (4) are. <a href="#fnref:deb" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

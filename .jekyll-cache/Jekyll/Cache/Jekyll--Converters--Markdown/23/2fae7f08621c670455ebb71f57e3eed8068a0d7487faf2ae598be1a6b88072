@@ -1,0 +1,121 @@
+I"{<h2 id="spectrum-of-languages">Spectrum of Languages</h2>
+<p>Broadly, there are two extremes in programming language design:</p>
+<ol>
+  <li>end-user-oriented - “humane” from the end-users’ perspective, but, theoretically unsound</li>
+  <li>theoretically-oriented - self-consistent, but “inhumane” from the end-users’ perspective</li>
+</ol>
+
+<p>What is the middle ground?</p>
+
+<p>We need a version of <a href="https://en.wikipedia.org/wiki/The_Humane_Interface">The Humane Interface</a> for programming language design.</p>
+
+<h2 id="programming-languages-are-ides">Programming Languages Are IDEs</h2>
+
+<p>The goal of programming is to control the operation of a machine.</p>
+
+<p>Programming languages are simply IDEs for programming machines.</p>
+
+<h2 id="λ-calculus">λ Calculus</h2>
+
+<p>A concrete example of (2) - theoretically sound, but, inhumane, programming language is the λ Calculus.</p>
+
+<p>The following is <em>reverse</em> in λ Calculus<sup id="fnref:jtar" role="doc-noteref"><a href="#fn:jtar" class="footnote">1</a></sup> :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λa.a(ω(λbcde.d(bb)(λf.fce)))⊥
+</code></pre></div></div>
+<p>(This becomes even harder to read when De Bruijn indexing is used).</p>
+
+<p>Clearly, one wouldn’t expect spreadsheet users to use λ Calculus instead of the high-school math functions that they are used to.</p>
+
+<h2 id="question">Question</h2>
+
+<p>So, what is the “science” behind wrapping theoretically-sound operations in sugar-coated syntax that makes for a “good” programming language?</p>
+
+<h3 id="problem-space">Problem Space</h3>
+
+<p>Firstly, it depends on the problem space.  Spreadsheet users want “simple to use” functions.  They don’t want to see the power of λ Calculus or the power of Python.</p>
+
+<h3 id="one-language-to-rule-them-all---not">One Language To Rule Them All - NOT</h3>
+<p>I argue that there can be no <em>one</em> programming language that will satisfy everone.</p>
+
+<p><em>General purpose programming languages</em> are dead to me.</p>
+
+<h3 id="implications">Implications</h3>
+
+<p>The implication is that we need tools to help us build lots of programming languages, and, we need tricks to make the act of building languages proceed more quickly.</p>
+
+<h4 id="peg">PEG</h4>
+
+<p>PEG<sup id="fnref:peg" role="doc-noteref"><a href="#fn:peg" class="footnote">2</a></sup> - Ohm-JS - is a step in that direction.</p>
+
+<h4 id="humane-interface-for-programming-languages">Humane Interface For Programming Languages</h4>
+
+<p>We need to explore / characterize what end-users <em>think</em> is simple.</p>
+
+<h4 id="simplicity-complexity">Simplicity, Complexity</h4>
+
+<p>Simplicity is defined as “lack of nuance”.</p>
+
+<p>How can we hide/elide nuance without removing nuance?</p>
+
+<h4 id="layers">Layers</h4>
+
+<p>We need to employ layered design.</p>
+
+<p>Layers are infinitely recursive.</p>
+
+<p>It is not good enough to think in terms of only two (2) layers</p>
+<ul>
+  <li>high-level vs. low-level</li>
+  <li>compile-time vs. runtime.</li>
+</ul>
+
+<h2 id="syntax">Syntax</h2>
+<p>End-users often use diagrams - e.g. whiteboards and paper.</p>
+
+<p>Our programming languages are relegated to being text-only<sup id="fnref:text" role="doc-noteref"><a href="#fn:text" class="footnote">3</a></sup>.</p>
+
+<h3 id="containment">Containment</h3>
+
+<p>People think in terms of containers - dolls nested within dolls.</p>
+
+<p>Containment is easy to express on diagrams.</p>
+
+<p>Containment is less-easy to express in text.  We have spent decades crawling out of the hole created by our use of text-only languages (Structured Programming, Global-vs-scoped variables, OO, λ Calculus, namespaces, etc., etc.).</p>
+
+<h4 id="containment-diagram">Containment Diagram</h4>
+
+<p><img src="/assets/containment.png" alt="Containment" /></p>
+
+<h4 id="containment-text">Containment Text</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  var x;
+}
+</code></pre></div></div>
+<p>Note that if <code class="language-plaintext highlighter-rouge">var x</code> appears outside of the braces, the variable <code class="language-plaintext highlighter-rouge">x</code> is no longer contained.</p>
+
+<p>It happens so often that we’ve given this condition a special name - <em>global variable</em>.</p>
+
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:jtar" role="doc-endnote">
+      <p>From <a href="https://justine.lol/lambda/">BLC</a> <a href="#fnref:jtar" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:peg" role="doc-endnote">
+      <p>Parsing Expression Grammars. <a href="#fnref:peg" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:text" role="doc-endnote">
+      <p>The reason for this is historical.  In the mid-1900s, it was very expensive to make hardware that operated on anything but non-overlapping, grids of small bitmaps (aka characters). <a href="#fnref:text" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

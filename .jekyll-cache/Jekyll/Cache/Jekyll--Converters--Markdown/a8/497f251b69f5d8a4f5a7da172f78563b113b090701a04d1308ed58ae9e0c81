@@ -1,0 +1,456 @@
+I"`<p>Looks like a function from the outside, but runs a dispatcher internally, allowing sensible diagrams to be drawn.</p>
+
+<p><a href="https://github.com/guitarvydas/dasl2/blob/dev/lisp/lookup.asd">lookup.asd</a> (lisp project file)</p>
+
+<p><a href="https://github.com/guitarvydas/dasl2/blob/dev/eval.drawio">working diagram rough cut</a> see lookup tab(s)</p>
+
+<h3 id="update-2022-04-10">Update 2022-04-10</h3>
+<p>I am debugging this… [If you see my problem, please email me :-]</p>
+
+<p>I draw my “code” using draw.io, then hand-transpile it to text[^txt] then use Ohm-JS to transpile the pseudo-code to JavaScript…</p>
+
+<h4 id="code">Code</h4>
+
+<p><img src="/assets/routing.png" alt="Code for Routing" /></p>
+
+<p>[Beware. This program is currently being debugged and the above may contain inconsistencies.]</p>
+
+<h4 id="revelation">Revelation</h4>
+
+<ul>
+  <li>concentric boxes
+    <ul>
+      <li>means synchronous execution</li>
+      <li>means inheritance (downwards and upwards, e.g. return value bubbles back up to the output of the outer-most box without needing an explicit wire)</li>
+    </ul>
+  </li>
+  <li>boxes with ports and wires
+    <ul>
+      <li>means concurrent execution</li>
+      <li>boxes are “black boxes” (you don’t/can’t care what is inside)</li>
+      <li>scheduler/dispatcher for concurrency is built-into the emitted code as closures (anonymous lambdas)</li>
+    </ul>
+  </li>
+  <li>what we call “parameters”
+    <ul>
+      <li>e.g. <code class="language-plaintext highlighter-rouge">f(x,y,z) ...</code></li>
+      <li>is not plural but singular - it is a single block of data which is de-structured into several sub-types</li>
+      <li>the singular block of data is synchronous - all data in the block arrives “at the same time”</li>
+      <li>the same with return values (one block of data, synchronous),</li>
+      <li>asynch parameters can arrive “at any time” (the code must be written in the concurrent paradigm), e.g. <code class="language-plaintext highlighter-rouge">f(p,q,r)(u,v,w)(x,y,z)-&gt;(a,b,c)(d,e,f)</code></li>
+      <li>asynch sends (aka return values) can be produced “at any time”</li>
+      <li>asynch sends do not cause blocking of the caller</li>
+      <li>asynch sends can go to any receiver (not just back to the caller)</li>
+      <li>asynch thinking allows for multiple input ports, multiple output ports, no input ports, no output ports (what is a <code class="language-plaintext highlighter-rouge">daemon</code>?) ; <code class="language-plaintext highlighter-rouge">functions</code>, though are limited to <em>exactly</em> one input port and <em>exactly</em> one output port and cause the caller to block ; (to re-iterate, my use of the term <code class="language-plaintext highlighter-rouge">port</code> implies a superset of what we commonly call <code class="language-plaintext highlighter-rouge">parameters</code> (one port === one block of parameters, regardless of how many parameters are in the block))</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="loop">Loop</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loop:
+  call function to test for termination
+  call function to do work
+  continue
+end loop
+</code></pre></div></div>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">do work ()</code> function might call a <code class="language-plaintext highlighter-rouge">done ()</code> function that affects the termination test - the next time around.</p>
+
+<p>Refinement, more detail:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>begin ()
+loop:
+  call function to test for termination
+  call function to do work
+  continue
+end loop
+finish ()
+</code></pre></div></div>
+
+<p>Each Loop is made of 3 pieces</p>
+<ol>
+  <li>beginning</li>
+  <li>middle</li>
+  <li>end.</li>
+</ol>
+
+<p>More refinement, even more detail:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>anonymous wrapper {
+  define mutable boolean done_flag = false;
+  define conclude () { done_flag = true; }
+  begin ()
+  loop:
+    call function to test for termination (done_flag === true?)
+    call function to do work
+    continue
+  end loop
+  finish ()
+}
+</code></pre></div></div>
+
+<p>Mutability - bad in general, but, OK when restricted.</p>
+
+<p>Flag === mutable variable.</p>
+
+<p>The above <strong>restricts</strong> the use of the <strong>flag</strong>.  The flag cannot be mutated explicitly by the programmer.  The flag can only be implicitly mutated by the programming language (e.g. by calling <code class="language-plaintext highlighter-rouge">conclude ()</code> or whatever syntactic sugar is provided by the language).</p>
+
+<p>Note that the loop contains two (2) <em>function</em> calls.  These can be written in a functional manner.</p>
+
+<p>The loop/flag is lifted out of the functional paradigm (leaving the functional paradigm simple, and, un-bloated) (See Tunney’s Sector Lisp for beautifully simple use of the functional paradigm.  Tunney removed bloat and reduced the whole language to &lt;512 bytes[sic]).</p>
+
+<p>Bloatware, like Linux, MacOS, Windows, etc. tries to enable mutation in a paradigm (functional) that resists mutation.  The result is bloatware.  Note that the above Loop is understandable and cannot need 1Mb of bloatware to support it.</p>
+
+<p>Note that <em>assembler</em> is full of flags and mutation and globals and otherwise disgusting concepts.  We wrap HLLs around assembler (e.g. Haskell, C++, Python, JS, etc.) to hide the disgusting concepts and to restrict their use.  But, then, we insert the disgusting concept of synchrony in at the lowest levels.</p>
+
+<p>Most of our programming languages allow bloated concepts like synchronization-everywhere, and, mutation, and, …  I argue that we should lift these concepts out of the beautifully-simple paradigms, stop trying to force one language to do everything and use Ohm (a derivative of PEG) to wrap many syntaxes around the paradigms.  Then, we can choose syntaxes to suit our problems instead of having the language-designers tell us how to solve our problems.</p>
+
+<p>Creating syntax (a language) used to be hard.</p>
+
+<p>With Ohm, syntax is no longer hard.</p>
+
+<p>Languages are like bowls of candies, grab a handful.</p>
+
+<p>The underlying paradigms are still “hard to understand”, but we can drape them in less-hard-to-understand syntaxes.</p>
+
+<p>We can create a cookbook of various syntaxes for programmers who don’t want to create their own syntaxes.</p>
+
+<p>Layers: some programmers know best how to create GUIs, some know security, etc, etc.  Give them each a bowl full of syntaxes.  Some programmers are good at creating syntaxes for other programmers - give <em>them</em> syntaxes for creating syntaxes.</p>
+
+<p>Unanswered question: how do we compose applications using many pieces and how do we compose applications that use pieces that are composed using other pieces (it’s turtles all the way down)?  Synchronous code and libraries ain’t the answer…  Depedencies are bad<sup id="fnref:dep" role="doc-noteref"><a href="#fn:dep" class="footnote">1</a></sup>.</p>
+
+<p>Programming languages are IDEs.</p>
+
+<p>Programming language IDEs were invented in the mid-1900s based on the pathetic hardware of the day.  The hardware has improved, but we continue to use mid-1900s style languages.</p>
+
+<h5 id="loop-vs-concurrency">Loop vs. Concurrency</h5>
+
+<p>Loop is, actually, more “complicated” than concurrency.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loop:
+  call function to test for termination
+  send message to leaf to perform 1 step
+  call leaf function
+  continue
+end loop
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>concurency:
+  call function to test for termination
+  call container function to do work
+  continue
+end loop
+</code></pre></div></div>
+
+<p>The “difference” between traditional looping and concurrency is:</p>
+<ul>
+  <li>loop calls a Leaf function
+    <ul>
+      <li>the Leaf function performs 1 step of the loop, then returns</li>
+      <li>the Loop sends a <code class="language-plaintext highlighter-rouge">continue</code> message to its inner function, when looping,</li>
+      <li>or, the loop exits when the termination condition is <code class="language-plaintext highlighter-rouge">true</code>, without sending a ` continue<code class="language-plaintext highlighter-rouge"> message to its inner function (in fact, even if it did send a </code>continue` message in this case, the message would never be processed, since the Loop would exit and not call its inner function)</li>
+    </ul>
+  </li>
+  <li>the concurrency loop calls a Container function
+    <ul>
+      <li>The Container performs one step, recursively</li>
+      <li>the Container is a recursive function that may contain nested functions</li>
+      <li>nested functions can be Leafs, Loops or other Container functions</li>
+      <li>somewhere in the bowels of the nested functions, the continuation flag is set/reset</li>
+      <li>the nested functions send messages to other functions (but indirectly)</li>
+      <li>the routing of messages is performed by the nested-functions’ direct parents (always Containers)</li>
+      <li>the concurrency loop does not need to send itself a <code class="language-plaintext highlighter-rouge">continue</code> message, the nested functions send messages as required and keep the loop going, or, one of the nested functions tells the loop to stop</li>
+      <li>stopping concurrency does not happen immediately, but only at the top level</li>
+      <li>the loop wrapper can stop looping if there are no messages (recursively) to be processed</li>
+      <li>in general, a message is not processed in one fell swoop, but is processed in steps where the steps are meted out by the loop and the recursive tree of Containers</li>
+      <li>The Container performs one step, recursively.  Each Container tells its Children to perform one step.  If the Child is a Container, then <em>it</em> tells its Children to perform one step, and so on.  If the Child is a Leaf, the Leaf performs its step and simply returns.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>A “game” world would be a Concurrency Loop that steps until it has changed the world.  It returns the modified World.  The game Loop would store this modified World for use in the next go-around.</p>
+
+<p>Makng <em>all</em> code concurrent makes it possible to optimize the code by splitting pieces onto other machines (distributed).</p>
+
+<p>Note that synchronous languages inhibit such splitting.  E.g. Python, JS, Haskell, libraries, etc.</p>
+
+<p>Splitting is possible using synchronous languages, but is more complicated (we invent bloatware like Linux, Window, MacOS, etc. to help with the splitting).</p>
+
+<p>Splitting is “natural” on the internet.  Synchrony inhibits splitting and, therefore, inhibits full realization of internetting.  We end up with contortions like callbacks and CPS.</p>
+
+<h4 id="pseudo-code">Pseudo-Code</h4>
+
+<p>[This is actual code from an actual project.  Don’t worry about what is being implemented, look only at <em>how</em> it is being implemented (the syntax, the transpiler(s)).]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation route
+{ for every item in children of me =&gt; child
+  { for every item in outputQueue of child.runnable =&gt; output_message
+    { synonym message = output_message
+      { find connection in me given child X message.port =&gt; connection
+        { lock receivers of connection
+	      { for every receiver in connection =&gt; dest
+	        { synonym params = {me, message, receiver}
+		      { cond
+		        { dest.component != me
+		          { @deliver_output_to_child_input &lt;= params }
+		        }
+		        { dest.component == me
+		          { @deliver_output_to_me_output &lt;= params }
+		         }
+		      }
+	        }
+          }
+        }
+      }
+    }
+    {@child.runnable.resetOutputQueue}
+  }
+}
+
+sync deliver_output_to_child_input &lt;= me, receiver, message
+   // map message for receiver
+  { var input_message &lt;= {receiver.etag, message.data}
+    { @receiver.enqueueInputMessage &lt;= input_message } 
+  }
+
+sync deliver_output_to_me_output &lt;= me, receiver, message
+  // map message for output
+  { var output_message &lt;= {receiver.etag, message.data}
+    { @me.enqueueInputMessage &lt;= output_message }
+  }
+
+</code></pre></div></div>
+
+<h4 id="javascript">JavaScript</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exports.route = function () {
+    var _me = this;
+    var _ret = null;
+
+    _me.children.forEach (child =&gt; {
+        child.runnable.outputQueue.forEach (output_message =&gt; {
+            var message = output_message;
+            var connection = this.find_connection_in__me (child, message.port);
+            // locking only matters on bare metal (async)
+            connection.receiver.forEach (dest =&gt; {
+                var params = [_me, message, receiver];
+                if ((dest.component !== _me)) {
+                    deliver_output_to_child_input (params);
+                } else if ((dest.component === _me)) {
+                    deliver_output_to_me_output (params);
+                }
+            });
+
+        });
+        child.runnable.resetOutputQueue ();
+    });
+    return _ret;
+}
+
+this.deliver_output_to_child_input = function (_me, receiver, message) {
+    var input_message = [receiver.etag, message.data];
+    receiver.enqueueInputMessage (input_message);
+}
+
+this.deliver_output_to_me_output = function (_me, receiver, message) {
+    var output_message = [receiver.etag, message.data];
+    _me.enqueueInputMessage (output_message);
+}
+
+</code></pre></div></div>
+
+<h3 id="future">Future</h3>
+
+<p>Once you have worked out the mechanisms for internal concurrency, it becomes “easy” to imagine other kinds of things, like internal state-tracking and Loop-ing…</p>
+
+<ul>
+  <li>state machine lambdas (calls functions written as pure FP lambdas, receives a result, stores it, follow Harel-like StateChart hierarchy to enter/exit states)</li>
+  <li>Loop lambda (calls function(s) written as pure FP lambdas, repeat)
+    <ul>
+      <li>one function as predicate - exit loop? continue looping?</li>
+      <li>one function as body of loop prior to predicate test</li>
+      <li>another function as body of loop after predicate test</li>
+      <li><code class="language-plaintext highlighter-rouge">loop</code> { <code class="language-plaintext highlighter-rouge">call</code> body1(), <code class="language-plaintext highlighter-rouge">exit when</code> test(), <code class="language-plaintext highlighter-rouge">call</code> body2() }</li>
+    </ul>
+  </li>
+</ul>
+
+<p>One should be able to “compose” pure functions with concurrent lambdas with state-machine-lambdas with loop-lambdas.</p>
+
+<h2 id="ė">ė</h2>
+<p>As a working title for this concept, I’m going to use <code class="language-plaintext highlighter-rouge">ė</code>.</p>
+
+<p>It is the Lithuanian letter “e” with a dot above it.</p>
+
+<p>It is pronounced like Canadian “eh” or the English-language letter “A” (hard, not soft).</p>
+
+<p>I almost chose another Greek letter, then realized that I could use any unicode character, then, almost chose a smily emoji, but, finally settled on <code class="language-plaintext highlighter-rouge">ė</code>.</p>
+
+<p>[The choice is almost arbitrary, but, <code class="language-plaintext highlighter-rouge">ė</code> ties my two inherited cultures together.]</p>
+
+<h2 id="syntax-is-cheap">Syntax Is Cheap</h2>
+
+<p>We need a toolbox that contains the Atoms of software.  Something like:</p>
+<ul>
+  <li>pure functions (e.g. Sector Lisp, Lambda Calculus)</li>
+  <li>state (history)</li>
+  <li>looping.</li>
+</ul>
+
+<p>Then, we can glue the Atoms together using any syntax we choose.</p>
+
+<p>Syntax - language design - is equivalent to building up molecules using atoms.</p>
+
+<p>PEG allows us to break out of the syntax prison. (Including the use of multiple languages (e.g. using balanced paren-matching))</p>
+
+<p>Ohm-JS is even better than PEG.</p>
+
+<p>FP taught us that variable names are inconsequential (in fact, this can also be understood by building compilers).</p>
+
+<p>In my view, syntax is equally inconsequential.</p>
+
+<h2 id="pattern-matching">Pattern Matching</h2>
+
+<p>FP teaches that pattern-matching is King.</p>
+
+<p>Parsing is pattern-matching.</p>
+
+<p>PEG is better-parsing.</p>
+
+<p>Ohm-JS is better-PEG.</p>
+
+<h2 id="looping">Looping</h2>
+
+<p>We don’t need TCO - tail-call-optimization.</p>
+
+<p>We only need Looping.</p>
+
+<p>TCO is make-work activity - an attempt to kludge looping into the functional paradigm.</p>
+
+<p>We need a way to <em>compose</em> looping with pure functions.</p>
+
+<p>We do not need to add epicycles to the functional paradigm, nor to devise clever tricks that allow us to use the functional paradigm <em>everywhere</em>.</p>
+
+<p>Sector Lisp is a wonderful example of a bloat-less functional paradigm.</p>
+
+<p>Rhetorical Q: How do we <em>compose</em> Sector Lisp with Loop and State?</p>
+
+<p>In my view,</p>
+<ul>
+  <li>Loop is a thing on its own.</li>
+  <li>State is a thing on its own.</li>
+  <li>Pure Functional is a thing on its own.</li>
+</ul>
+
+<p>In my view, don’t jam them all together, snap them together in new ways for every specific problem.</p>
+
+<h3 id="deprecating-loop-and-recursion">Deprecating Loop and Recursion</h3>
+<p>Note that Looping doesn’t even make sense in a distributed computing environment.</p>
+
+<p>A language for distributed computing does not have Loop (or Recursion) as a fundamental concept.</p>
+
+<p>A Component can always Send messages to itself if it wants to repeat a computation.</p>
+
+<p>Looping and Recursion imply the use of a Stack.  This doesn’t make sense in a distributed environment.</p>
+
+<p>A single CPU can have a single Shared Stack, but the idea of a Stack doesn’t translate well into something that is sent on a thin wire.</p>
+
+<p>The concepts of Loop and Recursion and Stack are so in-grained in our thinking that we feel it necessary to (cleverly) invent epicycles, like preemption, to accomodate long-running Loops.</p>
+
+<p>These epicycles have caused us unanticipated grief in the past, e.g. priority inversion in the Mars Rover disaster (see my blog).</p>
+
+<h2 id="on-diagrams">On Diagrams</h2>
+<p>Diagrams - to normal humans - imply concurrency.</p>
+
+<p>Boxes / ellipses / blobs on a diagram <em>look</em> like isolated entities.  And, that’s how humans interpret diagrams.</p>
+
+<p>Software is - currently - very synchronous.  As such, software programs defy diagramming.</p>
+
+<p>It is possible to draw diagrams of computer networks, because each computer on the network is isolated from the others (they synchronize only when they have to, otherwise, they run at their own speed (without implicit synchronization))).</p>
+
+<p>It is possible to draw sensible diagrams of large chunks of software.</p>
+
+<p>It is not possible to draw sensible diagrams of software at a fine grain, due to implicit synchronicity (for example, see my blog “CALL/RETURN Spaghetti”).</p>
+
+<p>There are 2 options:</p>
+<ol>
+  <li>Accept the fact that all programs, below a certain level, cannot be diagrammed.  You are stuck with lumps like Linux to shepherd isolated envelopes containing fancy calculators.</li>
+  <li>Find a way to optimize concurrency down to a lower level.  I propose Concurrent Lambdas (working name).  I think that every <em>function</em> should be concurrent (in fact, I’d be happier if every statement (line of code<sup id="fnref:lines" role="doc-noteref"><a href="#fn:lines" class="footnote">2</a></sup>) were concurrent, but, small steps first (<code class="language-plaintext highlighter-rouge">par</code> and thread libraries ain’t it))).  In my view, Components send messages to one another - they cannot <em>call</em> each other directly.  For added flexibility, messages cannot be sent directly to peers, but must be sent upwards to the parent (Container) for routing.  Structured message-passing is hierarchical.</li>
+</ol>
+
+<h2 id="drop-dead-simplicity">Drop-Dead Simplicity</h2>
+<p>The mechanism for interal concurrency is ridiculously simple.  Like the concurrency used in early computers</p>
+<ol>
+  <li>do something</li>
+  <li><code class="language-plaintext highlighter-rouge">exit when</code> some condition is met</li>
+  <li>poll inputs</li>
+  <li>loop back to (1)</li>
+</ol>
+
+<p>Preemption is a <em>tell</em> - a bad smell - that <em>something</em> is wrong / too-complicated.</p>
+
+<p>In fact, <em>preemption</em> allows us to disobey the principle of locality-of-reference.  <em>Blocking</em> is done in two disparate places:</p>
+<ol>
+  <li>The Operating System</li>
+  <li>CALL / RETURN.</li>
+</ol>
+
+<p>The O/S does preemption by pulling the rug out from under an app.</p>
+
+<p>The only reason that the O/S needs to do this is to allow for long-running Loops.</p>
+
+<p>Preemption should be relegated to development systems.</p>
+
+<p>Well-behaved apps (i.e. products) should not interfere with one another and, hence, don’t need preemption.</p>
+
+<p>The only reason that product apps might mis-behave is that they are too complicated to understand (and tame).</p>
+
+<h3 id="first-class-functions-and-closures">First-Class Functions and Closures</h3>
+
+<p>Operating systems implement closures in assembler and C.</p>
+
+<p>The reason for this is bigotry.</p>
+
+<p>Assembler and C programmers <em>thought</em> that Lisp and other dynamic languages weren’t “as good” as C and assembler, so, they built part-of-lisp in raw assembler and C, the hard way, in an act of self-flagellation.</p>
+
+<p>I suggest that we put concurrency directly into first-class functions and closures and get rid of Operating Systems.</p>
+
+<h2 id="concurrency-is-not-parallelism">Concurrency Is Not Parallelism</h2>
+
+<p>Concurrency is a life-style.</p>
+
+<p>Parallelism is a greasy hamburger.</p>
+
+<p><a href="https://www.youtube.com/watch?v=oV9rvDllKEg">Rob Pike Concurrency Is Not Parallelism</a></p>
+
+<p>It is possible to write programs that are concurrent but not parallel.</p>
+
+<p>It is not possible to write programs that are parallel without, first, being concurrent.</p>
+
+<p>Maybe concurrency is orthogonal to functions?  Like control-flow is orthogonal to data-flow.  (When you try to schmoo them together, you get a mess of complication).</p>
+
+<p>Concurrency is a paradigm.</p>
+
+<p>Parallelism, though, is simply a problem-to-be-solved.  An optimization.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:dep" role="doc-endnote">
+      <p><a href="https://guitarvydas.github.io/2022/03/29/Dependencies.html">Dependencies</a> <a href="#fnref:dep" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lines" role="doc-endnote">
+      <p>In fact, lines of code are <em>so</em> mid-1900s. I advocate switching to diagrams.  Diagrams can contain text (i.e. text is a subset of diagramming).  A unit of programming is The Component (concurrent), not the line-of-code (or function).  N.B. It is silly to draw diagrams of things that are perfectly fine as text, e.g. “a = b + c”, but, there are other concepts that can only be meaningful as diagrams (e.g. networks of Components (where Components are not restricted to being 1-in-1-out things (M-in-N-out, where N &gt;= 0 and M &gt;= 0 [sic - 0]))).  A network can be represented as text, but, I don’t find that meaningful (except as assembly code and core dumps). <a href="#fnref:lines" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

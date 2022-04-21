@@ -1,0 +1,137 @@
+I"�'<h1 id="overview">Overview</h1>
+<p><u>PFR</u> is a command-line find-and-replace utility that uses PEG parsing instead of REGEXP.  <u>PFR</u> outputs the resulting (modified input) file to stdout.</p>
+
+<p><u>PF</u> is a command-line find utility that uses PEG parsing instead of REGEXP (like GREP, except with parsing). <u>PF</u> merely prints the names of the matching files on stdout.</p>
+
+<h1 id="usage">Usage</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pfr source-filename grammar-filename action-filename [support.js] [t] [v]
+pf source-filename grammar-filename
+</code></pre></div></div>
+
+<p>The 3 files contain text.</p>
+
+<p><em>Source-filename</em> refers to a file which contains arbitrary text which is to-be-parsed.</p>
+
+<p><em>Grammar-filename</em> refers to a file which contains a grammar specification in <em>Ohm-JS</em> format.</p>
+
+<p><em>Action-filename</em> refers to a file which contains an action specification in <em>Glue</em> format.</p>
+
+<p><em>Support.js</em> [optional] contains functions that are used by the action rules (only required if action rules call-out to support functions ; not needed in simple use-cases). Default: support.js is not used and not read.</p>
+
+<p><em>t</em> [optional] lower-case ‘t’ as the 5th argument turns on rule tracing.  Default: tracing disabled.</p>
+
+<p><em>v</em> [optional] lower-case ‘v’ as the 6th argument turns on display of generated action code.  Default: displaying disabled.</p>
+
+<h1 id="code">Code</h1>
+
+<p><a href="https://github.com/guitarvydas/parse">github</a></p>
+
+<p>PFR and PF are shell scripts (Bash) contained in that directory.  Put them on your PATH.</p>
+
+<h1 id="workflow">Workflow</h1>
+
+<p>[<em>This section doesn’t belong in the final PFR/PF man page, but the tools are young…</em>]</p>
+
+<p>A workflow that works best for me is:</p>
+
+<ol>
+  <li>
+    <p>Use the <a href="https://ohmlang.github.io/editor/">Ohm-Editor</a> to build and debug the grammar</p>
+  </li>
+  <li>
+    <p>Write a “vanilla” action spec that simply outputs what is input (“identity”) ; note that if you use <em>syntactic rules</em> instead of <em>lexical rules</em> in the grammar, the output will omit spacing (that’s OK, you just need to be aware of this ; the only way to get a pure identity grammar is to use syntactic rules only (not necessary))</p>
+  </li>
+  <li>
+    <p>Modify the <em>identity</em> action spec to suit your needs.</p>
+  </li>
+</ol>
+
+<h1 id="appendix---ohm-js-format">Appendix - Ohm-JS Format</h1>
+
+<p>See <a href="https://github.com/harc/ohm/blob/master/doc/syntax-reference.md">Ohm-JS Syntax</a>.</p>
+
+<h1 id="appendix---glue-format">Appendix - Glue Format</h1>
+
+<p>See <a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a>.</p>
+
+<p>See <a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Overview</a>.</p>
+
+<h1 id="appendix---sample-grammars-and-actions">Appendix - Sample Grammars and Actions</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">ABC Glue</a> (uses the <code class="language-plaintext highlighter-rouge">ftranpile()</code> function - a precursor to <code class="language-plaintext highlighter-rouge">PFR</code> - with a simple<code class="language-plaintext highlighter-rouge">.ohm</code> file and a simple <code class="language-plaintext highlighter-rouge">.glue</code> file (action spec))</p>
+
+<p><a href="https://github.com/guitarvydas/firstclasscomments">first class comments</a> (this project was a quickie - one weekend - entry in the language jam ; the current versions of <code class="language-plaintext highlighter-rouge">sequence.js</code> and <code class="language-plaintext highlighter-rouge">details.js</code> contain the pre-cursor of <code class="language-plaintext highlighter-rouge">PFR</code> ; each of these contains references to multiple <code class="language-plaintext highlighter-rouge">.ohm</code> files and to multiple <code class="language-plaintext highlighter-rouge">.glue</code> files (action specs))</p>
+
+<p>A sample (very simple) grammar specification from ABC Glue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABCgrok {
+TopLevel = Assignment+
+
+  Assignment =   Variable "=" Expression -- complex
+               | Variable "=" number -- simple
+  Expression = Variable "+" Variable
+
+    Variable = "a" .. "z"
+    number = dig+
+    dig = "0" .. "9"
+}
+</code></pre></div></div>
+
+<p>In this example, there are 7 grammar rules</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TopLevel</code> is one-or-more Assignments</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_complex</code> is a <code class="language-plaintext highlighter-rouge">Variable</code>, <code class="language-plaintext highlighter-rouge">=</code>and an <code class="language-plaintext highlighter-rouge">Expression</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_simple</code> is a <code class="language-plaintext highlighter-rouge">Variable</code>, <code class="language-plaintext highlighter-rouge">=</code>and a <code class="language-plaintext highlighter-rouge">number</code></li>
+  <li>A <code class="language-plaintext highlighter-rouge">Variable</code> is a single lower case letter, from<code class="language-plaintext highlighter-rouge">a</code> through <code class="language-plaintext highlighter-rouge">z</code></li>
+  <li>A <code class="language-plaintext highlighter-rouge">number</code> is one-or-more <code class="language-plaintext highlighter-rouge">dig</code>s</li>
+  <li>A <code class="language-plaintext highlighter-rouge">dig</code> is a single character <code class="language-plaintext highlighter-rouge">0</code> through <code class="language-plaintext highlighter-rouge">9</code></li>
+</ul>
+
+<p>A sample action specification (aka Glue):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TopLevel [@assignments] = [[${console.log (assignments)}]]
+Assignment_complex [v keq e] = [[var ${v} = ${e};\n]]
+Assignment_simple [v keq n] = [[var ${v} = ${n};\n]]
+Expression [v1 kplus v2] = [[${v1} + ${v2}]]
+Variable [c] = [[${c}]]
+number [@digits] = [[${digits}]]
+dig [c] = [[${c}]]
+</code></pre></div></div>
+
+<p>One Action rule for each grammar rule.</p>
+
+<p>The Action rules must have the same name as the grammar rules.</p>
+
+<p>Each rule creates and returns one string (the string might be empty).</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TopLevel</code> accepts an <code class="language-plaintext highlighter-rouge">iterator</code> node called <code class="language-plaintext highlighter-rouge">assignments</code>, then calls <code class="language-plaintext highlighter-rouge">console.log()</code> to print out the assignments.</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_complex</code> takes three parameters <code class="language-plaintext highlighter-rouge">v</code>, <code class="language-plaintext highlighter-rouge">keq</code>and <code class="language-plaintext highlighter-rouge">e</code> which represent the sub-matches in the Assignment_complex grammar rule, then returns the string <code class="language-plaintext highlighter-rouge">var ${v} = ${e};</code> followed by a newline ; ${v} is expanded to be the text of the <code class="language-plaintext highlighter-rouge">var</code> parameter, ${e} is expanded to be the text of the <code class="language-plaintext highlighter-rouge">e</code> parameter, the parameter called <code class="language-plaintext highlighter-rouge">keq</code> is ignored)</li>
+  <li><code class="language-plaintext highlighter-rouge">Assignment_simple </code>takes three parameters <code class="language-plaintext highlighter-rouge">v</code>, <code class="language-plaintext highlighter-rouge">keq</code>and <code class="language-plaintext highlighter-rouge">n</code> and returns the string <code class="language-plaintext highlighter-rouge">var ${v} = ${n}</code> followed by a newline, the parameter <code class="language-plaintext highlighter-rouge">keq</code> is ignored</li>
+  <li><code class="language-plaintext highlighter-rouge">Variable</code> takes three parameters <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">kplus</code> and <code class="language-plaintext highlighter-rouge">v2</code> and returns a plus statement (ignoring the parameter <code class="language-plaintext highlighter-rouge">kplus</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">number</code> takes an iteration node containing all of the <code class="language-plaintext highlighter-rouge">dig</code>s and returns a string containing the digits (the iteration node is collapsed automatically to make a single string)</li>
+  <li><code class="language-plaintext highlighter-rouge">dig</code> takes one parameter <code class="language-plaintext highlighter-rouge">c</code> and returns a string of length 1 containing the character.</li>
+</ul>
+
+<h1 id="future">Future</h1>
+
+<p>These commands should deal with <em>stdin</em>, <em>stdout</em> and <em>stderr</em> in the usual UNIX® style.  Instead, these commands currently require filenames on the command line.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://github.com/harc/ohm/blob/master/doc/syntax-reference.md">Ohm-JS Syntax</a>.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/03/24/Glue-Manual.html">Glue Manual</a>.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">Glue Overview</a>.</p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

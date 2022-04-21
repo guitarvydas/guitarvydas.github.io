@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Numbers In Sector Lisp | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Numbers In Sector Lisp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Numbers In Sector Lisp" />
+<meta property="og:description" content="Numbers In Sector Lisp" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/09/Numbers-In-Sector-Lisp.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/09/Numbers-In-Sector-Lisp.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-09T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Numbers In Sector Lisp" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/09/Numbers-In-Sector-Lisp.html","@type":"BlogPosting","description":"Numbers In Sector Lisp","dateModified":"2022-03-09T00:00:00-05:00","datePublished":"2022-03-09T00:00:00-05:00","headline":"Numbers In Sector Lisp","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/09/Numbers-In-Sector-Lisp.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Numbers In Sector Lisp</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-09T00:00:00-05:00" itemprop="datePublished">Mar 9, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="numbers-in-sector-lisp">Numbers In Sector Lisp</h2>
+
+<p>Digits are just arbitrary scribbles.</p>
+
+<p>For example, we could define 10 atoms in Sector Lisp with suggestive names, e.g.</p>
+<ul>
+  <li>(quote 0)</li>
+  <li>(quote 1)</li>
+  <li>(quote 2)</li>
+  <li>(quote 3)</li>
+  <li>(quote 4)</li>
+  <li>(quote 5)</li>
+  <li>(quote 6)</li>
+  <li>(quote 7)</li>
+  <li>(quote 8)</li>
+  <li>(quote 9)</li>
+</ul>
+
+<p>In Sector Lisp, these 10 atoms would be Atoms and would never be garbage collected.</p>
+
+<p>What if you had a batch editor that replaced every occurrence of the character ‘4’ with the string of characters <code class="language-plaintext highlighter-rouge">(quote 4)</code>?</p>
+
+<p>Even Microsoft Word® can do this.  The operation is called <code class="language-plaintext highlighter-rouge">Search and Replace</code>.</p>
+
+<p>The names could be any unicode character, or, any string of characters.  For example, we could define an Atom <code class="language-plaintext highlighter-rouge">(quote IV)</code> to mean the same thing as <code class="language-plaintext highlighter-rouge">4</code>.  In ASCII, <code class="language-plaintext highlighter-rouge">IV</code> needs 2 bytes, whereas <code class="language-plaintext highlighter-rouge">4</code> needs only one byte.</p>
+
+<p>In Sector Lisp, each of these Atoms would be represented by an Address.  (In Sector Lisp, an Address is 1-byte long)<sup id="fnref:SLU" role="doc-noteref"><a href="#fn:SLU" class="footnote">1</a></sup>.</p>
+
+<h2 id="batch-editor-aka-macro-processor">Batch Editor (AKA Macro Processor)</h2>
+
+<p>One line of <code class="language-plaintext highlighter-rouge">bash</code> script can do the batch edit:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$prep '.' '$' batch-edit-4.ohm batch-edit-4.glue --stop=1 &lt; test.txt
+</code></pre></div></div>
+
+<p>See <code class="language-plaintext highlighter-rouge">run.bash</code> and <code class="language-plaintext highlighter-rouge">test.txt</code> and the grammar <code class="language-plaintext highlighter-rouge">batch-edit-4.ohm</code> and the reformatting script <code class="language-plaintext highlighter-rouge">batch-edit-4.glue</code>.</p>
+
+<p>(The command-line args to <em>prep</em> are mostly details that you can decipher later).</p>
+
+<h2 id="github">Github</h2>
+
+<p><a href="https://github.com/guitarvydas/slnumbers">slnumbers</a></p>
+
+<h2 id="prep">Prep</h2>
+
+<p>I’ve included a sub-directory containing the tool I call <code class="language-plaintext highlighter-rouge">prep</code> (rhymes with <em>grep</em>, and looks like <em>preprocessor</em>).</p>
+
+<p>It uses <code class="language-plaintext highlighter-rouge">Ohm-JS</code>.</p>
+
+<p>It’s kinda-like <code class="language-plaintext highlighter-rouge">sed</code> but uses grammars instead of REGEXs.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> needs two specifications:</p>
+<ol>
+  <li>a pattern-matching spec</li>
+  <li>a reformatting spec.</li>
+</ol>
+
+<p>Reformatting is currently done using an experimental syntax that I call <code class="language-plaintext highlighter-rouge">glue</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> is described in <a href="https://guitarvydas.github.io/2022/01/20/PREP-Tool.html">YouTube</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> is <a href="https://guitarvydas.github.io/2022/03/05/Prep.html">further described</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Glue</code> is described by following the links in <a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">ABC Glue</a>.</p>
+
+<p>Actually, <code class="language-plaintext highlighter-rouge">prep</code> uses <em>REGEX</em> to find chunks of text, then uses <em>grammars+glue</em> to reformat the chunks.</p>
+
+<h2 id="sector-lisp">Sector Lisp</h2>
+
+<p><a href="https://justine.lol/sectorlisp2/">Sector Lisp</a></p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>This example is chosen for its simplicity.</p>
+
+<p>This specific batch-edit could be done with <code class="language-plaintext highlighter-rouge">sed</code> or with a language that incorporates REGEX, like JavaScript.</p>
+
+<p>The interesting stuff comes when you need to match nested (structured) text.  That’s when REGEX gets hard and you need to switch to a parser.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:SLU" role="doc-endnote">
+      <p>If you had more than 256 of these Atoms, you might want more than one Sector Lisp program, or, you might want to invent a new kind of Sector Lisp based on Unicode instead of being based on 8-bit bytes. <a href="#fnref:SLU" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2022/03/09/Numbers-In-Sector-Lisp.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

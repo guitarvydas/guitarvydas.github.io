@@ -1,0 +1,61 @@
+I"�<ul>
+  <li>Sector Lisp is a pure version of FP (functional programming)</li>
+  <li>O/S (Operating System) processes are <em>lambda</em> wannabes</li>
+  <li>Arrays are simply optimized lists - no CDRs</li>
+  <li>Sub-dividing memory in a binary form, i.e. 2 sub-divisions (Atom and List, in the case of Sector Lisp) results in anti-code-bloat.</li>
+</ul>
+
+<h2 id="implications">Implications</h2>
+
+<h3 id="pure-fp">Pure FP</h3>
+
+<ul>
+  <li>no allowance for mutation -&gt; small code (less bloat)</li>
+  <li>GC is simple</li>
+</ul>
+
+<h3 id="processes-are-lambdas">Processes Are Lambdas</h3>
+
+<p>See Greenspun’s 10th Rule, if not already familiar with it.</p>
+
+<p>Processes were first implemented in assembler and C.</p>
+
+<p>Lisp implements processes, but calls them LAMBDAs and closures.</p>
+
+<p>First-class functions are LAMBDAs.</p>
+
+<h3 id="no-cdrs">No CDRs</h3>
+
+<p>Arrays are simply optimizations of lists, where the CDR is implied.</p>
+
+<p>IIRC this was called “CDR Lists” in early literature.</p>
+
+<p>Non-contiguous cells require special handling, but this need not apply to <em>all</em> cells.</p>
+
+<p>Array cells -&gt; Cdr(p) = p + 1</p>
+
+<p>List cells (non-contiguous) -&gt; Cdr(p) = *(p + 1)</p>
+
+<h4 id="string-function-library">String Function Library</h4>
+
+<p>String functions are easy to describe in pure FP.</p>
+
+<p>For exampe, <em>substring</em> can be written as a combinatino of CAR and CDR applied to Strings (arrays of characters).</p>
+
+<p>String functions become complicated (epicyclic) when mutation is desired.</p>
+
+<p>Shared memory, memory reuse -&gt; epicycles (code bloat).</p>
+
+<h3 id="sub-dividing-memory-in-a-binary-fashion">Sub-Dividing Memory in a Binary Fashion</h3>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

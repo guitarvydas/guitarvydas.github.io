@@ -1,0 +1,73 @@
+I"�<p>The <a href="https://justine.lol/lambda/">BLC Blog</a> contains this statement:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Unlike LISP, lambda calculus does head reduction, 
+...
+</code></pre></div></div>
+
+<p>Splitting hairs, LC is a <em>notation</em> that <em>uses</em> Lisp like an <em>assembler</em>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ0
+</code></pre></div></div>
+<p>becomes</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(callFunctionWithOneArg (lambda (x) x) (lookupInEnvironment 0))
+</code></pre></div></div>
+<p>(where “x” is any name),<br />
+or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>callFunctionWithOneArg (a, b)
+</code></pre></div></div>
+<p>where <code class="language-plaintext highlighter-rouge">a</code> is</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function (x) { return x; }
+</code></pre></div></div>
+<p>and <code class="language-plaintext highlighter-rouge">b</code> is</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lookupInEnvironement(0);
+</code></pre></div></div>
+
+<p>A <em>notation</em> elides certain repetitive operations.  Clearly, the LC notation is shorter than the Lisp-y notation, which leads to insights about how functions can be plumbed together.  Yet, LC <em>notation</em> is less “powerful” than Lisp-y notation, since certain things are impossible in LC while possible<sup id="fnref:possible" role="doc-noteref"><a href="#fn:possible" class="footnote">1</a></sup> in Lisp-y notation.</p>
+
+<p>Bizarrely, “power” implies closer-to-assembler-ness.</p>
+
+<p>When we take McCarthy’s original FP <em>notation</em> and hack mutation and looping into it, we get a “more powerful” assembler, called Common Lisp.</p>
+
+<p>Elision, in some beholders’ eyes, looks like obfuscation. People hate mathematics because it elides (aka obfuscates) certain concepts. Mathematicians love mathematical notation. That is good enough as long as we’re not forced to use mathematicians’ favorite notation for <em>everything</em>.</p>
+
+<p>For example, for certain problems, spreadsheet notation is perceived as being “better” than mathematical notation. If you want to understand the gory details of something, you use mathematical notation, if you want to understand income statements and balance sheets, you use spreadsheet notation.</p>
+
+<p>Hacking on mathematical notation, e.g. to insert the concept of time/history, makes that notation “closer to assembler”, but, doesn’t help in visualizing what is going on.  Feynman used diagrams and elided Greek symbols to gain a better understanding of a certain aspect of Physics.</p>
+
+<p>Choosing an appropriate notation depends on the problem that you are trying to solve.</p>
+
+<p>Choosing a notation before understanding the problem is a <em>fad</em>.</p>
+
+<h2 id="switching-notations">Switching Notations</h2>
+<p>Actually, you can choose a notation to <em>start</em> thinking about something, but, you have to remain open to the idea of switching notations or of inventing better notations.</p>
+
+<p>How do you know when to switch notations?</p>
+
+<p>I don’t know, but, it probably has something to do with understanding (boxing, scoping) the limits of a notation.</p>
+
+<p>You look for <em>tells</em>.</p>
+
+<p>A <em>tell</em> would be when you need to resort to clever twists of the notation.</p>
+
+<p>An example: J. Tunney’s Sector Lisp is an example of really pure Functional Programming.  No mutation allowed - GC becomes easy and small. [<em>Mutation hacked into Functional Programming led to random access heaps which led to more-and-more-elaborate garbage collectors and cleverness.</em>]</p>
+
+<p>Tunney’s BLC is even smaller than Sector Lisp.  What can we learn about the limits of Lambda Calculus notation from that?</p>
+
+<p>## See Also</p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:possible" role="doc-endnote">
+      <p>For example, Common Lisp allows mutation while LC disallows mutation. Does this mean that mutation is good or does it mean that mutation is bad? It depends. <a href="#fnref:possible" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

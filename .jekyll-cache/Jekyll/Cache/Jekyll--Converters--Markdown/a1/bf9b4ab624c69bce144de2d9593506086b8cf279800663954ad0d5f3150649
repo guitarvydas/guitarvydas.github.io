@@ -1,0 +1,184 @@
+I"<h1 id="data-descriptors---normalization">Data Descriptors - Normalization</h1>
+<p>One aspect of normalization is the normalization of data locations<sup id="fnref:controlflow" role="doc-noteref"><a href="#fn:controlflow" class="footnote">1</a></sup>.</p>
+
+<p>Holt created the concept of <em>data descriptors</em> and Cordy used data descriptors in his OCG (Orthogonal Code Generation) work.</p>
+
+<p>The point of creating data descriptors is to describe every data location in the <em>same</em> way - i.e. normalization.</p>
+
+<p>Normalized form - for anything - makes it easier to manipulate the form.  The manipulation can be done by a machine (a compiler).</p>
+
+<p>There is nothing particularly magical about normalization or manipulation.  To create a normalized form you just need to survey the problem space and choose an umbrella form that can be used to describe any item in that space.</p>
+
+<h2 id="components-of-data-descriptors">Components of Data Descriptors</h2>
+
+<p>Data descriptors, as originally described, are 5-tuples:</p>
+<ul>
+  <li>k - a level of indirection (k &lt;= 2 in the original form)</li>
+  <li>b - an abstract base, a code that represents a register or a region of memory (like .bss or a lexical level)</li>
+  <li>d - a displacement from the base</li>
+  <li>x - an index</li>
+  <li>s - a scale factor</li>
+</ul>
+
+<p>Data descriptors can be written as:<br />
+@^kb.d[x.s]</p>
+
+<h3 id="example-1">Example 1</h3>
+<p>If we want to describe a 1-byte item pointed-to by register R0, we might write</p>
+
+<p>@^1R0.0[0.1]</p>
+
+<p>[C doesn’t let us specify registers directly, so we can’t write this in high-level C].</p>
+
+<h3 id="example-2">Example 2</h3>
+<p>If we want to describe a 1-byte item pointed-to by the Stack Pointer, we might write:</p>
+
+<p>@^1SP.0[0.1]</p>
+
+<p>In C, we might write</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ 
+  unsigned char name;
+  name;
+}
+</code></pre></div></div>
+
+<h3 id="example-3">Example 3</h3>
+<p>To write a DD referring to a byte pointed-to by a C pointer in a variable on the stack, we might write</p>
+
+<p>@^2SP.0[0.1]</p>
+
+<p>or, in C</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  unsigned char *p;
+  *p;
+}
+</code></pre></div></div>
+
+<p>[So, how does the compiler know the size of addresses?  It doesn’t know this, nor does it need to care.  This is all worked out by the Allocator.  See below.  That’s the beauty of normalization - divide and conquer.]</p>
+
+<h3 id="example-4">Example 4</h3>
+
+<p>To refer to a byte passed as a parameter, we might write</p>
+
+<p>@^1AP.0[0.1]</p>
+
+<p>where <code class="language-plaintext highlighter-rouge">AP</code> is some register used for pointing at parameters (probably on the stack).</p>
+
+<p>or in C:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void f (char *p) {
+*p;
+}
+</code></pre></div></div>
+
+<h3 id="example-5">Example 5</h3>
+
+<p>In C, we might write</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void f (int x) {
+  long y;
+  y = x;
+}
+</code></pre></div></div>
+
+<p>and might re-write this in DD form as:</p>
+
+<p>@^1LP.0[0.4] = @^1.AP.0[0.2]</p>
+
+<p>where ints are 2 bytes and longs are 4 bytes, and,</p>
+
+<p>LP is a register that points to parameter variables (probably on the stack) and AP is a register that points to the parameters (probably also on the stack).</p>
+
+<p>[Aside: note that most of the syntactic “noise” has been removed.  This code looks ike data descriptors instead of C code..  Each pass helps the next pass out by stripping noise and details out of the program.]</p>
+
+<h3 id="example-6">Example 6</h3>
+
+<p>In C, we write</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int main (int argc, char **argv) { 
+... 
+}
+</code></pre></div></div>
+<p>The parameters to main are</p>
+<ol>
+  <li>argc (an int)</li>
+  <li>argv (a pointer to a pointer of chars)</li>
+</ol>
+
+<p>And, the return value of <code class="language-plaintext highlighter-rouge">main</code> is an <code class="language-plaintext highlighter-rouge">int</code>.  Let’s say that <code class="language-plaintext highlighter-rouge">int</code>s are 2 bytes long.</p>
+
+<p>The return value of <code class="language-plaintext highlighter-rouge">main</code> is representd by<br />
+@^1SP.0[0.2]</p>
+
+<p>and the parameters are</p>
+
+<p>argc : @^1AP.0[0.2]</p>
+
+<p>argv : @^1AP.1[0.4]</p>
+
+<p>where addresses are 4 bytes long and ints are 2 bytes long.</p>
+
+<p>The character at <code class="language-plaintext highlighter-rouge">\*\*argv</code> is</p>
+
+<p>@^2AP.1[0.1]</p>
+
+<h3 id="example----constant">Example  - Constant</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ 
+int y;
+y = 8;
+}
+</code></pre></div></div>
+
+<p>Might be written as</p>
+
+<p>@^1LP.0[0.2] = @^0-.8[0.-]</p>
+
+<p>or</p>
+
+<p>{1,”LP”,0,0,2} = {0,”-“,8,0,”-“}</p>
+
+<h2 id="allocator">Allocator</h2>
+
+<p>The compiler does not care <em>where</em> data ends up.</p>
+
+<p>The <em>allocator</em> makes the decision.</p>
+
+<p>The compiler only states that a variable is relative to some Lexical Base.</p>
+
+<p>The Allocator fixes that up.</p>
+
+<p>The <em>allocator</em> is like a mid-level loader.</p>
+
+<p>IMO, compilation is not a binary process, but a pipeline of successive refinements.  The compiler feeds the allocator.   The allocator feeds the loader.  And so on.</p>
+
+<p>IMO, the whole process is a continuum.  IMO it is meaningless to talk about a <em>compiler</em> and a <em>linker</em>.  Each stage in the pipeline compiles a bit, then passes the result off to the next stage, which compiles a bit more, and so on.</p>
+
+<p>Compilation, is itself, just a parial optimization.  A compiler checks and strips some information from the program, then passes the stripped program on to the next phase in the pipeline.</p>
+
+<p>The goal of compilation is to strip out as much information as possible, to allow the compiled program to run as fast (or as small) as possible on the target machine.</p>
+
+<h2 id="original-paper">Original Paper</h2>
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a></p>
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html">Names and Data Descriptors</a></p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a></p>
+
+<p><a href="https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y">OCG</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:controlflow" role="doc-endnote">
+      <p>As opposed to control flow.  Dataflow and Control flow are orthogonal. <a href="#fnref:controlflow" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

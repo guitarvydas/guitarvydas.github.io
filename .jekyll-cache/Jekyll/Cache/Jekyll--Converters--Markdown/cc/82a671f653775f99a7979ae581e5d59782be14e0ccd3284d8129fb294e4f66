@@ -1,0 +1,38 @@
+I"�<h1 id="transpilers">Transpilers</h1>
+<p>I now use Ohm-JS to define small <em>transpilers</em> and used a <em>toolbox language</em>, like Common Lisp, Javascript, etc., to do all of the heavy lifting for me.</p>
+
+<p>I don’t write code to implement scanners.  I use PEG (I used to used regular expressions).</p>
+
+<p>I don’t write code to implement parsers.  I use PEG<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>I don’t write code to do syntax-checking.  I use a parser.</p>
+
+<p>I don’t write code to implement semantics checking.  I use the underlying <em>toolbox language</em> to do most of the work for me (e.g. hash tables, etc.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>).</p>
+
+<p>I don’t write code to implement code emission.  I transpile<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> to some base language, e.g. JavaScript, and let the corresponding compiler do the work for me.</p>
+
+<p>I don’t write code to implement code optimization.  I transpile to some base language and let the corresponding compiler do the work for me.</p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>I like the Ohm language (based on PEG).  I regularly use <a href="https://github.com/harc/ohm">Ohm-JS</a> and <a href="https://ohmlang.github.io/editor/">Ohm-Editor</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Semantic analysis (type checking) consists, at a base level, of storing some information and retrieving that information.  More complicated type checking consists of inferring type information, which, itself, decomposes into two broad categories - (1) <em>what</em> to infer, and, (2) <em>how</em> to infer it. Akin to the use of <code class="language-plaintext highlighter-rouge">end if</code> -like constructs in parsing, there are some simple - low-hanging-fruit - type checks that can be performed fairly easily with information stored in tables. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Transpilation is source-to-source compilation.  Compile one source language to another textual language. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

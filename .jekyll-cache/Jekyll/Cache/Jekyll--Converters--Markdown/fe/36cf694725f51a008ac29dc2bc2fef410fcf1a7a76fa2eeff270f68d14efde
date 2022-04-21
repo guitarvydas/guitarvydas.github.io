@@ -1,0 +1,60 @@
+I"�<h1 id="lego">LEGO®:</h1>
+
+<p>Why does LEGO® work?</p>
+
+<p>Because of its API.</p>
+
+<p>What is LEGO®’s API?</p>
+
+<p>1) exactly one type<br />
+2) very simplistic.</p>
+
+<p>LEGO®’s’ API is: a round peg.</p>
+
+<p>The lesson for us is: chop types up into layers.</p>
+
+<p>Have one extremely simple type at the bottom (I favour the tagged event {tag, data}).</p>
+
+<p>Build the rest of the types up from the bottom (if you squint, you will see that UNIX /bin/*sh already does this - the API is “lines of text”.  Other tools, e.g. awk, build up more interesting types (e.g. fields) from that basic transport-layer type.</p>
+
+<p>Ohm-JS should make it easy to build languages of types. Hmm, somewhere I think I’ve written about this, probably https://guitarvydas.github.io/2020/12/09/Type-Stacks.html.</p>
+
+<h1 id="physical-layer-type">Physical Layer Type</h1>
+
+<p>There must be ONE type for interchange.</p>
+
+<p>Hmm, maybe “array of bytes” is that type (basically a non-type until you put more type-filters in the pipeline).</p>
+
+<h1 id="type-checkers-are-interpreters">Type Checkers Are Interpreters</h1>
+
+<p>Note that a type-checker is an interpreter.</p>
+
+<p>That interpreter is, currently, a big lump of code that we put into pipeline that we call <em>compiletime –&gt; runtime</em>.</p>
+
+<h1 id="layered-type-checkers">Layered Type Checkers</h1>
+
+<p>If you chop up the type-checking interpreter into smaller pieces and pipe them all together, you would get the same effect.</p>
+
+<p>For example, the first piece of type-checking might be to recognize basic types like int8, int16, char, string, lambda, etc, etc.  The second piece might be an arg counter for lambdas (pass all non-lambdas through, unchecked)<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<h1 id="type-checking-is-like-syntax-checking">Type Checking is Like Syntax Checking</h1>
+
+<p>Type checking is an error check like, “end if” syntax, but we’re not at the point yet where it is so simple that we tend to forget about it (like “end if” syntax).</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>[I’ve been forcing myself to learn Javascript and, I feel that the worst missing feature is arg counting)] <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

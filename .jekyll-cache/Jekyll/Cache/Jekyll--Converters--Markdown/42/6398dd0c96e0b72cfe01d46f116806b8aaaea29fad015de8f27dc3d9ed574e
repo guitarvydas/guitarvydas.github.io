@@ -1,0 +1,76 @@
+I"�<p>Compilers can be built in a pipeline.</p>
+
+<p>Each stage in the pipeline is driven by syntax (‘pattern matching’).</p>
+
+<p>Each stage strips out sugar and adds semantic information the next stage.</p>
+
+<p>PT Pascal was one of the early attempts at building a compiler as a pipeline.</p>
+
+<p>The stages in the pipeline are:</p>
+
+<ol>
+  <li>Scanner</li>
+  <li>Parser</li>
+  <li>Semantic</li>
+  <li>Coder</li>
+</ol>
+
+<h2 id="scanner">Scanner</h2>
+<ul>
+  <li>tokenizes the program text and passes a stream of tokens downstream.</li>
+</ul>
+
+<h2 id="parser">Parser</h2>
+<ul>
+  <li>Parses the incoming token stream and checks that they form legitimate phrases in the programming language being compiled</li>
+  <li>strips syntactic sugar from the stream before passing the stream downstream</li>
+  <li>aborts the pipeline if the incoming text does not form legitimate phrases.</li>
+</ul>
+
+<h2 id="semantic-pass">Semantic Pass</h2>
+<ul>
+  <li>creates tables for identifiers</li>
+  <li>checks declaration-before-use</li>
+  <li>creates tables for function signatures (args)</li>
+  <li>check that functions are called with appropriate number of args and types</li>
+  <li>reports errors, tries to recover and produce as many meaningful error messages as possible</li>
+  <li>aborts pipeline if any errors are found</li>
+  <li>augments the token stream with semantic information (e.g. location of variables - (parameters, temps, statics, etc.))</li>
+</ul>
+
+<h2 id="coder">Coder</h2>
+<ul>
+  <li>if invoked, it is known that the input token stream represents a valid program</li>
+  <li>the Coder converts the incoming token stream into valid assembler opcodes+operands for a specific architecture</li>
+  <li>(see Orthogonal Code Generator follow-on for how retargetting can be generalized)</li>
+</ul>
+
+<h2 id="conventions">Conventions</h2>
+<ul>
+  <li>S/SL is a dataless language - objects and errors and tokens can only be referred to by handles, but not defined in S/SL (the implementation of objects is done in some underlying language, e.g. Pascal, C, etc.)</li>
+  <li>tokens are named with “t” as the first letter of the name</li>
+  <li>operations are named with “o” as the first letter of the name</li>
+  <li>objects are implemented in single-level Objects, called “mechanisms” (aka Modules)</li>
+  <li>objects are usually implemented as stacks (aka, “concatenative languages”, aka, “stack machines”, aka, “Forth-like”, aka mid-1900s version of “De Bruijn indexing”)</li>
+  <li>operations on objects usually involve the top-of-stack and, maybe, other elements near the tops of stacks</li>
+</ul>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/">PT Pascal and S/SL</a></p>
+
+<p><a href="https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html">Names and Data Descriptors</a></p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a><br />
+<a href="https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y">OCG</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+:ET

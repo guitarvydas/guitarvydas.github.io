@@ -1,0 +1,56 @@
+I"�	<p>In JavaScript, I wrote <code class="language-plaintext highlighter-rouge">f(x,y,name,z)</code></p>
+
+<p>but intended to write <code class="language-plaintext highlighter-rouge">f(x,y.name,z)</code></p>
+
+<p>A long debugging session was required to discover that <code class="language-plaintext highlighter-rouge">z</code> was <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+
+<p>I gave 4 params, but <code class="language-plaintext highlighter-rouge">f</code> expected only 3.</p>
+
+<p>The 4th parameter <em>defaulted</em> to <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+
+<p>A simple compiler-check (count parameters), would have caught this typo.  Instead it caused a mystery.</p>
+
+<h2 id="why">Why?</h2>
+
+<p>I would guess that parameter defaulting was inserted into the language in-search-for user-friendliness.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<h3 id="user-friendliness">User Friendliness</h3>
+
+<p>This is not user friendly.</p>
+
+<h3 id="simple-checks">Simple Checks</h3>
+
+<p>Full-blown type-checking would not have been necessary here.</p>
+
+<p>Just parameter-counting.</p>
+
+<h4 id="re-structuring-semantics-checking">Re-Structuring Semantics Checking?</h4>
+
+<p>Hmm, we use a <em>parser</em> to check for stupid errors.</p>
+
+<p>We don’t waste time waiting for a full type-check, if the parser caught stupid errors.</p>
+
+<p>Maybe a pre-check pass should be inserted between the parser and the full-blown semantics checker?</p>
+
+<p>How does this affect language design and user-friendliness?  And, gradual typing?</p>
+
+<h4 id="gradual-compilation">Gradual Compilation</h4>
+
+<p>Maybe languages shoud be structured to allow experimentation, then, whine about “not enough information (detail) to compile” later?</p>
+
+<p><img src="/assets/gradualcompiling.png" alt="Gradual Compiling" /></p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 01 2021</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+:ET

@@ -1,0 +1,62 @@
+I"�
+<h1 id="repl">REPL</h1>
+
+<p>The “best” debugger I used was a REPL<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>REPL means “Read, Eval, Print, Loop”.</p>
+
+<p>Debugging in a REPL uses the language, itself, as the syntax for the debugger.</p>
+
+<p>Once inside a REPL, a programmer can query (and change) the state of a computation using familiar syntax.</p>
+
+<h1 id="interpretation-vs-compilation">Interpretation vs. Compilation</h1>
+
+<p><em>All</em> programming languages can be interpreted.</p>
+
+<p>Only <em>some</em> languages can be compiled.</p>
+
+<p>Compilation is an optimization, often applied prematurely.</p>
+
+<h1 id="interpreter-and-repl-for-all-languages-before-compilers">Interpreter and REPL For All Languages Before Compilers</h1>
+
+<p>IMO, <em>all</em> programming languages should start out life as interpreters with REPLs.</p>
+
+<p>Then, and only then, compilers can be built (for some languages / language features).</p>
+
+<h1 id="debugging-workflow">Debugging Workflow</h1>
+
+<p>The workflow could be changed to:</p>
+
+<ol>
+  <li>write the program</li>
+  <li>debug the program in the REPL</li>
+  <li>compile the debugged program for production.</li>
+</ol>
+
+<h1 id="how-to-build-interpreters-for-existing-languages">How To Build Interpreters For Existing Languages?</h1>
+
+<h2 id="ohm-js">Ohm-JS?</h2>
+
+<p>Q: Can Ohm-JS (+ CL, Pyton, etc.) be used to build interpreters for all existing compile-only languages?</p>
+
+<h2 id="denotational-semantics">Denotational Semantics?</h2>
+
+<p>Q: Can Denotational Semantics produce interpreters for languages and tie compilers back to the original language semantics?  Can the Denotational Semantics of a language be used to produce, both, the interpreter and the compiler?</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The REPL happened to be a Lisp REPL, but that is beside the point of this article.  I think that pre-CL Lisp was easier to debug than is Common Lisp. OTOH Lispworks (for CL) defines what a debugger should be capable of. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

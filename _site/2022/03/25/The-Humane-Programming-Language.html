@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>The Humane Programming Language | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="The Humane Programming Language" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Spectrum of Languages Broadly, there are two extremes in programming language design: end-user-oriented - “humane” from the end-users’ perspective, but, theoretically unsound theoretically-oriented - self-consistent, but “inhumane” from the end-users’ perspective" />
+<meta property="og:description" content="Spectrum of Languages Broadly, there are two extremes in programming language design: end-user-oriented - “humane” from the end-users’ perspective, but, theoretically unsound theoretically-oriented - self-consistent, but “inhumane” from the end-users’ perspective" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/25/The-Humane-Programming-Language.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/25/The-Humane-Programming-Language.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-25T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Humane Programming Language" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/25/The-Humane-Programming-Language.html","@type":"BlogPosting","description":"Spectrum of Languages Broadly, there are two extremes in programming language design: end-user-oriented - “humane” from the end-users’ perspective, but, theoretically unsound theoretically-oriented - self-consistent, but “inhumane” from the end-users’ perspective","dateModified":"2022-03-25T00:00:00-04:00","datePublished":"2022-03-25T00:00:00-04:00","headline":"The Humane Programming Language","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/25/The-Humane-Programming-Language.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Humane Programming Language</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-25T00:00:00-04:00" itemprop="datePublished">Mar 25, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="spectrum-of-languages">Spectrum of Languages</h2>
+<p>Broadly, there are two extremes in programming language design:</p>
+<ol>
+  <li>end-user-oriented - “humane” from the end-users’ perspective, but, theoretically unsound</li>
+  <li>theoretically-oriented - self-consistent, but “inhumane” from the end-users’ perspective</li>
+</ol>
+
+<p>What is the middle ground?</p>
+
+<p>We need a version of <a href="https://en.wikipedia.org/wiki/The_Humane_Interface">The Humane Interface</a> for programming language design.</p>
+
+<h2 id="programming-languages-are-ides">Programming Languages Are IDEs</h2>
+
+<p>The goal of programming is to control the operation of a machine.</p>
+
+<p>Programming languages are simply IDEs for programming machines.</p>
+
+<h2 id="λ-calculus">λ Calculus</h2>
+
+<p>A concrete example of (2) - theoretically sound, but, inhumane, programming language is the λ Calculus.</p>
+
+<p>The following is <em>reverse</em> in λ Calculus<sup id="fnref:jtar" role="doc-noteref"><a href="#fn:jtar" class="footnote">1</a></sup> :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λa.a(ω(λbcde.d(bb)(λf.fce)))⊥
+</code></pre></div></div>
+<p>(This becomes even harder to read when De Bruijn indexing is used).</p>
+
+<p>Clearly, one wouldn’t expect spreadsheet users to use λ Calculus instead of the high-school math functions that they are used to.</p>
+
+<h2 id="question">Question</h2>
+
+<p>So, what is the “science” behind wrapping theoretically-sound operations in sugar-coated syntax that makes for a “good” programming language?</p>
+
+<h3 id="problem-space">Problem Space</h3>
+
+<p>Firstly, it depends on the problem space.  Spreadsheet users want “simple to use” functions.  They don’t want to see the power of λ Calculus or the power of Python.</p>
+
+<h3 id="one-language-to-rule-them-all---not">One Language To Rule Them All - NOT</h3>
+<p>I argue that there can be no <em>one</em> programming language that will satisfy everone.</p>
+
+<p><em>General purpose programming languages</em> are dead to me.</p>
+
+<h3 id="implications">Implications</h3>
+
+<p>The implication is that we need tools to help us build lots of programming languages, and, we need tricks to make the act of building languages proceed more quickly.</p>
+
+<h4 id="peg">PEG</h4>
+
+<p>PEG<sup id="fnref:peg" role="doc-noteref"><a href="#fn:peg" class="footnote">2</a></sup> - Ohm-JS - is a step in that direction.</p>
+
+<h4 id="humane-interface-for-programming-languages">Humane Interface For Programming Languages</h4>
+
+<p>We need to explore / characterize what end-users <em>think</em> is simple.</p>
+
+<h4 id="simplicity-complexity">Simplicity, Complexity</h4>
+
+<p>Simplicity is defined as “lack of nuance”.</p>
+
+<p>How can we hide/elide nuance without removing nuance?</p>
+
+<h4 id="layers">Layers</h4>
+
+<p>We need to employ layered design.</p>
+
+<p>Layers are infinitely recursive.</p>
+
+<p>It is not good enough to think in terms of only two (2) layers</p>
+<ul>
+  <li>high-level vs. low-level</li>
+  <li>compile-time vs. runtime.</li>
+</ul>
+
+<h2 id="syntax">Syntax</h2>
+<p>End-users often use diagrams - e.g. whiteboards and paper.</p>
+
+<p>Our programming languages are relegated to being text-only<sup id="fnref:text" role="doc-noteref"><a href="#fn:text" class="footnote">3</a></sup>.</p>
+
+<h3 id="containment">Containment</h3>
+
+<p>People think in terms of containers - dolls nested within dolls.</p>
+
+<p>Containment is easy to express on diagrams.</p>
+
+<p>Containment is less-easy to express in text.  We have spent decades crawling out of the hole created by our use of text-only languages (Structured Programming, Global-vs-scoped variables, OO, λ Calculus, namespaces, etc., etc.).</p>
+
+<h4 id="containment-diagram">Containment Diagram</h4>
+
+<p><img src="/assets/containment.png" alt="Containment" /></p>
+
+<h4 id="containment-text">Containment Text</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  var x;
+}
+</code></pre></div></div>
+<p>Note that if <code class="language-plaintext highlighter-rouge">var x</code> appears outside of the braces, the variable <code class="language-plaintext highlighter-rouge">x</code> is no longer contained.</p>
+
+<p>It happens so often that we’ve given this condition a special name - <em>global variable</em>.</p>
+
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:jtar" role="doc-endnote">
+      <p>From <a href="https://justine.lol/lambda/">BLC</a> <a href="#fnref:jtar" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:peg" role="doc-endnote">
+      <p>Parsing Expression Grammars. <a href="#fnref:peg" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:text" role="doc-endnote">
+      <p>The reason for this is historical.  In the mid-1900s, it was very expensive to make hardware that operated on anything but non-overlapping, grids of small bitmaps (aka characters). <a href="#fnref:text" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2022/03/25/The-Humane-Programming-Language.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

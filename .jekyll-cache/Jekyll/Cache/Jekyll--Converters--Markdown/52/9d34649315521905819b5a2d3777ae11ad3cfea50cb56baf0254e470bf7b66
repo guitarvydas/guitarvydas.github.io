@@ -1,0 +1,95 @@
+I"<h1 id="restricting-interfaces">Restricting Interfaces</h1>
+<p>The big win in software repeatedly seems to be in restricting interfaces.</p>
+
+<p>Assembler is a restricted API of what is possible using microcode.</p>
+
+<p>APIs are restricted interfaces to applications.</p>
+
+<p>Structured Programming is a way to restrict control flow.</p>
+
+<p>OO (Object Oriented) is a way to restrict data structuring.</p>
+
+<p>Global variables were tamed by scoping (restricting the interface to variables).</p>
+
+<p>λ Calculus is a way to restrict interfaces to</p>
+<ol>
+  <li>functions</li>
+  <li>bound variables</li>
+</ol>
+
+<p>(Functions (and closures) are containers with very restricted interfaces (one group of data in, one group of data out (aka parameters and return value(s), resp.))).</p>
+
+<h2 id="portability-retargeting">Portability, Retargeting</h2>
+<p>Research on compilers in the mid-1970s resulted in things like:</p>
+
+<ul>
+  <li>OCG - Orthogonal Code Generator (Cordy), which defined a small set of operations to divide-and-conquer the task of compilation
+    <ul>
+      <li>
+        <ol>
+          <li>the compiler produces code for generic operations (like “a = b + c”)
+            <ul>
+              <li>all data is allocated in a uniform manner (<a href="https://dl.acm.org/doi/10.1145/24039.24051]">data descriptors</a>)</li>
+              <li>normalization makes automation easier</li>
+              <li><em>condition descriptors</em> were invented and look a lot like λ of 2 parameters (true and false branches, De Morgan’s Laws could be used to manipulate <em>condition descriptors</em>)</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>tree-walker produces real code for specific CPUs from the generic code</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>RTL - Register Transfer Logic -  (Fraser Davidson Peephole optimizer)
+    <ul>
+      <li>used in GCC</li>
+      <li>defines a small set of operations
+        <ul>
+          <li>all data is assumed to be allocated in “registers” (fake, virtual)</li>
+          <li>all operations act on “registers”</li>
+          <li>peephole optimizer walks RTL code and produces real code for specific CPUs</li>
+          <li>I built such a peephole optimizer using just AWK (for my 8080 C compiler)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Now, we are dealing with lambda calculus, which defines a small set of operations<br />
+	- apply<br />
+	- abstraction<br />
+	- access bound slot<br />
+and, encodes all programs as a combination of these operations.</p>
+
+<h2 id="normalization">Normalization</h2>
+<p>To reiterate, normalization makes automation easier.</p>
+
+<p>Assembler is easy to compile, because it is normalized to triples<br />
+<code class="language-plaintext highlighter-rouge">MOV R0, R1</code>.</p>
+
+<p>OCG, RTL, <a href="https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417">Peter Lee’s take on Denotational Semantics</a> all use the same trick - <em>normalization</em> (restricting the interface).</p>
+
+<p><em>Normalization</em> makes <em>divide-and-conquer</em> easier.</p>
+
+<p>[BTW, parameterization is the anti-thesis of normalization.  Parameterization makes interfaces more complicated (nuanced) instead of making them simpler (less nuanced).  (Aside: we don’t need to throw nuance away, just push it to a different view/level).]</p>
+
+<p>[BTW, one of the beauties of Lisp is that its syntax is normalized.  Everything <em>looks</em> like a function and everything has a value (i.e. everything is an expression).  This kind of extreme normalization led to the invention of Lisp macros (which happen to look like functions).  λ calculus applied to programming is regurgitating these concepts - everything is a function, every function always returns a value (another function), every function takes exactly one parameter, the type of every parameter is the same (an apply-able function))]</p>
+<ul>
+  <li>
+    <h2 id="see-also">See Also</h2>
+  </li>
+</ul>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

@@ -1,0 +1,115 @@
+<p>x—<br />
+layout: post<br />
+title:  “WIP Notes About Tunney’s BLC”<br />
+—</p>
+<h2 id="introduction">Introduction</h2>
+
+<p>I’m trying to parse Tunney’s blog post about <a href="https://justine.lol/lambda/">Binary Lambda Calculus</a> down to the bit level.</p>
+
+<p>I’ve captured my thoughts in this blog.  These are notes-to-self.  My current understanding is not-yet-complete, but HTH…</p>
+
+<p>The notes might contain errors in understanding, but that’s OK with me, since my understanding grows through iteration…</p>
+
+<h2 id="notes">Notes</h2>
+
+<ul>
+  <li>2 types
+    <ol>
+      <li>opcodes</li>
+      <li>references to variables on the stack</li>
+    </ol>
+  </li>
+</ul>
+
+<p>2 types needs 1 bit ; 0 =&gt; opcode, 1 =&gt; ref</p>
+
+<ol>
+  <li>refs are formally called “De Bruijn Indices”, but they are nothing more than anonymous variables.  Forth does this, too, but (2) Curries functions down to 1 parameter (always), Forth allows more than 1 parameter</li>
+</ol>
+
+<p>Opcodes: there are only 2 opcodes, 1 more bit is required (‘0’ to signify opcode, 0/1 to signify which opcode)</p>
+<ol>
+  <li>“Abstraction” (1st class function of exactly 1 parameter), push the function onto the stack. ‘00’</li>
+  <li>“Application” Apply a 1st-class function to an arg.  Arg is top-of-stack, 1st class function is at TOS+1 (2nd item on stack). ‘01’</li>
+</ol>
+
+<p>Ref always begins with a ‘1’ bit, then followed by N 1’s, followed by a ‘0’ bit terminator, e.g.</p>
+
+<p>0th item (TOS<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>) is ‘10’<br />
+Next item (TOS+1) is ‘110’<br />
+TOS+2 item is ‘1110’<br />
+etc.</p>
+
+<p>‘(lambda (x) x)’ is encoded as ‘‘0010”  which means</p>
+<ul>
+  <li>Abstraction ‘00’</li>
+  <li>TOS ref ‘10’</li>
+</ul>
+
+<p>The whole function ‘(lambda (x) x)’ needs 4 bits (half a byte).</p>
+
+<p>In JavaScript syntax, <code class="language-plaintext highlighter-rouge">(lambda (x) x)</code> would be written as</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function (x) { return x; }
+</code></pre></div></div>
+
+<p>The <em>program</em> ‘((lambda (x) x) 0101)’ requires 8 bits (a full byte).  0101 is arbitrary, it gets pushed into meory and passed as the 1st (only) arg to the function ‘(lambda (x) x)’ - which returns its arg whatever it is, in this case ‘0101’.</p>
+
+<p>In JavaScript, the program syntax is</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>((function (x) {return x;}) 0)
+</code></pre></div></div>
+
+<p>The whole program is 1 byte long - 00100101 binary.</p>
+
+<p>Stdin works with characters (8 bits) not single bits.  So, the shell script:<br />
+<code class="language-plaintext highlighter-rouge">printf 0010 ; printf 0101</code><br />
+outputs 8 <em>characters</em> (a total of 64 bits).  7 bits in each character are wasted and the blc parser discards those bits and only uses the bottom-most bit.  (N.B. the command-line version of <em>printf</em> does not add a terminating ‘\0’ like C does.)</p>
+
+<p>In ASCII,</p>
+<ul>
+  <li>the character ‘0’ is represented by the code 0x30, which is binary ?1100000, and,</li>
+  <li>the character ‘1’ is 0x31, which is binary ?1100001.<br />
+(where “?” is the parity bit ; ASCII is actually 7 bits plus 1 parity bit)<br />
+(I’m leaving the parity bit as ? to avoid even more confusion<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>)</li>
+</ul>
+
+<p>The parser discards the top 7 bits.  We get only the bottom-most bit (the LSB):</p>
+<ul>
+  <li>‘0’ -&gt; binary 0</li>
+  <li>‘1’ -&gt; binary 1</li>
+</ul>
+
+<p>(This works due to the definition of ASCII.  Essentially, this is a clever hack.  It is an idiom in assembler circles).</p>
+
+<p>The character string 0010 is 0x30303130 in hex, which is</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?1100000?1100000?1100001?1100000
+</code></pre></div></div>
+<p>in binary.</p>
+
+<p>The <em>character</em> string 0010 is parsed from 32 <em>bits</em> down to 4 <em>bits</em>, binary 0010.</p>
+
+<p>The parser reads characters from stdin, strips them down and puts them into memory (an array).</p>
+
+<p>Church numeral 0 is <em>defined</em> to be the unity function (lambda (x) x).</p>
+
+<p>“False” is <em>defined</em> to be the same as Church numeral 0.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>TOS means Top Of Stack. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Parity is calculated by the hardware by simply summing all of the bits in the byte (except the parity bit).  If the sum is even, the parity bit is set to 0, else if the sum is odd, the parity bit is set to 1.  There are no other possibilities.  An even binary number <em>always</em> ends with a 0 bit, an odd binary number <em>always</em> ends with a 1 bit.  This kind of summing discards all carries and the result is always a single bit. (IOW, it uses a 1-bit register and ignores overflow). <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>

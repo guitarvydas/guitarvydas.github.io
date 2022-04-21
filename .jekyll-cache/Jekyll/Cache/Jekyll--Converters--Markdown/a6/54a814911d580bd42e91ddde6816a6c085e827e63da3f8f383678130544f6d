@@ -1,0 +1,217 @@
+I"�1<h2 id="ux---user-experience">UX - User Experience</h2>
+<p>It is not <em>enough</em> to present all of the options to a user.</p>
+
+<p>The options must be presented in a way that is convenient to the user.</p>
+
+<p>That “convenience” is UX.</p>
+
+<h2 id="programming-languages-are-ide-wannabes">Programming Languages Are IDE Wannabes</h2>
+
+<p>Programming languages are IDEs for the act of programming.</p>
+
+<p>Programming languages are stunted IDEs.</p>
+
+<p>Programming languages, currently, are based only on code as text.</p>
+
+<h2 id="the-humane-interface">The Humane Interface</h2>
+
+<p>Jef Raskin’s “The Humane Interface” is a book that takes a stab at UX design issues.</p>
+
+<h2 id="ides">IDEs</h2>
+<h3 id="ides-for-non-programmers">IDEs For Non-Programmers</h3>
+<h4 id="spreadsheets">Spreadsheets</h4>
+<h4 id="word-processors">Word Processors</h4>
+<h3 id="windows">Windows</h3>
+<h4 id="apps-and-app-stores">Apps and App Stores</h4>
+<h3 id="macos">MacOS</h3>
+<h3 id="ides-for-programmers">IDEs For Programmers</h3>
+<h4 id="linux---original">Linux - Original</h4>
+<h4 id="early-dynamic-languages">Early, Dynamic Languages</h4>
+<h4 id="repl">REPL</h4>
+<p>REPLs are aimed at “rapid development”, i.e. Design and trying-out Designs.</p>
+<h5 id="lisp">Lisp</h5>
+<h5 id="forth">Forth</h5>
+<h5 id="etc">Etc.</h5>
+<h4 id="production-engineering">Production Engineering</h4>
+<h5 id="compilers">Compilers</h5>
+<h5 id="compiled-languages">Compiled Languages</h5>
+<p>Syntax is twisted to appease compilers and allow easier compilability, but UX suffers.</p>
+
+<h6 id="declaration-before-use">Declaration-before-use</h6>
+
+<p>Based on mid-1900s biases towards saving memory and CPU time.</p>
+
+<p>The real issue is detection of typos.</p>
+
+<p>Declaration-before-use appeases compilability, but UX suffers (least important stuff comes first).</p>
+
+<p>Legal contracts use declaration-before-use, but are based on</p>
+<ul>
+  <li>the fact that contracts are written in text on paper</li>
+  <li>our reading style - we read from top to bottom</li>
+  <li>machines (computers) don’t care - they can access randomly and don’t need top-to-bottom arrangement (except to appease compilability).</li>
+</ul>
+
+<p>Simple step forward: declaration <em>anywhere</em> (before or after first use).</p>
+
+<p>JavaScript attempts to achieve this in a clunky way - “lifting” (based on the incremental use of compiler lore, influenced by mid-1900s biases instead of 2000’s reality).</p>
+
+<p>The even-more-real issue is “why do we use text?”.  Machines (computers) can do more.</p>
+
+<p>Characters are but non-overlapping grids of fixed-size bitmaps.</p>
+
+<p>We can do more with machines in the 2000’s, like using windows.  In fact, my bank statement uses PDF and places <em>every</em> character using postscript (a derivative of Forth).  Text-only-based approaches choke on this format, since they “see” single characters instead of strings of characters.  Sigh.</p>
+
+<h2 id="theory-rigor-completeness-self-consistency">Theory, Rigor, Completeness, Self-Consistency</h2>
+
+<p>Theoretical approaches only solve 1/2 of the problem - the correctness issue.</p>
+
+<p>Theoretical approaches tend not to solve the UX issues - the other 1/2 of the problem.</p>
+
+<p>In fact, UXs in the 2000’s suck compared to desktop GUIs of the 1990s.  Emacs has become worse, not better, as far as the UX goes (the screen/buffer flashes randomly).</p>
+
+<p>Draw.io may be rigorous, but the UX sucks.</p>
+
+<h2 id="dynamic-vs-static">Dynamic vs. Static</h2>
+
+<p>The rush towards compilability and rigor has ruined the UX-ness of programming languages.</p>
+
+<p>Compiled languages trade off compilability / completeness against UX.</p>
+
+<p>Compilation is an optimization and hurts concurrency (and, hence, parallelization).</p>
+
+<p>The optimization of compilation leads to static binding which leads to twisting of programming languages, trading off PL ease-of-use in lieue of compilability.</p>
+
+<h2 id="concurrency">Concurrency</h2>
+
+<p>Concurrency-in-the-small doesn’t help as much as concurrency-in-the-big-picture.</p>
+
+<p>What we want is to be able to make every operation concurrent and to alleviate the bloated-ness of spawning big processes in lieue of spawning small processes.</p>
+
+<p>Closures and anonymous functions <em>are</em> concurrency.</p>
+
+<p>If “systems programmers” didn’t hate Lisp and other “dynamic” languages so much, maybe they wouldn’t have bothered to build behemoth implementations of closures called Operating Systems with their hands tied behind their backs with assembler and C.</p>
+
+<p>Aside: Anonymous functions - called <em>lambdas</em> - preceded the invention of <em>closures</em>.  Closures were invented as a way of appeasing compilability concerns.</p>
+
+<p>Closures led to De Bruijn indexing, which is another way of obfuscating the UX.  Forth (nee postscript) obfuscates just fine.</p>
+
+<h2 id="lambda-calculus---bad-ux">Lambda Calculus - Bad UX</h2>
+
+<p>Quick, what does this program do?<br />
+<code class="language-plaintext highlighter-rouge">λ [[0 [λ [0 0] λλλλ [[1 [3 3]] λ [[0 3] 1]]]] $nil]</code><sup id="fnref:blc" role="doc-noteref"><a href="#fn:blc" class="footnote">1</a></sup></p>
+
+<p>The above program is derived through mathematical manipulation.  It is (probably) sound, but its DI<sup id="fnref:DI" role="doc-noteref"><a href="#fn:DI" class="footnote">2</a></sup> is not very revealing.</p>
+
+<h2 id="creating-ux">Creating UX</h2>
+
+<p>Revealing-ness is UX.</p>
+
+<p>Can we wrap the above program in a way that is more humane to the reader?</p>
+
+<p>What is the “science” behind UX design?</p>
+
+<p>We could use Ohm-JS / PEG / etc. to wrap text around this.</p>
+
+<p>But, why stop at text?  Why not use a diagram?  Not necessarily a full-blown VPL, nothing fancy, just a box with some text in it, and some input and output ports.</p>
+
+<p>This used to be called “schematics”, and, “drawings”, and, “drafting”, and, “blueprints”.</p>
+
+<p>Instead we continue to use ASCII-art, like <code class="language-plaintext highlighter-rouge">{ ... }</code>, to represent boxes.  Long after unicode replaced ASCII…</p>
+
+<p>And, now we have SVG, which contains all of the primitives we need to program using diagrams:</p>
+<ol>
+  <li>boxes</li>
+  <li>ellipses</li>
+  <li>text</li>
+  <li>lines.</li>
+</ol>
+
+<p>(Ignore the rest of the SVG stuff 😀 ).</p>
+
+<h2 id="code-bloat">Code Bloat</h2>
+<p>IMO, Code Bloat comes from notation-abuse.</p>
+
+<p>If you push a notation “too far”, you need to figure out clever ways to abuse the notation to do what you need done.</p>
+
+<p>For example, functional programming is a good notation<sup id="fnref:sl" role="doc-noteref"><a href="#fn:sl" class="footnote">3</a></sup> for building fancy, synchronous calculators that obey the 1-in-1-out principle that cannot use mutation.</p>
+
+<p>Mutation has been grafted onto the functional paradigm, resulting in epicycles like preemption, operating systems, multi-tasking, fairness, semaphores, priority inversion, etc., etc.</p>
+
+<p>Multi-tasking used to be easy.  Loop, test for termination, call code snippet, continue looping.</p>
+
+<p>Instead, we have things like Windows and MacOS and Linux that take the easy-ness out of multi-tasking, so that we can build fancy, synchronous calculators<sup id="fnref:calc" role="doc-noteref"><a href="#fn:calc" class="footnote">4</a></sup> that multi-task.</p>
+
+<p>Programming used to be understandable until we invented textual “programming languages”.</p>
+
+<p>Programming used to be about making a machine do what was needed.</p>
+
+<p>Now, programming is about notation-worship.</p>
+
+<p>We are expected to completely ignore issues like history and sequencing in lieue of building fancier, synchronous calculators.</p>
+
+<h2 id="orthogonal-programming-languages">Orthogonal Programming Languages</h2>
+
+<p>Orthogonal split between</p>
+<ol>
+  <li>data allocation and access</li>
+  <li>operators</li>
+</ol>
+
+<p>Syntax is used for control-flow.</p>
+
+<p>Operands (Data Descriptors, functions, getters, setters) are for data access.</p>
+
+<p>Ohm-JS / PEG / etc. are DSLs for creating parsers.  They make syntax easy-to-design-and-implement.</p>
+
+<p>See OCG (Cordy’s Orthogonal Code Generator) for further details.</p>
+
+<p>See Data Descriptors (Holt’s Data Descriptor paper) for further details.</p>
+
+<h2 id="synonyms">Synonyms</h2>
+<p>Every name (variable, function, type, etc.) should be associated with a list of synonyms.</p>
+
+<p>Every operator should be associated with a list of synonyms.</p>
+
+<p>The IDE should allow the programmer to turn a dial and get as much detail / as little detail about any syntactic element in a program.</p>
+
+<p>For example, a maintainer might want to see long names for every name/operation when first getting one’s feet wet and trying to understand what is going on.</p>
+
+<p>For another example, a theoretician might want to reduce every name down to a single character to be able to “see” the algorithm better.</p>
+
+<p>The programming language should not define what a programmer can see.  The IDE should give the programmer a dial.</p>
+
+<p>I believe that many of our programming languages suffer from schizophrenia, where the language designer has tried to appease the extremes in both camps (above) and has, usually, devised a watered-down version (a union) as the final resulting “general purpose” language.</p>
+
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html">Names and Data Descriptors</a></p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a><br />
+<a href="https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y">OCG</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:blc" role="doc-endnote">
+      <p>https://justine.lol/lambda/ <a href="#fnref:blc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:DI" role="doc-endnote">
+      <p>DI means Design Intent. <a href="#fnref:DI" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sl" role="doc-endnote">
+      <p>See Sector Lisp and BLC for an example of how beautifully small this paradigm can be. <a href="#fnref:sl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:calc" role="doc-endnote">
+      <p>A calculator has exactly one synchronous input and exactly one synchronous output (the input and output can be destructured into several low-level data objects that have different low-level “types”, as is already done in compilers).  A calculator cannot have 0 inputs nor 0 outputs.  A calculator cannot have more than 1 input nor more than 1 output.  A calculator cannot sequence things nor track “history”.  A calculator cannot respond to asynchronous inputs.  A calculator cannot produce asynchronous outputs.  The callee blocks while waiting for a result from a calculator.  We cannot know if the called calculator will block waiting for results from sub-calculators.  We cannot calculate the throughput of a calculator (at best, we can measure the throughput and cross our fingers hoping that we’ve measured all edge cases).  Why does all of this matter?  Robotics.  IoT.  Distributed programming (internet, blockchain, etc.).  UX (mouse-clicks).  What about exceptions?  Uh, we had to kludge the functional paradigm to add warts called exceptions.  What about long-running loops and deep recursion?  Infinite loops only happen during development. Loops and recursion are non-starters for distributed language design (if you really, really want a loop, send yourself a feedback message).  What about daemons and servers?  They use the “simple” version of concurrency - loop, create response, continue - there is no need to make them more complicated.  (In fact, there are good reasons - like unintended bugs and security - for de-complicating daemons and servers). <a href="#fnref:calc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

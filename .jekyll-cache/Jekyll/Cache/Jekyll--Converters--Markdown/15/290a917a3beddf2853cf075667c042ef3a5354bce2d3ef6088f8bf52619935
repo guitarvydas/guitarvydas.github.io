@@ -1,0 +1,217 @@
+I"�%<p>Refer to my essay <a href="https://guitarvydas.github.io/2021/07/24/Jetbrains-MPS-Before-I-Look-At-It.html">Before I Look At It</a>.</p>
+
+<p>In general, I like Jetbrains MPS.</p>
+
+<p>I watched, at least:</p>
+
+<p><a href="https://www.youtube.com/watch?v=iN2PflvXUqQ&amp;t=18s">Projectional Editor</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=pVIywLXDuRo">Voice Menu</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=eEUMAx3g6do&amp;t=1s">Introduction</a></p>
+
+<ul>
+  <li>
+    <p><em>Does MPS contain unnecessary complexity?</em></p>
+
+    <ul>
+      <li><em>Can I begin using MPS after reading only 1 page or 2 pages of documentation?</em>
+        <ul>
+          <li>Nope.</li>
+        </ul>
+      </li>
+      <li><em>I come pre-loaded with DSL-building knowledge - does that help or get in the way,  Maybe I’m “set in my own ways” and will miss a different kind of simplicity</em>
+        <ul>
+          <li>Knowing how to build DSLs was probably helpful to me.  JetBrains seems to suggest that domain experts rely on DSL experts to invent DSLs.  I think that this is correct.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><em>I am wary of claims of projectional editing that aren’t based on a set of atoms.  I guess I’ll be looking for atoms.</em></p>
+
+    <ul>
+      <li>Projectional editing is based on parsing theory.  The <em>atoms</em> in MPS are parse-tree nodes.  I think that you need to know parsing theory to understand what is going on. I’m not sure if you need to understand what is going on, though.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Is MPS “better” than what we’ve got?</em></p>
+
+    <ul>
+      <li>Yes.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Can you build DSLs (SCNs) in a short amount of time?</em></p>
+
+    <ul>
+      <li>It is not clear to me how steep the learning curve is. I have been polluted by knowledge of how to build languages, compilers, interpreters, DSLs, etc.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>… tortuous mappings …</em></p>
+
+    <ul>
+      <li>MPS provides no assitance here, other than to enable building DSLs.  DSL-builders naturally get better over time.  Yes, it is better to use an expert DSL designer.</li>
+      <li>One way out of the tortuous-mapping prison is to build lots of DSLs for a single project (one DSL for every aspect of the project).</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Can you use the DSL to build more DSLs?  (Pipeline of DSLs).</em></p>
+
+    <ul>
+      <li>Yes, but, you have to supply the plumbing manually.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Are the Atoms expressible as XML? (XML is triples.)</em></p>
+
+    <ul>
+      <li>Not sure.</li>
+      <li>XML is downright ugly<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</li>
+    </ul>
+
+  </li>
+  <li>
+    <p><em>DRY - is DRY automated, or does the programmer need to worry about DRY?</em></p>
+
+    <ul>
+      <li>I didn’t see any DRY-help in MPS.</li>
+      <li>Git/Github is <em>soooo</em> close to doing DRY automatically.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Newbies think that a good example of visual programming is a “plus” box, <code class="language-plaintext highlighter-rouge">a = b + c</code>.</em></p>
+
+    <ul>
+      <li>MPS allows tree nodes to be visual things, e.g. tables.</li>
+      <li>I really like that feature.</li>
+      <li>I first saw that feature in Lisp (Lisp lends itself to projectional editing).</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Round trip - Newbies think that round-trip is a good idea.</em></p>
+
+    <ul>
+      <li>No attempt at round-tripping in MPS.</li>
+      <li>Good.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Not Just Text</em></p>
+
+    <ul>
+      <li>MPS can create DSLs that are Not Just Text.</li>
+      <li>Good.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Layers</em>.</p>
+
+    <ul>
+      <li>Hmm, I don’t think I see any layering-help in MPS.</li>
+      <li>One can create layers by choosing syntax for the DSLs.</li>
+      <li>Enabled, but not enforced.</li>
+    </ul>
+  </li>
+  <li>
+    <p><em>Containment</em>.</p>
+
+    <ul>
+      <li>Same as above (see layers).</li>
+      <li>Enabled, but not enforced.</li>
+      <li>Enforcement<sup id="fnref:enforce" role="doc-noteref"><a href="#fn:enforce" class="footnote">2</a></sup> is a UX issue. Psychology is a strange subject. We <em>can</em> write FP code in assembler, but we don’t.</li>
+    </ul>
+  </li>
+</ul>
+
+<ul>
+  <li><em>Java</em>
+    <ul>
+      <li>The videos I watched felt outdated because they emphasized Java.</li>
+      <li>It would be better if MPS emphasized the flavor-of-the-day language.  I think that means Python, today.</li>
+      <li>I doubt that MPS is wedded to Java. It should be “easy” to port MPS to emit code in other languages, like Python and JavaScript. (At worst, it should be possible to write an MPS DSL that emits an MPS DSL that emits Python).</li>
+    </ul>
+  </li>
+  <li>Dialog-based UX
+    <ul>
+      <li>Dialogs make a horrible UX
+        <ul>
+          <li>because they want <em>you</em> to enter information in the order prescribed by <em>them</em></li>
+          <li>dialogs impede free-form thinking</li>
+          <li>dialogs are a way to allow the underlying technology to cheat, instead of providing layers</li>
+          <li>layers lead to isolation, dialogs, though, flow from the mind-set of “everything at once” (an anti-layering mindset)</li>
+          <li>dialogs are, often, like <em>modes</em> (see Raskin’s “Humane Interface”), esp. when there are more than 7±2 options in the dialog (i.e. the dialog is “flat”, TMtTA - too much to think about)</li>
+        </ul>
+      </li>
+      <li>Jetbrains MPS seems to use a lot of dialogs</li>
+    </ul>
+  </li>
+  <li>Parsing ASTs
+    <ul>
+      <li>One of the videos says that text is always parsed to ASTs and implies that Projectional Editing is the only way out of this rabbit hole and that projectional editing “eliminates” parsing.</li>
+      <li>Parsing is pattern-matching.</li>
+      <li>REGEXP is pattern-matching, but with no push-down stack.</li>
+      <li>PEG is pattern-matching with a push-down stack.</li>
+    </ul>
+  </li>
+  <li>PEG Pattern Matching
+    <ul>
+      <li>Ohm-JS allows pattern-matching of structured text while calling subroutines to perform various tasks with the matching text.</li>
+    </ul>
+  </li>
+  <li>Parsing to Triples
+    <ul>
+      <li>Matches are often represented as ASTs which are often represented as trees.</li>
+      <li>Trees imply structure and, therefore, can limit the imagination on how matches get used.</li>
+      <li>The most fundmental, structure-less representation of matches is as <em>triples</em> (Relation, Subject, Object).</li>
+      <li>Trees can be built up from triples, but this requires work.</li>
+      <li>XML is triples, fundamentally.</li>
+      <li>Lisp is triples, fundamentally.</li>
+      <li>Assembler is triples.</li>
+    </ul>
+  </li>
+  <li>TXL
+    <ul>
+      <li><a href="2021-12-31-TXL.md">TXL</a> is a pattern-matching tool that creates strongly-typed parse-trees and allows strongly-typed transformations between different kinds of trees, i.e. augmenting languages and tranforming between languages.</li>
+    </ul>
+  </li>
+  <li>Projectional Editing - Lisp
+    <ul>
+      <li>Some Lisp editors are essentially Projectional Editors.</li>
+      <li>Lisp code is RPN triples, a form which lends itself to various syntaxes (I call them <em>skins</em>).</li>
+      <li>Lisp macros are a form of projectional editing scripts.</li>
+    </ul>
+  </li>
+  <li>Smart Editor
+    <ul>
+      <li>MPS provides a <em>smart editor</em>, where the user (a programmer) cannot write illegal code.</li>
+      <li>I feel that smart editors are a bad idea, since they limit imagination.  Editors (text, diagram, etc.) should allow the user to create <em>anything</em> and check it later for legality. Compilers already do this in phases.  Compilers start by lexing the code, then parsing it, then analyzing it for type-safety, etc.</li>
+      <li>Smart editors contain the biases of the original smart-editor-programmer.  Those biases may/may-not fit the problem-at-hand.  I think that the most-general solution is to create triples from pattern-matches.  Triples are problem-agnostic.  Triples are machine-readable (and less human-readable) which means that transformations can be easily automated.  Tree-walkers can be used to automate transformation of trees, but limit the imagination.  For example, UNIX® pipelines got a lot of mileage out of persisting data in a very simple form (lines of text) instead of polluting the data with various structures.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In general, I like Jetbrains MPS.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Lispers hate XML because XML’s syntax is worse than Lisp’s.  Lisp has often been accused of having an ugly syntax. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:enforce" role="doc-endnote">
+      <p>Gentle suggestion is better than force. <a href="#fnref:enforce" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

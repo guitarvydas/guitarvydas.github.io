@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Dependencies | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Dependencies" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Dependencies - The Problem of the 2000’s Dependencies in programs are the “global variable” problem of the 2000’s." />
+<meta property="og:description" content="Dependencies - The Problem of the 2000’s Dependencies in programs are the “global variable” problem of the 2000’s." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/29/Dependencies.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/29/Dependencies.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-29T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dependencies" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/29/Dependencies.html","@type":"BlogPosting","description":"Dependencies - The Problem of the 2000’s Dependencies in programs are the “global variable” problem of the 2000’s.","dateModified":"2022-03-29T00:00:00-04:00","datePublished":"2022-03-29T00:00:00-04:00","headline":"Dependencies","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/29/Dependencies.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dependencies</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-29T00:00:00-04:00" itemprop="datePublished">Mar 29, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="dependencies---the-problem-of-the-2000s">Dependencies - The Problem of the 2000’s</h2>
+<p>Dependencies in programs are the “global variable” problem of the 2000’s.</p>
+
+<p>IMO, the way to think about this problem is:</p>
+<ol>
+  <li>strive for software components that have zero (0) dependencies</li>
+  <li>forget about programming languages and just write software components in a hand-written notation<sup id="fnref:diag" role="doc-noteref"><a href="#fn:diag" class="footnote">1</a></sup>, that have 0 dependencies</li>
+  <li>look at what you’ve written and build a programming language that mimics what you wrote in (1).</li>
+</ol>
+
+<h2 id="asynchronous-components">Asynchronous Components</h2>
+
+<p>IMO, the solution is to use asynchronous components.</p>
+
+<p>Not components that invoke thread libraries.</p>
+
+<p>Components that are asynchronous from the get-go.</p>
+
+<p>Note that our current notation implies that all programming language statements are <em>synchronous</em>.</p>
+
+<p>One must be careful to write pseudo-programs that do not rely on statement sequencing.</p>
+
+<h3 id="asynchronous-notation">Asynchronous Notation</h3>
+<p>Thread libraries treat concurrency as a second class entity, not an integral part of the notation.</p>
+
+<p>Modeling concurrency in a notation isn’t the same as using a notation that is implicitly concurrent.</p>
+
+<p>For example <code class="language-plaintext highlighter-rouge">f(x,y)-&gt;u</code><sup id="fnref:antilc" role="doc-noteref"><a href="#fn:antilc" class="footnote">2</a></sup> implies synchrony, not asynchrony.  There are multiple kinds of synchrony in just that simple statement:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">f</code> is hard-baked into the expression</li>
+  <li><code class="language-plaintext highlighter-rouge">CALL / RETURN</code> implies synchronization of the caller and the callee.  The caller <em>waits</em> (blocks) until the callee is finished.</li>
+  <li><code class="language-plaintext highlighter-rouge">(x,y)</code> implies that, both, <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> arrive in a block at the same time (synchronous - time dependency)<sup id="fnref:parameters" role="doc-noteref"><a href="#fn:parameters" class="footnote">3</a></sup></li>
+  <li><code class="language-plaintext highlighter-rouge">-&gt;u</code> implies that all results, packed into <code class="language-plaintext highlighter-rouge">u</code>, leave in a block at the same time, (actually, the value of <code class="language-plaintext highlighter-rouge">u</code> depends on the timing of all of its sub-data.  All results need to be generated before the callee deacivates itself and unblocks the caller.</li>
+  <li>worse yet, <code class="language-plaintext highlighter-rouge">-&gt;u</code> uses a different syntax than <code class="language-plaintext highlighter-rouge">(x,y)</code>.  We describe input parameters as a desctructuring, but describe output parameters (return values) as an amorphous blob.</li>
+</ul>
+
+<p>Lambda calculus and Currying are inching towards a more-unified syntax.  LC insists that <em>all</em> data be created as sequences of functions and that functions be composed (<code class="language-plaintext highlighter-rouge">-&gt;</code>) in a synchronous manner.  LC tends not to describe the destructuring of data items, lumping all data into singular parameters and names (or, nameless stack offsets in the case of De Bruijn notation).  Destructuring can be described as sequences of functions composed in a synchronous manner.  Sequences are but flattened layers of information. Layering, in Lambda Calculus notation, is provided by wrapper functions, which tend to be defined in a flat (non-layered) manner, the layering of which is obfuscated by the notation.</p>
+
+<p>Insisting that <em>all</em> data be represented in the same way is a re-discovery of the principles of normalization, espoused in languages like <em>assembler</em>.</p>
+
+<p>Insisting that <em>all</em> functions be synchronous is a side-effect of using notations that were invented for use with pen-and-paper, instead of using more modern multi-dimensional notations (and processors, like computers).</p>
+
+<h4 id="alleviating-syntax">Alleviating Syntax</h4>
+
+<p>To alleviate the hard-baked knowledge that <code class="language-plaintext highlighter-rouge">f</code> is being called, use indirection.  DLLs are an atempt at doing this (an indirection slot is created for each imported function/entity).  C allows this using the <code class="language-plaintext highlighter-rouge">(*f)(...)</code> notation, but, that notation is too cumbersome.  Even <code class="language-plaintext highlighter-rouge">bash</code> allows indirection, if you try, e.g. <code class="language-plaintext highlighter-rouge">$f ... ...</code> instead of <code class="language-plaintext highlighter-rouge">f ... ...</code>. <code class="language-plaintext highlighter-rouge">Bash</code> lulls programmers into using a non-hierarchical form of indirection by providing <code class="language-plaintext highlighter-rouge">PATH</code>, which indirects all function calls to a flat place(s) in the file system.  Worse, <code class="language-plaintext highlighter-rouge">bash</code> fragments the notation for indirection by providing a bunch of rules that need to be learned by rote memorization.</p>
+
+<p>To avoid the implicit synchrony and blocking of <code class="language-plaintext highlighter-rouge">CALL / RETURN</code>,</p>
+<ul>
+  <li>don’t use <code class="language-plaintext highlighter-rouge">CALL</code> (or function-calling), use <code class="language-plaintext highlighter-rouge">Send()</code> to move data to <em>output</em> <em>ports</em><sup id="fnref:call" role="doc-noteref"><a href="#fn:call" class="footnote">4</a></sup></li>
+  <li>receive data from <em>input ports</em> using
+    <ul>
+      <li>-<em>handler</em> functions<sup id="fnref:handlers" role="doc-noteref"><a href="#fn:handlers" class="footnote">5</a></sup>, or,</li>
+      <li><code class="language-plaintext highlighter-rouge">Receive()</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>To avoid the synchronous tyranny of <code class="language-plaintext highlighter-rouge">(x,y)</code> parameter list notation, invent a notation that describes layered <em>ports</em> of destructurable data, e.g. something like<br />
+-<code class="language-plaintext highlighter-rouge">f(a,b)(c,d)(x,y)-&gt;...</code><br />
+	- wherein each block, <code class="language-plaintext highlighter-rouge">(a,b)</code>, <code class="language-plaintext highlighter-rouge">(c,d)</code> and <code class="language-plaintext highlighter-rouge">(x,y)</code> can arrive at different times.<br />
+	- this suggestion has bugs, <code class="language-plaintext highlighter-rouge">g</code> remains hard-wired and direct.  Maybe <code class="language-plaintext highlighter-rouge">f</code> should be replaced by a reference to an output port, e.g. something like <code class="language-plaintext highlighter-rouge">«p»</code>, resulting in <code class="language-plaintext highlighter-rouge">«p»(a,b)</code> and <code class="language-plaintext highlighter-rouge">«p»(c,d)</code> and <code class="language-plaintext highlighter-rouge">«p»(x,y)</code></p>
+
+<p>To avoid anti- “locality of reference” and to favour normalization, use the same syntax for input and output data blocks (ports).</p>
+
+<h2 id="ports">Ports</h2>
+
+<p>IMO, software components require explicit ports.</p>
+
+<p>Input ports.</p>
+
+<p>Output ports.</p>
+
+<h2 id="call-nothing">Call Nothing</h2>
+
+<p>IMO, software components cannot “call” other components.</p>
+
+<p>They can only <code class="language-plaintext highlighter-rouge">Send()</code> messages.</p>
+
+<h2 id="no-names">No Names</h2>
+
+<p>Components have their own name-space.</p>
+
+<p>In the name-space, are:</p>
+<ul>
+  <li>names of input ports</li>
+  <li>names of output ports.</li>
+</ul>
+
+<p>Notably, the name-space does <em>not</em> contain the names of other components (including the parent Containers).</p>
+
+<p>A child cannot decide where a message is <code class="language-plaintext highlighter-rouge">Send()</code>t to.</p>
+
+<p>Only the parent Container can decide how to route messages.</p>
+
+<p>The parent-child relationship is defined at runtime (dynamically).  This allows components to be used in different situations (plugability).</p>
+
+<h2 id="flexibility">Flexibility</h2>
+<p>Components are composed using Container components (recursively - Containers can contain other Containers (or Leaves)).</p>
+
+<p>All message-routing must be done by the Container, not the containee.</p>
+
+<p>The containee can only send messages to its own output ports (not directly to other components).</p>
+
+<p>The Container wires-up and routes messages between containees (children Components).</p>
+
+<h2 id="scalability">Scalability</h2>
+
+<p>We know, from human organization principles, that the most scalable organizational structure is a hierarchical tree (not a DAG).</p>
+
+<p>Commands/requests go <em>down</em> the tree.</p>
+
+<p>Summaries (data) come back <em>up</em> the tree.</p>
+
+<p>No one tree node is overwhelmed with too much data.  A node deals only with summary data.</p>
+
+<p>Divide and conquer.</p>
+
+<h2 id="asynchrony---fire-and-forget">Asynchrony - Fire And Forget</h2>
+
+<p>A component that sends a message does not wait for a response by default.</p>
+
+<p>Components are asynchronous by default.</p>
+
+<p>If synchronization is really needed<sup id="fnref:eth" role="doc-noteref"><a href="#fn:eth" class="footnote">6</a></sup>, you can use messages to perform a synchronization dance (a concept well-explored in networking and electronics).</p>
+
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2022/04/11/zerodependencysoftwarecomponents.html">Zero Dependency Software</a></p>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">CALL RETURN Spaghetti</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:diag" role="doc-endnote">
+      <p>Better yet, eschew character-based writing and draw diagrams. <a href="#fnref:diag" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:antilc" role="doc-endnote">
+      <p>I have chosen to not use the most modern form of functional notation to make my points. <a href="#fnref:antilc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:parameters" role="doc-endnote">
+      <p>Note that compilers implement parameter lists in exactly this manner.  All parameters are evaluated and their values are placed into a block of memory (The Stack), before the callee is activated (unblocked, called). <a href="#fnref:parameters" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:call" role="doc-endnote">
+      <p><code class="language-plaintext highlighter-rouge">CALL</code> (function calling) should only be used to describe the implementation of <em>innards</em> of components, not communcation <em>between</em> components. <a href="#fnref:call" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:handlers" role="doc-endnote">
+      <p>ATM, I favour the use of <em>handler</em> functions to react to asynchronous inputs.  As I write this, I recognize that this choice produces two different syntaxes - a syntax for input (<em>handlers</em>) and a different syntax for output (<em>Send()</em>).  Hmm.  Rhetorical question: can <em>handler</em> functions be implemented using <em>Receive()</em>? Rhetorical question: there is a difference between a theoretical treatment of a concept and a UX for that concept that appeals to non-theorist users.  What is the UX expected by non-theorists, that would be most useful in describing problems of this nature? <a href="#fnref:handlers" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:eth" role="doc-endnote">
+      <p>Note that <em>ethernet</em>, which we use on a daily basis, does not use synchronization (it uses a “random back-off” strategy instead of synchronization). <a href="#fnref:eth" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2022/03/29/Dependencies.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

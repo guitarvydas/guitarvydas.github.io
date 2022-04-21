@@ -1,0 +1,101 @@
+I"U<p>This note is a follow-on to <a href="https://guitarvydas.github.io/2021/09/15/Small-Example-of-Interpreting-and-Compiling.html">abc</a>.</p>
+
+<p>I show how to build a transpiler for the ABC language in about 20 lines of code.</p>
+
+<p>I use:</p>
+<ul>
+  <li>the <em>ftranspile()</em> function (from <em>transpiler.js</em>)</li>
+  <li>abc.glue - a specification of the transpiler in the <em>Glue</em> SCN<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</li>
+</ul>
+
+<p><em>Ftranspile()</em> and <em>glue</em> are auxiliary libraries built on top of Ohm-JS.</p>
+
+<h1 id="the-abc-language">The ABC Language</h1>
+<p>This is the most-trivial language that I could imagine, that also shows how to get started using Ohm-JS.</p>
+
+<p>The ABC language is discussed in the ABC note (see below).</p>
+<h1 id="test-sample-program">Test Sample Program</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b = 2
+c = 3
+a = b + c
+</code></pre></div></div>
+<h1 id="grammar">Grammar</h1>
+<p>The file <em>abc.ohm</em> contains the grammar</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABCgrok {
+TopLevel = Assignment+
+
+  Assignment =   Variable "=" Expression -- complex
+               | Variable "=" number -- simple
+  Expression = Variable "+" Variable
+
+    Variable = "a" .. "z"
+    number = dig+
+    dig = "0" .. "9"
+}
+</code></pre></div></div>
+<p>I have added an explicit digit rule (dig) instead of using the Ohm-JS library.</p>
+<h1 id="glue-aka-action-aka-semantics">Glue (aka action (aka semantics))</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TopLevel [@assignments] = [[${console.log (assignments)}]]
+Assignment_complex [v keq e] = [[var ${v} = ${e};\n]]
+Assignment_simple [v keq n] = [[var ${v} = ${n};\n]]
+Expression [v1 kplus v2] = [[${v1} + ${v2}]]
+Variable [c] = [[${c}]]
+number [digits] = [[${digits}]]
+dig [c] = [[${c}]]
+</code></pre></div></div>
+<p>Each rule in the <em>glue</em> specification corresponds to a rule in the grammar.</p>
+
+<p>The left-hand-side parameters name each of the sub-matches in the grammar.</p>
+
+<p>Parameters that correspond to iteration nodes in the grammar (<code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">?</code>) are prefixed with an at symbol <code class="language-plaintext highlighter-rouge">@</code>.</p>
+
+<p>The right-hand-side of each specification rule consists of JS <em>template strings</em> enclosed in double-brackets <code class="language-plaintext highlighter-rouge">[[]]</code>.</p>
+
+<p><em>Glue</em> also supports raw preamble code enclosed in double-braces ``, but this feature is not use in this example.</p>
+<h1 id="future">Future</h1>
+<p>Ftranspile() should be a command that runs from the command line.</p>
+
+<p>The syntax for glue was chosen arbitrarily for experimentation.  I intend to upgrade the syntax (using glue 0.1 as a preprocessor) but haven’t gotten around to it yet.  Having glue run from the command line would allow creating glue pipelines with newer syntax (decommissioning 0.1 is unnecessary, using pipelines).</p>
+
+<p>[<em>Aside: ftranspile() is a first step in creating a command-line version of glue.</em>]</p>
+
+<p><em>Glue</em> rules should return JS objects instead of returning only strings.</p>
+<h1 id="to-run">To Run</h1>
+<p>To run this version, use the bash script</p>
+
+<p><code class="language-plaintext highlighter-rouge">./run.bash</code></p>
+
+<p>You should see the result</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var b = 2;
+var c = 3;
+var a = b + c;
+</code></pre></div></div>
+
+<h1 id="github">Github</h1>
+<p>The details of this solution can be perused in <a href="https://github.com/guitarvydas/abc-glue">abc-glue</a></p>
+<h1 id="ohm-js">Ohm-JS</h1>
+<p><a href="https://github.com/harc/ohm">ohm-js</a></p>
+<h1 id="glue">Glue</h1>
+<p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">glue tool</a></p>
+<h1 id="ftranspile">FTranspile</h1>
+<p>[<em>yet to be documented</em>]</p>
+<h1 id="abc">ABC</h1>
+<p><a href="https://guitarvydas.github.io/2021/09/15/Small-Example-of-Interpreting-and-Compiling.html">abc</a></p>
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>SCN means Solution Centric Notation. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

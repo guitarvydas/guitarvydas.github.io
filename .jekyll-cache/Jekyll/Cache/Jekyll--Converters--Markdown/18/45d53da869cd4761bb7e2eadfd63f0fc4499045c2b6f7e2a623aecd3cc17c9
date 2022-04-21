@@ -1,0 +1,63 @@
+I"^<h2 id="goals">Goals</h2>
+<ol>
+  <li>Define ASC syntax.</li>
+  <li>Transpile ASC to alist form (in Lisp, in Python, etc.)</li>
+  <li>Produce example diagram-&gt;concurrentLambda code</li>
+  <li>Intermediate tools.</li>
+</ol>
+
+<p>ASC means “Asynchronous Software Component”.</p>
+
+<h2 id="status">Status</h2>
+<h3 id="1-define-asc-syntax">1. Define ASC Syntax</h3>
+<p>First cut done.  See <code class="language-plaintext highlighter-rouge">lookup.asc</code>. (below)</p>
+<h3 id="2-transpile-asc">2. Transpile ASC</h3>
+<p>Working on this, see section 2.0 below.</p>
+<h3 id="3-produce-example">3. Produce Example</h3>
+<p>First cut done and working. Hand-compiled from lookup.drawio to lookup.lisp.</p>
+
+<h3 id="4-intermediate-tools">4. Intermediate Tools</h3>
+<h4 id="prep">Prep</h4>
+<p>Done<sup id="fnref:done" role="doc-noteref"><a href="#fn:done" class="footnote">1</a></sup>. <a href="https://github.com/guitarvydas/prep">Prep</a></p>
+<h4 id="das-to-python">DaS To Python</h4>
+<p>Done. <a href="https://github.com/guitarvydas/das">DaS</a></p>
+
+<h2 id="more-details">More Details</h2>
+<h2 id="10-asc-syntax">1.0 ASC Syntax</h2>
+<p><a href="https://github.com/guitarvydas/dasl2/blob/dev/asca/lookup.asca">lookup.asc</a></p>
+<h2 id="20-transpile-asc">2.0 Transpile ASC</h2>
+<p>working in <a href="https://github.com/guitarvydas/dasl2/tree/dev/asca">asca working directory</a></p>
+
+<p>see Makefile, <code class="language-plaintext highlighter-rouge">make dev</code></p>
+
+<p>goal: transpile asc “assembler” to lisp <a href="https://github.com/guitarvydas/dasl2/blob/dev/asca/lookup.asca">lookup.asc</a>to something like <a href="https://github.com/guitarvydas/dasl2/blob/dev/lisp/lookup.proto.lisp">lookup.proto.lisp</a></p>
+
+<h3 id="sub-goal">sub-goal</h3>
+<ul>
+  <li>tokenize lookup.asca to lookup.asct</li>
+  <li>[working on this] write Ohm-JS grammar to parse tokens</li>
+  <li>[future] write .fmt file to output .lisp, .py, etc. alists
+    <h2 id="30-produce-example-of-concurrent-lambdas">3.0 Produce Example of Concurrent Lambdas</h2>
+    <p>see working paper <code class="language-plaintext highlighter-rouge">2022-03-20-Concurrent Lambdas</code>.</p>
+  </li>
+</ul>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:done" role="doc-endnote">
+      <p>“Done” in this context means “experimentally usable”.  Not necessarily production quality.  I would be happy to transfer this stuff to maintainers. <a href="#fnref:done" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

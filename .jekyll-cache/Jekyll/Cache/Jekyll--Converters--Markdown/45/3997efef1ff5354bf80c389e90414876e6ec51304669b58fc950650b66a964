@@ -1,0 +1,193 @@
+I"�,<h2 id="synopsis">Synopsis</h2>
+
+<p>This is my understanding of how JavaScript objects are stored, before optimization.</p>
+
+<p>[<em>This is WIP - I’m trying to understand JS by taking it apart and atom-izing it.</em>]</p>
+
+<h2 id="everything-is-an-object">Everything Is An Object</h2>
+
+<p>Everything is an <em>object</em>, including <em>functions</em>.</p>
+
+<h3 id="except-atomic-things">Except Atomic Things</h3>
+<ul>
+  <li>code is atomic - it is probably a blob of bytes, maybe a string of source code(?)</li>
+  <li>integers are probably atomic</li>
+  <li>booleans - true/false - are probably atomic</li>
+  <li>strings are atomic - probably a blob of bytes</li>
+  <li>the two-slot tuple (struct) that represents objects is probably atomic</li>
+  <li>
+    <p>list cells are atomic</p>
+  </li>
+  <li>(arrays are made of atomic list cells)</li>
+  <li>(continguous arrays of objects can be optimized (to remove CDRs))</li>
+</ul>
+
+<h2 id="drawing---atomic-structures">Drawing - Atomic Structures</h2>
+<p><img src="/assets/js-object-atomic-structures.png" alt="atomic objects" /></p>
+
+<h2 id="all-objects-have-two-slots">All Objects Have Two Slots</h2>
+
+<p><img src="/assets/js-object-objects.png" alt="objects" /></p>
+
+<h3 id="prototype-is-a-pointer-to-another-object">Prototype Is A Pointer to Another Object</h3>
+<h3 id="own-is-a-namespace">Own Is A Namespace</h3>
+<p>A <em>namespace</em> is a lookup table.</p>
+
+<p>Each row in the table maps a string name to an object.</p>
+
+<p>Namespaces could be implemented as hash tables.</p>
+
+<p>Names “point” to objects, either <em>function objects</em> or other kinds of <em>objects</em>.  (Both kinds of objects are the same).</p>
+<h2 id="magic-slot-for-code">Magic Slot for Code</h2>
+<p>Function objects contain a “magic name” that points to a code blob.</p>
+
+<p>The name is entirely implementation-dependent.</p>
+
+<p>I invented the name <code class="language-plaintext highlighter-rouge">%code%</code> as a stand-in for the name of this magic slot. I treat <code class="language-plaintext highlighter-rouge">%</code> like just a character that can’t be confused with any other character allowed in JavaScript programs.</p>
+
+<p><img src="/assets/js-object-function-object-code-field.png" alt="function objects" /></p>
+
+<h2 id="function-call-syntax">Function Call Syntax</h2>
+<p>There are two fundamental ways to create an object</p>
+<ol>
+  <li>Object.create()</li>
+  <li>new</li>
+</ol>
+
+<p>There are other ways to create objects, like <code class="language-plaintext highlighter-rouge">class</code>, but these are built upon the fundamental operations.  <code class="language-plaintext highlighter-rouge">Class</code> is like a molecule built out of atoms.</p>
+
+<h3 id="objectcreate">Object.Create</h3>
+<p>Object.create() is a method call on the top level Object object.</p>
+
+<h3 id="new">New</h3>
+<p><code class="language-plaintext highlighter-rouge">var x = new YYY (...)</code><br />
+The <code class="language-plaintext highlighter-rouge">new</code> statement calls a “regular” function in a special way…</p>
+
+<p>(<code class="language-plaintext highlighter-rouge">New</code> calls the function, but inserts pre- and post- code around the call.)</p>
+
+<p>All methods (functions) are called with a <code class="language-plaintext highlighter-rouge">this</code> parameter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f.x (y)
+</code></pre></div></div>
+<p>is converted to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>call f.%own%.%code% with parameters (f, y)
+</code></pre></div></div>
+<p>which becomes</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f.%own%.%code%.call (f, y)
+</code></pre></div></div>
+<p>(where <code class="language-plaintext highlighter-rouge">%own%</code> and <code class="language-plaintext highlighter-rouge">%code%</code> are names that I invented to represent implementation-dependent ways of getting the function (code) to be called. It is easiest to imagine that the %code% blob is attached to the namespace of the object <code class="language-plaintext highlighter-rouge">f</code>, but, implementations might optimize this in different ways).</p>
+
+<p>[<em>Note that the syntax <code class="language-plaintext highlighter-rouge">f.x (y)</code> implies that f is passed as the <code class="language-plaintext highlighter-rouge">this</code> parameter, e.g. this becomes <code class="language-plaintext highlighter-rouge">f.x.call (f, y)</code>.  And, <code class="language-plaintext highlighter-rouge">z (q)</code> becomes <code class="language-plaintext highlighter-rouge">global.z.call (z, q)</code>.</em>]</p>
+
+<p>In the case of <code class="language-plaintext highlighter-rouge">new</code> though,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var x = new YYY (...)
+</code></pre></div></div>
+<p>is converted to a several-step process</p>
+<ol>
+  <li>temp = {}</li>
+  <li>temp.%proto% = YYY.%proto%</li>
+  <li>temp2 = YYY.%own%.%code%.call (temp, …)</li>
+  <li>var x = temp2</li>
+</ol>
+
+<p>In JavaScript syntax, <code class="language-plaintext highlighter-rouge">this</code> is passed as an implicit parameter to every function.</p>
+
+<p>If a function does not execute a <code class="language-plaintext highlighter-rouge">return</code> statement, the function returns <code class="language-plaintext highlighter-rouge">undefined</code>, but, the function can mutate the <code class="language-plaintext highlighter-rouge">this</code> parameter.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">Constructor</code> is a just a normal function that returns <code class="language-plaintext highlighter-rouge">undefined</code>. When called, though, a constructor function is expected to modify the <code class="language-plaintext highlighter-rouge">this</code> parameter. In essence, the compiler hard-wires an extra parameter into every function call and hard-wires the parameter name to always be <code class="language-plaintext highlighter-rouge">this</code>, i.e. the syntax</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f (x, y) { ... }
+</code></pre></div></div>
+
+<p>is macro-expanded to be</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%callable% f (this, x, y) { ... }
+</code></pre></div></div>
+
+<p>The above only matters to compiler-writers.  For everyone else, the documentation contains hand-waving references to <em>functions</em> and <em>constructors</em>.  From a compiler-perspective, <em>functions</em> and <em>constructors</em> are the same.  The compiler doesn’t need to remember which functions are Constructors, it simply treats all function calls as method calls and calls functions differently in the two cases (1. normal, and, 2. <code class="language-plaintext highlighter-rouge">new</code>).</p>
+
+<h4 id="relationship-to-lisp">Relationship to Lisp</h4>
+
+<p>JavaScript function names aren’t simple pointers-to-code, but are pointers-to-objects.</p>
+
+<p>The objects can be walked to find code.</p>
+
+<p>This is very Lisp-y.</p>
+
+<p>In Lisp, functions are <em>always</em> anonymous (signified by the keyword <code class="language-plaintext highlighter-rouge">lambda</code>).</p>
+
+<p>In Lisp <em>every</em> symbol (a symbol is just a name, a “handle”) contains a set of attibutes.  One of the attribute values might be a <code class="language-plaintext highlighter-rouge">lambda</code>.</p>
+
+<p>In Lisp<sup id="fnref:lisp2" role="doc-noteref"><a href="#fn:lisp2" class="footnote">1</a></sup>, it is <em>possible</em> to have a symbol that has more than one kind of value, e.g. a symbol might contain a datum attribute plus a <code class="language-plaintext highlighter-rouge">lambda</code> attribute.</p>
+
+<h3 id="diagram">Diagram</h3>
+
+<p><img src="/assets/js-object-object-creation-and-new.png" alt="objects" /></p>
+
+<h3 id="code-transformation">Code Transformation</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f (x) {
+  return 1;
+}
+</code></pre></div></div>
+
+<p>is converted to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%callable% f (this, x) {
+  return 1;
+  return undefined;
+}
+</code></pre></div></div>
+
+<p>(The second <code class="language-plaintext highlighter-rouge">return</code> is never reached, so the above function never actually returns <code class="language-plaintext highlighter-rouge">undefined</code>).</p>
+
+<h4 id="call-syntax-transformation">Call Syntax Transformation</h4>
+<p>There are several ways to call functions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y.f(3);
+</code></pre></div></div>
+
+<p>and</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var x = new f(3);
+</code></pre></div></div>
+
+<p>and</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y.f.call (y, 3);
+</code></pre></div></div>
+
+<p>[<em>In the following, I use <code class="language-plaintext highlighter-rouge">%</code> like a normal character, like JavaScript uses the <code class="language-plaintext highlighter-rouge">_</code> character</em>].</p>
+
+<p>The first version is converted to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f.%own%.%code%.call(y, 3);
+</code></pre></div></div>
+
+<p>and, the second version is converted to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var %temp% = {};
+%temp%.%proto%=f.%proto%;
+%temp%.%own%=null;
+var %temp2% = f.%own%.%code%.call(%temp%,3);
+var x = %temp2%;
+</code></pre></div></div>
+
+<h2 id="stuff-i-havent-figured-out-yet">Stuff I Haven’t Figured Out Yet</h2>
+
+<p>Somewhere, JavaScript stores the name of the object’s type.  I would guess that this is saved in the object’s prototype, but I haven’t figured this out yet.</p>
+
+<p>When you call <code class="language-plaintext highlighter-rouge">console.log (...object...)</code>, JavaScript tries to print the type name of the object.  In the case of <code class="language-plaintext highlighter-rouge">{}</code>, it prints nothing as the type name.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:lisp2" role="doc-endnote">
+      <p>In Lisp2, to be exact.  Lisp1s don’t allow multiple values for symbols. <a href="#fnref:lisp2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

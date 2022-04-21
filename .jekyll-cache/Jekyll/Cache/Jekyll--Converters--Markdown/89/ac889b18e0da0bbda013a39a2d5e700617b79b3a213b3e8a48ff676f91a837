@@ -1,0 +1,332 @@
+I"7<h1 id="introduction">Introduction</h1>
+<p>This note shows a very small example of using Ohm-JS to build an interpreter and a transpiler.</p>
+
+<h1 id="steps">Steps</h1>
+<p>I suggest a sequence of 4 steps for producing a transpiler:</p>
+<ol>
+  <li>Write and debug the grammar using Ohm-Editor.</li>
+  <li>Build the Ohm-JS support code around the grammar. Test that it works.</li>
+  <li>Build the interpreter.</li>
+  <li>Modify the interpreter to turn it into a transpiler.</li>
+</ol>
+
+<p>This note shows these 4 steps.</p>
+
+<h1 id="transpiler--compiler">Transpiler / Compiler</h1>
+
+<p>I use the words <em>transpiler</em> and <em>compiler</em> interchangeably.</p>
+
+<p>Typically, a <em>compiler</em> is thought to compile a source language into <em>assembler</em>.</p>
+
+<p>I try to use the word <em>transpiler</em> when I am talking about compiling a source language into HLL assembler, like Common Lisp, JavaScript, etc<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>The task of building a <em>transpiler</em> is the same as building a <em>compiler</em>, but the details are different.</p>
+
+<h1 id="ohm-js">Ohm-JS</h1>
+
+<p>Ohm-JS is a PEG parser application that</p>
+
+<ol>
+  <li>provides separation of concerns (grammar and semantics are specified separately, whereas most PEG ports spec the semantics directly into the grammar), and,</li>
+  <li>provides an IDE for grammars (aka Ohm-Editor), making grammar development/testing simple.</li>
+</ol>
+
+<h1 id="the-abc-language">The ABC Language</h1>
+<p>The ABC “language” allows:</p>
+<ul>
+  <li>only single-letter variable names</li>
+  <li>one operator <code class="language-plaintext highlighter-rouge">+</code> which must refer to variables only (not numbers/integers)</li>
+  <li>assignment of integers to variables</li>
+  <li>assignment of expressions to variables.</li>
+</ul>
+
+<p>I hope that these severe simplifications make the underlying interpreter/transpiler simple to understand.</p>
+
+<p>I believe that the underlying code can be easily extended to accept a larger input language.</p>
+
+<h1 id="source-example---abc">Source Example - ABC</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b = 2
+c = 3
+a = b + c
+</code></pre></div></div>
+<h1 id="step-1---grammar-development">Step 1 - Grammar Development</h1>
+
+<p><img src="https://github.com/guitarvydas/guitarvydas.github.io/blob/master/assets/Ohm%20Editor%20Screen%20Shot%202021-09-15%20at%204.58.14%20PM.png?raw=true" alt="Ohm Editor Screen Shot 2021-09-15 at 4.58.14 PM.png" style="zoom:67%;" /></p>
+
+<h1 id="step-2---scaffolding">Step 2 - Scaffolding</h1>
+<h2 id="step-21---roughing-in-the-action-code-semantics">Step 2.1 - Roughing In The Action Code (Semantics)</h2>
+<p>Create a JS object with one named function property for each rule in the grammar.</p>
+
+<p>The property names must match <em>exactly</em> with the names of the grammar rules.</p>
+
+<p>Each function has parameters that name the sub-matches of a given rule.</p>
+
+<p>Each function must have <em>exactly</em> the same number of parameters as there are sub-matches in the corresponding grammar rules.</p>
+
+<p>The parameter names do not matter, but it is a good idea to make the names meaningful.</p>
+
+<p>I use the prefix “k” to mean a <em>constant</em> string, called a <em>terminal</em> in Ohm-JS-ese.</p>
+
+<p>Rules that have multiple branches with differing sub-matches must be marked by “– <em>name</em>” in the grammar. Such functions are written as <em>function_name</em> in the supporting JS code.  Our example contains one such multi-branch rule - <code class="language-plaintext highlighter-rouge">Assignment</code>.<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">2</a></sup></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exports.roughInSemantics = {
+    TopLevel: function (assignments) {
+    },
+    
+    Assignment_simple: function (v, keq, n) {
+    },
+
+    Assignment_complex: function (v, keq, expr) {
+    },
+
+    Expression: function (v1, kplus, v2) {
+    },
+
+    Variable: function (c) {
+    },
+
+    number: function (ds) {
+    }
+};
+</code></pre></div></div>
+<h2 id="step-22---the-other-stuff">Step 2.2 - The Other Stuff</h2>
+<p>The grammar and the semantics need to be wrapped with boilerplate JS code.</p>
+
+<p>I chose to put the grammar inline and the action code in a separate file.  It doesn’t matter how the code is structured, as long as all of the code is seen by the JS compiler.</p>
+
+<p>I chose to use <code class="language-plaintext highlighter-rouge">node.js</code> for this example, but a <code class="language-plaintext highlighter-rouge">.html</code> version of the code could also be constructed.  In fact, Ohm-JS makes it easy to create grammars and compilers in webpages.  See the Ohm-JS documentation for further details.</p>
+
+<p>We need to bring in the libraries:</p>
+<ul>
+  <li>ohm-js, and,</li>
+  <li>fs.</li>
+</ul>
+
+<p>We need to supply</p>
+<ul>
+  <li>
+    <p>the grammar</p>
+  </li>
+  <li>
+    <p>the action code (aka semantics)</p>
+  </li>
+  <li>
+    <p>test program source code.</p>
+  </li>
+</ul>
+
+<p>First, we let Ohm-JS build a CST<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup> by parsing the test program source.</p>
+
+<p>If that operation (the <em>parse</em>) succeeds, we hang various bits of action code (aka semantics) onto the CST generated by Ohm-JS.</p>
+
+<p>In subsequent steps, we will hang an interpreter <em>and</em> a transpiler onto the generated CST. We will ask Ohm-JS to walk the parse tree and invoke our action code (aka semantics) during the tree-walk.</p>
+
+<p>The rest of the source code for this step (2) is shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'use strict'
+
+var ohm = require('ohm-js');
+var fs = require('fs');
+
+var semanticsCode = require('./abcSemanticsRoughIn.js');
+var source = fs.readFileSync ('test.abc', 'utf-8');
+
+var grammar = `
+ABCgrok {
+TopLevel = Assignment+
+
+  Assignment =   Variable "=" Expression -- complex
+               | Variable "=" number -- simple
+  Expression = Variable "+" Variable
+
+    Variable = "a" .. "z"
+    number = digit+
+}
+`;
+
+
+function main () {
+    let parser = ohm.grammar (grammar);
+    let cst = parser.match (source);
+    if (cst.succeeded ()) {
+	let cstSemantics = parser.createSemantics ();
+	cstSemantics.addOperation ('roughIn', semanticsCode.roughInSemantics);
+    } else {
+	console.log (parser.trace (source).toString ());
+	throw ("grammar error :");
+    }
+}
+
+main ();
+</code></pre></div></div>
+
+<p>To run this second step, use the bash script:</p>
+
+<p><code class="language-plaintext highlighter-rouge">./run2.bash</code></p>
+
+<h1 id="step-3---interpreter">Step 3 - Interpreter</h1>
+
+<p>The interpreter executes ABC operations as the parse tree is walked.</p>
+
+<p>Simple <em>assignment</em> statements, like</p>
+
+<p><code class="language-plaintext highlighter-rouge">b = 2</code></p>
+
+<p>fetch the variable name (<em>b</em> in this case), fetch the RHS value (<em>2</em> in this case) and then put the fetche value into the symbol table under the fetched name.</p>
+
+<p>A VM-based interpreter would create a <em>stack</em> data structure and would leave the fetched value on the <em>stack</em>.</p>
+
+<p>The TopLevel function simply returns the whole symbol table, in this case.  This is a convenient operation in JavaScript and might be implemented differently if another underlying language were used.</p>
+
+<p>The <em>tree walking</em> is performed by calling the <em>interpret()</em> function on matching nodes.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exports.interpret = {
+
+    TopLevel: function (assignments) {
+        var dontcare = assignments.interpret ();
+        return symbolTable.symbolTable;
+    },
+    
+    Assignment_simple: function (v, keq, n) {
+        var name = v.interpret ();
+        var value = n.interpret ();
+        symbolTable.symbolTable[name] = value;
+    },
+
+    Assignment_complex: function (v, keq, expr) {
+        let value = expr.interpret ();
+        symbolTable.symbolTable[v.interpret ()] = value;
+    },
+
+    Expression: function (v1, kplus, v2) {
+        let name1 = v1.interpret ();
+        let name2 = v2.interpret ();
+        let value1 = symbolTable.symbolTable [name1];
+        let value2 = symbolTable.symbolTable [name2];
+        return value1 + value2;
+    },
+
+    Variable: function (c) {
+        return this.sourceString;
+    },
+
+    number: function (ds) {
+        return parseInt (this.sourceString);
+    }    
+};
+</code></pre></div></div>
+<p>To run this (third) step use the bash script</p>
+
+<p><code class="language-plaintext highlighter-rouge">/run3.bash</code></p>
+
+<p>You should see</p>
+
+<p><code class="language-plaintext highlighter-rouge">{ interpreted: { b: 2, c: 3, a: 5 } }</code></p>
+
+<h1 id="step-4---transpiler">Step 4 - Transpiler</h1>
+
+<p>The transpiler (aka compiler) uses the same parse tree as in step 3, but performs different actions.</p>
+
+<p>In this case, the TopLevel returns a string of JS code.</p>
+
+<p>The transpiler converts ABC statements into JS statements. It should be obvious how to change this code to return a string of Python, WASM, etc. code.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">4</a></sup></p>
+
+<p>In this case, each action creates a string of code (JS code in this case).  I used JS <em>template strings</em> as a convenience.</p>
+
+<p>Each <em>return</em> statement returns a string.</p>
+
+<p>The TopLevel function receives an array of strings (due to the <code class="language-plaintext highlighter-rouge">+</code> suffix operator in the grammar).  The strings in this array are glued together into one large string (using the .join() JS method) and returned.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exports.transpile = {
+
+    TopLevel: function (assignments) {
+        var finalString = assignments.transpile ().join ('\n');
+        return finalString;
+    },
+    
+    Assignment_simple: function (v, keq, n) {
+        var name = v.transpile ();
+        var value = n.transpile ();
+        return `var ${name} = ${value};`; 
+    },
+
+    Assignment_complex: function (v, keq, expr) {
+        var name = v.transpile ();
+        var value = expr.transpile ();
+        return `var ${name} = ${value};`; 
+    },
+
+    Expression: function (v1, kplus, v2) {
+        let name1 = v1.transpile ();
+        let name2 = v2.transpile ();
+        return `${name1} + ${name2}`;
+    },
+
+    Variable: function (c) {
+        return this.sourceString;
+    },
+
+    number: function (ds) {
+        return this.sourceString;
+    }
+};
+</code></pre></div></div>
+<p>To run this (third) step use the bash script</p>
+
+<p><code class="language-plaintext highlighter-rouge">./run4.bash</code></p>
+
+<p>You should see (interpreted and transpiled code)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ b: 2, c: 3, a: 5 }
+var b = 2;
+var c = 3;
+var a = b + c;
+
+</code></pre></div></div>
+
+<h1 id="appendix-github">Appendix Github</h1>
+<p><a href="https://github.com/guitarvydas/abc">abc</a></p>
+
+<h1 id="appendix-ohm-js">Appendix Ohm-JS</h1>
+
+<p><a href="https://github.com/harc/ohm">Ohm-JS</a></p>
+
+<h1 id="appendix-ohm-editor">Appendix Ohm-Editor</h1>
+
+<p><a href="https://ohmlang.github.io/editor/">Ohm Editor</a></p>
+
+<h1 id="appendix-see-also">Appendix See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html">WASM Transpiler</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/05/11/Ohm-Arithmetic.html">Python, JS, Lisp Transpilers</a></p>
+
+<p><a href="https://github.com/guitarvydas/js-prolog">Scheme to JS Transpiler</a></p>
+
+<p><a href="https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf">Ohm In Small Steps</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>A “good” HLL assembler is a language that has little syntax, is mostly expression-based, doesn’t insist on declaration-before-use and so on. I.E. a “good” assembler language is machine-readable/writable but might not be very human-readable. The emphasis is on features that aid machine reading and writing. Human-readability is secondary. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>In fact, Assignment could easily be rewritten to have only one branch.  I have left it as it is for expository purposes. Collapsing Assignment down to a single branch is left as an exercise to the reader. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>A CST is a Concrete Syntax Tree.  It is, essentially, an AST (Abstract Syntax Tree) for the grammar, pruned down to only the nodes that are matched in the input test program. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>See below for examples of emitting WASM, Python, JS and Lisp for a more interesting example language (the <em>arithmetic</em> language in the Ohm-JS example set). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

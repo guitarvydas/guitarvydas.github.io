@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Parsing BLC | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Parsing BLC" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Elevator Pitch (Synopsis) I’m working-on/thinking-about a pipeline that macro-expands λ [[$pair $false] [[$pair $true] $nil]] into λ [[ λλλ0 λλ0 ] [[ λλλ0 λλ1 ] λλ0 ]], then parses that into executable code in various languages (Python, JS, WASM, sectorlisp, sectorblc, etc., etc.)." />
+<meta property="og:description" content="Elevator Pitch (Synopsis) I’m working-on/thinking-about a pipeline that macro-expands λ [[$pair $false] [[$pair $true] $nil]] into λ [[ λλλ0 λλ0 ] [[ λλλ0 λλ1 ] λλ0 ]], then parses that into executable code in various languages (Python, JS, WASM, sectorlisp, sectorblc, etc., etc.)." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/05/Parsing-BLC.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/05/Parsing-BLC.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-05T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parsing BLC" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/05/Parsing-BLC.html","@type":"BlogPosting","description":"Elevator Pitch (Synopsis) I’m working-on/thinking-about a pipeline that macro-expands λ [[$pair $false] [[$pair $true] $nil]] into λ [[ λλλ0 λλ0 ] [[ λλλ0 λλ1 ] λλ0 ]], then parses that into executable code in various languages (Python, JS, WASM, sectorlisp, sectorblc, etc., etc.).","dateModified":"2022-03-05T00:00:00-05:00","datePublished":"2022-03-05T00:00:00-05:00","headline":"Parsing BLC","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/05/Parsing-BLC.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Parsing BLC</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-05T00:00:00-05:00" itemprop="datePublished">Mar 5, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="elevator-pitch-synopsis">Elevator Pitch (Synopsis)</h1>
+<p>I’m working-on/thinking-about a pipeline that macro-expands <code class="language-plaintext highlighter-rouge">λ [[$pair $false] [[$pair $true] $nil]]</code> into <code class="language-plaintext highlighter-rouge">λ [[ λλλ0 λλ0 ] [[ λλλ0 λλ1 ] λλ0 ]]</code>, then parses that into executable code in various languages (Python, JS, WASM, sectorlisp, sectorblc, etc., etc.).</p>
+
+<p>WIP.</p>
+<h1 id="goal">Goal</h1>
+<p>Convert lambda-calculus to code in Python, JS, WASM, etc, etc.</p>
+
+<p>Q: [open question]: does Lambda Calculus / sectorblc / sectorlisp lead to Atoms of Software?</p>
+
+<h1 id="simplicity">Simplicity</h1>
+<p>I am most interested in simplicity.</p>
+
+<p>The goal of <code class="language-plaintext highlighter-rouge">sectorlisp</code> and <code class="language-plaintext highlighter-rouge">sectorblc</code> is smallness, with a side-effect of simplicity.</p>
+
+<p>Simplicity and smallness are related, but not necessarily the same thing.</p>
+
+<p>Simplicity is defined as “lack of nuance”.</p>
+
+<p>Notational economy is a form of simplicity.</p>
+
+<p>Accountants find that spreadsheets are notationally “simple”, but, the notation of spreadsheets is not good enough for theoretical work.</p>
+
+<p>This leads to the question “What is the simplest notation for a given problem?”.</p>
+
+<p>If you are using a notation that isn’t suited to a problem, you begin to see <em>tells</em>.  A tell often manifests itself as statements like “multitasking is difficult”. To emphasize, note that a <em>tell</em> doesn’t mean that a problem is complicated, only that the notation being used is unsuited to describing the problem and results in accidental complexity (aka epicycles).</p>
+
+<p>This question further leads to the observation that there <em>cannot</em> be a <em>single</em> notation for any sizable problem/solution.  You might choose a notation that is a local minimum, and describes many aspects of the problem/solution, but you end up playing whack-a-mole with the aspects that aren’t easily-described by the notation. Clever people (aka “smart” people) often find work-arounds to notational complexity, but, IMO their time would be better-spent thinking about higher-level concepts than figuring out notational work-arounds.</p>
+
+<p>It’s “turtles all the way down”. Once you find a suitable notation, other suitable simplifications suggest themselves, layered above the suitable notation. Fractally.</p>
+
+<p>For example, chemistry and physics notations are use to describe oxides -&gt; which leads to a notation for semiconductors (transistors and electronics schematics) -&gt; which leads to VLSI -&gt; which leads to assembler -&gt; which leads to HLLs -&gt; which leads to more lambda calculus -&gt; which leads to “The Next Big Thing”. Where does internet fit into this?  It doesn’t fit well.  We’re playing whack-a-mole with internet concepts and saying things like “concurrency is just a difficult problem”, and, smart people are finding clever ways to twist the current notation, instead of inventing a better notation.  Maybe The Next Big Thing is a non-stack-based notation for distributed computing.</p>
+
+<h1 id="multiple-notations">Multiple Notations</h1>
+<p>I believe in choosing the best notation(s) for the job.</p>
+
+<p>Parsers are good for parsing. Parsers are better than, say, parsing combinators, since parsers use (only) a syntax for parsing, without trying to appease GPLs (General Programming Languages).</p>
+
+<p>Relational Programming is good for searching and querying.  In my mind, PROLOG is better than Loops and Recursion for this kind of thing (querying).  Some day, I will try to apply miniKanren to this stuff. (Note that I view core.logic as miniKanren force-fitted into a GPL called Clojure).</p>
+
+<p>The ultimate goal is to compose solutions using many syntaxes and paradigms.</p>
+
+<p>(Note that I, also, think that DaS - Diagrams - is a valid syntax.  We shouldn’t be restricted into thinking textual-only.)</p>
+
+<p>I believe in smallness of <em>notation</em> (“Does it fit on a T-Shirt?”) which isn’t necessarily the same as smallness of <em>code</em>. HLLs (high level languages) eventually won out over assembler, even though original HLLs produced code that was “worse” than the code produced by assembler programmers.</p>
+
+<h1 id="atoms-of-software">Atoms of Software</h1>
+<p>I think that it is important to take things apart and to strip them down to their bare essentials.</p>
+
+<p>Then, build them back up into “better” development tools, using things like, say, parsers and rewriters (I am not restricted to using parsers and rewriters, but they do look intriguing at the moment).</p>
+
+<h1 id="disclaimer">Disclaimer</h1>
+<p>I believe in “showing my work”.  This is WIP.</p>
+<h1 id="contributing">Contributing</h1>
+<p>I will gladly impart these ideas to anyone with an open mind - experience not necessary.</p>
+<h1 id="github">Github</h1>
+<p><a href="https://github.com/guitarvydas/ptblc">experiments with parsing blc</a></p>
+<h1 id="prep">Prep</h1>
+<p>I use <code class="language-plaintext highlighter-rouge">prep</code> which is kinda like <code class="language-plaintext highlighter-rouge">sed</code> on steroids.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> uses <code class="language-plaintext highlighter-rouge">Ohm-JS</code> grammars and <code class="language-plaintext highlighter-rouge">glue</code> rewriting rules.</p>
+
+<h1 id="usage">Usage</h1>
+<p>See <code class="language-plaintext highlighter-rouge">Makefile</code>, which uses <code class="language-plaintext highlighter-rouge">run.bash</code></p>
+
+<h1 id="references">References</h1>
+<p><a href="https://guitarvydas.github.io/2022/03/05/Prep.html">prep</a><br />
+<a href="https://guitarvydas.github.io/2022/01/20/PREP-Tool.html">prep yourube</a><br />
+<a href="https://github.com/harc/ohm">Ohm-JS</a><br />
+<a href="https://justine.lol/lambda/">sector blc</a><br />
+<a href="https://justine.lol/sectorlisp2/">sector lisp</a><br />
+<a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">glue - see links</a></p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2022/03/05/Parsing-BLC.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

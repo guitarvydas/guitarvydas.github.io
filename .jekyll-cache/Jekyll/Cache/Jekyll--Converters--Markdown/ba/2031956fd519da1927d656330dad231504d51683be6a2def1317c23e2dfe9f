@@ -1,0 +1,94 @@
+I"�<p>I’ve grown tired of building compilers.</p>
+
+<p>I have begun to use parsers for creating transpilers - source-to-source reformatters (aka bulk editing, compilation, etc.) - leaving the “hard work” to existing compilers.</p>
+
+<p>I built a tool for myself that I call <code class="language-plaintext highlighter-rouge">prep</code>.  It rhymes with <code class="language-plaintext highlighter-rouge">grep</code> and has the prefix <code class="language-plaintext highlighter-rouge">pre</code> in it (that stands for “pre-processing” in my mind).</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> chops up text files into blocks, then runs full-blown parsing and reformatting on the blocks.</p>
+
+<p>If you use Common Lisp or Racket, you know this process by the name of <code class="language-plaintext highlighter-rouge">macros</code><sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">1</a></sup>.</p>
+
+<p>The difference is that <code class="language-plaintext highlighter-rouge">prep</code> works on characters, whereas Lisp and Racket macros deal with lists<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.</p>
+
+<p>Boiling pattern-matching down to an easy-to-use tool frees one to invent languages that aren’t based on grids of non-overlapping bitmaps, i.e. lines of text.</p>
+
+<p>Everything that is presently done with compilers can be done with pattern matching and inferencing.</p>
+
+<p>Parsers don’t use inferencing because of an embargo on Early’s method, based on the biases of the mid-1900’s - i.e. save space and don’t over-use the CPU.</p>
+
+<p>Lately, inferencing has leaked back into the parsing world, in the form of PEG parsers.</p>
+
+<p>I used PEG at first, then found Ohm-JS.</p>
+
+<p>Ohm-JS simplifies the act of creating pattern-matchers - a subtle, but, vital aspect for development.  For example, LR(k) and LL(k) parsers make one “think compilers”, and PEG, while freer, still feels like a compiler technology.</p>
+
+<p>REGEX broke free of compilerdom and enabled a new class of languages and thought patterns<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup>.</p>
+
+<p>I believe that Ohm-JS can enable new thought patterns, even better than those enabled by REGEX.</p>
+
+<p>I currently use Ohm-JS for pattern matching and SWIPL for inferencing.</p>
+
+<h2 id="alan-kay---use-languages-as-assembly-code">Alan Kay - Use Languages as Assembly Code</h2>
+
+<p><em>In a ‘real’ Computer Science, the best languages of an era should serve as ‘assembly code’ for the next generation of expression.</em></p>
+
+<p><a href="https://www.youtube.com/watch?v=fhOHn9TClXY&amp;t=859s">Alan Kay on youtube - see 31:50</a><sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup></p>
+
+<p>Layering syntax over top of existing languages using Ohm is one way to accomplish this kind of expressiveness.</p>
+
+<p>Thinking this way has led me into down into new rabbit holes, e.g.</p>
+<ul>
+  <li>I conclude that syntax is frivolous, paradigms are essential,</li>
+  <li>I want toolbox languages that help me write code that writes code,</li>
+  <li>I conclude that we need to deprecate all programming languages and operating systems<sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote">2</a></sup>.</li>
+</ul>
+
+<h2 id="pipelines">Pipelines</h2>
+<p>I use <code class="language-plaintext highlighter-rouge">prep</code> in pipelines - not just one parser, but a series of parsers.</p>
+
+<p>I happen to use UNIX® pipelines, but pipelining can be easily done in HTML with a sprinkling of JavaScript (see the daswb POC).</p>
+<h2 id="diagrams-to-python">Diagrams to Python</h2>
+<p>An example of transpiling can be seen in the <code class="language-plaintext highlighter-rouge">d2py</code> code.</p>
+
+<p>The diagram, <code class="language-plaintext highlighter-rouge">helloworld.drawio</code> is</p>
+<ul>
+  <li>transpiled into PROLOG</li>
+  <li>then inferenced</li>
+  <li>then transpiled into JSON</li>
+  <li>then transpiled into Python.
+    <h2 id="see-also">See Also</h2>
+    <p>(<em>The following tools are like POCs.  They work, but are fairly new and could use some polishing</em>).</p>
+  </li>
+</ul>
+
+<p><a href="https://www.youtube.com/watch?v=-I-KQjC0oBY">PREP</a><br />
+<a href="https://guitarvydas.github.io/2022/01/25/Diagram-to-Python-Transpiler.html">d2py</a><br />
+<a href="https://guitarvydas.github.io/2021/07/30/Parsing-Diagrams-DaS-Workbench-Overview.html">DaS Workbench</a></p>
+
+<p><a href="https://github.com/harc/ohm">Ohm-jS</a><br />
+<a href="https://www.swi-prolog.org">SWIPL</a></p>
+
+<h1 id="see-also-1">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:3" role="doc-endnote">
+      <p>C Macros aren’t nearly as interesting as Lisp macros. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>11th Rule: Programming Languages are IDE wannabes. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Thanks to Rajiv Abraham for sending me this clip. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,38 @@
+I"�<h1 id="minor-revelation">Minor Revelation</h1>
+<p>I used to think of triples in PROLOG (Datalog, etc.) to be something like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>relation(subject,object).
+</code></pre></div></div>
+<p>but, PROLOG makes it hard to pattern-match on <code class="language-plaintext highlighter-rouge">relation</code>.</p>
+
+<p>For example, if I want to <code class="language-plaintext highlighter-rouge">find all relations that include a specific subject</code>, then, the above format makes it difficult to express the query.</p>
+
+<p>Instead, maybe a triple should be represented as</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>triple(relation,subject,object).
+</code></pre></div></div>
+<p>?</p>
+
+<h1 id="wip">WIP</h1>
+
+<p>I am going to try this new format for a while…</p>
+
+<p>I’m going to use the keyword <code class="language-plaintext highlighter-rouge">fact</code> to denote a triple.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fact(relation,subject,object).
+</code></pre></div></div>
+
+<h1 id="swipl-dicts">SWIPL Dicts</h1>
+
+<p>SWIPL includes an extension to classical PROLOG, in the form of <a href="https://www.swi-prolog.org/pldoc/man?section=bidicts">dict objects</a>.</p>
+
+<p>This might be something else to investigate.</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

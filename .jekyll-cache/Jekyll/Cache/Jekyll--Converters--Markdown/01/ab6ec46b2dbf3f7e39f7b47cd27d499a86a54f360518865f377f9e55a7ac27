@@ -1,0 +1,132 @@
+I"A<h1 id="reinventing-the-wheel">Reinventing the Wheel</h1>
+
+<p>There are only 2 things that are important for programming computers:</p>
+
+<ol>
+  <li>
+    <p>Getting computers to do what we want (using computing machines to augment human capabilities).</p>
+  </li>
+  <li>
+    <p>Paradigms.</p>
+  </li>
+</ol>
+
+<h1 id="programming-languages">Programming Languages:</h1>
+
+<p>Programming Languages fall in between 1 &amp; 2.</p>
+
+<p>One can do away with programming languages and replace them with simpler “notations” using Ohm-JS (PEG).</p>
+
+<p>I think of notations as very simple DSLs.</p>
+
+<p>It should take only 10’s of minutes to produce a notation.</p>
+
+<p>Notations can be tuned to a particular problem (this is something that Physicists do).</p>
+
+<p>Multiple Notations can be used on a single problem.</p>
+
+<p>Notations can be transpiled into other languages (I call them Toolbox Languages), like Python, JavaScript, Common Lisp, etc.</p>
+
+<p>Notations are like “new” compilers - instead of compiling to assembler, notations compile to Toolbox Languages.</p>
+
+<h1 id="operating-systems">Operating Systems</h1>
+<p>Operating systems are merely libraries.</p>
+
+<p>One feature that OSs provide is multitasking.</p>
+
+<p>The kind of multitasking they provide is rife with accidental complexity - “we’re going to make this square peg fit our notation even if it kills us”.</p>
+
+<p>For example, current OSs incur issues with thread safety.</p>
+
+<p>Thread safety is accidental complexity caused by the use of memory sharing. Memory Sharing is used only due to old-fashioned premature optimization (CPUs and Memory used to be expensive in the 1950’s).</p>
+
+<p>If we build computing devices using many rPIs, each running exactly one program (no Linux), then thread safety becomes a non-issue.</p>
+
+<p>Poof.</p>
+
+<p>Another feature that OSs provide is honest-to-goodness big lumps of library code, like file handling.</p>
+
+<p>That stuff can simply be moved into LEGO(R) components that replace the concept of libraries.</p>
+
+<p>No OS needed for this, either.</p>
+
+<p>Poof.</p>
+
+<p>OSs provide the concept of DLLs (shared libraries).  We use those every day in another form - HTTP servers (servlets).</p>
+
+<p>Servlets currently aren’t as “efficient” as DLLs, but they would be if we insisted on using them instead of DLLs.</p>
+
+<p>[The “build it and they will come” syndrome has happened many times in computering - from Assembler to HLLs (gcc), C++ used to be too inefficient to use on ubiquitous computing platforms of the day (e.g. 8-bit micros), etc, etc].</p>
+
+<p>[Note that DLLs are not “free”.  The OS must load them and fix up all of the holes. Then, the DLLs need to be mapped into the address space of the application(s) using them.]</p>
+
+<p>Poof.</p>
+
+<h1 id="paradigms">Paradigms</h1>
+
+<p>Concepts such as OO and FP and Structured Programming, etc. are based on research and experience.</p>
+
+<p>They are often presented using their own syntax that <em>look</em> like languages.</p>
+
+<p>Let’s take OO for example. OO was popularized by Smalltalk but quickly branched into various syntaxes, e.g. C++, Eiffel, CLOS, JS, Python, etc.</p>
+
+<p>The underlying principles are mostly the same, but the syntax is different in each variant.</p>
+
+<p>Another example: FP first appeared in 1956 in the form of Lisp.  Today, FP looks nothing like Lisp, but, the underlying principle (the Paradigm) is the same.  (I might argue that today’s syntax first appeared APL, but that’s an aside).  The major delta between 1956 and now is “just” syntax (there have been improvements - more experience - with the paradigm, but the new syntax obscures the improvements).</p>
+
+<p>I argue that it is easy to create syntax and just as easy to throw it away as new experience is gained with the paradigm.</p>
+
+<p>I argue that this same strategy - inventing syntax - should be applied to problems-to-be-solved and not just to paradigms.</p>
+
+<p>[It is a good idea to keep a checklist handy of what we’ve learned to be good and what we’ve learned to be bad, as one invents new syntax].</p>
+
+<h1 id="legor-block-software">LEGO(R) Block Software</h1>
+
+<p>The keys to making LEGO(R) block software are:</p>
+
+<ul>
+  <li>isolation</li>
+  <li>concurrency.</li>
+</ul>
+
+<p>Isolation gives you “build and forget”.  No dependencies.</p>
+
+<p>Concurrency means that blocks can run in any order (and, therefore, can be snapped together in any order to make different apps).</p>
+
+<p>[It might be helpful to think of building everything using networks of rPIs or to think that EVERY function runs in its own thread. (That’s not actually far-fetched if you know about anonymous functions and callbacks).]</p>
+
+<h1 id="the-universal-acid">The Universal Acid</h1>
+
+<p>Isolation is a Universal Acid<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>: - it eats through old-fashioned ideas.</p>
+
+<p>Isolation implies concurrency.</p>
+
+<p>Software Components in an app must be written in such a way that order cannot matter.</p>
+
+<p>Components from one app can be re-ordered to form a new app.</p>
+
+<h1 id="sightings-of-isolation">Sightings of Isolation</h1>
+
+<p>Isolation can be seen in UNIX threads.</p>
+
+<p>Isolation can be seen in Worlds (http://vpri.org/pdf/rn2008001_worlds.pdf).</p>
+
+<p>[FYI - Functions do not enforce Isolation, OO does not enforce Isolation, and so on.]</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Term borrowed from Daniel Dennett. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

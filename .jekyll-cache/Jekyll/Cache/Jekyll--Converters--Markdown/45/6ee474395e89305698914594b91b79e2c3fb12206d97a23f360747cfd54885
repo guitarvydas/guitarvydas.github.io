@@ -1,0 +1,79 @@
+I"<h2 id="immutability-and-mathematical-notation">Immutability and Mathematical Notation</h2>
+
+<p>Mathematical notation relies on immutability.</p>
+
+<p>If you have immutability, you can replace patterns with impunity.</p>
+
+<p>Note that I’m not describing <em>all</em> of mathematics, just the notation part<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<h2 id="search-and-replace">Search and Replace</h2>
+
+<p>The <em>notation</em> part of mathematics boils down to a simple set of principles</p>
+<ol>
+  <li>find a pattern</li>
+  <li>replace the pattern</li>
+  <li>repeat.</li>
+</ol>
+
+<h3 id="word">Word®</h3>
+
+<p>Word® does <em>search and replace</em>.</p>
+
+<p>Can Word® do mathematical manipulation for us?</p>
+
+<h2 id="recursive-search-and-replace">Recursive Search and Replace</h2>
+
+<p>It is easier if your searcher-and-replacer works recursively.</p>
+
+<p>REGEX is flat (non-recursive).</p>
+
+<p>Parsers are recursive.</p>
+
+<h3 id="peg-vs-regex">PEG vs REGEX</h3>
+
+<p>PEG<sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> does recursive parsing and is “better” than REGEX in that regard.</p>
+
+<h2 id="unix-immutability">UNIX® Immutability</h2>
+
+<p>Immutability is, actually, <em>isolation</em>.</p>
+
+<p>You can re-arrange things if you can guarantee that rearranging doesn’t cause unintended side-effects.</p>
+
+<p>UNIX® provides <em>isolation</em>.</p>
+
+<p>Using C, yet.</p>
+
+<p>UNIX® commands are completely stand-alone.  If you change the source for <code class="language-plaintext highlighter-rouge">cat.c</code>, the operation of <code class="language-plaintext highlighter-rouge">sed.c</code> doesn’t change.</p>
+
+<p>UNIX® creates <em>isolation</em> at runtime by piping (isolated) commands together.</p>
+
+<h3 id="whats-inside">What’s Inside?</h3>
+
+<p>Who cares what’s inside?</p>
+
+<p>Do we care if a UNIX® command is written in C or in Haskell?</p>
+
+<p>No.</p>
+
+<p>We only care that the commands are isolated from each other. We can make the internals of the commands better, later.</p>
+
+<p>Achieving isolation - immutability - at compile-time is just icing-on-the-cake (aka optimization).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Ohm-JS is currently my favourite form of PEG. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+:ET

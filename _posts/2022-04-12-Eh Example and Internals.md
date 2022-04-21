@@ -419,7 +419,7 @@ implementation route
 
 sync deliver_to_child_input <= me, dest, message
    // map message for receiver
-  { var input_message <= $i{{dest.etag, message.data} message}
+  { var input_message <= $i\{\{dest.etag, message.data} message}
     { lookup dest.name => receiver
       { @receiver.enqueueInput <= input_message }
     }
@@ -427,7 +427,7 @@ sync deliver_to_child_input <= me, dest, message
 
 sync deliver_to_me_output <= me, dest, message
   // map message for output
-  { var output_message <= $o{{receiver.etag, message.data} message}
+  { var output_message <= $o\{\{receiver.etag, message.data} message}
     { @me.enqueueOutput <= output_message }
   }
 ```

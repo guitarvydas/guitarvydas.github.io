@@ -1,0 +1,67 @@
+I"<h1 id="summary">Summary</h1>
+<p>I share a grammar for Ohm and a diagram to go with it.</p>
+
+<h1 id="make-work">Make-Work</h1>
+<p>This grammar - ohm in Ohm - already exists in the source code for the Ohm-JS compiler.  For reasons not well understood, I backed into creating my own grammar from scratch.</p>
+
+<h1 id="diagram-of-the-grammar">Diagram of the Grammar</h1>
+<p>In the process, I drew myself a diagram (using draw.io) which can be seen in the <a href="https://github.com/guitarvydas/ohm-parse/blob/main/ohm-grammar.svg">SVG Diagram</a> and in the README of the <a href="https://github.com/guitarvydas/ohm-parse">ohm-parse github</a>.</p>
+
+<h1 id="diagram-notation-for-grammars">Diagram Notation for Grammars</h1>
+<p>I think that I found a consistent diagrammatic notation for all constructs in the grammar.</p>
+
+<h1 id="transpiler">Transpiler</h1>
+
+<p>I went on to build a transpiler using this grammar.</p>
+
+<p>I used my <em>glue</em><sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">1</a></sup> DSL for the transpiler.</p>
+
+<h1 id="testing">Testing</h1>
+<h3 id="identity-transform">Identity Transform</h3>
+<p>I began by creating an <a href="https://github.com/guitarvydas/ohm-parse/blob/main/identity-ohm.glue">identity transformation</a> which sanity-checks the glue file by outputting the input after parsing it (a big fat no-op, but satisfying nonetheless).</p>
+
+<h3 id="grammar-checking">Grammar Checking</h3>
+
+<p>Sanity-checking the grammar was done using the <a href="https://ohmlang.github.io/editor/">Ohm editor</a> and various test samples, culminating in testing the whole of the grammar on itself.</p>
+
+<h1 id="disclaimer">Disclaimer</h1>
+<p>This stuff is dripping fresh and probably contains errors, but, I hope that it will be of use to someone in understanding how to create a grammar (or, at least, understanding how I do it).</p>
+
+<h1 id="future">Future</h1>
+<p>I intend to use this grammar to do <em>some</em> of my editing work for me - just enough to trade off the development time against the boring task of typing a <em>glue</em> specification for another project.</p>
+
+<p>The beginnings of this partial-editor can be seen in <a href="https://github.com/guitarvydas/ohm-parse/blob/main/emitglue.ohm">emitglue.ohm</a> and <a href="https://github.com/guitarvydas/ohm-parse/blob/main/emitglue.glue">emitglue.glue</a>.</p>
+
+<p>I don’t intend to make the partial-editor complete.  I will stop working on it when I think that editing the result manually will take less time that tweaking emitglue.glue.</p>
+
+<h2 id="cannot-use-sed-and-awk-and-regexs">Cannot Use Sed and Awk and REGEXs</h2>
+<p>Normally, I would use <code class="language-plaintext highlighter-rouge">sed</code> or <code class="language-plaintext highlighter-rouge">awk</code> or regular expressions to hack code for me, but, in this case, I needed to match structured blobs of code that would be best done with something better than REGEX, i.e. by using a parser.</p>
+
+<h2 id="prep">Prep</h2>
+<p>I intend to use my <code class="language-plaintext highlighter-rouge">prep</code> <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">2</a></sup> tool in combination with the .ohm and .glue files to give me a command-line code hacking utility.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> uses Ohm-JS to parse text code from stdin and uses <code class="language-plaintext highlighter-rouge">glue</code>  to reformat the text code.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> is also dripping fresh, but, is based on experience with previous tools like <code class="language-plaintext highlighter-rouge">pfr</code>.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://guitarvydas.github.io/2021/04/11/Glue-Tool.html">glue</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://github.com/guitarvydas/prep">prep github</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

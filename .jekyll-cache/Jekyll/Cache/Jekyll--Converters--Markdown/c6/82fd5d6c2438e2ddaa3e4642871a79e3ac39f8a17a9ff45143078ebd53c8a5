@@ -1,0 +1,54 @@
+I"P<p>RTL (Register Transfer Logic) was used by GCC.</p>
+
+<p>RTL was written up in a paper by Fraser-Davidson (“… Peephole optimizer …” - see References).</p>
+
+<p>RTL works by treating <em>everything</em> as a register, then optimizing certain runs of register logic into better (faster) code.</p>
+
+<p>I used <em>awk</em> to build a peephole optimizer for my 8080 C compiler.</p>
+
+<p>The algorithm for peepholing is trivial - (1) search for a pattern, then, (2) replace (even Word® can do this :-).</p>
+
+<p>How do you search for a pattern?  Brute force.  Also known as inferencing / backtracking / PROLOG / miniKanren / core.logic / Relational Programming.</p>
+
+<p>How do you replace?  At the character-level (e.g. REGEX), <em>sed</em> does the trick.  If you search/replace trees then you need a tree rewriter (aka Lisp).</p>
+
+<p>What else does search?</p>
+
+<p>Parsers.</p>
+
+<p>What does inferencing search+replace?  PEG, Ohm-JS, TXL.ca.</p>
+
+<p>[aside: I built an OCG - Cordy’s Orthogonal Code Generator.  OCG is a declarative spec of a code rewriter.  See References, again.]</p>
+
+<p>[aside: Cordy used “condition descriptors” which bear a striking resemblance to Church 1 and 0 - true and false.]</p>
+
+<p>To do recursive exhaustive search, you want something that does recursive inferencing (e.g. Relational programming, PROLOG, Ohm-JS, etc., etc.).</p>
+
+<h1 id="prolog-simplified">PROLOG Simplified</h1>
+
+<p>See Holm’s Prolog Control in 6 Slides.</p>
+
+<h2 id="on-optimizing-blc">On Optimizing BLC</h2>
+
+<p>It should be possible to write a peephole optimizer for BLC (say, in awk, or JS, or perl, or Python, or …) that finds certain runs of lambdas and replaces them by other code, more tuned to the target CPU architecture.</p>
+
+<p>To optimize code for speed, you need to de-optimize for size (and scalability).</p>
+
+<p>This could be done by The Loader.  (Currently, this is done, in an ad-hoc manner, by The Compiler).</p>
+
+<h1 id="see-also">See Also</h1>
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://justine.lol/lambda/">BLC</a><br />
+<a href="https://www.t3x.org/bits/prolog6.html">Prolog Control in 6 Slides</a><br />
+<a href="https://computingsimplicity.neocities.org/blogs/OhmInSmallSteps.pdf">Ohm in Small Steps (Scheme to JS experiment)</a></p>
+<h1 id="see-also-1">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

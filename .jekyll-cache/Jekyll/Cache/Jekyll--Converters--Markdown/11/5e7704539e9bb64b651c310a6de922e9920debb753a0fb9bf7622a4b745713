@@ -1,0 +1,171 @@
+I"�<h2 id="kind-of-variables">Kind of Variables</h2>
+<p>There are three (4) kinds[^kinds] of variables:</p>
+<ol>
+  <li>inherited variables</li>
+  <li>own variables</li>
+  <li>bound parameters</li>
+  <li>temp variables</li>
+</ol>
+
+<p>Variables are locations that can be bound (set).</p>
+
+<p>[^kinds] Note that current languages concentrate on 3 &amp; 4 and tend to shun 1 &amp; 2.  Lisp alists are much like (1).  JavaScript own variables are much like (2).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parent { 
+  own variables
+  child {
+    own variables
+	code 
+	{
+	  parameters
+      {
+	    temp variables
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<h2 id="variable-access-syntax">Variable Access Syntax</h2>
+<p>I suggest a unique syntax for accessing every kind of variable.</p>
+
+<p>Access operators are not overloaded, they mean exactly one thing - always.</p>
+
+<p>This is a very “assembler”-like perspective.</p>
+
+<p>Later, syntactic sugar (e.g. with Ohm-JS) can be applied to make SCNs that don’t seem to differentiate (at the syntax level) between the various kinds of variables.</p>
+
+<p>Furthermore, there are “special” symbols, like “Args” which is bound by the system before executing the ė.</p>
+
+<p>Variables can be accessed and bound (dereferenced and written-to).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>operation</th>
+      <th>data descriptor</th>
+      <th>dd tuple</th>
+      <th>syntax</th>
+      <th>comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>create own variable</td>
+      <td>@$^1$own.0[size]</td>
+      <td>{1,own,0,size,{“…”,”…“,…}}</td>
+      <td>own name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>create temporary variable</td>
+      <td>@$^1$temp.0[size]</td>
+      <td>{1,own,0,size,{“…”,”…“,…}}</td>
+      <td>temp ~name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>deref own variable</td>
+      <td>-</td>
+      <td>-</td>
+      <td>?name</td>
+      <td>None if “name” is not in Own space</td>
+    </tr>
+    <tr>
+      <td>set own variable</td>
+      <td>-</td>
+      <td>-</td>
+      <td>name ⇐ No</td>
+      <td>creates “name” in own space, if not present</td>
+    </tr>
+    <tr>
+      <td>deref temp variable</td>
+      <td>-</td>
+      <td>-</td>
+      <td>?~name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>deref* own variable</td>
+      <td>-</td>
+      <td>-</td>
+      <td>@name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>deref Arg[name]</td>
+      <td>@$^1$Args.0[size]</td>
+      <td>{1,args,0,size,{“…”,”…“,…}}</td>
+      <td>⤶name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>deref parameter variable</td>
+      <td>@$^1$params.0[size]</td>
+      <td>{1,params,0,size,{“…”,”…“,…}}</td>
+      <td>name{}</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>bind value to a temp</td>
+      <td>-</td>
+      <td>-</td>
+      <td>name ≡ …</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>bind value to a parameter variable</td>
+      <td>-</td>
+      <td>-</td>
+      <td>name{v}</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A variable is characterized by a tuple:</p>
+<ul>
+  <li>number of indirections</li>
+  <li>base area (name)</li>
+  <li>index (offset) in the base area</li>
+  <li>size (in bytes) of the variable</li>
+  <li>a list of synonym names</li>
+</ul>
+
+<p>index and size can be <em>nothing</em> if these fields have not yet been assigned</p>
+
+<h2 id="bases">Bases</h2>
+<ul>
+  <li>own</li>
+  <li>temp</li>
+  <li>parameter</li>
+  <li>arg</li>
+  <li>child (containee)</li>
+  <li>net</li>
+  <li>component</li>
+  <li>input port</li>
+  <li>output port</li>
+  <li>constant</li>
+  <li>symbol</li>
+  <li>lambda</li>
+  <li>language function (classical f(x,y,z,…)-&gt;(p,q,r,…))</li>
+  <li>language variable</li>
+</ul>
+
+<p>Nets are simply names in the <em>net</em> namespace.  Nets are used in asynchronous (e.g. bare-metal) implementations and can be ignored when the system is hosted on a synchronous language/operating system.</p>
+
+<h2 id="see-also">See Also</h2>
+<p><a href="https://guitarvydas.github.io/2022/03/26/Data-Descriptors.html">Data Descriptors</a></p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a><br />
+<a href="https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y">OCG</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+:ET

@@ -1,480 +1,1910 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2022-01-21T16:38:23-05:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">PREP Tool</title><link href="https://computingsimplicity.neocities.org/2022/01/20/PREP-Tool.html" rel="alternate" type="text/html" title="PREP Tool" /><published>2022-01-20T00:00:00-05:00</published><updated>2022-01-20T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/20/PREP%20Tool</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/20/PREP-Tool.html">&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Prep&lt;/code&gt; is a tool for software developers.&lt;/p&gt;
-
-&lt;p&gt;It performs batch-edits on blocks of text, bracketed by REGEXPs.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Prep&lt;/code&gt; edit patterns can do things that REGEXP can’t do.&lt;/p&gt;
-
-&lt;p&gt;For example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prep&lt;/code&gt; can match and edit software source programs.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://youtu.be/t3dwGckJUDk&quot;&gt;Prep Tool&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Prep is a tool for software developers.</summary></entry><entry><title type="html">Ohm in Ohm</title><link href="https://computingsimplicity.neocities.org/2022/01/18/Ohm-In-Ohm.html" rel="alternate" type="text/html" title="Ohm in Ohm" /><published>2022-01-18T00:00:00-05:00</published><updated>2022-01-18T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/18/Ohm-In-Ohm</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/18/Ohm-In-Ohm.html">&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
-&lt;p&gt;I share a grammar for Ohm and a diagram to go with it.&lt;/p&gt;
-
-&lt;h1 id=&quot;make-work&quot;&gt;Make-Work&lt;/h1&gt;
-&lt;p&gt;This grammar - ohm in Ohm - already exists in the source code for the Ohm-JS compiler.  For reasons not well understood, I backed into creating my own grammar from scratch.&lt;/p&gt;
-
-&lt;h1 id=&quot;diagram-of-the-grammar&quot;&gt;Diagram of the Grammar&lt;/h1&gt;
-&lt;p&gt;In the process, I drew myself a diagram (using draw.io) which can be seen in the &lt;a href=&quot;https://github.com/guitarvydas/ohm-parse/blob/main/ohm-grammar.svg&quot;&gt;SVG Diagram&lt;/a&gt; and in the README of the &lt;a href=&quot;https://github.com/guitarvydas/ohm-parse&quot;&gt;ohm-parse github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;diagram-notation-for-grammars&quot;&gt;Diagram Notation for Grammars&lt;/h1&gt;
-&lt;p&gt;I think that I found a consistent diagrammatic notation for all constructs in the grammar.&lt;/p&gt;
-
-&lt;h1 id=&quot;transpiler&quot;&gt;Transpiler&lt;/h1&gt;
-
-&lt;p&gt;I went on to build a transpiler using this grammar.&lt;/p&gt;
-
-&lt;p&gt;I used my &lt;em&gt;glue&lt;/em&gt;&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; DSL for the transpiler.&lt;/p&gt;
-
-&lt;h1 id=&quot;testing&quot;&gt;Testing&lt;/h1&gt;
-&lt;h3 id=&quot;identity-transform&quot;&gt;Identity Transform&lt;/h3&gt;
-&lt;p&gt;I began by creating an &lt;a href=&quot;https://github.com/guitarvydas/ohm-parse/blob/main/identity-ohm.glue&quot;&gt;identity transformation&lt;/a&gt; which sanity-checks the glue file by outputting the input after parsing it (a big fat no-op, but satisfying nonetheless).&lt;/p&gt;
-
-&lt;h3 id=&quot;grammar-checking&quot;&gt;Grammar Checking&lt;/h3&gt;
-
-&lt;p&gt;Sanity-checking the grammar was done using the &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;Ohm editor&lt;/a&gt; and various test samples, culminating in testing the whole of the grammar on itself.&lt;/p&gt;
-
-&lt;h1 id=&quot;disclaimer&quot;&gt;Disclaimer&lt;/h1&gt;
-&lt;p&gt;This stuff is dripping fresh and probably contains errors, but, I hope that it will be of use to someone in understanding how to create a grammar (or, at least, understanding how I do it).&lt;/p&gt;
-
-&lt;h1 id=&quot;future&quot;&gt;Future&lt;/h1&gt;
-&lt;p&gt;I intend to use this grammar to do &lt;em&gt;some&lt;/em&gt; of my editing work for me - just enough to trade off the development time against the boring task of typing a &lt;em&gt;glue&lt;/em&gt; specification for another project.&lt;/p&gt;
-
-&lt;p&gt;The beginnings of this partial-editor can be seen in &lt;a href=&quot;https://github.com/guitarvydas/ohm-parse/blob/main/emitglue.ohm&quot;&gt;emitglue.ohm&lt;/a&gt; and &lt;a href=&quot;https://github.com/guitarvydas/ohm-parse/blob/main/emitglue.glue&quot;&gt;emitglue.glue&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I don’t intend to make the partial-editor complete.  I will stop working on it when I think that editing the result manually will take less time that tweaking emitglue.glue.&lt;/p&gt;
-
-&lt;h2 id=&quot;cannot-use-sed-and-awk-and-regexs&quot;&gt;Cannot Use Sed and Awk and REGEXs&lt;/h2&gt;
-&lt;p&gt;Normally, I would use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt; or regular expressions to hack code for me, but, in this case, I needed to match structured blobs of code that would be best done with something better than REGEX, i.e. by using a parser.&lt;/p&gt;
-
-&lt;h2 id=&quot;prep&quot;&gt;Prep&lt;/h2&gt;
-&lt;p&gt;I intend to use my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prep&lt;/code&gt; &lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; tool in combination with the .ohm and .glue files to give me a command-line code hacking utility.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Prep&lt;/code&gt; uses Ohm-JS to parse text code from stdin and uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;glue&lt;/code&gt;  to reformat the text code.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Prep&lt;/code&gt; is also dripping fresh, but, is based on experience with previous tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pfr&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;glue&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/prep&quot;&gt;prep github&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Summary I share a grammar for Ohm and a diagram to go with it.</summary></entry><entry><title type="html">Two Parts of Mathematics</title><link href="https://computingsimplicity.neocities.org/2022/01/14/Two-Parts-of-Mathematics.html" rel="alternate" type="text/html" title="Two Parts of Mathematics" /><published>2022-01-14T00:00:00-05:00</published><updated>2022-01-14T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/14/Two%20Parts%20of%20Mathematics</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/14/Two-Parts-of-Mathematics.html">&lt;p&gt;Mathematics consists of 2 main parts:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://computingsimplicity.neocities.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://computingsimplicity.neocities.org/" rel="alternate" type="text/html" /><updated>2022-04-21T17:58:47-04:00</updated><id>https://computingsimplicity.neocities.org/feed.xml</id><title type="html">Computing Simplicity</title><subtitle>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</subtitle><entry><title type="html">PEG Again</title><link href="https://computingsimplicity.neocities.org/2022/04/21/PEG-Again.html" rel="alternate" type="text/html" title="PEG Again" /><published>2022-04-21T00:00:00-04:00</published><updated>2022-04-21T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/21/PEG%20Again</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/21/PEG-Again.html">&lt;h2 id=&quot;synopsis&quot;&gt;Synopsis&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;the mechanics of manipulating symbols&lt;/li&gt;
-  &lt;li&gt;the hard-won knowledge of what works and what doesn’t (algorithms, laws, principles, etc.).&lt;/li&gt;
+  &lt;li&gt;PEG is a game-changing technology&lt;/li&gt;
+  &lt;li&gt;parsing ≣ pattern-matching&lt;/li&gt;
+  &lt;li&gt;PEG creates &lt;strong&gt;parsers&lt;/strong&gt;, YACC describes &lt;strong&gt;languages&lt;/strong&gt; from first principles&lt;/li&gt;
+  &lt;li&gt;PEG paper by Bryan Ford&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Part 1 is simple text manipulation.&lt;/p&gt;
-
-&lt;p&gt;Mathematics was invented when the only tools were pen and paper.&lt;/p&gt;
-
-&lt;p&gt;The UNIX people &lt;em&gt;almost&lt;/em&gt; got part 1 by producing a set of utilities for manipulating symbols in the form of text.&lt;/p&gt;
-
-&lt;p&gt;The “problem” with the UNIX notation was that text was only text up to end-of-line.&lt;/p&gt;
-
-&lt;p&gt;Newline is &lt;em&gt;special&lt;/em&gt; in UNIX&lt;/p&gt;
-
-&lt;p&gt;Lisp &lt;em&gt;almost&lt;/em&gt; got part 1, except that the symbols must be arranged as lists (CONS cells).&lt;/p&gt;
-
-&lt;h1 id=&quot;new-math-manipulation&quot;&gt;New Math Manipulation&lt;/h1&gt;
-&lt;p&gt;We need a way to manipulate symbols in a way that doesn’t make newlines and CONS cells special.&lt;/p&gt;
-
-&lt;p&gt;Computers like to think in terms of bytes.&lt;/p&gt;
-
-&lt;h1 id=&quot;peg&quot;&gt;PEG&lt;/h1&gt;
-
-&lt;p&gt;How can we manipulate raw bytes?&lt;/p&gt;
-
-&lt;p&gt;Parsers.&lt;/p&gt;
-
-&lt;p&gt;PEG parsing makes parsing easier.&lt;/p&gt;
-
-&lt;p&gt;PEG is a DSL for parsing.&lt;/p&gt;
-
-&lt;p&gt;Ohm-JS is improved PEG.&lt;/p&gt;
-
-&lt;h1 id=&quot;diagrams&quot;&gt;Diagrams&lt;/h1&gt;
-&lt;p&gt;Why stop at characters?&lt;/p&gt;
-
-&lt;p&gt;We can manipulate diagrams using computers.&lt;/p&gt;
-
-&lt;p&gt;How can we draw diagrams and then manipulate them?&lt;/p&gt;
-
-&lt;p&gt;A beginning might be:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;draw.io&lt;/li&gt;
-  &lt;li&gt;SVG&lt;/li&gt;
-  &lt;li&gt;d2f.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/01/14/D2F.html&quot;&gt;d2f - Diagram to Text Converter&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.npmjs.com/package/ohm-js&quot;&gt;Ohm-JS&lt;/a&gt; (see, also, my articles on PEG and Ohm-JS)&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Mathematics consists of 2 main parts: the mechanics of manipulating symbols the hard-won knowledge of what works and what doesn’t (algorithms, laws, principles, etc.).</summary></entry><entry><title type="html">D2F - Diagram to Factbase Compiler</title><link href="https://computingsimplicity.neocities.org/2022/01/14/D2F.html" rel="alternate" type="text/html" title="D2F - Diagram to Factbase Compiler" /><published>2022-01-14T00:00:00-05:00</published><updated>2022-01-14T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/14/D2F</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/14/D2F.html">&lt;p&gt;This code compiles .drawio diagrams to a factbase (.pl).&lt;/p&gt;
-
-&lt;p&gt;It does not “parse” the diagram - see d2py for that.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://youtu.be/F17x3lONHjY&quot;&gt;video&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">This code compiles .drawio diagrams to a factbase (.pl).</summary></entry><entry><title type="html">GC in SectorLisp</title><link href="https://computingsimplicity.neocities.org/2022/01/13/GC-in-SectorLisp.html" rel="alternate" type="text/html" title="GC in SectorLisp" /><published>2022-01-13T00:00:00-05:00</published><updated>2022-01-13T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/13/GC%20in%20SectorLisp</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/13/GC-in-SectorLisp.html">&lt;p&gt;Another attempt to describe the behaviour of GC in SectorLisp.&lt;/p&gt;
-
-&lt;p&gt;This time as an animation (video without sound).&lt;/p&gt;
-
-&lt;p&gt;Feel free to fast-forward…&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://youtu.be/TF0FzcBkV60&quot;&gt;GC&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Thanks for the feedback…&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Another attempt to describe the behaviour of GC in SectorLisp.</summary></entry><entry><title type="html">SectorLisp</title><link href="https://computingsimplicity.neocities.org/2022/01/11/SectorLisp.html" rel="alternate" type="text/html" title="SectorLisp" /><published>2022-01-11T00:00:00-05:00</published><updated>2022-01-11T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/11/SectorLisp</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/11/SectorLisp.html">&lt;p&gt;&lt;a href=&quot;https://youtu.be/nZWR2ftBoA0&quot;&gt;A youtube of my description of SectorLisp&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://justine.lol/sectorlisp2/&quot;&gt;SectorLisp&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/sectorlisp&quot;&gt;My github SectorLisp&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
-
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">A youtube of my description of SectorLisp SectorLisp</summary></entry><entry><title type="html">Software Atoms</title><link href="https://computingsimplicity.neocities.org/2022/01/01/Software-Atoms.html" rel="alternate" type="text/html" title="Software Atoms" /><published>2022-01-01T00:00:00-05:00</published><updated>2022-01-01T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2022/01/01/Software%20Atoms</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/01/01/Software-Atoms.html">&lt;p&gt;This is WIP.&lt;/p&gt;
-
-&lt;p&gt;I am “thinking aloud” about the primitive elements of software.&lt;/p&gt;
-
-&lt;p&gt;I expect that the contents of this note will change with feedback and further thought.&lt;/p&gt;
-
-&lt;p&gt;I do, though, believe in “showing my work”.  Showing intermediate results, no matter how rough.&lt;/p&gt;
-
-&lt;p&gt;Although this article is fresh, these ideas have been percolating for several decades, influenced by my experiences in running a small software consultancy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/softwareatoms&quot;&gt;Notes in Obsidian Format&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Brief overview, follows…&lt;/p&gt;
-
-&lt;h1 id=&quot;atoms&quot;&gt;Atoms&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;Case on Type&lt;/li&gt;
-  &lt;li&gt;Case on State&lt;/li&gt;
-  &lt;li&gt;Case on Data Pattern&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;iteration&quot;&gt;Iteration&lt;/h1&gt;
-
-&lt;h1 id=&quot;molecules&quot;&gt;Molecules&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;nested&lt;/li&gt;
-  &lt;li&gt;spaghetti&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;energy&quot;&gt;Energy&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;Control Flow
+&lt;h2 id=&quot;discussion&quot;&gt;Discussion&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Game changing technology
     &lt;ul&gt;
-      &lt;li&gt;Synchronous Transfer of Control Flow&lt;/li&gt;
-      &lt;li&gt;Asynchronous Transfer of Control Flow&lt;/li&gt;
+      &lt;li&gt;allows bowls of syntax approach&lt;sup id=&quot;fnref:macros&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:macros&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, instead of many-years-for-one-language approach&lt;/li&gt;
+      &lt;li&gt;PEG, esp. Ohm-JS, allows jail-break from some of the mid-1900s assumptions&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;parsing is pattern-matching
+    &lt;ul&gt;
+      &lt;li&gt;no magic, parsers are just big pattern-matching programs&lt;sup id=&quot;fnref:adhoc&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:adhoc&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+      &lt;li&gt;PEG is a DSL for pattern-matching&lt;/li&gt;
+      &lt;li&gt;REGEX is a DSL for pattern-matching&lt;/li&gt;
+      &lt;li&gt;PEG is better than REGEX, because PEG allows subroutines&lt;/li&gt;
+      &lt;li&gt;parsing  technology is geared towards parsing text, due to biases and limitations in mid-1900s machines, but, machines have changed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Parsers vs. language first principles
+    &lt;ul&gt;
+      &lt;li&gt;subtle difference&lt;/li&gt;
+      &lt;li&gt;PEG is a DSL for creating TDPL parsers&lt;/li&gt;
+      &lt;li&gt;Language theory ≣ principles of (restricted) language design, can be used to generate parsers, but languages that are parsed are restricted by the theoretical model
+        &lt;ul&gt;
+          &lt;li&gt;model doesn’t always reflect reality, but, only what can be conveniently modeled&lt;sup id=&quot;fnref:nw&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:nw&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;PEG allows matching balanced parens, YACC/language-theory/etc. cannot match balanced parens&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;PEG paper by B. Ford
+    &lt;ul&gt;
+      &lt;li&gt;shows that squishy concepts for top-down parsing&lt;sup id=&quot;fnref:tdpl&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:tdpl&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; can be theorized and used to build UXs for programmers&lt;/li&gt;
+      &lt;li&gt;paper basically shows how to build backtracking for text without using PROLOG&lt;/li&gt;
+      &lt;li&gt;uses memoization to avoid re-parsing already-parsed bits&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;notes--rambling&quot;&gt;Notes &amp;amp; Rambling&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Game changing technology
+    &lt;ul&gt;
+      &lt;li&gt;allows bowls of syntax approach, instead of many-years-for-one-language approach&lt;/li&gt;
+      &lt;li&gt;PEG uses backtracking, which used to be verbotten in the mid-1900s&lt;/li&gt;
+      &lt;li&gt;PEG is like PROLOG aimed for backtracking over text characters&lt;/li&gt;
+      &lt;li&gt;Kleene &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; and Kleene &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; were invented long ago, but not thought to be useful for parsing due to concerns for efficiency ; current computers are magnitudes better than in the mid-1900s -&amp;gt; time to reevaluate basic assumptions, esp. concerns for efficiency&lt;/li&gt;
+      &lt;li&gt;PEG allows matching balanced parens, YACC/language-theory/etc. cannot match balanced parens&lt;/li&gt;
+      &lt;li&gt;PEG is akin to: automobile vs. walking - changes basic assumptions about what is possible&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;a Parser is just a program, an app
+    &lt;ul&gt;
+      &lt;li&gt;REGEX is a simplified form of pattern-matching&lt;/li&gt;
+      &lt;li&gt;PEG is a DSL meant specifically for pattern-matching sequences of characters&lt;/li&gt;
+      &lt;li&gt;PEG is better than REGEX because PEG allows subroutines&lt;/li&gt;
+      &lt;li&gt;PEG is worse than REGEX because PEG specs are usually larger than REGEX specs&lt;/li&gt;
+      &lt;li&gt;REGEX syntax is write-only, PEG syntax is more readable (IMO)&lt;/li&gt;
+      &lt;li&gt;PEG is like modernized BNF&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Compiling
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;ol&gt;
+          &lt;li&gt;pattern-match input file&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;ol&gt;
+          &lt;li&gt;make a bunch of tables&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;ol&gt;
+          &lt;li&gt;check input against tables&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;ol&gt;
+          &lt;li&gt;emit code (assembler or other language)&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;typical approach
+        &lt;ul&gt;
+          &lt;li&gt;pattern-matcher creates a tree&lt;/li&gt;
+          &lt;li&gt;tree-walk the tree to fire “semantic” routines&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;better approach
+        &lt;ul&gt;
+          &lt;li&gt;taught at UofT, etc. (Queen’s?)&lt;/li&gt;
+          &lt;li&gt;syntax-directed compiling&lt;/li&gt;
+          &lt;li&gt;build “many” trees, as pipelined, serialized-streams of characters
+            &lt;ul&gt;
+              &lt;li&gt;use many parsers to expand &amp;amp; unserialize intermediate trees&lt;/li&gt;
+              &lt;li&gt;helps stop tangling of issues and Accidental Complexity
+                &lt;ul&gt;
+                  &lt;li&gt;unwinds dependencies&lt;/li&gt;
+                  &lt;li&gt;each step / phase is independent and can be programmed in situ
+                    &lt;ul&gt;
+                      &lt;li&gt;without worrying about causing side-effects in other phases&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;allows compiler-writer to concentrate on one thing at a time&lt;/li&gt;
+              &lt;li&gt;similar to pattern-matching in FP languages
+                &lt;ul&gt;
+                  &lt;li&gt;allow pattern-matching engine to fire functions based on history / sequencing
+                    &lt;ul&gt;
+                      &lt;li&gt;eschew ad-hoc coding of sequence-tracking&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;FP pattern-matching cases on type (and dynamic data?)&lt;/li&gt;
+                  &lt;li&gt;parsing cases on dynamic data (and dynamic type)&lt;/li&gt;
+                  &lt;li&gt;OO cases on type&lt;/li&gt;
+                  &lt;li&gt;PROLOG allows programmer to define “types” in layers (“rules”), then backtracks and performs exhaustive search&lt;/li&gt;
+                  &lt;li&gt;PEG allows programmer to define layers (“rules”) then backtracks&lt;/li&gt;
+                  &lt;li&gt;miniKanren performs exhaustive match, like PROLOG, without backtracking&lt;/li&gt;
+                  &lt;li&gt;(backtracking is an attempt at memory optimization - reuse memory by GC’ing it, then trying again, miniKanren doesn’t care, it just keeps every possibility on deck as it works)
+                    &lt;ul&gt;
+                      &lt;li&gt;PROLOG algorithm explained in Scheme by &lt;a href=&quot;http://www.t3x.org/bits/prolog-6-code.scm.html&quot;&gt;Nils Holm&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;backtracking ≣ inferencing&lt;/li&gt;
+                  &lt;li&gt;inferencing ≣ exhaustive search&lt;/li&gt;
+                  &lt;li&gt;has anyone tried to re-cast PEG in miniKanren?&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;beauty of Lisp and Assembler
+    &lt;ul&gt;
+      &lt;li&gt;prefix notation&lt;/li&gt;
+      &lt;li&gt;very regular -&amp;gt; automatable
+        &lt;ul&gt;
+          &lt;li&gt;machines can do the work instead of humans&lt;/li&gt;
+          &lt;li&gt;frees up human thinking to consider higher level concepts&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;leads to observation that operators are orthogonal to operands (Cordy’s Orthogonal Code Generator)
+        &lt;ul&gt;
+          &lt;li&gt;GCC’s RTL is a special case of this observation (in RTL &lt;em&gt;all&lt;/em&gt; operands are registers until the final step)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;in Lisp, &lt;em&gt;everything&lt;/em&gt; is an expression, no special syntax for &lt;em&gt;return&lt;/em&gt; -&amp;gt; regularity (normalization)&lt;/li&gt;
+      &lt;li&gt;Lambda Calculus is discovering normalization&lt;/li&gt;
+      &lt;li&gt;Sector Lisp (Tunney) is a fine example of the beauty of the FP paradigm
+        &lt;ul&gt;
+          &lt;li&gt;my conclusion: bloatware comes from forcing a paradigm to be something it wasn’t designed for&lt;/li&gt;
+          &lt;li&gt;e.g. FP vs. mutability
+            &lt;ul&gt;
+              &lt;li&gt;Tunney’s GC is 40 bytes[sic] becase it is pure FP
+                &lt;ul&gt;
+                  &lt;li&gt;no special cases&lt;/li&gt;
+                  &lt;li&gt;very few (2) data types - Atoms and Lists&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Lisp was schizophrenic
+        &lt;ul&gt;
+          &lt;li&gt;Lisp tried to serve 2 masters at once
+            &lt;ol&gt;
+              &lt;li&gt;Design&lt;/li&gt;
+              &lt;li&gt;Production Engineering&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Production Engineering “won out” and warped Lisp (-&amp;gt; Common Lisp, Scheme)&lt;/li&gt;
+          &lt;li&gt;REPL is a “natural” outcome of Design-oriented thinking (see Bret Victor, Live Programming - which are REPLs for non-text-based programming)&lt;/li&gt;
+          &lt;li&gt;dynamic languages are better for Design, static languages are better for Production Engineering
+            &lt;ul&gt;
+              &lt;li&gt;using static languages for Design, inhibits Design&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Lispworks debugger is better (IMO) than VSCode
+            &lt;ul&gt;
+              &lt;li&gt;Lispworks has more experience&lt;/li&gt;
+              &lt;li&gt;dynamic languages -&amp;gt; less trouble to build debuggers than with static languages&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;IMO - data should be OO objects, and, orthogonally, control flow should be syntax&lt;br /&gt;
+     - flags, state, etc. are not inherently bad&lt;br /&gt;
+     - unrestricted use of flags is bad, just like unrestricted use of Global Variables is bad&lt;br /&gt;
+     - wrap syntax &lt;em&gt;skins&lt;/em&gt; around hoary contructs and never allow users to access them directly&lt;br /&gt;
+     - Lambda Calculus wraps data items dynamically (on the stack), and, now syntax can wrap stuff that LC is not designed for (using PEG)&lt;br /&gt;
+     - FP teaches that &lt;em&gt;variable&lt;/em&gt; names are inconsequential&lt;br /&gt;
+         - in fact, variables are not variable&lt;br /&gt;
+     - parsing teaches that &lt;em&gt;syntax&lt;/em&gt; is equally inconsequential&lt;/li&gt;
+  &lt;li&gt;Parser DSL
+    &lt;ul&gt;
+      &lt;li&gt;theory is for theoreticians
+        &lt;ul&gt;
+          &lt;li&gt;leads to better languages, but slowly&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;DSL is UX
+        &lt;ul&gt;
+          &lt;li&gt;theoreticians tend to “ignore” UX and don’t care if they mangle languages for the sake of correctness&lt;/li&gt;
+          &lt;li&gt;IMO, the ideal is theory -&amp;gt; lint-like tools that preen programmer code, not warp the languages that programmers are allowed to use&lt;/li&gt;
+          &lt;li&gt;theory -&amp;gt; helps Production Engineers, hinders Designers
+            &lt;ul&gt;
+              &lt;li&gt;self-editing is “bad”&lt;/li&gt;
+              &lt;li&gt;implementation details obfuscate Design&lt;/li&gt;
+              &lt;li&gt;implementation details inhibit Design and destroy Design “flow” (“in the zone”)&lt;/li&gt;
+              &lt;li&gt;biggest advances in CompSci come from eliding and deferring details, e.g. OO, GC, Scoping, Structured Programming, etc.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;i.e. PEG is for programmers, language theory is for theorists
+        &lt;ul&gt;
+          &lt;li&gt;the two don’t mix and cannot be combined into a single language&lt;/li&gt;
+          &lt;li&gt;PEG allows rapid syntax creation -&amp;gt; one language for programmers, another language for theorists, same bag of paradigms with different syntactic sugar&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;PEG paper by B. Ford -&amp;gt; shows that squishy concepts for parsing can be theorized and used to build UXs for programmers&lt;br /&gt;
+     - paper basically shows how to build backtracking for text without using PROLOG&lt;br /&gt;
+     - uses memoization to avoid re-parsing already-parsed bits&lt;br /&gt;
+     - concerns for efficiency are misplaced&lt;br /&gt;
+         - based on assumption that programs will grow “big”&lt;br /&gt;
+         - if you keep programs “small”, then efficiency “doesn’t matter”&lt;br /&gt;
+         - IMO: the goal shoud be to keep programs small instead of appeasing bigness&lt;br /&gt;
+         - I built a PEG without packrat and it worked fine, since, using the new DSL, programs never became big&lt;br /&gt;
+         - conclusion: when programs become big enough for efficiency to matter, switch notations (create and use a different language)&lt;/li&gt;
+  &lt;li&gt;PREP
+    &lt;ul&gt;
+      &lt;li&gt;I built a tool using PEG and REGEX that allows me to write pipelined one-liners (in &lt;em&gt;bash&lt;/em&gt; modulo accompanying grammar and reformat specs)&lt;/li&gt;
+      &lt;li&gt;use it to build variants of itself (feed &lt;em&gt;prep&lt;/em&gt; pipelines with &lt;em&gt;prep&lt;/em&gt; preprocessors) -&amp;gt; syntax directed transpiling&lt;/li&gt;
+      &lt;li&gt;parse diagrams&lt;/li&gt;
+      &lt;li&gt;parse .md as a programming language
+        &lt;ul&gt;
+          &lt;li&gt;architectural / Design language&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;See Also
+    &lt;ul&gt;
+      &lt;li&gt;Rosie
+        &lt;ul&gt;
+          &lt;li&gt;I haven’t explored this, but it looks to be in a similar vein (parsing as a tool)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Ohm-JS
+        &lt;ul&gt;
+          &lt;li&gt;currently, my favourite variant of PEG&lt;/li&gt;
+          &lt;li&gt;a DSL for pattern-matching based on PEG principles&lt;/li&gt;
+          &lt;li&gt;skips whitespace
+            &lt;ul&gt;
+              &lt;li&gt;avoids sullying the grammar with details&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;sends CST (concrete syntax tree - output of parser) to JS for further processing (tree-walking)&lt;/li&gt;
+          &lt;li&gt;&lt;em&gt;every&lt;/em&gt; match is captured (i.e. normalization, no options == good for automation, anti-bloatware)&lt;/li&gt;
+          &lt;li&gt;Ohm-JS examples:
+            &lt;ul&gt;
+              &lt;li&gt;T.B.D.&lt;/li&gt;
+              &lt;li&gt;working on book of idioms&lt;/li&gt;
+              &lt;li&gt;working on explaining raw markdown parser&lt;/li&gt;
+              &lt;li&gt;WASM from arith P.O.C.&lt;/li&gt;
+              &lt;li&gt;link to Obsidian raw material … (will be free)&lt;/li&gt;
+              &lt;li&gt;prep&lt;/li&gt;
+              &lt;li&gt;Diagrams as Syntax to Python&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;9 Other&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;replace use of REGEX with use of PEG&lt;br /&gt;
+      - use REGEX for small snippets of pattern-matching&lt;br /&gt;
+      - use PEG for anything more interesting, esp. structured text (multiline, recursive)&lt;/li&gt;
+  &lt;li&gt;Programming Languages are IDEs&lt;br /&gt;
+          - PLs are IDEs for programming (goal === control a machine)&lt;br /&gt;
+          - PL’s based on biases of mid-1900s, e.g. text, concerns for efficiency&lt;br /&gt;
+          - PEG, esp. Ohm-JS, allows jail-break from some of these mid-1900s assumptions&lt;br /&gt;
+          - IMO ideal IDE for programming -&amp;gt;&lt;br /&gt;
+              - choice of notations, text, diagram, hybrid, etc.&lt;br /&gt;
+              - choice of design rules&lt;br /&gt;
+                  - more specific than type checking&lt;br /&gt;
+                  - tuned to specific project, not generalized&lt;br /&gt;
+                  - PEG allows specializing syntax per project&lt;br /&gt;
+                  - PEG allows many syntaxes for a single project&lt;br /&gt;
+                  - for those who don’t want to invent syntaxes -&amp;gt; cookbook&lt;/li&gt;
+  &lt;li&gt;gaming
+    &lt;ul&gt;
+      &lt;li&gt;early games used to be quite econimical&lt;/li&gt;
+      &lt;li&gt;bloated now?&lt;/li&gt;
+      &lt;li&gt;where did the simplicity go?
+        &lt;ul&gt;
+          &lt;li&gt;“it is complicated” is a hand-waving argument, not science&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;compiling
+    &lt;ul&gt;
+      &lt;li&gt;compiling is akin to sorting Red Smarties into one pile&lt;/li&gt;
+      &lt;li&gt;if you can move all operations (of a certain kind) to one pile, then you can pre-operate and save runtime later&lt;/li&gt;
+      &lt;li&gt;amortize cost of operations - waste CPU during compile, save CPU later&lt;/li&gt;
+      &lt;li&gt;compiling is AKA Production Engineering
+        &lt;ul&gt;
+          &lt;li&gt;Software Engineering is more than just Production Engineering&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;composition-molecules&quot;&gt;Composition (Molecules)&lt;/h1&gt;
+&lt;h2 id=&quot;disclaimer&quot;&gt;Disclaimer&lt;/h2&gt;
+&lt;p&gt;I was going for 80% truth and edited out all qualifications for succinctness.&lt;/p&gt;
 
-&lt;h1 id=&quot;data&quot;&gt;Data&lt;/h1&gt;
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:macros&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Bowls of syntax is known as &lt;em&gt;macros&lt;/em&gt; to Lispers, but, Lisp macros deal only with lists, not characters. C macros are much more limited and shouldn’t be conflated with the Lisp concept. &lt;a href=&quot;#fnref:macros&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:adhoc&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Parsers are, hopefully, less ad-hoc than hand-written pattern-matching code. &lt;a href=&quot;#fnref:adhoc&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:nw&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Notation Worship.  Ironically, sometimes the (insufficient) model is assumed to define reality, and the rest of reality is simply ignored. &lt;a href=&quot;#fnref:nw&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:tdpl&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;TDPL ≣ Top-Down Parsing Language &lt;a href=&quot;#fnref:tdpl&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Synopsis PEG is a game-changing technology parsing ≣ pattern-matching PEG creates parsers, YACC describes languages from first principles PEG paper by Bryan Ford</summary></entry><entry><title type="html">DaS - Elements of Diagrammatic Languages (WP1)</title><link href="https://computingsimplicity.neocities.org/2022/04/12/Elements-of-Diagrammatic-Languages-DaS.html" rel="alternate" type="text/html" title="DaS - Elements of Diagrammatic Languages (WP1)" /><published>2022-04-12T00:00:00-04:00</published><updated>2022-04-12T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/12/Elements%20of%20Diagrammatic%20Languages%20DaS</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/12/Elements-of-Diagrammatic-Languages-DaS.html">&lt;p&gt;Thoughts April 12, 2022 …&lt;/p&gt;
+
+&lt;h2 id=&quot;boxes&quot;&gt;Boxes&lt;/h2&gt;
+
+&lt;h3 id=&quot;1box&quot;&gt;1Box&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-1box.png&quot; alt=&quot;1 Box&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2box&quot;&gt;2Box&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-2box.png&quot; alt=&quot;2 Box&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;nbox&quot;&gt;NBox&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-nbox.png&quot; alt=&quot;N Box&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;0box&quot;&gt;0Box&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-0box.png&quot; alt=&quot;0 Box&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;concentric-boxes&quot;&gt;Concentric Boxes&lt;/h3&gt;
+
+&lt;h3 id=&quot;independent-boxes&quot;&gt;Independent Boxes&lt;/h3&gt;
+
+&lt;h2 id=&quot;ports&quot;&gt;Ports&lt;/h2&gt;
+
+&lt;h3 id=&quot;input-ports&quot;&gt;Input Ports&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-inputport.png&quot; alt=&quot;Input Ports&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;output-ports&quot;&gt;Output Ports&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-outputport.png&quot; alt=&quot;Output Ports&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;connectors&quot;&gt;Connectors&lt;/h2&gt;
+
+&lt;h3 id=&quot;message-connectors&quot;&gt;Message Connectors&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/daswp1-connectors.png&quot; alt=&quot;Asynchronous Connectors&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;same-page-connectors&quot;&gt;Same-Page Connectors&lt;/h3&gt;
+
+&lt;h2 id=&quot;text-phrase&quot;&gt;Text Phrase&lt;/h2&gt;
+
+&lt;h3 id=&quot;example-phrases&quot;&gt;Example Phrases&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;Datum (singular)&lt;/li&gt;
-  &lt;li&gt;Bag (plural, unordered)&lt;/li&gt;
-  &lt;li&gt;Proc (unit of execution, aka lambda w/o parameters and w/o retaddr)&lt;/li&gt;
+  &lt;li&gt;⟪WhenAll⟫&lt;br /&gt;
+| when all PredicateBox&lt;/li&gt;
+  &lt;li&gt;⟪When⟫&lt;br /&gt;
+| when messages&lt;/li&gt;
+  &lt;li&gt;⟪Return⟫&lt;br /&gt;
+| -&amp;gt; [1]&lt;/li&gt;
+  &lt;li&gt;⟪CheckReturn⟫&lt;br /&gt;
+| check return [String]&lt;/li&gt;
+  &lt;li&gt;⟪FindConnectionFromMe⟫&lt;br /&gt;
+| find [1] from me on port [2]&lt;/li&gt;
+  &lt;li&gt;⟪Cond⟫&lt;br /&gt;
+| cond 【CondClause】【…】&lt;/li&gt;
+  &lt;li&gt;⟪WithLock⟫&lt;br /&gt;
+| lock [1]&lt;/li&gt;
+  &lt;li&gt;⟪Find⟫&lt;br /&gt;
+| find [1] in [2] given [ParameterList] =&amp;gt; [3]&lt;br /&gt;
+| find [1] in [2] =&amp;gt; [3]&lt;br /&gt;
+⟪VarBox⟫&lt;br /&gt;
+| var [1] &amp;lt;= $i { { [[2]] } [3] }&lt;br /&gt;
+| var [1] &amp;lt;= $o { { [[2]] } [3] }&lt;br /&gt;
+| var [1] &amp;lt;=      { [[2]] }&lt;br /&gt;
+⟪Synonym⟫&lt;br /&gt;
+| synonym [1] = { [2]List }&lt;br /&gt;
+| synonym [1] = [2]&lt;br /&gt;
+⟪Lookup⟫&lt;br /&gt;
+| lookup [2] =&amp;gt; [1]&lt;br /&gt;
+⟪ForEvery⟫&lt;br /&gt;
+= for every item in [1] given [ParameterList] =&amp;gt; [2]&lt;br /&gt;
+| for every [1] in [1] given [ParameterList] =&amp;gt; [2]&lt;br /&gt;
+| for every item in [1]  =&amp;gt; [2]&lt;br /&gt;
+| for every [1] in [1]  =&amp;gt; [2]&lt;br /&gt;
+⟪SynchronousCall⟫&lt;br /&gt;
+// no nesting here - Call is a Leaf, not a nested box&lt;br /&gt;
+| @ [1] &amp;lt;= [2]&lt;br /&gt;
+| @ [1]&lt;br /&gt;
+| # [1] &amp;lt;= [2]&lt;br /&gt;
+| # [1]&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;control-flow-composition&quot;&gt;Control Flow Composition&lt;/h1&gt;
+&lt;p&gt;DD&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;sync&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;async&lt;/p&gt;
+  &lt;li&gt;⟪Field Accessor⟫ name “.” name&lt;/li&gt;
+  &lt;li&gt;⟪MethodCallSynchronous⟫ name “(“ … “)” where “…” is a list of DDs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sub-phrases&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;⟪Predicate⟫【1】where 1 is a Predicate Phrase&lt;/li&gt;
+  &lt;li&gt;⟪Datum⟫ [digit] where [digit] is a placeholder for a DD&lt;/li&gt;
+  &lt;li&gt;⟪name⟫ [id] where id is a string of characters (alnum)&lt;/li&gt;
+  &lt;li&gt;⟪CondClause⟫&lt;br /&gt;
+|【Predicate】【1】&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comment&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;notes
+    &lt;ul&gt;
+      &lt;li&gt;spaces ignored at top level&lt;/li&gt;
+      &lt;li&gt;[spaces allowed inside brackets(?)]&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;nested&lt;/li&gt;
-  &lt;li&gt;spaghetti&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+&lt;h4 id=&quot;example-mapping-phrases---operation&quot;&gt;Example Mapping Phrases -&amp;gt; Operation&lt;/h4&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;find [1] in [2] given [ParameterList] =&amp;gt; [3]&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">This is WIP.</summary></entry><entry><title type="html">FDD In Action</title><link href="https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html" rel="alternate" type="text/html" title="FDD In Action" /><published>2021-12-24T00:00:00-05:00</published><updated>2021-12-24T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/12/24/FDD-In-Action.html">&lt;p&gt;“FDD” means “Failure Driven Design”.&lt;/p&gt;
+&lt;p&gt;–&amp;gt; me.findInGiven ([1], [2], [ParameterList], [3])&lt;/p&gt;
 
-&lt;p&gt;FDD can prevent future bugs.&lt;/p&gt;
+&lt;h3 id=&quot;string&quot;&gt;String&lt;/h3&gt;
 
-&lt;p&gt;FDD is like “design rule” checking built into the dev app.&lt;/p&gt;
+&lt;p&gt;“abc”&lt;/p&gt;
 
-&lt;p&gt;I spent hours tracking down a hoary bug in my logic.&lt;/p&gt;
+&lt;h3 id=&quot;name&quot;&gt;Name&lt;/h3&gt;
 
-&lt;p&gt;I wrote:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;… (Kind, Edge, edge)
-… sourceof(Edge, Sender)
-… targetof(Edge, Receiver)
-… (direct_contains, Parent, Edge)
+&lt;p&gt;alnum&lt;/p&gt;
+
+&lt;h3 id=&quot;comment&quot;&gt;Comment&lt;/h3&gt;
+
+&lt;p&gt;// to end of line&lt;/p&gt;
+
+&lt;p&gt;/* block comment */&lt;/p&gt;
+
+&lt;h2 id=&quot;data-descriptors&quot;&gt;Data Descriptors&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/03/26/Data-Descriptors.html&quot;&gt;see for basics, ideas&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;construction-language&quot;&gt;Construction Language&lt;/h2&gt;
+
+&lt;h3 id=&quot;methods&quot;&gt;Methods&lt;/h3&gt;
+
+&lt;h3 id=&quot;predicates&quot;&gt;Predicates&lt;/h3&gt;
+
+&lt;h3 id=&quot;procedures&quot;&gt;Procedures&lt;/h3&gt;
+
+&lt;h3 id=&quot;handlers&quot;&gt;Handlers&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;λ₂ (self, message) -&amp;gt; nothing&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Handlers can invoke &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Send ()&lt;/code&gt; to create messages which are routed by the handlers’ Containers.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-descriptors-1&quot;&gt;Data Descriptors&lt;/h3&gt;
+
+&lt;h2 id=&quot;synonyms&quot;&gt;Synonyms&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;synonym&lt;/code&gt; &lt;em&gt;name&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;= [1]&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/routing.png&quot; alt=&quot;Code for Routing&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Thoughts April 12, 2022 …</summary></entry><entry><title type="html">ė (eh) Example and Internals</title><link href="https://computingsimplicity.neocities.org/2022/04/12/Eh-Example-and-Internals.html" rel="alternate" type="text/html" title="ė (eh) Example and Internals" /><published>2022-04-12T00:00:00-04:00</published><updated>2022-04-12T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/12/Eh%20Example%20and%20Internals</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/12/Eh-Example-and-Internals.html">&lt;p&gt;I describe the implementation of a very simplistic example using inner concurrency and a handful of diagrams.&lt;/p&gt;
+
+&lt;p&gt;The example is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;.  It copies the contents of a file to the console, character by character.  It, also, outputs each character on a port (unused in this simple example).&lt;/p&gt;
+
+&lt;p&gt;This document is a snapshot of my current progress in describing these concepts.&lt;/p&gt;
+
+&lt;h2 id=&quot;top-level&quot;&gt;Top Level&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/cat.png&quot; alt=&quot;Top Level of The Simple Example (cat)&quot; /&gt;&lt;br /&gt;
+(obsidian:&lt;br /&gt;
+&lt;img src=&quot;file:///Users/tarvydas/Desktop/blogs/guitarvydas.github.io/assets/cat.png&quot; alt=&quot;cat.png&quot; /&gt;&lt;br /&gt;
+)&lt;/p&gt;
+
+&lt;p&gt;The diagram represents a very simple system with three (3) components total&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a Container&lt;/li&gt;
+  &lt;li&gt;two (2) Leaf components.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Container is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Leaf components are called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; runs the two leaves concurrently and routes messages between them.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; is called (invoked) like a normal function and can return values like a normal function.  (In this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; doesn’t bother to return anything).&lt;/p&gt;
+
+&lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; is invoked, it is passed two (2) parameters&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;the filename to be read&lt;/li&gt;
+  &lt;li&gt;the filename to be written (which is ignored in this simple example, this example simply prints characters on the console and doesn’t write them to a file).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt; injects these two filenames into the appropriate components and starts up concurrent dispatching.&lt;/p&gt;
+
+&lt;p&gt;How does &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; know when to stop dispatching?  One&lt;sup id=&quot;fnref:sev&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:sev&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; of its children tells it to stop.  In this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; invokes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conclude&lt;/code&gt; when it hits end-of-file.&lt;/p&gt;
+
+&lt;p&gt;Note that the Leaf component &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt; has an output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt; which is unused - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NC&lt;/code&gt; (No Connection).&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Write&lt;/code&gt; does not know (cannot know) that its output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt; is not connected and, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt; continues to output characters to that output.  The &lt;em&gt;dispatcher&lt;/em&gt; dumps messages coming from this pin on the floor (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pass&lt;/code&gt; in Python lingo).&lt;/p&gt;
+
+&lt;p&gt;Note that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt; is never overwhelmed with too many input characters.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Write&lt;/code&gt; sends &lt;em&gt;request&lt;/em&gt;s to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; for each character.  [If we were concerned with efficiency, we might send big buffers of characters instead of single characters - but, that is left for Production Engineering to worry about].&lt;/p&gt;
+
+&lt;h2 id=&quot;ports&quot;&gt;Ports&lt;/h2&gt;
+
+&lt;p&gt;What is a Port?&lt;/p&gt;
+
+&lt;p&gt;A Port is a block (array) of data.&lt;/p&gt;
+
+&lt;p&gt;The data can be destructured into several sub-items, conforming to shapes that we call &lt;em&gt;types&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;All data on a single port arrives / leaves &lt;em&gt;at the same time&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ports, though, can fire at different times.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Functions&lt;/em&gt; in traditional programming languages, have exactly one (1) input port and (1) output port and cause the caller to &lt;em&gt;block&lt;/em&gt; (implicit synchronization).  Such functions receive all of their data at once.  We call that input data “parameters” and imagine that they are separate items.  Such functions save up all of their output data and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;send&lt;/code&gt; it all at the same time in a single block.  If you know how compilers work, then you already know that parameters are stuffed into a global array (called The Stack) and are destructured by the callee. Likewise, compilers stuff all return data into the global array and the caller destructures the block when it wakes up again.  Compilers have different - aggressive - optimizing strategies, so the exact details might be different from what is described in the preceding.&lt;/p&gt;
+
+&lt;p&gt;Messages travel between ports.&lt;/p&gt;
+
+&lt;h2 id=&quot;blocking&quot;&gt;Blocking&lt;/h2&gt;
+
+&lt;p&gt;Blocking is synchronization.&lt;/p&gt;
+
+&lt;p&gt;Blocking is usually thought to be controlled by the Operating System.&lt;/p&gt;
+
+&lt;p&gt;Blocking actually happens in two (2) places, voiding the principal of locality-of-reference.&lt;/p&gt;
+
+&lt;p&gt;Blocking is controlled by:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CALL&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RETURN&lt;/code&gt; low-level, built-in CPU instructions&lt;/li&gt;
+  &lt;li&gt;the Operating System.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note that the Operating System needs to implement preemption (an epicycle) to yank blocking control away from processes which use the low-level &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CALL&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RETURN&lt;/code&gt; blocking instructions.&lt;/p&gt;
+
+&lt;h2 id=&quot;synchronization-generalized&quot;&gt;Synchronization Generalized&lt;/h2&gt;
+
+&lt;p&gt;The general form of synchronization is to &lt;em&gt;ask&lt;/em&gt; and &lt;em&gt;receive&lt;/em&gt; via asynchronous messages.&lt;/p&gt;
+
+&lt;p&gt;The general form of synchronization can be seen in network protocols and in everyday life (e.g. interacting with other people).&lt;/p&gt;
+
+&lt;p&gt;Programmers tend to have difficulty with &lt;em&gt;multitasking&lt;/em&gt; because they try to invert the natural order of life (where everything is asynchronous by default) and need to (re)-learn how to deal with such inversions of primary instincts.&lt;/p&gt;
+
+&lt;p&gt;One &lt;em&gt;optimization&lt;/em&gt; of synchronization is to use a global variable (The Stack) and the low-level, built-in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CALL&lt;/code&gt; and&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RETURN&lt;/code&gt; instructions of the underlying CPUs.  In this case, the messages and state-machine protocols are implemented in hardware in an optimized manner.&lt;/p&gt;
+
+&lt;h2 id=&quot;boxes&quot;&gt;Boxes&lt;/h2&gt;
+
+&lt;p&gt;Boxes, on a diagram, represent software components.&lt;/p&gt;
+
+&lt;p&gt;Concentric boxes represent synchronous components that allow inheritance (AKA scoping).&lt;/p&gt;
+
+&lt;p&gt;Separate boxes that communicate via messages on ports represent asynchronous components.&lt;/p&gt;
+
+&lt;p&gt;Every system consists of a single box that encloses other boxes.&lt;/p&gt;
+
+&lt;p&gt;Distributed systems appear not to have a single enclosing box, but, that is because we elide the top-level box and view only its innards.  For example, a robot is composed of many computers.  A robot is a single, stand-alone system, but we tend not to need to view it that way, and instead consider all of its parts as being separate entities.   We can change our mental “camera angle” to zoom-in and view the robot as a bunch of separate parts, or, we can zoom-out and consider the robot as a whole, e.g. when interacting with other robots and objects.  Being able to change our zoom factor allows us to avoid becoming overwhelmed with details and to describe (script) higher-and-higher level interactions.&lt;/p&gt;
+
+&lt;h2 id=&quot;messages&quot;&gt;Messages&lt;/h2&gt;
+
+&lt;p&gt;A Message contains two fields:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;an &lt;em&gt;etag&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;data&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The &lt;em&gt;etag&lt;/em&gt; is, currently, an implementation-dependent code (e.g. a number or a symbol or a string) that identifies the port (reason) that the message arrived on.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Data&lt;/em&gt; is a block of data.  The shape and size of the data depends on the component.  Akin to the concept of &lt;em&gt;implementation-dependent&lt;/em&gt; size and shape, &lt;em&gt;data&lt;/em&gt; is &lt;em&gt;component-dependent&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system does not define the size and shape of message data.  This cannot be known until the component has been implemented.  The Sender is responsible for sending appropriate data.  The Receiver is responsible for input validation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Future Consideration&lt;/em&gt;: Can a type-checker / compiler / optimizer insert information into messages that help optimize the input validation phase(s)?&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-use&quot;&gt;How To Use&lt;/h2&gt;
+
+&lt;h3 id=&quot;most-basic-usage&quot;&gt;Most Basic Usage&lt;/h3&gt;
+
+&lt;p&gt;To run the basic tests:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node test.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This should run three tests&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;read test using the Leaf &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;write test using the Leaf &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write.js&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;container test using the Container &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The read test uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readwrapper.js&lt;/code&gt; to run the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; Leaf.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Readwrapper.js&lt;/code&gt; looks like a function / component to the outside world and can be called like a function.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Readwrapper.js&lt;/code&gt; creates a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; component by using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; and sends a test string into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; component.  In this example, the test string is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;text.txt&quot;&lt;/code&gt;, which is the filename of a small bit of text that is opened and read by the component.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Readwrapper&lt;/code&gt; creates fake entry points for the main programmatic features of a Leaf component and then punts (delegates) all calls to these entry points to the actual component that is being wrapped (i.e. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;It is expected that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; opens and reads the file and produces output messages.  In this - very simple - case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; opens and read the file character-by-character, producing one output message for each character.&lt;/p&gt;
+
+&lt;p&gt;The idea is that the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; component &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;send&lt;/code&gt;s these messages to other components for processing, but, in this case, we simply want to verify that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; works as expected.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Readwrapper&lt;/code&gt; runs the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; component, then dumps al of its outputs to the console for visual inspection.  This is a very low-level test.  As we build up larger and larger systems, we would write &lt;em&gt;test programs&lt;/em&gt; to inspect the outputs instead of relying on manual inspection.&lt;/p&gt;
+
+&lt;p&gt;In this particular case, we expect &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testwrapper.js&lt;/code&gt; to output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;read ...
+r outputs (r::[o]char:a:(rw::[i]req:true:.))
+r outputs (r::[o]char:b:(rw::[i]req:true:.))
+r outputs (r::[o]char:c:(rw::[i]req:true:.))      
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Which failed silently using PROLOG rules.&lt;/p&gt;
 
-&lt;p&gt;The final clause “… (direct_contains, Parent, Edge)” was not fulfufilled due to a bug in my logic - the outer-most container did not have a Parent.&lt;/p&gt;
+&lt;p&gt;Decoding this output:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;“r” is the name of the UUT &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.js&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(r::[o]char:a:(rw::[i]req:true:.))&lt;/code&gt; is a message with tracing enabled&lt;/li&gt;
+  &lt;li&gt;tracing is read from left to right
+    &lt;ul&gt;
+      &lt;li&gt;the actual message comes first&lt;/li&gt;
+      &lt;li&gt;followed by a nested trace of all messages that caused this message&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r::[o]char:a&lt;/code&gt; says that the component “r” emitted an output message ([o]) with the etag &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt; data &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:(rw::[i]req:true:.)&lt;/code&gt; is a trace that says the the component “rw” (read wrapper) produced an input message tagged &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; and data &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt; which was preceded by no other messages (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt;).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Nothing could prevent me from making this mistake, but, it is possible to prevent &lt;em&gt;other&lt;/em&gt; errors of this kind.&lt;/p&gt;
+&lt;p&gt;If we look at the source code for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; / protoImplementation / handler), we see that it waits for a filename, then outputs one character message (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt;) every time it receives a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; message. In normal usage, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; message would come from a downstream component, but in this test case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testwrapper&lt;/code&gt; generates (stub) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; messages and injects these test messages into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; UUT with an appropriate etag (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt;).&lt;/p&gt;
 
-&lt;h1 id=&quot;what-i-wanted-to-say&quot;&gt;What I Wanted to Say&lt;/h1&gt;
-&lt;p&gt;I wanted to say:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; component doesn’t know (cannot know) where the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; messages come from and simple responds to each one.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Forall “… (kind, Edge, edge)”, and, 
- There must be a fact “… sourceof(Edge, Sender)”, and,
- There must be a fact “… targetof(Edge, Receiver)”, and,
- There must be a fact “… (direct_contains, Parent, Edge)”
-else
- fail loudly
+&lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; encounters an end-of-file condition, it invokes the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conclude&lt;/code&gt; entry point which finishes the test and causes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testwrapper&lt;/code&gt; to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;finish&lt;/code&gt; and return.  In normal (“steady-state” usage), a Container would be calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; and the Container would supply a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conclude&lt;/code&gt; entry point.  In this case, because we are testing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt;, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conclude&lt;/code&gt; entry point is supplied by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testwrapper&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Writewrapper.js&lt;/code&gt; is built in a similar way.  We expect the write test to display the characters on the console and to send each of the characters as output messages.  The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write.js&lt;/code&gt; component is like the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tee&lt;/code&gt; command in UNIX® - it outputs each input character to two different places.&lt;/p&gt;
+
+&lt;p&gt;In normal usage, we would expect downstream components to use the output messages from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write.js&lt;/code&gt;.  In this test case, however, we ignore the messages and manually inspect them as they are output.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Topwrapper.js&lt;/code&gt; is similar to the above, except that it uses a Container component and connects the output from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; to the input of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt;. And, it connects the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;request&lt;/code&gt;&lt;br /&gt;
+output from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; input of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt;.  N.B. the actual names of these etags is different - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;request&lt;/code&gt; vs. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req&lt;/code&gt; - but neither Leaf component cares about this difference.  The routing table is set up in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; and only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; knows about the name differences.  An entry in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;makeConnections()&lt;/code&gt; explicitly wires the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w:request&lt;/code&gt; output to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r:req&lt;/code&gt; input.&lt;/p&gt;
+
+&lt;h2 id=&quot;testing&quot;&gt;Testing&lt;/h2&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readwrapper.js&lt;/code&gt; code contains the term &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uut&lt;/code&gt;.  The term &lt;em&gt;uut&lt;/em&gt; comes from the hardware-testing realm, meaning “Unit Under Test”.  To test electronic circuits as they come off of the production line, one sets up a testing workbench and drops the UUT into the workbench.  The workbench drives inputs into the circuit and records outputs from the circuit.  A program (software) is used to check that the outputs conform to the expected results.  This technique works because electronic circuits are inherently asynchronous and carry no dependencies.  It is possible to test electronic circuits using simple stimulus-response techniques because the circuits are stand-alone (have no dependencies, except for very basic things like needing power from a battery or power supply).  Testers - ATE (automated test equipment) can do basic black-box testing.  Testers can also do white-box testing by poking probes directly into parts of the circuit using what is called a &lt;em&gt;bed of nails&lt;/em&gt;. Test Engineers review circuit designs, before production, and suggest changes to the designs to insert &lt;em&gt;TP&lt;/em&gt;s - Test Points - into the production circuits, to enable a layered approach to white-box testing. For example, first a black-box test is used to determine a GO/NOGO status for each production board.  Most boards don’t fail and are shipped if they receive a “GO” status.  Boards that receive a “NO GO” status are tested further.  Electronic components can be expensive, so an attempt is made to repair “NO GO” boards.  The next layer of testing checks TPs to isolate problem areas.    This process continues to test deeper and deeper into the non-conforming circuits based on an ROI evaluation - “is it worth the time to delve deeper into the problem(s) in the hopes of repairing the board, or, is it cheaper to discard the board?”.  Boards for which the problem issues are isolated are sent to a re-work station.  After being repaired, boards are put back into the production line for a new cycle of testing and shipping.&lt;/p&gt;
+
+&lt;h3 id=&quot;other-usage&quot;&gt;Other Usage&lt;/h3&gt;
+
+&lt;p&gt;Examine &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It contains three (3) invocations of the test harness code.&lt;/p&gt;
+
+&lt;p&gt;The final invocation &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testContainer&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function testContainer () {
+    var tw = require ('./topwrapper');
+    var testHarness = new tw.TopWrapper ();
+    
+    //testHarness.tracing = true;
+    
+    testHarness.begin ('test.txt', 'test.out');
+    testHarness.route ();
+
+    while (!testHarness.done ()) {
+        testHarness.step ();
+        testHarness.route ();
+    }
+
+    testHarness.finish ();
+}
+...
+testContainer ();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;invokes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; in three (3) major steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;begin
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;begin (*filename₁*, *filename₂*)&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;followed by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;route ()&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;causes initialization of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; component, and,&lt;/li&gt;
+      &lt;li&gt;routes any initial outputs to other components
+        &lt;ul&gt;
+          &lt;li&gt;in this example, &lt;em&gt;filename₁&lt;/em&gt; is sent to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; component, and,&lt;/li&gt;
+          &lt;li&gt;&lt;em&gt;filename₂&lt;/em&gt; is sent to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt; component&lt;/li&gt;
+          &lt;li&gt;as per the first (top-level) diagram&lt;/li&gt;
+          &lt;li&gt;&lt;em&gt;future consideration&lt;/em&gt;: it seems that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;begin()&lt;/code&gt; might be implemented using some &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;varargs&lt;/code&gt; mechanism, but, for this example, we hard-code the two parameters into test.js&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;the main loop (dispatch)
+    &lt;ul&gt;
+      &lt;li&gt;test for completion&lt;/li&gt;
+      &lt;li&gt;step the component (Containers try to step their children ; when no child has produced output, the Container declares itself to be “finished” and returns a flag that indicates whether there are messages on the Container’s output queue)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;finish.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;how-to-modify&quot;&gt;How To Modify&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;begin by examining &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;topwrapper&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;create new components
+    &lt;ul&gt;
+      &lt;li&gt;for Leaf components, examine &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read.js&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write.js&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;for Container componente, examine &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top.js&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;N.B. it is OK to leave inputs and outputs not connected &lt;em&gt;NC&lt;/em&gt;.  This allows multiple use (reuse) of components in different situations.  It is not necessary to predict how a component will be used.  It is not necessary to parameterize a component for new usages (write a wrapper instead).&lt;/p&gt;
+
+&lt;p&gt;N.B. it is OK to create feedback loops of messages - a component sends itself a message, or, a chain of events causes a message to be sent back to the front of the same component chain.&lt;/p&gt;
+
+&lt;p&gt;N.B. it is possible to test components in a stand-alone manner.  Components have zero (0) dependencies on other components.  Components have well-define input and output signatures.  Components never contain hard-wired names of other components.&lt;/p&gt;
+
+&lt;h2 id=&quot;details-of-the-implementation&quot;&gt;Details of the Implementation&lt;/h2&gt;
+
+&lt;p&gt;Each of the components is described by two uber-lists of attributes:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Signature&lt;/li&gt;
+  &lt;li&gt;Implementation (prototype implementation).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When we define a component, we are defining a prototype.&lt;/p&gt;
+
+&lt;p&gt;When we want to compose a system using prototype components, we create &lt;em&gt;runnable&lt;/em&gt; versions of each component (called &lt;em&gt;instances&lt;/em&gt; in traditional programming).&lt;/p&gt;
+
+&lt;p&gt;We can include more than one instance of the same prototype in a Container component.  Each instance is given a unique id (a graphical position) and sometimes provide &lt;em&gt;synonyms&lt;/em&gt; for the id that are easier for humans to read (the machine doesn’t care about the names, only humans do).  In general, we could provide more than one synonym for each component (e.g. a Greek letter vs. a phrase), but, in this simple example, we don’t bother to do that (to keep things simple for human-oriented reading).&lt;/p&gt;
+
+&lt;p&gt;In fact, in this simple example, we use the name of the prototypes (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Top&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;write&lt;/code&gt;) as the names for the runnable components.  This cheat works because - in this simple example - we have exactly one instance of every component.  To relate this concept to traditional programming, imagine “variable names” in programming languages.  Such names actually denote byte offsets for destructuring the data blocks.  In the extreme case, we use De Bruijn indices to elide human-readable names with stack offset indices.&lt;/p&gt;
+
+&lt;p&gt;We compose programs in a layered manner.  We create prototypes, then compose them (by “programming”).  Since the composed components can be used in other systems, they act as prototypes for use in the other systems.  This layering is &lt;em&gt;fractal&lt;/em&gt; and continues downward and upward ad infinitum&lt;sup id=&quot;fnref:turtles&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:turtles&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;signature&quot;&gt;Signature&lt;/h2&gt;
+
+&lt;p&gt;A signature contains three (3) pieces of information:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;name&lt;/li&gt;
+  &lt;li&gt;inputs&lt;/li&gt;
+  &lt;li&gt;outputs.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var signature = {
+    name: &quot;read&quot;,
+    inputs: [
+        { &quot;name&quot;: &quot;filename&quot;, &quot;structure&quot;: [&quot;filename&quot;] },
+        { &quot;name&quot;:&quot;req&quot;, &quot;structure&quot;:[&quot;req&quot;] }
+    ],
+    outputs: [
+        { &quot;name&quot;: &quot;char&quot;, &quot;structure&quot;: [&quot;char&quot;] }
+    ]
+};
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;what-i-really-said&quot;&gt;What I Really Said&lt;/h1&gt;
+&lt;p&gt;Each port has&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;name&lt;/li&gt;
+  &lt;li&gt;destructuring information.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;But, I wrote:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Forall “… (Kind, Edge, edge)”
- And, if there is a fact “… sourceof(Edge, Sender)”,
- And, if there is a fact “… targetof(Edge, Receiver)”,
- And, ifthere is a fact “… (direct_contains, Parent, Edge)”
- succeed
+&lt;p&gt;The destructuring information corresponds to what is called a &lt;em&gt;parameter list&lt;/em&gt; in traditional languages.&lt;/p&gt;
+
+&lt;p&gt;Each port is asynchronous.  It does not make sense to describe all ports in a collapsed notation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Future Consideration&lt;/em&gt;:  Does the destructuring information belong in the top-level signature, or, can it be demoted to a different level of description, or, described only in the implementation layers?  Currently, type-checkers want to “reach in” and know how each port is destructured.  Maybe type-checking can be moved to a separate pass (akin to, say, the Loader) and run in waves, checking only what can be checked with the given information and leaving breadcrumbs for future waves of checking?  A Component cannot be deemed to be &lt;em&gt;runnable&lt;/em&gt; unless it contains no breadcrumbs.&lt;/p&gt;
+
+&lt;h2 id=&quot;prototype-implementation&quot;&gt;Prototype Implementation&lt;/h2&gt;
+
+&lt;p&gt;Each Component runs but one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;step&lt;/code&gt; when commanded to do so by its Container.  The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;step&lt;/code&gt; must return &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt; if any output was generated by the Component, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;br /&gt;
+ if the Component created no outputs.&lt;/p&gt;
+
+&lt;p&gt;Each implementation contains attributes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;name&lt;/li&gt;
+  &lt;li&gt;kind&lt;/li&gt;
+  &lt;li&gt;handler&lt;/li&gt;
+  &lt;li&gt;begin&lt;/li&gt;
+  &lt;li&gt;finish.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name&lt;/code&gt; must correspond exactly to the name in the component’s signature.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kind&lt;/code&gt; is either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;leaf&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;container&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Begin&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;finish&lt;/code&gt; are traditional functions that take one (1) parameter - &lt;em&gt;me&lt;/em&gt; (like &lt;em&gt;self&lt;/em&gt; or &lt;em&gt;this&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Handler&lt;/code&gt; is a function of two (2) parameters&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;em&gt;me&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;message&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;leaf&quot;&gt;Leaf&lt;/h3&gt;
+
+&lt;h3 id=&quot;container&quot;&gt;Container&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;children
+    &lt;ul&gt;
+      &lt;li&gt;each child prototype has
+        &lt;ul&gt;
+          &lt;li&gt;kind&lt;/li&gt;
+          &lt;li&gt;destructuring&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;each child runnable (instance) has
+        &lt;ul&gt;
+          &lt;li&gt;unique name&lt;/li&gt;
+          &lt;li&gt;unique runnable instantiation of kind&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;connections
+    &lt;ul&gt;
+      &lt;li&gt;each connection has
+        &lt;ul&gt;
+          &lt;li&gt;sender&lt;/li&gt;
+          &lt;li&gt;net name&lt;/li&gt;
+          &lt;li&gt;list of receivers&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;nets
+    &lt;ul&gt;
+      &lt;li&gt;name&lt;/li&gt;
+      &lt;li&gt;list of components on the net (key: “locks”)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nets are needed only in bare-metal situations - to lock all receivers before deliving message.  Semantics: one message must be delivered to all receivers “at the same time”.&lt;/p&gt;
+
+&lt;p&gt;In implementations that use implicity synchrony (e.g. most programming languages and operating systems today), locking is not needed, since it is covered by the implicit synchrony.&lt;/p&gt;
+
+&lt;h3 id=&quot;wrappers&quot;&gt;Wrappers&lt;/h3&gt;
+
+&lt;h3 id=&quot;support-code&quot;&gt;Support Code&lt;/h3&gt;
+
+&lt;h3 id=&quot;drakon-diagram&quot;&gt;Drakon Diagram&lt;/h3&gt;
+
+&lt;h4 id=&quot;stepdrakon&quot;&gt;Step.Drakon&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flowchart Try-component {
+  start main
+  skewer main {
+    unless has-children try-self/1
+    step-each-child
+    unless child-produced-output try-self/2
+    &amp;gt; produced-output/0
+  }
+  skewer try-self {
+    : try-self/1
+    : try-self/2
+    run-self
+    unless self-produced-output no-output/3
+    &amp;gt; produced-output/0
+  }
+  skewer no-output {
+    : no-output/3
+    send no-output _
+    &amp;gt; finished/0
+  }
+  skewer produced-output {
+    send produced-output _
+    &amp;gt; finished/0
+  }
+  skewer finished {
+    end
+  }
+}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h1 id=&quot;whats-the-difference&quot;&gt;What’s the Difference?&lt;/h1&gt;
-&lt;p&gt;A subtle difference.&lt;/p&gt;
 
-&lt;p&gt;The And version silently fails if ANY of the 4 clauses is false.&lt;/p&gt;
+&lt;h3 id=&quot;dia-diagrams&quot;&gt;Dia Diagrams&lt;/h3&gt;
 
-&lt;p&gt;Subtle bugs are the hardest to find.&lt;/p&gt;
+&lt;h4 id=&quot;handlingdas&quot;&gt;Handling.das&lt;/h4&gt;
 
-&lt;h1 id=&quot;preventing-errors-using-fdd&quot;&gt;Preventing Errors Using FDD&lt;/h1&gt;
-
-&lt;p&gt;Using FDD mentality, I can change the meaning of:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;… (kind, Edge, edge)
-… sourceof(Edge, Sender)
-… targetof(Edge, Receiver)
-… (direct_contains, Parent, Edge)
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;implementation deliverInputMessageToAllChildrenOfSelf (message)
+      { find connection from me on port message.etag
+        { lock connection
+          { for every receivers in connection =&amp;gt; dest
+            { synonym params = {me, message, dest}
+              { cond
+                { dest.name != me
+                  { #deliver_input_from_container_input_to_child_input &amp;lt;= params }
+                }
+                { dest.name == me
+                  { #deliver_input_from_container_input_to_me_output &amp;lt;= params }
+                }
+              }
+            }
+          }
+        }
+        { orelse
+          { pass }
+        }
+      }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;To mean what I wanted and simply push a button to regenerate the whole shebang, and, raise errors for any other latent bugs of this nature.&lt;/p&gt;
+&lt;h4 id=&quot;routingdas&quot;&gt;Routing.das&lt;/h4&gt;
 
-&lt;h2 id=&quot;example-design-rule-check&quot;&gt;Example Design Rule Check&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;implementation route
+{ for every item in children of me =&amp;gt; child
+  { for every item in outputQueue of child.runnable =&amp;gt; output_message
+    { synonym message = output_message
+      { find connection in me given child X message.etag =&amp;gt; connection
+        { lock connection
+          { for every receivers in connection =&amp;gt; dest
+              { synonym params = {me, dest, message}
+                { cond
+                  { dest.name is not me
+                    { @deliver_to_child_input &amp;lt;= params }
+                  }
+                  { dest.name is me
+                    { @deliver_to_me_output &amp;lt;= params }
+                  }
+                }
+            }
+          }
+        }
+        { orelse
+           { pass }
+        }
+      }
+    }
+    {@child.runnable.resetOutputQueue}
+  }
+}
 
-&lt;p&gt;I can choose syntax to map to meaning - I might change the generated code to match what I wanted to say.&lt;/p&gt;
+sync deliver_to_child_input &amp;lt;= me, dest, message
+   // map message for receiver
+  { var input_message &amp;lt;= $i\{\{dest.etag, message.data} message}
+    { lookup dest.name =&amp;gt; receiver
+      { @receiver.enqueueInput &amp;lt;= input_message }
+    }
+  }
 
-&lt;p&gt;For example, I might generate code that matched the first clause, then asserted the rest of the clauses (with appropriate error messages), e.g.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;… (kind, Edge, edge)
-(… sourceof(Edge, Sender)” -&amp;gt; true ; format(user_error, “FAILURE sourceof(Edge,Sender) failed on ~w~n)”, [Edge])
-(… (targetof(Edge, Receiver) -&amp;gt; true ; format(user_error, &quot;FAILURE:targetof(Edge, Receiver) ~w~n)&quot;, [Edge])
-(… (direct_contains, Parent, Edge)” -&amp;gt; true ; format(user_error, &quot;FAILURE: direct_contains, Parent, Edge) ~w~n)&quot;, [Edge])
+sync deliver_to_me_output &amp;lt;= me, dest, message
+  // map message for output
+  { var output_message &amp;lt;= $o\{\{receiver.etag, message.data} message}
+    { @me.enqueueOutput &amp;lt;= output_message }
+  }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The above code looks horrible and hides the true essence of what I want to say, but, the machine doesn’t care and will check my other code for errors.&lt;/p&gt;
 
-&lt;p&gt;I’m using PROLOG (swipl) as &lt;em&gt;assembler&lt;/em&gt; and I’m emitting assembler code (PROLOG) to do what I want.&lt;/p&gt;
+&lt;h4 id=&quot;find_connectiondas&quot;&gt;Find_connection.das&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;implementation find_connection (etag)
+  { for every item in connections of me =&amp;gt; connection
+      { synonym sender = connection.sender
+          { when all
+              {
+                  sender.name is me
+                  sender.etag == etag
+              }
+              { -&amp;gt; connection }
+          }
+      }
+  }
 
-&lt;p&gt;I can modify the DSL syntax, push a button, and have ALL of my code checked.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;I don’t need to look at the generated assembler code (PROLOG)&lt;sup id=&quot;fnref:30&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:30&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;find_connection_in__medas&quot;&gt;Find_connection_in__me.das&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;implementation find_connection_in__me (childname, etag)
+  { for every item in connections of me =&amp;gt; connection
+      { synonym sender = connection.sender
+          { when all
+              {
+                  sender.name == childname
+                  sender.etag == etag
+              }
+              { -&amp;gt; connection }
+          }
+      }
+  }
 
-&lt;p&gt;Yes, there might be cases where I want to say AND instead of “there must be a fact”.  I will modify (invent) the syntax to handle such cases.  I expect that most of my code is based on “there must be a fact” rules, with AND rules being the exception.  I intend to invent a syntax to express AND rules, and, I will use the FDD transpiler to find those cases for me (in the current code base).&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;FDD lets me make sweeping changes such as this.&lt;/p&gt;
+&lt;h3 id=&quot;appendix---github&quot;&gt;Appendix - Github&lt;/h3&gt;
 
-&lt;p&gt;I need to modify the transpiler, then I need to push a button (or invoke &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./run.bash&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/duct&quot;&gt;code on github&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Not a lot of work, but it captures one of my pervasive errors in logic…&lt;/p&gt;
+&lt;h3 id=&quot;appendix---leaf-read&quot;&gt;Appendix - Leaf “Read”&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const runnable = require('./runnable');
+const fs = require('fs');
 
-&lt;p&gt;Yes, I &lt;em&gt;could&lt;/em&gt; have written the code correctly in the first place, but that would require a lot more thinking on my part (and, probably, a PhD degree).&lt;/p&gt;
+var signature = {
+    name: &quot;read&quot;,
+    inputs: [
+        { &quot;name&quot;: &quot;filename&quot;, &quot;structure&quot;: [&quot;filename&quot;] },
+        { &quot;name&quot;:&quot;req&quot;, &quot;structure&quot;:[&quot;req&quot;] }
+    ],
+    outputs: [
+        { &quot;name&quot;: &quot;char&quot;, &quot;structure&quot;: [&quot;char&quot;] }
+    ]
+};
 
-&lt;p&gt;I said what I wanted to say.  Now, using FDD, my only task is to make the computer (transpiler) &lt;em&gt;do&lt;/em&gt; what I wanted…&lt;/p&gt;
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+let protoImplementation = {
+    name: &quot;read&quot;,
+    kind: &quot;leaf&quot;,
+    handler: function (me, message) {
+        if (&quot;filename&quot; === message.etag) {
+            me.filename = message.data;
+            me.contents = fs.readFileSync (me.filename, 'utf8');
+            me.cindex = 0;
+        } else if (&quot;req&quot; === message.etag) {
+            if (eof (me)) {
+                me.conclude ();
+            } else {
+                me.send (&quot;char&quot;, nextChar (me), me.name, message);
+            }
+        } else {
+            me.errorUnhandledMessage (message);
+        }
+    },
+    begin: function () {},
+    finish: function () {}
+}
 
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/04/23/Failure-Driven-Design.html&quot;&gt;FDD - Failure Driven Design&lt;/a&gt;&lt;/p&gt;
+function Read (container) {
+    let me = new runnable.Leaf (signature, protoImplementation, container, &quot;read&quot;);
+    me.name = &quot;r&quot;;
+    me.filename = null;
+    me.contents = null;
+    me.index = null;
+    return me;
+}
 
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+exports.Read = Read;
 
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+// helper functions
+
+function eof (me) {
+    if (me.cindex &amp;gt; (me.contents.length - 1)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function nextChar (me) {
+    let c = me.contents.substr (me.cindex, 1);
+    me.cindex += 1;
+    return c;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix---leaf-write&quot;&gt;Appendix - Leaf “Write”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const runnable = require('./runnable');
+
+var signature = {
+    name: &quot;write&quot;,
+    inputs: [
+        { &quot;name&quot;: &quot;filename&quot;, &quot;structure&quot;: [&quot;filename&quot;] },
+        { &quot;name&quot;: &quot;char&quot;, &quot;structure&quot;: [&quot;char&quot;] }
+    ],
+    outputs: [
+        { &quot;name&quot;: &quot;request&quot;, &quot;structure&quot;: [&quot;request&quot;] },
+        { &quot;char&quot;: &quot;request&quot;, &quot;structure&quot;: [&quot;char&quot;] }
+    ]
+};
+
+var protoImplementation = {
+    name: &quot;write&quot;,
+    kind: &quot;leaf&quot;,
+    handler: function (me, message) {
+        if (&quot;filename&quot; === message.etag) {
+            me.send (&quot;request&quot;, true, me.name, message);
+        } else if (&quot;char&quot; === message.etag) {
+            process.stdout.write (message.data);
+            me.send (&quot;char&quot;, message.data, me.name, message);
+            me.send (&quot;request&quot;, true, me.name, message);
+        } else {
+            me.errorUnhandledMessage (message);
+        }
+    }
+}
+
+function Write (container) {
+    let me = new runnable.Leaf (signature, protoImplementation, container);
+    me.name = &quot;w&quot;;
+    me.filename = null;
+    return me;
+}
+
+exports.Write = Write;
+
+// This example code implements output to the console
+// but is port-for-port compatible with output to a file (aka referential transparency)
+
+// (in a future example, we will show how to create a 'write' part that wraps, both, 
+//  file and console output ; this example is extra-KISS and does only one kind of output
+//  to make the example a bare minimum)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix---container-top&quot;&gt;Appendix - Container “Top”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const handling = require('./handling');
+const deliver = require('./containerDeliver');
+const routing = require('./routing');
+const runnable = require('./runnable');
+
+
+const top = require('./top');
+const read = require ('./read');
+const write = require ('./write');
+
+var signature = {
+    name: &quot;top&quot;,
+    inputs: [
+        { &quot;name&quot;: &quot;input filename&quot;, &quot;structure&quot;: [&quot;infname&quot;] },
+        { &quot;name&quot;: &quot;output filename&quot;, &quot;structure&quot;: [&quot;outfname&quot;] }
+    ],
+    outputs: [
+    ]
+};
+
+function begin (me, infname, outfname) {
+    me.inject (&quot;input filename&quot;, infname);
+    me.inject (&quot;output filename&quot;, outfname);
+}
+
+function finish (me) {
+}
+
+var protoImplementation = {
+    name: &quot;top&quot;,
+    kind: &quot;container&quot;,
+    handler: handling.deliverInputMessageToAllChildrenOfSelf,
+    route: routing.route,
+    begin: begin,
+    finish: finish
+}       
+    
+function makeChildren (me) {
+    var child1 = new read.Read (me);
+    var child2 = new write.Write (me);
+    return [
+        {&quot;name&quot;: &quot;r&quot;, &quot;runnable&quot;: child1}, 
+        {&quot;name&quot;: &quot;w&quot;, &quot;runnable&quot;: child2}
+    ];
+}
+
+function makeNets (me) {
+    return [
+        {&quot;name&quot;:&quot;⇒₁&quot;,&quot;locks&quot;:[&quot;r&quot;]},
+        {&quot;name&quot;:&quot;⇒₂&quot;,&quot;locks&quot;:[&quot;w&quot;]},
+        {&quot;name&quot;:&quot;⇒₃&quot;,&quot;locks&quot;:[&quot;r&quot;]},
+        {&quot;name&quot;:&quot;⇒₄&quot;,&quot;locks&quot;:[&quot;w&quot;]}
+    ];
+}
+
+function makeConnections (me) {
+    return [
+        {&quot;sender&quot;:{&quot;name&quot;:&quot;_me&quot;,&quot;etag&quot;:&quot;input filename&quot;},
+         &quot;net&quot;:&quot;⇒₁&quot;,
+         &quot;receivers&quot;: [{&quot;name&quot;:&quot;r&quot;,&quot;etag&quot;:&quot;filename&quot;}]
+        },                 
+        {&quot;sender&quot;:{&quot;name&quot;:&quot;_me&quot;,&quot;etag&quot;:&quot;output filename&quot;},
+         &quot;net&quot;:&quot;⇒₂&quot;,
+         &quot;receivers&quot;: [{&quot;name&quot;:&quot;w&quot;,&quot;etag&quot;:&quot;filename&quot;}]
+        },                 
+        {&quot;sender&quot;:{&quot;name&quot;:&quot;r&quot;,&quot;etag&quot;:&quot;char&quot;},
+         &quot;net&quot;:&quot;⇒₃&quot;,
+         &quot;receivers&quot;: [{&quot;name&quot;:&quot;w&quot;,&quot;etag&quot;:&quot;char&quot;}]
+        },                 
+        {&quot;sender&quot;:{&quot;name&quot;:&quot;w&quot;,&quot;etag&quot;:&quot;request&quot;},
+         &quot;net&quot;:&quot;⇒₄&quot;,
+         &quot;receivers&quot;: [{&quot;name&quot;:&quot;r&quot;,&quot;etag&quot;:&quot;req&quot;}]
+        }
+    ];
+}
+
+function Top (container) {
+    let me = new runnable.Container (signature, protoImplementation, container);
+    me.name = &quot;T&quot;;
+    me.children = makeChildren (container);
+    me.nets = makeNets (container);
+    me.connections = makeConnections (container);
+    me.deliver_input_from_container_input_to_child_input = deliver.deliver_input_from_container_input_to_child_input;
+    me.deliver_input_from_container_input_to_me_output = deliver.deliver_input_from_container_input_to_me_output;
+    return me;
+}
+
+exports.Top = Top;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix-readwrapper&quot;&gt;Appendix “ReadWrapper”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var read = require ('./read');
+var message = require ('./message');
+
+function ReadWrapper () {
+    this.name = &quot;rw&quot;;
+    this.begin = function () {
+        // this.args = ???
+        uut.begin ();
+    };
+    this.finish = function () {
+        uut.finish ();
+    };
+    this.isValidETagForUUT = isValidETagForUUT;
+    this.isInputETag = isInputETag;
+    this.send = function (etag, v) {
+        if (this.isValidETagForUUT (etag)) {
+            var m = new message.InputMessageNoTrace (etag, v, this.name);
+            this.uut.handler (this.uut, m);
+        } else {
+            console.error (`invalid input message ${etag}`);
+        }
+    };
+    this._done = false;
+    this.conclude = function () { 
+        this.container._done = true; 
+    };
+    this.done = function () {return this._done;};
+    this.route = function () {
+        this.uut.route ();
+        if (this.tracing) {
+            destructivelyDisplayAllOutputsForAllChildren (this);
+        }
+    };    
+    this.step = function () {
+        this.uut.step ();
+        this.route ();
+    };    
+    this.uut =  new read.Read (this);
+    this.children = [{name: &quot;uut&quot;, runnable: this.uut}];
+}
+
+function isValidETagForUUT (etag) {
+    if (this.isInputETag (etag)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isInputETag (etag) {
+    var inputs = this.uut.signature.inputs;
+    return inputs.some (input =&amp;gt; { return (etag === input.name); });
+}
+
+function destructivelyDisplayAllOutputsForAllChildren (me) {
+    me.children.forEach (child =&amp;gt; {
+        var r = child.runnable;
+        displayAllOutputs (r);
+        r.resetOutputQueue ();
+    });
+}
+
+function displayAllOutputs (child) {
+    child.outputQueue.forEach (m =&amp;gt; {
+        console.log (`${child.name} outputs ${recursiveDisplay (m)}`);
+    })
+}
+
+function recursiveDisplay (m) {
+    if (m) {
+        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+    } else {
+        return '.';
+    }
+}
+
+exports.ReadWrapper = ReadWrapper;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix-writewrapper&quot;&gt;Appendix “WriteWrapper”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var write = require ('./write');
+var message = require ('./message');
+
+function WriteWrapper () {
+    this.name = &quot;ww&quot;;
+    this.begin = function () {
+        // this.args = ???
+        uut.begin ();
+    };
+    this.finish = function () {
+        uut.finish ();
+    };
+    this.isValidETagForUUT = isValidETagForUUT;
+    this.isInputETag = isInputETag;
+    this.send = function (etag, v) {
+        if (this.isValidETagForUUT (etag)) {
+            var m = new message.OutputMessageNoTrace (etag, v, this.name, undefined);
+            this.uut.handler (this.uut, m);
+        } else {
+            console.error (`invalid input message ${message.etag}`);
+        }
+    };
+    this._done = false;
+    this.conclude = function () { 
+        this.container._done = true; 
+    };
+    this.done = function () {return this._done;};
+    this.route = function () {
+        if (this.tracing) {
+            destructivelyDisplayAllOutputsForAllChildren (this);
+        }
+    };    
+    this.step = function () {
+        this.uut.step ();
+        this.route ();
+    };    
+    this.uut =  new write.Write (this);
+    this.children = [{name: &quot;uut&quot;, runnable: this.uut}];
+}
+
+function isValidETagForUUT (etag) {
+    if (this.isInputETag (etag)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isInputETag (etag) {
+    var inputs = this.uut.signature.inputs;
+    return inputs.some (input =&amp;gt; { return (etag === input.name); });
+}
+
+function destructivelyDisplayAllOutputsForAllChildren (me) {
+    me.children.forEach (child =&amp;gt; {
+        var r = child.runnable;
+        displayAllOutputs (r);
+        r.resetOutputQueue ();
+    });
+}
+
+function displayAllOutputs (child) {
+    child.outputQueue.forEach (m =&amp;gt; {
+        console.log (`${child.name} outputs ${recursiveDisplay (m)}`);
+    })
+}
+
+function recursiveDisplay (m) {
+    if (m) {
+        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+    } else {
+        return '.';
+    }
+}
+
+exports.WriteWrapper = WriteWrapper;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix-topwrapper&quot;&gt;Appendix “TopWrapper”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var top = require ('./top');
+var message = require ('./message');
+
+function TopWrapper (infname, outfname) {
+    this.name = &quot;tw&quot;;
+    this.tracing = false;
+
+    this.begin = function (infname, outfname) {
+        this.uut.begin (this.uut, infname, outfname);
+    };
+    this.finish = function () {
+        this.uut.finish (this.uut);
+    };
+    this.isValidETagForUUT = isValidETagForUUT;
+    this.isInputETag = isInputETag;
+    this.send = function (etag, v) {
+        if (this.isValidETagForUUT (etag)) {
+            var m = new message.OutputMessageNoTrace (etag, v, this.name, undefined);
+            this.uut.handler (this.uut, m);
+        } else {
+            console.error (`invalid input message ${message.etag}`);
+        }
+    };
+    this._done = false;
+    this.conclude = function () { 
+        this.container._done = true; 
+    };
+    this.done = function () {return this._done;};
+    this.route = function () {
+        destructivelyDisplayAllOutputsForAllChildrenAndDestroy (this);
+    };    
+    this.step = function () {
+        this.uut.step ();
+        if (this.tracing) {
+            recursiveTraceOutput (this.uut);
+        }
+        this.route ();
+    };    
+    this.uut =  new top.Top (this);
+    this.handler = this.step;
+    this.children = [{name: &quot;uut&quot;, runnable: this.uut}];
+    this.route = function () {
+        this.uut.route ();
+    }
+}
+
+function isValidETagForUUT (etag) {
+    if (this.isInputETag (etag)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isInputETag (etag) {
+    var inputs = this.uut.signature.inputs;
+    return inputs.some (input =&amp;gt; { return (etag === input.name); });
+}
+
+function destructivelyDisplayAllOutputsForAllChildren (me) {
+    me.children.forEach (child =&amp;gt; {
+        var r = child.runnable;
+        displayAllOutputs (r);
+        r.resetOutputQueue ();
+    });
+}
+
+function displayAllOutputsForAllChildren (me) {
+    me.children.forEach (child =&amp;gt; {
+        displayAllOutputs (child.runnable);
+    });
+}
+
+function displayAllOutputs (runnablechild) {
+    runnablechild.outputQueue.forEach (m =&amp;gt; {
+        console.log (`${runnablechild.name} outputs ${recursiveDisplay (m)}`);
+    })
+}
+
+function recursiveDisplay (m) {
+    if (m) {
+        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+    } else {
+        return '.';
+    }
+}
+
+function recursivelyDisplayAllOutputsForAllChildren (me) {
+    recursiveTraceOutput (me.uut);
+}
+
+function recursiveTraceOutput (me) {
+    displayAllOutputsForAllChildren (me);
+    me.children.forEach (childobject =&amp;gt; {
+        recursiveTraceOutput (childobject.runnable);
+    });
+}
+
+exports.TopWrapper = TopWrapper;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appendix-testjs&quot;&gt;Appendix “Test.js”&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+function testRead () {
+    var rw = require ('./readwrapper');
+    var testHarness = new rw.ReadWrapper ();
+    testHarness.send (&quot;filename&quot;, &quot;test.txt&quot;);
+    while (!testHarness.done ()) {
+        testHarness.send (&quot;req&quot;, true); 
+        testHarness.step ();
+        testHarness.route ();
+    }
+}
+
+function testWrite () {
+    var ww = require ('./writewrapper');
+    var testHarness = new ww.WriteWrapper ();
+    testHarness.send (&quot;filename&quot;, &quot;test.out&quot;);
+    testHarness.step ();
+    testHarness.route ();
+    testHarness.send (&quot;char&quot;, &quot;x&quot;);
+    testHarness.step ();
+    testHarness.route ();
+    testHarness.send (&quot;char&quot;, &quot;y&quot;);
+    testHarness.step ();
+    testHarness.route ();
+    testHarness.send (&quot;char&quot;, &quot;z&quot;);
+    testHarness.step ();
+    testHarness.route ();
+}
+
+function testContainer () {
+    var tw = require ('./topwrapper');
+    var testHarness = new tw.TopWrapper ();
+    
+    //testHarness.tracing = true;
+    
+    testHarness.begin ('test.txt', 'test.out');
+    testHarness.route ();
+
+    while (!testHarness.done ()) {
+        testHarness.step ();
+        testHarness.route ();
+    }
+}
+
+console.log ();
+console.log ('read ...');
+testRead ();
+
+console.log ();
+console.log ('write ...');
+testWrite ();
+
+console.log ();
+console.log ();
+console.log ('top ...');
+testContainer ();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html&quot;&gt;ė - Concurrent Lambdas Working Paper 1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/04/11/ė-Working-Paper-2.html&quot;&gt;ė - Concurrent Lambdas Working Paper 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
 &lt;/script&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:30&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;The only reason to look at the generated assembler is to debug the transpiler.  Once debugged, no one needs to look at the assembler. &lt;a href=&quot;#fnref:30&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:sev&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Or several of its children tell it to stop… &lt;a href=&quot;#fnref:sev&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:turtles&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;“Turtles all the way down”. https://en.wikipedia.org/wiki/Turtles_all_the_way_down. &lt;a href=&quot;#fnref:turtles&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">“FDD” means “Failure Driven Design”.</summary></entry><entry><title type="html">Project Overview</title><link href="https://computingsimplicity.neocities.org/2021/12/23/Project-Overview.html" rel="alternate" type="text/html" title="Project Overview" /><published>2021-12-23T00:00:00-05:00</published><updated>2021-12-23T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/12/23/Project%20Overview</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/12/23/Project-Overview.html">&lt;h1 id=&quot;synopsis&quot;&gt;Synopsis&lt;/h1&gt;
-&lt;p&gt;This note introduces some of the projects that I am working on.&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">I describe the implementation of a very simplistic example using inner concurrency and a handful of diagrams.</summary></entry><entry><title type="html">UX - Parameter Counting - Gradual Compiling</title><link href="https://computingsimplicity.neocities.org/2022/04/11/UX-Parameter-Counting-Gradual-Compiling.html" rel="alternate" type="text/html" title="UX - Parameter Counting - Gradual Compiling" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/UX%20-%20Parameter%20Counting%20Gradual%20Compiling</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/UX-Parameter-Counting-Gradual-Compiling.html">&lt;p&gt;In JavaScript, I wrote &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f(x,y,name,z)&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;I mostly work on programmer-tools and lean towards:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;DaS - Diagrams as Syntax (in between textual programming and full-blown VPL)&lt;/li&gt;
-  &lt;li&gt;Ohm-JS - syntax is cheap&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;but intended to write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f(x,y.name,z)&lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;video&quot;&gt;Video&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/guitarvydas/Overview&quot;&gt;for now: pull and watch video in README.md&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A long debugging session was required to discover that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;z&lt;/code&gt; was &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undefined&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;As of Dec. 23, 2021.&lt;/p&gt;
+&lt;p&gt;I gave 4 params, but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; expected only 3.&lt;/p&gt;
 
-&lt;p&gt;There has been progress since then.  For example shu-das2py compiles helloworld.drawio to python code and runs it ()&lt;/p&gt;
-&lt;h1 id=&quot;see-also&quot;&gt;See Also&lt;/h1&gt;
+&lt;p&gt;The 4th parameter &lt;em&gt;defaulted&lt;/em&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undefined&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/05/14/Table-Of-Contents.html&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A simple compiler-check (count parameters), would have caught this typo.  Instead it caused a mystery.&lt;/p&gt;
 
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
-&lt;/script&gt;</content><author><name></name></author><summary type="html">Synopsis This note introduces some of the projects that I am working on.</summary></entry><entry><title type="html">IDEs Instead of Programming Languages and Operating Systems</title><link href="https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html" rel="alternate" type="text/html" title="IDEs Instead of Programming Languages and Operating Systems" /><published>2021-12-18T00:00:00-05:00</published><updated>2021-12-18T00:00:00-05:00</updated><id>https://computingsimplicity.neocities.org/2021/12/18/IDEs%20Instead%20of%20Programming%20Languages%20and%20Operating%20Systems</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2021/12/18/IDEs-Instead-of-Programming-Languages-and-Operating-Systems.html">&lt;h1 id=&quot;the-goal&quot;&gt;The Goal&lt;/h1&gt;
-&lt;p&gt;The goal of programming is to control a computer.&lt;/p&gt;
-&lt;h2 id=&quot;secondary-goals&quot;&gt;Secondary Goals&lt;/h2&gt;
-&lt;h3 id=&quot;secondary-goal-describe-architecture-to-other-people&quot;&gt;Secondary Goal: Describe Architecture to Other People&lt;/h3&gt;
-&lt;p&gt;It is desirable to describe designs to other people.&lt;/p&gt;
+&lt;h2 id=&quot;why&quot;&gt;Why?&lt;/h2&gt;
 
-&lt;p&gt;For example, in the construction industry,&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Architects use drawings and 3D models to describe designs to Engineers&lt;/li&gt;
-  &lt;li&gt;Engineers use blueprints to describe design details to Construction Workers (Implementors).&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;I would guess that parameter defaulting was inserted into the language in-search-for user-friendliness.&lt;/p&gt;
 
-&lt;p&gt;Both of these kinds of communication - drawings, models - are used to describe aspects of the design to other people.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;h4 id=&quot;tertiary-goal-automated-checking-of-descriptions&quot;&gt;Tertiary Goal: Automated Checking of Descriptions&lt;/h4&gt;
+&lt;h3 id=&quot;user-friendliness&quot;&gt;User Friendliness&lt;/h3&gt;
 
-&lt;p&gt;In the Construction Industry, drawings are checked manually.&lt;/p&gt;
+&lt;p&gt;This is not user friendly.&lt;/p&gt;
 
-&lt;p&gt;Using computers, it becomes possible to write software that checks aspects of design documentation.&lt;/p&gt;
+&lt;h3 id=&quot;simple-checks&quot;&gt;Simple Checks&lt;/h3&gt;
 
-&lt;p&gt;Programmers and programming language designers strive to write software that checks design documents (usually in the form of textual “code”).&lt;/p&gt;
+&lt;p&gt;Full-blown type-checking would not have been necessary here.&lt;/p&gt;
 
-&lt;p&gt;IMO, language designers miss the fact that automated checking is only a tertiary goal.&lt;/p&gt;
+&lt;p&gt;Just parameter-counting.&lt;/p&gt;
 
-&lt;h3 id=&quot;secondary-goal-production-engineering&quot;&gt;Secondary Goal: Production Engineering&lt;/h3&gt;
+&lt;h4 id=&quot;re-structuring-semantics-checking&quot;&gt;Re-Structuring Semantics Checking?&lt;/h4&gt;
 
-&lt;p&gt;Once a design has been vetted (by Architects, Engineers, Testers, etc.), the design can be optimized along a number of dimensions - this is called Production Engineering.&lt;/p&gt;
+&lt;p&gt;Hmm, we use a &lt;em&gt;parser&lt;/em&gt; to check for stupid errors.&lt;/p&gt;
 
-&lt;p&gt;Typically, Production Engineering in software tends towards making a low-cost version of the software, usually taking into account hardware costs that the software is to run on.&lt;/p&gt;
+&lt;p&gt;We don’t waste time waiting for a full type-check, if the parser caught stupid errors.&lt;/p&gt;
 
-&lt;p&gt;Most popular so-called General Purpose programming Languages are actually DSLs for Production Engineering.  I include Haskell, Python, JavaScript, etc., etc., in this list of popular GPLs.&lt;/p&gt;
+&lt;p&gt;Maybe a pre-check pass should be inserted between the parser and the full-blown semantics checker?&lt;/p&gt;
 
-&lt;p&gt;In fact, any programming language that provides the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; operator, or, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrays&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lists&lt;/code&gt;, or, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user-defined types&lt;/code&gt;, is usually designed as a DSL for Production Engineering.&lt;/p&gt;
+&lt;p&gt;How does this affect language design and user-friendliness?  And, gradual typing?&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Compilation&lt;/code&gt; is geared towards Production Engineering.  All languages can be interpreted, but, only some languages can be compiled, after making various trade-offs in the languages themselves.  Interpretation helps with Design and Vetting, Compilation helps with Production Engineering. [Note that, neither is actually geared towards only DI&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; - communicating designs to other people.]&lt;/p&gt;
+&lt;h4 id=&quot;gradual-compilation&quot;&gt;Gradual Compilation&lt;/h4&gt;
 
-&lt;h1 id=&quot;programming-languages-are-ide-wannabes&quot;&gt;Programming Languages Are IDE Wannabes&lt;/h1&gt;
-&lt;p&gt;Programming languages (GPLs&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;) are only the tip of the iceberg for controlling computers.&lt;/p&gt;
+&lt;p&gt;Maybe languages shoud be structured to allow experimentation, then, whine about “not enough information (detail) to compile” later?&lt;/p&gt;
 
-&lt;h1 id=&quot;operating-systems-are-ide-wannabes&quot;&gt;Operating Systems Are IDE Wannabes&lt;/h1&gt;
-&lt;p&gt;Operating systems are the only tip of the iceberg for controlling computers.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gradualcompiling.png&quot; alt=&quot;Gradual Compiling&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;ide-evolution&quot;&gt;IDE Evolution&lt;/h1&gt;
-&lt;p&gt;What do we want in an IDE?&lt;/p&gt;
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
 
-&lt;p&gt;Given that the primary purpose of programming is controlling computers, we want &lt;em&gt;anything&lt;/em&gt; that helps us program computers.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;We &lt;em&gt;don’t&lt;/em&gt; want to use only one-thing in a one-size-fits-all manner.&lt;/p&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">In JavaScript, I wrote f(x,y,name,z)</summary></entry><entry><title type="html">Tracer Bullets</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Tracer-Bullets.html" rel="alternate" type="text/html" title="Tracer Bullets" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Tracer%20Bullets</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Tracer-Bullets.html">&lt;p&gt;When debugging a concurrent app - one with many possible paths of execution - one wants the equivalent of &lt;em&gt;tracer bullets&lt;/em&gt; to see where messages have gone, and, come-from.&lt;/p&gt;
 
-&lt;p&gt;We see this kind of desire leaking into GPL designs.&lt;/p&gt;
+&lt;p&gt;A single backtrace is not enough.&lt;/p&gt;
 
-&lt;p&gt;For example, REGEXs&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; have leaked into some GPLs, giving those GPLs two (2) syntaxes.&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
 
-&lt;p&gt;As an example of the evolution of IDEs, consider technologies that we already know: C++ and REGEXs.&lt;/p&gt;
+&lt;p&gt;Tracer bullets are straight-forward to implement in Common Lisp and JavaScript.&lt;/p&gt;
 
-&lt;p&gt;We want an IDE that has multiple windows that can produce an executable module at the push of a button.&lt;/p&gt;
+&lt;p&gt;Tack the previous message onto the end of the current message (recursively, each message contains a trace of messages that caused them).&lt;/p&gt;
 
-&lt;p&gt;Using only the above already-known technologies, we might expect:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;a window for writing REGEXs, in REGEX DSL syntax,&lt;/li&gt;
-  &lt;li&gt;a window for writing replacements after REGEX matching has been successful, in REGEX replacement DSL syntax&lt;/li&gt;
-  &lt;li&gt;a window for writing Production Engineering code in C++ syntax, with some sort of bauble to show where the REGEX pattern matchers pattern replacers are to be inserted.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;I’m experimenting with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Message&lt;/code&gt; class that has two main fields and two trace fields:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;tag&lt;/li&gt;
+  &lt;li&gt;data&lt;/li&gt;
+  &lt;li&gt;come-from id&lt;/li&gt;
+  &lt;li&gt;previous message.&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;To illustrate the point, imagine that we want to write a REGEX that replaces all “A”s with “AB”s&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;we might write /(A)/ in window 1&lt;/li&gt;
-  &lt;li&gt;we might write /\1B/ in window 2&lt;/li&gt;
-  &lt;li&gt;we might write some C++ in window 3.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Since each message is defined as above, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;previous message&lt;/code&gt; becomes a nested list from the beginning of time.&lt;/p&gt;
 
-&lt;p&gt;In fact, we would probably drop the “/” characters in windows 1 and 2.&lt;/p&gt;
+&lt;p&gt;Currently, I output traces in Lisp syntax and use a Lisp pretty printer to view them (emacs &lt;em&gt;indent-region&lt;/em&gt; in my case).&lt;/p&gt;
 
-&lt;p&gt;In the above example, parentheses are use to “remember” parts of the match, e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(A)&lt;/code&gt; remembers “A” (if matched) and gives it the name &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\1&lt;/code&gt;&lt;sup id=&quot;fnref:6&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Fields (1) and (2) are &lt;em&gt;real&lt;/em&gt;.  Fields (3) and (4) are for debugging.&lt;/p&gt;
 
-&lt;p&gt;A simple example of a REGEX visualizer is &lt;a href=&quot;https://regex101.com&quot;&gt;regex101&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
 
-&lt;p&gt;We want something like the REGEX visualizer to become our windows 1 and 2 in our progamming IDE.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/04/11/Message-Class.html&quot;&gt;Message Class&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Of course, one could re-imagine the above using languages, like Python and JavaScript, that have REGEXs built into them.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;further-ideas&quot;&gt;Further Ideas:&lt;/h2&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">When debugging a concurrent app - one with many possible paths of execution - one wants the equivalent of tracer bullets to see where messages have gone, and, come-from.</summary></entry><entry><title type="html">Smallest Unit of Concurrency</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Smallest-Unit-of-Concurrency.html" rel="alternate" type="text/html" title="Smallest Unit of Concurrency" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Smallest%20Unit%20of%20Concurrency</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Smallest-Unit-of-Concurrency.html">&lt;p&gt;smallest unit of concurrency that I can think of&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    CLR flag
+loop:
+    TEST flag
+    BRNZ exit
+    CALL λ₂
+    BR loop
+exit:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;I believe that Ohm-JS is better than REGEX.&lt;/p&gt;
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
 
-&lt;p&gt;If we look at the &lt;a href=&quot;https://ohmlang.github.io/editor/&quot;&gt;Ohm-JS IDE&lt;/a&gt;, we see the beginnings of what we want in one of the windows of our futuristic IDE.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;We would want to augment the IDE with an Ohm-JS replacement window (a replacement rule for every grammar rule in Ohm-JS.  See the &lt;a href=&quot;https://guitarvydas.github.io/2021/04/11/Glue-Tool.html&quot;&gt;glue tool&lt;/a&gt; for POC-level ideas for a replacement DSL for Ohm-JS programs.&lt;/p&gt;
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">smallest unit of concurrency that I can think of CLR flag loop: TEST flag BRNZ exit CALL λ₂ BR loop exit:</summary></entry><entry><title type="html">Smallest Unit of Concurrency 2</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Smallest-Unit-of-Concurrency-2.html" rel="alternate" type="text/html" title="Smallest Unit of Concurrency 2" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Smallest%20Unit%20of%20Concurrency%202</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Smallest-Unit-of-Concurrency-2.html">&lt;p&gt;smallest unit of concurrency that I can think of, with more detail:&lt;/p&gt;
 
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/07/30/Parsing-Diagrams-DaS-Workbench-Overview.html&quot;&gt;DaS Workbench&lt;/a&gt; for POC-level ideas on multi-window, heads-up displays for pattern matching and replacement.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wrapper {
+    var mutable flag
+    CALL λ₁
+    CLR flag
+loop:
+    TEST flag
+    BRNZ exit
+    CALL λ₂
+    BR loop
+exit:
+    CALL λ₃
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ₁ - begin
+λ₂ - message handler
+λ₃ - finish
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ₁ (self, &amp;amp;rest args)
+λ₂ (self, message)
+λ₃ (self)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;See &lt;a href=&quot;https://guitarvydas.github.io/2021/07/12/Transpilation.html&quot;&gt;Transpilation&lt;/a&gt; for POC-level ideas on how to transmogrify PEG into two separate parts &lt;br /&gt;
-((1) grammar (2) formatting)&lt;/p&gt;
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;Smallest Unit of Concurrency&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;appendix---see-also&quot;&gt;Appendix - See Also&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/12/01/Table-of-Contents-December-01-2021.html&quot;&gt;Table of Contents as of Dec. 01, 2021&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/channel/UC2bdO9l84VWGlRdeNy5&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
 
-&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot; async=&quot;&quot;&gt; 
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">smallest unit of concurrency that I can think of, with more detail:</summary></entry><entry><title type="html">Orthogonal Code Generation</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Orthogonal-Code-Generation.html" rel="alternate" type="text/html" title="Orthogonal Code Generation" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Orthogonal%20Code%20Generation</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Orthogonal-Code-Generation.html">&lt;p&gt;OCG - Cordy.&lt;/p&gt;
+
+&lt;p&gt;OCG splits the task into two (2) parts:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;control-flow&lt;/li&gt;
+  &lt;li&gt;data description.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Normalization of control-flow.&lt;/p&gt;
+
+&lt;p&gt;Normalization of data description.&lt;/p&gt;
+
+&lt;p&gt;See Holt’s Data Descriptors for normalization of data description.&lt;/p&gt;
+
+&lt;p&gt;Normalization aids manipulation&lt;sup id=&quot;fnref:norm&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:norm&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;amp;redir_esc=y&quot;&gt;OCG&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/03/26/Data-Descriptors.html&quot;&gt;Data Descriptors&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
 &lt;/script&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;DI means Design Intent &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;GPL means General Purpose programming Language. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;REGEX means REGular EXpression.  A technology lifted from compiler design and made popular in languages like PERL, JavaScript, etc., etc. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:6&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Standard REGEX syntax is obtuse and, IMO, write-only.  I would suggest replacements to this syntax, but, I believe that REGEX will be superceded by PEG (Ohm-JS), and, it is not worth expending time on improving the syntax. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:norm&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Manipulation - manual and automatic (machine, scripting, programming). &lt;a href=&quot;#fnref:norm&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">The Goal The goal of programming is to control a computer. Secondary Goals Secondary Goal: Describe Architecture to Other People It is desirable to describe designs to other people.</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><summary type="html">OCG - Cordy.</summary></entry><entry><title type="html">Ohm Everywhere</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Ohm-Everywhere.html" rel="alternate" type="text/html" title="Ohm Everywhere" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Ohm%20Everywhere</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Ohm-Everywhere.html">&lt;p&gt;Ohm is better-PEG.&lt;/p&gt;
+
+&lt;p&gt;PEG is better than REGEX.&lt;/p&gt;
+
+&lt;p&gt;Programming consists of two (2) activities&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;pattern matching&lt;/li&gt;
+  &lt;li&gt;doing something with the match captures.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Ohm does pattern matching (1) with backtracking.&lt;/p&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ohmjs.org&quot;&gt;Ohm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/08/30/Ohm-JS.html&quot;&gt;Ohm-JS Quick Start&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://utteranc.es/client.js&quot; repo=&quot;guitarvydas/guitarvydas.github.io&quot; issue-term=&quot;pathname&quot; theme=&quot;github-light&quot; crossorigin=&quot;anonymous&quot;&gt; 
+&lt;/script&gt;</content><author><name></name></author><summary type="html">Ohm is better-PEG.</summary></entry><entry><title type="html">Message Class</title><link href="https://computingsimplicity.neocities.org/2022/04/11/Message-Class.html" rel="alternate" type="text/html" title="Message Class" /><published>2022-04-11T00:00:00-04:00</published><updated>2022-04-11T00:00:00-04:00</updated><id>https://computingsimplicity.neocities.org/2022/04/11/Message%20Class</id><content type="html" xml:base="https://computingsimplicity.neocities.org/2022/04/11/Message-Class.html">&lt;p&gt;I’m experimenting with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Message&lt;/code&gt; class that has two main fields and two trace fields:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;tag&lt;/li&gt;
+  &lt;li&gt;data&lt;/li&gt;
+  &lt;li&gt;come-from id&lt;/li&gt;
+  &lt;li&gt;previous message.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Since each message is defined as above, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;previous message&lt;/code&gt; becomes a nested list from the beginning of time.&lt;/p&gt;
+
+&lt;p&gt;Currently, I output traces in Lisp syntax and use a Lisp pretty printer to view them (emacs &lt;em&gt;indent-region&lt;/em&gt; in my case).&lt;/p&gt;
+
+&lt;p&gt;Fields (1) and (2) are &lt;em&gt;real&lt;/em&gt;.  Fields (3) and (4) are for debugging&lt;sup id=&quot;fnref:deb&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:deb&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;tag-in-practice&quot;&gt;Tag In Practice&lt;/h2&gt;
+
+&lt;p&gt;I found that, in practice, I wanted to tag messages - always.&lt;/p&gt;
+
+&lt;p&gt;One untagged input (like Unix stdin) was not good enough in practice.&lt;/p&gt;
+
+&lt;p&gt;I wanted to know &lt;em&gt;why&lt;/em&gt; a message was being received.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;tag&lt;/em&gt; is a simple code - a number, a symbol.&lt;/p&gt;
+
+&lt;p&gt;I tried using untagged messages, but, then when I put tags back in, I had to hack on the kernel.&lt;/p&gt;
+
+&lt;p&gt;This made me think that tags are &lt;em&gt;atoms&lt;/em&gt; and need to be explicitly taken into account in the kernel.&lt;/p&gt;
+
+&lt;p&gt;I dunno, maybe some day when I have copious free time, I will reconsider the pervasity of tags and normalize them out of the kernel.&lt;/p&gt;
+
+&lt;h2 id=&quot;messages-in-general&quot;&gt;Messages In General&lt;/h2&gt;
+
+&lt;p&gt;Tagless messages have an appeal.&lt;/p&gt;
+
+&lt;p&gt;Messages should be layered envelopes like network packets.&lt;/p&gt;
+
+&lt;p&gt;Each Layer in the code picks off one layer of wrapping and passes the data on.&lt;/p&gt;
+
+&lt;h3 id=&quot;osi-layer-model&quot;&gt;OSI Layer Model&lt;/h3&gt;
+
+&lt;p&gt;The OSI 7-layer model in-the-small, applied to software components.&lt;/p&gt;
+
+&lt;p&gt;Will it turn out to be 7 layers for component-driven software?&lt;/p&gt;
+
+&lt;p&gt;I don’t know yet.&lt;/p&gt;
+
+&lt;p&gt;My current guess is that it won’t turn out to be hard-wired to any specific number and will depend on the problem-being-solved.&lt;/p&gt;
+
+&lt;p&gt;Maybe a cookbook of layer-patterns can be created for programmers who don’t want to invent new layer patterns.&lt;/p&gt;
+
+&lt;h2 id=&quot;tag-handlers&quot;&gt;Tag Handlers&lt;/h2&gt;
+
+&lt;p&gt;A tag handler is a pure λ that takes two (2) parameters&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;me (self, this)&lt;/li&gt;
+  &lt;li&gt;message.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The uber-controller contains one λ for each possible message tag.&lt;/p&gt;
+
+&lt;p&gt;The uber-controller decodes tags, then, calls the appropriate λ to handle the message.&lt;/p&gt;
+
+&lt;p&gt;Tag handler λs can call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Send()&lt;/code&gt; to send messages upwards for routing, but, handlers cannot invoke other handlers directly.&lt;/p&gt;
+
+&lt;p&gt;Only the parent Container can route messages.  This provides &lt;em&gt;flexibility&lt;/em&gt; and allows components to be used in differing situations.&lt;/p&gt;
+
+&lt;h2 id=&quot;libary-functions-are-inflexible&quot;&gt;Libary Functions Are Inflexible&lt;/h2&gt;
+
+&lt;p&gt;We &lt;em&gt;thought&lt;/em&gt; that library functions work this way, but they aren’t flexible enough.&lt;/p&gt;
+
+&lt;p&gt;For example, any library function that invokes another function by-name (which is the usual case), is inflexible and has the name of the other function baked into it.&lt;/p&gt;
+
+&lt;p&gt;DLLs are a partial solution to this problem of flexibility.&lt;/p&gt;
+
+&lt;p&gt;DLLs wouldn’t be necessary if software components were flexible-by-default.&lt;/p&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See Also&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2022/04/11/Tracer-Bullets.html&quot;&gt;Tracer Bullets&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html&quot;&gt;Table of Contents as of Dec. 01 2021&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io&quot;&gt;Blog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos&quot;&gt;Videos&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://guitarvydas.github.io/2021/01/14/References.html&quot;&gt;References&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://leanpub.com/u/paul-tarvydas.html&quot;&gt;Books&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;script src=”https://utteranc.es/client.js” &lt;br /&gt;
+        repo=”guitarvydas/guitarvydas.github.io”&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:deb&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;See “Tracer Bullets” for description about what (3) and (4) are. &lt;a href=&quot;#fnref:deb&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">I’m experimenting with a Message class that has two main fields and two trace fields: tag data come-from id previous message.</summary></entry></feed>

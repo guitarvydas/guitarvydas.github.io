@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Compiler Pipelines | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Compiler Pipelines" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Compilers can be built in a pipeline." />
+<meta property="og:description" content="Compilers can be built in a pipeline." />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/29/Compiler-Pipeline.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/29/Compiler-Pipeline.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-29T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Compiler Pipelines" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/29/Compiler-Pipeline.html","@type":"BlogPosting","description":"Compilers can be built in a pipeline.","dateModified":"2022-03-29T00:00:00-04:00","datePublished":"2022-03-29T00:00:00-04:00","headline":"Compiler Pipelines","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/29/Compiler-Pipeline.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Compiler Pipelines</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-29T00:00:00-04:00" itemprop="datePublished">Mar 29, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Compilers can be built in a pipeline.</p>
+
+<p>Each stage in the pipeline is driven by syntax (‘pattern matching’).</p>
+
+<p>Each stage strips out sugar and adds semantic information the next stage.</p>
+
+<p>PT Pascal was one of the early attempts at building a compiler as a pipeline.</p>
+
+<p>The stages in the pipeline are:</p>
+
+<ol>
+  <li>Scanner</li>
+  <li>Parser</li>
+  <li>Semantic</li>
+  <li>Coder</li>
+</ol>
+
+<h2 id="scanner">Scanner</h2>
+<ul>
+  <li>tokenizes the program text and passes a stream of tokens downstream.</li>
+</ul>
+
+<h2 id="parser">Parser</h2>
+<ul>
+  <li>Parses the incoming token stream and checks that they form legitimate phrases in the programming language being compiled</li>
+  <li>strips syntactic sugar from the stream before passing the stream downstream</li>
+  <li>aborts the pipeline if the incoming text does not form legitimate phrases.</li>
+</ul>
+
+<h2 id="semantic-pass">Semantic Pass</h2>
+<ul>
+  <li>creates tables for identifiers</li>
+  <li>checks declaration-before-use</li>
+  <li>creates tables for function signatures (args)</li>
+  <li>check that functions are called with appropriate number of args and types</li>
+  <li>reports errors, tries to recover and produce as many meaningful error messages as possible</li>
+  <li>aborts pipeline if any errors are found</li>
+  <li>augments the token stream with semantic information (e.g. location of variables - (parameters, temps, statics, etc.))</li>
+</ul>
+
+<h2 id="coder">Coder</h2>
+<ul>
+  <li>if invoked, it is known that the input token stream represents a valid program</li>
+  <li>the Coder converts the incoming token stream into valid assembler opcodes+operands for a specific architecture</li>
+  <li>(see Orthogonal Code Generator follow-on for how retargetting can be generalized)</li>
+</ul>
+
+<h2 id="conventions">Conventions</h2>
+<ul>
+  <li>S/SL is a dataless language - objects and errors and tokens can only be referred to by handles, but not defined in S/SL (the implementation of objects is done in some underlying language, e.g. Pascal, C, etc.)</li>
+  <li>tokens are named with “t” as the first letter of the name</li>
+  <li>operations are named with “o” as the first letter of the name</li>
+  <li>objects are implemented in single-level Objects, called “mechanisms” (aka Modules)</li>
+  <li>objects are usually implemented as stacks (aka, “concatenative languages”, aka, “stack machines”, aka, “Forth-like”, aka mid-1900s version of “De Bruijn indexing”)</li>
+  <li>operations on objects usually involve the top-of-stack and, maybe, other elements near the tops of stacks</li>
+</ul>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/">PT Pascal and S/SL</a></p>
+
+<p><a href="https://guitarvydas.github.io/2022/03/24/Names-and-Data-Descriptors.html">Names and Data Descriptors</a></p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/24039.24051">Data Descriptors - a compile-time model of data and addressing</a><br />
+<a href="https://books.google.ca/books/about/An_Orthogonal_Model_for_Code_Generation.html?id=X0OaMQEACAAJ&amp;redir_esc=y">OCG</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+
+  </div><a class="u-url" href="/2022/03/29/Compiler-Pipeline.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

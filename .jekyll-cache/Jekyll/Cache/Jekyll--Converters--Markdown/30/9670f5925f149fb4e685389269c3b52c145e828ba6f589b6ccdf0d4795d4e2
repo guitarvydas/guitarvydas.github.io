@@ -1,0 +1,183 @@
+I""<h2 id="elevator-pitch">Elevator Pitch</h2>
+<p>I think that multitasking is backwards.</p>
+
+<p>Instead of having an Operating System that call functions, we can have functions that have internal multitasking.</p>
+
+<h2 id="multitasking-used-to-be-simple">Multitasking Used to be Simple</h2>
+
+<p>At its most basic, multitasking is a Loop with a test.</p>
+
+<p>Multitasking, as a function, consists of:</p>
+
+<ul>
+  <li>
+    <p>initialize “the environment”</p>
+  </li>
+  <li>Loop:
+    <ul>
+      <li>call a function</li>
+      <li>store the result from the function</li>
+      <li>test to see if we should quit</li>
+      <li>repeat, from the top, if we don’t need to quit</li>
+    </ul>
+  </li>
+  <li>on quit: suck various values out of the environment and return them</li>
+</ul>
+
+<p>That happens to be the way that early games were built.  They would use up the whole CPU and all of memory for the game, and, come up for air once in a while.</p>
+
+<p>That’s how messaging loops work - (1) process message (2) check for quit or new messages.</p>
+
+<h3 id="closures-anonymous-functions-lambdas">Closures, Anonymous Functions, Lambdas</h3>
+
+<p>Anonymous, first-class functions are all that is needed to implement concurrency (and multi-tasking).</p>
+
+<p>Operating systems are just big, inefficient, implementations of anonymous functions.</p>
+
+<h2 id="code-bloat">Code Bloat</h2>
+
+<p>We veered away from this simple model when we jammed mutation (aka Garbage Collection, etc.) into a paradigm that didn’t really support all that stuff.</p>
+
+<p>This resulted in bloat of the paradigm.</p>
+
+<p>Instead of remaining simple, the paradigm was hacked-on.</p>
+
+<p>We played whack-a-mole with the various epicycles that were created (aka “Accidental Complexity”).</p>
+
+<p>For example, the Mars Pathfinder software crashed when the Pathfinder landed on Mars.  The cause?  Ostensibly “priority inversion” in the operating system.</p>
+
+<p>The <em>real</em><sup id="fnref:real" role="doc-noteref"><a href="#fn:real" class="footnote">1</a></sup> problem was that the operating system had grown so complicated that we couldn’t see the lurking bugs until we hit an edge case - on Mars.</p>
+
+<h2 id="other-verboten-concepts">Other Verboten Concepts</h2>
+
+<p>Once concurrency has been inverted, it is “easy” to see how to wrap other bugaboos…</p>
+
+<p>These concepts aren’t inherently <em>bad</em>, they simply need to be restricted in use.</p>
+
+<p>For example, assembler isn’t inherently bad, but its use (usually) needs to be restricted by Structured Programming organization techniques.</p>
+
+<h3 id="state">State</h3>
+
+<p>Computers support <em>state</em>.</p>
+
+<p>Period.</p>
+
+<p>That is what RAM is.</p>
+
+<p>That is what Disk is.</p>
+
+<p>How can we constrain the use of <em>state</em>?</p>
+
+<p>Call a function that returns some value(s).</p>
+
+<p>Store that value(s) somewhere.</p>
+
+<p>Wrap the whole process in some syntax that containerizes the state and doesn’t let it leak into other parts of the system.</p>
+
+<p>Tune the syntax so that it allows exactly one use for state.</p>
+
+<h3 id="flags">Flags</h3>
+
+<p>Flags are assumed-to-be-bad because unrestricted use of flags has caused many problems.</p>
+
+<p>We tamed the unrestricted use of global variables.</p>
+
+<p>We tamed the unrestricted use of GOTOs<sup id="fnref:cps" role="doc-noteref"><a href="#fn:cps" class="footnote">2</a></sup>.</p>
+
+<p>Just about every time that we tamed a hoary concept, we tamed it by <em>containerizing</em> it.</p>
+
+<p>We built <em>containers</em> using ASCII art, e.g. <code class="language-plaintext highlighter-rouge">{ ... }</code>.</p>
+
+<p>Now, we can draw diagrams using computers.  There is no longer any need to stick to ASCII art.  Boxes are better-looking containers than brace-bracket characters.</p>
+
+<p>StateCharts are one way to containerize <em>flags</em> (flags used for tracking state).</p>
+
+<h3 id="mutation">Mutation</h3>
+<h3 id="state-machines-statecharts">State Machines, StateCharts</h3>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/StateCharts.html">Harel</a> figured out how to containerize state.</p>
+
+<p>He tamed the “state explosion” problem.</p>
+
+<h3 id="history">History</h3>
+
+<p>Computers can sequence events.</p>
+
+<p>Period.</p>
+
+<p>To do this, computers need to remember (store) history.</p>
+
+<h3 id="time">Time</h3>
+
+<p>To work with History, you need to use a notation that supports the notion of <em>time</em> as a first-class entity, or as a default.</p>
+
+<p>Our current programming notations support exactly one kind of history - synchronous, sequential.</p>
+
+<p>Our current notation has synchrony baked right into it.  For example, we use <em>text</em> to represent programs and we <em>know</em> that lines of text follow each other in synchronous lock-step fashion.</p>
+
+<p>This is OK for some problems<sup id="fnref:calc" role="doc-noteref"><a href="#fn:calc" class="footnote">3</a></sup> but not <em>all</em> problems, like the internet.</p>
+
+<h3 id="blocking">Blocking</h3>
+
+<p>Our current notation has <em>blocking</em> built right into it.</p>
+
+<p>CALL blocks the caller until the callee returns.</p>
+
+<p>Will the callee block, too?  We don’t know.</p>
+
+<p>We’ve had to hack on our notation to allow for non-locality of blocking.  We call this hack <em>preemption</em>.</p>
+
+<h3 id="share-memory">Share Memory</h3>
+<h3 id="time-sharing">Time Sharing</h3>
+<h3 id="programs-as-drawings">Programs as Drawings</h3>
+
+<h2 id="domains">Domains</h2>
+<h3 id="robotics">Robotics</h3>
+<h3 id="iot">IoT</h3>
+<h3 id="blockchain">Blockchain</h3>
+<h3 id="guis">GUIs</h3>
+
+<h2 id="loops-recursion">Loops, Recursion</h2>
+
+<p>Looping and recursion don’t make sense in the new reality (distributed programming).</p>
+
+<p>Looping was a knee-jerk, unrestricted concept inserted into languages when we had only single-CPUs and expensive memory.</p>
+
+<p>Recursion is a refinement of Loop.</p>
+
+<p>In a distributed environment, if you want to build a Loop, you simply send a feedback message to yourself.</p>
+
+<p>In a distributed environment, you don’t send a stack down a wire.  This essentially negates the use of recursion as a notation for distributed programming<sup id="fnref:recur" role="doc-noteref"><a href="#fn:recur" class="footnote">4</a></sup>.</p>
+
+<p>In single-CPU, shared-memory environments (like computers of the mid-1900s) it was OK to use recursion and loops and we didn’t notice that we were notationally boxing ourselves in.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p>The <a href="https://www.rapitasystems.com/blog/what-really-happened-software-mars-pathfinder-spacecraft">Mars Pathfinder disaster</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:real" role="doc-endnote">
+      <p>By “real”, I mean “the next level up”.  It’s turtles all the way down.  If you or I think that we’ve found the <em>final</em> solution, we’re simply wrong.  We can always simplify the simplification and solve a new class of problems. <a href="#fnref:real" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cps" role="doc-endnote">
+      <p>And, we are now un-taming GOTOs by using continuation-passing-style. <a href="#fnref:cps" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:calc" role="doc-endnote">
+      <p>I call this set of problems “calculators”.  1-in and 1-out.  All data arrives at the same time.  All data exits at the same time.  If you are building a fancy ballistics calculator, this notation works fine.  If you are building internet servers, this notation needs to be bent to remove unintended synchrony. <a href="#fnref:calc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:recur" role="doc-endnote">
+      <p>You can continue to use recursion and loops as a notation that describes the <em>innards</em> for distributed nodes, just not as a notation (language) for describing the interactions <em>between</em> nodes. <a href="#fnref:recur" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

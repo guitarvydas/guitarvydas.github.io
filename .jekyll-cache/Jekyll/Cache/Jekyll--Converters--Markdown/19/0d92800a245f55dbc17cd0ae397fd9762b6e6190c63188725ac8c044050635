@@ -1,0 +1,47 @@
+I"ç	<p>The relation</p>
+
+<p><code class="language-plaintext highlighter-rouge">contains(rect, circle)</code></p>
+
+<p>usually implemented as a pointer from rect -&gt; circle (and, maybe, circle -&gt; rect, or both).</p>
+
+<p>Such pointers are relations.  They can be represented as relations:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contains(rect,circle).
+containedby(circle,rect).
+</code></pre></div></div>
+
+<p>Information is not lost in the relational representation.</p>
+
+<p>Information is <em>flatttened</em> to its simplest form - a <em>relation</em>.</p>
+
+<p>Persisting information in flattened form is more flexible, but, if you want to (re-)structure the data, it takes work (CPU).</p>
+
+<p>With modern hardware, this extra work is inexpensive.  The reconstruction work happens quickly and uses cheap memory.</p>
+
+<p>Machine time is inexpensive.</p>
+
+<p>Machines (computers) can perform repetitive work flawlessly.</p>
+
+<p>Flexibility equates to savings of architecting time (human time, programming time).</p>
+
+<p>Destruction of flexibility is an optimization and should be used sparingly.</p>
+
+<p>On modern hardware, optimization is not needed in most use-cases.</p>
+
+<p>Destruction of flexibility also tends to destroy DI.  Optimization conflates architectural concerns with optimization concerns.  This tends to obfuscate DI. This affects understandability and, therefore, affects maintenance.</p>
+
+<p>Unnecessary optimization is a bad idea.</p>
+
+<p>The plus operator <code class="language-plaintext highlighter-rouge">+</code> is an optimization of the plus function <code class="language-plaintext highlighter-rouge">plus()</code>.  Any language that provides a <code class="language-plaintext highlighter-rouge">+</code> operator is - at least psychologically - encouraging optimization in preference to DI.</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

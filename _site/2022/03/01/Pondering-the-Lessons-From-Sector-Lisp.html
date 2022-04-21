@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pondering the Lessons From Sector Lisp | Computing Simplicity</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Pondering the Lessons From Sector Lisp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="bizarre observation #1: JavaScript prototype inheritance and Common Lisp specials are most similar to McCarthy’s original alists" />
+<meta property="og:description" content="bizarre observation #1: JavaScript prototype inheritance and Common Lisp specials are most similar to McCarthy’s original alists" />
+<link rel="canonical" href="https://computingsimplicity.neocities.org/2022/03/01/Pondering-the-Lessons-From-Sector-Lisp.html" />
+<meta property="og:url" content="https://computingsimplicity.neocities.org/2022/03/01/Pondering-the-Lessons-From-Sector-Lisp.html" />
+<meta property="og:site_name" content="Computing Simplicity" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-01T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pondering the Lessons From Sector Lisp" />
+<script type="application/ld+json">
+{"url":"https://computingsimplicity.neocities.org/2022/03/01/Pondering-the-Lessons-From-Sector-Lisp.html","@type":"BlogPosting","description":"bizarre observation #1: JavaScript prototype inheritance and Common Lisp specials are most similar to McCarthy’s original alists","dateModified":"2022-03-01T00:00:00-05:00","datePublished":"2022-03-01T00:00:00-05:00","headline":"Pondering the Lessons From Sector Lisp","mainEntityOfPage":{"@type":"WebPage","@id":"https://computingsimplicity.neocities.org/2022/03/01/Pondering-the-Lessons-From-Sector-Lisp.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://computingsimplicity.neocities.org/feed.xml" title="Computing Simplicity" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Computing Simplicity</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pondering the Lessons From Sector Lisp</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-01T00:00:00-05:00" itemprop="datePublished">Mar 1, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>bizarre observation #1: JavaScript prototype inheritance and Common Lisp specials are most similar to McCarthy’s original alists</p>
+
+<p>bizarre observation #2: McCarthy’s Lisp is - wait for it - a DSL for List Processing.  As soon as we try to add mutation to that simple notation, we get epicycles.  By inference, Mathematics notation is a DSL for List Processing (invented for pen-and-paper).  Mathematics is 2 things: (1) a DSL, and, (2) hard-won knowledge (theorems/laws) about using that notation.</p>
+
+<p>Example of simple notation:</p>
+<ol>
+  <li>x = [a]</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>x = [b</td>
+          <td>x]</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>x = [c|x]<br />
+In most GPLs, x is mutated, but in SL, x is augmented.  In SL, this is written as
+    <ul>
+      <li>(let ((x (cons ‘a nil)))</li>
+      <li>(let ((x-prime (cons ‘b x))))</li>
+      <li>(let ((x-prime-prime (cons ‘c x))))</li>
+      <li>… do something with x-prime-prime …</li>
+      <li>(x and x-prime are shadowed by x-prime-prime ; in fact, we might call the value “x” in all cases, dropping the -prime)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>mutation is an optimization - instead of keeping &gt;1 copy of a named-value, we fold all copies into 1 ; McCarthy’s Lisp keeps a (dynamic) stack of values for every name ; (mutation is structure sharing in the small?)</p>
+
+<p>cycle in data is an optimization and infinite-recursion preventer</p>
+
+<p>cycle is the exception, not the rule, need syntax for @cycle() instead of hard-wiring mutation into every language? ; maybe separate language that allows @cycle()? ; it is easy to create languages (using Ohm-JS/PEG)</p>
+
+<p>adding mutation, adding cycles, breaking strict stack-like ordering</p>
+
+<p>create a “shell” DSL that allows mutation, no need to hack on SL</p>
+
+<hr />
+
+<p>current pondering (for discussion):</p>
+
+<p>code bloat comes from conflation of (a) mutation, with, (b) the idea of “one language to rule them all”</p>
+
+<p>mutation is /sometimes/ necessary, but, there is no reason to hack mutation into every existing language and to pay for epicycles everywhere</p>
+
+<p>SL is a /notation/ for List Processing without mutation (=&gt; no cycles, alists).</p>
+
+<p>If/when we need mutation, we should not insert it into SL.  We can use a different /notation/.  It used to be considered “hard” to build languages, but, now it is easy to build /notations/ using PEG</p>
+
+<p>remove mutation from OO, if you need mutable objects, use Actors</p>
+
+<p>mutation is an optimization - structure sharing - thought to be needed in mid-1900s due to expensive CPUs and limited memory</p>
+
+<p>(syn x y a) -&gt; (let ((x y)) a) –&gt; editor(s) can elide to just “a” and provide the synonym (syn) in a tooltip or keystroke to unelide whole buffer</p>
+
+<p>need a syntax for object slots that doesn’t imply operation (not car/first, second, etc.), e.g. obj=(x . (y . z)) -&gt; (slot obj ‘y) -&gt; obj.y (again, mutation has seeped into most languages - obj is most often represented as a cdr-less array, which is just any optimization of obj from list form to cdr-less form) ; compilers should not compile data to blocks but to lists, e.g. “y” is not an offset, but a function (a list accessing function)</p>
+
+<p>state for tracking history = alist (stack), optimization = mutation/overwrite<br />
+state for iterator<br />
+state for queue<br />
+state for stack pointer<br />
+StateChart<br />
+Actor</p>
+
+<hr />
+
+<p>bizarre observation #3: The preferred way to build GUIs today is The Browser.  The API for Browsers is JavaScript.  AFAICT CLOG makes the browser a stand-alone GUI server that accepts GUI API commands and interprets them.</p>
+
+<p>bizarre observation #4: In the back of my mind, I have felt that “data” should be active.  Data should be prefixed with a lump of code that executes and produces the data.  Data is an Actor.  Or, data is a lambda. BLC and SL invoke these thoughts again.</p>
+
+<p>bizarre observation #5: Mutation is an optimization.  Instead of keeping a stack of values for every named “variable”, we save memory by overwriting (aka optimization).</p>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+
+  </div><a class="u-url" href="/2022/03/01/Pondering-the-Lessons-From-Sector-Lisp.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Computing Simplicity</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Computing Simplicity</li><li><a class="u-email" href="mailto:ptcomputingsimplicity@gmail.com">ptcomputingsimplicity@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/guitarvydas"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">guitarvydas</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Various thoughts on making programming simpler, and, breaking programming down into several disciplines: Architecture, Engineering, Implementation.  Concurrency is not parallelism and concurrency is not multitasking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

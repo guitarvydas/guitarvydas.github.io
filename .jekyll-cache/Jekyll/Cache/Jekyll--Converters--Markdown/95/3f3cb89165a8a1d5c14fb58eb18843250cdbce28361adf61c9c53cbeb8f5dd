@@ -1,0 +1,345 @@
+I"jA<h2 id="on-concurrency">On Concurrency</h2>
+<h3 id="synopsis">Synopsis</h3>
+<ol>
+  <li>Concurrency Is Not Parallelism</li>
+  <li>Blocking</li>
+  <li>Parameters vs. Ports</li>
+  <li>Dependencies</li>
+</ol>
+
+<h3 id="concurrency-is-not-parallelism">Concurrency Is Not Parallelism</h3>
+<p>Concurrency is a healthy lifestyle.</p>
+
+<p>Parallelism is a greasy hamburger.</p>
+
+<p>Concurrency is a paradigm.</p>
+
+<p>Parallelism is an optimization.</p>
+
+<p>Programs written in the concurrent paradigm need not be parallel.</p>
+
+<p>Parallel programs must be concurrent.</p>
+
+<p><a href="https://www.youtube.com/watch?v=oV9rvDllKEg">Rob Pike’s Talk</a></p>
+
+<p>Concurrent programs must have no dependencies on one another</p>
+<ul>
+  <li>data dependencies, nor,</li>
+  <li>control flow dependencies.</li>
+</ul>
+
+<h2 id="parameters-vs-ports">Parameters vs. Ports</h2>
+<h4 id="briefly-">Briefly …</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">f(a,b,c) -&gt; ...</code>
+    <ul>
+      <li>one parameter destructured into 3 parts</li>
+      <li>what we call <em>parameters</em> are actually sub-ports</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">f (...) -&gt; x,y,z</code>
+    <ul>
+      <li>one return value, destructured into 3 parts.</li>
+    </ul>
+  </li>
+  <li>blocking</li>
+</ul>
+
+<h3 id="f-abc---"><code class="language-plaintext highlighter-rouge">f (a,b,c) -&gt; ...</code></h3>
+<p><code class="language-plaintext highlighter-rouge">f (a,b,c) -&gt; ...</code> implies that <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> and <code class="language-plaintext highlighter-rouge">c</code> arrive at the same time.  I call that one (1) <em>port</em>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">(a,b,c)</code> is an <em>input port</em>.</p>
+
+<p>In fact, that is how current-day compilers implement <em>parameters</em>.</p>
+
+<p>All data is pushed onto the stack and <em>sent</em> to the callee as a single block.</p>
+
+<p>The callee destructures the data on the port into separate <em>parameters</em>.</p>
+
+<h3 id="f----x-y-z"><code class="language-plaintext highlighter-rouge">f (...) -&gt; x, y, z</code></h3>
+
+<p>The return value represents one (1) <em>output port</em>.</p>
+
+<p>The caller destructures the return value into separate data slots.</p>
+
+<h3 id="f-a-b-c---x-y-z"><code class="language-plaintext highlighter-rouge">f (a, b, c) -&gt; x, y, z</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">F</code> is a <em>component</em> with <em>exactly</em> one (1) input port and one (1) output port.</p>
+
+<p>This notation does not allow for multiple (or zero) ports arriving / sent at different times.</p>
+
+<p><img src="/assets/on-concurrency-single-in-single-out.png" alt="One In One Out" /></p>
+
+<h3 id="f-a-b-c-d-e-g-h---x-y-z-u-w-p-q"><code class="language-plaintext highlighter-rouge">f (a, b, c) (d, e) (g, h) -&gt; (x, y, z) (u, w) (p q)</code></h3>
+
+<p>Three (3) input ports, three (3) output ports.</p>
+
+<p>Ports can fire (arrive, be sent) at different times.</p>
+
+<p><img src="/assets/on-concurrency-three-in-three-out.png" alt="Three In Three Out" /></p>
+
+<h3 id="f---x-y-z-u-w-p-q"><code class="language-plaintext highlighter-rouge">f -&gt; (x, y, z) (u, w) (p q)</code></h3>
+
+<p>Zero (0) input ports, three (3) output ports.</p>
+
+<p><img src="/assets/on-concurrency-zero-in-three-out.png" alt="Zero In Three Out" /></p>
+
+<h3 id="f-a-b-c-d-e-g-h--"><code class="language-plaintext highlighter-rouge">f (a, b, c) (d, e) (g, h) -&gt;</code></h3>
+
+<p>Three (3) input ports, zero (0) output ports.</p>
+
+<p><img src="/assets/on-concurrency-three-in-zero-out.png" alt="Three In Zero Out" /></p>
+
+<h3 id="f"><code class="language-plaintext highlighter-rouge">f</code></h3>
+
+<p>Zero (0) input ports, zero (0) output ports.</p>
+
+<p>Daemon, server.</p>
+
+<p><img src="/assets/on-concurrency-zero-in-zero-out.png" alt="Zero In Zero Out" /></p>
+
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+  <li>Concurrency Is Not Parallelism
+    <ul>
+      <li>Programs that are concurrent have no dependencies on one another.</li>
+      <li>Life is filled with concurrency.
+        <ul>
+          <li>E.G. This <em>apple</em> is not dependent on that <em>ball</em>.  If you cut the apple, you do not expect that ball to begin moving.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>CALL / RETURN
+    <ul>
+      <li>CALL/RETURN creates an implicit dependency chain that uses a global, shared variable (The Stack).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">f (a, b, c) -&gt; ...</code>
+    <ul>
+      <li>means that <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, and, <code class="language-plaintext highlighter-rouge">c</code> are dependent on one another - they must arrive at the same time<sup id="fnref:sub" role="doc-noteref"><a href="#fn:sub" class="footnote">1</a></sup></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="blocking">Blocking</h3>
+<ul>
+  <li>CALL/RETURN
+    <ul>
+      <li>Caller <em>blocks</em> (suspends operation) until callee returns</li>
+      <li>Does the caller “know” whether the callee will, also, block?  In general, no.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Blocking is thought to be the domain of operating systems, but blocking is also controlled by CALL/RETURN.</p>
+
+<p>Blocking does <em>not</em> obey locality-of-reference.  Sometimes blocking is performed by the operating system, sometimes, blocking is performed by function calls.</p>
+
+<h3 id="epicycle---preemption">Epicycle - Preemption</h3>
+
+<p>Preemption was invented as a way for the operating system to yank control away from functions.</p>
+
+<p>Preemption has resulted in epicycles and mysterious bugs, e.g. Mars Pathfinder disaster.</p>
+
+<h3 id="epicycle---loop-recursion">Epicycle - Loop (Recursion)</h3>
+
+<p>Early attempts at creating programming languages involved knee-jerk constructs like <em>Loop</em> (later refined to <em>recursion</em>).</p>
+
+<p>Supporting Loop required the creation of the epicycle called <em>preemption</em>.</p>
+
+<p>Truly concurrent, non-inter-dependent, software Components do not use Loop.</p>
+
+<p>If a Component really, really wants to Loop, it can <em>send</em> itself a message.</p>
+
+<p>Loop (recursion) is valid and usable on systems that share memory, e.g. single-CPU systems (extended to multi-core systems).  One would not <em>send</em> a stack along a wire to another processor, hence, programming languages that have built-in Loop (and recursion) are not natural ways to describe distributed systems. The CALL/RETURN paradigm has a natural limitation that makes it hard to use in distributed situations<sup id="fnref:rpc" role="doc-noteref"><a href="#fn:rpc" class="footnote">2</a></sup>.</p>
+
+<h2 id="synchronization">Synchronization</h2>
+
+<p>Synchronization is the exception not the rule.</p>
+
+<p>Currently, PLs make synchronization the rule, not the exception.</p>
+
+<p>This led to the creation of the epicycle<sup id="fnref:bw" role="doc-noteref"><a href="#fn:bw" class="footnote">3</a></sup> called <em>operating systems</em>.</p>
+
+<p>Explicit synchronization is well-understood, e.g.</p>
+<ul>
+  <li>hardware design</li>
+  <li>network protocols</li>
+</ul>
+
+<p>Most real problems do not require synchronization.</p>
+
+<h3 id="time">Time</h3>
+
+<p>Synchronization is a function of <em>time</em> and <em>history</em>.</p>
+
+<p>Removing <em>time</em> and <em>history</em> from a problem - a notation (model) describing a problem - is a useful approach, but has limits.</p>
+
+<p>Such - time-removed - notation cannot describe time-based sequencing, except through the use of tricks and warps to the notation, e.g. clever, PhD-level, “complicated” epicycles.</p>
+
+<p>Such cleverness hides higher-level layers of description.</p>
+
+<h3 id="sequencers">Sequencers</h3>
+
+<p>In the cases where a problem needs to be sequenced in time, one builds a <em>sequencer</em>.</p>
+
+<h4 id="examples">Examples</h4>
+
+<ul>
+  <li>DAWs (Digital Audio Workstation), e.g. ProTools®, Logic®, etc.</li>
+  <li>Movie production, e.g. iMovie®</li>
+  <li>machine control, robotics</li>
+</ul>
+
+<h3 id="single-point-of-failure">Single Point of Failure</h3>
+
+<p>The problem of building a <em>sequencer</em> can lead to sub-problems, like</p>
+<ul>
+  <li>single point of failure.</li>
+</ul>
+
+<p>This problem is being attacked with research on distributed systems, <em>p2p</em>, etc.</p>
+
+<p>In my opinion, the solution lies in considering the <em>system</em> at a higher level.</p>
+
+<p>Synchronization might be designed-in at a high level, not at the low level.</p>
+
+<p>IOW: working with only low-level, pervasive synchronization keeps one too busy devising tricks and escapes instead of viewing the larger picture <sup id="fnref:rec" role="doc-noteref"><a href="#fn:rec" class="footnote">4</a></sup></p>
+
+<h3 id="business-hierarchy">Business Hierarchy</h3>
+
+<p>Businesses are arranged in a top-down hierarchical manner.</p>
+
+<p>Businesses appear to have a single point of failure - the CEO.</p>
+
+<p>If the CEO of a business is changed, the business does not necessarily fail.</p>
+
+<p>Why?</p>
+
+<h3 id="ethernet">Ethernet</h3>
+
+<p>Ethernet is a solution to a problem which rarely needs synchronization.</p>
+
+<p>Synchronization is so rare, that it is completely left out of consideration.</p>
+
+<p>In the rare case that multiple Components <em>collide</em> and try to use the same resource at the same time (e.g. writing data onto a data bus), the Components <em>do not</em> synchronize - they simply <em>back off</em> for <em>random</em> amounts of time.</p>
+
+<p>Obviously, this non-synchronization algorithm works.  We use it daily.</p>
+
+<h3 id="internet">Internet</h3>
+
+<p>Asynchronous clients and servers.</p>
+
+<p>Current, synchronous, programming languages do not serve this domain well.</p>
+
+<p>HTML and JavaScript were invented to describe internet apps.</p>
+
+<p>HTML and JavaScript are but low-level (assembly) languages for describing this domain.</p>
+
+<h2 id="bloatware">Bloatware</h2>
+
+<p>Tunney’s <a href="https://justine.lol/sectorlisp2/#listing">Sector Lisp</a> and <a href="https://justine.lol/lambda/">BLC</a> are examples of the beautiful simplicity of the functional paradigm.</p>
+
+<p>Tunney’s Garbage Collector<sup id="fnref:gc" role="doc-noteref"><a href="#fn:gc" class="footnote">5</a></sup> is 40 bytes ([sic], bytes, not K, not M, not G).</p>
+
+<p>Sector Lisp started out as a project whose goal was smallness (in bytes, in size) of executable, but, involved preening the basic paradigm and removing cruft.</p>
+
+<p>When we corrupt this simple paradigm, the result is bloatware.</p>
+
+<p>Corruption often involves mid-1900s biases, like conserving CPU time<sup id="fnref:ts" role="doc-noteref"><a href="#fn:ts" class="footnote">6</a></sup> and conserving memory<sup id="fnref:mut" role="doc-noteref"><a href="#fn:mut" class="footnote">7</a></sup>.  Attention to “efficiency” has resulted in <em>premature optimization</em>.</p>
+
+<p>Electronic computers are inherently based on CPUs and mutation, hence, the very-pure functional paradigm cannot describe (model) all of what electronic computers can do.</p>
+
+<p>The functional paradigm is a useful paradigm for describing a subset of what electronic computers can do, but it behooves one to understand the limitations of this paradigm.</p>
+
+<p><em>Tells</em> that the functional paradigm is being stretched beyond its natural limits:</p>
+<ul>
+  <li>The invention of JavaScript callbacks.</li>
+  <li>Use of Continuation Passing Style (CPS).  CPS is the new GOTO.  CPS leads to write-only code.</li>
+  <li>The invention of Operating Systems.
+    <ul>
+      <li>Only a few apps require full-blown preemption and operating-system-ness, e.g. Windows®, MacOS®, Linux</li>
+      <li>Full preemption is really only needed during development to trap runaway, buggy programs-under-development.  We use full-preemption as a crutch to allow us to ship runaway, buggy programs-under-development to customers.</li>
+      <li>Synchrony. We, humans, are used to asynchronous things - we experience asynchrony and non-dependency every day in our lives. By inserting pervasive-synchrony-under-the-hood, we change the rules and have to learn how to deal with such things and to un-learn all of our experience with asynchronous things.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="games">Games</h2>
+
+<p>Early games eschewed bloatware.</p>
+
+<p>A <em>Loop</em> consisted of a simple branch+label.</p>
+
+<p>Mbytes of O/S bloatware was not needed to implement <em>Loop</em>.</p>
+
+<p>Scanning hardware devices, like joysticks, did not need Mbytes of O/S bloatware.</p>
+
+<p>Games use mutation.</p>
+
+<p>Programmers can try to push mutation aside, but, this results in bloatware.</p>
+
+<h2 id="plumbing-notations-together">Plumbing Notations Together</h2>
+
+<p>Functional parts of a program should be implemented in the functional domain.</p>
+
+<p>Non-functional parts of a program, like mutation, should be implemented in some other domain.</p>
+
+<p>Programmers need a way to plumb notations together to produce systems, not a way to express <em>everything</em> in only a single notation.</p>
+
+<p>Electronics engineers figured this out.</p>
+
+<p>Electronics engineers work with oxides.  On top of this, they layer a notation called <em>transistors</em>.  On top of this notation, they layer another notation called <em>chips</em> (VLSI, epoxy, pins).  On top of this notation, there is another layer called assembler.  On top of this notation, there is a notation called <em>programming language(s)</em>. On top of this notation, there are <em>signatures</em> and <em>implementations</em>, etc.</p>
+
+<p>It works going in the other direction, too.  Oxides are built out of molecules.  Molecules are built out of atoms.  Atoms are not atomic, but, are built out of sub-atomic particles, etc.</p>
+
+<p><em>Chips</em> are asynchronous.</p>
+
+<h2 id="inner-concurrency">Inner Concurrency</h2>
+
+<p>Instead of Operating Systems calling functions, functions might have concurrency inside them.</p>
+
+<p>[<em>I’m currently working on presenting this concept.  I call it ė.</em>]</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">CALL/RETURN Spaghetti - my view on breaking implicit dependencies</a></p>
+
+<p><a href="https://guitarvydas.github.io/2022/03/20/ė-Concurrent-Lambdas.html">Working Paper on ė</a></p>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 1, 2021</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:sub" role="doc-endnote">
+      <p>This is a useful sub-class of problems, but, this is only a <em>single</em> sub-class. <a href="#fnref:sub" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:rpc" role="doc-endnote">
+      <p>It has been done, e.g. with epicycles like RPC (Remote Procedure Call), but, it ain’t natural.  This is a <em>tell</em> that switching to another notation is in order. <a href="#fnref:rpc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:bw" role="doc-endnote">
+      <p>Bloatware. <a href="#fnref:bw" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:rec" role="doc-endnote">
+      <p>And, once that has been viewed, stepping back and viewing the larger picture of the larger picture.  Ad infinitum. <a href="#fnref:rec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gc" role="doc-endnote">
+      <p>Tunney’s GC is different from McCarthy’s original GC.  Tunney’s is even more-functional. <a href="#fnref:gc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ts" role="doc-endnote">
+      <p>A.K.A. Time-Sharing. <a href="#fnref:ts" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mut" role="doc-endnote">
+      <p>A.K.A. mutation and random access. <a href="#fnref:mut" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

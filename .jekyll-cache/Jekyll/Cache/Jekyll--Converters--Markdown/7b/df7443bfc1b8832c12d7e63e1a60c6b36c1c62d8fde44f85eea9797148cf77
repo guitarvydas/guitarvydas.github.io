@@ -1,0 +1,51 @@
+I"�<p>(unfinished)</p>
+
+<h1 id="initial-grammar">Initial Grammar</h1>
+<p>zodeSCN{<br />
+  main = room+<br />
+  room = “room:” ws* id ws+ statement+ “;room”<br />
+  statement = widthStatement | heightStatement | tilesStatement | enterStatement<br />
+  widthStatement = “width” ws+ number eol<br />
+  heightStatement = “height” ws+ number eol<br />
+  tilesStatement = “tiles” ws* “(“ numberList “)” eol<br />
+  enterStatement = “enter:” ws* tellStatement “;enter” eol<br />
+  tellStatement = “tell” ws+ string eol</p>
+
+<p>numberList = (number ws*)+<br />
+  number = negativeNumber | positiveNumber<br />
+  negativeNumber = “-“ smallinteger<br />
+  positiveNumber = smallinteger</p>
+
+<p>smallinteger = dig+<br />
+  dig = “0” ..”9”<br />
+  ws = “ “ | “\t” | “\n”<br />
+  id = firstIDChar followIDChar*<br />
+  firstIDChar = “a” .. “z” | “A” .. “Z”<br />
+  followIDChar = “0” .. “9” | firstIDChar<br />
+  string = quote notQuote* quote<br />
+  quote = “"”<br />
+  notQuote = ~quote any<br />
+  eol = ws+<br />
+}</p>
+<h1 id="initial-test-code">Initial Test Code</h1>
+<p>room: default<br />
+  width 3<br />
+  height 3<br />
+  tiles (-1 -1 -1  -1 -1 -1  -1 -1 -1)<br />
+  enter:<br />
+     tell “Something BAD happened.\nPlease report this bug!\nTHNX 1.0E6!!!”<br />
+  ;enter<br />
+;room</p>
+<h1 id="ohm-editor">Ohm Editor</h1>
+
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+:ET

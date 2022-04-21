@@ -1,0 +1,137 @@
+I"�$<p>WIP</p>
+
+<h2 id="lookup">Lookup</h2>
+
+<p>The main difference between JavaScript and classless Lisp<sup id="fnref:classless" role="doc-noteref"><a href="#fn:classless" class="footnote">1</a></sup> is the way that values are looked up.</p>
+
+<p>To lookup a symbol, we start by looking at the <code class="language-plaintext highlighter-rouge">own</code> variables belonging to the symbol.  The <code class="language-plaintext highlighter-rouge">own</code> slot contains a table that maps names to values.</p>
+
+<p>In classless Lisp, a symbol value is looked-up once, with no iterations.  Either the symbol has a named slot or it doesn’t.</p>
+
+<p>In JavaScript, the lookup is an upward-tree-walk.  If the named slot does not exist in an object’s <code class="language-plaintext highlighter-rouge">own</code> table, we try again to lookup the name in the object’s ancestor.  This lookup process repeats until there is no ancestor.</p>
+
+<p>[<em>In class-based systems, including CLOS, the tree-walk is pre-optimized away during compilation.  See below.</em>]</p>
+
+<h3 id="lookup-example">Lookup Example</h3>
+
+<p><img src="/assets/js-object-lookup.png" alt="lookup" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var a = new Ford ();
+var b = a.z;
+</code></pre></div></div>
+
+<p>In JavaScript, <code class="language-plaintext highlighter-rouge">b</code> would be <code class="language-plaintext highlighter-rouge">300</code>, since an ancestor of the <code class="language-plaintext highlighter-rouge">Ford</code> class (aka prototype) has a <code class="language-plaintext highlighter-rouge">z</code> field which contains the value <code class="language-plaintext highlighter-rouge">300</code>.</p>
+
+<h2 id="set">Set</h2>
+
+<p><img src="/assets/js-object-set.png" alt="set" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var a = new Ford ();
+a.z = 7;
+var b = a.z;
+</code></pre></div></div>
+
+<p>In JavaScript, the second line causes a new slot, called <code class="language-plaintext highlighter-rouge">z</code> to be created in the <code class="language-plaintext highlighter-rouge">Ford</code> class (prototype), then <code class="language-plaintext highlighter-rouge">7</code> is assigned to that new field.</p>
+
+<p>In JavaScript, if the field already exists in Ford, the field is simply overwritten and not re-created.</p>
+
+<h2 id="optimization">Optimization</h2>
+<p>JavaScript performs <code class="language-plaintext highlighter-rouge">copy on write</code> when writing to fields of an object.</p>
+
+<p>In JavaScript, the <code class="language-plaintext highlighter-rouge">z</code> slot is created only if required.  This happens at runtime.</p>
+
+<p>In class-based systems, <code class="language-plaintext highlighter-rouge">copy on write</code> is pre-optimized by the compiler<sup id="fnref:apps" role="doc-noteref"><a href="#fn:apps" class="footnote">2</a></sup>.  The compiled object always contains a unique <code class="language-plaintext highlighter-rouge">z</code> slot (after compilation).</p>
+
+<p>In JavaScript, if an object does not contain a slot with a given name, the system looks up the value in the object’s ancestors.  This happens at runtime.</p>
+
+<p>In classless Lisp, there is no lookup.  Either the slot exists or it doesn’t.</p>
+
+<p>In class-based systems, the lookup is pre-optimized-away.  All objects contain slots corresponding to their ancestors’ slots.</p>
+
+<p>There is a trade-off.  The JavaScript method is simpler but uses CPU time for lookups at runtime.</p>
+
+<p>Class-based systems optimize for final app speed at the expense of doing more work during compilation. Class-based systems use up CPU time, just like prototype-based-systems, but class-based systems amortize the cost over the number of times that the final app is executed.</p>
+
+<p>Class-based systems are less flexible than prototype-based systems, because the language needs to be constrained to help the compiler/optimizer figure things out.</p>
+
+<p>In class-based languages, the programmer is stuck with slot-composition rules set by the language designer.</p>
+
+<p>In prototype-based languages the programmer is free(er) to choose the rules and patterns that will be used.</p>
+
+<h2 id="programming">Programming</h2>
+<p>Both methods have a place in programming.</p>
+
+<h3 id="flexibility">Flexibility</h3>
+
+<p>Prototype-based systems are more flexible and are suited to Software Architecture and initial Engineering.</p>
+
+<p>Class-based systems are less flexible, but, (usually) produce more efficient code (speed) and are suited to Production Engineering.</p>
+
+<h3 id="the-continuum">The Continuum</h3>
+
+<p>I see <em>programming</em> as a continuum of activities.</p>
+
+<p>At one end of the continuum, <em>Design</em> is the most important consideration.</p>
+
+<p>At the other end of the continuum, <em>Production Engineering</em> is the most important consideration.</p>
+
+<p>The ideal situation would be to allow automated mapping from prototype-based designs to Production Engineered products.</p>
+
+<p>A mid-level ideal would be to have <em>design rules</em> - like <em>lint</em> - report if un-compilable uses of prototypes exist in the code.</p>
+
+<p>At present, we are stuck with a low-level approach.</p>
+
+<p>All Designs are done with Production Engineering languages and concepts.  The Designer must specify all Engineering details, which constrains the thought-processes during Design.</p>
+
+<p>[<em>Optmization, e.g. compilation, also affects grain-size for scalability.</em>]</p>
+
+<h2 id="design-vs-production-engineering">Design vs. Production Engineering</h2>
+
+<p>Theorists tend to treat Design as a secondary issue.</p>
+
+<p>People like Jef Raskin and Bret Victor point out that Design is important, too.</p>
+
+<p>Early lisp, and BASIC, were <em>dynamic</em> languages that emphasized Design (this used to be called “Rapid Prototyping”).</p>
+
+<p>The invention of JavaScript is a <em>tell</em> that programming has several orthogonal dimensions.</p>
+
+<p>Jef Raskin’s book “The Humane Interface” contributed to the <em>science</em> of UX Design.</p>
+
+<p>Lisp explored the continuum between Design and Production Engineering, with features like gradual typing (after-the-fact typing, DECLARE), fast-calls (which is a pre-cursor to JIT), garbage collection, REPLs, etc.</p>
+
+<h2 id="inheritance">Inheritance</h2>
+
+<p>In programming, one of the big wins is DRY - Don’t Repeat Yourself.</p>
+
+<p>Humans don’t like to repeat themselves.</p>
+
+<p>In fact, we have found that, as we increase our understanding of a problem, we see patterns of similarities in the problem and we try to collapse such similarities together.  We have learned that, if the similarities are not collapsed, then updates require “more work” to perform and leave the potential for leaving dangling un-updated code blobs that result in mysterious bugs.</p>
+
+<p>Class-based inheritance is a (manual) way to get programmers to expend brain-power on pointing out similarities between similar data structures.</p>
+
+<p>Instead of having the compiler automatically figure out the similarities in a Design, with something like <em>diff</em>, the programmer must appease the compiler by explicitly declaring such similarities using text-based inheritance syntax.  Currently, our programming languages expect programmers to help compilers figure this stuff out.</p>
+
+<p>I haven’t explored it, but <a href="https://www.cs.usask.ca/~croy/papers/2011/CR-NiCad-Tool-ICPC11.pdf">NiCad</a> sounds like a step in the direction of automating similarity-detection.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:classless" role="doc-endnote">
+      <p>Early Lisps did not have classes. The class system is written in Lisp and is called CLOS.  This is similar to the way the JavaScript evolved.  JavaScript originally only had prototypes, not classes.  Later, class systems were written in JavaScript and, then, classes were promoted to the ESx standard.  Classes are an optimization (“static language” means pre-optimized, “dynamic language” means ) <a href="#fnref:classless" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:apps" role="doc-endnote">
+      <p>Compilers are just programs - apps.  We run compilers before shipping a product in the hope that the compiler will optimize the product and make it run “more efficiently” on customers’ machines (reducing the customers’ cost, amortizing the cost of running the optimizer app during product development). <a href="#fnref:apps" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

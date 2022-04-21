@@ -1,0 +1,374 @@
+I"�D<h2 id="synopsis">Synopsis</h2>
+<ol>
+  <li>PEG is a game-changing technology</li>
+  <li>parsing ≣ pattern-matching</li>
+  <li>PEG creates <strong>parsers</strong>, YACC describes <strong>languages</strong> from first principles</li>
+  <li>PEG paper by Bryan Ford</li>
+</ol>
+
+<h2 id="discussion">Discussion</h2>
+<ol>
+  <li>Game changing technology
+    <ul>
+      <li>allows bowls of syntax approach<sup id="fnref:macros" role="doc-noteref"><a href="#fn:macros" class="footnote">1</a></sup>, instead of many-years-for-one-language approach</li>
+      <li>PEG, esp. Ohm-JS, allows jail-break from some of the mid-1900s assumptions</li>
+    </ul>
+  </li>
+</ol>
+
+<ol>
+  <li>parsing is pattern-matching
+    <ul>
+      <li>no magic, parsers are just big pattern-matching programs<sup id="fnref:adhoc" role="doc-noteref"><a href="#fn:adhoc" class="footnote">2</a></sup></li>
+      <li>PEG is a DSL for pattern-matching</li>
+      <li>REGEX is a DSL for pattern-matching</li>
+      <li>PEG is better than REGEX, because PEG allows subroutines</li>
+      <li>parsing  technology is geared towards parsing text, due to biases and limitations in mid-1900s machines, but, machines have changed</li>
+    </ul>
+  </li>
+</ol>
+
+<ol>
+  <li>Parsers vs. language first principles
+    <ul>
+      <li>subtle difference</li>
+      <li>PEG is a DSL for creating TDPL parsers</li>
+      <li>Language theory ≣ principles of (restricted) language design, can be used to generate parsers, but languages that are parsed are restricted by the theoretical model
+        <ul>
+          <li>model doesn’t always reflect reality, but, only what can be conveniently modeled<sup id="fnref:nw" role="doc-noteref"><a href="#fn:nw" class="footnote">3</a></sup></li>
+        </ul>
+      </li>
+      <li>PEG allows matching balanced parens, YACC/language-theory/etc. cannot match balanced parens</li>
+    </ul>
+  </li>
+</ol>
+
+<ol>
+  <li>PEG paper by B. Ford
+    <ul>
+      <li>shows that squishy concepts for top-down parsing<sup id="fnref:tdpl" role="doc-noteref"><a href="#fn:tdpl" class="footnote">4</a></sup> can be theorized and used to build UXs for programmers</li>
+      <li>paper basically shows how to build backtracking for text without using PROLOG</li>
+      <li>uses memoization to avoid re-parsing already-parsed bits</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="notes--rambling">Notes &amp; Rambling</h2>
+<ol>
+  <li>Game changing technology
+    <ul>
+      <li>allows bowls of syntax approach, instead of many-years-for-one-language approach</li>
+      <li>PEG uses backtracking, which used to be verbotten in the mid-1900s</li>
+      <li>PEG is like PROLOG aimed for backtracking over text characters</li>
+      <li>Kleene <code class="language-plaintext highlighter-rouge">*</code> and Kleene <code class="language-plaintext highlighter-rouge">+</code> were invented long ago, but not thought to be useful for parsing due to concerns for efficiency ; current computers are magnitudes better than in the mid-1900s -&gt; time to reevaluate basic assumptions, esp. concerns for efficiency</li>
+      <li>PEG allows matching balanced parens, YACC/language-theory/etc. cannot match balanced parens</li>
+      <li>PEG is akin to: automobile vs. walking - changes basic assumptions about what is possible</li>
+    </ul>
+  </li>
+  <li>a Parser is just a program, an app
+    <ul>
+      <li>REGEX is a simplified form of pattern-matching</li>
+      <li>PEG is a DSL meant specifically for pattern-matching sequences of characters</li>
+      <li>PEG is better than REGEX because PEG allows subroutines</li>
+      <li>PEG is worse than REGEX because PEG specs are usually larger than REGEX specs</li>
+      <li>REGEX syntax is write-only, PEG syntax is more readable (IMO)</li>
+      <li>PEG is like modernized BNF</li>
+    </ul>
+  </li>
+  <li>Compiling
+    <ul>
+      <li>
+        <ol>
+          <li>pattern-match input file</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>make a bunch of tables</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>check input against tables</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>emit code (assembler or other language)</li>
+        </ol>
+      </li>
+      <li>typical approach
+        <ul>
+          <li>pattern-matcher creates a tree</li>
+          <li>tree-walk the tree to fire “semantic” routines</li>
+        </ul>
+      </li>
+      <li>better approach
+        <ul>
+          <li>taught at UofT, etc. (Queen’s?)</li>
+          <li>syntax-directed compiling</li>
+          <li>build “many” trees, as pipelined, serialized-streams of characters
+            <ul>
+              <li>use many parsers to expand &amp; unserialize intermediate trees</li>
+              <li>helps stop tangling of issues and Accidental Complexity
+                <ul>
+                  <li>unwinds dependencies</li>
+                  <li>each step / phase is independent and can be programmed in situ
+                    <ul>
+                      <li>without worrying about causing side-effects in other phases</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>allows compiler-writer to concentrate on one thing at a time</li>
+              <li>similar to pattern-matching in FP languages
+                <ul>
+                  <li>allow pattern-matching engine to fire functions based on history / sequencing
+                    <ul>
+                      <li>eschew ad-hoc coding of sequence-tracking</li>
+                    </ul>
+                  </li>
+                  <li>FP pattern-matching cases on type (and dynamic data?)</li>
+                  <li>parsing cases on dynamic data (and dynamic type)</li>
+                  <li>OO cases on type</li>
+                  <li>PROLOG allows programmer to define “types” in layers (“rules”), then backtracks and performs exhaustive search</li>
+                  <li>PEG allows programmer to define layers (“rules”) then backtracks</li>
+                  <li>miniKanren performs exhaustive match, like PROLOG, without backtracking</li>
+                  <li>(backtracking is an attempt at memory optimization - reuse memory by GC’ing it, then trying again, miniKanren doesn’t care, it just keeps every possibility on deck as it works)
+                    <ul>
+                      <li>PROLOG algorithm explained in Scheme by <a href="http://www.t3x.org/bits/prolog-6-code.scm.html">Nils Holm</a></li>
+                    </ul>
+                  </li>
+                  <li>backtracking ≣ inferencing</li>
+                  <li>inferencing ≣ exhaustive search</li>
+                  <li>has anyone tried to re-cast PEG in miniKanren?</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>beauty of Lisp and Assembler
+    <ul>
+      <li>prefix notation</li>
+      <li>very regular -&gt; automatable
+        <ul>
+          <li>machines can do the work instead of humans</li>
+          <li>frees up human thinking to consider higher level concepts</li>
+        </ul>
+      </li>
+      <li>leads to observation that operators are orthogonal to operands (Cordy’s Orthogonal Code Generator)
+        <ul>
+          <li>GCC’s RTL is a special case of this observation (in RTL <em>all</em> operands are registers until the final step)</li>
+        </ul>
+      </li>
+      <li>in Lisp, <em>everything</em> is an expression, no special syntax for <em>return</em> -&gt; regularity (normalization)</li>
+      <li>Lambda Calculus is discovering normalization</li>
+      <li>Sector Lisp (Tunney) is a fine example of the beauty of the FP paradigm
+        <ul>
+          <li>my conclusion: bloatware comes from forcing a paradigm to be something it wasn’t designed for</li>
+          <li>e.g. FP vs. mutability
+            <ul>
+              <li>Tunney’s GC is 40 bytes[sic] becase it is pure FP
+                <ul>
+                  <li>no special cases</li>
+                  <li>very few (2) data types - Atoms and Lists</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Lisp was schizophrenic
+        <ul>
+          <li>Lisp tried to serve 2 masters at once
+            <ol>
+              <li>Design</li>
+              <li>Production Engineering</li>
+            </ol>
+          </li>
+          <li>Production Engineering “won out” and warped Lisp (-&gt; Common Lisp, Scheme)</li>
+          <li>REPL is a “natural” outcome of Design-oriented thinking (see Bret Victor, Live Programming - which are REPLs for non-text-based programming)</li>
+          <li>dynamic languages are better for Design, static languages are better for Production Engineering
+            <ul>
+              <li>using static languages for Design, inhibits Design</li>
+            </ul>
+          </li>
+          <li>Lispworks debugger is better (IMO) than VSCode
+            <ul>
+              <li>Lispworks has more experience</li>
+              <li>dynamic languages -&gt; less trouble to build debuggers than with static languages</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>IMO - data should be OO objects, and, orthogonally, control flow should be syntax<br />
+     - flags, state, etc. are not inherently bad<br />
+     - unrestricted use of flags is bad, just like unrestricted use of Global Variables is bad<br />
+     - wrap syntax <em>skins</em> around hoary contructs and never allow users to access them directly<br />
+     - Lambda Calculus wraps data items dynamically (on the stack), and, now syntax can wrap stuff that LC is not designed for (using PEG)<br />
+     - FP teaches that <em>variable</em> names are inconsequential<br />
+         - in fact, variables are not variable<br />
+     - parsing teaches that <em>syntax</em> is equally inconsequential</li>
+  <li>Parser DSL
+    <ul>
+      <li>theory is for theoreticians
+        <ul>
+          <li>leads to better languages, but slowly</li>
+        </ul>
+      </li>
+      <li>DSL is UX
+        <ul>
+          <li>theoreticians tend to “ignore” UX and don’t care if they mangle languages for the sake of correctness</li>
+          <li>IMO, the ideal is theory -&gt; lint-like tools that preen programmer code, not warp the languages that programmers are allowed to use</li>
+          <li>theory -&gt; helps Production Engineers, hinders Designers
+            <ul>
+              <li>self-editing is “bad”</li>
+              <li>implementation details obfuscate Design</li>
+              <li>implementation details inhibit Design and destroy Design “flow” (“in the zone”)</li>
+              <li>biggest advances in CompSci come from eliding and deferring details, e.g. OO, GC, Scoping, Structured Programming, etc.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>i.e. PEG is for programmers, language theory is for theorists
+        <ul>
+          <li>the two don’t mix and cannot be combined into a single language</li>
+          <li>PEG allows rapid syntax creation -&gt; one language for programmers, another language for theorists, same bag of paradigms with different syntactic sugar</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>PEG paper by B. Ford -&gt; shows that squishy concepts for parsing can be theorized and used to build UXs for programmers<br />
+     - paper basically shows how to build backtracking for text without using PROLOG<br />
+     - uses memoization to avoid re-parsing already-parsed bits<br />
+     - concerns for efficiency are misplaced<br />
+         - based on assumption that programs will grow “big”<br />
+         - if you keep programs “small”, then efficiency “doesn’t matter”<br />
+         - IMO: the goal shoud be to keep programs small instead of appeasing bigness<br />
+         - I built a PEG without packrat and it worked fine, since, using the new DSL, programs never became big<br />
+         - conclusion: when programs become big enough for efficiency to matter, switch notations (create and use a different language)</li>
+  <li>PREP
+    <ul>
+      <li>I built a tool using PEG and REGEX that allows me to write pipelined one-liners (in <em>bash</em> modulo accompanying grammar and reformat specs)</li>
+      <li>use it to build variants of itself (feed <em>prep</em> pipelines with <em>prep</em> preprocessors) -&gt; syntax directed transpiling</li>
+      <li>parse diagrams</li>
+      <li>parse .md as a programming language
+        <ul>
+          <li>architectural / Design language</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>See Also
+    <ul>
+      <li>Rosie
+        <ul>
+          <li>I haven’t explored this, but it looks to be in a similar vein (parsing as a tool)</li>
+        </ul>
+      </li>
+      <li>Ohm-JS
+        <ul>
+          <li>currently, my favourite variant of PEG</li>
+          <li>a DSL for pattern-matching based on PEG principles</li>
+          <li>skips whitespace
+            <ul>
+              <li>avoids sullying the grammar with details</li>
+            </ul>
+          </li>
+          <li>sends CST (concrete syntax tree - output of parser) to JS for further processing (tree-walking)</li>
+          <li><em>every</em> match is captured (i.e. normalization, no options == good for automation, anti-bloatware)</li>
+          <li>Ohm-JS examples:
+            <ul>
+              <li>T.B.D.</li>
+              <li>working on book of idioms</li>
+              <li>working on explaining raw markdown parser</li>
+              <li>WASM from arith P.O.C.</li>
+              <li>link to Obsidian raw material … (will be free)</li>
+              <li>prep</li>
+              <li>Diagrams as Syntax to Python</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>9 Other</p>
+<ul>
+  <li>replace use of REGEX with use of PEG<br />
+      - use REGEX for small snippets of pattern-matching<br />
+      - use PEG for anything more interesting, esp. structured text (multiline, recursive)</li>
+  <li>Programming Languages are IDEs<br />
+          - PLs are IDEs for programming (goal === control a machine)<br />
+          - PL’s based on biases of mid-1900s, e.g. text, concerns for efficiency<br />
+          - PEG, esp. Ohm-JS, allows jail-break from some of these mid-1900s assumptions<br />
+          - IMO ideal IDE for programming -&gt;<br />
+              - choice of notations, text, diagram, hybrid, etc.<br />
+              - choice of design rules<br />
+                  - more specific than type checking<br />
+                  - tuned to specific project, not generalized<br />
+                  - PEG allows specializing syntax per project<br />
+                  - PEG allows many syntaxes for a single project<br />
+                  - for those who don’t want to invent syntaxes -&gt; cookbook</li>
+  <li>gaming
+    <ul>
+      <li>early games used to be quite econimical</li>
+      <li>bloated now?</li>
+      <li>where did the simplicity go?
+        <ul>
+          <li>“it is complicated” is a hand-waving argument, not science</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>compiling
+    <ul>
+      <li>compiling is akin to sorting Red Smarties into one pile</li>
+      <li>if you can move all operations (of a certain kind) to one pile, then you can pre-operate and save runtime later</li>
+      <li>amortize cost of operations - waste CPU during compile, save CPU later</li>
+      <li>compiling is AKA Production Engineering
+        <ul>
+          <li>Software Engineering is more than just Production Engineering</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="disclaimer">Disclaimer</h2>
+<p>I was going for 80% truth and edited out all qualifications for succinctness.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 01 2021</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:macros" role="doc-endnote">
+      <p>Bowls of syntax is known as <em>macros</em> to Lispers, but, Lisp macros deal only with lists, not characters. C macros are much more limited and shouldn’t be conflated with the Lisp concept. <a href="#fnref:macros" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:adhoc" role="doc-endnote">
+      <p>Parsers are, hopefully, less ad-hoc than hand-written pattern-matching code. <a href="#fnref:adhoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:nw" role="doc-endnote">
+      <p>Notation Worship.  Ironically, sometimes the (insufficient) model is assumed to define reality, and the rest of reality is simply ignored. <a href="#fnref:nw" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:tdpl" role="doc-endnote">
+      <p>TDPL ≣ Top-Down Parsing Language <a href="#fnref:tdpl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

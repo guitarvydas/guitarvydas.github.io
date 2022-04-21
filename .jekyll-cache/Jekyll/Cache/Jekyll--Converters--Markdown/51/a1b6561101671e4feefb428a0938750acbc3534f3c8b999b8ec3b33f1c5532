@@ -1,0 +1,98 @@
+I"H<h2 id="numbers-in-sector-lisp">Numbers In Sector Lisp</h2>
+
+<p>Digits are just arbitrary scribbles.</p>
+
+<p>For example, we could define 10 atoms in Sector Lisp with suggestive names, e.g.</p>
+<ul>
+  <li>(quote 0)</li>
+  <li>(quote 1)</li>
+  <li>(quote 2)</li>
+  <li>(quote 3)</li>
+  <li>(quote 4)</li>
+  <li>(quote 5)</li>
+  <li>(quote 6)</li>
+  <li>(quote 7)</li>
+  <li>(quote 8)</li>
+  <li>(quote 9)</li>
+</ul>
+
+<p>In Sector Lisp, these 10 atoms would be Atoms and would never be garbage collected.</p>
+
+<p>What if you had a batch editor that replaced every occurrence of the character ‘4’ with the string of characters <code class="language-plaintext highlighter-rouge">(quote 4)</code>?</p>
+
+<p>Even Microsoft Word® can do this.  The operation is called <code class="language-plaintext highlighter-rouge">Search and Replace</code>.</p>
+
+<p>The names could be any unicode character, or, any string of characters.  For example, we could define an Atom <code class="language-plaintext highlighter-rouge">(quote IV)</code> to mean the same thing as <code class="language-plaintext highlighter-rouge">4</code>.  In ASCII, <code class="language-plaintext highlighter-rouge">IV</code> needs 2 bytes, whereas <code class="language-plaintext highlighter-rouge">4</code> needs only one byte.</p>
+
+<p>In Sector Lisp, each of these Atoms would be represented by an Address.  (In Sector Lisp, an Address is 1-byte long)<sup id="fnref:SLU" role="doc-noteref"><a href="#fn:SLU" class="footnote">1</a></sup>.</p>
+
+<h2 id="batch-editor-aka-macro-processor">Batch Editor (AKA Macro Processor)</h2>
+
+<p>One line of <code class="language-plaintext highlighter-rouge">bash</code> script can do the batch edit:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$prep '.' '$' batch-edit-4.ohm batch-edit-4.glue --stop=1 &lt; test.txt
+</code></pre></div></div>
+
+<p>See <code class="language-plaintext highlighter-rouge">run.bash</code> and <code class="language-plaintext highlighter-rouge">test.txt</code> and the grammar <code class="language-plaintext highlighter-rouge">batch-edit-4.ohm</code> and the reformatting script <code class="language-plaintext highlighter-rouge">batch-edit-4.glue</code>.</p>
+
+<p>(The command-line args to <em>prep</em> are mostly details that you can decipher later).</p>
+
+<h2 id="github">Github</h2>
+
+<p><a href="https://github.com/guitarvydas/slnumbers">slnumbers</a></p>
+
+<h2 id="prep">Prep</h2>
+
+<p>I’ve included a sub-directory containing the tool I call <code class="language-plaintext highlighter-rouge">prep</code> (rhymes with <em>grep</em>, and looks like <em>preprocessor</em>).</p>
+
+<p>It uses <code class="language-plaintext highlighter-rouge">Ohm-JS</code>.</p>
+
+<p>It’s kinda-like <code class="language-plaintext highlighter-rouge">sed</code> but uses grammars instead of REGEXs.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> needs two specifications:</p>
+<ol>
+  <li>a pattern-matching spec</li>
+  <li>a reformatting spec.</li>
+</ol>
+
+<p>Reformatting is currently done using an experimental syntax that I call <code class="language-plaintext highlighter-rouge">glue</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> is described in <a href="https://guitarvydas.github.io/2022/01/20/PREP-Tool.html">YouTube</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Prep</code> is <a href="https://guitarvydas.github.io/2022/03/05/Prep.html">further described</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Glue</code> is described by following the links in <a href="https://guitarvydas.github.io/2021/09/15/ABC-Glue.html">ABC Glue</a>.</p>
+
+<p>Actually, <code class="language-plaintext highlighter-rouge">prep</code> uses <em>REGEX</em> to find chunks of text, then uses <em>grammars+glue</em> to reformat the chunks.</p>
+
+<h2 id="sector-lisp">Sector Lisp</h2>
+
+<p><a href="https://justine.lol/sectorlisp2/">Sector Lisp</a></p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>This example is chosen for its simplicity.</p>
+
+<p>This specific batch-edit could be done with <code class="language-plaintext highlighter-rouge">sed</code> or with a language that incorporates REGEX, like JavaScript.</p>
+
+<p>The interesting stuff comes when you need to match nested (structured) text.  That’s when REGEX gets hard and you need to switch to a parser.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:SLU" role="doc-endnote">
+      <p>If you had more than 256 of these Atoms, you might want more than one Sector Lisp program, or, you might want to invent a new kind of Sector Lisp based on Unicode instead of being based on 8-bit bytes. <a href="#fnref:SLU" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

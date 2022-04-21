@@ -1,0 +1,326 @@
+I"�K<h1 id="synopsis">Synopsis</h1>
+<p>This note advocates approaching computer-based product development as 2 issues</p>
+<ol>
+  <li>design</li>
+  <li>production.</li>
+</ol>
+
+<p>This note examines the issue of <em>performance</em>.</p>
+
+<h1 id="performance">Performance</h1>
+<p>“Performance” can be divided, broadly, into two categories.</p>
+
+<ol>
+  <li>Performance during development.</li>
+  <li>Performance in the final app.</li>
+</ol>
+
+<p>The goals of 1 &amp; 2 are vastly different.</p>
+
+<p>In fact the end-user is a different person in both cases.</p>
+
+<p>In (1), we need performance for development turn-around.</p>
+
+<p>In (2) we want performance of the final app.  In other fields, this is called Production <br />
+Engineering.</p>
+
+<p>There is no need to use the same methods (i.e. the same language) for (1) and (2).</p>
+
+<p>Most modern languages aim only for (2) and throw away many considerations for (1).</p>
+
+<p>IMO, there is a confusion about the utility of dynamic vs. static languages.</p>
+
+<p>Dynamic languages - generally - provide better debuggers.  Static languages - generally - throw out debugging in lieue of faster execution and smaller executables.</p>
+
+<p>Attempting to solve both problems with only one language makes the language design problem harder than necessary<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<h1 id="1-performance-for-the-developer">(1) Performance For The Developer</h1>
+<p>In (1) we target performance for the developer.</p>
+
+<h3 id="issues">Issues</h3>
+<p>Developer turn-around is the main issue.</p>
+
+<p>The machine (aka computer) should be used to help the developer.</p>
+
+<h3 id="techniques">Techniques</h3>
+<ul>
+  <li>elide details to allow better expression of the design</li>
+  <li>elide details to allow deeper thinking about the design</li>
+  <li>elide details to communicate designs better between team-members</li>
+  <li>provide a rich syntax (e.g. text plus diagrams)</li>
+  <li>garbage collection</li>
+  <li>pipelines</li>
+  <li>Worlds</li>
+  <li>strong type analysis aimed at DI<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup></li>
+  <li>books: “Design of Everyday Things”, “Humane Interface”</li>
+  <li>dynamic languages<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">3</a></sup> and REPLs</li>
+  <li>automatic inlining &amp; macros (lisp-ish macros)</li>
+</ul>
+
+<h3 id="reducing-inconvenience">Reducing Inconvenience</h3>
+<p>Development turn-around time can be improved by reducing inconveniences.</p>
+
+<p>Less inconvenience might be provided by:</p>
+<ul>
+  <li>declaration after use</li>
+  <li>multiple syntaxes</li>
+  <li>syntax checking</li>
+  <li>parameter counting</li>
+  <li>type checking</li>
+  <li>lots of fundamental data types (Rebol and ASON)</li>
+  <li>etc.</li>
+</ul>
+
+<h5 id="discussion">Discussion</h5>
+<h6 id="declaration-after-use">Declaration After Use</h6>
+<p>Declaration <em>before</em> use is an aid to compiler development and optimization.</p>
+
+<p>In the 1950’s, it seemed to be “more efficient” to build one-pass compilers.</p>
+
+<p>The onus, though, has been placed on programmers to declare entities before they are used in the code.</p>
+
+<p>This affects readability (for human developers) - the “most important” aspects of the design appear at the bottom of a file of code instead of at the top.</p>
+
+<p>This inconvenience could be removed by going back to two-pass compilers (or using JavaScript’s “hoisting” ideas).</p>
+<h6 id="multiple-syntaxes">Multiple Syntaxes</h6>
+<p>See Appendix “Two Syntaxes for Each GPL”.</p>
+
+<h6 id="syntax-checking">Syntax Checking</h6>
+<p>There exists a tension between language sytax and “syntactic noise”.</p>
+
+<p>On one hand, verbose syntax can be easily checked by automated means (i.e. compiler).</p>
+
+<p>On the other hand, verbose syntax makes it harder to “get the big picture” for humans, when maintaining code.</p>
+
+<p>This issue is discussed in the article “Two Syntaxes For Each GPL”.</p>
+
+<p>To summarize, it is possible to use PEG technologies to provide more than one syntax for any given language, thereby achieving “the best of both worlds” (a verbose syntax that can be machine-checked, and a concise syntax to aid human understanding).</p>
+
+<h6 id="parameter-counting">Parameter Counting</h6>
+<p>A seemingly small detail has come out of more involved research on type checking and type inferencing - simply checking the number of parameters to a function.</p>
+
+<p>This detail is much like the “if … end if” detail in language syntax design.  It seems trivial but can catch many simple errors effectively and automatically.</p>
+
+<p>Language designers learned this lesson early, but didn’t state it explicitly.</p>
+
+<p>Javascript removed this restriction by allowing uncounted parameter lists.  I assume that the intent was to make the language “more friendly” but had the opposite effect.</p>
+<h6 id="type-checking">Type Checking</h6>
+<p>Type checking was invented as an optimization.</p>
+
+<p>Type checking allowed one to strip type conversion code from BASIC interpreters (making them run faster).</p>
+
+<p>Type checking and type inferencing has grown, beyond optimization, into a useful tool for thinking about program design.</p>
+
+<p>Many languages inconvenience the programmer by making the programmer explicitly declare types.</p>
+
+<p>This notational inconvenience can be ameliorated by using PEG-based preprocessors tuned to the problem-at-hand (or, by allowing declaration-after-use).</p>
+<h6 id="many-fundamental-types">Many Fundamental Types</h6>
+<p>Sassenrath (inventor of Rebol, which led to the invention of JSON) showed that a <em>lot</em> or practical results can be accomplished by providing a rich set of fundamental types, without requiring the programmer to define them explicitly as classes.</p>
+
+<p>Sassenrath is refining his ideas as ASON (see Appendix)<sup id="fnref:11" role="doc-noteref"><a href="#fn:11" class="footnote">4</a></sup>.</p>
+<h6 id="inlining-and-macros">Inlining and Macros</h6>
+<p>Inlining allows programmers to express code in functional form, and the compiler generates “more efficient” code than pure function calls.</p>
+
+<p>It used to be the case that spotting opportunities for inlining was left up to programmers, e.g. programmers had to insert keywords to mark inlinable functions.</p>
+
+<p>Lisp macros represent inlinable-functions-on-steroids, but, still defined by the programmers.</p>
+
+<p>Compiler technology has developed ways to recognize inlinable functions and to optimize code sequences.</p>
+
+<p>Clearly, one needs to know what one’s compiler can and can’t do.</p>
+
+<p>If the compiler implements automatic inlining, most code should be written as (inlinable) functions.</p>
+
+<p>Lisp macros differ from C macros in that Lisp macros allow <em>arbitrary</em> routines to be called at compile-time and to generate code to be fed to the compiler.</p>
+
+<p>C macros begin at the other end of the spectrum.  C macros are more like Find-and-Replace operations normally found in editors.</p>
+
+<p>C macros define a different “language” for writing macros.  Lisp macros, OTOH, use the same Lisp language for writing macros.</p>
+
+<p>Ohm (PEG) can provide lisp-like macro preprocessing for any text-based language.</p>
+
+<p>The <em>m4</em> macro processor<sup id="fnref:41" role="doc-noteref"><a href="#fn:41" class="footnote">5</a></sup> was designed to provide macro preprocessing that is more powerful than search-and-replace macros.  Tools like <em>sed</em> and <em>awk</em>, etc., might be used to pre-process code.</p>
+
+<p>Languages that have built-in REGEXP can be used to write macro-like pre-processors.  IMO, PEG is better than REGEXP.</p>
+
+<h1 id="2-performance-for-the-consumer">(2) Performance For The Consumer</h1>
+<p>In (2) we target performance for the consumer.</p>
+
+<h3 id="issues-1">Issues</h3>
+
+<p>Cost of the final product.</p>
+
+<p>For example,</p>
+<ul>
+  <li>speed</li>
+  <li>memory footprint</li>
+  <li>cheapest final hardware (e.g. can the app run on a Raspberry Pi, a phone, or, only on the latest hardware?)<sup id="fnref:31" role="doc-noteref"><a href="#fn:31" class="footnote">6</a></sup></li>
+</ul>
+
+<h3 id="techniques-1">Techniques</h3>
+
+<p>Various techniques aid in Production Engineering, like</p>
+<ul>
+  <li>parallelism</li>
+  <li>caching</li>
+  <li>strong type analysis aimed at product performance (allows stripping type checking code from the final product)</li>
+  <li>O(n) analysis</li>
+  <li>profilers</li>
+  <li>C, Rust, C++, etc, etc.</li>
+  <li>memory sharing</li>
+  <li>time-sharing</li>
+  <li>syntactic trade-offs to aid compilation (aka static languages)</li>
+</ul>
+
+<h1 id="time-to-delivery">Time To Delivery</h1>
+<p>Q: What’s faster?  Forcing the use of only one language for product realization, or, using more than one language?</p>
+
+<p>Some say that Lisp aids in creating products faster, some say that Rust should be used.<sup id="fnref:51" role="doc-noteref"><a href="#fn:51" class="footnote">7</a></sup></p>
+
+<h1 id="architecture-engineering-implementation">Architecture, Engineering, Implementation</h1>
+
+<h3 id="software-architecture">Software Architecture</h3>
+<ul>
+  <li>whiteboards</li>
+  <li>sketches</li>
+  <li>high-level details</li>
+  <li>UX</li>
+  <li>extract requirements from end-users, codify requirements</li>
+</ul>
+
+<h3 id="software-engineering">Software Engineering</h3>
+<p>Cost-benefit analysis, refactor the Software Architecture to reduce final cost (Q: along which dimension(s)?)</p>
+<h3 id="software-implementation">Software Implementation</h3>
+<p>Often mis-named engineering (Software Engineering is not Coding, Implementation is Coding).</p>
+
+<h1 id="users-of-computers">Users of Computers</h1>
+
+<h3 id="business">Business</h3>
+
+<p>The programming community addresses the needs of business users, with products like Windows, MacOSX, WYSIWYG word processors, calendars, etc, etc.</p>
+
+<h3 id="software-development">Software Development</h3>
+<p>Addressing the needs of programing development is mostly stuck in the 1950’s - text languages, text editors, GPLs for Software Production Engineering (but no popular languages for Software Architecture).</p>
+
+<h1 id="how-using-current-languages">How? Using Current Languages</h1>
+
+<p>Most current languages are implementation languages, e.g. C++, Rust, Haskell, etc.</p>
+
+<p>GPL (General purpose Programming Languages) are not very general.  They are - typically - aimed mostly at implementation.</p>
+
+<p>E.G. any language that requires the programmer to <em>define</em> a data structure is an implementation language (i.e. implementation of the data structure (instead of using a handle to data which is defined elsewhere)).</p>
+
+<p>E.G. any language that supplies low-level operators, like <code class="language-plaintext highlighter-rouge">+</code>, is an implementation language<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">8</a></sup>.</p>
+
+<p>Why are some developers “better” than other developers?  Discipline, structuring of their designs and implementations. Similarly, some people could write structured assembly programs before HLLs became popular.</p>
+
+<p>Use <em>shell</em> pipelines and <em>*sh</em> to construct MVPs.</p>
+
+<p>Note that mapping <em>*sh</em>-based programs to GPL-based programs is not straight-forward, since shell commands are asynchronous and GPLs are mostly synchronous<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">9</a></sup>.  See Appendix (Call/Return Spaghetti) for ideas on how to perform such mappings.</p>
+
+<p>PEG parsing<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">10</a></sup> provides a way to create syntax <em>skins</em> over existing languages.  Write PEGlets (I call them SCNs) that capture DI and emit different code/languages during development and production.</p>
+
+<h1 id="language-bloat">Language Bloat</h1>
+<p>Creating different languages (better yet: creating IDEs), makes it possible to fine-tune the different languages while eschewing language bloat.</p>
+
+<p>The Handmade Network’s manifesto opposes language bloat.  The above begins to address at least some of the issues alluded to in that manifesto.</p>
+
+<h1 id="appendix---peg-applied-to-wasm">Appendix - PEG Applied To WASM</h1>
+<p>POC for PEG-to-WASM…</p>
+
+<p><a href="https://guitarvydas.github.io/2021/05/15/WASM-Arithmetic-Transpiler.html">WASM Arithmentic Transpiler</a><br />
+<a href="https://github.com/guitarvydas/arithmetic">WASM Arithmetic github</a></p>
+
+<h1 id="appendix---peg-applied-to-transpilation">Appendix - PEG Applied to Transpilation</h1>
+<p><a href="https://guitarvydas.github.io/2021/03/17/PEG-vs.-Other-Pattern-Matchers.html">PEG vs Other Pattern Matchers</a><br />
+(see TOC for further discussion)</p>
+<h1 id="appendix---peg-applied-to-peg">Appendix - PEG Applied to PEG</h1>
+<p><a href="https://guitarvydas.github.io/2021/07/12/Transpilation.html">Transpilation</a></p>
+<h1 id="appendix---two-syntaxes-for-each-gpl">Appendix - Two Syntaxes For Each GPL</h1>
+<p><a href="https://guitarvydas.github.io/2021/11/14/Two-Syntaxes-For-Each-GPL.html">Two Syntaxes For Each GPL</a></p>
+<h1 id="appendix---software-development-roles">Appendix - Software Development Roles</h1>
+<p><a href="https://guitarvydas.github.io/2020/12/10/Software-Development-Roles.html">Software Development Roles</a></p>
+<h1 id="appendix---call-return-spaghetti">Appendix - Call Return Spaghetti</h1>
+<p>Understanding concurrency.</p>
+
+<p>Breaking CALL/RETURN into separate parts.</p>
+
+<p>This article does not directly show <em>how</em> to build concurrent programs, but, if you already know about queues and anonymous functions, it should be a short hop to implementation of true concurrency.</p>
+
+<p>[IMO: Concurrency is a paradigm, not a bag bolted onto the side of a language using  thread libraries.<sup id="fnref:21" role="doc-noteref"><a href="#fn:21" class="footnote">11</a></sup>]</p>
+
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">Call Return Spaghetti</a></p>
+
+<h1 id="appendix---handmade-manifesto">Appendix - Handmade Manifesto</h1>
+<p><a href="https://handmade.network/manifesto">Handmade Manifesto</a></p>
+
+<h1 id="appendix---ohm-js">Appendix - Ohm-JS</h1>
+<p><a href="https://github.com/harc/ohm">Ohm-JS</a><br />
+<a href="https://ohmlang.github.io">Ohm</a><br />
+<a href="https://guitarvydas.github.io/2021/08/30/Ohm-JS.html">Musings About Ohm-JS</a></p>
+
+<h1 id="appendix---my-goals">Appendix - My Goals</h1>
+<p><a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Manifesto</a></p>
+
+<h1 id="appendix---worlds">Appendix - Worlds</h1>
+<p><a href="https://guitarvydas.github.io/assets/worlds.pdf">Worlds Paper Thoughts</a></p>
+<h1 id="appendix---ason">Appendix - ASON</h1>
+<p><a href="https://altscript.com">ASON</a><br />
+<a href="https://guitarvydas.github.io/2021/04/10/ASON-Notation-Pipeline.html">ASON Ohm-JS parser</a><br />
+<a href="https://guitarvydas.github.io/2021/07/07/ASON-Tokenizing.html">ASON Tokenizing</a></p>
+<h1 id="appendix---book-design-of-everyday-things">Appendix - Book: Design of Everyday Things</h1>
+<p><a href="https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things">Design of Everyday Things</a></p>
+<h1 id="appendix---book-the-humane-interface">Appendix - Book: The Humane Interface</h1>
+<p><a href="https://en.wikipedia.org/wiki/The_Humane_Interface">The Humane Interface</a></p>
+
+<h1 id="appendix---references">Appendix - References</h1>
+<p><a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://guitarvydas.github.io/2021/09/21/Table-of-Contents-Sept-17-2021.html">TOC as of Sept. 17, 2021</a></p>
+<h1 id="see-also">See Also</h1>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents</a><br />
+<a href="https://guitarvydas.github.io">Blog</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async=""> 
+</script>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>We need an IDE that allows us to use both kinds of languages.  Q: Do we need a seamless transition between both types of development? Q: How much is that worth? <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>DI means Design Intent <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Every language can be interpreted.  The emphasis has been on twisting syntax to allow easier compilation. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:11" role="doc-endnote">
+      <p>Again, Ohm (a better PEG) could be used to graft these ideas onto existing languages. <a href="#fnref:11" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:41" role="doc-endnote">
+      <p>found on *nix. <a href="#fnref:41" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:31" role="doc-endnote">
+      <p>I advocate that Optimization be considered and programmed separately, instead of being tangled up with Design. <a href="#fnref:31" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:51" role="doc-endnote">
+      <p>IMO: I would not handcuff myself with Rust.  I advocate (1) creating a Design (i.e. MVP), then (2) optimizing the hell out of the very few places that actually need it.  I want a language that protects me from silly mistakes during (1) and then I want a language that gets out of my way during (2).  If I never have to spend effort on (2), all the better.  The key is to realize that you can’t do (1) and (2) at the same time, one or the other suffers.  The biggest “win”, IMO, is to allow oneself to create (1) in a concurrent paradigm. <a href="#fnref:51" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>The only dataless programming language that I know of is S/SL (not to be confused with SSL). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Note that a piepine of functions is <em>not</em> the same as a *nix pipeline <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>My current favorite PEG language is Ohm-JS.  The question of “Why?” is addressed in other notes (see TOC). <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:21" role="doc-endnote">
+      <p>See Rob Pike’s <a href="https://www.youtube.com/watch?v=oV9rvDllKEg">Concurrency is not Parallelism</a> <a href="#fnref:21" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
