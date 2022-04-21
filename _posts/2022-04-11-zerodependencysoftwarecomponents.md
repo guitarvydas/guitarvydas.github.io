@@ -13,6 +13,17 @@ Kill libraries.
 
 Kill synchrony.
 
+
+## Goal - Zero Dependencies
+
+Aim to write software that has zero (0) dependencies on other software.
+
+If this is "hard" to do, demand better features from your language designers.
+
+N.B. calling a function creates a hard-wired dependency.
+1. The name of the function is (usually) hard-wired into the calling code.
+2. The CALL is (usually) implemented using a global variable (The Stack).  Using an implicit stack creates a dynamic dependency chain.
+
 ## See Also
 
 [dependencies](https://guitarvydas.github.io/2022/03/29/Dependencies.html)
