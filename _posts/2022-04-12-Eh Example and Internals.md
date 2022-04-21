@@ -11,8 +11,8 @@ This document is a snapshot of my current progress in describing these concepts.
 
 ## Top Level
 
-![Top Level of The Simple Example (cat)](/assets/cat![[cat.png]].png)
 
+![Top Level of The Simple Example (cat)](/assets/cat.png)
 (obsidian:
 ![cat.png](file:///Users/tarvydas/Desktop/blogs/guitarvydas.github.io/assets/cat.png)
 )
