@@ -136,7 +136,7 @@ It is expected that `read` opens and reads the file and produces output messages
 
 The idea is that the `read` component `send`s these messages to other components for processing, but, in this case, we simply want to verify that `read` works as expected.
 
-`Readwrapper` runs the `read` component, then dumps al of its outputs to the console for visual inspection.  This is a very low-level test.  As we build up larger and larger systems, we would write *test programs* to inspect the outputs instead of relying on manual inspection.
+`Readwrapper` runs the `read` component, then dumps all of its outputs to the console for visual inspection.  This is a very low-level test.  As we build up larger and larger systems, we would write *test programs* to inspect the outputs instead of relying on manual inspection.
 
 In this particular case, we expect `testwrapper.js` to output:
 ```
@@ -157,7 +157,7 @@ Decoding this output:
 
 If we look at the source code for `read` (`read.js` / protoImplementation / handler), we see that it waits for a filename, then outputs one character message (`char`) every time it receives a `req` message. In normal usage, the `req` message would come from a downstream component, but in this test case, `testwrapper` generates (stub) `req` messages and injects these test messages into the `read` UUT with an appropriate etag (`req`).
 
-The `read.js` component doesn't know (cannot know) where the `req` messages come from and simple responds to each one.
+The `read.js` component doesn't know (cannot know) where the `req` messages come from and simply responds to each one.
 
 When `read.js` encounters an end-of-file condition, it invokes the `conclude` entry point which finishes the test and causes `testwrapper` to call `finish` and return.  In normal ("steady-state" usage), a Container would be calling `read` and the Container would supply a `conclude` entry point.  In this case, because we are testing `read`, the `conclude` entry point is supplied by `testwrapper`.
 
@@ -165,8 +165,7 @@ When `read.js` encounters an end-of-file condition, it invokes the `conclude` en
 
 In normal usage, we would expect downstream components to use the output messages from `write.js`.  In this test case, however, we ignore the messages and manually inspect them as they are output.
 
-`Topwrapper.js` is similar to the above, except that it uses a Container component and connects the output from `read` to the input of `write`. And, it connects the `request`
-output from `write` to the `req` input of `read`.  N.B. the actual names of these etags is different - `request` vs. `req` - but neither Leaf component cares about this difference.  The routing table is set up in `top` and only `top` knows about the name differences.  An entry in `makeConnections()` explicitly wires the `w:request` output to the `r:req` input.
+`Topwrapper.js` is similar to the above, except that it uses a Container component and connects the output from `read` to the input of `write`. And, it connects the `request` output from `write` to the `req` input of `read`.  N.B. the actual names of these etags is different - `request` vs. `req` - but neither Leaf component cares about this difference.  The routing table is set up in `top` and only `top` knows about the name differences.  An entry in `makeConnections()` explicitly wires the `w:request` output to the `r:req` input.
 
 ## Testing
 The `readwrapper.js` code contains the term `uut`.  The term *uut* comes from the hardware-testing realm, meaning "Unit Under Test".  To test electronic circuits as they come off of the production line, one sets up a testing workbench and drops the UUT into the workbench.  The workbench drives inputs into the circuit and records outputs from the circuit.  A program (software) is used to check that the outputs conform to the expected results.  This technique works because electronic circuits are inherently asynchronous and carry no dependencies.  It is possible to test electronic circuits using simple stimulus-response techniques because the circuits are stand-alone (have no dependencies, except for very basic things like needing power from a battery or power supply).  Testers - ATE (automated test equipment) can do basic black-box testing.  Testers can also do white-box testing by poking probes directly into parts of the circuit using what is called a *bed of nails*. Test Engineers review circuit designs, before production, and suggest changes to the designs to insert *TP*s - Test Points - into the production circuits, to enable a layered approach to white-box testing. For example, first a black-box test is used to determine a GO/NOGO status for each production board.  Most boards don't fail and are shipped if they receive a "GO" status.  Boards that receive a "NO GO" status are tested further.  Electronic components can be expensive, so an attempt is made to repair "NO GO" boards.  The next layer of testing checks TPs to isolate problem areas.    This process continues to test deeper and deeper into the non-conforming circuits based on an ROI evaluation - "is it worth the time to delve deeper into the problem(s) in the hopes of repairing the board, or, is it cheaper to discard the board?".  Boards for which the problem issues are isolated are sent to a re-work station.  After being repaired, boards are put back into the production line for a new cycle of testing and shipping.
@@ -427,7 +426,7 @@ sync deliver_to_child_input <= me, dest, message
 
 sync deliver_to_me_output <= me, dest, message
   // map message for output
-  { var output_message <= $o\{\{receiver.etag, message.data} message}
+  { var output_message <= $o{\{receiver.etag, message.data} message}
     { @me.enqueueOutput <= output_message }
   }
 ```

@@ -16,7 +16,7 @@ Looks like a function from the outside, but runs a dispatcher internally, allowi
 
 ### Molecules
 
-![Molecules](/assets/wp2-Molecules.png)
+![Molecules](/assets/wp2-molecules.png)
 
 ## Github
 
