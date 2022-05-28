@@ -3,7 +3,7 @@ layout: post
 title:  "Moved to Obsidian Publish"
 ---
 
-I have switched to using Obsidian Publish for blogging instead of github pages.  https://publish.obsidian.md/programmingsimplicity/, but, I am still experimenting on how best to organize this stuff.
+I have switched to using Obsidian Publish for blogging instead of github pages.  [new blog](https://publish.obsidian.md/programmingsimplicity/), but, I am still experimenting on how best to organize this stuff.
 
 ## See Also
 
