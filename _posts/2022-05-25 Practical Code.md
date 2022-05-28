@@ -2,6 +2,7 @@
 layout: post
 title:  "Practical Code"
 ---
+
 I am striving to produce code that downloads and works.  
 
 Previously, I was producing ideas, under the assumption that using using the ideas to create programs would be self-evident to the reader.
