@@ -374,34 +374,16 @@ In this POC, we simply invent new names for facts, such that old facts do not ov
 For example, rectangle fact carries more semantic information that any line facts.  Once we create a rectangle fact, we simply ignore all line facts in future (downstream) passes.
 N.B. This method of backtracking parsing has not been fully explored (but, see http://bford.info/packrat/), hence, creating useful error messages has not been explored fully.</Comments>
         </Document>
-        <Document ID="8DD43885-CF5F-4FBA-801E-196A96F0CB88">
-            <Title>Diagram Conventions / Diagrammatic Syntax</Title>
-            <Text>Drawing Conventions
+        <Document ID="76FE83C7-E24A-4195-93DF-0B344C9DF299">
+            <Title>Allocator</Title>
+            <Text>Allocation
 
-As it stands, we do not have an off-the-shelf drawing editor.
+For allocation, one needs to represent data-locations in some manner.
 
-We use an existing diagram editor plus some conventions that make its output suitable for compilation.  We do not check all drawings for correctness and the compiler may fail (or produce incorrect code) if drawings contain features not specified below.
+One method is to use a data structure called “data descriptors” [Holt, https://dl.acm.org/citation.cfm?id=24051].
 
-For now, we will use the (free) Draw.IO drawing editor and save the drawings as .SVG files.
- 
-For drawings made with Draw.IO, the following conventions are used:
-
-	•	A Part is drawn as a Rectangle (top-left of General palette) with Text (3rd item on General palette) completely inside the Rectangle.  The Text represents the kind (aka, type, class) of the part.  There can be multiple Parts with the same kind in a drawing.  These are recognised as multiple instances of the same kind of part.  Instances are given unique ID’s internally, that are not shown on the diagram (see Figure: &lt;$n:figure:Ports&gt;).
-	•	A Wire is drawn as a “directional connector” (line with arrowhead) (32nd item on the General palette) from one rectangle to another.  The connection points are displayed by Draw.IO when the line is dragged near, or across, the boundary of the rectangle.
-	•	A Wire must be a single, contiguous line.  It must not be split into multiple line segments.  Draw.IO allows one to place multiple “bend points” on a line - this is allowed, as long as the line is not split into multiple segments.
-	•	The beginning of a wire/line is unadorned.  The end of a wire is marked with an arrow-head.  Events flow from the beginning of a wire to the end.  The compiler expects the beginning of a wire to touch the rectangle.  On the other hand, arrowheads (ends of the wire(s)) can be +-20 units from the edge of a rectangle.  Draw.IO draws lines in way that the beginning touches a rectangle, but draws the end of a line so that they do not touch a rectangle (only the arrowhead touches the rectangle ; it was easier to add a kludge factor to the end of wires than to sort out which arrowheads correspond to which lines ; the kludge factor only applies to arrowhead portion of a line, all other matches are exact).
-	•	A Port is a text box (3rd item on General palette) that is not contained inside the rectangle, but is positioned “near” one end or another of the wire.  The Port’s name is a numeral.  The range of numerals depends on the compiler.  In this POC, Port names start at 0 up to 15.  The compiler measures distance from the beginning or end of a wire to unenclosed text.  The text closest to the end of a wire is taken to be the index of the Port. Currently, ports are “named” by a numeric index. In the future, the compiler can be changed to accept arbitrary character strings for port “names”.  This is not the case, currently (the compiler only understands numeric indices).
-	•	A port with no arrow is an output pin.  A port with an arrow-head is an input pin.   &lt;$img:Ports;w=400;h=300&gt; Figure: &lt;$n:figure:Ports&gt; 	
-	•	Multiple wires can connect to input pins and to output pins. (“Fan out” and “fan in”, resp.).  (N.B. FBP allows “fan in” but does not allow “fan out”.  The drawings discussed here do not follow all FBP conventions and allow for “fan out”, similar to electronic schematics).  &lt;$img:MultipleWires&gt; Figure: &lt;$n:figure:MultipleWires&gt; 
-	•	Time-ordering is preserved.  An event that is placed on a wire arrives at all inputs (in the same schematic) at the same “time”.  A wire that is attached to multiple inputs (“fan out”) is, therefore, more “costly” than a wire that connects a single output to a single input (N.B. some care is needed when implementing multiple connection and simultaneous delivery in a preemptive (time-sliced) environment. Fan-out requires that the event be delivered to a group of wires/pins atomically.  When time-slicing and/or interrupts are being used, there might be a need for some locking under-the-hood to guarantee atomic delivery of events to implement fan-out) [The current PoC performs atomic delivery implicitly].  It is, also, implementation-dependant as to what happens when non-scalar events are fanned out (e.g. an implementation can refuse to support non-scalar fan-in, or it can implement under-the-hood non-scalar event copying).
-	•	Inputs from the outside and outputs to the outside are drawn as ellipses with a port number fully enclosed inside the ellipse. 
-	•	[Dots are currently unimplemented, since they are just “syntactic sugar” for fan-in and fan-out at ports]. Dots, drawn as small black circles (Draw.IO ellipses that are round, and filled with color black).    &lt;$img:Dots&gt; Figure: &lt;$n:figure:Dots&gt;  Multiple wires can connect to a dot.  Dots are “one-way”.  A dot can have many arrow-heads pointing into it and only one wire emanating from it, or, one arrow-head pointing into it, and many wires emanating from it.  A dot must not have multiple inputs and multiple outputs.  The meaning of dots are (1) many inputs (arrow-heads) pointing in and one wire pointing out means that all of the incoming wires are compressed down into the single output (all inputs go the same place as the single output) and (2) one input and many outputs means that the input is split (copied) to all of the outputs simultaneously.
-	•	Composite Parts — parts which are made up of a schematic referring to other parts — are managed manually.  A composite Part consists of a drawing (a schematic) containing boxes, arrows, ellipses and dots.  When a composite diagram is compiled and run, it is assumed that the children parts all exist (the compiler does not currently check for this).  Composite parts can be nested hierarchically, each part on its own schematic.
-	•	Draw.IO must be instructed to save the drawing as an .SVG file (change the name to &lt;name&gt;.svg before saving).
-	•	Hints: Draw wires first, then annotate the wires with port numbers.  When moving or re-drawing a wire, move existing port numbers far away from the rectangle and connect the wires, then move the port numbers back into position.  Draw.IO allows wires to connect to Text, but this is not what we want - wires must be connected to rectangles.  When a port number is left in place, while moving an reconnecting a wire, Draw.IO might connect the wire to the rectangle or to the port number - it remains visually unclear as to which connection is made.
-</Text>
-            <Notes>- design of notation cf.&lt;&gt; 
-- if you think “electronics schematic capture”, you won’t be far off
+Fraser/Davidson designed RTL [Fraser-Davidson, https://people.well.com/user/cwf/pro/Davidson%20and%20Fraser.20The%20design%20and%20application%20of%20a%20retargetable%20peephole%20optimizer.pdf], the method used in gcc.</Text>
+            <Notes>- data descriptors
 </Notes>
         </Document>
         <Document ID="56F34B6B-2AE6-48B9-AC76-B9B53EB2F88E">
@@ -1170,16 +1152,34 @@ In the two-Part pipeline, “markIndexedPorts” and “coincidentPorts”, I im
 
 The Part “mark_directions” is a no-op for this POC compiler.  In some editors, the direction of lines is not specified.  In such cases, lines might be made up of segments with no direction associated with them.  In such cases, the compiler needs to trace all connected segments to find the ultimate beginnings (sources) and ends (sinks) of the lines and create a virtual directed line between the beginning and end Ports.  In this POC, we use Draw.IO, and use the convention that all lines (wires) use Draw.IO’s arrows.  Draw.IO arrows already provide direction information, so “mark_directions” is a no-op in this case.</Text>
         </Document>
-        <Document ID="76FE83C7-E24A-4195-93DF-0B344C9DF299">
-            <Title>Allocator</Title>
-            <Text>Allocation
+        <Document ID="8DD43885-CF5F-4FBA-801E-196A96F0CB88">
+            <Title>Diagram Conventions / Diagrammatic Syntax</Title>
+            <Text>Drawing Conventions
 
-For allocation, one needs to represent data-locations in some manner.
+As it stands, we do not have an off-the-shelf drawing editor.
 
-One method is to use a data structure called “data descriptors” [Holt, https://dl.acm.org/citation.cfm?id=24051].
+We use an existing diagram editor plus some conventions that make its output suitable for compilation.  We do not check all drawings for correctness and the compiler may fail (or produce incorrect code) if drawings contain features not specified below.
 
-Fraser/Davidson designed RTL [Fraser-Davidson, https://people.well.com/user/cwf/pro/Davidson%20and%20Fraser.20The%20design%20and%20application%20of%20a%20retargetable%20peephole%20optimizer.pdf], the method used in gcc.</Text>
-            <Notes>- data descriptors
+For now, we will use the (free) Draw.IO drawing editor and save the drawings as .SVG files.
+ 
+For drawings made with Draw.IO, the following conventions are used:
+
+	•	A Part is drawn as a Rectangle (top-left of General palette) with Text (3rd item on General palette) completely inside the Rectangle.  The Text represents the kind (aka, type, class) of the part.  There can be multiple Parts with the same kind in a drawing.  These are recognised as multiple instances of the same kind of part.  Instances are given unique ID’s internally, that are not shown on the diagram (see Figure: &lt;$n:figure:Ports&gt;).
+	•	A Wire is drawn as a “directional connector” (line with arrowhead) (32nd item on the General palette) from one rectangle to another.  The connection points are displayed by Draw.IO when the line is dragged near, or across, the boundary of the rectangle.
+	•	A Wire must be a single, contiguous line.  It must not be split into multiple line segments.  Draw.IO allows one to place multiple “bend points” on a line - this is allowed, as long as the line is not split into multiple segments.
+	•	The beginning of a wire/line is unadorned.  The end of a wire is marked with an arrow-head.  Events flow from the beginning of a wire to the end.  The compiler expects the beginning of a wire to touch the rectangle.  On the other hand, arrowheads (ends of the wire(s)) can be +-20 units from the edge of a rectangle.  Draw.IO draws lines in way that the beginning touches a rectangle, but draws the end of a line so that they do not touch a rectangle (only the arrowhead touches the rectangle ; it was easier to add a kludge factor to the end of wires than to sort out which arrowheads correspond to which lines ; the kludge factor only applies to arrowhead portion of a line, all other matches are exact).
+	•	A Port is a text box (3rd item on General palette) that is not contained inside the rectangle, but is positioned “near” one end or another of the wire.  The Port’s name is a numeral.  The range of numerals depends on the compiler.  In this POC, Port names start at 0 up to 15.  The compiler measures distance from the beginning or end of a wire to unenclosed text.  The text closest to the end of a wire is taken to be the index of the Port. Currently, ports are “named” by a numeric index. In the future, the compiler can be changed to accept arbitrary character strings for port “names”.  This is not the case, currently (the compiler only understands numeric indices).
+	•	A port with no arrow is an output pin.  A port with an arrow-head is an input pin.   &lt;$img:Ports;w=400;h=300&gt; Figure: &lt;$n:figure:Ports&gt; 	
+	•	Multiple wires can connect to input pins and to output pins. (“Fan out” and “fan in”, resp.).  (N.B. FBP allows “fan in” but does not allow “fan out”.  The drawings discussed here do not follow all FBP conventions and allow for “fan out”, similar to electronic schematics).  &lt;$img:MultipleWires&gt; Figure: &lt;$n:figure:MultipleWires&gt; 
+	•	Time-ordering is preserved.  An event that is placed on a wire arrives at all inputs (in the same schematic) at the same “time”.  A wire that is attached to multiple inputs (“fan out”) is, therefore, more “costly” than a wire that connects a single output to a single input (N.B. some care is needed when implementing multiple connection and simultaneous delivery in a preemptive (time-sliced) environment. Fan-out requires that the event be delivered to a group of wires/pins atomically.  When time-slicing and/or interrupts are being used, there might be a need for some locking under-the-hood to guarantee atomic delivery of events to implement fan-out) [The current PoC performs atomic delivery implicitly].  It is, also, implementation-dependant as to what happens when non-scalar events are fanned out (e.g. an implementation can refuse to support non-scalar fan-in, or it can implement under-the-hood non-scalar event copying).
+	•	Inputs from the outside and outputs to the outside are drawn as ellipses with a port number fully enclosed inside the ellipse. 
+	•	[Dots are currently unimplemented, since they are just “syntactic sugar” for fan-in and fan-out at ports]. Dots, drawn as small black circles (Draw.IO ellipses that are round, and filled with color black).    &lt;$img:Dots&gt; Figure: &lt;$n:figure:Dots&gt;  Multiple wires can connect to a dot.  Dots are “one-way”.  A dot can have many arrow-heads pointing into it and only one wire emanating from it, or, one arrow-head pointing into it, and many wires emanating from it.  A dot must not have multiple inputs and multiple outputs.  The meaning of dots are (1) many inputs (arrow-heads) pointing in and one wire pointing out means that all of the incoming wires are compressed down into the single output (all inputs go the same place as the single output) and (2) one input and many outputs means that the input is split (copied) to all of the outputs simultaneously.
+	•	Composite Parts — parts which are made up of a schematic referring to other parts — are managed manually.  A composite Part consists of a drawing (a schematic) containing boxes, arrows, ellipses and dots.  When a composite diagram is compiled and run, it is assumed that the children parts all exist (the compiler does not currently check for this).  Composite parts can be nested hierarchically, each part on its own schematic.
+	•	Draw.IO must be instructed to save the drawing as an .SVG file (change the name to &lt;name&gt;.svg before saving).
+	•	Hints: Draw wires first, then annotate the wires with port numbers.  When moving or re-drawing a wire, move existing port numbers far away from the rectangle and connect the wires, then move the port numbers back into position.  Draw.IO allows wires to connect to Text, but this is not what we want - wires must be connected to rectangles.  When a port number is left in place, while moving an reconnecting a wire, Draw.IO might connect the wire to the rectangle or to the port number - it remains visually unclear as to which connection is made.
+</Text>
+            <Notes>- design of notation cf.&lt;&gt; 
+- if you think “electronics schematic capture”, you won’t be far off
 </Notes>
         </Document>
     </Documents>

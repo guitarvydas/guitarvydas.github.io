@@ -1,44 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
-        <Document ID="EC720A9B-0567-4856-82E6-C6919D91FC19">
-            <Title>Quoting Revisited</Title>
-            <Text>As I get further and try more detailed examples, I see some bugs in the quote expander code.
+        <Document ID="E165032C-26C8-4E67-A1C8-58CB5162367A">
+            <Title>Grammar Inheritance</Title>
+            <Text>Grammars for Scm2JSListConstants and Scm2JSEmitter are rewritten to inherit from Scm2JSBasic.
 
-Firstly, 
+Note that this creates new "flat" grammars and does not, by itself, create new isolated passes.
 
-(define db '(5)) 
+Note that Scm2JSEmitter inherits from Scm2JSBasic and not from its immediate predecessor Scm2JSListConstants (as would be done if I used only OO instead of a pass-based strategy).
 
-Comes out as
+OO is essentially a fancy form of cut&amp;paste - it creates new "flat" grammars by piling changes up on predecessor grammars.  This applies to all forms of OO, not just to grammars.  OO provides only some encapsulation, not full encapsulation.
 
-(define db (@newList@ "5")) 
+Inheritance produces increasingly complicated software and does not provide a way to "freeze" changes.
 
-whereas it should be
-
-(define db (@newList@ 5)).
-
-This is a variant of the problem I solved in the Scm2JS grammar, and should be easy to repair.  Thankfully, the quote expansion is isolated, so I know that changes to it will not affect what I've done so far.  
-
-See commit 8946e4f755f5b3083fcf0203c0d3246d0b8cd399 which fixes quoted lists of single atoms and a quoted null list.  The result still has problems…
-
-Next, I see (1) that the Scm2JS grammar treats the insides of quoted lists as function calls and (2) something looks odd for input "(define db '(((edge a b))):.
-
-Actually, after a more detailed look, I see that (1) is misdiagnosed.  The emitter has left-over code that places "()" after every item when emitting for SList_atnewlistat.  I need to remove the spurious "()".  See commit 0ce488124f292152754348e030b78be3b449fb13 (now back on the 'master' branch, once again).
-
-Now, (2) looks more reasonable, but still has spurious "function"s emitted.  Again, this is just legacy code - easy to clean up and fix.  See commit 6a5a268cccdc04c593c79983bd5d02ccf80160ed.
-
-The emitted code is
-
-var db = new List(new List(new List("edge","a","b")));
-
-but the node compiler balks with the error that List is undefined.
-
-Manually stubbing in List…
-
-function List(args) {
-};
-
-and the code compiles cleanly under node (put the code into "junk.js" and run node: "node junk.js").</Text>
+</Text>
         </Document>
         <Document ID="D8881C7F-056F-48D3-AE86-FE61DBD1D979">
             <Title>Lines and Filenames</Title>
@@ -2768,6 +2743,45 @@ OMeta can parse arbitrary datatypes.
 
 </Text>
         </Document>
+        <Document ID="EC720A9B-0567-4856-82E6-C6919D91FC19">
+            <Title>Quoting Revisited</Title>
+            <Text>As I get further and try more detailed examples, I see some bugs in the quote expander code.
+
+Firstly, 
+
+(define db '(5)) 
+
+Comes out as
+
+(define db (@newList@ "5")) 
+
+whereas it should be
+
+(define db (@newList@ 5)).
+
+This is a variant of the problem I solved in the Scm2JS grammar, and should be easy to repair.  Thankfully, the quote expansion is isolated, so I know that changes to it will not affect what I've done so far.  
+
+See commit 8946e4f755f5b3083fcf0203c0d3246d0b8cd399 which fixes quoted lists of single atoms and a quoted null list.  The result still has problems…
+
+Next, I see (1) that the Scm2JS grammar treats the insides of quoted lists as function calls and (2) something looks odd for input "(define db '(((edge a b))):.
+
+Actually, after a more detailed look, I see that (1) is misdiagnosed.  The emitter has left-over code that places "()" after every item when emitting for SList_atnewlistat.  I need to remove the spurious "()".  See commit 0ce488124f292152754348e030b78be3b449fb13 (now back on the 'master' branch, once again).
+
+Now, (2) looks more reasonable, but still has spurious "function"s emitted.  Again, this is just legacy code - easy to clean up and fix.  See commit 6a5a268cccdc04c593c79983bd5d02ccf80160ed.
+
+The emitted code is
+
+var db = new List(new List(new List("edge","a","b")));
+
+but the node compiler balks with the error that List is undefined.
+
+Manually stubbing in List…
+
+function List(args) {
+};
+
+and the code compiles cleanly under node (put the code into "junk.js" and run node: "node junk.js").</Text>
+        </Document>
         <Document ID="FD4FF368-A7F5-41E5-8EB0-58FB689EA3D3">
             <Title>Waterfall</Title>
             <Text>In software, it is never true that one can get it right the first time around.  
@@ -2778,20 +2792,6 @@ Even really smart people don't get it right most of the time - for example, refe
 
 [If you thought that you got it right the "first time", odds are that you have done this before.] </Text>
             <Comments>Currently, multi-tasking is considered "hard",  Most of the problem is due to Accidental Complexity - the use of Time-Sharing (a hard problem) and the idea that memory needs to be shared.  Both of these are based on old-fashioned criteria that have little to do with generalized multi-tasking.</Comments>
-        </Document>
-        <Document ID="E165032C-26C8-4E67-A1C8-58CB5162367A">
-            <Title>Grammar Inheritance</Title>
-            <Text>Grammars for Scm2JSListConstants and Scm2JSEmitter are rewritten to inherit from Scm2JSBasic.
-
-Note that this creates new "flat" grammars and does not, by itself, create new isolated passes.
-
-Note that Scm2JSEmitter inherits from Scm2JSBasic and not from its immediate predecessor Scm2JSListConstants (as would be done if I used only OO instead of a pass-based strategy).
-
-OO is essentially a fancy form of cut&amp;paste - it creates new "flat" grammars by piling changes up on predecessor grammars.  This applies to all forms of OO, not just to grammars.  OO provides only some encapsulation, not full encapsulation.
-
-Inheritance produces increasingly complicated software and does not provide a way to "freeze" changes.
-
-</Text>
         </Document>
     </Documents>
 </SearchIndexes>

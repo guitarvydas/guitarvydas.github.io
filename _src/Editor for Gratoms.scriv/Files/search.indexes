@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
-        <Document ID="D9C4D5D5-2DAB-415B-9030-3FE8D626E359">
-            <Title>Editor Basic Operations</Title>
-            <Text>An editor can create various gratoms:
-
-	•	rectangle
-	•	line
-	•	text
-	•	ellipse
-	•	curvy line
-
-The editor does not know what it is editing.  The editor simply creates gratoms and allows the user to edit them.
-
-Understanding what is on a diagram is left to later passes in the chain.
-
-</Text>
-        </Document>
-        <Document ID="5B8BD183-9176-47E8-BD01-552E96D46127">
-            <Title>Curvy Line</Title>
-            <Text>	•	define start point of a line
-	•	define ending point of a line
-	•	edit syntactic sugar of a line - editing bezier points, thickness, etc.</Text>
+        <Document ID="DB20D9AB-E5BC-48B8-8AA8-5BCE71C6D9CD">
+            <Title>Rectangle</Title>
+            <Text>	•	position x,y of a rectangle
+	•	change w,h (width, height) of rectangle
+	•	edit characteristics of rectangle (colour, border, rounding, etc.)	</Text>
         </Document>
         <Document ID="5BB7A57F-A194-4DCE-898E-EE422114BD8F">
             <Title>Ellipse</Title>
             <Text>	•	position x,y of an ellipse
 	•	change w,h (width, height) of ellipse's bounding box
 	•	edit characteristics of ellipse (colour, border, etc.)	</Text>
+        </Document>
+        <Document ID="AD38C617-C021-4F34-918E-3D139A5B2694">
+            <Title>Text</Title>
+            <Text>	•	position x,y of a text box
+	•	change w,h (width, height) of text box
+	•	edit the characters contained in a text box (maybe by bringing up a textual editor)
+</Text>
         </Document>
         <Document ID="F91C8E1B-67DA-45E4-A3A0-A300F78FEDD4">
             <Title>Graphical Atoms - Gratoms</Title>
@@ -36,12 +27,11 @@ Understanding what is on a diagram is left to later passes in the chain.
 For lack of a better term, I will use the word gratom to denote graphics atoms.
 </Text>
         </Document>
-        <Document ID="AD38C617-C021-4F34-918E-3D139A5B2694">
-            <Title>Text</Title>
-            <Text>	•	position x,y of a text box
-	•	change w,h (width, height) of text box
-	•	edit the characters contained in a text box (maybe by bringing up a textual editor)
-</Text>
+        <Document ID="5B8BD183-9176-47E8-BD01-552E96D46127">
+            <Title>Curvy Line</Title>
+            <Text>	•	define start point of a line
+	•	define ending point of a line
+	•	edit syntactic sugar of a line - editing bezier points, thickness, etc.</Text>
         </Document>
         <Document ID="064191B4-0AF1-450C-A684-8F56BC586480">
             <Title>Straight Line</Title>
@@ -86,14 +76,24 @@ We could write a checker routine that checks that the stripped-down SVG diagram 
 Parsing is not contained in the editor proper.  Attempts at putting a lot of smarts into the editor were tried and failed.  Such editors - "structured editors" - were too complicated to maintain.  It was always better to put the parser in a separate pass.   Such structured editors also tried to deal with the conundrum of ill-formed code - some editors would not let you save an unfinished piece of code.  The user should be able to create garbage files using the editor, as long as the parser complains when fed garbage.  Let the editor edit, the parser parse, etc.
 </Text>
         </Document>
+        <Document ID="D9C4D5D5-2DAB-415B-9030-3FE8D626E359">
+            <Title>Editor Basic Operations</Title>
+            <Text>An editor can create various gratoms:
+
+	•	rectangle
+	•	line
+	•	text
+	•	ellipse
+	•	curvy line
+
+The editor does not know what it is editing.  The editor simply creates gratoms and allows the user to edit them.
+
+Understanding what is on a diagram is left to later passes in the chain.
+
+</Text>
+        </Document>
         <Document ID="16C8146A-1A82-4799-A7FE-4972C055ACEA">
             <Title>Operations</Title>
-        </Document>
-        <Document ID="DB20D9AB-E5BC-48B8-8AA8-5BCE71C6D9CD">
-            <Title>Rectangle</Title>
-            <Text>	•	position x,y of a rectangle
-	•	change w,h (width, height) of rectangle
-	•	edit characteristics of rectangle (colour, border, rounding, etc.)	</Text>
         </Document>
     </Documents>
 </SearchIndexes>

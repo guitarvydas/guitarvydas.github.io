@@ -66,14 +66,41 @@ We see some light at the end of the tunnel creeping in with technologies such as
 The power transfer can happen at places that are clearly defined in the syntax of the concurrent language.
 Multitasking accidental complexities involve such issues as fairness, etc.  Issues like thread safety are harmful to concurrency, too, but, they are caused by other problems in the multitasking model.  See the sections on time-sharing and memory-sharing.</Comments>
         </Document>
-        <Document ID="4D3BF9C7-75DC-444F-AECC-095CF57719D5">
-            <Title>Always-ON</Title>
-            <Text>A concurrent part is alway running.  It is always-on.  It is always waiting for events.
+        <Document ID="2643D563-D18D-4405-8FE5-9A1C44F61E50">
+            <Title>DAW</Title>
+            <Text>- ORCA
+- Sonic Pi
+- (IRCIS) </Text>
+        </Document>
+        <Document ID="B3175E76-740D-4D72-BC79-CBE576019206">
+            <Title>Calculator</Title>
+            <Text>The original intent for using a computer was to calculate ballistic trajectories of missiles and bombs.
 
-When an event arrives, the part performs some action.  The action might involve:
-	•	doing nothing (ignoring the event)
-	•	changing its own state
-	•	sending zero or more events to its output pins.</Text>
+Treating a computer as a glorified calculator fits this kind of thinking.
+
+To do this well, you think in terms of sequential operations, e.g. (1) do this then (2) do that the (3) do something else then … (4) print the result.
+
+Computer Scientists have been barrelling down this road for decades.  They have invented better and better ways to build sequential calculations.
+
+One of the techniques that has been invented is a pipeline of one-in/one-out clumps of software.  This has led to FP (Functional Programming).
+
+Early on, the technique of serialization invented several techniques:
+	•	call/return languages
+	•	the stack
+	•	threads (processes) of sequential lumps of software.
+These techniques made it possible to build better and more complicated calculators.
+
+These techniques have been mis-applied to other kinds of computing.  As a counter-example, imagine the lowly HMTML File Reader.  It has one input - a user-supplied file name, that comes at "any" time - and it has at least five (5) possible outcomes: 
+	1)	OK - the file contents
+	2)	error in the filename specified by the user
+	3)	cancelling - the user cancels the operation
+	4)	file read error
+	5)	no response - the network is down, the server has crashed, etc.
+
+When we mis-apply calculation-computing techniques to this kind of problem, we run into trouble
+</Text>
+            <Comments>This is called "asynchronous input".
+This is called "accidental complexity".</Comments>
         </Document>
         <Document ID="E78E1ABC-ED26-484C-9FF4-521A81EE96C4">
             <Title>General Computer</Title>
@@ -86,15 +113,6 @@ A general computer runs many apps.  For example, you don't spend $1,000 to buy a
 You buy a general computer hoping that you can run many different apps on it, while, in the long run, saving money.
 
 Some of the apps on a general computer are (1) calculator apps and some are (2) controller apps.</Text>
-        </Document>
-        <Document ID="907F8A57-A629-4E64-88AB-214C7178DABF">
-            <Title>History</Title>
-            <Text>- electricity was originally used to pump water uphill to create streams of water to run water-wheels that ran mills
-
-- desktop metaphor is an "old idea"
-
-- time-sharing is an "old idea"
-</Text>
         </Document>
         <Document ID="C100AB56-DA0B-4765-80B8-2A1B372D2869">
             <Title>Concurrency</Title>
@@ -116,8 +134,14 @@ In calculator-like languages, data transfer happens all-at-once.  When a functio
         <Document ID="69F0C30D-FADC-40B2-88BA-5F1C425CBEAB">
             <Title>Desktop</Title>
         </Document>
-        <Document ID="8F3342E3-8F01-4EBE-8367-6A67D6897D88">
-            <Title>Further Nuance</Title>
+        <Document ID="907F8A57-A629-4E64-88AB-214C7178DABF">
+            <Title>History</Title>
+            <Text>- electricity was originally used to pump water uphill to create streams of water to run water-wheels that ran mills
+
+- desktop metaphor is an "old idea"
+
+- time-sharing is an "old idea"
+</Text>
         </Document>
         <Document ID="72F82AB1-3618-4BA6-B7BB-8643CF445DCB">
             <Title>Blockchain</Title>
@@ -130,8 +154,8 @@ Blockchain is 2 things in a single app:
 
 </Text>
         </Document>
-        <Document ID="767643CB-D959-4B02-8F88-7263D334FA87">
-            <Title>Basic Breakdown</Title>
+        <Document ID="8F3342E3-8F01-4EBE-8367-6A67D6897D88">
+            <Title>Further Nuance</Title>
         </Document>
         <Document ID="86A9F376-EF35-4041-AA7C-36ACA08A6A21">
             <Title>Network, Internet, Distributed Computing</Title>
@@ -173,16 +197,8 @@ If you use a computer for one kind of thing, but program it as if you are using 
 
 </Text>
         </Document>
-        <Document ID="288BA1E4-BFC3-407A-9F41-B318BB0A99CA">
-            <Title>Websites</Title>
-            <Text>Websites are UIs.  See UIs.
-
-Websites react to asynchronous operations performed by users.
-
-Websites collect up asynchronous inputs from users and then send requests to servers, and waits for responses.
-
-Websites are primarily controllers, not calculators.</Text>
-            <Comments>JavaScript provides callbacks in an attempt to corral asynchronous operations.</Comments>
+        <Document ID="767643CB-D959-4B02-8F88-7263D334FA87">
+            <Title>Basic Breakdown</Title>
         </Document>
         <Document ID="F386F4F6-6AD0-4E17-BE4A-AE97DCA9D578">
             <Title>Multitasking</Title>
@@ -201,38 +217,19 @@ Few programs are written using the concurrent paradigm.  Most multitasking progr
 
 </Text>
         </Document>
+        <Document ID="288BA1E4-BFC3-407A-9F41-B318BB0A99CA">
+            <Title>Websites</Title>
+            <Text>Websites are UIs.  See UIs.
+
+Websites react to asynchronous operations performed by users.
+
+Websites collect up asynchronous inputs from users and then send requests to servers, and waits for responses.
+
+Websites are primarily controllers, not calculators.</Text>
+            <Comments>JavaScript provides callbacks in an attempt to corral asynchronous operations.</Comments>
+        </Document>
         <Document ID="4FB7EE53-5E4E-4A7F-A144-A6A573BB2AF8">
             <Title>New Technology Using Old Ideas</Title>
-        </Document>
-        <Document ID="B3175E76-740D-4D72-BC79-CBE576019206">
-            <Title>Calculator</Title>
-            <Text>The original intent for using a computer was to calculate ballistic trajectories of missiles and bombs.
-
-Treating a computer as a glorified calculator fits this kind of thinking.
-
-To do this well, you think in terms of sequential operations, e.g. (1) do this then (2) do that the (3) do something else then … (4) print the result.
-
-Computer Scientists have been barrelling down this road for decades.  They have invented better and better ways to build sequential calculations.
-
-One of the techniques that has been invented is a pipeline of one-in/one-out clumps of software.  This has led to FP (Functional Programming).
-
-Early on, the technique of serialization invented several techniques:
-	•	call/return languages
-	•	the stack
-	•	threads (processes) of sequential lumps of software.
-These techniques made it possible to build better and more complicated calculators.
-
-These techniques have been mis-applied to other kinds of computing.  As a counter-example, imagine the lowly HMTML File Reader.  It has one input - a user-supplied file name, that comes at "any" time - and it has at least five (5) possible outcomes: 
-	1)	OK - the file contents
-	2)	error in the filename specified by the user
-	3)	cancelling - the user cancels the operation
-	4)	file read error
-	5)	no response - the network is down, the server has crashed, etc.
-
-When we mis-apply calculation-computing techniques to this kind of problem, we run into trouble
-</Text>
-            <Comments>This is called "asynchronous input".
-This is called "accidental complexity".</Comments>
         </Document>
         <Document ID="BFFBE117-5590-4DFE-8188-746B81EB109A">
             <Title>Memory-Sharing</Title>
@@ -284,11 +281,14 @@ Parallelism requires the use of the concurrent paradigm (where multitasking is a
 Concurrency, on the other hand, does not require parallelism.  The concurrent paradigm can be used on a single computer or on many distributed computers and on many cores.
 </Text>
         </Document>
-        <Document ID="2643D563-D18D-4405-8FE5-9A1C44F61E50">
-            <Title>DAW</Title>
-            <Text>- ORCA
-- Sonic Pi
-- (IRCIS) </Text>
+        <Document ID="4D3BF9C7-75DC-444F-AECC-095CF57719D5">
+            <Title>Always-ON</Title>
+            <Text>A concurrent part is alway running.  It is always-on.  It is always waiting for events.
+
+When an event arrives, the part performs some action.  The action might involve:
+	•	doing nothing (ignoring the event)
+	•	changing its own state
+	•	sending zero or more events to its output pins.</Text>
         </Document>
     </Documents>
 </SearchIndexes>
