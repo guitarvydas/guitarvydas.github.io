@@ -333,6 +333,20 @@
 <p class="p3"><br></p>
 <p class="p2">Control Flow does not leak beyond the boundaries of Components<a id="fnlink42"></a><a href="#fn42"><sup>[42]</sup></a>.</p>
 <hr>
+<h2 id="see-also">See Also</h2>
+
+<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 01 2021 (outdated)</a><br />
+<a href="https://publish.obsidian.md/programmingsimplicity/">Blog #1 (refer to dated entries)</a><br />
+<a href="https://guitarvydas.github.io">Blog #2</a><br />
+<a href="https://www.youtube.com/@programmingsimplicity2980/featured">Videos #1</a><br />
+<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos #2</a><br />
+<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
+<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
+
+<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
+</script>
+
+<hr>
 <p class="p7"><a id="fn1"></a><a href="#fnlink1">[1]</a> The oval labelled "input".</p>
 <p class="p7"><a id="fn2"></a><a href="#fnlink2">[2]</a> <span class="s3">The oval labelled "output".</span></p>
 <p class="p9"><a id="fn3"></a><a href="#fnlink3"><span class="s2">[3]</span></a><span class="s2"> </span>Boxes labelled B and C.</p>
@@ -376,20 +390,6 @@
 <p class="p11"><a id="fn40"></a><a href="#fnlink40"><span class="s2">[40]</span></a><span class="s2"> </span>I call them "input pins" and "output pins", resp., inspired by TTL hardware concepts.</p>
 <p class="p11"><a id="fn41"></a><a href="#fnlink41"><span class="s2">[41]</span></a><span class="s2"> </span>This is similar to <i>referential transparency, </i>but, without the constraint that pin-compatible components must produce the same outputs (this loosening of the same-output restriction allows upgrading).</p>
 <p class="p9"><a id="fn42"></a><a href="#fnlink42"><span class="s2">[42]</span></a><span class="s2"> </span>Control Flow cannot leak because Components cannot <i>CALL</i> other components.<span class="Apple-converted-space">  </span>Components can only SEND() messages upwards to their parents for routing.<span class="Apple-converted-space">  </span>Corollary: the direction of SEND() is vertical-only - SEND() cannot be used to deliver messages <i>sideways</i> to peer components.<span class="Apple-converted-space">  </span>Components can SEND() data upwards to their parent.<span class="Apple-converted-space">  </span>A parent can route messages between children (and their own input and output pins).<span class="Apple-converted-space">  </span>Parents can SEND() commands downwards to children.</p>
-
-<hr>
-<h2 id="see-also">See Also</h2>
-
-<p><a href="https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html">Table of Contents as of Dec. 01 2021 (outdated)</a><br />
-<a href="https://publish.obsidian.md/programmingsimplicity/">Blog #1 (refer to dated entries)</a><br />
-<a href="https://guitarvydas.github.io">Blog #2</a><br />
-<a href="https://www.youtube.com/@programmingsimplicity2980/featured">Videos #1</a><br />
-<a href="https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos">Videos #2</a><br />
-<a href="https://guitarvydas.github.io/2021/01/14/References.html">References</a><br />
-<a href="https://leanpub.com/u/paul-tarvydas.html">Books</a></p>
-
-<script src="https://utteranc.es/client.js" repo="guitarvydas/guitarvydas.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous"> 
-</script>
 
 </div>
 </body>
