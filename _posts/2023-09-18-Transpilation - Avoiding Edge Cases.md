@@ -59,13 +59,13 @@ Currently, it is customary to solve programming problems by building obfuscated 
 
 The idea of building programming languages on top of existing programming languages is espoused by Alan Kay in https://www.youtube.com/watch?v=fhOHn9TClXY&t=859s where he says, around 31:50, "In a 'real' Computer Science, the best languages of an era should serve as 'assembly code" for the next generation of expression.
 
-# Appendix - Ohm in Small Steps
+## Appendix - Ohm in Small Steps
 
 My first project when learning to use Ohm-JS was a Scheme to JavaScript transpiler.  A "diary" of my progress on that learning curve is https://guitarvydas.github.io/2020/12/09/OhmInSmallSteps.html.
 
 Recently, I dusted off this project and converted it into drawware.  The drawware version of this transpiler forms the playground for this essay.  The repo for the drawware version is (as already mentioned above) https://github.com/guitarvydas/transpiler .
 
-# See Also
+## See Also
 ### Blogs
 - https://publish.obsidian.md/programmingsimplicity (see blogs that begin with a date 202x-xx-xx-)
 - https://guitarvydas.github.io/ (up to about mid-2022)
