@@ -69,7 +69,6 @@ Recently, I dusted off this project and converted it into drawware.  The drawwar
 ### Blogs
 - https://publish.obsidian.md/programmingsimplicity (see blogs that begin with a date 202x-xx-xx-)
 - https://guitarvydas.github.io/ (up to about mid-2022)
-
 ### Videos
 https://www.youtube.com/@programmingsimplicity2980
 ### Books
@@ -80,7 +79,7 @@ https://discord.gg/Jjx62ypR  ("programming simplicity") all welcome, I invite mo
 ### Twitter
 @paul_tarvydas
 ### Mastodon
-*(tbd, advice needed)*
+(tbd, advice needed)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
