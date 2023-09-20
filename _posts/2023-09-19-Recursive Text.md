@@ -64,8 +64,9 @@ see 2023-09-19-CPUs Are Not Computers
 
 ## See Also
 ### Blogs
-- https://publish.obsidian.md/programmingsimplicity (see blogs that begin with a date 202x-xx-xx-)
-- https://guitarvydas.github.io/
+https://publish.obsidian.md/programmingsimplicity (see blogs that begin with a date 202x-xx-xx-)
+
+https://guitarvydas.github.io/
 ### Videos
 https://www.youtube.com/@programmingsimplicity2980
 ### Books
