@@ -1,4 +1,4 @@
-![[/screenshots/Find and Replace.png]]
+![](/screenshots/Find and Replace.png)
 WIP: playing with Ohm-JS / PEG operations ; using Obsidian markdown editor + a bit of HTML...
 
 - Loop is a main rule - included in macro processor
