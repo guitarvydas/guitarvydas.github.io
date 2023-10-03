@@ -240,6 +240,10 @@ The memory layout works out to be the same as that in Block 4.
 ![](/diagrams/stringclone-block 5.drawio.svg)
 ## Appendix - Code Repository
 
+[odinmem](https://github.com/guitarvydas/odinmem)
+
+usage: `make`
+
 ## Appendix - Contact Me
 email: paultarvydas@gmail.com
 
