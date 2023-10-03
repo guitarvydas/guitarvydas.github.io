@@ -257,10 +257,10 @@ In fact, feedback will help me improve the readability of this essay...
 ### Videos
 [videos - programming simplicity playlist](https://www.youtube.com/@programmingsimplicity2980)
 ### Books
-leanpub'ed (disclaimer: leanpub encourages publishing books before they are finalized)
-[](https://leanpub.com/u/paul-tarvydas)
+leanpub'ed (disclaimer: leanpub encourages publishing books before they are finalized - these books are WIPs)
+[Programming Simplicity Takeaways, and, Programming Simplicity Broad Brush](https://leanpub.com/u/paul-tarvydas)
 ### Discord
-[Programming Simplicity](https://discord.gg/Jjx62ypR)) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
+[Programming Simplicity](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
 ### Twitter
 @paul_tarvydas
 ### Mastodon
