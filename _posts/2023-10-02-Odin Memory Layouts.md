@@ -250,7 +250,6 @@ email: paultarvydas@gmail.com
 I would be glad to answer any question to the best of my abilities and available time.  No question is "too stupid" to ask.
 
 In fact, feedback will help me improve the readability of this essay...
-## Appendix - See Also
 
 ## See Also
 ### Blogs
