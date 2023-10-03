@@ -250,9 +250,9 @@ In fact, feedback will help me improve the readability of this essay...
 
 ## See Also
 ### Blogs
-https://guitarvydas.github.io/
+[blog](https://guitarvydas.github.io/)
 
-https://publish.obsidian.md/programmingsimplicity (see blogs that begin with a date 202x-xx-xx-)
+[obsidian blogs](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
 
 ### Videos
 https://www.youtube.com/@programmingsimplicity2980
