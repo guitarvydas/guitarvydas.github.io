@@ -255,12 +255,12 @@ In fact, feedback will help me improve the readability of this essay...
 [obsidian blogs](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
 
 ### Videos
-https://www.youtube.com/@programmingsimplicity2980
+[videos - programming simplicity playlist](https://www.youtube.com/@programmingsimplicity2980)
 ### Books
 leanpub'ed (disclaimer: leanpub encourages publishing books before they are finalized)
-https://leanpub.com/u/paul-tarvydas
+[](https://leanpub.com/u/paul-tarvydas)
 ### Discord
-https://discord.gg/Jjx62ypR  ("programming simplicity") all welcome, I invite more discussion of these topics
+[Programming Simplicity](https://discord.gg/Jjx62ypR)) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
 ### Twitter
 @paul_tarvydas
 ### Mastodon
