@@ -7,12 +7,11 @@ Civil Engineers *think* about designs for solutions to *specific* problems and c
 
 Software Engineers shouldn't need to write code.
 
-Software Engineers *think* about designs for solutions to *specific* problems and communicate those designs to coders using `<`???>.
+Software Engineers *think* about designs for solutions to *specific* problems and communicate those designs to coders using `<???>`.
 
 Currently, Software Engineers are forced to lay bricks and hope that other engineers and brick-layers can reverse-engineer the design intentions from how the bricks were laid.
 
 Most existing "general purpose" programming languages - like Rust, Python, Haskell, JavaScript, etc. - are brick-laying languages, not blueprint languages for describing engineering designs and trade-offs.
-
 
 ## See Also
 ### Blogs
