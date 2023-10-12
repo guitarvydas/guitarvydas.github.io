@@ -144,8 +144,37 @@ I think in the back of my mind how to adapt my GigaDSP system to these Actors. I
 
 Functionally pure Actor behavior code means that local persistent data are never mutated. So parallel execution is perfectly fine. If you need to mutate some local data, you BECOME a fresh behavior with augmented copy of data. This means that parallel execution can’t be fudged in any way.
 
+## Rebol
+Rebol - Carl Sassenrath - one of the chief programmers on the Amiga project. Yes, we know each other. Part of that convoluted story on the Amiga.   
+  
+Carl was a bright young guy from Berkeley? or Stanford? But he was frustrated by the shenanigans of the Amiga project, their takeover by Commodore, and all the funny money stuff that went on.  
+  
+We didn’t part amicably, but Carl and I were caught up in something bigger than either of us on the money front. Along the way he was smashed into compliance while we (my WSM Group) enjoyed a brief but lucrative contract from Commodore. Once the dust settled, we were all dispatched to elsewhere.   
+  
+A lawsuit ensued as a result of the truncated contract, dragging out for another year. By the time I was deposed, Amiga had lost all of their engineers, and the lawyers could not understand anything I was saying about the technology. We ended up getting a settlement for 50 cents on the dollar, the day before Arbitration. The total contract was around $600K, back in 1985(?). We actually got about half of that overall.  
+  
+The Amiga started out in 1983(?) as a hyper-Apple II computer. But along the way, and after much money fraud, they changed their desires (per Carl) to become a “Personal Unix Machine”. That would have been a marketing disaster. By the end days, under Commodore's harsh insistence, it was finally becoming a decent consumer machine.  
+  
+Carl did have some interesting ideas on low-level API’s in the Amiga - forced by extreme memory limitations and (probably) the need to interface with widely disparate developers of the higher level code.   
+  
+But we initially came together because of Forth. I guess he never quite gave up on that. I have glanced at Rebol, but I think it is misguided. I’d rather stick with Lisp.   
+  
+Lisp is what Forth always wanted to become when it grew up…
 
+## Actors
+Just last week, after nearly 3 years thinking hard about the problem, I finally invented UNW-PROT for Actors, as well as OPEN-FILE (an Actor’s equiv of WITH-OPEN-FILE).
 
+Actors don’t nest. The dynamic scope of an Actor is one FUNCALL deep from the Dispatch routine. So UNWIND-PROTECT doesn’t work for Actors.  But UNW-PROT is an Actors-equivalent to UNWIND-PROTECT.
+
+I find the whole topic of Transactional Actors programming fascinating. I’m still exploring the limits of this style of programming. Already we can prove that it transcends Lambda Calculus, using an example that is just a few lines of code.
+
+If you had an Actors machine architecture, there would be no program counter. Instructions would be read from a global FIFO event queue. There would be no need to segregate OS Kernel memory from user space memory. There would be no store operations. It would be a memory-safe architecture from the get-go. No need for processes and threads. You would have instruction level concurrency. No need of MMU and all the silicon real-estate devoted to managing process memory. An interrupt mechanism would simply deposit the data into a message and place that into the instruction event queue.
+
+But lacking an Actors Machine, and forced to live on a Von Neumann architecture, I think the blend of Functionally Pure Lisp code along with Actors is probably the best of both worlds. You have the speed of today’s Call/Return programming, and the task independence (no threads, no locks) of Actors dispatching for macro tasks, and maximum concurrency. And on a multi-thread multi-Core system, maximum parallelism without even lifting a finger.
+
+Transactional behavior is key. Either you succeed, and all your SENDS and BECOME are committed, or else it becomes as though the message were never delivered.
+
+[Lisp Actors](https://github.com/dbmcclain/Lisp-Actors)
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
