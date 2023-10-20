@@ -8,6 +8,10 @@ Something more than that is needed to handle distributed programming.  Treating 
 ???
 
 ![decoupling](/diagrams/coupling-decoupling.drawio.svg)
+## Multiple Ports
+
+![multiple ports](/diagrams/coupling-multiple ports.drawio.svg)
+
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
