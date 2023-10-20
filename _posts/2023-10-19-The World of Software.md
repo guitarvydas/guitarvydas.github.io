@@ -7,7 +7,7 @@ Something more than that is needed to handle distributed programming.  Treating 
 
 ???
 
-![[/diagrams/coupling-decoupling.drawio.svg]]
+![decoupling](/diagrams/coupling-decoupling.drawio.svg)
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
