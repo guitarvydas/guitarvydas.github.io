@@ -13,6 +13,8 @@ How do you implement 0D with what you've got today?  FIFO queues, `send()` and `
 Crockford's goal is different than mine.  Crockford's *misty* language is meant as a transitional language that straddles the paradigms of traditional programming and Actor-based programming.  Odin0d, on the other hand, uses diagrams to program in an Actor-like paradigm, using traditional programming inside of Components.  Odin0d is used in example applications such as [transpiler](https://github.com/guitarvydas/transpiler/tree/dev) and [find-and-replace](https://github.com/guitarvydas/find-and-replace). 
 
 Crockford gives arguments for why Actor-like programming is better than traditional programming, thereby also supporting 0D ideas.
+
+Most implementations of Actors that I've seen have been hobbled by writing them in the synchronous paradigm. Trying to describe an asynchronous system starting out with a synchronous meme is harder than necessary.
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
