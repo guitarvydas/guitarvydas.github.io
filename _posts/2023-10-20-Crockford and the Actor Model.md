@@ -6,11 +6,13 @@ I think that FBP is simpler than what he talks about and 0D is even simpler.
 
 I feel that a point is missed: a CPU, as originally designed, *is* an Actor capable of only single-threading.  Moore's Law has finally made it reasonable to think this way.  The stuff about data races and memory sharing and so-called concurrency, etc. is accidental complexity caused by a concern for cheaping-out - attempting to use fewer CPUs than the number of threads that are needed for a solution. 
 
-Message-passing is fundamental, but, like GOTO, needs to be "structured".
+Message-passing is fundamental, but, like GOTO, needs to be used in a "structured" manner.
 
 How do you implement 0D with what you've got today?  FIFO queues, `send()` and `handle()` and a dispatcher. [refs to sample code available ... ]
 
 Crockford's goal is different than mine.  Crockford's *misty* language is meant as a transitional language that straddles the paradigms of traditional programming and Actor-based programming.  Odin0d, on the other hand, uses diagrams to program in an Actor-like paradigm, using traditional programming inside of Components.  Odin0d is used in example applications such as [transpiler](https://github.com/guitarvydas/transpiler/tree/dev) and [find-and-replace](https://github.com/guitarvydas/find-and-replace). 
+
+Crockford gives arguments for why Actor-like programming is better than traditional programming, thereby also supporting 0D ideas.
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
