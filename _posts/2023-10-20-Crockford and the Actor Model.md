@@ -9,6 +9,8 @@ I feel that a point is missed: a CPU, as originally designed, *is* an Actor capa
 Message-passing is fundamental, but, like GOTO, needs to be "structured".
 
 How do you implement 0D with what you've got today?  FIFO queues, `send()` and `handle()` and a dispatcher. [refs to sample code available ... ]
+
+Crockford's goal is different than mine.  Crockford's *misty* language is meant as a transitional language that straddles the paradigms of traditional programming and Actor-based programming.  Odin0d, on the other hand, uses diagrams to program in an Actor-like paradigm, using traditional programming inside of Components.  Odin0d is used in example applications such as [transpiler](https://github.com/guitarvydas/transpiler/tree/dev) and [find-and-replace](https://github.com/guitarvydas/find-and-replace). 
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
