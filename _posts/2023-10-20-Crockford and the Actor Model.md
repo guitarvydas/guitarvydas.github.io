@@ -7,6 +7,8 @@ I think that FBP is simpler than what he talks about and 0D is even simpler.
 I feel that a point is missed: a CPU, as originally designed, *is* an Actor capable of only single-threading.  Moore's Law has finally made it reasonable to think this way.  The stuff about data races and memory sharing and so-called concurrency, etc. is accidental complexity caused by a concern for cheaping-out - attempting to use fewer CPUs than the number of threads that are needed for a solution. 
 
 Message-passing is fundamental, but, like GOTO, needs to be "structured".
+
+How do you implement 0D with what you've got today?  FIFO queues, `send()` and `handle()` and a dispatcher. [refs to sample code available ... ]
 ## See Also
 ### Blogs
 [blog](https://guitarvydas.github.io/)
