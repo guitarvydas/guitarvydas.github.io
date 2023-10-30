@@ -116,3 +116,28 @@ In contrast to control flow, data is inherently static and is not directly inter
 - **Program-Driven Data Interpretation:** It is the responsibility of the software program to interpret and manipulate data. The program determines how data is accessed, processed, and used, bringing a level of predictability and consistency to the handling of information.
 
 Understanding this distinction between control flow and data is fundamental in the realm of computer science, as it lays the groundwork for comprehending how computers execute instructions and manage data effectively.
+
+## See Also
+### Blogs
+[blog](https://guitarvydas.github.io/)
+
+[obsidian blogs](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
+### Videos
+[videos - programming simplicity playlist](https://www.youtube.com/@programmingsimplicity2980)
+### Books
+leanpub'ed (disclaimer: leanpub encourages publishing books before they are finalized - these books are WIPs)
+[Programming Simplicity Takeaways, and, Programming Simplicity Broad Brush](https://leanpub.com/u/paul-tarvydas)
+### Discord
+[Programming Simplicity](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
+### Twitter
+@paul_tarvydas
+### Mastodon
+(tbd, advice needed re. most appropriate server(s))
+
+<script src="https://utteranc.es/client.js" 
+        repo="guitarvydas/guitarvydas.github.io" 
+        issue-term="pathname" 
+        theme="github-light" 
+        crossorigin="anonymous" 
+        async> 
+</script> 
