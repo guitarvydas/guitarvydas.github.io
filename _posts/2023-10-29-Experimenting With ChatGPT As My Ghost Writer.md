@@ -52,19 +52,98 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 - find-and-replace
 - transpiler
 - OhmJS
+- RWR
 - Ceptre
 - Software Atoms
 - Behavior Trees
 - Blogging and Book Writing
 - Code Commenting
-	- describe operation of code
-	- describe Architecture
-- Operators and Operands
+- OPL - Orthogonal Programming Languages
+- Golf
+- Software Simplicity
+
+- RT
+	- RT - Recursive Text - is the pursuit of a common syntax for all languages/compilers
+	- attempt to define all possible languages using recursive language, instead of linear language
+	- need 3 basic elements:
+		1. Lists, recursive, of things
+		2. Atoms, the bottom things - non-recursive
+		3. Whitespace, terminators in addition to terminators such as `"("` and `")"`
+	- like the goal of Projectional Editing, but, borrowing from already-existing syntax (e.g. Lisp)
+	- this project is related to RT due to experimentation with a syntax-building workflow (OhmJS + draw.io / 0D / drawware + RWR)
+- odin0d
+	- the basis for building programs in a simplified manner using draw.io
+	- this project refines odin0D ideas by using them for something real ("eating my own dogfood")
+- find-and-replace
+	- using non-nested syntax - i.e. markdown - as a programming language
+	- stepping stone towards simplifying syntax creation
+- transpiler
+	- Scheme to JavaScript transpiler
+	- builds PROLOG-like pattern-matching capabilities in JavaScript
+- OhmJS
+	- syntax-defining language based on PEG
+	- PEG opens up a new world in language creation
+	- OhmJS is used in this drawware workflow
+- RWR
+	- SCN (nano-DSL) that allows writing *semantics* code for use with OhmJS without needing to write JavaScript
+- Ceptre
+	- language that may hold the key to better concurrency primitives
+- Software Atoms
+	- boiled-down concepts of *paradigms* vs *syntax*
+	- atoms for
+		- types
+		- control flow
+		- data structure
+- Behavior Trees
+	- language and "operating system" for Robotics
+- Blogging and Book Writing
+	- writing blogs and essays (see "See Also")
+	- writing books (see "See Also")
+- Code Commenting
+	- comments consist, at least, of 2 kinds
+		1. describe operation of code (*how* the code works)
+		2. describe Architecture (*why* the code was built ; what problems it is mean to solve)
+	- better tools for documentation might allow for *more* documentation, where *why* remains relevant even when *how* drifts over time
+	- can A.I. be used to generate the *why* documentation?
+		- maybe needs some *why*-related point-form text
+		- maybe the tool prompts for more *why*-related points
+- OPL - Orthogonal Programming Languages
+	- strive for clean separation of *operations* from *operands*
+	- ideas for programming language design, based on Cordy's OCG and Fraser/Davidson's RTL (used in *gcc*)
+	- OhmJS makes it possible to easily build languages that use *phrases*
+		- this leads to the possibility to defining syntaxes that treat *operations* and *operands* as orthogonal concepts
+	- "conditional" code has, at least, 2 purposes:
+		1. defining values of functions (on a conditional basis), like taught in grade-school math (Functions and Relations)
+		2. scripting *control flow*
+	- currently, the 2 kinds of conditionals are usually conflated into single programming languages, leading to non-structured use of variables and `if...then...else` and accompanying edicts such as *"state is bad"* (state is not bad, unstructured use of state is bad)
 - Golf
 	- Flow
 		- "Analysis Paralysis"
-- Something is Rotten in Denmark
+			- over-thinking actions leads to poor performance
+	- programming should be done in a *Flow* state (formerly known as *"in the zone"*)
+		- current IDEs and programming languages interfere with *Flow* and make it more difficult to effectively create programs
 - Software Simplicity
+	- Discord channel to discuss how to drastically simplify programming
+
+### basic building blocks used in this project
+- odin0d
+- OhmJS
+- RWR
+- Golf (re. Flow)
+### projects that await better description/documenting
+- Software Atoms
+- Blogging and Book Writing
+- Code Commenting
+- Software Simplicity
+### extension/refinement of syntax creating workflow
+- RT
+- find-and-replace
+- transpiler
+### projects that await better language-building workflows
+- Ceptre
+- Behavior Trees
+- OPL
+
 ## BRAINSTORMING:
 I Use Kinopio to capture ideas in point form:
 ![control flow is not data](/screenshots/Screenshot 2023-10-30 at 4.31.58 AM.png)
