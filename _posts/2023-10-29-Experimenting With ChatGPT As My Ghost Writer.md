@@ -34,7 +34,9 @@ consult(md).
 main.
 ```
 
-The next step will be modifying the `main` diagram in `top.drawio` to glue the generated factbase and `md.pl` together, then, shelling-out to SWIPL to generate the markdown point-form text.
+The next step will be modifying the `main` diagram in `top.drawio` to glue the generated factbase and `md.pl` together, then, shelling-out to SWIPL to generate the markdown point-form text[^oct31].
+
+[^oct31]: update: 2023/10/31 `top.drawio` has been modified, now making the project, using `make`, ingests `softwareAtomsTest.json` and spits out markdown.  commit 19916ad06b0c01cffe53ff0496dac044a478b1a7
 
 ## Future 2
 I am playing with `Khoj` to see if I can AI-generate reasonable responses on my local machine without moving my data off of my local machine.
