@@ -1,6 +1,6 @@
 ## TL;DR
-I am exploring the concept of using ChatGPT to ghost-write prose from my point-form notes.  
 
+I'm developing a cutting-edge tool that leverages ChatGPT to ghost-write prose based on my point-form outlines, particularly focusing on 'new ideas' that the AI wasn't trained on. The challenge lies in preventing hallucinations and incorrect extrapolations from the outline. Early experimental results have been promising prompting me to create a dedicated workflow tool. This tool enables me to swiftly input point-form outlines, using the user-friendly Kinopio platform for brainstorming. I then paste the outline to ChatGPT, transforming it into coherent and readable prose. Join me in revolutionizing idea development and content creation with this innovative solution!
 ## Method
 1. I created a brainstorm in Kinopio about a single topic, containing only 7 point-form notes.
 2. I re-typed the brainstorm in markdown format into a .md file.
@@ -58,6 +58,8 @@ In contrast to control flow, data is inherently static and is not directly inter
 
 Understanding this distinction between control flow and data is fundamental in the realm of computer science, as it lays the groundwork for comprehending how computers execute instructions and manage data effectively.
 
+## Next Step
+I am building a tool to convert Kinopio tree drawings into markdown format.
 
 ## Appendix: Background
 I believe that there should be a distinction between the concepts of *data* and *control flow*.  Control flow is the *interpretation* of *data*.  *Data*, itself is static.  A CPU *interprets* data - opcodes.
@@ -67,7 +69,6 @@ I am struggling, trying to find the right words to explain this distinction.
 I like to write in point-form.  
 
 I believe that an *idea* is more important than a particular realization of that idea.  
-
 I believe in the concept of *showing your work*.  To this end, I publish *ideas* and show the *experiments* that support the ideas.  Typically, very little of my code is directly usable, except, maybe, by someone who is inspired by the idea and wants to further riff on the idea.
 
 I tend not to go back and edit my point-form notes.  In essence, I want "someone" to re-cast my notes into prose.  In the past, one would employ editors and ghost-writers.  I am exploring the concept of using ChatGPT to ghost-write prose from my notes.  
@@ -88,7 +89,7 @@ main.
 
 The next step will be modifying the `main` diagram in `top.drawio` to glue the generated factbase and `md.pl` together, then, shelling-out to SWIPL to generate the markdown point-form text[^oct31].
 
-[^oct31]: update: 2023/10/31 `top.drawio` has been modified, now making the project, using `make`, ingests `softwareAtomsTest.json` and spits out markdown.  commit 19916ad06b0c01cffe53ff0496dac044a478b1a7
+[^oct31]: update: 2023/10/31 `top.drawio` has been modified.  Now, making the project, using `make`, ingests `softwareAtomsTest.json` and spits out markdown.  commit 19916ad06b0c01cffe53ff0496dac044a478b1a7
 
 ## Appendix: Future 2
 I am playing with `Khoj` to see if I can AI-generate reasonable responses on my local machine without moving my data off of my local machine.
@@ -124,10 +125,10 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 		2. Atoms, the bottom things - non-recursive
 		3. Whitespace, terminators in addition to terminators such as `"("` and `")"`
 	- like the goal of Projectional Editing, but, borrowing from already-existing syntax (e.g. Lisp)
-	- this project is related to RT due to experimentation with a syntax-building workflow (OhmJS + draw.io / 0D / drawware + RWR)
+	- this project - Experimenting With ChatGPT As My Ghost Writer - is related to RT due to experimentation with a syntax-building workflow (OhmJS + draw.io / 0D / drawware + RWR)
 - odin0d
 	- the basis for building programs in a simplified manner using draw.io
-	- this project refines odin0D ideas by using them for something real ("eating my own dogfood")
+	- this project - Experimenting With ChatGPT As My Ghost Writer - refines odin0D ideas by using that codr for something real ("eating my own dogfood")
 - find-and-replace
 	- using non-nested syntax - i.e. markdown - as a programming language
 	- stepping stone towards simplifying syntax creation
@@ -141,7 +142,7 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 - RWR
 	- SCN (nano-DSL) that allows writing *semantics* code for use with OhmJS without needing to write JavaScript
 - Ceptre
-	- language that may hold the key to better concurrency primitives
+	- a language that may hold the key to better concurrency primitives
 - Software Atoms
 	- boiled-down concepts of *paradigms* vs *syntax*
 	- atoms for
@@ -154,10 +155,10 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 	- writing blogs and essays (see "See Also")
 	- writing books (see "See Also")
 - Code Commenting
-	- comments consist, at least, of 2 kinds
+	- comments consist, at least, of 2 kinds of concepts
 		1. describe operation of code (*how* the code works)
-		2. describe Architecture (*why* the code was built ; what problems it is mean to solve)
-	- better tools for documentation might allow for *more* documentation, where *why* remains relevant even when *how* drifts over time
+		2. describe Architecture (*why* the code was built ; what problems the code is meant to solve)
+	- better tools for documentation might allow for *more* documentation, where *why*-documentation remains relevant even when *how*-documentation drifts over time
 	- can A.I. be used to generate the *why* documentation?
 		- maybe needs some *why*-related point-form text
 		- maybe the tool prompts for more *why*-related points
@@ -177,7 +178,7 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 	- programming should be done in a *Flow* state (formerly known as *"in the zone"*)
 		- current IDEs and programming languages interfere with *Flow* and make it more difficult to effectively create programs
 - Software Simplicity
-	- Discord channel to discuss how to drastically simplify programming
+	- Discord channel to discuss how to drastically simplify programming (see "See Also")
 
 ### basic building blocks used in this project
 - odin0d
@@ -200,7 +201,17 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 - Ceptre
 - Behavior Trees
 - OPL
+## Appendix - Gradual Development of the Elevator Pitch
 
+### My words:
+I am exploring the use of ChatGPT to ghost-write prose from my outline, which contains point-form notes about "new ideas" that ChatGPT was not trained on. The problem is to avoid hallucinations and incorrect extrapolations of the outline.
+
+I like the early experimental results and am beginning to build a tool to help with this kind of workflow, exploring the use of larger outlines.  The tool allows me to rapidly enter an outline in point form, using a very convenient tool for brainstorming (Kinopio), then passes the outline to ChatGPT for expansion into more-readable prose.
+
+### ChatGPT's take on the above 
+15 regenerates:
+
+"I'm developing a cutting-edge tool that leverages ChatGPT to ghost-write prose based on my point-form outlines, particularly focusing on 'new ideas' that the AI wasn't trained on. The challenge lies in preventing hallucinations and incorrect extrapolations from the outline. Encouragingly, early experimental results have been promising, prompting me to create a dedicated workflow tool. This tool enables me to swiftly input point-form outlines, using the user-friendly Kinopio platform for brainstorming. It then paste the outline to ChatGPT, transforming it into coherent and readable prose. Join me in revolutionizing idea development and content creation with this innovative solution!"
 
 ## Appendix: See Also
 ### Blogs
