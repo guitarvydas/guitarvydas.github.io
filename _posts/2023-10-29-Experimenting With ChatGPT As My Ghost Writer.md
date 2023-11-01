@@ -73,12 +73,12 @@ I believe in the concept of *showing your work* and the *scientific method* ("fa
 
 I tend not to go back and edit my point-form notes.  In essence, I want "someone" to re-cast my notes into prose.  In the past, one would employ editors and ghost-writers.  I am exploring the concept of using ChatGPT to ghost-write prose from my notes.  
 
-Thus far, the indications are positive.  ChatGPT ingests my 7-point note - in markdown format - and generates reasonable prose, suitable to use a subsection of a chapter in a book, or, as an essay on a blog.
+Thus far, the indications are positive.  ChatGPT ingests my 7-point note - in markdown format - and generates reasonable prose, suitable to use as a  subsection of a chapter in a book, or, as an essay on a blog.
 
 ## Appendix: Future 1
 I am building a pipeline - in drawware/0D - to take raw JSON exported from Kinopio and to  convert it to point-form notes in markdown format.
 
-The pipeline uses JavaScript, Python, PROLOG (SWIPL), draw.io, OhmJS, RWR, and, odin0d.
+The pipeline uses JavaScript, Python, PROLOG (swipl), draw.io, OhmJS, RWR, and, odin0d.
 
 Thus far, the pipeline converts JSON from Kinopio into a PROLOG factbase.  I manually copy/paste the factbase into a PROLOG program `md.pl` and then run the program using the commands:
 ```
@@ -87,7 +87,7 @@ consult(md).
 main.
 ```
 
-The next step will be modifying the `main` diagram in `top.drawio` to glue the generated factbase and `md.pl` together, then, shelling-out to SWIPL to generate the markdown point-form text[^oct31].
+The next step will be modifying the `main` diagram in `top.drawio` to glue the generated factbase and `md.pl` together, then, shelling-out to *swipl* to generate the markdown point-form text[^oct31].
 
 [^oct31]: update: 2023/10/31 `top.drawio` has been modified.  Now, making the project, using `make`, ingests `softwareAtomsTest.json` and spits out markdown.  commit 19916ad06b0c01cffe53ff0496dac044a478b1a7
 
@@ -138,7 +138,7 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 - OhmJS
 	- syntax-defining language based on PEG
 	- PEG opens up a new world in language creation
-	- OhmJS is based on PEG ; OhmJS is a "better PEG"
+	- OhmJS is language based on PEG ; OhmJS is a "better PEG"
 	- OhmJS is used in this drawware workflow
 - RWR
 	- SCN (nano-DSL) that allows writing *semantics* code for use with OhmJS without needing to write JavaScript
@@ -171,7 +171,7 @@ This is a stand-alone repo that contains all of `odin0d` and `top.drawio` (the d
 	- "conditional" code has, at least, 2 purposes:
 		1. defining values of functions (on a conditional basis), like taught in grade-school math (Functions and Relations)
 		2. scripting *control flow*
-	- currently, the 2 kinds of conditionals are usually conflated into single programming languages, leading to non-structured use of variables and `if...then...else` and is accompanied edicts such as *"state is bad"* (state is not bad, unstructured use of state is bad)
+	- currently, the 2 kinds of conditionals are usually conflated into single programming languages, leading to non-structured use of variables and `if...then...else` and is accompanied by edicts such as *"state is bad"* (state is not bad, unstructured use of state is bad)
 - Golf
 	- Flow
 		- "Analysis Paralysis"
