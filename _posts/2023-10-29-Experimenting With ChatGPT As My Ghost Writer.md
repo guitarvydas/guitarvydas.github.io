@@ -215,6 +215,11 @@ I like the early experimental results and am beginning to build a tool to help w
 "I'm developing a cutting-edge tool that leverages ChatGPT to ghost-write prose based on my point-form outlines, particularly focusing on 'new ideas' that the AI wasn't trained on. The challenge lies in preventing hallucinations and incorrect extrapolations from the outline. Encouragingly, early experimental results have been promising, prompting me to create a dedicated workflow tool. This tool enables me to swiftly input point-form outlines, using the user-friendly Kinopio platform for brainstorming. It then paste the outline to ChatGPT, transforming it into coherent and readable prose. Join me in revolutionizing idea development and content creation with this innovative solution!"
 
 ## Appendix: See Also
+
+### References
+
+https://guitarvydas.github.io/2021/12/15/References.html
+
 ### Blogs
 [blog](https://guitarvydas.github.io/)
 

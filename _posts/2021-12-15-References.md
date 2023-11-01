@@ -3,6 +3,12 @@ layout: post
 title:  "References"
 ---
 # References
+
+Ceptre
+- Strangeloop 2015: https://www.youtube.com/watch?v=bFeJZRdhKcI
+- Paper: http://www.cs.cmu.edu/~cmartens/ceptre.pdf
+- Thesis: https://www.cs.cmu.edu/~cmartens/thesis/thesis.pdf
+
 Peter Lee – Realistic Compiler Generation.  
 - Denotational Semantics in several passes.
 - [https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417](https://www.amazon.ca/Realistic-Compiler-Generation-Peter-Lee/dp/0262121417)
