@@ -39,7 +39,7 @@ What we tend to call *type checking*.
 
 ### References
 
-https://guitarvydas.github.io/2021/12/15/References.html
+[https://guitarvydas.github.io/2021/12/15/References.html](https://guitarvydas.github.io/2021/12/15/References.html)
 
 ### Blogs
 [blog](https://guitarvydas.github.io/)
