@@ -12,6 +12,7 @@ For example, VISA gave me - for free - a plastic card with an embedded CPU plus 
 
 For a further example, every person carries around super-computers in their pockets these days, each being connected to zillions of other super-computers via cellular networks.
 
+The problem is no longer "how to make a single CPU run faster", but, has become "how to make a network of zillions of nodes more manageable and to run faster and to be cheaper".  Ptolemaic Software Cosmology is unsuited to dealing with such (new) problems.
 
 ## See Also
 
