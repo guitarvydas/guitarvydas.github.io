@@ -1,4 +1,4 @@
-# I Wish I Had a Syntax Knob
+# I Wish I Had a Readability Knob
 
 I wish that I had an editor that allowed me to write:
 
@@ -29,7 +29,10 @@ Somewhere - well out of the way - I am allowed to define a table, like
 | *x*.*y* | (slot-value '*y* *x*) |
 
 In the best of all worlds, setting up the table is done via some "easy" UX.  E.g. highlight the phrase, get a popup to enter the synonym (uh, what UX is used for entering generic synonym transforms like "*x*.*y*"?)
+# Proof of Concept
 
-# Appendix - attribution 
-https://www.flickr.com/photos/dejankrsmanovic/29451540498/
+
+
+# Appendix - attribution
+The picture of the knob: https://www.flickr.com/photos/dejankrsmanovic/29451540498/
 
