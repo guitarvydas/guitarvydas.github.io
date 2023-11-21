@@ -71,6 +71,14 @@ If you don't understand the meaning of some visual code, don't blame the tool, b
 	- problem with tooltips: not always available, i.e. hard to program into a system, essentially an after-thought
 	- problem with tooltips: the gesture - hovering the mouse and waiting for some unspecified amount of time - is clunky and not precise-enough
 
+- observation: writing prose has a different purpose than writing equations
+- observation: writing equations has a different purpose from commanding electronic machines
+- observation: writing for the purposes of explaining the purpose of sequences of commands to other humans is different from the purpose of commanding electronic machines
+- opinion: electronic machines read and interpret sequential code, people shouldn't have to
+- observation: making drawings on cave walls, using pointy sticks on clay tablets, and, using opaque dyes on papyrus were tried; dyes and papyrus won out due to the limitations of the other kinds of media
+- observation: writing equations became less expressive when the printing press was invented, writing programs became less expressive when EBCDIC and, then, ASCII became the media for expressing sequences of commands ([The Story of the Vinculum (I believe that this was posted to FoC by someone, but I can't find the post)](https://www.youtube.com/watch?v=JFzHIp2F0Yk&t=34s))
+- observation: before the advent of non-overlapping grids of small bitmaps called "characters" coupled with banks of switches called "QWERTY keyboards", IDEs for commanding machines (aka "programming") consisted of banks of toggle switches, and/or, soldering stations coupled with various kinds of meters and oscilloscopes ; "programming" - commanding electronics - was around well before the advent of textual programming languages, but, using soft-switches rather than hard-physical-switches turned out to be more convenient
+- opinion: "programming" consists of two activities, neither of which are the same as other kinds of activities (e.g. writing prose, and, e.g. analysis of phenomena using mathematical equations), i.e. 1. commanding machines, 2. communicating the purpose of the commands to other humans ... conflating the two activities leads to unnecessary hardship
 ## See Also
 
 ### References
