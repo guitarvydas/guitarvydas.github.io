@@ -7,7 +7,7 @@
 				- the true model of concurrency is: 1 CPU per thread
 					- time-sharing was invented because CPUs were *very* expensive in the 1950s
 					- memory management and GC was invented to conserve memory, which was *very* expensive in the 1950s
-					- in essence, most modern progarmming languages, e.g. Python, Rust, etc., aim at *optimizing* these factors and, thereby, interrupt the Design thought-process with niggly details
+					- in essence, most modern programming languages, e.g. Python, Rust, etc., aim at *optimizing* these factors and, thereby, interrupt the Design thought-process with niggly details
 					- time-sharing, coupled with shared memory, causes lots of *gotchas*
 						- e.g. "thread safety" is only a problem if you share memory
 					- today, we have cheap Arduinos, rPis, etc. with lots of cheap memory
