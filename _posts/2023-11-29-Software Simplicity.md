@@ -8,7 +8,7 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 	- purer than pure FP, mutation not possible (no heap, either)
 	- 2 types - Atoms and Lists
 	- Sector Lisp is virtually useless on its own
-		- although Woodrush has done some impressive things with it https://woodrush.github.io (like LambdaLisp)
+		- although Woodrush has done some impressive things with it [Woodrush](https://woodrush.github.io) (like LambdaLisp)
 	- I haven't checked out Tunney's other work, like BLC, Redbean, Cosmopolitan, Ape, but, I wouldn't be surprised if these were "simple", too
 	- Sector Lisp is small because Tunney is doing something fundamentally right, not because it uses assembler tricks
 - UNIX pipelines
@@ -109,6 +109,7 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 			- most existing programming languages - Haskell, Python, JavaScript, Rust, etc. - force programmers to deal with optimization too early (like, right off the bat)
 		- dynamic type checking is the default, use static type checking sparingly only when optimization is proven to be necessary (e.g. by profiling)
 		- prEMs ("computers") can do more than just automate mathematics
+		- projects that use current-day programming languages are essentially doomed to abandonment or complexification
 	
 # Appendix - See Also
 
