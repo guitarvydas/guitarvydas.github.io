@@ -110,6 +110,8 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 		- dynamic type checking is the default, use static type checking sparingly only when optimization is proven to be necessary (e.g. by profiling)
 		- prEMs ("computers") can do more than just automate mathematics
 		- projects that use current-day programming languages are essentially doomed to abandonment or complexification
+			- every time you add a CALL to a subroutine, you are adding a hidden dependency, over time, this will result in complexity
+			- regardless if the CALL is made indirect via "dependency injection" techniques
 	
 # Appendix - See Also
 
