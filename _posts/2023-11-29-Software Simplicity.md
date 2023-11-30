@@ -109,9 +109,11 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 		- optimization is the antithesis of scalability
 			- most existing programming languages - Haskell, Python, JavaScript, Rust, etc. - force programmers to deal with optimization too early (like, right off the bat)
 		- dynamic type checking should be the default, use static type checking sparingly only when optimization is proven to be necessary (e.g. by profiling)
-		- prEMs ("computers" - programmable Electronic Machines) can do more than just act as automation of mathematics
+		- prEMs ("computers" - programmable Electronic Machines) can do more than just act as automation for mathematics
 		- projects that use current-day programming languages are essentially doomed to abandonment or complexification
-			- every time you add a CALL to a subroutine, you are adding a hidden dependency, over time, this will result in complexity
+		- every time you add a CALL to code, you are adding a hidden dependency, which, over time, will result in complexity
+			- using CALL is the only way provided by current languages to bolt to other libraries and to add functionality
+				- other techniques are *possible*, but, using CALL is so strongly encouraged, that programmers skip over other ways of bolting software together
 			- regardless if the CALL is made indirect via "dependency injection" techniques
 	
 # Appendix - See Also
