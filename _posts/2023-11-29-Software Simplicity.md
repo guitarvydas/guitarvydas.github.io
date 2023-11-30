@@ -42,7 +42,7 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 		- shared memory need not be supported by default
 			- "thread safety", et al, just dissolves
 				- "thread safety", et al, is just accidental complexity due to the misuse of the idea of sharing memory, thinking that this is necessary
-		- Garbage Collection, in extreme forms, not needed
+		- Garbage Collection, except the Biblical Flood method, not needed
 		- Operating Systems not needed
 	- in 1950, hardware could only easily support non-overlapping grids of small bitmaps (aka "characters")
 		- hence, in 1950, it made sense to develop text-only programming languages
@@ -82,8 +82,9 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 				- no assignment
 				- no heap
 				- if this leaves you with a mostly useless notation, so be it
-				- if this makes it impossible to fully solve a problem include another notation(s)
+				- if this makes it impossible to fully solve a problem with a single notation, then, include another notation(s)
 					- don't hack on the notation, just use/invent another notation
+						- I've reached the conclusion that bloatware is due to our hacking on the FP paradigm, to add mutation and heaps to the paradigm
 			- include other notations in a project if a given notation / programming language doesn't fit or is too restricted to solve the whole problem
 			- solve problems in little bits (aka "divide and conquer"), using different languages
 				- e.g Prolog supports exhaustive search, but was stretched to support formatting of output, resulting in accidental complexities and difficulty in writing simple code for formatted output, like, say, in JavaScript
@@ -101,14 +102,14 @@ You're welcome to disagree with me, YMMV.  My take on software simplicity is...
 		- eschew synchronous-only programming
 			- in many cases, you don't need synchronization, so, don't start out with a synchronous mindset
 		- build progressive type pipelines instead of strongly typed languages
-		- programs became non-simple when a whole program wasn't visible in one eye-full
+		- programs *became* non-simple when a whole program was no longer visible in one eye-full
 			- the notation was stretched to allow "bigger" programs, instead of snapping little bits together in small, understandable layers
 		- don't share memory by default
 			- optimize only if necessary
 		- optimization is the antithesis of scalability
 			- most existing programming languages - Haskell, Python, JavaScript, Rust, etc. - force programmers to deal with optimization too early (like, right off the bat)
-		- dynamic type checking is the default, use static type checking sparingly only when optimization is proven to be necessary (e.g. by profiling)
-		- prEMs ("computers") can do more than just automate mathematics
+		- dynamic type checking should be the default, use static type checking sparingly only when optimization is proven to be necessary (e.g. by profiling)
+		- prEMs ("computers" - programmable Electronic Machines) can do more than just act as automation of mathematics
 		- projects that use current-day programming languages are essentially doomed to abandonment or complexification
 			- every time you add a CALL to a subroutine, you are adding a hidden dependency, over time, this will result in complexity
 			- regardless if the CALL is made indirect via "dependency injection" techniques
