@@ -153,6 +153,8 @@ Hyper-links are an "assembler" for forming hierarchies.  It is *possible* to arr
 	- UNIX® shell pipelines
 	- Note that Scratch, Blockly, etc. are fundamentally sequential
 		- sequentialism blocks layout innovation
+
+
 # Appendix - See Also
 
 ### References
