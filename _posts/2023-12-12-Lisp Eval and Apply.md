@@ -114,7 +114,7 @@ It is currently mis-believed that static type checking guarantees that programs 
 Ad-hoc-ness will always be with us, regardless of the language used.  For example, the word "robust" applies to only a small part of the overall process and should not be misconstrued to mean that the overall process is robust, even if static type checking is used.
 ## Cons Cells
 
-![](../diagrams/Lisp%20Eval%20and%20Apply-2023-12-12-1659.svg)
+![cons cells](/diagrams/Lisp%20Eval%20and%20Apply-2023-12-12-1659.svg)
 ## Evlis
 Loops through a given list and `Eval`s each item, using the supplied environment (the 2nd parameter) to lookup variables.
 
