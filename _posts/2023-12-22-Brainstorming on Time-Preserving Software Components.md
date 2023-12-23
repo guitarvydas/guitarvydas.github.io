@@ -1,4 +1,6 @@
-I think that this can be easily expressed in Odin...
+Brainstorming.
+
+I think that this can be easily expressed in the Odin programming language.
 
 ![](../diagrams/2023-12-22-routing%20dependency-Component%20Brainstorming.drawio.svg)
 
