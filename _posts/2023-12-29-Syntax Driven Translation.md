@@ -42,6 +42,17 @@ In summary, create a bunch of little grammars:
 5. Reformat the already-checked and already-scoped-and-allocated code into some existing language, like JS or Python or something.
 6. Finish - let the existing compiler do the rest of the heavy lifting, such as creating an executable or WASM or whatever.
 
+# Said in a different way 
+`"a + b"` is a legal syntactic phrase. The parser determines that. A subsequent phase(s) does the semantic checking. Semantically, the syntactic phrase only makes sense if `(typeof(a), typeof(b))` is a valid combination for the operator `"+"`, but, you don't build that check into the first-pass parser. How do you store and pattern match such legal combinations? I guess that I was making suggestions. At least one that I left out is: a big wad of conditional code, like 
+```
+if (a is an int) and (b is an int) 
+  then OK
+  else if (a is an int) and (b is a float) 
+    then OK
+    else if ... 
+      else NOT_OK`. 
+```
+The big-wad-of-code technique only works (but is usually bug-ridden) if the overloading rules are cast in stone. If you allow the programmer to define overloaded procedures, you need to keep the overload information in some sort of dynamically-generated form, e.g. a symbol table. I guess that you could code up the big-wad-of-code idea as an OhmJS grammar (as long as the rules are cast in stone and you embellish the variables with "data descriptors"). OhmJS's backtracking is a better way of pattern matching than writing big long if-then-else's. For example, you could write a second-pass grammar that annotates the code as `⦑a,int⦒ + ⦑b,int⦒` (those are Unicode brackets), then, write a third pass grammar that checks for valid combinations. OTOH, it might be more straight-forward to do that in Javascript using a map that contains lists of valid combos. I like the annotation idea, since I believe that that is where "Functional Programming" is ultimately headed...
 # Appendix - See Also
 
 ### References
