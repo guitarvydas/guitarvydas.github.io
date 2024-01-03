@@ -1,9 +1,9 @@
 *Programming* is many things.
 
-A single person (group) *can* do all of the things, but, if you need to scale upwards from cottage industry mindset, you need to find ways to cleave the work into separate parts, which can be done by other people / groups.
+A single person (group) *can* do all of the things, but, if you need to scale upwards from a cottage industry mindset, you need to find ways to cleave the work into separate parts, which can be done by other people / groups.
 
 The essence is to provide a notation for communication between the parts, that allows each of the parts to concentrate on their goals
-	- probably needs more than one "language" / notation
+	- probably needs more than one "language" / notation (ex.  construction blueprints as opposed to CAD drawings of I-beam details)
 
 # Possible Breakdown of Programming Into Separate Parts
 - **SWArch** 
@@ -42,13 +42,16 @@ The members of each group are allowed to communicate / negotiate with the other 
 https://kinopio.club/differentiating-swarch-from-sweng-from-swimpl-from-swprodeng-from-swmaint-from--AJoDrdgLzyNK7dyRsqlPU
 
 # Appendix - TL;DR
+
+(self-reference to this note, don't bother reading or following this reference if you're already reading this ...)
+
+I believe strongly that SWArch, SWEng, SWImpl, SWProdEng, SWMaint, etc. are very distinct disciplines under the same umbrella called "programming".
+
 A single person (group) *can* do all of the things involved in programming, but, if you need to scale upwards from a cottage industry mindset, you need to find ways to cleave the work into separate parts which can be done by other people / groups.
 
-Possible parts:, SWArch, SWEng, SWImpl, SWProdEng, SWMaint, etc.
+... [more thoughts](https://guitarvydas.github.io/2024/01/02/Programming-Is-Many-Things.html)... 
 
-... [more thoughts]()... 
 
-(feedback reference back to this note, don't bother following this reference if you're reading the .md note...)
 
 # Appendix - See Also
 
