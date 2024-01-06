@@ -4,11 +4,11 @@ In 1950, CPUs were ridiculously expensive and memory was scarce.
 
 In 2024, CPUs are ridiculously cheap (rPI, Arduino, etc.) and memory is wildly abundant. 
 
-We *can* go back to the original model for concurrency - one thread per CPU - but, we continue using 1950-think.  
+We *can* go back to the original model for concurrency - one thread per CPU - but, instead, we continue using 1950s-think.  
 
-CPUs are just ICs made for sequencing and mutation.  
+CPUs are just ICs made for sequentially interpreting integer codes stored in memory slots and made for mutation of RAM.  
 
-This is the new version of "The Gods Must Be Crazy" (CPU == Coke bottle).
+CPU ≡ Coke bottle?
 
 
 # Appendix - See Also
