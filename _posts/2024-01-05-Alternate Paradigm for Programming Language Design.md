@@ -108,7 +108,29 @@ In this example, `pass2` inhales the output from the `hamburger` pass and strips
 
 The working example is in the repo [hamburger](https://github.com/guitarvydas/hamburger)
 
+# Appendix - Language Set Experiments
+What is a *set* of languages?  
+
+Basically, I think that syntax is cheap, but, that paradigms are important.
+
+I think that Prolog has a wonderful syntax for expressing *exhaustive search*.  That same syntax is not appropriate for most other things.
+
+I think that Javascript *template strings* and *string interpolation* form a nice syntax for formatting textual output.  Other languages are better than Javascript at just about everything else.
+
+I think that OhmJS has a wonderful syntax for expressing *parsing* based on pattern matching with some backtracking.
+
+I think that */bin/bash* is a good tool for plumbing lumps of code together.
+
+In one experiment, I wrote a tiny DSL (I call it an SCN - Solution Centric Notation) for expressing *semantics* code that is required for building OhmJS applications.  Currently, I call the DSL *RWR* (for ReWRite), but, it's had many different names in the past, like "glue", "fab", "prep", etc.
+
+In another experiment, I bolted Prolog + JavaScript together and used bash to feed the output from one to the other. I built a quickie DSL, based on markdown syntax (yes, markdown can be a programming language syntax, if you continue to insist on using text for programming), for this using OhmJS. I used this combination to build an early version of my DPL technologies *and* augmented the whole thing were very specific checks (more than just type checking) that I call *Design Rules* (name stolen from the same concept in EE). I expressed patterns in a Prolog-y manner and output in a Javascript-y manner.  I used a *bash* pipeline to pipe output from one syntactic phase to the other.  Even though this spawned processes and ran up *swipl* and *node*, the result ran fast enough (seconds) on my relatively new hardware (at that time, an Intel-based MacBook) to allow me to chop up what I was working on into a bunch of small divide-and-conquer pieces and to finish it. 
+
+Note that I didn't even bother to create my own full-blown syntax for the DSL, I just created a transpiler that chopped the input source code up and created `.pl` and `.js` files as necessary, feeding lumps of the input source to each without much more checking - `swipl` and `node` already do a lot of syntax checking and I didn't want to duplicate their efforts.
+
+An example of such DSL source code is https://github.com/guitarvydas/bootstrap2/blob/main/d2fb/das2f/direct_contains.md .
+
 # Appendix - References
+
 ### PT Pascal and Syntax-Driven Translation
 [PT Pascal and S/SL](https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/)
 
