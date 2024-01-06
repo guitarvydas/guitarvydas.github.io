@@ -140,7 +140,7 @@ Order Out of Chaos
 - [https://www.amazon.com/Order-Out-Chaos-Dialogue-Thinkers-ebook/dp/B01N7H2J3B/ref=sr_1_1?dchild=1&keywords=ilya+prigogine+order&qid=1595281139&sr=8-1](https://www.amazon.com/Order-Out-Chaos-Dialogue-Thinkers-ebook/dp/B01N7H2J3B/ref=sr_1_1?dchild=1&keywords=ilya+prigogine+order&qid=1595281139&sr=8-1)
 - Ilya Prigogine
 
-Human Interface
+Humane Interface
 - https://www.amazon.ca/Humane-Interface-Directions-Designing-Interactive/dp/0201379376
 Design of Everyday Things
 - https://www.amazon.ca/Design-Everyday-Things-Revised-Expanded/dp/0465050654
@@ -157,8 +157,8 @@ Design of Everyday Things
 - bacteria exhibits behaviour that might be called "intelligence" and "consciousness"
 
 [Sleepwalkers](https://en.wikipedia.org/wiki/The_Sleepwalkers_(Koestler_book))
-- examines personalities of people involved in transition from Ptolomaic Universe to Copernican Universe
-- important because it shows how many people are "blind" to simpler theories (e.g. epicycles in Ptolomaic version)
+- examines personalities of people involved in transition from Ptolemaic Universe to Copernican Universe
+- important because it shows how many people are "blind" to simpler theories (e.g. epicycles in Ptolemaic version)
 
 Songwriting
 - anything by Pat Pattison
