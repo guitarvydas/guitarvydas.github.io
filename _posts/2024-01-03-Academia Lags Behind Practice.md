@@ -17,11 +17,17 @@ Robert Distinti describes Electrical effects that haven't yet been quantified, e
 Tesla probably figured out more about the explanation of electrical phenomena than he cared to share, or could put into words.
 
 Historically, it has taken decades to leak academic Scientific study into Engineering.  Practice, then Science, then Engineering. We can do better.
+# Appendix - Edit
+After reading comments from the like of Konrad Hinsen, I realized that my use of the phrase "practice" wasn't sufficiently precise.
+
+I have written an update in "2024-01-05-Fumbling Around and Applied Science".
+
+
 # Appendix - See Also
 
 ### References
 
-[https://guitarvydas.github.io/2021/12/15/References.html](https://guitarvydas.github.io/2021/12/15/References.html)
+[https://guitarvydas.github.io/2004/01/06/References.html](https://guitarvydas.github.io/2024/01/06/References.html)
 
 ### Blogs
 [blog](https://guitarvydas.github.io/)

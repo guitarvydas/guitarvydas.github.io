@@ -3,6 +3,8 @@ layout: post
 title:  "References"
 ---
 # References
+Programming Simplicity
+- Discord https://discord.gg/yrhegrjy65
 
 Ceptre
 - Strangeloop 2015: https://www.youtube.com/watch?v=bFeJZRdhKcI
@@ -22,6 +24,9 @@ S/SL
 - (paper in pt+ssl/doc/ssl.intro and various other places)
 - report:
 	- [https://archive.org/details/technicalreportc118univ](https://archive.org/details/technicalreportc118univ)
+
+PT Pascal - Syntax Driven Translation
+- [PT Pascal and S/SL](https://research.cs.queensu.ca/home/cordy/pub/downloads/ssl/)
 
 OCG
 - Orthogonal Code Generator
@@ -55,16 +60,15 @@ Anatomy of Lisp
 Flow-Based Programming
 - [https://jpaulm.github.io/fbp/](https://jpaulm.github.io/fbp/)
 - book: [https://jpaulm.github.io/fbp/book.html](https://jpaulm.github.io/fbp/book.html)
-- discord: Flow-Based Programming
+- discord: Flow-Based Programming https://discord.gg/JAUYWUBDHk
 - google group: https://groups.google.com/d/forum/flow-based-programming
 - slack (use discord instead) [https://join.slack.com/t/fbphq/shared_invite/enQtOTM4ODkzMTYyODE3LTJiMmNlZjhiMWY1MDY1ODA4Y2YzNDBlNDZlMTBkMDNlMjcwNzg2MGZhZjA2NjJjYTliYTM0OTIyYmM0Yzk0MDQ](https://join.slack.com/t/fbphq/shared_invite/enQtOTM4ODkzMTYyODE3LTJiMmNlZjhiMWY1MDY1ODA4Y2YzNDBlNDZlMTBkMDNlMjcwNzg2MGZhZjA2NjJjYTliYTM0OTIyYmM0Yzk0MDQ)
 - J. P. Morrison
 
 PROLOG Control in Six Slides
 - PROLOG is fundamentally very simple – it is just an exhaustive pattern matching tool
-- Nils Holm created the easiest (IMO) to understand description of PROLOG...
+- Nils Holm created the most understandable description of PROLOG...
 - [https://www.t3x.org/bits/prolog6.html](https://www.t3x.org/bits/prolog6.html)
-- Nils Holm   
 
 Eiffel, The Language
 - [https://www.amazon.ca/Eiffel-The-Language/dp/0132479257](https://www.amazon.ca/Eiffel-The-Language/dp/0132479257)
@@ -110,9 +114,9 @@ C.A.R. Hoare CSP (Communicating Sequential Processes)
 - [https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf)
 
 Ohm-js
-- parser DSL
+- A JavaScript library for building parsers, interpreters, compilers, and more. [ed. Way more]
+- https://ohmjs.org
 - (based on PEG and META-II)
-- [https://github.com/harc/ohm](https://github.com/harc/ohm)
 
 PEG.js
 - PEG parser for JS (I feel that Ohm is “better”)
@@ -142,6 +146,7 @@ Order Out of Chaos
 
 Humane Interface
 - https://www.amazon.ca/Humane-Interface-Directions-Designing-Interactive/dp/0201379376
+
 Design of Everyday Things
 - https://www.amazon.ca/Design-Everyday-Things-Revised-Expanded/dp/0465050654
 
@@ -168,14 +173,12 @@ Songwriting
 - important for understanding choice of words and phrasing (even in technical documentation, IMO)
 - [B-Rhymes](http://www.b-rhymes.com) (perfect rhymes are not always appropriate)
 # Appendix - Updates
-- Dec. 15, 2021 converted from Scrivener to markdown, and, added non-cs references
-
 # See Also
 
 [Table of Contents](https://guitarvydas.github.io/2021/12/10/Table-of-Contents-Dec-01-2021.html)
 [Blog](https://guitarvydas.github.io)
 [Videos](https://www.youtube.com/channel/UC9EJr0nKHwadbHUtc5zHdmQ/videos)
-[References](https://guitarvydas.github.io/2021/01/14/References.html)
+[References](https://guitarvydas.github.io/2024/01/06/References.html)
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

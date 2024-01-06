@@ -48,11 +48,12 @@ This approach needs to deal with the dimension of *time*. Inputs can be sent to 
 One way to deal with the dimension of *time* is to make little envelopes that contain the data, i.e. *messages*, and, to keep ordered queues of such envelopes.  A function `f` is invoked with no parameters, then, sometime later, its parameters arrive.  Likewise, `f` can produce output parameters at any time and in any order, or, `f` can produce no output at all.  `f` can send its outputs anywhere it wants to - it is not constrained to sending the outputs back to the caller. In fact, if `f` is properly isolated, it must send its outputs to its own output queue, without knowing where such outputs will be delivered. `f`'s *Container* (its parent) makes all routing decisions. When the *Container* is properly isolated - and adheres to locality-of-reference rules - it is constrained to routing messages only between its direct children, or, back out to its own output queue, while not knowing where such outputs will be routed by its own *Container*.
 
 
+
 # Appendix - See Also
 
 ### References
 
-[https://guitarvydas.github.io/2021/12/15/References.html](https://guitarvydas.github.io/2021/12/15/References.html)
+[https://guitarvydas.github.io/2004/01/06/References.html](https://guitarvydas.github.io/2024/01/06/References.html)
 
 ### Blogs
 [blog](https://guitarvydas.github.io/)
