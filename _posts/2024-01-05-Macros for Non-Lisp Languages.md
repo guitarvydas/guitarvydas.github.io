@@ -60,7 +60,7 @@ A rule that has a name beginning with an upper-case letter is a Syntactic rule. 
 
 Most PEG parsing libraries, except OhmJS, use Lexical rules that expect the grammar writer to specify every niggly detail, including where whitespace might appear.  OhmJS's Syntactic rules allow programmers to specify grammars that are more readable and easier to understand.
 
-PEG, itself, has a power that is not found in CFG nor REGEX technology - the ability to parse matching pairs of items (usually parentheses and brackets). This simple feature makes it possible to re-think how parsers are used. For example, PEG makes it possible to write many nano-parsers and to "skip over" uninteresting bits of text, instead of specifying the full grammar for the incoming language. 
+PEG, itself, has a power that is not found in CFG nor REGEX technology - the ability to parse matching pairs of items (usually parentheses and brackets). This simple feature makes it possible to re-think how parsers are used. For example, PEG makes it possible to write parsers that consist of many nano-parsers and to "skip over" uninteresting bits of text, instead of specifying the full grammar for the incoming language. 
 
 This line of reasoning leads to the idea of converting (transpiling) macros embedded in larger lumps of text, say, adding some new syntax feature to C++, or making it possible to write some Lisp code in infix form.
 
@@ -99,7 +99,15 @@ The macro-processing technique described above uses "big" rules to detect macros
 I like this feature, but, it is not essential to the basic technique. OTOH, I believe that human readability is paramount, and, I am willing to trade off machine time to make my grammars more readable. So, I try to write grammars using Syntactic rules as much as possible.  When I write a pattern-match for Macros, I want to use Syntactic rules, but, I need to, also, ensure that the top-most rule is Lexical.  The use of `applySyntactic<...>` makes it possible for me to mix and match rules, while letting OhmJS type check as much of the grammar code as possible.
 
 # Further Processing
-In the example code in the repo, `pass2` inhales the output from the `hamburger` pass and strips off all verbatim brackets.  We *could* mute the other characters by simply outputting nothing. In general, though, some other processing happens, in a series of further passes, such that every input phrase is ultimately rewritten. For this simple example, then, it makes little sense to show how to mute output. Doing this should be obvious to the reader, anyway, by just changing `character_other [c] = ‛«c»’` to be `character_other [c] = ‛’.
+In the example code in the repo, `pass2` inhales the output from the `hamburger` pass and strips off all verbatim brackets.  We *could* mute the other characters by simply outputting nothing. In general, though, some other processing happens, in a series of further passes, such that every input phrase is ultimately rewritten. For this simple example, then, it makes little sense to show how to mute output. Doing this should be obvious to the reader, anyway, by just changing 
+
+```
+character_other [c] = ‛«c»’
+```
+to be 
+```
+character_other [c] = ‛’.
+```
 
 The working example is in the repo [hamburger](https://github.com/guitarvydas/hamburger)
 
@@ -173,7 +181,7 @@ kitchen.multiple_order(2, menu_item(1));
 ```
 and something like
 ```
-kitchen.order(hamburger, [cheese().bacon.crispy(),tomatoes.sliced(thin)]);
+kitchen.order(hamburger, [cheese, bacon.crispy(),tomatoes.sliced(thin)]);
 ```
 becomes
 ```

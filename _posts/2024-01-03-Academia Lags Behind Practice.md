@@ -18,7 +18,7 @@ Tesla probably figured out more about the explanation of electrical phenomena th
 
 Historically, it has taken decades to leak academic Scientific study into Engineering.  Practice, then Science, then Engineering. We can do better.
 # Appendix - Edit
-After reading comments from the like of Konrad Hinsen, I realized that my use of the phrase "practice" wasn't sufficiently precise.
+After reading comments from the likes of Konrad Hinsen, I realized that my use of the phrase "practice" wasn't sufficiently precise.
 
 I have written an update in "2024-01-05-Fumbling Around and Applied Science".
 

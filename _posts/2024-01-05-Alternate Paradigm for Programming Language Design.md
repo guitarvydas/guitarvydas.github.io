@@ -37,6 +37,7 @@ In such a paradigm, each altPL would address only a single aspect of PL usage, e
 - time-ordering of events
 - "pipelines" that are cyclic graphs
 - "main loops"
+
 # Syntactic Snapping-Together and Composition
 Until fairly recently, it has been considered to be difficult to whip up new programming syntaxes.
 
@@ -107,6 +108,14 @@ d e f
 In this example, `pass2` inhales the output from the `hamburger` pass and strips off all verbatim brackets.  We *could* mute the other characters by simply outputting nothing. For this example, I didn't bother to do this. In a real example, just about every input phrase will get processed in some way, so muting would be the exception anyway, and less interesting to show.
 
 The working example is in the repo [hamburger](https://github.com/guitarvydas/hamburger)
+
+# Appendix - Alan Kay - Use Languages as Assembly Code
+
+*In a 'real' Computer Science, the best languages of an era should serve as 'assembly code' for the next generation of expression.*
+
+[Alan Kay on youtube - see 31:50](https://www.youtube.com/watch?v=fhOHn9TClXY&t=859s)
+
+Thanks to Rajiv Abraham for sending me this clip.
 
 # Appendix - Language Set Experiments
 What is a *set* of languages?  
