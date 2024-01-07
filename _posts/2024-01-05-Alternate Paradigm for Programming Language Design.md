@@ -169,11 +169,12 @@ https://ohmjs.org
 https://github.com/guitarvydas/ceptre 
 branch bc86474031619d44d608eefb5643088c961e0e08
 
+
 # Appendix - See Also
 
-### General References
+### References
 
-[https://guitarvydas.github.io/2021/12/15/References.html](https://guitarvydas.github.io/2021/12/15/References.html)
+[https://guitarvydas.github.io/2004/01/06/References.html](https://guitarvydas.github.io/2024/01/06/References.html)
 
 ### Blogs
 [blog](https://guitarvydas.github.io/)
