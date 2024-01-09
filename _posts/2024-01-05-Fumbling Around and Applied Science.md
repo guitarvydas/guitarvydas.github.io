@@ -1,6 +1,6 @@
 I see *practice* as two things:
-1. "fumbling around"
-2. Applied Science - also known as Engineering.
+1. "fumbling around", and,
+2. Applied Science (also known as Engineering).
 
 It seems to me that the significant "precambrian explosion" types of discoveries are made only through "fumbling around", whereas the yin-yang pairing of academic study with Applied Science can produce only incremental improvements and deeper refinements of bigger ideas.
 
