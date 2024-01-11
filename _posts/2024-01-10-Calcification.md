@@ -22,7 +22,7 @@ Computer "functions" are subroutines, not mathematical functions[^macros].
 
 Computers are Programmable Electronic Machines (PEMs?), not solely meant for computation.
 
-Paper is 2D. Computers are 4D (x/y/z/t). Using 2D equations to express 4D PEMics is a handy trick (physicists call this a "simplifying assumption") but cannot express the full breadth of 4D capabilities.  At a minimum, one needs multiple 2D notations to describe 4D realities.
+Paper is 2D. Computers are 4D (x/y/z/t). Using 2D equations to express 4D PEMics is a handy trick (physicists call this a "simplifying assumption") but cannot express the full breadth of 4D capabilities.  At a minimum, one needs multiple 2D notations to describe phenomena in 4D.
 
 # Appendix - See Also
 
