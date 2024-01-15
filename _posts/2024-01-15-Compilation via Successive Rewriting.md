@@ -1,20 +1,27 @@
-textual rewrites, *only* 
-(untested, can these be parsed by OhmJS?)
-(only the first grammar needs to be human readable, the intermediate grammars need only be parsable by a machine and we don't care if humans like it or not)
+These are rough notes regarding the technique of Syntax-Directed Transpilation.  In other places, I have called this *nano-parsers* and *divide-and-conquer*, etc. I try to present ideas by writing out snippets of code and intermediate code, but, none of the code has actually been tested. The technique is more important than the code itself...
 
+- textual rewrites, *only* 
+- only the first grammar needs to be human readable, the intermediate grammars need only be parsable by a machine and we don't care if humans like them or not
+
+See the final section "Suggested Approach" for suggestions on how to proceed to explore this technique.
 # Legend
 
-   `⎡ s1 ⎤` 
+`⎡ s1 ⎤` 
    - begin scope "s1"
 
-   `⎣ s1 ⎦` 
+`⎣ s1 ⎦` 
    - end scope "s1"
 
-   `⟪+ name="ch",kind=channel,scope=global,value=5⟫` 
+`⟪+ name="ch",kind=channel,scope=global,value=5⟫` 
    - data descriptor (def datum)
    
-   `⟪name="ch",kind=channel,scope=global,indirection=1,value=5⟫` 
+`⟪name="ch",kind=channel,scope=global,indirection=1,value=5⟫` 
    - data descriptor usage (datum usage)
+
+`š`
+- marker for subroutine operation
+
+I use Unicode symbols in the intermediate code to avoid characters that might be used in the current crop of 3GL programming languages (JS, Python, Rust, WASM, assembler, etc.).  Note that my tool of choice - OhmJS - can accept Unicode symbols.  PEG parsing, which OhmJS is based on, can parse bracketed pairs, so I tend to use various kinds of Unicode brackets.
 
 goals:
 - first few passes gather up semantic info
@@ -132,6 +139,10 @@ import "fmt"
 - can you transpile pass NN using OhmJS/ChatGPT/etc?
 - can you write out code that some other compiler (e.g. Go, JS, Python, Odin, Rust, WASM, etc.) can compile and execute?
 
+# Suggested Approach
+Write an OhmJS grammar that parses the intermediate code labelled "Pass NN" above.  Use the grammar to emit code in *your favourite language* (e.g. JS, Python, Go, Odin, Rust, WASM, etc., etc.).  My target language of choice is something based on Lisp (Common Lisp, Scheme, Racket, etc.), because it has almost no syntax to get in the way. Lisp's recursive syntax often requires one to write parsing rules that are recursive (this is a good habit, anyway).
+
+When this part is working, back up one pass and try to get it working.  And, so on until you reach Pass 0.
 
 # Appendix - See Also
 
