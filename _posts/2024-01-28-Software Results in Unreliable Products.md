@@ -1,6 +1,6 @@
 State of the art software techniques result in unreliable products.
 
-[embed](/assets/Calculators Then and Now.pdf)[/embed]
+<object data="/assets/Calculators Then and Now.pdf" width="1000" height="1000" type='application/pdf'></object>
 
 
 # Appendix - See Also
