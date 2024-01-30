@@ -1,4 +1,4 @@
-![](/assets/Diagrams.pdf)
+<object data="/assets/Diagrams.pdf" width="1000" height="1000" type="applicatoin/pdf"></object>
 
 # Appendix - See Also
 
