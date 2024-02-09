@@ -79,27 +79,29 @@ If you don't understand the meaning of some visual code, don't blame the tool, b
 - observation: writing equations became less expressive when the printing press was invented, writing programs became less expressive when EBCDIC and, then, ASCII became the media for expressing sequences of commands ([The Story of the Vinculum (I believe that this was posted to FoC by someone, but I can't find the post)](https://www.youtube.com/watch?v=JFzHIp2F0Yk&t=34s))
 - observation: before the advent of non-overlapping grids of small bitmaps called "characters" coupled with banks of switches called "QWERTY keyboards", IDEs for commanding machines (aka "programming") consisted of banks of toggle switches, and/or, soldering stations coupled with various kinds of meters and oscilloscopes ; "programming" - commanding electronics - was around well before the advent of textual programming languages, but, using soft-switches rather than hard-physical-switches turned out to be more convenient
 - opinion: "programming" consists of two activities, neither of which are the same as other kinds of activities (e.g. writing prose, and, e.g. analysis of phenomena using mathematical equations), i.e. 1. commanding machines, 2. communicating the purpose of the commands to other humans ... conflating the two activities leads to unnecessary hardship
-## See Also
+
+
+# Appendix - See Also
 
 ### References
 
-[https://guitarvydas.github.io/2021/12/15/References.html](https://guitarvydas.github.io/2021/12/15/References.html)
+[https://guitarvydas.github.io/2004/01/06/References.html](https://guitarvydas.github.io/2024/01/06/References.html)
 
-### Blogs
+### Blog
 [blog](https://guitarvydas.github.io/)
 
+### Blog
 [obsidian blogs](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
 ### Videos
 [videos - programming simplicity playlist](https://www.youtube.com/@programmingsimplicity2980)
-### Books
-leanpub'ed (disclaimer: leanpub encourages publishing books before they are finalized - these books are WIPs)
-[Programming Simplicity Takeaways, and, Programming Simplicity Broad Brush](https://leanpub.com/u/paul-tarvydas)
+### Books (WIP)
+[leanpub](https://leanpub.com/u/paul-tarvydas)
+### Pamphlets
+[gumroad](https://tarvydas.gumroad.com/l/dvtej?_gl=1*o7hy6z*_ga*MjA0NzUyMDY1Mi4xNzA3NDc3MDIx*_ga_6LJN6D94N6*MTcwNzQ3NzAyMC4xLjEuMTcwNzQ3NzI5Ni4wLjAuMA..)
 ### Discord
 [Programming Simplicity](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
 ### Twitter
 @paul_tarvydas
-### Mastodon
-(tbd, advice needed re. most appropriate server(s))
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
@@ -108,3 +110,4 @@ leanpub'ed (disclaimer: leanpub encourages publishing books before they are fina
         crossorigin="anonymous" 
         async> 
 </script> 
+

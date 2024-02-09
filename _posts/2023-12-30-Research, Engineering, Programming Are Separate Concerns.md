@@ -76,18 +76,6 @@ For scaling projects up to larger teams of developers and to larger communities 
 We tried to "off-shore" the Implementation work, but, the only communication tools available to on-shore Engineers were programming languages.  Essentially, the Engineers did most of the Implementation work before off-shoring it.  Furthermore, our use of programming languages that use the callstack for implementing code libraries defies divvying up the work on libraries. The calling code is too dependent on the library code to make this approach fruitful. Code can't be off-shored because it has too many threads of dependencies running through it.
 
 When you use a DIY approach, you can't divvy the work up and you're stuck with a *cottage industry* reality. Professions, such as accounting, had this problem until remote access technologies were promulgated.  Professional accountants were forced to do *all* of the work themselves, and couldn't scale their businesses upwards until they found a way to separate out the straight-forward tasks from the creative tasks.
-# Notes
-The decoupled view is to write some code and put it on CBU one and then write some more code and put it on CPU to then have CPU one send one-way messages to CPU to across a wire and have CPU to send one of my messages to see if you one across a different wire these messages may include responses.
-The functional approach is to use only one CPU and combine both bits of code on that CPU and use the calls to share and use the shared global coal stack in a functional protocol to two invoke functions so CPU so function one invokes function to function two is required to return some value to function one via the shared global call STOCH
-
-I mix first Emm ICS first then Pemex PEMICS first get the machine to do what you want then figure out how to reprogram or how to change the program in a way that is less painful than using a soldiering iron or machine in new parts 
-
----
-When you write code, you do two things 
-1. you write code
-2. you stop and think.
-
-Can we separate the two? can we make it so that code writer just writes code from one into the other and his pro productivity is determined by their typing speed
 
 # Appendix - References
 
@@ -118,6 +106,7 @@ Can we separate the two? can we make it so that code writer just writes code fro
 [Programming Simplicity](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
 ### Twitter
 @paul_tarvydas
+
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 
