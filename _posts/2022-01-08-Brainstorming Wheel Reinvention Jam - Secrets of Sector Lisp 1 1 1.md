@@ -38,7 +38,6 @@
 		- what *first principles* are at work here?
 
 
-
 # Appendix - See Also
 
 ### References
