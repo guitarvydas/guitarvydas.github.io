@@ -22,7 +22,7 @@
 		- transpile SL to SL
 		- transpile SL to  C/C++
 		- ostensibly: create a Sector Lisp Embeddable Language
-	- changing our mind: we will follow the path of least resistance, whereever that takes us
+	- changing our mind: we will follow the path of least resistance, wherever that takes us
 	- taste: *previous notes* [TBD]
 	- collaborators:
 		- no experience necessary
