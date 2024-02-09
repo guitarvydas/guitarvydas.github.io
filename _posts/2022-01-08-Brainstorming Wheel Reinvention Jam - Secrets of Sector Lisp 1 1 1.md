@@ -1,3 +1,7 @@
+---
+tags:
+  - ghp
+---
 [This essay is a set of thoughts for an upcoming Jam. In the end, I worked on something else.]
 # Secrets of Sector Lisp vs Wheel Reinvention Jam
 - Goal: understand the secrets of Sector Lisp
@@ -36,8 +40,6 @@
 	- First Principles Thinking
 		- https://fs.blog/first-principles/
 		- what *first principles* are at work here?
-
-
 # Appendix - See Also
 
 ### References
