@@ -14,8 +14,8 @@
 | `2021-4-5-10:23:45` | (date-and-time 2021 4 5 10 23 45)
 | `2021-4-5-10:23:45-8:00` | (date-and-time-and-timezone 2021 4 5 10 23 45 8)
 | | |
-| `"abc"`    | "abc"
-| `''abc''`  | "abc"
+| `"abc"`    | (string "abc")
+| `''abc''`  | (long-string "abc")
 | `<abc>`    | (tag "abc")
 | `%abc`     | (path "abc")
 | `abc://`   | (url "abc://")
