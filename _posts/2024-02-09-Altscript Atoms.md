@@ -11,8 +11,8 @@
 | | |
 | `2021-4-5`  | (date 2021 4 5)
 | `10:23:45`  | (time 10 23 45)
-| `2021-4-5-10:23:45` | (date-and-time 2021 4 5 10 23 45)
-| `2021-4-5-10:23:45-8:00` | (date-and-time-and-timezone 2021 4 5 10 23 45 8)
+| `2021-4-5-10:23:45` | (date-and-time (date 2021 4 5) (time 10 23 45))
+| `2021-4-5-10:23:45-8:00` | (date-and-time-and-timezone (date 2021 4 5) (time 10 23 45) (timezone 8 0))
 | | |
 | `"abc"`    | (string "abc")
 | `''abc''`  | (long-string "abc")
