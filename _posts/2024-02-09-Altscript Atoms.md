@@ -16,7 +16,7 @@
 | | |
 | `"abc"`    | (string "abc")
 | `''abc''`  | (long-string "abc")
-| `<abc>`    | (tag "abc")
+| `<abc>`    | (html-tag "abc")
 | `%abc`     | (path "abc")
 | `abc://`   | (url "abc://")
 | `ab@cde`   | (email "ab@cde")
