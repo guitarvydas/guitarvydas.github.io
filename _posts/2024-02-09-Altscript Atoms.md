@@ -24,7 +24,7 @@
 | `##"atbfc"` | (binary-b64 "atbfc")
 | | |
 | `abc`  | (word "abc")
-| `abc:` | (defword "abc")
+| `abc:` | (def-word "abc")
 | | |
 | `:abc` | (get-word "abc")
 | `'abc` | (symbol "abc")
