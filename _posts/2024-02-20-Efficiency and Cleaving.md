@@ -22,6 +22,7 @@ In fact, the meaning of "efficiency" has greatly changed since the 1950s, and ma
 
 The answers and techniques are quite different depending on who you're targeting. For example, developers can afford to use souped-up, but, expensive machines. Users want cheap machines. When targeting developers, you can afford to throw machine cycles away for the sake of development turn-around time. When targeting End-Users, you need to worry about speed and size, to reduce costs. 
 
+If you think of an "editor" as an "Actor", then you could scale to using editors on local machines while punting semantics checking and code emission to servers elsewhere in the world... (which goes back to the central idea of 0D, where everything is an Actor (with 2023-ish improvements) https://guitarvydas.github.io/2024/02/17/Hardware-Actors.html and could be implemented on bare Arduinos not running Linux)
 # Appendix - See Also
 
 ### References
