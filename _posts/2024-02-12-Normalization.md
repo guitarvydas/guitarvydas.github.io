@@ -12,6 +12,18 @@ Later, GCC proved the assembler programmers wrong.
 
 Assembler programmers quit complaining and retired after GCC came out.  Programming languages that included syntax for *register* declarations and fine control of register usage, went away and were superseded by programming languages that presented fewer options and allowed programmers to think freely at higher levels.
 
+# Normalization
+Putting *all* args on the stack was *normalization*.
+
+This standard way of passing arguments to subroutines looked inefficient at first. 
+
+This normalization had at least two effects:
+- it made it possible to create new higher level languages for human use
+- it made it possible to write better optimizers in compilers - everything is the same, so writing code to optimize the normalized output of dumb compilers became easier to imagine.
+
+UNIX also won big due to normalization. Until UNIX became popular, each peripheral device attached to a computer required special-case code to be written for it. UNIX's approach was to normalize access to devices - all devices were made to appear the same, they all looked like *files*. This normalization made it possible to write scripts that generalized to many devices. Generalized scripts made it possible to write more interesting, more complicated, scripts.
+
+
 # Appendix - See Also
 
 ### References
