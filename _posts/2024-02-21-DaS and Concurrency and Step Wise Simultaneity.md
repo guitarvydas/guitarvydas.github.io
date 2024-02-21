@@ -48,6 +48,25 @@ The fundamental problem is the idea that there must be "one language to rule the
 
 Most people think that the use of multiple languages is a bad idea. Most people think that the use of VPLs is a bad idea. Most people think that Actors don't work. I suggest that these opinions have been formed by exposure to bad implementations of these ideas. Step-wise, overly-synchronized implementations of these ideas leads to poor experiences.
 
+# Key Aspects
+## 0D - Call and Send
+As mentioned above, the basis of 0D is the addition of `send ()` to programmers' repertoire.
+
+This isn't enough, since `send ()` requires programmers to arrange systems in layers. If they don't use such arrangement, they will encounter scaling problems later. Flat-ness creates confusion as systems grow larger in size.
+## Structured Composition
+
+This is the second aspect that is required for this technique to work and to scale to larger systems.
+
+Components can have multiple outputs and multiple inputs. This is difficult - but not impossible - to express in textual form.
+
+Using diagrams - DaS - makes it easier to express and to read code that contains multi-input and multi-output components. I find it much easier to read source code for this kind of thing in diagram format than in pure textual format. Note that *diagram format* is a hybrid of diagrams and text - it is not all-or-nothing. This format is not solely composed of diagrams and it is not solely composed of text.
+
+Until recently, it seemed overly-difficult to use diagrams as code and to compile diagrams to executable binary.
+
+I show that this is "easy" to do, using OhmJS to parse XML produced by diagram editors. In this specific case, I used `draw.io` which creates `.drawio` files in `mxGraph` format. `MxGraph` is a variant of XML. It is textual and can be parsed using existing tools.
+
+A specific example of doing this is the Odin-based `0D` repository https://github.com/guitarvydas/0D . Contact me if you have questions / comments about this code.
+
 
 # Appendix - See Also
 
