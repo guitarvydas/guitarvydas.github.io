@@ -79,13 +79,16 @@ I expect it to be tokenized as:
 
 In this particular case, `❲ė❳` is a marker that is followed by an ID and then a bunch of formatted text. The ID is:
 
+```
 ❲<sub style="border-color: var(--border-color);">
   <font style="border-color: var(--border-color); font-size: 7px;">
     Collect
   </font>
 </sub>❳
+```
 
 and the rest of the text is
+```
 ❲<br style="border-color: var(--border-color);">❳
 
 ❲p.wallet += m.wallet❳
@@ -97,6 +100,7 @@ and the rest of the text is
 ❲<br style="border-color: var(--border-color);">❳
 
 ❲⇒❳
+```
 
 I can use OhmJS to tokenize in this manner. Are there any other existing tools that already do what I want? Can this suggested tokenizing format be altered to make parsing easier?
 
