@@ -1,4 +1,4 @@
-![0D Sketch of Internals](../assets/0D-2024-02-27-1613.svg)
+![0D Sketch of Internals](/assets/0D-2024-02-27-1613.svg)
 
 
 # Appendix - See Also
