@@ -1,4 +1,4 @@
-An analogy: programming today is like creating RGB drawings using colour pickers that don't allow you to use R. You can do it (e.g. switch to CMYK), but, it ain't as easy as if you had an colour picker that gave you an R. You work less efficiently because you have to screw around in a domain that isn't exactly in line with what you're thinking. You need to take more steps to get from point A to point B. 
+An analogy: programming today is like creating RGB drawings using colour pickers that don't allow you to use R. You can do it (e.g. switch to CMYK), but, it ain't as easy as if you had a colour picker that gave you an R. You work less efficiently because you have to screw around in a domain that isn't exactly in line with what you're thinking. You need to take more steps to get from point A to point B. 
 
 In programming, *all* of the stuff you *need* is in assembler, BUT, it ain't convenient to use in many cases. Rebol, Forth, Lisp, Smalltalk give you programming-pickers that fit with single aspects of programming. Just about all "modern" programming languages, though, filter out one of the options and herd you into exactly the same way of solving problems. 
 
