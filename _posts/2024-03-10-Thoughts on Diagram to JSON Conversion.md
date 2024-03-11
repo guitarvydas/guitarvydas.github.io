@@ -5,6 +5,8 @@ Aside: in my earlier experiments, I used CL to parse the XML and then punted to 
 
 Using only such simple relationships - that any high-schooler has the math chops to calculate - one might devise other interesting syntaxes. The conversion from draw.io to JSON is boooring and repetitive and niggly to code up. Maybe so boring that it might be punted to an LLM, instead of wasting human time? 
 
+WIP: draw.io allows only 1 piece of text to be associated with a rectangle. But, the text can contain just about anything, including newlines and Unicode. So, I wrote some 0D Components that have very, very long names, i.e. a magic character (like λ and ė) followed by one name (no whitespace) followed by lines of (Odin) code. Once converted, by das2json, to JSON, the very, very long names become strings. A text parser (written in OhmJS of course) picks off the strings that begin with the magic characters, parses them and creates boiler-plate Odin 0D components from them (along with housekeeping stuff like registering the components by name vs. Odin procs). So, in at least some cases, I type the code for components directly into the draw.io diagram rectangles and use a t2t transpiler to convert them into Odin for inclusion in my project. WIP code is in repo https://github.com/guitarvydas/gen0d.
+
 # Appendix - See Also
 
 ### References
