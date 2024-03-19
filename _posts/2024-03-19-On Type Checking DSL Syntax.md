@@ -15,7 +15,7 @@ function fn (i : i8, f : f64) -> f64 {
 }
 ```
 
-
+# Thoughts...
 We might augment the first lump of code with a separate text section that is written specifically for the type-checker DSL:
 ```
 fn   = (i8, f64) -> f64
@@ -83,18 +83,18 @@ Cordy, in his thesis on Orthogonal Code Generation, built a declarative decision
 # Appendix - Orthogonal Code Generation
 Cordy's thesis is concerned mainly with assembler code generation, yet, the technique used - especially the MIST decision tree-walking language - could be applied to checking resolved types against a declarative menu of supported types for a target architecture.
 
-https://books.google.ca/books?id=X0OaMQEACAAJ&dq=bibliogroup:%22University+of+Toronto+Computer+Systems+Research+Institute+Technical+Report+CSRI%22&hl=en&sa=X&ved=2ahUKEwig1Legm8bqAhWvlHIEHYzzBYEQ6AEwBHoECAEQAQs
+[OCG](https://books.google.ca/books?id=X0OaMQEACAAJ&dq=bibliogroup:%22University+of+Toronto+Computer+Systems+Research+Institute+Technical+Report+CSRI%22&hl=en&sa=X&ved=2ahUKEwig1Legm8bqAhWvlHIEHYzzBYEQ6AEwBHoECAEQAQs)
 
 One of the main tenets of OCG, is the idea that data and control flow should be treated in an orthogonal manner. The MIST DSL is applied in the second - data oriented - pass of OCG.
 
 For example, in extending this technology to type checking, in many computer languages, the operation of adding two `int`s can result in overflow, hence, the operation must be cast to a wider result type if no precision is to be lost. A thorough type checker must ensure that the runtime code does such casting. If the source programming language requires programmers to specify all types, as in Odin, then an error must be generated in cases where the appropriate cast is not specified, whereas in languages that provide auto-casting, extra code might need to be generated. These kinds of type-checking decisions are often performed using ad-hoc code. Cordy shows how to collapse such decision trees into a small DSL designed expressly for the purpose.
 
-A precursor to OCG is used in the GCC compiler. This precursor is `RTL`, described in https://www.researchgate.net/publication/220404697_The_Design_and_Application_of_a_Retargetable_Peephole_Optimizer. The idea here, again, is data and control flow orthogonality. On the first pass, an RTL compiler generates code for a fictitious machine that has an infinite number of registers. The second pass uses a simple pattern-matching algorithm that uses a window to detect boiler-plate usage patterns and replaces such code sequences with different ("better") sequences of code using various heuristics based on the instruction and allocation realities of a specific target. This strategy produces code which is locally optimized. GCC then goes on to use global optimization techniques, such as those described in the *Dragon Book* to produce even tighter code sequences. 
+A precursor to OCG is used in the GCC compiler. This precursor is `RTL`, described in [Peephole optimizer](https://www.researchgate.net/publication/220404697_The_Design_and_Application_of_a_Retargetable_Peephole_Optimizer). The idea here, again, is data and control flow orthogonality. On the first pass, an RTL compiler generates code for a fictitious machine that has an infinite number of registers. The second pass uses a simple pattern-matching algorithm that uses a window to detect boiler-plate usage patterns and replaces such code sequences with different ("better") sequences of code using various heuristics based on the instruction and allocation realities of a specific target. This strategy produces code which is locally optimized. GCC then goes on to use global optimization techniques, such as those described in the *Dragon Book* to produce even tighter code sequences. 
 # Appendix - See Also
 
 ### References
 
-[https://guitarvydas.github.io/2004/01/06/References.html](https://guitarvydas.github.io/2024/01/06/References.html)
+[references](https://guitarvydas.github.io/2024/01/06/References.html)
 
 ### Blog
 [blog](https://guitarvydas.github.io/)
