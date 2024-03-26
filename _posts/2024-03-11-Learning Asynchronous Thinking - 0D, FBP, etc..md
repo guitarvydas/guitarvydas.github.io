@@ -10,7 +10,9 @@ UNIX pipelines are maybe the closest concept to FBP. Closures, daemons, clients,
 - noFlo
 - Nevalang (I don't know enough about Nevalang yet)
 - etc.
+
 # True Asynchronous
+
 At present, we only fake out true asynchronicity, but, some notations avoid the function-based paradigm and are ready to be used in truly asynchronous (aka "distributed") systems:
 
 - 0D
@@ -69,7 +71,7 @@ FBP is one way to deal with asynchronous systems, like the internet.
 
 To learn about the FBP paradigm, the best thing you can do right now is to study fake-outs of asynchronous systems, like UNIX pipelines, internet servers, EE, etc. Studying synchronous implementations of Actors, processes, and workarounds like function-based async paradigms, cannot easily give you an appreciation for the benefits of asynchronous thinking.   
 
-UNIX pipelines are close to being structured because of UNIX's use of hierarchical file systems UNIX shell scripts can invoke other shell scripts. You can write structured systems in this way, but, you have to be careful not to abuse the paradigm by using shared memory or rats' nests of interconnections. Text-only syntax, unfortunately, encourages flatness in architectural designs.
+UNIX pipelines are close to being structured because of UNIX's use of hierarchical file systems. UNIX shell scripts can invoke other shell scripts. You can write structured systems in this way, but, you have to be careful not to abuse the paradigm by using shared memory or rats' nests of interconnections. Text-only syntax, unfortunately, encourages flatness in architectural designs.
 
 # Appendix - See Also
 
