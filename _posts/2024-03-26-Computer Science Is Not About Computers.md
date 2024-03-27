@@ -19,7 +19,7 @@ Furthermore, REMs in 1950 were vastly different from REMs in 2024. In 1950, CPUs
  All of the constraints and rules of Computistry  - e.g. no side-effects, assign-once, 1-in always results in 1-out, no mutation, etc. - lead to the ultimate goal of "referential transparency". This goal was achieved decades ago using various other means, such as "pin-compatibility" in EE, "macros", "compilers" (which are just text-to-text transformers), Microsoft Word's find-and-replace, etc. The attempts to force "referential transparency" *into* synchronous languages has caused decades of gotchas and workarounds involving ad-hoc band-aids. Workarounds used to be called "epicycles" in Galileo's time.
 
 # Further
-[Rethinking REMics](https://guitarvydas.github.io/2024/03/26/Rethinking-REMics.html)
+[Rethinking Computer Programming](https://guitarvydas.github.io/2024/03/26/Rethinking-REMics.html)
 # Appendix - See Also
 
 ### References
