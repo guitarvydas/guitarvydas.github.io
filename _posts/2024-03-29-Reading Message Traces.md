@@ -1,6 +1,6 @@
 # Diagram and Trace
 
-![screenshot](./Screenshot-2024-03-29-at-7.53.54-AM.png)
+![screenshot](/assets/Screenshot-2024-03-29-at-7.53.54-AM.png)
 
 ```
 --- routing traces ---
