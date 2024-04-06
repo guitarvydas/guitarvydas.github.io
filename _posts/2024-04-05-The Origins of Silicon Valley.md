@@ -6,7 +6,7 @@ In Silicon Valley, "non-compete clauses" were not allowed.  This allowed people 
 
 Only 5 states in the U.S. and, recently, the province of Ontario (Canada) have legislation that disallows or doesn't honour non-compete clauses.
 
-In my mind, this brings up the issue of "open source software" and how it relates to this concept. Historically, the idea of "open source" did not even exist until the 1990's. Before then, all software was "closed source" (including UNIX® -  paid hard-earned money for a binary (non-source) license to use UNIX®). The "open source" mind-set represents a huge, yet subtle memetic difference. For example, Linux was borne out of the closed-source mentality. UNIX® cost money, so someone put in the effort to make a "clean-room copy" of UNIX® and to make it available to the masses. There were other attempts at copying (like XINU, TUNIS), but they didn't catch fire (why not?).
+In my mind, this brings up the issue of "open source software" and how it relates to this concept. Historically, the idea of "open source" did not even exist until the 1990's. Before then, all software was "closed source" (including UNIX® -  I paid hard-earned money for a binary (non-source) license to use UNIX®). The "open source" mind-set represents a huge, yet subtle memetic difference. For example, Linux was borne out of the closed-source mentality. UNIX® cost money, so someone put in the effort to make a "clean-room copy" of UNIX® and to make it available to the masses. There were other attempts at copying (like XINU, MINIX, Coherent, TUNIS, and many others), but they didn't catch fire (why not?).
 # Appendix - See Also
 
 ### References
