@@ -1,4 +1,4 @@
-I attended this talk https://events.vtools.ieee.org/m/409693 by Paul Wesling in-person, yesterday.
+My main takeaway from this talk https://events.vtools.ieee.org/m/409693 by Paul Wesling in-person...
 
 My main takeaway was that the companies in Silicon Valley freely shared knowledge with each other, whereas much larger companies on the east coast did not share information.
 
