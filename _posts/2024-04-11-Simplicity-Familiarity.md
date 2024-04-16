@@ -1,5 +1,7 @@
-<object data="/assets/2024-04-11-Simplicity-Familiarity.pdf" width="1000" height="1000" type="application/pdf"></object>
-
+<object data="/assets/2024-04-11-Simplicity-Familiarity.pdf" width="1000" height="1000" type="application/pdf">
+    <p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="/assets/2024-04-11-Simplicity-Familiarity.pdf">Download Instead</a></p>
+</object>
 # Appendix - PDF
 [2024-04-11-Simplicity-Familiarity.pdf](/assets/2024-04-11-Simplicity-Familiarity.pdf)
 
