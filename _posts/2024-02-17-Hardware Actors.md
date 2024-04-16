@@ -1,4 +1,6 @@
-<object data="/assets/HW-Actors.pdf" width="1000" height="1000" type="application/pdf"></object>
+<object data="/assets/HW-Actors.pdf" width="1000" height="1000" type="application/pdf">	<p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="/assets/HW-Actors.pdf">Download Instead</a></p>
+</object>
 
 <script src="https://utteranc.es/client.js" 
         repo="guitarvydas/guitarvydas.github.io" 

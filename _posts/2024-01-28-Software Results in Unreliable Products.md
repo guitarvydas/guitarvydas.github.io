@@ -1,6 +1,7 @@
 State of the art software techniques result in unreliable products.
 
-<object data="/assets/Calculators Then and Now.pdf" width="1000" height="1000" type='application/pdf'></object>
+<object data="/assets/Calculators Then and Now.pdf" width="1000" height="1000" type='application/pdf'><p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="/assets/Calculators Then and Now.pdf">Download Instead</a></p></object>
 
 
 # Appendix - See Also
