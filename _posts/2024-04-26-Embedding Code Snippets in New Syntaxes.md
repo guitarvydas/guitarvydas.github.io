@@ -95,6 +95,28 @@ output is:
 function f_100 (x, y) { return x + y; }
 ```
 
+# Ohm
+A grammar for the above can be defined as:
+```
+simple_rwr {
+  rewriteString = "‛" c* "’"
+  c =
+    | "«" inner_c+ "»" -- interpolation
+    | inner_c          -- raw
+  inner_c = ~"‛" ~"’" ~"«" ~"»" any
+}
+```
+![[embeddingohm.png]]
+# RWR
+And the RWR for the above grammar is
+```
+simple_rwr {
+  rewriteString [lq c* rq] = ‛«lq»«c»«rq»’
+  c_interpolation [lb c+ rb] = ‛«lb»«c»«rb»’
+  c_raw [c] = ‛«c»’
+}
+```
+[TBD - I haven't implemented this bit yet and got it to run. I will be developing this using the existing drawware tools and the existing 'transpile' component. Keep in touch. Collaborators welcome.]
 # Appendix - See Also
 
 ### References
