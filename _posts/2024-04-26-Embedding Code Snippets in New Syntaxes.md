@@ -106,7 +106,7 @@ simple_rwr {
   inner_c = ~"‛" ~"’" ~"«" ~"»" any
 }
 ```
-![[embeddingohm.png]]
+![embeddingohm.png](/assets/embeddingohm.png)
 # RWR
 And the RWR for the above grammar is
 ```
