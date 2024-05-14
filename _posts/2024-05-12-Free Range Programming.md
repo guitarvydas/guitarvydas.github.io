@@ -1,6 +1,6 @@
-**<object data="/assets/2024-05-13-Deep Dive Into Rewriting.pdf" width="1000" height="1000" type="application/pdf">    
+**<object data="/assets/2024-05-12-Free Range Programming.pdf" width="1000" height="1000" type="application/pdf">    
 	<p>Your browser doesn't support PDFs.</p>
-    <p><a href="/assets/2024-05-13-Deep Dive Into Rewriting.pdf">Download Instead</a></p>
+    <p><a href="/assets/2024-05-12-Free Range Programming.pdf">Download Instead</a></p>
 </object>
 
 <script src="https://utteranc.es/client.js" 
