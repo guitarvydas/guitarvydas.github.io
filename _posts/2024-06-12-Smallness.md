@@ -1,5 +1,5 @@
 Title: 2024-06-12-Smallness  
-Author:
+Author: pt
 
 2024-06-12-Smallness
 
