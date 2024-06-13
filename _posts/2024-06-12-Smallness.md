@@ -32,19 +32,19 @@ This is essentially a hash-table strategy. McCarthy did not use hash tables and 
 
 # Appendix - See Also
 
-[References](https://guitarvydas.github.io/2024/01/06/References.html)
+\[References\](https://guitarvydas.github.io/2024/01/06/References.html)
 
-[blog](https://guitarvydas.github.io/)
+\[blog\](https://guitarvydas.github.io/)
 
-[obsidian blogs](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
+\[obsidian blogs\](https://publish.obsidian.md/programmingsimplicity) (see blogs that begin with a date 202x-xx-xx-)
 
-[videos - programming simplicity playlist](https://www.youtube.com/@programmingsimplicity2980)
+\[videos - programming simplicity playlist\](https://www.youtube.com/@programmingsimplicity2980)
 
-[leanpub](https://leanpub.com/u/paul-tarvydas)
+\[leanpub\](https://leanpub.com/u/paul-tarvydas)
 
-[gumroad](https://tarvydas.gumroad.com/l/dvtej?\_gl=1\*o7hy6z\*\_ga\*MjA0NzUyMDY1Mi4xNzA3NDc3MDIx\*\_ga\_6LJN6D94N6\*MTcwNzQ3NzAyMC4xLjEuMTcwNzQ3NzI5Ni4wLjAuMA..)
+\[gumroad\](https://tarvydas.gumroad.com/l/dvtej?\_gl=1\*o7hy6z\*\_ga\*MjA0NzUyMDY1Mi4xNzA3NDc3MDIx\*\_ga\_6LJN6D94N6\*MTcwNzQ3NzAyMC4xLjEuMTcwNzQ3NzI5Ni4wLjAuMA..)
 
-[Discord: Programming Simplicity](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
+\[Discord: Programming Simplicity\](https://discord.gg/Jjx62ypR) all welcome, I invite more discussion of these topics, esp. regarding Drawware and 0D
 
 Twitter: @paul\_tarvydas
 
