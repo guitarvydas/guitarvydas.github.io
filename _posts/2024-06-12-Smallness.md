@@ -16,6 +16,9 @@ Functional Programming (FP) means that data is *always* allocated on a stack. Th
 
 *Diagram should display here:*
 
+![](ABCGC.png)
+
+*Diagram should, also, display here:*
 ![][ABCGC]
 
 # Interning
