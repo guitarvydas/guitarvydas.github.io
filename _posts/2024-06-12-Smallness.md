@@ -16,7 +16,7 @@ Functional Programming (FP) means that data is *always* allocated on a stack. Th
 
 *Diagram should display here:*
 
-![](ABCGC.png)
+![](/assets/ABCGC.png)
 
 *Diagram should, also, display here:*
 ![][ABCGC]
@@ -34,4 +34,4 @@ This is essentially a hash-table strategy. McCarthy did not use hash tables and 
 
 
 
-[ABCGC]: ABCGC.png width=325px height=181px
+[ABCGC]: /assets/ABCGC.png width=325px height=181px
