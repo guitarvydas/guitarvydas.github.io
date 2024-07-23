@@ -150,6 +150,9 @@ Humane Interface
 Design of Everyday Things
 - https://www.amazon.ca/Design-Everyday-Things-Revised-Expanded/dp/0465050654
 
+Small-C (Ron Cain)
+- https://ia801008.us.archive.org/19/items/dr_dobbs_journal_vol_05_201803/dr_dobbs_journal_vol_05.pdf volume #45
+
 # Non-CS References
 [Gazzaniga](https://www.giffordlectures.org/lecturers/michael-gazzaniga)
 - human brain invents explanations for experiences - after-the-fact (!)
